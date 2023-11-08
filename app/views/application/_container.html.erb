@@ -1,0 +1,8 @@
+<%= tag.div(
+  class: [
+    "max-xl:container xl:max-w-screen-xl mx-auto px-4 md:px-8",
+    "h-full": local_assigns.fetch(:full_height, false)
+  ]
+) do %>
+  <%= yield %>
+<% end %>

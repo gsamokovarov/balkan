@@ -1,0 +1,93 @@
+<%= render "section" do %>
+  <div class="grid gap-6">
+    <div>
+      <h1 class="text-4xl sm:text-5xl font-black">
+        Balkan Ruby is <span class="text-brand-600">back to business</span>
+      </h1>
+      <div class="text-2xl sm:text-3xl font-semibold mt-3">
+        April 26-27, 2024 in Sofia, Bulgaria
+      </div>
+    </div>
+
+    <h2 class="text-4xl sm:text-5xl font-black"></h2>
+
+    <p class="text-xl">
+      We aim to introduce the local communities to each other and invite companies and developers from all over Europe to visit the Balkan region, learn new technologies and share ideas with us.
+    </p>
+
+    <div class="flex flex-col sm:flex-row">
+      <%= primary_button "mailto:speak@rubybanitsa.com?subject=Ruby Banitsa talk" do %>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5"
+        >
+          <path d="M7 4a3 3 0 016 0v6a3 3 0 11-6 0V4z"/>
+          <path
+            d="M5.5 9.643a.75.75 0 00-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-1.5v-1.546A6.001 6.001 0 0016 10v-.357a.75.75 0 00-1.5 0V10a4.5 4.5 0 01-9 0v-.357z"
+          />
+        </svg>
+        <span>Become a speaker</span>
+      <% end %>
+    </div>
+
+    <div
+      class="
+        -mx-4
+        px-4
+        h-72
+        flex
+        overflow-x-auto
+        snap-x
+        snap-mandatory
+        sm:mx-0
+        sm:px-0
+        sm:snap-none
+        sm:h-auto
+        sm:grid
+        sm:items-start
+        sm:grid-rows-[repeat(4,160px)]
+        sm:grid-cols-3
+        gap-4
+      "
+    >
+      <%= image_tag "hero/puzl.jpg",
+      alt: "Ruby Banitsa event",
+      class:
+        "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2 col-span-2",
+      lazy: true %>
+
+      <%= image_tag "hero/stefan.jpg",
+      alt: "Ruby Banitsa event",
+      class:
+        "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover",
+      lazy: true %>
+
+      <%= image_tag "hero/genadi.jpg",
+      alt: "Ruby Banitsa event",
+      class:
+        "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2",
+      lazy: true %>
+
+      <%= image_tag "hero/mitio.jpg",
+      alt: "Ruby Banitsa event",
+      class:
+        "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object-left row-span-2",
+      lazy: true %>
+
+      <%= image_tag "hero/code.jpg",
+      alt: "Ruby Banitsa event",
+      class:
+        "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object-top",
+      lazy: true %>
+
+      <%= image_tag "hero/banitsa.jpg",
+      alt: "Ruby Banitsa event",
+      class:
+        "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover col-span-2",
+      lazy: true %>
+    </div>
+  </div>
+<% end %>
+

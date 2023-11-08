@@ -1,0 +1,13 @@
+<header class="hidden sm:block pt-5">
+  <%= render "container" do %>
+    <div class="flex items-center justify-between gap-8">
+      <div class="shrink-0">
+        <%= render "header_logo" %>
+      </div>
+
+      <nav class="flex items-center gap-8 text-lg font-medium">
+        <%= render "navigation_links", nav_links: nav_links %>
+      </nav>
+    </div>
+  <% end %>
+</header>

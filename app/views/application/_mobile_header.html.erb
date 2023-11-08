@@ -1,0 +1,60 @@
+<header
+  data-controller="mobile-navigation"
+  id="mobile-navigation"
+  class="sm:hidden bg-brand-50 pt-5 z-20"
+>
+  <%= render "container", full_height: true do %>
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between">
+        <div class="shrink-0">
+          <%= render "header_logo" %>
+        </div>
+
+        <button data-action="mobile-navigation#toggleOpen">
+          <svg
+            data-mobile-navigation-target="hamburgerIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-10 h-10"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+            />
+          </svg>
+          <svg
+            data-mobile-navigation-target="closeIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-10 h-10 hidden"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav
+        data-mobile-navigation-target="menu"
+        class="
+          hidden
+          grow
+          flex-col
+          items-center
+          justify-center
+          gap-20
+          text-3xl
+          font-medium
+        "
+      >
+        <%= render "navigation_links", nav_links: nav_links %>
+      </nav>
+    </div>
+  <% end %>
+</header>

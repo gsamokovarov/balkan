@@ -1,0 +1,10 @@
+<% title = local_assigns[:title] %>
+<% title_element = local_assigns[:title_element] %>
+
+<section class="py-16 space-y-10">
+  <% if title %>
+    <%= render "section_title", title: title, element: title_element %>
+  <% end %>
+
+  <%= yield %>
+</section>

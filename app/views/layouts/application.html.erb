@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
-    <title>Balkan</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><%= yield :title %>Balkan Ruby</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <%= yield :head %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    >
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="antialiased bg-white h-full">
+    <div class="flex flex-col h-full">
+      <%= render "header" %>
+
+      <div class="grow">
+        <%= render "container" do %>
+          <div class="lg:flex lg:items-start">
+            <main class="grow lg:pr-10 xl:pr-16">
+              <%= yield %>
+            </main>
+          </div>
+        <% end %>
+      </div>
+
+      <%= render "footer" %>
+    </div>
   </body>
 </html>
