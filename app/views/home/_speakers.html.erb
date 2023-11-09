@@ -1,0 +1,59 @@
+<%
+  speakers = [
+    OpenStruct.new(name: "Bozhidar Batsov", avatar: "bozhidar.jpg"),
+    OpenStruct.new(name: "Nick Sutterrer", avatar: "nick.png"),
+    OpenStruct.new(name: "Xavier Noria", avatar: "xavi.jpg")
+  ]
+
+  card_rotations = [
+    "-rotate-6",
+    "-rotate-1",
+    "rotate-6 md:rotate-12",
+    "rotate-3",
+    "-rotate-6 md:-rotate-12",
+    "rotate-0",
+    "rotate-6",
+    "rotate-1",
+    "-rotate-3"
+  ]
+%>
+
+<%= render "section", title: "Speakers", title_element: "h2" do %>
+  <div
+    class="
+      grid
+      grid-cols-2
+      md:grid-cols-3
+      lg:grid-cols-2
+      xl:grid-cols-3
+      gap-y-10
+      sm:gap-2
+      p-4
+    "
+  >
+    <% speakers.each.with_index do |speaker, index| %>
+      <%= render "speaker", speaker:, rotation_class: card_rotations[index % card_rotations.size] %>
+    <% end %>
+  </div>
+
+  <p class="text-xl py-3">
+    We are looking for technical talks about solving core business problems; or business talks on building, running and sustaining Ruby businesses.
+  </p>
+
+  <div class="flex flex-col sm:flex-row">
+    <%= primary_button "mailto:speak@rubybanitsa.com?subject=Ruby Banitsa talk" do %>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="w-5 h-5"
+      >
+        <path d="M7 4a3 3 0 016 0v6a3 3 0 11-6 0V4z"/>
+        <path
+          d="M5.5 9.643a.75.75 0 00-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-1.5v-1.546A6.001 6.001 0 0016 10v-.357a.75.75 0 00-1.5 0V10a4.5 4.5 0 01-9 0v-.357z"
+        />
+      </svg>
+      <span>Become a speaker</span>
+    <% end %>
+  </div>
+<% end %>
