@@ -1,24 +1,58 @@
-# README
+![Balkan Ruby][logo]
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Balkan Ruby is back to business!
 
-Things you may want to cover:
+## Development
 
-* Ruby version
+Before running Balkan Ruby on your local macOS machine, you need the following software:
 
-* System dependencies
+### Ready...
 
-* Configuration
+- Ruby 3.2.2
+- PostgreSQL v12+
+- Foreman or Hivemind
 
-* Database creation
+Install Ruby 3.2.2 with `rbenv`, `chruby` or `asdf`. Use [Homebrew](https://brew.sh) for everything else:
 
-* Database initialization
+```
+brew install postgresql hivemind
+```
 
-* How to run the test suite
+With the dependencies installed, setup the project itself with `bin/setup`.
 
-* Services (job queues, cache servers, search engines, etc.)
+### Steady...
 
-* Deployment instructions
+After installing the dependencies, setup admin usage credentials by exporting:
 
-* ...
+```
+export ADMIN_NAME=admin
+export ADMIN_PASSWORD=admin
+```
+
+### Go!
+
+Having the required software and **env**ironment setup run the development server with `hivemind`.
+
+## Development
+
+### Setup
+
+Clone the repo.
+
+```sh
+git clone git@github.com:gsamokovarov/balkan.git
+```
+
+Setup project environment.
+
+```sh
+bin/setup
+```
+
+Start the application.
+
+```sh
+bin/dev
+```
+
+[logo]: https://raw.githubusercontent.com/gsamokovarov/balkan/main/app/assets/images/logo-black.svg?token=GHSAT0AAAAAACJMMNZ5YAAQTIPUE2K3B2AWZKNCUJQ
