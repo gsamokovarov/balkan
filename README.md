@@ -22,12 +22,7 @@ With the dependencies installed, setup the project itself with `bin/setup`.
 
 ### Steady...
 
-After installing the dependencies, setup admin usage credentials by exporting:
-
-```
-export ADMIN_NAME=admin
-export ADMIN_PASSWORD=admin
-```
+(Import maps are great, you have nothing else to configure...)
 
 ### Go!
 
