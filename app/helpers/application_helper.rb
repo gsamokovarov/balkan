@@ -12,7 +12,6 @@ module ApplicationHelper
     rounded
     py-3
     px-8
-    bg-banitsa-500
     bg-white
     text-black
     hover:bg-black
