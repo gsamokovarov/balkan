@@ -1,0 +1,15 @@
+ <div class="
+  rounded-md
+  transition
+  ease-in-out
+  <%= ticket.enabled ? "
+    hover:shadow-brutal
+    hover:-translate-x-1
+    hover:-translate-y-1
+    hover:scale-110
+    hover:z-10
+  " : "" %>
+  w-64
+">
+  <%= render "ticket_card", ticket: ticket %>
+</div>

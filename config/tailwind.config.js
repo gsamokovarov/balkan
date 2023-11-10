@@ -20,6 +20,7 @@ module.exports = {
         "brutal-md": "6px 6px #fff",
       },
       colors: {
+        current: "currentColor",
         banitsa: {
           50: "#FDF2F3",
           100: "#FCE9EB",

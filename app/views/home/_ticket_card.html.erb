@@ -1,0 +1,28 @@
+<div class="p-2 sm:p-3 bg-black border-2 <%= ticket.enabled ? "border-white" : "border-neutral-600" %> rounded-md">
+  <div class="w-full aspect-square">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      class="<%= ticket.enabled ? "text-white" : "text-neutral-600" %>"
+    >
+      <g color="currentColor" weight="regular">
+      <path
+        d="M24,167.2a7.9,7.9,0,0,1,6.4-7.8,32.1,32.1,0,0,0,0-62.8A7.9,7.9,0,0,1,24,88.8V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V88.8a7.9,7.9,0,0,1-6.4,7.8,32.1,32.1,0,0,0,0,62.8,7.9,7.9,0,0,1,6.4,7.8V192a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"
+        ></path>
+      </g>
+    </svg>
+  </div>
+  <div class="mt-4 text-center">
+    <h2 class="sm:text-lg font-medium leading-none <%= ticket.enabled ? "text-white" : "text-neutral-600" %>">
+      <%= ticket.type %>
+    </h2>
+    <p class="font-medium text-neutral-600">
+      <%= ticket.price %>
+    </p>
+  </div>
+</div>
