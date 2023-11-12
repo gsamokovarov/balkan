@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#show"
 
+  resources :sponsors, only: [:index]
+
   direct(:twitter) { "https://twitter.com/@balkanruby" }
   direct(:youtube) { "https://www.youtube.com/@balkanruby6171" }
 end
