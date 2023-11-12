@@ -2,12 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+    @apply
+      inline-flex
+      justify-center
+      items-center
+      gap-2
+      font-semibold
+      border-2
+      border-white
+      rounded
+      py-3
+      px-8
+      bg-white
+      text-black
+      hover:bg-black
+      hover:text-white
+      hover:shadow-brutal
+      hover:-translate-x-1
+      hover:-translate-y-1
+      transition
+      ease-in-out;
+  }
+
+  .btn-secondary {
+    @apply
+      inline-flex
+      justify-center
+      items-center
+      gap-2
+      border-2
+      border-white
+      text-black
+      rounded-full
+      py-2
+      px-4
+      hover:shadow-brutal
+      hover:-translate-x-1
+      hover:-translate-y-1
+      transition
+      ease-in-out;
+  }
+
+  .badge-important {
+    @apply rounded bg-banitsa-500 text-white text-base p-2 align-middle;
+  }
+
+  .badge-warning {
+    @apply rounded bg-x-orange text-black text-base p-2 align-middle;
   }
 }
-
-*/
