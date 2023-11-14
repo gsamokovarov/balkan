@@ -1,15 +1,18 @@
- <div class="
+<%= link_to ticket.buy_url, class: "
+  block
+  w-64
   rounded-md
   transition
   ease-in-out
-  <%= ticket.enabled ? "
-    hover:shadow-brutal
-    hover:-translate-x-1
-    hover:-translate-y-1
-    hover:scale-110
-    hover:z-10
-  " : "" %>
-  w-64
-">
+  #{
+    ticket.enabled ? "
+      hover:shadow-brutal
+      hover:-translate-x-1
+      hover:-translate-y-1
+      hover:scale-110
+      hover:z-10
+    " : "pointer-events-none"
+  }
+" do %>
   <%= render "ticket_card", ticket: ticket %>
-</div>
+<% end %>
