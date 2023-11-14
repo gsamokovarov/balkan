@@ -1,2 +1,2 @@
-class ApplicationRecord
+class ApplicationRecord < FrozenRecord::Base
 end

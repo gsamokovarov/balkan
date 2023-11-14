@@ -68,3 +68,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem "frozen_record", "~> 0.27.0"

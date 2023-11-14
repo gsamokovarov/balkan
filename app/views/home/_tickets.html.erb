@@ -1,13 +1,6 @@
-<%
-  tickets = [
-    OpenStruct.new(type: "Early Bird", price: "€150", enabled: true),
-    OpenStruct.new(type: "Regular", price: "€200", enabled: false),
-  ]
-%>
-
 <%= render "section", title: "Tickets", title_element: "h2" do %>
   <div class="flex flex-col sm:flex-row gap-8">
-    <% tickets.each do |ticket| %>
+    <% @ticket_types.each do |ticket| %>
       <%= render "ticket", ticket: %>
     <% end %>
   </div>

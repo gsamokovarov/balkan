@@ -1,0 +1,6 @@
+- type: "Early Bird"
+  price: "€150"
+  enabled: true
+- type: "Regular"
+  price: "€200"
+  enabled: false

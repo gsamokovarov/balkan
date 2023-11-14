@@ -1,5 +1,5 @@
 <% if speaker.avatar %>
-  <%= image_tag "speakers/#{speaker.avatar}", alt: "#{speaker.name}'s avatar",
+  <%= image_tag speaker.avatar, alt: "#{speaker.name}'s avatar",
                 class: "w-full aspect-square object-cover",
                 lazy: true %>
 <% else %>
