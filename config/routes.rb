@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
   direct(:youtube) { "https://www.youtube.com/@balkanruby6171" }
+  direct(:neuvents) { "https://neuvents.com" }
 end
