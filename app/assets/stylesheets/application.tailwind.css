@@ -45,6 +45,14 @@
       ease-in-out;
   }
 
+  .link-primary {
+    @apply text-banitsa-500 hover:underline hover:decoration-banitsa-500 hover:underline-offset-4 hover:ease-in-out;
+  }
+
+  .link-secondary {
+    @apply text-banitsa-50 hover:text-banitsa-300;
+  }
+
   .badge-important {
     @apply rounded bg-banitsa-500 text-white text-base p-2 align-middle;
   }
