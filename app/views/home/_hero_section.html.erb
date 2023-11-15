@@ -1,10 +1,14 @@
 <%= render "section" do %>
   <div class="grid gap-6">
-    <div>
+    <div class="relative">
+      <%= image_tag "bg_outline_white.gif",
+        alt: "Bulgaria borders outline",
+        class: "absolute invisible md:visible -rotate-12 w-40 right-0 top-6 -z-10" %>
+
       <h1 class="text-4xl sm:text-5xl font-black">
         Balkan Ruby is <span class="text-banitsa-500">back to business</span>
       </h1>
-      <div class="text-2xl sm:text-3xl font-semibold mt-3">
+      <div class="text-2xl sm:text-3xl font-semibold mt-3 text-white/70">
         April 26-27, 2024 in Sofia, Bulgaria
       </div>
     </div>
@@ -37,43 +41,38 @@
       <% end %>
     </div>
 
-    <div
-      class="
-        -mx-4
-        px-4
-        h-72
-        flex
-        overflow-x-auto
-        snap-x
-        snap-mandatory
-        sm:mx-0
-        sm:px-0
-        sm:snap-none
-        sm:h-auto
-        sm:grid
-        sm:items-start
-        sm:grid-rows-[repeat(3,160px)]
-        sm:grid-cols-3
-        gap-4
-      "
-    >
+    <div class="
+      -mx-4
+      px-4
+      h-72
+      flex
+      overflow-x-auto
+      snap-x
+      snap-mandatory
+      sm:mx-0
+      sm:px-0
+      sm:snap-none
+      sm:h-auto
+      sm:grid
+      sm:items-start
+      sm:grid-rows-[repeat(3,160px)]
+      sm:grid-cols-3
+      gap-4
+    ">
       <%= image_tag "memories/balkan_from_atop.jpg",
-      alt: "Ruby Banitsa event",
-      class:
-        "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2 col-span-2",
-      lazy: true %>
+        alt: "Ruby Banitsa event",
+        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2 col-span-2",
+        lazy: true %>
 
-      <%= image_tag "memories/balkan_squat.jpg",
-      alt: "Ruby Banitsa event",
-      class:
-        "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2",
-      lazy: true %>
+        <%= image_tag "memories/balkan_squat.jpg",
+          alt: "Ruby Banitsa event",
+          class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2",
+          lazy: true %>
 
       <%= image_tag "memories/balkan_work.jpg",
-      alt: "Ruby Banitsa event",
-      class:
-        "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover col-span-3",
-      lazy: true %>
+        alt: "Ruby Banitsa event",
+        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover col-span-3",
+        lazy: true %>
     </div>
   </div>
 <% end %>
