@@ -1,7 +1,7 @@
-<%= render "section", title: "Tickets", title_element: "h2" do %>
+<%= render "section", title: "Tickets", title_element: local_assigns.fetch(:title_element, "h2") do %>
   <div class="flex flex-col sm:flex-row gap-8">
     <% @ticket_types.each do |ticket| %>
-      <%= render "ticket", ticket: %>
+      <%= render "tickets/ticket", ticket: %>
     <% end %>
   </div>
 

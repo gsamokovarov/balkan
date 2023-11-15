@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   root "home#show"
 
   resources :sponsors, only: [:index]
+  resources :tickets, only: [:index]
+  resources :speakers, only: [:index]
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
   direct(:youtube) { "https://www.youtube.com/@balkanruby6171" }

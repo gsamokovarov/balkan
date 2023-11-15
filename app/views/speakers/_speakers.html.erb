@@ -1,21 +1,7 @@
-<%
-  card_rotations = [
-    "-rotate-6",
-    "-rotate-1",
-    "rotate-6 md:rotate-12",
-    "rotate-3",
-    "-rotate-6 md:-rotate-12",
-    "rotate-0",
-    "rotate-6",
-    "rotate-1",
-    "-rotate-3"
-  ]
-%>
-
-<%= render "section", title: "Speakers", title_element: "h2" do %>
+<%= render "section", title: "Speakers", title_element: local_assigns.fetch(:title_element, "h2") do %>
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-y-10 sm:gap-2 p-4 w-full md:w-5/6">
     <% @speakers.each.with_index do |speaker, index| %>
-      <%= render "speaker", speaker:, rotation_class: card_rotations[index % card_rotations.size] %>
+      <%= render "speakers/speaker", speaker:, rotation_class: card_rotation(index) %>
     <% end %>
   </div>
 

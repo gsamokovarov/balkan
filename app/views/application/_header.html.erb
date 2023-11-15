@@ -1,7 +1,8 @@
 <% nav_links = [
   { name: "Home", path: root_path },
-  { name: "Speakers", path: "/#speakers" },
-  { name: "Tickets", path: "/#tickets" }
+  { name: "Speakers", path: speakers_path },
+  { name: "Tickets", path: tickets_path },
+  { name: "Sponsors", path: sponsors_path }
 ] %>
 
 <%= render "desktop_header", nav_links: nav_links %>
