@@ -8,4 +8,29 @@
   <p class="text-xl py-3">
     Early Bird tickets are available until 31st of December 2023. Get yours now!
   </p>
+
+  <%= render "tickets/faq" do %>
+    <%= render "tickets/question", title: "Can I get an invoice?" do %>
+      <p>
+        Yes, reach out to us at <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>.
+      </p>
+    <% end %>
+    <%= render "tickets/question", title: "Can I buy tickets in bulk?" do %>
+      <p>
+        If you want to buy tickets for your team, please email us at
+        <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>.
+        We'll give you 5% discount when buying 5 or more tickets.
+      </p>
+    <% end %>
+    <%= render "tickets/question", title: "Do you offer childcare?" do %>
+      <p>
+        Yes, given enough interest, we will run a childcare program during the conference.
+      </p>
+    <% end %>
+    <%= render "tickets/question", title: "What exactly do I get for my ticket?" do %>
+      <p>
+        You get access to the conference, swag, and access to conference-run parties.
+      </p>
+    <% end %>
+  <% end %>
 <% end %>
