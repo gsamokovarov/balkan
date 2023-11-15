@@ -16,4 +16,9 @@ module ApplicationHelper
   def card_rotation(index)
     CARD_ROTATIONS[index % CARD_ROTATIONS.size]
   end
+
+  def title(name)
+    content_for(:title) { "#{name} – " } if name.present?
+    nil
+  end
 end
