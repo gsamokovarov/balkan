@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   direct(:youtube) { "https://www.youtube.com/@balkanruby6171" }
   direct(:banitsa) { "https://rubybanitsa.com" }
   direct(:neuvents) { "https://neuvents.com" }
+  direct(:cfp) { "https://forms.gle/NJY9PJWpud39ZQAr8" }
 end
