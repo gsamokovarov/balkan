@@ -1,5 +1,5 @@
 <%= render "section" do %>
-  <div class="grid gap-6">
+  <div class="grid gap-6" data-controller="hero" id="hero">
     <div class="relative">
       <%= image_tag "bg_outline_white.gif",
         alt: "Bulgaria borders outline",
@@ -20,7 +20,7 @@
     </p>
 
     <div class="flex flex-col sm:flex-row grop">
-      <%= link_to "#tickets", class: "btn-primary" do %>
+      <button data-action="hero#scrollToTickets" class="btn-primary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 256 256"
@@ -38,7 +38,7 @@
           </g>
         </svg>
         <span>Buy a ticket</span>
-      <% end %>
+      </button>
     </div>
 
     <div class="
