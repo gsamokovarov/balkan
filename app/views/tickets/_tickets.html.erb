@@ -22,6 +22,13 @@
         We'll give you 5% discount when buying 5 or more tickets.
       </p>
     <% end %>
+    <%= render "tickets/question", title: "Do you offer refunds?" do %>
+      <p>
+        Yes, we do! Request one with an email to
+        <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>
+        before <time datetime="2024-04-25">April 25th of 2024</time>.
+      </p>
+    <% end %>
     <%= render "tickets/question", title: "Do you offer childcare?" do %>
       <p>
         Yes, given enough interest, we will run a childcare program during the conference.
