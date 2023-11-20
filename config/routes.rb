@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :speakers, only: [:index]
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
+  direct(:facebook) { "https://facebook.com/balkanruby" }
   direct(:youtube) { "https://www.youtube.com/@balkanruby6171" }
   direct(:banitsa) { "https://rubybanitsa.com" }
   direct(:neuvents) { "https://neuvents.com" }
