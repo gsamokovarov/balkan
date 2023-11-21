@@ -1,2 +1,2 @@
-class TicketType < ApplicationRecord
+class TicketType < ApplicationFrozenRecord
 end

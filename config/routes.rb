@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :sponsors, only: [:index]
   resources :tickets, only: [:index]
   resources :speakers, only: [:index]
+  resource :checkout, only: [:create]
+
+  namespace :webhooks do
+    resource :stripe, only: [:create]
+  end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
   direct(:facebook) { "https://facebook.com/balkanruby" }
