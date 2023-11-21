@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root "home#show"
 
   resources :sponsors, only: [:index]
-  resources :tickets, only: [:index]
+  resources :tickets, only: [:index, :show]
   resources :speakers, only: [:index]
   resource :checkout, only: [:create]
 
