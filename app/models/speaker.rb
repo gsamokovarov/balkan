@@ -1,2 +1,2 @@
-class Speaker < ApplicationRecord
+class Speaker < ApplicationFrozenRecord
 end
