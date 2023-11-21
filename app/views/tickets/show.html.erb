@@ -1,0 +1,65 @@
+<% title @ticket_type.type %>
+
+<%= render "section", title: "Tickets", title_element: "h1" do %>
+  <form class="flex flex-col gap-6" data-controller="ticket">
+    <div data-ticket-target="tickets" class="flex flex-wrap gap-12">
+      <div class="border-2 border-white rounded-md flex flex-col gap-6 p-4 w-64">
+        <label class="flex flex-col items-baseline gap-3">
+          <span class="text-xl w-50">Ticket name</span>
+          <input
+            name="name"
+            type="text"
+            required
+            class="
+              w-full
+              border-2
+              rounded-sm
+              border-neutral-600
+              p-2
+              text-black
+              focus:border-banitsa-500
+              focus:outline-banitsa-500
+            "
+          />
+        </label>
+        <label class="flex flex-col items-baseline gap-3">
+          <span class="text-xl w-50">T-shirt size</span>
+          <select
+            name="name"
+            type="text"
+            required
+            class="
+              w-full
+              border-2
+              rounded-sm
+              border-neutral-600
+              p-2
+              text-black
+              focus:border-banitsa-500
+              focus:outline-banitsa-500
+            "
+          >
+            <option value="xs">XS</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+            <option value="xxl">XXL</option>
+          </select>
+        </label>
+      </div>
+
+    </div>
+    <div class="flex gap-6">
+      <button type="button" class="btn-secondary" data-action="ticket#add">
+        + Add another ticket
+      </button>
+    </div>
+
+    <div class="flex gap-6 border-t-2 border-white pt-12 mt-12">
+      <button type="submit" class="btn-primary">
+        Buy ticket
+      </button>
+    </div>
+  </form>
+<% end %>
