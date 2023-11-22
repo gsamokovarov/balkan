@@ -3,56 +3,23 @@
 <%= render "section", title: "Tickets", title_element: "h1" do %>
   <form class="flex flex-col gap-6" data-controller="ticket">
     <div data-ticket-target="tickets" class="flex flex-wrap gap-12">
-      <div class="border-2 border-white rounded-md flex flex-col gap-6 p-4 w-64">
-        <label class="flex flex-col items-baseline gap-3">
-          <span class="text-xl w-50">Ticket name</span>
-          <input
-            name="name"
-            type="text"
-            required
-            class="
-              w-full
-              border-2
-              rounded-sm
-              border-neutral-600
-              p-2
-              text-black
-              focus:border-banitsa-500
-              focus:outline-banitsa-500
-            "
-          />
-        </label>
-        <label class="flex flex-col items-baseline gap-3">
-          <span class="text-xl w-50">T-shirt size</span>
-          <select
-            name="name"
-            type="text"
-            required
-            class="
-              w-full
-              border-2
-              rounded-sm
-              border-neutral-600
-              p-2
-              text-black
-              focus:border-banitsa-500
-              focus:outline-banitsa-500
-            "
-          >
-            <option value="xs">XS</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
-            <option value="xxl">XXL</option>
-          </select>
-        </label>
-      </div>
-
+      <%= render "tickets/single_ticket" %>
     </div>
     <div class="flex gap-6">
       <button type="button" class="btn-secondary" data-action="ticket#add">
-        + Add another ticket
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <span>Add ticket</span>
       </button>
     </div>
 
