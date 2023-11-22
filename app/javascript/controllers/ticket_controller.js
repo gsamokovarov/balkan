@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="ticket"
 export default class extends Controller {
-  static targets = ["tickets", "template", "buyText"]
+  static targets = ["tickets", "template", "summary", "buyButtonText"]
   static values = { count: { type: Number, default: 1 } }
 
   add() {
@@ -33,6 +33,14 @@ export default class extends Controller {
   }
 
   countValueChanged() {
-    this.buyTextTarget.textContent = `Buy ${this.countValue} ticket${this.countValue > 1 ? "s" : ""}`
+    this.summaryTarget.textContent = `You are about to buy ${this.countValue} ticket${this.countValue > 1 ? "s" : ""}.`
+    if (this.countValue < 3) {
+      this.summaryTarget.textContent += ` Buy ${3 - this.countValue} more and save 10%`
+    } else {
+      this.summaryTarget.textContent += ` You are saving 10%`
+      this.summaryTarget.classList.add("text-x-orange")
+    }
+
+    this.buyButtonTextTarget.textContent = `Buy ${this.countValue} ticket${this.countValue > 1 ? "s" : ""}`
   }
 }

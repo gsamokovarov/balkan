@@ -1,7 +1,7 @@
 <% title @ticket_type.type %>
 
 <%= render "section", title: "Tickets", title_element: "h1" do %>
-  <form class="flex flex-col gap-6" data-controller="ticket">
+  <form class="flex flex-col gap-12" data-controller="ticket">
     <div data-ticket-target="tickets" class="flex flex-wrap gap-12">
       <%= render "tickets/single_ticket" %>
     </div>
@@ -23,10 +23,28 @@
       </button>
     </div>
 
-    <div class="flex gap-6 border-t-2 border-white pt-12 mt-12">
-      <button data-ticket-target="buyText" type="submit" class="btn-primary">
-        Buy 1 ticket
-      </button>
-    </div>
+    <p class="text-xl" data-ticket-target="summary">
+      You are about to buy 1 ticket. Buy 2 more and save 10%
+    </p>
+
+    <button type="submit" class="btn-primary w-fit">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 256"
+        class="w-5 h-5 text-current"
+      >
+        <g color="currentColor" weight="regular">
+        <path
+          d="M24,167.2a7.9,7.9,0,0,1,6.4-7.8,32.1,32.1,0,0,0,0-62.8A7.9,7.9,0,0,1,24,88.8V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V88.8a7.9,7.9,0,0,1-6.4,7.8,32.1,32.1,0,0,0,0,62.8,7.9,7.9,0,0,1,6.4,7.8V192a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="16"
+          ></path>
+        </g>
+      </svg>
+      <span data-ticket-target="buyButtonText" >Buy 1 ticket</span>
+    </button>
   </form>
 <% end %>
