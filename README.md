@@ -49,3 +49,15 @@ Start the application.
 ```sh
 bin/dev
 ```
+
+### Stripe setup
+
+> **Warning**
+> Make sure you are using the test mode in Stripe.
+
+1. Install [stripe cli](https://stripe.com/docs/stripe-cli)
+2. Setup a [local listener for the webhooks](https://stripe.com/docs/development/dashboard/local-listener)
+3. Make sure you have the following ENVs setup - e.g. [.env.erb](./.env.erb)
+
+- STRIPE_SECRET_KEY
+- STRIPE_WEBHOOK_SECRET
