@@ -8,10 +8,31 @@ export default class extends Controller {
   add() {
     this.countValue++
     this.ticketsTarget.insertAdjacentHTML("beforeend", this.templateTarget.outerHTML)
+
+    const newTicket = this.ticketsTarget.lastElementChild
+
+    const newTicketRemoveButton = newTicket.querySelector("button")
+    newTicketRemoveButton.classList.remove("invisible")
+    newTicketRemoveButton.classList.add("visible")
+
+    newTicket.scrollIntoView({ behavior: "smooth" })
+  }
+
+  remove(event) {
+    const removeButton = event.currentTarget
+    if (removeButton.disabled) return
+
+    if (this.countValue > 1) {
+      removeButton.disabled = true
+      this.countValue--
+
+      const currentTicket = removeButton.parentElement
+      currentTicket.classList.add("transition-opacity", "duration-500", "opacity-0")
+      setTimeout(() => currentTicket.remove(), 500)
+    }
   }
 
   countValueChanged() {
-    console.log(this.countValue)
-    this.buyTextTarget.textContent = `Buy ${this.countValue} tickets`
+    this.buyTextTarget.textContent = `Buy ${this.countValue} ticket${this.countValue > 1 ? "s" : ""}`
   }
 }
