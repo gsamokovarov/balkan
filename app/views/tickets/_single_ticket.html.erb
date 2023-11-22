@@ -1,6 +1,33 @@
-<div data-ticket-target="template" class="border-2 border-white rounded-md flex flex-col gap-6 p-4 w-64">
-  <label class="flex flex-col items-baseline gap-3">
-    <span class="text-xl w-50">Ticket name</span>
+<div
+  data-ticket-target="template"
+  class="
+    relative
+    border-2
+    border-white
+    rounded-md
+    flex
+    flex-col
+    gap-6
+    p-4
+    w-64
+    max-w-prose
+  "
+>
+  <button type="button" data-action="ticket#remove" class="absolute right-4 top-4 invisible ">
+    <svg
+      class="rotate-45 h-6 w-6 stroke-white/70 hover:stroke-banitsa-500 hover:cursor-pointer"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M18 12H6"></path>
+      <path d="M12 6v12"></path>
+    </svg>
+  </button>
+  <label class="flex flex-col gap-3">
+    <span class="text-xl">Ticket name</span>
     <input
       name="tickets[][name]"
       type="text"
@@ -38,7 +65,7 @@
     >
       <option value="xs">XS</option>
       <option value="s">S</option>
-      <option value="m">M</option>
+      <option selected value="m">M</option>
       <option value="l">L</option>
       <option value="xl">XL</option>
       <option value="xxl">XXL</option>
