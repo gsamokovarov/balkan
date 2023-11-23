@@ -51,13 +51,13 @@ RSpec.case Checkout, type: :model do
 
     assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
     assert_eq ticket.name, "John Doe"
-    assert_eq ticket.price, ticket_type.price_decimal
+    assert_eq ticket.price, ticket_type.price
     assert_eq ticket.shirt_size, "XXL"
   end
 
   def create_ticket_type
     OpenStruct.new(
-      price_decimal: 150,
+      price: 150,
       type: "Early Bird",
     )
   end
@@ -71,7 +71,7 @@ RSpec.case Checkout, type: :model do
         {
           price_data: {
             currency: "eur",
-            unit_amount: (ticket_type.price_decimal * 100).to_i,
+            unit_amount: (ticket_type.price * 100).to_i,
             product_data: {
               name: "#{ticket_type.type} - #{ticket_params[:name]}",
             },

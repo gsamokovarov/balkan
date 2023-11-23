@@ -1,12 +1,12 @@
 - id: 1
   type: "Early Bird"
-  price: "€150"
-  price_decimal: 150
+  price: 150
+  price_currency: EUR
   buy_url: https://book.stripe.com/9AQeXmd9wb5Z5gc7ss
   enabled: true
 - id: 2
   type: "Regular"
-  price: "€200"
-  price_decimal: 200
+  price: 200
+  price_currency: EUR
   buy_url: null
   enabled: false

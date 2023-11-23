@@ -51,7 +51,7 @@ module Checkout
     params.fetch(:tickets).map do |ticket_params|
       ::Ticket.create!(ticket_params.merge(
         order: order,
-        price: ticket_type.price_decimal,
+        price: ticket_type.price,
         description: ticket_type.type,
       ))
     end

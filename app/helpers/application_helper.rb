@@ -17,6 +17,10 @@ module ApplicationHelper
     CARD_ROTATIONS[index % CARD_ROTATIONS.size]
   end
 
+  def format_money(amount, currency: "€", precision: 2)
+    number_to_currency(amount, unit: currency, precision: precision)
+  end
+
   def title(name)
     content_for(:title) { "– #{name}" } if name.present?
     nil
