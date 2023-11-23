@@ -38,9 +38,10 @@ export default class extends Controller {
   countValueChanged() {
     this.summaryTarget.textContent = `You are about to buy ${this.countValue} ticket${this.countValue > 1 ? "s" : ""}.`
     if (this.countValue < 3) {
+      this.summaryTarget.classList.remove("text-x-orange")
       this.summaryTarget.textContent += ` Buy ${3 - this.countValue} more and save 10%`
     } else {
-      this.summaryTarget.textContent += ` You are saving ${this.calculateDiscount()}!`
+      this.summaryTarget.textContent += ` You are saving 10% (${this.calculateDiscount()})`
       this.summaryTarget.classList.add("text-x-orange")
     }
 

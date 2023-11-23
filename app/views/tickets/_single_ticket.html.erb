@@ -1,17 +1,6 @@
 <div
   data-ticket-target="template"
-  class="
-    relative
-    border-2
-    border-white
-    rounded-md
-    flex
-    flex-col
-    gap-6
-    p-4
-    w-64
-    max-w-prose
-  "
+  class="relative border-2 border-white rounded-md flex flex-col gap-6 p-4 w-72"
 >
   <button type="button" data-action="ticket#remove" class="absolute right-4 top-4 invisible ">
     <svg
@@ -26,8 +15,30 @@
       <path d="M12 6v12"></path>
     </svg>
   </button>
+
   <label class="flex flex-col gap-3">
-    <span class="text-xl">Ticket name</span>
+    <span class="text-xl">Attendee name</span>
+    <input
+      name="tickets[][name]"
+      type="email"
+      required
+      class="
+        w-full
+        border-2
+        rounded-md
+        border-neutral-600
+        px-4
+        py-2
+        text-black
+        text-ellipsis
+        focus:border-black
+        focus:outline-white
+      "
+    />
+  </label>
+
+  <label class="flex flex-col gap-3">
+    <span class="text-xl">Attendee email</span>
     <input
       name="tickets[][name]"
       type="text"
@@ -40,11 +51,13 @@
         px-4
         py-2
         text-black
+        text-ellipsis
         focus:border-black
         focus:outline-white
       "
     />
   </label>
+
   <label class="flex flex-col items-baseline gap-3">
     <span class="text-xl w-50">T-shirt size</span>
     <select
