@@ -59,6 +59,8 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  gem 'rspec-rails', '~> 6.1.0'
+  gem 'rspec-xunit'
 end
 
 group :test do

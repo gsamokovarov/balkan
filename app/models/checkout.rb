@@ -1,10 +1,10 @@
 module Checkout
   extend self
 
-  def create_link(params)
+  def create_link(params, ticket_type)
     ActiveRecord::Base.transaction do
       order = ::Order.create!
-      tickets = create_tickets(params, order)
+      tickets = create_tickets(params, order, ticket_type)
       stripe_order = create_stripe_checkout_session(tickets)
 
       order.update!(stripe_checkout_session_uid: stripe_order.id)
@@ -47,9 +47,7 @@ module Checkout
     end
   end
 
-  def create_tickets(params, order)
-    ticket_type = fetch_ticket_type
-
+  def create_tickets(params, order, ticket_type)
     params.fetch(:tickets).map do |ticket_params|
       ::Ticket.create!(ticket_params.merge(
         order: order,
@@ -57,13 +55,5 @@ module Checkout
         description: ticket_type.type,
       ))
     end
-  end
-
-  def fetch_ticket_type
-    ticket_types = TicketType.where(enabled: true).to_a
-
-    raise "One ticket type should be enabled at a time!" if ticket_types.size != 1
-
-    ticket_types.first
   end
 end
