@@ -3,3 +3,21 @@
 <%= render "section", title: "Buy #{@ticket_type.type} tickets", title_element: "h1" do %>
   <%= render "tickets/buy_form", ticket_type: @ticket_type %>
 <% end %>
+
+<%= render "section_separator" %>
+
+<%= render "section", title: "FAQ", title_element: "h2" do %>
+  <%= render "tickets/faq" do %>
+    <%= render "tickets/question", title: "Can I get an invoice?" do %>
+      <p>
+        Yes, reach out to us at <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>.
+      </p>
+    <% end %>
+    <%= render "tickets/question", title: "Can I get a refund?" do %>
+      <p>
+        Yes, request one at <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>
+        before <time datetime="2024-04-25">April 25, 2024</time>.
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
