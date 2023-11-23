@@ -1,50 +1,5 @@
 <% title @ticket_type.type %>
 
-<%= render "section", title: "Tickets", title_element: "h1" do %>
-  <form class="flex flex-col gap-12" data-controller="ticket">
-    <div data-ticket-target="tickets" class="flex flex-wrap gap-12">
-      <%= render "tickets/single_ticket" %>
-    </div>
-    <div class="flex gap-6">
-      <button type="button" class="btn-secondary" data-action="ticket#add">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          class="w-5 h-5"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        <span>Add ticket</span>
-      </button>
-    </div>
-
-    <p class="text-xl" data-ticket-target="summary">
-      You are about to buy 1 ticket. Buy 2 more and save 10%
-    </p>
-
-    <button type="submit" class="btn-primary w-fit">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 256 256"
-        class="w-5 h-5 text-current"
-      >
-        <g color="currentColor" weight="regular">
-        <path
-          d="M24,167.2a7.9,7.9,0,0,1,6.4-7.8,32.1,32.1,0,0,0,0-62.8A7.9,7.9,0,0,1,24,88.8V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V88.8a7.9,7.9,0,0,1-6.4,7.8,32.1,32.1,0,0,0,0,62.8,7.9,7.9,0,0,1,6.4,7.8V192a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8Z"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="16"
-          ></path>
-        </g>
-      </svg>
-      <span data-ticket-target="buyButtonText" >Buy 1 ticket</span>
-    </button>
-  </form>
+<%= render "section", title: "Buy #{@ticket_type.type} tickets", title_element: "h1" do %>
+  <%= render "tickets/buy_form", ticket_type: @ticket_type %>
 <% end %>
