@@ -3,7 +3,7 @@ class CheckoutsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    redirect_to Checkout.create_link(checkout_params), allow_other_host: true
+    redirect_to Checkout.create_link(checkout_params, TicketType.current), allow_other_host: true
   end
 
   def checkout_params
