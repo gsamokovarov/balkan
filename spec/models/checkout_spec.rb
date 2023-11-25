@@ -31,10 +31,10 @@ RSpec.case Checkout, type: :model do
 
     stub_stripe_checkout(
       params[:tickets].map do |t|
-        t.merge({
+        {
           price: ticket_type.price,
           description: "#{ticket_type.type} - #{t[:name]}"
-        })
+        }
       end,
       session_id: "stripe-session-id",
       session_url: "https://stripe-checkout-link.com"
@@ -57,10 +57,10 @@ RSpec.case Checkout, type: :model do
 
     stub_stripe_checkout(
       params[:tickets].map do |t|
-        t.merge({
+        {
           price: ticket_type.price,
           description: "#{ticket_type.type} - #{t[:name]}"
-        })
+        }
       end,
       session_id: "stripe-session-id",
       session_url: "https://stripe-checkout-link.com"
@@ -105,10 +105,10 @@ RSpec.case Checkout, type: :model do
 
     stub_stripe_checkout(
       params[:tickets].map do |t|
-        t.merge({
+        {
           price: ticket_type.price * 0.9,
           description: "#{ticket_type.type} - #{t[:name]}"
-        })
+        }
       end,
       session_id: "stripe-session-id",
       session_url: "https://stripe-checkout-link.com"
@@ -155,10 +155,10 @@ RSpec.case Checkout, type: :model do
 
     stub_stripe_checkout_with_invoice(
       params[:tickets].map do |t|
-        t.merge({
+        {
           price: ticket_type.price,
           description: "#{ticket_type.type} - #{t[:name]}"
-        })
+        }
       end,
       session_id: "stripe-session-id",
       session_url: "https://stripe-checkout-link.com"
