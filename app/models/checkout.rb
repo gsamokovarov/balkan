@@ -2,11 +2,11 @@ module Checkout
   extend self
 
   def create_link(params, ticket_type)
-    ActiveRecord::Base.transaction do
-      order = ::Order.create!
+    ApplicationRecord.transaction do
+      order = Order.create!
       tickets = create_tickets(params, order, ticket_type)
-      stripe_order = create_stripe_checkout_session(tickets)
 
+      stripe_order = create_stripe_checkout_session(tickets)
       order.update!(stripe_checkout_session_uid: stripe_order.id)
 
       stripe_order.url
@@ -16,8 +16,6 @@ module Checkout
   private
 
   def create_stripe_checkout_session(tickets)
-    Stripe.api_key = ENV.fetch('STRIPE_SECRET_KEY')
-
     Stripe::Checkout::Session.create({
       currency: "eur",
       success_url: "http://localhost:3000/success",

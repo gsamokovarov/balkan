@@ -18,11 +18,9 @@
 
   <label class="flex flex-col gap-3">
     <span class="text-xl">Attendee name</span>
-    <input
-      name="tickets[][name]"
-      type="email"
-      required
-      class="
+    <%= fields.text_field :name,
+      required: true,
+      class: "
         w-full
         border-2
         rounded-md
@@ -32,18 +30,15 @@
         text-black
         text-ellipsis
         focus:border-black
-        focus:outline-white
-      "
-    />
+        focus:outline-white"
+     %>
   </label>
 
   <label class="flex flex-col gap-3">
     <span class="text-xl">Attendee email</span>
-    <input
-      name="tickets[][name]"
-      type="text"
-      required
-      class="
+    <%= fields.email_field :email,
+      required: true,
+      class: "
         w-full
         border-2
         rounded-md
@@ -55,16 +50,17 @@
         focus:border-black
         focus:outline-white
       "
-    />
+    %>
   </label>
 
   <label class="flex flex-col items-baseline gap-3">
     <span class="text-xl w-50">T-shirt size</span>
-    <select
-      name="tickets[][name]"
-      type="text"
-      required
-      class="
+    <%= fields.select :shirt_size,
+      %w[XS S M L XL XXL].map { [_1, _1] },
+      {selected: "M"},
+      required: true,
+      type: :text,
+      class: "
         w-full
         border-2
         rounded-md
@@ -75,13 +71,6 @@
         focus:border-black
         focus:outline-white
       "
-    >
-      <option value="xs">XS</option>
-      <option value="s">S</option>
-      <option selected value="m">M</option>
-      <option value="l">L</option>
-      <option value="xl">XL</option>
-      <option value="xxl">XXL</option>
-    </select>
+    %>
   </label>
 </div>
