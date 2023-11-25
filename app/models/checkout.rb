@@ -6,28 +6,34 @@ module Checkout
       order = Order.create!
       tickets = create_tickets(params, order, ticket_type)
 
-      stripe_order = create_stripe_checkout_session(tickets)
-      order.update!(stripe_checkout_session_uid: stripe_order.id)
+      stripe_session = create_stripe_checkout_session(tickets, params)
+      order.update!(stripe_checkout_session_uid: stripe_session.id, issue_invoice: issue_invoice?(params))
 
-      stripe_order.url
+      stripe_session.url
     end
   end
 
   private
 
-  def create_stripe_checkout_session(tickets)
-    Stripe::Checkout::Session.create({
+  def issue_invoice?(params)
+    params[:invoice] == "1"
+  end
+
+  def create_stripe_checkout_session(tickets, params)
+    checkout_params = {
       currency: "eur",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/error",
+      success_url: Rails.application.routes.url_helpers.thanks_url,
+      cancel_url: Rails.application.routes.url_helpers.root_url,
       line_items: build_stripe_products(tickets),
-      mode: 'payment',
-      billing_address_collection: 'required',
-      tax_id_collection: {
-        enabled: true
-      },
-      # allow_promotion_codes: true, # TODO: should we support this?
-    })
+      mode: 'payment'
+    }
+
+    if issue_invoice?(params)
+      checkout_params[:billing_address_collection] = "required"
+      checkout_params[:tax_id_collection] = { enabled: true }
+    end
+
+    Stripe::Checkout::Session.create(checkout_params)
   end
 
   def build_stripe_products(tickets)
