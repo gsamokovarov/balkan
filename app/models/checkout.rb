@@ -6,6 +6,8 @@ module Checkout
       order = Order.create!
       tickets = create_tickets(params, order, ticket_type)
 
+      raise(ArgumentError, "At least 1 ticket needs to be created!") if tickets.size.zero?
+
       stripe_session = create_stripe_checkout_session(tickets, params)
       order.update!(stripe_checkout_session_uid: stripe_session.id, issue_invoice: issue_invoice?(params))
 
@@ -52,12 +54,25 @@ module Checkout
   end
 
   def create_tickets(params, order, ticket_type)
-    params.fetch(:tickets).map do |ticket_params|
+    tickets = params.fetch(:tickets).map do |ticket_params|
       ::Ticket.create!(ticket_params.merge(
         order: order,
         price: ticket_type.price,
         description: ticket_type.type,
       ))
+    end
+
+    apply_discount(tickets)
+
+    tickets
+  end
+
+  def apply_discount(tickets)
+    return if tickets.size < 3
+
+    tickets.each do |t|
+      t.price = t.price * 0.9
+      t.save!
     end
   end
 end
