@@ -7,12 +7,6 @@ class CheckoutsController < ApplicationController
   end
 
   def checkout_params
-    params.require(:checkout).permit(
-      tickets: [
-        :name,
-        :email,
-        :shirt_size
-      ]
-    )
+    params.require(:checkout).permit :invoice, tickets: [:name, :email, :shirt_size]
   end
 end

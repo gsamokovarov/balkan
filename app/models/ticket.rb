@@ -9,11 +9,5 @@ class Ticket < ApplicationRecord
   validates :price, presence: true
   validates :shirt_size, inclusion: { in: T_SHIRT_SIZES }
 
-  before_validation :sanitize_email
-
-  private
-
-  def sanitize_email
-    self.email = email&.downcase&.strip&.presence
-  end
+  normalizes :email, with: -> { _1.downcase.strip }
 end

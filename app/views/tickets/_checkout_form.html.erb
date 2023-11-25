@@ -1,6 +1,16 @@
-<form class="flex flex-col gap-12" data-controller="ticket" data-ticket-price-value="<%= ticket_type.price %>">
+<%= form_with(
+  scope: :checkout,
+  url: checkout_path,
+  class: "flex flex-col gap-12",
+  data: {
+    "controller": "ticket",
+    "ticket_price_value": ticket_type.price
+  }
+) do |f| %>
   <div data-ticket-target="tickets" class="flex flex-wrap gap-12">
-    <%= render "tickets/single_ticket" %>
+    <%= f.fields_for :tickets, index: nil do |fields| %>
+      <%= render "tickets/single_ticket", fields: %>
+    <% end %>
   </div>
 
   <div class="flex gap-6">
@@ -24,11 +34,9 @@
   <div class="flex gap-6">
     <label class="flex flex-col gap-3">
       <span class="text-xl">Do you need an invoice?</span>
-      <input
-        name="invoice"
-        type="checkbox"
-        class="w-5 h-5 text-banitsa-500 border-neutral-600 rounded-sm focus:border-black focus:outline-white"
-      />
+      <%= f.check_box :invoice,
+        class: "w-5 h-5 text-banitsa-500 border-neutral-600 rounded-sm focus:border-black focus:outline-white"
+      %>
     </label>
   </div>
 
@@ -37,7 +45,7 @@
       You are about to buy 1 ticket. Buy 2 more and save 10%
     </p>
 
-    <button type="submit" class="btn-primary w-fit">
+    <%= f.button type: "submit", class: "btn-primary w-fit" do %>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 256 256"
@@ -55,6 +63,6 @@
         </g>
       </svg>
       <span data-ticket-target="buyButtonText" >Pay <%= @ticket_type.price %></span>
-    </button>
+    <% end %>
   </div>
-</form>
+<% end %>
