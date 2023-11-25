@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :tickets, only: [:index, :show]
   resources :speakers, only: [:index]
   resource :checkout, only: [:create]
+  resources :thanks, only: [:index]
 
   namespace :webhooks do
     resource :stripe, only: [:create]

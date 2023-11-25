@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_131052) do
     t.json "stripe_checkout_session", default: "{}", null: false
     t.datetime "completed_at"
     t.datetime "expired_at"
+    t.boolean "issue_invoice", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
