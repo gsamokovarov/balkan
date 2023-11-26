@@ -54,25 +54,15 @@ module Checkout
   end
 
   def create_tickets(params, order, ticket_type)
-    tickets = params.fetch(:tickets).map do |ticket_params|
-      ::Ticket.create!(ticket_params.merge(
-        order: order,
-        price: ticket_type.price,
-        description: ticket_type.type,
-      ))
-    end
+    tickets = params[:tickets]
+    discounted_price = ticket_type.price * 0.9 if tickets.size >= 3
 
-    apply_discount(tickets)
-
-    tickets
-  end
-
-  def apply_discount(tickets)
-    return if tickets.size < 3
-
-    tickets.each do |t|
-      t.price = t.price * 0.9
-      t.save!
+    tickets.map do
+      Ticket.create! _1 do |ticket|
+        ticket.order = order
+        ticket.price = discounted_price || ticket_type.price
+        ticket.description = ticket_type.type
+      end
     end
   end
 end
