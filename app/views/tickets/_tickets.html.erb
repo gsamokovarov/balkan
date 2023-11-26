@@ -1,18 +1,19 @@
 <%= render "section", title: "Tickets", title_element: local_assigns.fetch(:title_element, "h2") do %>
   <div class="flex flex-shrink gap-8">
-    <% @ticket_types.each do |ticket| %>
-      <%= render "tickets/ticket", ticket: %>
+    <% @ticket_types.each do |ticket_type| %>
+      <%= render "tickets/ticket_card_link", ticket_type: %>
     <% end %>
   </div>
 
   <p class="text-xl py-3">
-    Early Bird tickets are available until we announce the speaker lineup. Get yours now!
+    Early Bird tickets are available until we announce the speaker lineup.
+    <%= link_to "Get yours now!", tickets_path, class: "link-primary" %>
   </p>
 
   <%= render "tickets/faq" do %>
     <%= render "tickets/question", title: "Can I get an invoice?" do %>
       <p>
-        Yes, make sure to check the <b>"Do you need an invoice?</b> box when buying your ticket.
+        Yes, make sure to check the <b>"Do you need an invoice?</b> check-box when buying your ticket.
       </p>
     <% end %>
     <%= render "tickets/question", title: "Do you offer refunds?" do %>
