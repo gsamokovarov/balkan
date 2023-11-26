@@ -1,0 +1,30 @@
+<% title "Thank you" %>
+
+<%= render "section", title: "Thank you", title_element: "h1" do %>
+  <div class="prose prose-xl prose-invert text-white">
+    <p>
+      Thank you for purchasing a ticket! You will receive an email with your
+      receipt or invoice shortly. If you have any questions for us, feel free
+      to <%= link_to "contact us", "mailto://hi@balkanruby.com", class: "link-primary" %>.
+    </p>
+
+    <p>
+      Now, why not check out Sofia and its activities?
+    </p>
+<% end %>
+
+<%= render "section_separator" %>
+
+<%= render "section", title: "Sofia", title_element: "h2" do %>
+  <div class="prose-xl max-w-prose prose-invert">
+    <p>
+      Sofia is an old city, inhabited as early as 7000 BC. For centuries, this
+      has been the city of Thracians, Byzantines, Slavs and Bulgars. It has
+      been the residence of Roman emperors, an administrative centre under the
+      First Bulgarian Kingdom, and a capital of an Ottoman province. You can
+      see a monument of almost each historical era inside the city. If you have
+      some spare time you can try
+      <a href="https://freesofiatour.com" class="link-primary">a free Sofia tour</a>.
+    </p>
+  </div>
+<% end %>
