@@ -6,7 +6,7 @@ module Checkout
       order = Order.create!
       tickets = create_tickets(params, order, ticket_type)
 
-      raise(ArgumentError, "At least 1 ticket needs to be created!") if tickets.size.zero?
+      precondition tickets.present?, "At least 1 ticket needs to be created"
 
       stripe_session = create_stripe_checkout_session(tickets, params)
       order.update!(stripe_checkout_session_uid: stripe_session.id, issue_invoice: issue_invoice?(params))

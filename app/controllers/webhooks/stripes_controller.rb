@@ -31,7 +31,7 @@ module Webhooks
             stripe_checkout_session: checkout_session.to_h
           )
         else
-          puts "Unhandled event type: #{event.type}"
+          preconditon_failure "Unhandled event type: #{event.type}"
         end
       rescue JSON::ParserError => e
         render json: { error: { message: e.message } }, status: :bad_request
