@@ -7,10 +7,85 @@
     "ticket_price_value": ticket_type.price,
     "turbo": false
   }
-) do |f| %>
+) do |form| %>
   <div data-ticket-target="tickets" class="flex flex-wrap gap-12">
-    <%= f.fields_for :tickets, index: nil do |fields| %>
-      <%= render "tickets/single_ticket", fields: %>
+    <%= form.fields_for :tickets, index: nil do |fields| %>
+      <div
+        data-ticket-target="template"
+        class="relative border-2 border-white rounded-md flex flex-col gap-6 p-4 w-72"
+      >
+        <button type="button" data-action="ticket#remove" class="absolute right-4 top-4 invisible ">
+          <svg
+            class="rotate-45 h-6 w-6 stroke-white/70 hover:stroke-banitsa-500 hover:cursor-pointer"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 12H6"></path>
+            <path d="M12 6v12"></path>
+          </svg>
+        </button>
+
+        <label class="flex flex-col gap-3">
+          <span class="text-xl">Attendee name</span>
+          <%= fields.text_field :name,
+            required: true,
+            class: "
+              w-full
+              border-2
+              rounded-md
+              border-neutral-600
+              px-4
+              py-2
+              text-black
+              text-ellipsis
+              focus:border-black
+              focus:outline-white"
+           %>
+        </label>
+
+        <label class="flex flex-col gap-3">
+          <span class="text-xl">Attendee email</span>
+          <%= fields.email_field :email,
+            required: true,
+            class: "
+              w-full
+              border-2
+              rounded-md
+              border-neutral-600
+              px-4
+              py-2
+              text-black
+              text-ellipsis
+              focus:border-black
+              focus:outline-white
+            "
+          %>
+        </label>
+
+        <label class="flex flex-col items-baseline gap-3">
+          <span class="text-xl w-50">T-shirt size</span>
+          <%= fields.select :shirt_size,
+            %w[XS S M L XL XXL].map { [_1, _1] },
+            {selected: "M"},
+            required: true,
+            type: :text,
+            class: "
+              w-full
+              border-2
+              rounded-md
+              border-neutral-600
+              px-4
+              py-2
+              text-black
+              focus:border-black
+              focus:outline-white
+            "
+          %>
+        </label>
+      </div>
     <% end %>
   </div>
 
@@ -35,7 +110,7 @@
   <div class="flex gap-6">
     <label class="flex flex-col gap-3">
       <span class="text-xl">Do you need an invoice?</span>
-      <%= f.check_box :invoice,
+      <%= form.check_box :invoice,
         class: "w-5 h-5 text-banitsa-500 border-neutral-600 rounded-sm focus:border-black focus:outline-white"
       %>
     </label>
@@ -46,7 +121,7 @@
       You are about to buy 1 ticket. Buy 2 more and save 10%
     </p>
 
-    <%= f.button type: "submit", class: "btn-primary w-fit" do %>
+    <%= form.button type: "submit", class: "btn-primary w-fit" do %>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 256 256"
