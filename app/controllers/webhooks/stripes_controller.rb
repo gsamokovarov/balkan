@@ -37,7 +37,7 @@ module Webhooks
         render json: { error: { message: e.message } }, status: :bad_request
         return
       rescue Stripe::SignatureVerificationError => e
-        render json: { error: { message: e.message, extra: 'Signiture verification failed' } },
+        render json: { error: { message: e.message, extra: 'Signature verification failed' } },
                status: :bad_request
         return
       end
