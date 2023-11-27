@@ -101,6 +101,7 @@ GEM
     diff-lcs (1.5.0)
     drb (2.1.1)
       ruby2_keywords
+    early (0.3.1)
     erubi (1.12.0)
     frozen_record (0.27.0)
       activemodel
@@ -280,6 +281,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  early (~> 0.3.1)
   frozen_record (~> 0.27.0)
   importmap-rails
   jbuilder

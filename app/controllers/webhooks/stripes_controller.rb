@@ -6,7 +6,7 @@ module Webhooks
 
       begin
         event = Stripe::Webhook.construct_event(
-          payload, sig_header, ENV.fetch('STRIPE_WEBHOOK_SECRET')
+          payload, sig_header, Early::STRIPE_WEBHOOK_SECRET
         )
 
         case event.type

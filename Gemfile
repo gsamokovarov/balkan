@@ -69,8 +69,14 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# No more manual CSS
 gem "tailwindcss-rails", "~> 2.0"
 
+# Use static models with an ActiveRecord-like interface
 gem "frozen_record", "~> 0.27.0"
 
+# Get paid
 gem "stripe"
+
+# Setup early configuration
+gem "early", "~> 0.3.1"
