@@ -112,6 +112,7 @@ GEM
       activemodel
     globalid (1.2.1)
       activesupport (>= 6.1)
+    honeybadger (5.3.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.3)
@@ -287,6 +288,7 @@ DEPENDENCIES
   early (~> 0.3.1)
   factory_bot_rails
   frozen_record (~> 0.27.0)
+  honeybadger (~> 5.3)
   importmap-rails
   jbuilder
   pg
