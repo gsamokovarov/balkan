@@ -1,6 +1,6 @@
-<% title @ticket_type.type %>
+<% title @ticket_type.name %>
 
-<%= render "section", title: "Buy #{@ticket_type.type} tickets", title_element: "h1" do %>
+<%= render "section", title: "Buy #{@ticket_type.name} tickets", title_element: "h1" do %>
   <%= render "tickets/checkout_form", ticket_type: @ticket_type %>
 <% end %>
 

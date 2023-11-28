@@ -4,6 +4,6 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket_type = TicketType.find(params[:id].to_i)
+    @ticket_type = TicketType.enabled.find(params[:id].to_i)
   end
 end

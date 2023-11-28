@@ -1,8 +1,5 @@
-class TicketType < ApplicationFrozenRecord
-  def self.current
-    ticket_types = TicketType.where(enabled: true)
-    precondition ticket_types.count == 1, "One ticket type should be enabled at a time"
+class TicketType < ApplicationRecord
+  belongs_to :event
 
-    ticket_types.first
-  end
+  scope :enabled, -> { where(enabled: true) }
 end

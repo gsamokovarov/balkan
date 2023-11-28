@@ -10,20 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_21_131052) do
-  create_table "orders", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "stripe_checkout_session_uid", default: "", null: false
-    t.json "stripe_checkout_session", default: "{}", null: false
-    t.datetime "completed_at"
-    t.datetime "expired_at"
-    t.boolean "issue_invoice", default: false, null: false
+ActiveRecord::Schema[7.1].define(version: 2023_11_28_061850) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "name", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "email", default: "", null: false
+    t.string "stripe_checkout_session_uid", default: "", null: false
+    t.json "stripe_checkout_session", default: "{}", null: false
+    t.datetime "completed_at", precision: nil
+    t.datetime "expired_at", precision: nil
+    t.boolean "issue_invoice", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_orders_on_event_id"
+  end
+
+  create_table "ticket_types", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "name"
+    t.decimal "price", default: "0.0", null: false
+    t.boolean "enabled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_ticket_types_on_event_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
-    t.integer "order_id", null: false
+    t.bigint "order_id", null: false
     t.string "description", null: false
     t.string "name", null: false
     t.string "email", null: false
@@ -34,5 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_131052) do
     t.index ["order_id"], name: "index_tickets_on_order_id"
   end
 
+  add_foreign_key "orders", "events"
+  add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "orders"
 end

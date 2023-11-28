@@ -3,7 +3,7 @@ module Checkout
 
   def create_link(params, ticket_type)
     ApplicationRecord.transaction do
-      order = Order.create!
+      order = Order.create!(event: ticket_type.event)
       tickets = create_tickets(params, order, ticket_type)
 
       precondition tickets.present?, "At least 1 ticket needs to be created"
@@ -61,7 +61,7 @@ module Checkout
       Ticket.create! _1 do |ticket|
         ticket.order = order
         ticket.price = discounted_price || ticket_type.price
-        ticket.description = ticket_type.type
+        ticket.description = ticket_type.name
       end
     end
   end
