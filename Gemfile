@@ -82,3 +82,5 @@ gem "stripe"
 
 # Setup early configuration
 gem "early", "~> 0.3.1"
+
+gem "honeybadger", "~> 5.3"
