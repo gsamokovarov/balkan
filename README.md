@@ -61,3 +61,8 @@ bin/dev
 
 - STRIPE_SECRET_KEY
 - STRIPE_WEBHOOK_SECRET
+
+### Sendgrid setup
+
+The `SENDGRID_API_KEY` needs to be set with a random value e.g [.env.erb](./.env.erb).
+In development & test emails are not sent.
