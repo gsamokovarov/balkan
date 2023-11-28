@@ -14,22 +14,20 @@ module Webhooks
           checkout_session = event.data.object
 
           order = Order.find_by!(stripe_checkout_session_uid: checkout_session.id)
+          order.update! completed_at: Time.current,
+                        email: checkout_session.customer_details&.email,
+                        stripe_checkout_session: checkout_session.to_h
 
-          order.update!(
-            completed_at: Time.current,
-            email: checkout_session.customer_details&.email,
-            stripe_checkout_session: checkout_session.to_h
-          )
+          order.tickets.each do
+            TicketMailer.welcome_email(_1).deliver_now
+          end
         when 'checkout.session.expired'
           checkout_session = event.data.object
 
           order = Order.find_by!(stripe_checkout_session_uid: checkout_session.id)
-
-          order.update!(
-            expired_at: Time.current,
-            email: checkout_session.customer_details&.email,
-            stripe_checkout_session: checkout_session.to_h
-          )
+          order.update! expired_at: Time.current,
+                        email: checkout_session.customer_details&.email,
+                        stripe_checkout_session: checkout_session.to_h
         else
           preconditon_failure "Unhandled event type: #{event.type}"
         end
