@@ -1,0 +1,18 @@
+<%= link_to ticket_path(ticket_type), class: "
+  block
+  w-64
+  rounded-md
+  transition
+  ease-in-out
+  #{
+    ticket_type.enabled ? "
+      hover:shadow-brutal
+      hover:-translate-x-1
+      hover:-translate-y-1
+      hover:scale-110
+      hover:z-10
+    " : "pointer-events-none"
+  }
+" do %>
+  <%= render "tickets/ticket_card", ticket_type: %>
+<% end %>

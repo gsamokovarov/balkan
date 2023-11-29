@@ -1,0 +1,146 @@
+<%= form_with(
+  scope: :checkout,
+  url: checkout_path,
+  class: "flex flex-col gap-12",
+  data: {
+    "controller": "ticket",
+    "ticket_price_value": ticket_type.price,
+    "turbo": false
+  }
+) do |form| %>
+  <div data-ticket-target="tickets" class="flex flex-wrap gap-12">
+    <%= form.fields_for :tickets, index: nil do |fields| %>
+      <div
+        data-ticket-target="template"
+        class="relative border-2 border-white rounded-md flex flex-col gap-6 p-4 w-full sm:w-72"
+      >
+        <button type="button" data-action="ticket#remove" class="absolute right-4 top-4 invisible ">
+          <svg
+            class="rotate-45 h-6 w-6 stroke-white/70 hover:stroke-banitsa-500 hover:cursor-pointer"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 12H6"></path>
+            <path d="M12 6v12"></path>
+          </svg>
+        </button>
+
+        <label class="flex flex-col gap-3">
+          <span class="text-xl">Attendee name</span>
+          <%= fields.text_field :name,
+            required: true,
+            class: "
+              w-full
+              border-2
+              rounded-md
+              border-neutral-600
+              px-4
+              py-2
+              text-black
+              text-ellipsis
+              focus:border-black
+              focus:outline-white"
+           %>
+        </label>
+
+        <label class="flex flex-col gap-3">
+          <span class="text-xl">Attendee email</span>
+          <%= fields.email_field :email,
+            required: true,
+            class: "
+              w-full
+              border-2
+              rounded-md
+              border-neutral-600
+              px-4
+              py-2
+              text-black
+              text-ellipsis
+              focus:border-black
+              focus:outline-white
+            "
+          %>
+        </label>
+
+        <label class="flex flex-col items-baseline gap-3">
+          <span class="text-xl w-50">T-shirt size</span>
+          <%= fields.select :shirt_size,
+            %w[XS S M L XL XXL],
+            { selected: "M", prompt: true },
+            required: true,
+            type: :text,
+            class: "
+              w-full
+              border-2
+              rounded-md
+              border-neutral-600
+              px-4
+              py-2
+              text-black
+              focus:border-black
+              focus:outline-white
+            "
+          %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flex gap-6">
+    <button type="button" class="btn-secondary" data-action="ticket#add">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="w-5 h-5"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <span>Add ticket</span>
+    </button>
+  </div>
+
+  <div class="flex gap-6">
+    <label class="flex flex-col gap-3">
+      <span class="text-xl">Do you need an invoice?</span>
+      <%= form.check_box :invoice,
+        class: "w-5 h-5 text-banitsa-500 border-neutral-600 rounded-sm focus:border-black focus:outline-white"
+      %>
+    </label>
+  </div>
+
+  <%= form.hidden_field :ticket_type_id, value: @ticket_type.id %>
+
+  <div class="flex flex-col gap-6">
+    <p class="text-xl" data-ticket-target="summary">
+      You are about to buy 1 ticket. Buy 2 more and save 10%
+    </p>
+
+    <%= form.button type: "submit", class: "btn-primary w-fit" do %>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 256"
+        class="w-5 h-5 text-current"
+      >
+        <g color="currentColor" weight="regular">
+        <path
+          d="M24,167.2a7.9,7.9,0,0,1,6.4-7.8,32.1,32.1,0,0,0,0-62.8A7.9,7.9,0,0,1,24,88.8V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V88.8a7.9,7.9,0,0,1-6.4,7.8,32.1,32.1,0,0,0,0,62.8,7.9,7.9,0,0,1,6.4,7.8V192a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="16"
+          ></path>
+        </g>
+      </svg>
+      <span data-ticket-target="buyButtonText">Pay <%= @ticket_type.price %></span>
+    <% end %>
+  </div>
+<% end %>

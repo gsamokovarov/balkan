@@ -1,0 +1,29 @@
+<% title @ticket_type.name %>
+
+<%= render "section", title: "Buy #{@ticket_type.name} tickets", title_element: "h1" do %>
+  <%= render "tickets/checkout_form", ticket_type: @ticket_type %>
+<% end %>
+
+<%= render "section_separator" %>
+
+<%= render "section", title: "FAQ", title_element: "h2" do %>
+  <%= render "tickets/faq" do %>
+    <%= render "tickets/question", title: "Can I get a refund?" do %>
+      <p>
+        Yes, request one at <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>
+        before <time datetime="2024-04-25">April 25, 2024</time>.
+      </p>
+    <% end %>
+    <%= render "tickets/question", title: "Do you give my data to third parties?" do %>
+      <p>
+        Absolutely not! We don't share your data with anyone, even sponsors. We need your name
+        for a badge and email to keep in touch with you. We don't collect anything else.
+      </p>
+    <% end %>
+    <%= render "tickets/question", title: "What exactly do I get for my ticket?" do %>
+      <p>
+        You get access to the conference, swag, access to conference-run parties, and other activities.
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

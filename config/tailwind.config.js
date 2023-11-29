@@ -47,6 +47,9 @@ module.exports = {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
+            a: {
+              textDecoration: "none",
+            },
             img: {
               "border-width": defaultTheme.borderWidth[2],
               "border-color": theme("colors.white"),
@@ -57,5 +60,8 @@ module.exports = {
       }),
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms")
+  ],
 };

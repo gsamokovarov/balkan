@@ -1,30 +1,24 @@
 <%= render "section", title: "Tickets", title_element: local_assigns.fetch(:title_element, "h2") do %>
   <div class="flex flex-shrink gap-8">
-    <% @ticket_types.each do |ticket| %>
-      <%= render "tickets/ticket", ticket: %>
+    <% @ticket_types.each do |ticket_type| %>
+      <%= render "tickets/ticket_card_link", ticket_type: %>
     <% end %>
   </div>
 
   <p class="text-xl py-3">
-    Early Bird tickets are available until 31st of December 2023. Get yours now!
+    Early Bird tickets are available until we announce the speaker lineup.
+    <%= link_to "Get yours now!", tickets_path, class: "link-primary" %>
   </p>
 
   <%= render "tickets/faq" do %>
     <%= render "tickets/question", title: "Can I get an invoice?" do %>
       <p>
-        Yes, reach out to us at <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>.
-      </p>
-    <% end %>
-    <%= render "tickets/question", title: "Can I buy tickets in bulk?" do %>
-      <p>
-        If you want to buy tickets for your team, please email us at
-        <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>.
-        We'll give you 5% discount when buying 5 or more.
+        Yes, make sure to check the <b>"Do you need an invoice?</b> check-box when buying your ticket.
       </p>
     <% end %>
     <%= render "tickets/question", title: "Do you offer refunds?" do %>
       <p>
-        Yes, we do! Request one with an email to
+        Yes, we do. No questions asked. Request one at
         <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>
         before <time datetime="2024-04-25">April 25, 2024</time>.
       </p>
