@@ -9,7 +9,6 @@ current_event.ticket_types.find_or_create_by! name: "Early Bird" do
 end
 
 current_event.ticket_types.find_or_create_by! name: "Regular" do
-TicketType.find_or_create_by!(event: event, name: "Regular") do
   _1.price = 175
   _1.enabled = false
 end
