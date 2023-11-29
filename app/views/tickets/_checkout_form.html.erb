@@ -12,7 +12,7 @@
     <%= form.fields_for :tickets, index: nil do |fields| %>
       <div
         data-ticket-target="template"
-        class="relative border-2 border-white rounded-md flex flex-col gap-6 p-4 w-72"
+        class="relative border-2 border-white rounded-md flex flex-col gap-6 p-4 w-full sm:w-72"
       >
         <button type="button" data-action="ticket#remove" class="absolute right-4 top-4 invisible ">
           <svg
