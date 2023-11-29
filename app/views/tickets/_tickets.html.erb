@@ -11,6 +11,12 @@
   </p>
 
   <%= render "tickets/faq" do %>
+    <%= render "tickets/question", title: "Can I buy tickets in bulk?" do %>
+      <p>
+        Yes, and you will save doing so! We'll give you 10% off when buying 3
+        tickets or more. The discount is applied automatically.
+      </p>
+    <% end %>
     <%= render "tickets/question", title: "Can I get an invoice?" do %>
       <p>
         Yes, make sure to check the <b>"Do you need an invoice?</b> check-box when buying your ticket.
