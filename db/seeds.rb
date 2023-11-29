@@ -9,6 +9,6 @@ TicketType.find_or_create_by!(event: event, name: "Early Bird") do
 end
 
 TicketType.find_or_create_by!(event: event, name: "Regular") do
-  _1.price = 200
+  _1.price = 175
   _1.enabled = false
 end
