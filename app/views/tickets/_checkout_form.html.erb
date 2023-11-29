@@ -68,8 +68,8 @@
         <label class="flex flex-col items-baseline gap-3">
           <span class="text-xl w-50">T-shirt size</span>
           <%= fields.select :shirt_size,
-            %w[XS S M L XL XXL].map { [_1, _1] },
-            {selected: "M"},
+            %w[XS S M L XL XXL],
+            { selected: "M", prompt: true },
             required: true,
             type: :text,
             class: "
