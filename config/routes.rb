@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :sponsors, only: [:index]
   resources :tickets, only: [:index, :show]
   resources :speakers, only: [:index]
-  resource :checkout, only: [:create]
+  resources :checkouts, only: [:index, :show, :create]
   resource :thanks, only: [:show]
 
   namespace :webhooks do

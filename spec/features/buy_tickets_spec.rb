@@ -4,7 +4,7 @@ RSpec.case "Buy tickets", type: :feature do
   test "returns 404 for a disabled ticket type" do
     ticket_type = FactoryBot.create(:ticket_type)
 
-    visit ticket_path(ticket_type.id)
+    visit checkout_path(ticket_type.id)
 
     assert_eq page.status_code, 404
   end
@@ -18,7 +18,7 @@ RSpec.case "Buy tickets", type: :feature do
       session_url: "https://stripe-checkout-link.com/payment"
     )
 
-    visit ticket_path(ticket_type.id)
+    visit checkout_path(ticket_type.id)
 
     assert_have_content page, 'Buy Early Bird tickets'
 
