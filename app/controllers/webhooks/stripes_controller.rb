@@ -27,6 +27,8 @@ module Webhooks
           order = Order.find_by!(stripe_checkout_session_uid: checkout_session.id)
           order.update! expired_at: Time.current,
                         stripe_checkout_session: checkout_session.to_h
+
+          order.tickets.destroy_all
         else
           preconditon_failure "Unhandled event type: #{event.type}"
         end
