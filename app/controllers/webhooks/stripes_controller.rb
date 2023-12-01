@@ -5,30 +5,20 @@ module Webhooks
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
 
       begin
-        event = Stripe::Webhook.construct_event(
-          payload, sig_header, Early::STRIPE_WEBHOOK_SECRET
-        )
+        event = Stripe::Webhook.construct_event payload, sig_header,
+                                                Early::STRIPE_WEBHOOK_SECRET
 
         case event.type
         when 'checkout.session.completed'
           checkout_session = event.data.object
 
-          order = Order.find_by!(stripe_checkout_session_uid: checkout_session.id)
-          order.update! completed_at: Time.current,
-                        email: checkout_session.customer_details.email,
-                        stripe_checkout_session: checkout_session.to_h
-
-          order.tickets.each do
-            TicketMailer.welcome_email(_1).deliver_now
-          end
+          order = Order.find_by! stripe_checkout_session_uid: checkout_session.id
+          order.complete! checkout_session
         when 'checkout.session.expired'
           checkout_session = event.data.object
 
-          order = Order.find_by!(stripe_checkout_session_uid: checkout_session.id)
-          order.update! expired_at: Time.current,
-                        stripe_checkout_session: checkout_session.to_h
-
-          order.tickets.destroy_all
+          order = Order.find_by! stripe_checkout_session_uid: checkout_session.id
+          order.expire! checkout_session
         else
           preconditon_failure "Unhandled event type: #{event.type}"
         end
