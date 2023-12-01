@@ -19,4 +19,10 @@ class Ticket < ApplicationRecord
     event_access_token = generate_token_for(:event_access)
     RQRCode::QRCode.new Link.ticket_url(event_access_token)
   end
+
+  def lts_url
+    Link.with_lts_domain do
+      Link.ticket_url Ticket.generate_token_for(:event_access)
+    end
+  end
 end

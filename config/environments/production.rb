@@ -101,12 +101,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  Rails.application.routes.default_url_options[:host] = 'balkanruby.com'
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.lts_domain = "2024.balkanruby.com"
+
+  Rails.application.routes.default_url_options[:host] = "balkanruby.com"
 end
