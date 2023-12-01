@@ -5,11 +5,13 @@ class Ticket < ApplicationRecord
 
   generates_token_for :event_access
 
-  validates :email, presence: true
-  validates :description, presence: true
-  validates :name, presence: true
-  validates :price, presence: true
-  validates :shirt_size, inclusion: { in: SHIRT_SIZES }
+  with_options strict: true do
+    validates :email, presence: true
+    validates :description, presence: true
+    validates :name, presence: true
+    validates :price, presence: true
+    validates :shirt_size, inclusion: { in: SHIRT_SIZES }
+  end
 
   normalizes :email, with: -> { _1.downcase.strip }
 

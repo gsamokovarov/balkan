@@ -14,6 +14,7 @@ class Order < ApplicationRecord
             email: checkout_session.customer_details.email,
             stripe_checkout_session: checkout_session.to_h
 
+    tickets.create! tickets_metadata
     tickets.each do
       TicketMailer.welcome_email(_1).deliver_now
     end
