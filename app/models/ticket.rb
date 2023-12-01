@@ -15,14 +15,14 @@ class Ticket < ApplicationRecord
 
   def has_event_access? = order.completed_at?
 
+  def event_access_url
+    precondition has_event_access?, "Ticket has no event access"
+
+    Link.ticket_url generate_token_for(:event_access)
+  end
+
   def qrcode
     event_access_token = generate_token_for(:event_access)
     RQRCode::QRCode.new Link.ticket_url(event_access_token)
-  end
-
-  def lts_url
-    Link.with_lts_domain do
-      Link.ticket_url generate_token_for(:event_access)
-    end
   end
 end
