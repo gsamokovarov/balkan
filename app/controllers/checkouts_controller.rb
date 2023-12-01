@@ -8,9 +8,7 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-    ticket_type = TicketType.enabled.find checkout_params[:ticket_type_id]
-
-    redirect_to Checkout.create_link(checkout_params, ticket_type), allow_other_host: true
+    redirect_to Checkout.create_link(checkout_params), allow_other_host: true
   end
 
   def checkout_params
