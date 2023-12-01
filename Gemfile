@@ -41,8 +41,23 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+# No more manual CSS
+gem "tailwindcss-rails", "~> 2.0"
+
+# Use static models with an ActiveRecord-like interface
+gem "frozen_record", "~> 0.27.0"
+
+# Generate QR codes
+gem "rqrcode", "~> 2.0"
+
+# Get paid
+gem "stripe"
+
+# Setup early configuration
+gem "early", "~> 0.3.1"
+
+# Error reporting
+gem "honeybadger", "~> 5.3"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -70,17 +85,3 @@ group :test do
 
   gem 'factory_bot_rails'
 end
-
-# No more manual CSS
-gem "tailwindcss-rails", "~> 2.0"
-
-# Use static models with an ActiveRecord-like interface
-gem "frozen_record", "~> 0.27.0"
-
-# Get paid
-gem "stripe"
-
-# Setup early configuration
-gem "early", "~> 0.3.1"
-
-gem "honeybadger", "~> 5.3"
