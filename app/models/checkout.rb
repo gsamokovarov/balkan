@@ -24,8 +24,8 @@ module Checkout
   def create_stripe_checkout_session(tickets, params)
     checkout_params = {
       currency: "eur",
-      success_url: Rails.application.routes.url_helpers.thanks_url,
-      cancel_url: Rails.application.routes.url_helpers.root_url,
+      success_url: Link.thanks_url,
+      cancel_url: Link.root_url,
       line_items: build_stripe_products(tickets),
       mode: 'payment'
     }
