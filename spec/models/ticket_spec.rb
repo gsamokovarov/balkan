@@ -5,6 +5,6 @@ RSpec.describe Ticket do
     ticket = FactoryBot.create :ticket, :early_bird, name: "John Doe", email: "john@example.com"
     token = ticket.generate_token_for :event_access
 
-    assert_equal ticket.lts_url, "http://2024.example.com/tickets/#{token}"
+    assert_eq ticket.lts_url, "http://2024.example.com/tickets/#{token}"
   end
 end
