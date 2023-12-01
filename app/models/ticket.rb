@@ -22,7 +22,7 @@ class Ticket < ApplicationRecord
 
   def lts_url
     Link.with_lts_domain do
-      Link.ticket_url Ticket.generate_token_for(:event_access)
+      Link.ticket_url generate_token_for(:event_access)
     end
   end
 end
