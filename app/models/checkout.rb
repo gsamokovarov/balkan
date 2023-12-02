@@ -29,7 +29,8 @@ module Checkout
       success_url: Link.thanks_url,
       cancel_url: Link.root_url,
       line_items: build_stripe_products(tickets_metadata),
-      mode: 'payment'
+      mode: 'payment',
+      allow_promotion_codes: true
     }
 
     if issue_invoice

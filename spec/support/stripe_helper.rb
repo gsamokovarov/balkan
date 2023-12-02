@@ -33,6 +33,7 @@ module SpecSupport
           }
         end,
         mode: 'payment',
+        allow_promotion_codes: true,
       }
     end
 

@@ -62,6 +62,31 @@ RSpec.describe Order do
     assert_eq ticket2.shirt_size, ticket2_params["shirt_size"]
   end
 
+  test "#complete! creates tickets and applies an incoming promo code discount" do
+    ticket1_params = build_ticket_params(index: 1, price: 150)
+    ticket2_params = build_ticket_params(index: 2, price: 150)
+    checkout_session_hash = {
+      "allow_promotion_codes"=>true,
+      "total_details"=>{"amount_discount"=>4500, "amount_shipping"=>0, "amount_tax"=>0},
+    }
+
+    order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
+
+    assert_change Ticket, :count do
+      order.complete! double(stripe_checkout_session_uid: "test",
+                            customer_details: double(email: "test@example.com"),
+                            to_h: checkout_session_hash)
+    end
+
+    assert_eq order.completed_at?, true
+    assert_eq order.tickets.count, 2
+
+    ticket1, ticket2 = order.tickets
+
+    assert_eq ticket1.price, BigDecimal("127.5")
+    assert_eq ticket2.price, BigDecimal("127.5")
+  end
+
   def build_ticket_params(index:, price:)
     {
       "name" => "John Doe #{index}",
