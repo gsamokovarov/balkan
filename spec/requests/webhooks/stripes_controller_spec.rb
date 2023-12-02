@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.case Webhooks::StripesController, type: :request do
-  test "order tickets are deleted on checkut.session.expired" do
+  test "order tickets are not created on checkout.session.expired" do
     stripe_expired_payload =
       {
         "id": "evt_1OIEvACUZRkPCoUiKJ2Sfrjz",
@@ -72,20 +72,20 @@ RSpec.case Webhooks::StripesController, type: :request do
         "type": "checkout.session.expired"
       }
     stripe_checkout_session_uid = stripe_expired_payload.dig(:data, :object, :id)
-
-    order = create(:order, stripe_checkout_session_uid:)
-    build_list :ticket, 2, :early_bird, order: do |ticket, index|
-      ticket.update! name: "Early Bird #{index + 1}",
-                     email: "attendee-#{index + 1}@example.com"
+    tickets_metadata = (1..3).map do
+      build_ticket_params(index: _1, price: 150)
     end
+
+    order = create(:order, stripe_checkout_session_uid:, tickets_metadata:)
 
     stripe_post stripe_expired_payload
 
     assert_have_http_status response, :ok
+    assert_eq order.reload.expired_at?, true
     assert_empty? order.tickets
   end
 
-  test "finalizes order and sends ticket email on checkut.session.completed" do
+  test "finalizes order and sends ticket email on checkout.session.completed" do
     stripe_completed_payload =
       {
         "id": "evt_1OI4uGCUZRkPCoUiF9Uko7Ej",
@@ -162,17 +162,28 @@ RSpec.case Webhooks::StripesController, type: :request do
         "request": { "id": nil, "idempotency_key": nil },
         "type": "checkout.session.completed"
       }
-    stripe_checkout_session_uid = stripe_completed_payload.dig(:data, :object, :id)
 
-    order = create(:order, stripe_checkout_session_uid:)
-    build_list :ticket, 3, :early_bird, order: do |ticket, index|
-      ticket.update! name: "Early Bird #{index + 1}",
-                     email: "attendee-#{index + 1}@example.com"
+    stripe_checkout_session_uid = stripe_completed_payload.dig(:data, :object, :id)
+    tickets_metadata = (1..3).map do
+      build_ticket_params(index: _1, price: 150)
     end
+
+    order = create(:order, stripe_checkout_session_uid:,tickets_metadata:)
 
     stripe_post stripe_completed_payload
 
     assert_have_http_status response, :ok
+    assert_eq order.reload.completed_at?, true
     assert_eq order.tickets.count, 3
+  end
+
+  def build_ticket_params(index:, price:)
+    {
+      "name" => "John Doe #{index}",
+      "description" => "Early Bird",
+      "email" => "john-#{index}@example.com",
+      "price" => price.to_s,
+      "shirt_size" => "L"
+    }
   end
 end

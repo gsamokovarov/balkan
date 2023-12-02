@@ -33,7 +33,7 @@ RSpec.case Checkout, type: :model do
     assert_eq Checkout.create_link(params), "https://stripe-checkout-link.com"
   end
 
-  test ".create_link creates an order with tickets" do
+  test ".create_link creates an order with tickets metadata" do
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
       ticket_type_id: ticket_type.id
