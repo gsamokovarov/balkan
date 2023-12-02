@@ -85,7 +85,7 @@ RSpec.case Webhooks::StripesController, type: :request do
     assert_empty? order.tickets
   end
 
-  test "finalizes order and sends ticket email on checkout.session.completed" do
+  test "finalizes order and sends ticket emails on checkout.session.completed" do
     stripe_completed_payload =
       {
         "id": "evt_1OI4uGCUZRkPCoUiF9Uko7Ej",
@@ -175,9 +175,29 @@ RSpec.case Webhooks::StripesController, type: :request do
     assert_have_http_status response, :ok
     assert_eq order.reload.completed_at?, true
     assert_eq order.tickets.count, 3
+
+    ticket1, ticket2, ticket3 = order.tickets
+
+    assert_eq ActionMailer::Base.deliveries.count, 6
+    email1, email2, email3, email4, email5, email6 = ActionMailer::Base.deliveries
+
+    assert_eq email1.to, [ticket1.email]
+    assert_eq email1.subject, "Welcome to Balkan Ruby!"
+    assert_eq email2.to, [ticket1.email]
+    assert_eq email2.subject, "Your ticket for Balkan Ruby"
+
+    assert_eq email3.to, [ticket2.email]
+    assert_eq email3.subject, "Welcome to Balkan Ruby!"
+    assert_eq email4.to, [ticket2.email]
+    assert_eq email4.subject, "Your ticket for Balkan Ruby"
+
+    assert_eq email5.to, [ticket3.email]
+    assert_eq email5.subject, "Welcome to Balkan Ruby!"
+    assert_eq email6.to, [ticket3.email]
+    assert_eq email6.subject, "Your ticket for Balkan Ruby"
   end
 
-  test "finalizes order with promo code and sends ticket email on checkout.session.completed" do
+  test "finalizes order with promo code on checkout.session.completed" do
     stripe_completed_payload =
       {
         "id": "evt_1OI4uGCUZRkPCoUiF9Uko7Ej",
