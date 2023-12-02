@@ -13,9 +13,10 @@ class Order < ApplicationRecord
             stripe_checkout_session: checkout_session.to_h
 
     tickets.create! apply_promo_code_discount(tickets_metadata, checkout_session.to_h)
-    # TODO: When should we send the ticket email?
+
     tickets.each do
       TicketMailer.welcome_email(_1).deliver_now
+      TicketMailer.ticket_email(_1).deliver_now
     end
   end
 
