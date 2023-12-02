@@ -7,5 +7,7 @@
 </p>
 
 <p class="pb-2">
-  <em>You can also view your ticket <%= link_to "here", ticket.event_access_url, class: "link-primary" %>.</em>
+  <%= link_to ticket.event_access_url, class: "link-primary" do %>
+    <em>You can also view your ticket here.</em>
+  <% end %>
 </p>
