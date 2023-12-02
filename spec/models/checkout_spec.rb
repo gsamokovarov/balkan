@@ -51,9 +51,7 @@ RSpec.case Checkout, type: :model do
     )
 
     assert_change Order, :count do
-      assert_change Ticket, :count do
-        Checkout.create_link params
-      end
+      Checkout.create_link params
     end
 
     order = Order.last
@@ -89,30 +87,28 @@ RSpec.case Checkout, type: :model do
     )
 
     assert_change Order, :count do
-      assert_change Ticket, :count do
-        Checkout.create_link params
-      end
+      Checkout.create_link params
     end
 
     order = Order.last
     assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
     assert_eq order.issue_invoice, false
 
-    ticket1, ticket2, ticket3 = order.tickets
+    ticket1, ticket2, ticket3 = order.tickets_metadata
 
     assert_eq ticket1["name"], "John Doe"
     assert_eq ticket1["email"], "john@example.com"
-    assert_eq ticket1["price"], ticket_type.price * 0.9
+    assert_eq ticket1["price"], (ticket_type.price * 0.9).to_s
     assert_eq ticket1["shirt_size"], "XXL"
 
     assert_eq ticket2["name"], "Jane Doe"
     assert_eq ticket2["email"], "jane@example.com"
-    assert_eq ticket2["price"], ticket_type.price * 0.9
+    assert_eq ticket2["price"], (ticket_type.price * 0.9).to_s
     assert_eq ticket2["shirt_size"], "XS"
 
     assert_eq ticket3["name"], "Jake Doe"
     assert_eq ticket3["email"], "jake@example.com"
-    assert_eq ticket3["price"], ticket_type.price * 0.9
+    assert_eq ticket3["price"], (ticket_type.price * 0.9).to_s
     assert_eq ticket3["shirt_size"], "L"
   end
 

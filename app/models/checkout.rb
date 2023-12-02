@@ -57,7 +57,7 @@ module Checkout
 
   def build_tickets_metadata(order, tickets, ticket_type:)
     discounted_price = ticket_type.price * 0.9 if tickets.size >= 3
-    tickets_metadata = 
+    tickets_metadata =
       tickets.map do
         ticket = order.tickets.build _1
         ticket.price = discounted_price || ticket_type.price
