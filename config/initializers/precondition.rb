@@ -1,3 +1,3 @@
-Rails.configuration.to_prepare do
-  Object.include Precondition
-end
+require "precondition"
+
+Object.include Precondition
