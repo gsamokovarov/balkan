@@ -7,4 +7,12 @@ class TicketPreview < ActionMailer::Preview
 
     TicketMailer.welcome_email(ticket).deliver_now
   end
+
+  def ticket_email
+    ticket = Ticket.new name: "John Doe",
+                        email: "genadi+test@hey.com",
+                        order: Order.new(completed_at: Time.current)
+
+    TicketMailer.ticket_email(ticket).deliver_now
+  end
 end
