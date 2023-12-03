@@ -24,7 +24,6 @@ class Order < ApplicationRecord
 
     tickets.each do
       TicketMailer.welcome_email(_1).deliver_now
-      TicketMailer.ticket_email(_1).deliver_now
     end
   end
 end
