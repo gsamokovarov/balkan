@@ -5,7 +5,6 @@ FactoryBot.define do
     shirt_size { "M" }
 
     trait :early_bird do
-      description { "Early Bird - #{name}" }
       price { 150 }
     end
   end

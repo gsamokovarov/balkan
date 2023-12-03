@@ -48,17 +48,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_144659) do
 
   create_table "tickets", force: :cascade do |t|
     t.bigint "order_id", null: false
-    t.string "description", null: false
     t.string "name", null: false
     t.string "email", null: false
     t.decimal "price", null: false
     t.string "shirt_size", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ticket_type_id"
     t.index ["order_id"], name: "index_tickets_on_order_id"
+    t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id"
   end
 
   add_foreign_key "orders", "events"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "orders"
+  add_foreign_key "tickets", "ticket_types"
 end

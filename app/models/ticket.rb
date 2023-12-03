@@ -2,12 +2,12 @@ class Ticket < ApplicationRecord
   SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 
   belongs_to :order
+  belongs_to :ticket_type, optional: true
 
   generates_token_for :event_access
 
   with_options strict: true do
     validates :email, presence: true
-    validates :description, presence: true
     validates :name, presence: true
     validates :price, presence: true
     validates :shirt_size, inclusion: { in: SHIRT_SIZES }
