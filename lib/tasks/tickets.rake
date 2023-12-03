@@ -5,4 +5,9 @@ namespace :tickets do
 
     Ticket.where(ticket_type: nil).update_all(ticket_type_id: ticket_type.id)
   end
+
+  desc "Cleanup tickets of expired orders"
+  task delete_expired: :environment do
+    Order.where.not(expired_at: nil).each { _1.tickets.destroy_all }
+  end
 end
