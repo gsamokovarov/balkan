@@ -2,6 +2,7 @@ class Ticket < ApplicationRecord
   SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 
   belongs_to :order
+  belongs_to :ticket_type, optional: true
 
   generates_token_for :event_access
 
