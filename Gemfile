@@ -20,10 +20,6 @@ gem "early", "~> 0.3.1"
 gem "honeybadger", "~> 5.3"
 gem "icalendar"
 
-group :development, :test do
-  gem "debug", platforms: %i[ mri windows ]
-end
-
 group :development do
   gem "web-console"
   gem 'rspec-rails', '~> 6.1.0'
@@ -33,6 +29,10 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
-  gem 'factory_bot_rails'
   gem "hashie"
+end
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri windows ]
+  gem 'factory_bot_rails'
 end

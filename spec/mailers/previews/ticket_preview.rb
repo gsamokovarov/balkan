@@ -1,17 +1,19 @@
+require "factory_bot_rails"
+
 # Preview all emails at http://localhost:3000/rails/mailers/ticket
 class TicketPreview < ActionMailer::Preview
+  include FactoryBot::Syntax::Methods
+
   def welcome_email
-    ticket = Ticket.new name: "John Doe",
-                        email: "genadi+test@hey.com",
-                        order: Order.new(completed_at: Time.current)
+    ticket = build :ticket, name: "Genadi Samokovarov"
+    ticket.event = ticket.order.event
 
     TicketMailer.welcome_email(ticket).deliver_now
   end
 
   def ticket_email
-    ticket = Ticket.new name: "John Doe",
-                        email: "genadi+test@hey.com",
-                        order: Order.new(completed_at: Time.current)
+    ticket = build :ticket, name: "Genadi Samokovarov"
+    ticket.event = ticket.order.event
 
     TicketMailer.ticket_email(ticket).deliver_now
   end

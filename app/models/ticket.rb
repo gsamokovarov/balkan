@@ -3,6 +3,7 @@ class Ticket < ApplicationRecord
 
   belongs_to :order
   belongs_to :ticket_type, optional: true
+  has_one :event, through: :order
 
   generates_token_for :event_access
 
@@ -16,8 +17,6 @@ class Ticket < ApplicationRecord
   normalizes :email, with: -> { _1.downcase.strip }
 
   def event_access_url
-    precondition order.completed_at?, "Ticket has no event access"
-
     Link.ticket_url generate_token_for(:event_access)
   end
 
