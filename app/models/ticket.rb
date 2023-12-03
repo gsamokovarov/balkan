@@ -15,10 +15,8 @@ class Ticket < ApplicationRecord
 
   normalizes :email, with: -> { _1.downcase.strip }
 
-  def has_event_access? = order.completed_at?
-
   def event_access_url
-    precondition has_event_access?, "Ticket has no event access"
+    precondition order.completed_at?, "Ticket has no event access"
 
     Link.ticket_url generate_token_for(:event_access)
   end
