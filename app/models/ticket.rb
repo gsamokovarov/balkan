@@ -8,7 +8,6 @@ class Ticket < ApplicationRecord
 
   with_options strict: true do
     validates :email, presence: true
-    validates :description, presence: true
     validates :name, presence: true
     validates :price, presence: true
     validates :shirt_size, inclusion: { in: SHIRT_SIZES }
