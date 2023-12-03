@@ -1,0 +1,644 @@
+[
+  {
+    "id": "cs_live_b1I7siA75b2VQuqZS5bhSKg0wl4wj17jsIJQct7AbD6CvitCE1TZfl3G6I",
+    "object": "checkout.session",
+    "livemode": true,
+    "payment_intent": "pi_3OEav0CUZRkPCoUi1HWQCc2m",
+    "status": "complete",
+    "after_expiration": null,
+    "allow_promotion_codes": true,
+    "amount_subtotal": 15000,
+    "amount_total": 15000,
+    "automatic_tax": {
+      "enabled": false,
+      "status": null
+    },
+    "billing_address_collection": "required",
+    "cancel_url": "https://stripe.com",
+    "client_reference_id": null,
+    "client_secret": null,
+    "consent": null,
+    "consent_collection": {
+      "promotions": "none",
+      "terms_of_service": "none"
+    },
+    "created": 1700499897,
+    "currency": "eur",
+    "currency_conversion": null,
+    "custom_fields": [
+      {
+        "key": "tshirtsize",
+        "label": {
+          "custom": "Attendee name",
+          "type": "custom"
+        },
+        "optional": false,
+        "text": {
+          "maximum_length": null,
+          "minimum_length": null,
+          "value": "Raul Murciano"
+        },
+        "type": "text"
+      },
+      {
+        "dropdown": {
+          "options": [
+            {
+              "label": "XS",
+              "value": "xs"
+            },
+            {
+              "label": "S",
+              "value": "s"
+            },
+            {
+              "label": "M",
+              "value": "m"
+            },
+            {
+              "label": "L",
+              "value": "l"
+            },
+            {
+              "label": "XL",
+              "value": "xl"
+            },
+            {
+              "label": "XXL",
+              "value": "xxl"
+            }
+          ],
+          "value": "m"
+        },
+        "key": "childcare",
+        "label": {
+          "custom": "T-shirt size",
+          "type": "custom"
+        },
+        "optional": false,
+        "type": "dropdown"
+      }
+    ],
+    "custom_text": {
+      "shipping_address": null,
+      "submit": null,
+      "terms_of_service_acceptance": null
+    },
+    "customer": null,
+    "customer_creation": "if_required",
+    "customer_details": {
+      "address": {
+        "city": "L'Escala",
+        "country": "ES",
+        "line1": "Pasaje Velazquez 7 Casa 22",
+        "line2": null,
+        "postal_code": "17130",
+        "state": "GI"
+      },
+      "email": "raul@murciano.net",
+      "name": "Raul Murciano Quejido",
+      "phone": null,
+      "tax_exempt": "none",
+      "tax_ids": []
+    },
+    "customer_email": null,
+    "expires_at": 1700586297,
+    "invoice": null,
+    "invoice_creation": {
+      "enabled": false,
+      "invoice_data": {
+        "account_tax_ids": null,
+        "custom_fields": null,
+        "description": null,
+        "footer": null,
+        "metadata": {},
+        "rendering_options": null
+      }
+    },
+    "locale": "auto",
+    "metadata": {},
+    "mode": "payment",
+    "payment_link": "plink_1OC6TnCUZRkPCoUiXopz75iN",
+    "payment_method_collection": "if_required",
+    "payment_method_configuration_details": {
+      "id": "pmc_1OBvi4CUZRkPCoUiEQXmcDxW",
+      "parent": null
+    },
+    "payment_method_options": {},
+    "payment_method_types": [
+      "card",
+      "bancontact",
+      "eps",
+      "giropay",
+      "ideal",
+      "link"
+    ],
+    "payment_status": "paid",
+    "phone_number_collection": {
+      "enabled": false
+    },
+    "recovered_from": null,
+    "setup_intent": null,
+    "shipping_address_collection": null,
+    "shipping_cost": null,
+    "shipping_details": null,
+    "shipping_options": [],
+    "submit_type": "book",
+    "subscription": null,
+    "success_url": "https://stripe.com",
+    "tax_id_collection": {
+      "enabled": true
+    },
+    "total_details": {
+      "amount_discount": 0,
+      "amount_shipping": 0,
+      "amount_tax": 0
+    },
+    "ui_mode": "hosted",
+    "url": null
+  },
+  {
+    "id": "cs_live_b1JpFb539wXjXSUNBKZuXOkttMjw5Aw4Q1p5XmlKcMiQOqZuzbk0RkD3kh",
+    "object": "checkout.session",
+    "livemode": true,
+    "payment_intent": "pi_3OEmlRCUZRkPCoUi0Jn3AHHl",
+    "status": "complete",
+    "after_expiration": null,
+    "allow_promotion_codes": true,
+    "amount_subtotal": 15000,
+    "amount_total": 15000,
+    "automatic_tax": {
+      "enabled": false,
+      "status": null
+    },
+    "billing_address_collection": "required",
+    "cancel_url": "https://stripe.com",
+    "client_reference_id": null,
+    "client_secret": null,
+    "consent": null,
+    "consent_collection": {
+      "promotions": "none",
+      "terms_of_service": "none"
+    },
+    "created": 1700544739,
+    "currency": "eur",
+    "currency_conversion": null,
+    "custom_fields": [
+      {
+        "key": "tshirtsize",
+        "label": {
+          "custom": "Attendee name",
+          "type": "custom"
+        },
+        "optional": false,
+        "text": {
+          "maximum_length": null,
+          "minimum_length": null,
+          "value": "Alexander Popov"
+        },
+        "type": "text"
+      },
+      {
+        "dropdown": {
+          "options": [
+            {
+              "label": "XS",
+              "value": "xs"
+            },
+            {
+              "label": "S",
+              "value": "s"
+            },
+            {
+              "label": "M",
+              "value": "m"
+            },
+            {
+              "label": "L",
+              "value": "l"
+            },
+            {
+              "label": "XL",
+              "value": "xl"
+            },
+            {
+              "label": "XXL",
+              "value": "xxl"
+            }
+          ],
+          "value": "l"
+        },
+        "key": "childcare",
+        "label": {
+          "custom": "T-shirt size",
+          "type": "custom"
+        },
+        "optional": false,
+        "type": "dropdown"
+      }
+    ],
+    "custom_text": {
+      "shipping_address": null,
+      "submit": null,
+      "terms_of_service_acceptance": null
+    },
+    "customer": null,
+    "customer_creation": "if_required",
+    "customer_details": {
+      "address": {
+        "city": "Sofia",
+        "country": "BG",
+        "line1": "9 Solunska Str.",
+        "line2": null,
+        "postal_code": "1000",
+        "state": null
+      },
+      "email": "sasho@hey.com",
+      "name": "Qwerty Labs EOOD",
+      "phone": null,
+      "tax_exempt": "none",
+      "tax_ids": [
+        {
+          "type": "ru_kpp",
+          "value": "206064606"
+        }
+      ]
+    },
+    "customer_email": null,
+    "expires_at": 1700631139,
+    "invoice": null,
+    "invoice_creation": {
+      "enabled": false,
+      "invoice_data": {
+        "account_tax_ids": null,
+        "custom_fields": null,
+        "description": null,
+        "footer": null,
+        "metadata": {},
+        "rendering_options": null
+      }
+    },
+    "locale": "auto",
+    "metadata": {},
+    "mode": "payment",
+    "payment_link": "plink_1OC6TnCUZRkPCoUiXopz75iN",
+    "payment_method_collection": "if_required",
+    "payment_method_configuration_details": {
+      "id": "pmc_1OBvi4CUZRkPCoUiEQXmcDxW",
+      "parent": null
+    },
+    "payment_method_options": {},
+    "payment_method_types": [
+      "card",
+      "bancontact",
+      "eps",
+      "giropay",
+      "ideal",
+      "link"
+    ],
+    "payment_status": "paid",
+    "phone_number_collection": {
+      "enabled": false
+    },
+    "recovered_from": null,
+    "setup_intent": null,
+    "shipping_address_collection": null,
+    "shipping_cost": null,
+    "shipping_details": null,
+    "shipping_options": [],
+    "submit_type": "book",
+    "subscription": null,
+    "success_url": "https://stripe.com",
+    "tax_id_collection": {
+      "enabled": true
+    },
+    "total_details": {
+      "amount_discount": 0,
+      "amount_shipping": 0,
+      "amount_tax": 0
+    },
+    "ui_mode": "hosted",
+    "url": null
+  },
+  {
+    "id": "cs_live_b1JFUMefuwsnX90GQPYYxQm02RamDXcqASaBQxqPvVUdS5pldM3CNQr8dj",
+    "object": "checkout.session",
+    "livemode": true,
+    "payment_intent": "pi_3OEqiLCUZRkPCoUi0RFgzeMP",
+    "status": "complete",
+    "after_expiration": null,
+    "allow_promotion_codes": true,
+    "amount_subtotal": 15000,
+    "amount_total": 15000,
+    "automatic_tax": {
+      "enabled": false,
+      "status": null
+    },
+    "billing_address_collection": "required",
+    "cancel_url": "https://stripe.com",
+    "client_reference_id": null,
+    "client_secret": null,
+    "consent": null,
+    "consent_collection": {
+      "promotions": "none",
+      "terms_of_service": "none"
+    },
+    "created": 1700560637,
+    "currency": "eur",
+    "currency_conversion": null,
+    "custom_fields": [
+      {
+        "key": "tshirtsize",
+        "label": {
+          "custom": "Attendee name",
+          "type": "custom"
+        },
+        "optional": false,
+        "text": {
+          "maximum_length": null,
+          "minimum_length": null,
+          "value": "Rosa Gutierrez"
+        },
+        "type": "text"
+      },
+      {
+        "dropdown": {
+          "options": [
+            {
+              "label": "XS",
+              "value": "xs"
+            },
+            {
+              "label": "S",
+              "value": "s"
+            },
+            {
+              "label": "M",
+              "value": "m"
+            },
+            {
+              "label": "L",
+              "value": "l"
+            },
+            {
+              "label": "XL",
+              "value": "xl"
+            },
+            {
+              "label": "XXL",
+              "value": "xxl"
+            }
+          ],
+          "value": "xs"
+        },
+        "key": "childcare",
+        "label": {
+          "custom": "T-shirt size",
+          "type": "custom"
+        },
+        "optional": false,
+        "type": "dropdown"
+      }
+    ],
+    "custom_text": {
+      "shipping_address": null,
+      "submit": null,
+      "terms_of_service_acceptance": null
+    },
+    "customer": null,
+    "customer_creation": "if_required",
+    "customer_details": {
+      "address": {
+        "city": "Madrid",
+        "country": "ES",
+        "line1": "Calle Juanelo, 9 - 2º derecha",
+        "line2": null,
+        "postal_code": "28012",
+        "state": "Madrid"
+      },
+      "email": "rosa@hey.com",
+      "name": "Rosa Maria Gutierrez Escudero",
+      "phone": null,
+      "tax_exempt": "none",
+      "tax_ids": []
+    },
+    "customer_email": null,
+    "expires_at": 1700647036,
+    "invoice": null,
+    "invoice_creation": {
+      "enabled": false,
+      "invoice_data": {
+        "account_tax_ids": null,
+        "custom_fields": null,
+        "description": null,
+        "footer": null,
+        "metadata": {},
+        "rendering_options": null
+      }
+    },
+    "locale": "auto",
+    "metadata": {},
+    "mode": "payment",
+    "payment_link": "plink_1OC6TnCUZRkPCoUiXopz75iN",
+    "payment_method_collection": "if_required",
+    "payment_method_configuration_details": {
+      "id": "pmc_1OBvi4CUZRkPCoUiEQXmcDxW",
+      "parent": null
+    },
+    "payment_method_options": {},
+    "payment_method_types": [
+      "card",
+      "bancontact",
+      "eps",
+      "giropay",
+      "ideal",
+      "link"
+    ],
+    "payment_status": "paid",
+    "phone_number_collection": {
+      "enabled": false
+    },
+    "recovered_from": null,
+    "setup_intent": null,
+    "shipping_address_collection": null,
+    "shipping_cost": null,
+    "shipping_details": null,
+    "shipping_options": [],
+    "submit_type": "book",
+    "subscription": null,
+    "success_url": "https://stripe.com",
+    "tax_id_collection": {
+      "enabled": true
+    },
+    "total_details": {
+      "amount_discount": 0,
+      "amount_shipping": 0,
+      "amount_tax": 0
+    },
+    "ui_mode": "hosted",
+    "url": null
+  },
+  {
+    "id": "cs_live_b1rnCp8wxWeklPlrkKCik2cUPwPAoK2KWwdhd4yA2luFJ9Hmp0rcxJkvNR",
+    "object": "checkout.session",
+    "livemode": true,
+    "payment_intent": "pi_3OEvlBCUZRkPCoUi07Mc5TTy",
+    "status": "complete",
+    "after_expiration": null,
+    "allow_promotion_codes": true,
+    "amount_subtotal": 15000,
+    "amount_total": 15000,
+    "automatic_tax": {
+      "enabled": false,
+      "status": null
+    },
+    "billing_address_collection": "required",
+    "cancel_url": "https://stripe.com",
+    "client_reference_id": null,
+    "client_secret": null,
+    "consent": null,
+    "consent_collection": {
+      "promotions": "none",
+      "terms_of_service": "none"
+    },
+    "created": 1700579984,
+    "currency": "eur",
+    "currency_conversion": null,
+    "custom_fields": [
+      {
+        "key": "tshirtsize",
+        "label": {
+          "custom": "Attendee name",
+          "type": "custom"
+        },
+        "optional": false,
+        "text": {
+          "maximum_length": null,
+          "minimum_length": null,
+          "value": "Naser Mugrabi"
+        },
+        "type": "text"
+      },
+      {
+        "dropdown": {
+          "options": [
+            {
+              "label": "XS",
+              "value": "xs"
+            },
+            {
+              "label": "S",
+              "value": "s"
+            },
+            {
+              "label": "M",
+              "value": "m"
+            },
+            {
+              "label": "L",
+              "value": "l"
+            },
+            {
+              "label": "XL",
+              "value": "xl"
+            },
+            {
+              "label": "XXL",
+              "value": "xxl"
+            }
+          ],
+          "value": "l"
+        },
+        "key": "childcare",
+        "label": {
+          "custom": "T-shirt size",
+          "type": "custom"
+        },
+        "optional": false,
+        "type": "dropdown"
+      }
+    ],
+    "custom_text": {
+      "shipping_address": null,
+      "submit": null,
+      "terms_of_service_acceptance": null
+    },
+    "customer": null,
+    "customer_creation": "if_required",
+    "customer_details": {
+      "address": {
+        "city": "Sofia",
+        "country": "BG",
+        "line1": "ul. Dimitar Hadzhikotsev 72b",
+        "line2": "ap. 12",
+        "postal_code": "1421",
+        "state": null
+      },
+      "email": "vestimir@raketadesign.com",
+      "name": "Studio Raketa EOOD",
+      "phone": null,
+      "tax_exempt": "none",
+      "tax_ids": [
+        {
+          "type": "eu_vat",
+          "value": "BG203338272"
+        }
+      ]
+    },
+    "customer_email": null,
+    "expires_at": 1700666384,
+    "invoice": null,
+    "invoice_creation": {
+      "enabled": false,
+      "invoice_data": {
+        "account_tax_ids": null,
+        "custom_fields": null,
+        "description": null,
+        "footer": null,
+        "metadata": {},
+        "rendering_options": null
+      }
+    },
+    "locale": "auto",
+    "metadata": {},
+    "mode": "payment",
+    "payment_link": "plink_1OC6TnCUZRkPCoUiXopz75iN",
+    "payment_method_collection": "if_required",
+    "payment_method_configuration_details": {
+      "id": "pmc_1OBvi4CUZRkPCoUiEQXmcDxW",
+      "parent": null
+    },
+    "payment_method_options": {},
+    "payment_method_types": [
+      "card",
+      "bancontact",
+      "eps",
+      "giropay",
+      "ideal",
+      "link"
+    ],
+    "payment_status": "paid",
+    "phone_number_collection": {
+      "enabled": false
+    },
+    "recovered_from": null,
+    "setup_intent": null,
+    "shipping_address_collection": null,
+    "shipping_cost": null,
+    "shipping_details": null,
+    "shipping_options": [],
+    "submit_type": "book",
+    "subscription": null,
+    "success_url": "https://stripe.com",
+    "tax_id_collection": {
+      "enabled": true
+    },
+    "total_details": {
+      "amount_discount": 0,
+      "amount_shipping": 0,
+      "amount_tax": 0
+    },
+    "ui_mode": "hosted",
+    "url": null
+  }
+]
