@@ -3,9 +3,11 @@ require "rails_helper"
 RSpec.describe Order do
   test "#expire! does not create tickets" do
     ticket_params = build_ticket_params(index: 1, price: 150)
+    checkout_session = Stripe::Checkout::Session.construct_from id: "test"
+
     order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket_params]
 
-    order.expire! double(stripe_checkout_session_uid: "test", to_h: {})
+    order.expire! checkout_session
 
     assert_eq order.expired_at?, true
     assert_eq order.tickets, []
@@ -15,12 +17,15 @@ RSpec.describe Order do
   test "#complete! sends welcome emails" do
     ticket1_params = build_ticket_params(index: 1, price: 150)
     ticket2_params = build_ticket_params(index: 2, price: 150)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { email: "test@example.com" },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+    )
 
     order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
 
-    order.complete! double(stripe_checkout_session_uid: "test",
-                            customer_details: double(email: "test@example.com"),
-                            to_h: {})
+    order.complete! checkout_session
 
     assert_eq ActionMailer::Base.deliveries.count, 4
     email1, email2, email3, email4 = ActionMailer::Base.deliveries
@@ -39,13 +44,16 @@ RSpec.describe Order do
   test "#complete! creates tickets" do
     ticket1_params = build_ticket_params(index: 1, price: 150)
     ticket2_params = build_ticket_params(index: 2, price: 150)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { email: "test@example.com" },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+    )
 
     order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
 
     assert_change Ticket, :count do
-      order.complete! double(stripe_checkout_session_uid: "test",
-                             customer_details: double(email: "test@example.com"),
-                             to_h: {})
+      order.complete! checkout_session
     end
 
     assert_eq order.completed_at?, true
@@ -69,17 +77,16 @@ RSpec.describe Order do
   test "#complete! creates tickets and applies an incoming promo code discount" do
     ticket1_params = build_ticket_params(index: 1, price: 150)
     ticket2_params = build_ticket_params(index: 2, price: 150)
-    checkout_session_hash = {
-      "allow_promotion_codes"=>true,
-      "total_details"=>{"amount_discount"=>4500, "amount_shipping"=>0, "amount_tax"=>0},
-    }
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { email: "test@example.com" },
+      total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
+    )
 
     order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
 
     assert_change Ticket, :count do
-      order.complete! double(stripe_checkout_session_uid: "test",
-                             customer_details: double(email: "test@example.com"),
-                             to_h: checkout_session_hash)
+      order.complete! checkout_session
     end
 
     assert_eq order.completed_at?, true
