@@ -1,0 +1,110 @@
+require "rails_helper"
+
+RSpec.describe Order do
+  test "#expire! does not create tickets" do
+    ticket_params = build_ticket_params(index: 1, price: 150)
+    checkout_session = Stripe::Checkout::Session.construct_from id: "test"
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params]
+
+    order.expire! checkout_session
+
+    assert_eq order.expired_at?, true
+    assert_eq order.tickets, []
+    assert_eq Ticket.count, 0
+  end
+
+  test "#complete! sends welcome emails" do
+    ticket1_params = build_ticket_params(index: 1, price: 150)
+    ticket2_params = build_ticket_params(index: 2, price: 150)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { email: "test@example.com" },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
+
+    order.complete! checkout_session
+
+    assert_eq ActionMailer::Base.deliveries.count, 4
+    email1, email2, email3, email4 = ActionMailer::Base.deliveries
+
+    assert_eq email1.to, [ticket1_params["email"]]
+    assert_eq email1.subject, "Welcome to Balkan Ruby!"
+    assert_eq email2.to, [ticket1_params["email"]]
+    assert_eq email2.subject, "Your ticket for Balkan Ruby"
+
+    assert_eq email3.to, [ticket2_params["email"]]
+    assert_eq email3.subject, "Welcome to Balkan Ruby!"
+    assert_eq email4.to, [ticket2_params["email"]]
+    assert_eq email4.subject, "Your ticket for Balkan Ruby"
+  end
+
+  test "#complete! creates tickets" do
+    ticket1_params = build_ticket_params(index: 1, price: 150)
+    ticket2_params = build_ticket_params(index: 2, price: 150)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { email: "test@example.com" },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
+
+    assert_change Ticket, :count do
+      order.complete! checkout_session
+    end
+
+    assert_eq order.completed_at?, true
+    assert_eq order.tickets.count, 2
+
+    ticket1, ticket2 = order.tickets
+
+    assert_eq ticket1.name, ticket1_params["name"]
+    assert_eq ticket1.email, ticket1_params["email"]
+    assert_eq ticket1.description, ticket1_params["description"]
+    assert_eq ticket1.price, ticket1_params["price"].to_d
+    assert_eq ticket1.shirt_size, ticket1_params["shirt_size"]
+
+    assert_eq ticket2.name, ticket2_params["name"]
+    assert_eq ticket2.email, ticket2_params["email"]
+    assert_eq ticket2.description, ticket2_params["description"]
+    assert_eq ticket2.price, ticket2_params["price"].to_d
+    assert_eq ticket2.shirt_size, ticket2_params["shirt_size"]
+  end
+
+  test "#complete! creates tickets and applies an incoming promo code discount" do
+    ticket1_params = build_ticket_params(index: 1, price: 150)
+    ticket2_params = build_ticket_params(index: 2, price: 150)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { email: "test@example.com" },
+      total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
+
+    assert_change Ticket, :count do
+      order.complete! checkout_session
+    end
+
+    assert_eq order.completed_at?, true
+    assert_eq order.tickets.count, 2
+
+    ticket1, ticket2 = order.tickets
+
+    assert_eq ticket1.price, "127.5".to_d
+    assert_eq ticket2.price, "127.5".to_d
+  end
+
+  def build_ticket_params(index:, price:)
+    {
+      "name" => "John Doe #{index}",
+      "description" => "Early Bird",
+      "email" => "john-#{index}@example.com",
+      "price" => price.to_s,
+      "shirt_size" => "L"
+    }
+  end
+end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :ticket_type do
-    event { create(:event) }
+    event
     name { "Early Bird" }
     price { 150 }
     enabled { false }
