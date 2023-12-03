@@ -8,13 +8,13 @@ module Checkout
       precondition params[:tickets].present?, "At least 1 ticket needs to be created"
 
       order = Order.create!(event: ticket_type.event)
-      tickets_metadata = build_tickets_metadata(order, params[:tickets], ticket_type:)
+      pending_tickets = build_pending_tickets(order, params[:tickets], ticket_type:)
 
       issue_invoice = params[:invoice] == "1"
 
-      stripe_session = create_stripe_checkout_session(tickets_metadata, issue_invoice:)
+      stripe_session = create_stripe_checkout_session(pending_tickets, issue_invoice:)
       order.update!(stripe_checkout_session_uid: stripe_session.id,
-                    tickets_metadata:,
+                    pending_tickets:,
                     issue_invoice:)
 
       stripe_session.url
@@ -23,12 +23,12 @@ module Checkout
 
   private
 
-  def create_stripe_checkout_session(tickets_metadata, issue_invoice:)
+  def create_stripe_checkout_session(pending_tickets, issue_invoice:)
     checkout_params = {
       currency: "eur",
       success_url: Link.thanks_url,
       cancel_url: Link.root_url,
-      line_items: build_stripe_products(tickets_metadata),
+      line_items: build_stripe_products(pending_tickets),
       mode: 'payment',
       allow_promotion_codes: true
     }
@@ -56,9 +56,9 @@ module Checkout
     end
   end
 
-  def build_tickets_metadata(order, tickets, ticket_type:)
+  def build_pending_tickets(order, tickets, ticket_type:)
     discounted_price = ticket_type.price * 0.9 if tickets.size >= 3
-    tickets_metadata =
+    pending_tickets =
       tickets.map do
         ticket = order.tickets.build _1
         ticket.price = discounted_price || ticket_type.price
@@ -71,6 +71,6 @@ module Checkout
 
     order.tickets.reload
 
-    tickets_metadata
+    pending_tickets
   end
 end

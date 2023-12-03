@@ -55,7 +55,7 @@ RSpec.case Checkout, type: :model do
     end
 
     order = Order.last
-    ticket = order.tickets_metadata.first
+    ticket = order.pending_tickets.first
 
     assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
     assert_eq order.issue_invoice, false
@@ -94,7 +94,7 @@ RSpec.case Checkout, type: :model do
     assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
     assert_eq order.issue_invoice, false
 
-    ticket1, ticket2, ticket3 = order.tickets_metadata
+    ticket1, ticket2, ticket3 = order.pending_tickets
 
     assert_eq ticket1["name"], "John Doe"
     assert_eq ticket1["email"], "john@example.com"

@@ -13,12 +13,12 @@ class Order < ApplicationRecord
               stripe_checkout_session: checkout_session.as_json,
               email: checkout_session.customer_details.email
 
-      tickets.create!(tickets_metadata.map do |data|
+      tickets.create!(pending_tickets.map do |ticket|
         total_discount = (checkout_session.total_details.amount_discount || 0) / 100.to_d
-        individual_discount = total_discount / tickets_metadata.size
+        individual_discount = total_discount / pending_tickets.size
 
-        data["price"] = data["price"].to_d - individual_discount
-        data
+        ticket["price"] = ticket["price"].to_d - individual_discount
+        ticket
       end)
     end
 

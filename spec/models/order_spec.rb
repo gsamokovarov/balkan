@@ -5,7 +5,7 @@ RSpec.describe Order do
     ticket_params = build_ticket_params(index: 1, price: 150)
     checkout_session = Stripe::Checkout::Session.construct_from id: "test"
 
-    order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket_params]
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params]
 
     order.expire! checkout_session
 
@@ -23,7 +23,7 @@ RSpec.describe Order do
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
     )
 
-    order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
 
     order.complete! checkout_session
 
@@ -50,7 +50,7 @@ RSpec.describe Order do
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
     )
 
-    order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
 
     assert_change Ticket, :count do
       order.complete! checkout_session
@@ -83,7 +83,7 @@ RSpec.describe Order do
       total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
     )
 
-    order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
 
     assert_change Ticket, :count do
       order.complete! checkout_session
