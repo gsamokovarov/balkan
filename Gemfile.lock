@@ -117,6 +117,9 @@ GEM
     honeybadger (5.3.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    icalendar (2.8.0)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.4)
     importmap-rails (1.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -205,10 +208,6 @@ GEM
     rake (13.1.0)
     rdoc (6.6.0)
       psych (>= 4.0.0)
-    redis (5.0.8)
-      redis-client (>= 0.17.0)
-    redis-client (0.18.0)
-      connection_pool
     regexp_parser (2.8.2)
     reline (0.3.9)
       io-console (~> 0.5)
@@ -296,12 +295,12 @@ DEPENDENCIES
   frozen_record (~> 0.27.0)
   hashie
   honeybadger (~> 5.3)
+  icalendar
   importmap-rails
   jbuilder
   pg
   puma (>= 5.0)
   rails (~> 7.1.1)
-  redis (>= 4.0.1)
   rqrcode (~> 2.0)
   rspec-rails (~> 6.1.0)
   rspec-xunit
