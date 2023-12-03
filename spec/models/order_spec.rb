@@ -58,14 +58,12 @@ RSpec.describe Order do
 
     assert_eq ticket1.name, ticket1_params["name"]
     assert_eq ticket1.email, ticket1_params["email"]
-    assert_eq ticket1.description, ticket1_params["description"]
     assert_eq ticket1.price, BigDecimal(ticket1_params["price"])
     assert_eq ticket1.shirt_size, ticket1_params["shirt_size"]
     assert_eq ticket1.ticket_type, ticket_type
 
     assert_eq ticket2.name, ticket2_params["name"]
     assert_eq ticket2.email, ticket2_params["email"]
-    assert_eq ticket2.description, ticket2_params["description"]
     assert_eq ticket2.price, BigDecimal(ticket2_params["price"])
     assert_eq ticket2.shirt_size, ticket2_params["shirt_size"]
     assert_eq ticket2.ticket_type, ticket_type
@@ -113,7 +111,6 @@ RSpec.describe Order do
   def build_ticket_params(index:, price:, ticket_type:)
     {
       "name" => "John Doe #{index}",
-      "description" => "Early Bird",
       "email" => "john-#{index}@example.com",
       "price" => price,
       "shirt_size" => "L",

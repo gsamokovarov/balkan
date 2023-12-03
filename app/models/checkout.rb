@@ -12,7 +12,7 @@ module Checkout
 
       issue_invoice = params[:invoice] == "1"
 
-      stripe_session = create_stripe_checkout_session(tickets_metadata, issue_invoice:)
+      stripe_session = create_stripe_checkout_session(tickets_metadata, issue_invoice:, ticket_type:)
       order.update!(stripe_checkout_session_uid: stripe_session.id,
                     tickets_metadata:,
                     issue_invoice:)
@@ -23,12 +23,12 @@ module Checkout
 
   private
 
-  def create_stripe_checkout_session(tickets_metadata, issue_invoice:)
+  def create_stripe_checkout_session(tickets_metadata, issue_invoice:, ticket_type:)
     checkout_params = {
       currency: "eur",
       success_url: Link.thanks_url,
       cancel_url: Link.root_url,
-      line_items: build_stripe_products(tickets_metadata),
+      line_items: build_stripe_products(tickets_metadata, ticket_type),
       mode: 'payment',
       allow_promotion_codes: true
     }
@@ -41,14 +41,14 @@ module Checkout
     Stripe::Checkout::Session.create checkout_params
   end
 
-  def build_stripe_products(tickets)
+  def build_stripe_products(tickets, ticket_type)
     tickets.map do
       {
         price_data: {
           currency: "eur",
           unit_amount: (_1["price"] * 100).to_i,
           product_data: {
-            name: "#{_1["description"]} - #{_1["name"]}",
+            name: "#{ticket_type.name} - #{_1["name"]}",
           },
         },
         quantity: 1,
@@ -62,12 +62,11 @@ module Checkout
       tickets.map do
         ticket = order.tickets.build _1
         ticket.price = discounted_price || ticket_type.price
-        ticket.description = ticket_type.name
         ticket.ticket_type = ticket_type
 
         ticket.validate!
 
-        ticket.attributes.slice "name", "description", "email", "price", "shirt_size", "ticket_type_id"
+        ticket.attributes.slice "name", "email", "price", "shirt_size", "ticket_type_id"
       end
 
     order.tickets.reload

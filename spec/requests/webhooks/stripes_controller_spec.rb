@@ -307,7 +307,6 @@ RSpec.case Webhooks::StripesController, type: :request do
   def build_ticket_params(index:, price:)
     {
       "name" => "John Doe #{index}",
-      "description" => "Early Bird",
       "email" => "john-#{index}@example.com",
       "price" => price.to_s,
       "shirt_size" => "L"

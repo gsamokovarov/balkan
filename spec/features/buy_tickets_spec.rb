@@ -13,7 +13,7 @@ RSpec.case "Buy tickets", type: :feature do
     ticket_type = FactoryBot.create(:ticket_type, :enabled)
 
     stub_stripe_checkout_with_invoice(
-      [price: 150, description: "Early Bird - John Doe"],
+      [price: 150, description: "#{ticket_type.name} - John Doe"],
       session_id: "stripe-session-id",
       session_url: "https://stripe-checkout-link.com/payment"
     )
