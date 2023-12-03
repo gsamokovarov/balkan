@@ -80,19 +80,23 @@ RSpec.describe Order do
   test "#complete! fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
     ticket_type = OpenStruct.new(id: 42)
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { email: "test@example.com" },
+      total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
+    )
 
-    order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket_params]
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params]
 
     assert_raise_error ActiveRecord::InvalidForeignKey do
-      order.complete! double(stripe_checkout_session_uid: "test",
-                             customer_details: double(email: "test@example.com"),
-                             to_h: {})
+      order.complete! checkout_session
     end
   end
 
   test "#complete! creates tickets and applies an incoming promo code discount" do
-    ticket1_params = build_ticket_params(index: 1, price: 150)
-    ticket2_params = build_ticket_params(index: 2, price: 150)
+    ticket_type = create :ticket_type, :enabled
+    ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",
       customer_details: { email: "test@example.com" },

@@ -15,7 +15,7 @@ namespace :orders do
            stripe_checkout_session: _1,
            stripe_checkout_session_uid: _1["id"],
            completed_at: Time.zone.at(_1["created"]),
-           tickets_metadata: [],
+           pending_tickets: [],
            issue_invoice: !!tax_id
         })
 
