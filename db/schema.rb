@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_01_123553) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_03_144659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_123553) do
     t.boolean "issue_invoice", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json "tickets_metadata", default: [], null: false
+    t.json "pending_tickets", default: [], null: false
     t.index ["event_id"], name: "index_orders_on_event_id"
   end
 
