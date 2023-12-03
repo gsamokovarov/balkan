@@ -14,7 +14,7 @@ class Order < ApplicationRecord
               email: checkout_session.customer_details.email
 
       tickets.create!(pending_tickets.map do |ticket|
-        total_discount = (checkout_session.total_details.amount_discount || 0) / 100.to_d
+        total_discount = checkout_session.total_details.amount_discount / 100.to_d
         individual_discount = total_discount / pending_tickets.size
 
         ticket["price"] = ticket["price"].to_d - individual_discount
