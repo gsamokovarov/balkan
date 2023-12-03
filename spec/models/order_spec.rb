@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.describe Order do
   test "#expire! does not create tickets" do
-    ticket_params = build_ticket_params(index: 1, price: 150)
+    ticket_type = create :ticket_type, :enabled
+    ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket_params]
 
     order.expire! double(stripe_checkout_session_uid: "test", to_h: {})
@@ -13,8 +14,9 @@ RSpec.describe Order do
   end
 
   test "#complete! sends welcome emails" do
-    ticket1_params = build_ticket_params(index: 1, price: 150)
-    ticket2_params = build_ticket_params(index: 2, price: 150)
+    ticket_type = create :ticket_type, :enabled
+    ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
 
     order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
 
@@ -37,8 +39,9 @@ RSpec.describe Order do
   end
 
   test "#complete! creates tickets" do
-    ticket1_params = build_ticket_params(index: 1, price: 150)
-    ticket2_params = build_ticket_params(index: 2, price: 150)
+    ticket_type = create :ticket_type, :enabled
+    ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
 
     order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket1_params, ticket2_params]
 
@@ -58,17 +61,33 @@ RSpec.describe Order do
     assert_eq ticket1.description, ticket1_params["description"]
     assert_eq ticket1.price, BigDecimal(ticket1_params["price"])
     assert_eq ticket1.shirt_size, ticket1_params["shirt_size"]
+    assert_eq ticket1.ticket_type, ticket_type
 
     assert_eq ticket2.name, ticket2_params["name"]
     assert_eq ticket2.email, ticket2_params["email"]
     assert_eq ticket2.description, ticket2_params["description"]
     assert_eq ticket2.price, BigDecimal(ticket2_params["price"])
     assert_eq ticket2.shirt_size, ticket2_params["shirt_size"]
+    assert_eq ticket2.ticket_type, ticket_type
+  end
+
+  test "#complete! fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
+    ticket_type = OpenStruct.new(id: 42)
+    ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+
+    order = create :order, stripe_checkout_session_uid: "test", tickets_metadata: [ticket_params]
+
+    assert_raise_error ActiveRecord::InvalidForeignKey do
+      order.complete! double(stripe_checkout_session_uid: "test",
+                             customer_details: double(email: "test@example.com"),
+                             to_h: {})
+    end
   end
 
   test "#complete! creates tickets and applies an incoming promo code discount" do
-    ticket1_params = build_ticket_params(index: 1, price: 150)
-    ticket2_params = build_ticket_params(index: 2, price: 150)
+    ticket_type = create :ticket_type, :enabled
+    ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
     checkout_session_hash = {
       "allow_promotion_codes"=>true,
       "total_details"=>{"amount_discount"=>4500, "amount_shipping"=>0, "amount_tax"=>0},
@@ -91,13 +110,14 @@ RSpec.describe Order do
     assert_eq ticket2.price, BigDecimal("127.5")
   end
 
-  def build_ticket_params(index:, price:)
+  def build_ticket_params(index:, price:, ticket_type:)
     {
       "name" => "John Doe #{index}",
       "description" => "Early Bird",
       "email" => "john-#{index}@example.com",
-      "price" => price.to_s,
-      "shirt_size" => "L"
+      "price" => price,
+      "shirt_size" => "L",
+      "ticket_type_id" => ticket_type.id
     }
   end
 end

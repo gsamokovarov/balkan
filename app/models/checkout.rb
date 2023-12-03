@@ -63,10 +63,11 @@ module Checkout
         ticket = order.tickets.build _1
         ticket.price = discounted_price || ticket_type.price
         ticket.description = ticket_type.name
+        ticket.ticket_type = ticket_type
 
         ticket.validate!
 
-        ticket.attributes.slice "name", "description", "email", "price", "shirt_size"
+        ticket.attributes.slice "name", "description", "email", "price", "shirt_size", "ticket_type_id"
       end
 
     order.tickets.reload
