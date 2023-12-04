@@ -170,7 +170,9 @@ RSpec.case Webhooks::StripesController, type: :request do
 
     order = create(:order, stripe_checkout_session_uid:, pending_tickets:)
 
-    stripe_post stripe_completed_payload
+    perform_enqueued_jobs do
+      stripe_post stripe_completed_payload
+    end
 
     assert_have_http_status response, :ok
     assert_eq order.reload.completed_at?, true

@@ -23,7 +23,7 @@ class Order < ApplicationRecord
     end
 
     tickets.each do
-      TicketMailer.welcome_email(_1).deliver_now
+      TicketMailer.welcome_email(_1).deliver_later
     end
   end
 end
