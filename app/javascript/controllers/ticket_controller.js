@@ -42,6 +42,7 @@ export default class extends Controller {
       if (this.countValue === 2) this.summaryTarget.classList.add("text-x-orange")
       this.summaryTarget.textContent += ` Buy ${3 - this.countValue} more and save 10%`
     } else {
+      this.summaryTarget.classList.remove("text-x-orange")
       this.summaryTarget.textContent += ` You are saving 10% (${this.calculateDiscount()})`
       this.summaryTarget.classList.add("text-x-green")
     }
