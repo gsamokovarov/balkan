@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.case "Buy tickets", type: :feature do
   test "returns 404 for a disabled ticket type" do
@@ -20,15 +20,15 @@ RSpec.case "Buy tickets", type: :feature do
 
     visit checkout_path(ticket_type.id)
 
-    assert_have_content page, 'Buy Early Bird tickets'
+    assert_have_content page, "Buy Early Bird tickets"
 
-    fill_in 'checkout_tickets__name', with: 'John Doe'
-    fill_in 'checkout_tickets__email', with: 'john@example.com'
-    select 'M', from: 'checkout_tickets__shirt_size'
+    fill_in "checkout_tickets__name", with: "John Doe"
+    fill_in "checkout_tickets__email", with: "john@example.com"
+    select "M", from: "checkout_tickets__shirt_size"
 
-    check 'checkout_invoice'
+    check "checkout_invoice"
 
-    click_button 'Pay'
+    click_button "Pay"
 
     assert_eq page.current_url, "https://stripe-checkout-link.com/payment"
   end

@@ -74,7 +74,7 @@ RSpec.describe Order do
   end
 
   test "#complete! fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
-    ticket_type = OpenStruct.new(id: 42)
+    ticket_type = double id: 42
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",

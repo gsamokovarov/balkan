@@ -52,12 +52,12 @@ Rails.application.configure do
   config.force_ssl = true
 
   # Log to STDOUT by default
-  config.logger = ActiveSupport::Logger.new(STDOUT)
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
+  config.logger = ActiveSupport::Logger.new($stdout)
+    .tap  { |logger| logger.formatter = Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Info include generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
@@ -78,14 +78,14 @@ Rails.application.configure do
     user_name: "apikey",
     password: Early::SENDGRID_API_KEY,
     domain: "balkanruby.com",
-    address: 'smtp.sendgrid.net',
+    address: "smtp.sendgrid.net",
     port: 587,
     authentication: :plain,
     enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { host: 'balkanruby.com' }
-  config.action_mailer.asset_host = 'https://balkanruby.com'
+  config.action_mailer.default_url_options = { host: "balkanruby.com" }
+  config.action_mailer.asset_host = "https://balkanruby.com"
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

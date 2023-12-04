@@ -76,5 +76,5 @@ Rails.application.configure do
 
   config.lts_domain = "2024.localhost:3000"
 
-  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  Rails.application.routes.default_url_options[:host] = "localhost:3000"
 end

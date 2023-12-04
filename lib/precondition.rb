@@ -3,7 +3,7 @@ module Precondition
     attr_reader :metadata
 
     def initialize(message, metadata:)
-      super message
+      super(message)
       @metadata = metadata
     end
   end
@@ -56,4 +56,3 @@ module Precondition
     raise error
   end
 end
-

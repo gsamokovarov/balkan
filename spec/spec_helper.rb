@@ -1,5 +1,5 @@
-require 'capybara/rspec'
-require_relative 'support/stripe_helper'
+require "capybara/rspec"
+require_relative "support/stripe_helper"
 
 RSpec.configure do |config|
   config.include SpecSupport::StripeHelper

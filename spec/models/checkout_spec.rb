@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.case Checkout, type: :model do
   test ".create_link raises an ActiveRecord::RecordInvalid for invalid ticket data" do

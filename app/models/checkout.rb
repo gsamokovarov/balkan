@@ -30,7 +30,7 @@ module Checkout
       success_url: Link.thanks_url,
       cancel_url: Link.root_url,
       line_items: build_stripe_products(pending_tickets, ticket_type),
-      mode: 'payment',
+      mode: "payment",
       allow_promotion_codes: true
     }
 
@@ -49,7 +49,7 @@ module Checkout
           currency: "eur",
           unit_amount: (_1["price"] * 100).to_i,
           product_data: {
-            name: "#{ticket_type.name} - #{_1["name"]}",
+            name: "#{ticket_type.name} - #{_1['name']}",
           },
         },
         quantity: 1,

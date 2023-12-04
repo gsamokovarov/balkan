@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ApplicationHelper
   CARD_ROTATIONS = [
     "-rotate-6",
@@ -11,14 +9,14 @@ module ApplicationHelper
     "rotate-6",
     "rotate-1",
     "-rotate-3"
-  ]
+  ].freeze
 
   def card_rotation(index)
     CARD_ROTATIONS[index % CARD_ROTATIONS.size]
   end
 
   def format_money(amount, currency: "€", precision: 2)
-    number_to_currency(amount, unit: currency, precision: precision)
+    number_to_currency(amount, unit: currency, precision:)
   end
 
   def title(name)

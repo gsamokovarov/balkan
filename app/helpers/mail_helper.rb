@@ -1,3 +1,3 @@
 module MailHelper
-  def first_name(name) = name.split(" ").first
+  def first_name(name) = name.split.first
 end

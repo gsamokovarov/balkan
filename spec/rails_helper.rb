@@ -1,9 +1,9 @@
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rspec/rails'
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
+require "rspec/rails"
 require "rspec/xunit"
 
-require 'spec_helper'
+require "spec_helper"
 
 abort "Cannot run tests in production mode" if Rails.env.production?
 
@@ -14,7 +14,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 Capybara.register_driver :selenium_chrome do |app|
-  Capybara::Selenium::Driver.new app, browser: :chrome, args: ['headless']
+  Capybara::Selenium::Driver.new app, browser: :chrome, args: ["headless"]
 end
 
 Capybara.javascript_driver = :selenium_chrome

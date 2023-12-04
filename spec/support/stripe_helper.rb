@@ -3,16 +3,16 @@ module SpecSupport
     def stub_stripe_checkout(expected_line_items, session_id:, session_url:)
       stub(Stripe::Checkout::Session).to receive(:create)
         .with(stripe_checkout_opts(expected_line_items))
-        .and_return OpenStruct.new(id: session_id, url: session_url)
+        .and_return Stripe::Checkout::Session.construct_from(id: session_id, url: session_url)
     end
 
     def stub_stripe_checkout_with_invoice(expected_line_items, session_id:, session_url:)
       stub(Stripe::Checkout::Session).to receive(:create)
         .with(stripe_checkout_opts(expected_line_items).merge(
-          billing_address_collection: 'required',
-          tax_id_collection: { enabled: true },
-        ))
-        .and_return OpenStruct.new(id: session_id, url: session_url)
+                billing_address_collection: "required",
+                tax_id_collection: { enabled: true },
+              ))
+        .and_return Stripe::Checkout::Session.construct_from(id: session_id, url: session_url)
     end
 
     def stripe_checkout_opts(expected_line_items)
@@ -32,7 +32,7 @@ module SpecSupport
             quantity: 1,
           }
         end,
-        mode: 'payment',
+        mode: "payment",
         allow_promotion_codes: true,
       }
     end
