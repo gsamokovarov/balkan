@@ -8,6 +8,6 @@ namespace :tickets do
 
   desc "Cleanup tickets of expired orders"
   task delete_expired: :environment do
-    Order.where.not(expired_at: nil).each { _1.tickets.destroy_all }
+    Ticket.joins(:order).where("orders.completed_at IS NULL").destroy_all
   end
 end
