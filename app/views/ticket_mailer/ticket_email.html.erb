@@ -2,9 +2,17 @@
   Hi <%= first_name @ticket.name %>,
 </p>
 
+<p class="pb-2">
+  When you bought the ticket, our ticketing system was still in the works. It
+  is ready now, and we are attaching your ticket in this email. If you need an
+  invoice, please reply to this email with your VAT ID and we will send you one.
+</p>
+
 <%= render "ticket_info", ticket: @ticket, ticket_png: @ticket_png %>
 
-<%= render "get_in_touch" %>
+<p class="pb-2">
+  I want to personally thank you for trusting in us and buying your ticket early! 🙇
+</p>
 
 <p class="pb-2">
   Best regards,<br>
