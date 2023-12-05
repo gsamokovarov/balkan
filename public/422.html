@@ -1,67 +1,179 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>The change you wanted was rejected (422)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
-
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
-
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+<html class="h-full">
+  <head>
+    <style type="text/css">
+      .turbo-progress-bar { position: fixed; display: block; top: 0; left: 0; height: 3px; background: #0076ff; z-index: 2147483647; transition: width 300ms ease-out, opacity 150ms 150ms ease-in; transform: translate3d(0, 0, 0); }
+    </style>
+    <title>Balkan Ruby – Something went wrong</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Balkan Ruby">
+    <meta property="og:site_name" content="Balkan Ruby – April 26-27, 2024">
+    <meta property="og:url" content="https://balkanruby.com">
+    <meta property="og:description" content="Balkan Ruby is back to business! April 26-27, 2024 in Sofia, Bulgaria">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://balkanruby.com/assets/ogp_image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@balkanruby">
+    <meta name="twitter:creator" content="@gsamokovarov">
+    <meta name="twitter:title" content="Balkan Ruby – April 26-27, 2024">
+    <meta name="twitter:description" content="Balkan Ruby is back to business! April 26-27, 2024 in Sofia, Bulgaria">
+    <meta name="twitter:image" content="https://balkanruby.com/assets/ogp_image.png">
+    <link rel="stylesheet" href="/assets/tailwind.css" data-turbo-track="reload">
+    <link rel="stylesheet" href="/assets/inter-font.css" data-turbo-track="reload">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/application.css" data-turbo-track="reload">
+    <script type="importmap" data-turbo-track="reload">{ "imports": { "application": "/assets/application.js", "@hotwired/turbo-rails": "/assets/turbo.min.js", "@hotwired/stimulus": "/assets/stimulus.min-dd364f16ec9504dfb72672295637a1c8838773b01c0b441bd41008124c407894.js", "@hotwired/stimulus-loading": "/assets/stimulus-loading.js", "controllers/hero_controller": "/assets/controllers/hero_controller.js", "controllers": "/assets/controllers/index.js", "controllers/mobile_navigation_controller": "/assets/controllers/mobile_navigation_controller.js", "controllers/ticket_controller": "/assets/controllers/ticket_controller.js" } }</script>
+    <link rel="modulepreload" href="/assets/application.js">
+    <link rel="modulepreload" href="/assets/turbo.min.js">
+    <link rel="modulepreload" href="/assets/stimulus.min.js">
+    <link rel="modulepreload" href="/assets/stimulus-loading.js">
+    <script src="/assets/es-module-shims.min.js" async="async" data-turbo-track="reload"></script>
+    <script type="module">import "application"</script>
+  </head>
+  <body class="antialiased bg-black h-full text-white">
+    <div class="flex flex-col h-full">
+      <header class="hidden sm:block pt-5">
+        <div class="max-xl:container xl:max-w-screen-xl mx-auto px-4 md:px-8">
+          <div class="flex items-center justify-between gap-8">
+            <div class="shrink-0">
+              <a class="flex items-center" href="/">
+              <img class="w-56" alt="Balkan Ruby logo" src="/assets/logo-white.svg">
+              </a>
+            </div>
+            <nav class="flex items-center gap-8 text-lg font-medium">
+              <a class="group" href="/">
+                <span>Home</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+              <a class="group" href="/speakers">
+                <span>Speakers</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+              <a class="group" href="/checkouts">
+                <span>Tickets</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+              <a class="group" href="/sponsors">
+                <span>Sponsors</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <header data-controller="mobile-navigation" id="mobile-navigation" class="sm:hidden bg-black pt-5 z-20">
+        <div class="max-xl:container xl:max-w-screen-xl mx-auto px-4 md:px-8 h-full">
+          <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between">
+              <div class="shrink-0">
+                <a class="flex items-center" href="/">
+                <img class="w-56" alt="Balkan Ruby logo" src="/assets/logo-white.svg">
+                </a>
+              </div>
+              <button data-action="mobile-navigation#toggleOpen">
+                <svg data-mobile-navigation-target="hamburgerIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"></path>
+                </svg>
+                <svg data-mobile-navigation-target="closeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 hidden">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+            <nav data-mobile-navigation-target="menu" class="
+              hidden
+              grow
+              flex-col
+              items-center
+              justify-center
+              gap-20
+              text-3xl
+              font-medium
+              ">
+              <a class="group" href="/">
+                <span>Home</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+              <a class="group" href="/speakers">
+                <span>Speakers</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+              <a class="group" href="/checkouts">
+                <span>Tickets</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+              <a class="group" href="/sponsors">
+                <span>Sponsors</span>
+                <div class="-mt-0.5 rounded-full h-1 bg-banitsa-500 group-hover:w-full transition-all ease-in-out w-0"></div>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <div class="grow">
+        <div class="max-xl:container xl:max-w-screen-xl mx-auto px-4 md:px-8">
+          <div class="lg:flex lg:items-start">
+            <main class="grow lg:pr-10 xl:pr-16">
+              <section class="py-16 space-y-10">
+                <h1 class="text-3xl sm:text-4xl text-banitsa-500 font-extrabold">
+                  Something went wrong
+                </h1>
+                <div class="prose prose-xl prose-invert text-white">
+                  <p>
+                    Well, it did... Please, try again in a bit!
+                  </p>
+                </div>
+              </section>
+            </main>
+          </div>
+        </div>
+      </div>
+      <footer class="py-16 bg-black text-white">
+        <div class="max-xl:container xl:max-w-screen-xl mx-auto px-4 md:px-8">
+          <div class="flex flex-wrap flex-col sm:flex-row sm:justify-between items-center gap-12">
+            <div class="flex items-center gap-2">
+              <p class="whitespace-nowrap">
+                While in Bulgaria, why not have some <a class="link-primary" href="https://rubybanitsa.com">Banitsa</a>?
+              </p>
+            </div>
+            <div class="flex items-center flex-wrap gap-10">
+              <a class="link-secondary" aria-label="Twitter" href="https://twitter.com/@balkanruby">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 fill-current">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                </svg>
+              </a>
+              <a class="link-secondary" aria-label="Facebook" href="https://facebook.com/balkanruby">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 fill-current">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a class="link-secondary" aria-label="YouTube" href="https://www.youtube.com/@balkanruby6171">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 fill-current">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                  <polygon class="fill-black stroke-black" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="flex flex-wrap flex-col sm:flex-row sm:justify-between items-center gap-3 mt-6">
+            <p class="text-sm text-white/70">
+              Balkan Ruby is
+              <a class="link-secondary" aria-label="Neuvents" href="https://neuvents.com">
+                <svg viewBox="0 0 53 75" class="w-5 mx-1 inline" xmlns="http://www.w3.org/2000/svg">
+                  <path d="m48.9033181 29.0306593c0 .3554162-.2882458.6430099-.6436621.6430099h-14.9992174c-.3606334 0-.6534442.2928108-.6534442.6534442v17.136932c0 .4558457-.5836652.6462706-.8523468.2771594l-12.9293254-17.7388571c-.1499922-.2067283-.3906318-.3286785-.6462707-.3286785h-14.26556003c-.35672052 0-.64561849-.288898-.64561849-.6456185v-25.11781993c0-.3580248.29020225-.64822705.64822705-.64822705h44.33246957c.3612855 0 .6547485.29346295.6547485.65474845zm2.6137767-29.0306593h-50.86299849c-.3612855 0-.65409631.29346295-.65409631.65409631v73.69180739c0 .3612855.29281081.6540963.65409631.6540963h17.28757629c.3560684 0 .6443142-.2882458.6443142-.6443142v-17.3012712c0-.3919361.5008435-.5549711.7310488-.2386832l13.0584492 17.9162391c.1226023.1689042.3188964.2680295.526929.2680295h18.614681c.3612855 0 .6540963-.2928108.6540963-.6540963v-73.69180739c0-.36063336-.2928108-.65409631-.6540963-.65409631z" fill="currentColor" fill-rule="evenodd"></path>
+                </svg>
+              </a>
+              event.
+            </p>
+            <a class="link-secondary text-white/70" href="https://berlincodeofconduct.org">Code of Conduct</a>
+            <a class="link-secondary text-white/70" href="mailto://hi@balkanruby.com">Contact us</a>
+          </div>
+        </div>
+      </footer>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+  </body>
 </html>
