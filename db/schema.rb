@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_03_144659) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_065218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,35 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_144659) do
     t.datetime "updated_at", null: false
     t.json "pending_tickets", default: [], null: false
     t.index ["event_id"], name: "index_orders_on_event_id"
+  end
+
+  create_table "receipt_items", force: :cascade do |t|
+    t.bigint "receipt_id", null: false
+    t.bigint "ticket_id", null: false
+    t.decimal "amount", null: false
+    t.index ["receipt_id"], name: "index_receipt_items_on_receipt_id"
+    t.index ["ticket_id"], name: "index_receipt_items_on_ticket_id"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "invoice_id"
+    t.integer "number", null: false
+    t.integer "variant", default: 0, null: false
+    t.string "receiver_name", default: "", null: false
+    t.string "receiver_company_uid", default: "", null: false
+    t.string "receiver_company_vat_uid", default: "", null: false
+    t.string "receiver_city", default: "", null: false
+    t.string "receiver_zip", default: "", null: false
+    t.string "receiver_country", limit: 3, default: "", null: false
+    t.string "receiver_address", default: "", null: false
+    t.string "receiver_email", default: "", null: false
+    t.integer "payment_method", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_receipts_on_invoice_id"
+    t.index ["number"], name: "index_receipts_on_number", unique: true
+    t.index ["order_id"], name: "index_receipts_on_order_id"
   end
 
   create_table "ticket_types", force: :cascade do |t|
@@ -60,6 +89,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_144659) do
   end
 
   add_foreign_key "orders", "events"
+  add_foreign_key "receipt_items", "receipts"
+  add_foreign_key "receipt_items", "tickets"
+  add_foreign_key "receipts", "orders"
+  add_foreign_key "receipts", "receipts", column: "invoice_id"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "orders"
   add_foreign_key "tickets", "ticket_types"

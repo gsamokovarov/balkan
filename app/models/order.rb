@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :event
   has_many :tickets
+  has_many :receipts
 
   def expire!(checkout_session)
     update! expired_at: Time.current,
@@ -20,6 +21,8 @@ class Order < ApplicationRecord
         ticket["price"] = ticket["price"].to_d - individual_discount
         ticket
       end)
+
+      Receipt.issue_invoice(self, checkout_session) if issue_invoice?
     end
 
     tickets.each do

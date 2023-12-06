@@ -73,6 +73,59 @@ RSpec.describe Order do
     assert_eq ticket2.ticket_type, ticket_type
   end
 
+  test "#complete! creates a receipt of type invoice with items" do
+    ticket_type = create :ticket_type, :enabled
+    ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: {
+        email: "test@example.com",
+        name: "Studio Raketa EOOD",
+        tax_ids: [{ type: "eu_vat", value: "BG123456789" }],
+        address: {
+          city: "Sofia",
+          country: "BG",
+          line1: "ul. Dimitar Hadzhikotsev 420",
+          line2: "ap. 42",
+          postal_code: "1234",
+        }
+      },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params], issue_invoice: true
+
+    assert_change Receipt, :count do
+      assert_change ReceiptItem, :count do
+        order.complete! checkout_session
+      end
+    end
+
+    assert_eq order.completed_at?, true
+    assert_eq order.tickets.count, 1
+    assert_eq order.receipts.count, 1
+
+    ticket = order.tickets.first
+    receipt = order.receipts.first
+
+    assert_eq receipt.items.count, 1
+    assert_eq receipt.variant, "invoice"
+    assert_eq receipt.payment_method, "card"
+    assert_eq receipt.number, 1
+    assert_eq receipt.receiver_name, "Studio Raketa EOOD"
+    assert_eq receipt.receiver_email, "test@example.com"
+    assert_eq receipt.receiver_company_vat_uid, "BG123456789"
+    assert_eq receipt.receiver_city, "Sofia"
+    assert_eq receipt.receiver_zip, "1234"
+    assert_eq receipt.receiver_country, "BG"
+    assert_eq receipt.receiver_address, "ul. Dimitar Hadzhikotsev 420 ap. 42"
+
+    receipt_item = receipt.items.first
+
+    assert_eq receipt_item.amount, ticket_params["price"].to_d
+    assert_eq receipt_item.ticket, ticket
+  end
+
   test "#complete! fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
     ticket_type = double id: 42
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
