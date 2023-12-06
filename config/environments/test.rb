@@ -65,8 +65,4 @@ Rails.application.configure do
   config.lts_domain = "2024.example.com"
 
   Rails.application.routes.default_url_options[:host] = "example.com"
-
-  # TODO: Figure out a better way to set those for the tests.
-  ENV["STRIPE_SECRET_KEY"] = "stripe-secret-key"
-  ENV["STRIPE_WEBHOOK_SECRET"] = "stripe-webhook-secret"
 end
