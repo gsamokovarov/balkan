@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "3.2.2"
 
 gem "bootsnap", require: false
+gem "country_select"
 gem "early", "~> 0.3.1"
 gem "frozen_record", "~> 0.27.0"
 gem "honeybadger", "~> 5.3"

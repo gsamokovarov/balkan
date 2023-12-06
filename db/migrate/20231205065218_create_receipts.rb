@@ -5,6 +5,8 @@ class CreateReceipts < ActiveRecord::Migration[7.1]
       t.belongs_to :invoice, foreign_key: { to_table: :receipts }
       t.integer :number, null: false, index: { unique: true }
       t.integer :variant, null: false, default: 0
+      t.date :issue_date, null: false
+      t.date :tax_event_date, null: false
 
       # Receiver details
       t.string :receiver_name, null: false, default: ''
@@ -15,7 +17,6 @@ class CreateReceipts < ActiveRecord::Migration[7.1]
       t.string :receiver_country, null: false, default: '', limit: 3
       t.string :receiver_address, null: false, default: ''
       t.string :receiver_email, null: false, default: ''
-      t.integer :payment_method, null: false, default: 0
 
       t.timestamps
     end

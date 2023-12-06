@@ -60,4 +60,8 @@
   .badge-warning {
     @apply rounded bg-x-orange text-black text-base p-2 align-middle;
   }
+
+  .heading-2 {
+    @apply text-4xl font-bold;
+  }
 }

@@ -1,0 +1,76 @@
+<div class="p-12 print:p-0 w-full">
+  <div class="flex justify-between mb-10">
+    <div>
+      <h2 class="heading-2">Фактура</h2>
+      <h2 class="heading-2"><%= params[:type] == "copy" ? "(копие)" : "(оригинал)"%></h2>
+    </div>
+
+    <div>
+      <div class="flex justify-end">
+        Номер: <%= receipt.pretty_number %>
+      </div>
+      <div class="flex justify-end">
+        Дата на издаване: <%= receipt.issue_date %>
+      </div>
+      <div class="flex justify-end">
+        Дата на данъчно събитие: <%= receipt.tax_event_date %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between mb-10">
+    <div>
+      <div>Нойвентс ООД</div>
+      <div>ЕИК/Булстат: 203844519</div>
+      <div>ЗДДС N: BG203844519</div>
+      <div>ул. Банат 3, ет. 1, ап. 3, 1407, София</div>
+      <div>България</div>
+    </div>
+
+    <div>
+      <div class="flex justify-end"><%= receipt.receiver_name %></div>
+
+      <% if receipt.receiver_company_uid.present? %>
+        <div class="flex justify-end">ЕИК/Булстат: <%= receipt.receiver_company_uid %></div>
+      <% end %>
+
+      <% if receipt.receiver_company_vat_uid.present? %>
+        <div class="flex justify-end">ЗДДС N: <%= receipt.receiver_company_vat_uid %></div>
+      <% end %>
+
+      <div class="flex justify-end"><%= [receipt.receiver_address, receipt.receiver_zip, receipt.receiver_city].filter(&:present?).join(", ") %></div>
+      <div class="flex justify-end"><%= country_name(receipt.receiver_country, language: "bg") %></div>
+      <br />
+
+      <div class="flex justify-end">
+        <%= receipt.receiver_email %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between bg-slate-200 border-b border-slate-300">
+    <div class="p-1">Начин на плащане</div>
+    <div class="p-1">Stripe / Дебитна карта</div>
+  </div>
+
+  <div class="flex justify-between bg-slate-200 border-b border-slate-300">
+    <div class="p-1">Наименование на продукта</div>
+    <div class="p-1">Цена</div>
+  </div>
+
+  <% receipt.items.each do %>
+    <div class="flex justify-between border-b border-slate-300">
+      <div class="p-1">"<%= _1.ticket.ticket_type.name %>" резервация "<%= Base64.encode64(_1.ticket.id.to_s).chars.map { |char| char.ord.to_s(16) }.join() %>" за <%= _1.ticket.event.name %></div>
+      <div class="p-1"><%= format_decimal Currency.to_bgn Vat.extract_amount(_1.amount) %> лв.</div>
+    </div>
+  <% end %>
+
+  <div class="flex justify-end">
+    <div>
+      <div class="p-1 flex justify-end">Сума по фактура: <%= format_decimal Currency.to_bgn Vat.extract_amount(receipt.items.sum(&:amount)) %> лв.</div>
+      <div class="p-1 flex justify-end">Данъчна основа: <%= format_decimal Currency.to_bgn Vat.extract_amount(receipt.items.sum(&:amount)) %> лв.</div>
+      <div class="p-1 border-b border-slate-300 flex justify-end">ДДС: <%= Vat.percentage %>%</div>
+      <div class="p-1 flex justify-end">Всичко: <%= format_decimal Currency.to_bgn receipt.items.sum(&:amount) %> лв.</div>
+    </div>
+  </div>
+</div>

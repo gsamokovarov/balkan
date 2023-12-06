@@ -1,0 +1,8 @@
+<% if @receipt.variant == "invoice" %>
+  <% if params[:language] == "bg" %>
+    <%= render "receipts/invoice_bg", receipt: @receipt %>
+  <% else %>
+    <%= render "receipts/invoice_en", receipt: @receipt %>
+  <% end %>
+<% else %>
+<% end %>

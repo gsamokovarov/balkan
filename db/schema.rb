@@ -49,6 +49,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_065218) do
     t.bigint "invoice_id"
     t.integer "number", null: false
     t.integer "variant", default: 0, null: false
+    t.date "issue_date", null: false
+    t.date "tax_event_date", null: false
     t.string "receiver_name", default: "", null: false
     t.string "receiver_company_uid", default: "", null: false
     t.string "receiver_company_vat_uid", default: "", null: false
@@ -57,7 +59,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_065218) do
     t.string "receiver_country", limit: 3, default: "", null: false
     t.string "receiver_address", default: "", null: false
     t.string "receiver_email", default: "", null: false
-    t.integer "payment_method", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_receipts_on_invoice_id"

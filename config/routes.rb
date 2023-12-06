@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :speakers, only: [:index]
   resources :checkouts, only: [:index, :show, :create]
   resource :thanks, only: [:show]
+  resources :receipts, only: [:show]
 
   namespace :webhooks do
     resource :stripe, only: [:create]

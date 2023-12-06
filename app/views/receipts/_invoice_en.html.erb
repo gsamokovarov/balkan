@@ -1,0 +1,76 @@
+<div class="p-12 print:p-0 w-full">
+  <div class="flex justify-between mb-10">
+    <div>
+      <h2 class="heading-2">Invoice</h2>
+      <h2 class="heading-2"><%= params[:type] == "copy" ? "(copy)" : "(original)"%></h2>
+    </div>
+
+    <div>
+      <div class="flex justify-end">
+        Number: <%= receipt.pretty_number %>
+      </div>
+      <div class="flex justify-end">
+        Date of issue: <%= receipt.issue_date %>
+      </div>
+      <div class="flex justify-end">
+        Date of tax event: <%= receipt.tax_event_date %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between mb-10">
+    <div>
+      <div>Neuvents Ltd.</div>
+      <div>Company ID: 203844519</div>
+      <div>VAT ID: BG203844519</div>
+      <div>Banat 3 str., floor 1, ap. 3, 1407, Sofia</div>
+      <div>Bulgaria</div>
+    </div>
+
+    <div>
+      <div class="flex justify-end"><%= receipt.receiver_name %></div>
+
+      <% if receipt.receiver_company_uid.present? %>
+        <div class="flex justify-end">Company ID: <%= receipt.receiver_company_uid %></div>
+      <% end %>
+
+      <% if receipt.receiver_company_vat_uid.present? %>
+        <div class="flex justify-end">VAT ID: <%= receipt.receiver_company_vat_uid %></div>
+      <% end %>
+
+      <div class="flex justify-end"><%= [receipt.receiver_address, receipt.receiver_zip, receipt.receiver_city].filter(&:present?).join(", ") %></div>
+      <div class="flex justify-end"><%= country_name(receipt.receiver_country, language: "en") %></div>
+      <br />
+
+      <div class="flex justify-end">
+        <%= receipt.receiver_email %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between bg-slate-200 border-b border-slate-300">
+    <div class="p-1">Payment method</div>
+    <div class="p-1">Stripe / Credit card</div>
+  </div>
+
+  <div class="flex justify-between bg-slate-200 border-b border-slate-300">
+    <div class="p-1">Item</div>
+    <div class="p-1">Price</div>
+  </div>
+
+  <% receipt.items.each do %>
+    <div class="flex justify-between border-b border-slate-300">
+      <div class="p-1">"<%= _1.ticket.ticket_type.name %>" reservation "<%= Base64.encode64(_1.ticket.id.to_s).chars.map { |char| char.ord.to_s(16) }.join() %>" for <%= _1.ticket.event.name %></div>
+      <div class="p-1"><%= format_decimal Vat.extract_amount(_1.amount) %> EUR</div>
+    </div>
+  <% end %>
+
+  <div class="flex justify-end">
+    <div>
+      <div class="p-1 flex justify-end">Сума по фактура: <%= format_decimal Vat.extract_amount(receipt.items.sum(&:amount)) %> EUR</div>
+      <div class="p-1 flex justify-end">Данъчна основа: <%= format_decimal Vat.extract_amount(receipt.items.sum(&:amount)) %> EUR</div>
+      <div class="p-1 border-b border-slate-300 flex justify-end">VAT: <%= Vat.percentage %>%</div>
+      <div class="p-1 flex justify-end">Всичко: <%= format_decimal receipt.items.sum(&:amount) %> EUR</div>
+    </div>
+  </div>
+</div>

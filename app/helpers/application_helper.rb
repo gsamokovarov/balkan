@@ -23,4 +23,12 @@ module ApplicationHelper
     content_for(:title) { "– #{name}" } if name.present?
     nil
   end
+
+  def country_name(code, language: "en")
+    CountryUtils.country_name(code, language:)
+  end
+
+  def format_decimal(value)
+    format("%<value>.2f", value:)
+  end
 end

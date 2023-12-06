@@ -3,11 +3,15 @@ class Receipt < ApplicationRecord
   belongs_to :invoice, optional: true, class_name: "Receipt"
   has_many :items, class_name: "ReceiptItem"
 
+  generates_token_for :receipt_access
+
   enum variant: { invoice: 0, credit_note: 1 }
-  enum payment_method: { card: 0 }
 
   scope :invoices, -> { where(variant: :invoice) }
   scope :credit_notes, -> { where(variant: :credit_note) }
+
+  # This is the last invoice we issued for 2020 from the 0010000000 ledger
+  LEDGER_START_NUMBER = 1032
 
   class << self
     def next_number
@@ -19,7 +23,8 @@ class Receipt < ApplicationRecord
         order:,
         number: next_number,
         variant: :invoice,
-        payment_method: :card
+        issue_date: order.completed_at.to_date,
+        tax_event_date: order.completed_at.to_date,
       }.merge(receiver_details(checkout_session.customer_details)))
 
       order.tickets.each do
@@ -40,5 +45,13 @@ class Receipt < ApplicationRecord
         receiver_address: [customer_details&.address&.line1, customer_details&.address&.line2].filter(&:present?).join(" ")
       }
     end
+  end
+
+  def receipt_access_url
+    Link.receipt_url generate_token_for(:receipt_access)
+  end
+
+  def pretty_number
+    (LEDGER_START_NUMBER + number).to_s.rjust(8, "0").rjust(10, "0")
   end
 end

@@ -95,6 +95,10 @@ GEM
     chunky_png (1.4.0)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    countries (5.7.0)
+      unaccent (~> 0.3)
+    country_select (8.0.3)
+      countries (~> 5.0)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
@@ -289,6 +293,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unaccent (0.4.0)
     unicode-display_width (2.5.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
@@ -312,6 +317,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  country_select
   debug
   early (~> 0.3.1)
   factory_bot_rails
