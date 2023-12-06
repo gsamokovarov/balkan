@@ -29,4 +29,15 @@ namespace :orders do
       end
     end
   end
+
+  desc "Issue invoices for Orders without one"
+  task issue_invoices: :environment do
+    Order.where.not(completed_at: nil)
+      .where(issue_invoice: true)
+      .where("NOT EXISTS (SELECT 1 from receipts WHERE receipts.order_id = orders.id)")
+      .order(completed_at: :asc)
+      .each do
+      Receipt.issue_invoice(_1, Stripe::Checkout::Session.construct_from(_1.stripe_checkout_session))
+    end
+  end
 end
