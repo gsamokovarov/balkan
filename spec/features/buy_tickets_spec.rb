@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.case "Buy tickets", type: :feature do
   test "returns 404 for a disabled ticket type" do
-    ticket_type = FactoryBot.create(:ticket_type)
+    ticket_type = create :ticket_type
 
     visit checkout_path(ticket_type.id)
 
@@ -10,7 +10,7 @@ RSpec.case "Buy tickets", type: :feature do
   end
 
   test "redirects the user to Stripe checkout" do
-    ticket_type = FactoryBot.create(:ticket_type, :enabled)
+    ticket_type = create :ticket_type, :enabled
 
     stub_stripe_checkout_with_invoice(
       [price: 150, description: "#{ticket_type.name} - John Doe"],
