@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html class="h-full">
   <head>
-    <title>Balkan Ruby – <%= yield :title %></title>
+    <title>Balkan Ruby Admin – <%= yield :title %></title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,21 +26,25 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="antialiased bg-black h-full text-white">
-    <div class="flex flex-col h-full">
-      <%= render "header" %>
+  <body class="antialiased h-full">
+    <div class="min-h-full">
+      <%= render "admin/application/nav" %>
 
-      <div class="grow">
-        <%= render "container" do %>
-          <div class="lg:flex lg:items-start">
-            <main class="grow lg:pr-10 xl:pr-16">
-              <%= yield %>
-            </main>
+      <div class="py-10">
+        <header>
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900"><%= yield :title %></h1>
           </div>
-        <% end %>
-      </div>
+        </header>
 
-      <%= render "footer" %>
+        <main>
+          <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <%= yield %>
+          </div>
+        </main>
+      </div>
     </div>
   </body>
 </html>
+
+

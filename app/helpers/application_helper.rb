@@ -20,7 +20,6 @@ module ApplicationHelper
   end
 
   def title(name)
-    content_for(:title) { "– #{name}" } if name.present?
-    nil
+    content_for(:title) { name } if name.present?
   end
 end

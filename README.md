@@ -66,3 +66,13 @@ bin/dev
 
 The `SENDGRID_API_KEY` needs to be set with a random value e.g [.env.erb](./.env.erb).
 In development & test emails are not sent.
+
+### Admin setup
+
+The admin is accessed at `/admin` and requires basic HTTP authentication
+controlled by 2 environment variables:
+
+- `ADMIN_NAME`
+- `ADMIN_PASSWORD`
+
+Both of them default to `admin`.

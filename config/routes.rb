@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     resource :stripe, only: [:create]
   end
 
+  namespace :admin do
+    root "dashboards#show"
+  end
+
   direct(:twitter) { "https://twitter.com/@balkanruby" }
   direct(:facebook) { "https://facebook.com/balkanruby" }
   direct(:youtube) { "https://www.youtube.com/@balkanruby6171" }
