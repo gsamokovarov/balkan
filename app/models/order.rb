@@ -26,4 +26,8 @@ class Order < ApplicationRecord
       TicketMailer.welcome_email(_1).deliver_later
     end
   end
+
+  def price
+    tickets.sum(&:price)
+  end
 end
