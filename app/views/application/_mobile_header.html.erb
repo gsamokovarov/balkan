@@ -1,6 +1,6 @@
 <header
-  data-controller="mobile-navigation"
-  id="mobile-navigation"
+  data-controller="navigation"
+  id="navigation"
   class="sm:hidden bg-black pt-5 z-20"
 >
   <%= render "container", full_height: true do %>
@@ -10,9 +10,9 @@
           <%= render "header_logo" %>
         </div>
 
-        <button data-action="mobile-navigation#toggleOpen">
+        <button data-action="navigation#toggleOpen">
           <svg
-            data-mobile-navigation-target="hamburgerIcon"
+            data-navigation-target="openIcon"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -27,7 +27,7 @@
             />
           </svg>
           <svg
-            data-mobile-navigation-target="closeIcon"
+            data-navigation-target="closeIcon"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -41,7 +41,7 @@
       </div>
 
       <nav
-        data-mobile-navigation-target="menu"
+        data-navigation-target="menu"
         class="
           hidden
           grow

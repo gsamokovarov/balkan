@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="mobile-navigation"
+// Connects to data-controller="navigation"
 export default class extends Controller {
-  static targets = ["menu", "hamburgerIcon", "closeIcon"];
+  static targets = ["menu", "openIcon", "closeIcon"];
 
   static values = {
     open: { type: Boolean, default: false },
@@ -47,4 +47,4 @@ export default class extends Controller {
       this.closeIconTarget.classList.add("hidden");
     }
   }
-}
+};

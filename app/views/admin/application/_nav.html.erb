@@ -5,7 +5,7 @@
   ]
 %>
 
-<nav data-controller="mobile-navigation" class="border-b border-gray-200 bg-white">
+<nav data-controller="navigation" class="border-b border-gray-200 bg-white">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 justify-between">
       <div class="flex">
@@ -26,7 +26,7 @@
       <div class="-mr-2 flex items-center sm:hidden">
         <button
           type="button"
-          data-action="mobile-navigation#toggleOpen"
+          data-action="navigation#toggleOpen"
           class="
             relative
             inline-flex
@@ -46,7 +46,7 @@
         >
           <span class="absolute -inset-0.5"></span>
           <svg
-            data-mobile-navigation-target="hamburgerIcon"
+            data-navigation-target="openIcon"
             class="block h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
@@ -56,7 +56,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
           <svg
-            data-mobile-navigation-target="closeIcon"
+            data-navigation-target="closeIcon"
             class="hidden h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <div class="sm:hidden" data-mobile-navigation-target="menu">
+  <div class="sm:hidden" data-navigation-target="menu">
     <div class="space-y-1 pb-3 pt-2 w-full">
       <% nav_links.each do |link| %>
         <%= link_to link[:name], link[:path],
