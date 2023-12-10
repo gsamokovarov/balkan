@@ -47,6 +47,14 @@
               <% end %>
             <% end %>
           </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" colspan="2" />
+              <th scope="row" class="hidden pl-4 pr-3 pt-6 text-left text-sm font-normal text-gray-500 sm:table-cell sm:pl-0">Total</th>
+              <th scope="row" class="pl-4 pr-3 pt-6 text-left text-sm font-normal text-gray-500 sm:hidden">Total</th>
+              <td class="pl-3 pr-4 pt-6 text-left text-sm font-medium text-gray-500 sm:pr-0"><%= format_money @orders.sum(:price) %></td>
+            </tr>
+          <tfoot>
         </table>
       </div>
     </div>
