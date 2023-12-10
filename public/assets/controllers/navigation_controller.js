@@ -20,11 +20,11 @@ export default class extends Controller {
 
     if (open) {
       this.element.classList.add(...headerClasses);
-      this.hamburgerIconTarget.classList.add("hidden");
+      this.openIconTarget.classList.add("hidden");
       this.closeIconTarget.classList.remove("hidden");
     } else {
       this.element.classList.remove(...headerClasses);
-      this.hamburgerIconTarget.classList.remove("hidden");
+      this.openIconTarget.classList.remove("hidden");
       this.closeIconTarget.classList.add("hidden");
     }
   }
@@ -39,11 +39,11 @@ export default class extends Controller {
 
     if (open) {
       this.element.classList.add(...headerClasses);
-      this.hamburgerIconTarget.classList.add("hidden");
+      this.openIconTarget.classList.add("hidden");
       this.closeIconTarget.classList.remove("hidden");
     } else {
       this.element.classList.remove(...headerClasses);
-      this.hamburgerIconTarget.classList.remove("hidden");
+      this.openIconTarget.classList.remove("hidden");
       this.closeIconTarget.classList.add("hidden");
     }
   }
