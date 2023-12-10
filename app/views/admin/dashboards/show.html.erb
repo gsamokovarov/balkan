@@ -24,19 +24,25 @@
             <% @orders.each do |order| %>
               <tr class="border-t border-gray-200">
                 <th
-                  colspan="5"
+                  colspan="3"
                   scope="colgroup"
                   class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3"
                 >
-                  Order #<%= order.id %> (€<%= order.price %>)
+                  Order #<%= order.id %> 
+                </th>
+                <th
+                  colspan="2"
+                  scope="colgroup"
+                  class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3"
+                >
+                  <%= format_money order.price %>
                 </th>
               </tr>
               <% order.tickets.each do |ticket| %>
                 <tr class="border-t border-gray-300">
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"><%= ticket.name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.email %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.shirt_size %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= format_money ticket.price %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.shirt_size %></td> <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= format_money ticket.price %></td>
                 </tr>
               <% end %>
             <% end %>
