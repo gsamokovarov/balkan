@@ -42,17 +42,18 @@
                 <tr class="border-t border-gray-300">
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"><%= ticket.name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.email %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.shirt_size %></td> <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= format_money ticket.price %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.shirt_size %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= format_money ticket.price %></td>
                 </tr>
               <% end %>
             <% end %>
           </tbody>
           <tfoot>
-            <tr>
-              <th scope="row" colspan="2" />
-              <th scope="row" class="hidden pl-4 pr-3 pt-6 text-left text-sm font-normal text-gray-500 sm:table-cell sm:pl-0">Total</th>
-              <th scope="row" class="pl-4 pr-3 pt-6 text-left text-sm font-normal text-gray-500 sm:hidden">Total</th>
-              <td class="pl-3 pr-4 pt-6 text-left text-sm font-medium text-gray-500 sm:pr-0"><%= format_money @orders.sum(:price) %></td>
+            <tr class="border-t border-gray-300">
+              <th scope="row" colspan="2" class="hidden sm:table-cell sm:pt-6" />
+              <th scope="row" class="hidden pt-6 text-left text-sm font-medium uppercase text-gray-900 sm:table-cell">Total</th>
+              <th scope="row" class="pl-3 pt-6 text-left text-sm font-medium uppercase text-gray-900 sm:hidden">Total</th>
+              <td scope="row" class="pl-3 pt-6 text-left text-sm font-medium text-gray-900 sm:pr-0"><%= format_money @orders.sum(:price) %></td>
             </tr>
           <tfoot>
         </table>
