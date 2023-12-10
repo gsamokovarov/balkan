@@ -1,6 +1,6 @@
 <% title "Dashboard" %>
 
-<div class="p-4 sm:p-6 lg:p-8 border-2 border-gray-300 rounded-lg">
+<div class="p-4 sm:p-6 lg:p-8 sm:border-2 sm:border-gray-300 sm:rounded-lg">
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
       <h1 class="text-base font-semibold leading-6 text-gray-900">Tickets</h1>
@@ -13,7 +13,7 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>
-              <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Name</th>
+              <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-3">Name</th>
               <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Email</th>
               <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">T-shirt</th>
               <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Price</th>
@@ -33,7 +33,7 @@
               </tr>
               <% order.tickets.each do |ticket| %>
                 <tr class="border-t border-gray-300">
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"><%= ticket.name %></td>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"><%= ticket.name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.email %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.shirt_size %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= format_money ticket.price %></td>
