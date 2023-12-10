@@ -13,10 +13,10 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>
-              <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-3">Name</th>
-              <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Email</th>
-              <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">T-shirt</th>
-              <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Price</th>
+              <th scope="col" class="py-3 pl-4 pr-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500 sm:pl-3">Name</th>
+              <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Email</th>
+              <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">T-shirt</th>
+              <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Price</th>
               <th scope="col" class="relative py-3 pl-3 pr-4 sm:pr-0" />
             </tr>
           </thead>
@@ -26,23 +26,23 @@
                 <th
                   colspan="3"
                   scope="colgroup"
-                  class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3"
+                  class="bg-gray-50 px-3 py-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-3"
                 >
                   Order #<%= order.id %> 
                 </th>
                 <th
                   colspan="2"
                   scope="colgroup"
-                  class="bg-gray-50 py-2 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3"
+                  class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold text-gray-900"
                 >
                   <%= format_money order.price %>
                 </th>
               </tr>
               <% order.tickets.each do |ticket| %>
                 <tr class="border-t border-gray-300">
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3"><%= ticket.name %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.email %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-900"><%= ticket.shirt_size %></td>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-3"><%= ticket.name %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= ticket.email %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= ticket.shirt_size %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= format_money ticket.price %></td>
                 </tr>
               <% end %>
@@ -51,9 +51,9 @@
           <tfoot>
             <tr class="border-t border-gray-300">
               <th scope="row" colspan="2" class="hidden sm:table-cell sm:pt-6" />
-              <th scope="row" class="hidden pt-6 text-left text-sm font-medium uppercase text-gray-900 sm:table-cell">Total</th>
-              <th scope="row" class="pl-3 pt-6 text-left text-sm font-medium uppercase text-gray-900 sm:hidden">Total</th>
-              <td scope="row" class="pl-3 pt-6 text-left text-sm font-medium text-gray-900 sm:pr-0"><%= format_money @orders.sum(:price) %></td>
+              <th scope="row" class="hidden py-6 text-left text-sm font-medium uppercase text-gray-500 sm:table-cell">Total</th>
+              <th scope="row" class="px-3 py-6 text-left text-sm font-medium uppercase text-gray-500 sm:hidden">Total</th>
+              <td scope="row" class="px-3 py-6 text-left text-sm font-semibold text-gray-900 sm:pr-0"><%= format_money @orders.sum(:price) %></td>
             </tr>
           <tfoot>
         </table>
