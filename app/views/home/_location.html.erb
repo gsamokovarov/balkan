@@ -1,0 +1,59 @@
+<%= render "section", title: "Venue", title_element: "h2" do %>
+  <div class="prose-xl max-w-prose prose-invert">
+    <p>
+      The National Palace of Culture, or how it goes around here – NDK, one of
+      the largest multifunctional complex in the world. It was built in 1981
+      and is one of the most emblematic buildings in Sofia. It's located right in the
+      <%= link_to "heart of the city", "https://maps.app.goo.gl/R9pC7ePWmtpkMQCJ7", class: "link-primary" %>
+      with easy access and lot's to do around.
+    </p>
+
+    <p>
+      We are going to be in <% link_to "Hall 6", "https://ndk.bg/halls-21EN.html?hall=6", class: "link-primary" %>.
+    </p>
+  </div>
+
+  <div class="-mx-4 px-4 h-72 flex gap-4 overflow-x-auto snap-x snap-mandatory sm:h-96">
+    <%= image_tag "location/ndk_empire1",
+      class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-3/4 h-full object-cover",
+      lazy: true %>
+
+    <%= image_tag "location/ndk_empire2",
+      class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-3/4 h-full object-cover",
+      lazy: true %>
+
+    <%= image_tag "location/ndk_empire3",
+      class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-3/4 h-full object-cover",
+      lazy: true %>
+
+    <figure class="snap-always snap-center border-2 border-white rounded-md shrink-0 w-3/4 h-full relative">
+      <%= image_tag "location/ndk_aerial",
+        class: "w-full h-full object-cover",
+        lazy: false %>
+      <figcaption
+        class="
+          absolute
+          bottom-2
+          left-2
+          right-2
+          p-2
+          text-center
+          text-white/70
+          font-bold
+          bg-black/70
+          rounded-md
+          border-2
+          border-white
+        "
+      >
+        Just kidding, it looks like this in real life.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="prose-lg max-w-prose prose-invert">
+    <p class="text-white/70">
+      Photos by <%= link_to "Dimitar Karanikolov", "https://www.dimitarkaranikolov.com/", class: "link-secondary" %>
+    </p>
+  </div>
+<% end %>
