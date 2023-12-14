@@ -1,0 +1,18 @@
+<div class="bg-black border-2 border-white rounded-md w-full sm:w-auto">
+  <div class="flex justify-between p-4 border-b-2 border-white rounded-sm overflow-hidden text-2xl font-bold">
+    <%= name %>
+    <div>
+      <% if price %>
+        <span class="badge-important"><%= price %></span>
+      <% end %>
+      <% if limited %>
+        <span class="badge-warning">limited</span>
+      <% end %>
+    </div>
+  </div>
+  <div class="p-2 sm:p-3">
+    <h2 class="prose prose-xl prose-invert">
+      <%= yield %>
+    </h2>
+  </div>
+</div>

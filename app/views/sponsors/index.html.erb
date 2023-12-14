@@ -5,73 +5,63 @@
     <p>
       By sponsoring Balkan Ruby, you are helping us make a great event while
       promoting your brand to the passionate Ruby developers in Bulgaria, the
-      Balkans, and beyond! Check out our sponsorship packages below.
+      Balkans, and beyond! Check out our sponsorship packages below:
     </p>
+  </div>
 
-    <h2 id="regular">
-      Sponsor
-      <span class="badge-important">€3000</span>
-    </h2>
-    <ul>
-      <li>Table at the conference</li>
-      <li>Banner at the event</li>
-      <li>Logo on the website</li>
-      <li>Brand promotion on social media</li>
-      <li>Mentions from the stage</li>
-      <li>3 free tickets</li>
-    </ul>
+  <div class="flex flex-wrap gap-8">
+    <%= render "package", name: "Regular", price: "€3000", limited: false do %>
+      <ul>
+        <li><b>Table at the conference</b></li>
+        <li>Banner at the event</li>
+        <li>Logo on the website</li>
+        <li>Brand promotion on social media</li>
+        <li>Mentions from the stage</li>
+        <li>3 free tickets</li>
+      </ul>
+    <% end %>
+    <%= render "package", name: "Video", price: "€3000", limited: false do %>
+      <ul>
+        <li><b>Your logo on our video recordings</b></li>
+        <li>Banner at the event</li>
+        <li>Logo on the website</li>
+        <li>Brand promotion on social media</li>
+        <li>Mentions from the stage</li>
+        <li>3 free tickets</li>
+      </ul>
+    <% end %>
+    <%= render "package", name: "T-shirt", price: "€3000", limited: true do %>
+      <ul>
+        <li><b>Your logo on our t-shirts</b></li>
+        <li>Banner at the event</li>
+        <li>Logo on the website</li>
+        <li>Brand promotion on social media</li>
+        <li>Mentions from the stage</li>
+        <li>3 free tickets</li>
+      </ul>
+    <% end %>
+    <%= render "package", name: "Party", price: "€3000", limited: true do %>
+      <ul>
+        <li><b>Promotion at our attendees party</b></li>
+        <li>Banner at the event</li>
+        <li>Logo on the website</li>
+        <li>Brand promotion on social media</li>
+        <li>Mentions from the stage</li>
+        <li>3 free tickets</li>
+      </ul>
+    <% end %>
 
-    <h2 id="video">
-      Video sponsor
-      <span class="badge-important">€3000</span>
-    </h2>
-    <ul>
-      <li>Your logo on the video recordings</li>
-      <li>Banner at the event</li>
-      <li>Logo on the website</li>
-      <li>Brand promotion on social media</li>
-      <li>Mentions from the stage</li>
-      <li>3 free tickets</li>
-    </ul>
+    <%= render "package", name: "Travel", price: nil, limited: false do %>
+      <ul>
+        <li>Logo on the website</li>
+        <li>Brand promotion on social media</li>
+        <li>Mentions from the stage</li>
+        <li>1 free ticket</li>
+      </ul>
+    <% end %>
+  </div>
 
-    <h2 id="t-shirt">
-      T-shirt sponsor
-      <span class="badge-important">€3000</span>
-      <span class="badge-warning">limited</span>
-    </h2>
-    <ul>
-      <li>Your logo on our t-shirts</li>
-      <li>Banner at the event</li>
-      <li>Logo on the website</li>
-      <li>Brand promotion on social media</li>
-      <li>Mentions from the stage</li>
-      <li>3 free tickets</li>
-    </ul>
-
-    <h2 id="party">
-      Party sponsor
-      <span class="badge-important">€3000</span>
-      <span class="badge-warning">limited</span>
-    </h2>
-    <ul>
-      <li>Promotion at our attendees party</li>
-      <li>Banner at the event</li>
-      <li>Logo on the website</li>
-      <li>Brand promotion on social media</li>
-      <li>Mentions from the stage</li>
-      <li>3 free tickets</li>
-    </ul>
-
-    <h2 id="travel">
-      Travel sponsor
-    </h2>
-    <ul>
-      <li>Logo on the website</li>
-      <li>Brand promotion on social media</li>
-      <li>Mentions from the stage</li>
-      <li>1 free ticket</li>
-    </ul>
-
+  <div class="prose prose-xl prose-invert text-white">
     <p class="text-white/70">
       <b>T-shirt</b> and <b>Party</b> packages are limited to a <b>single</b> slot each. If
       multiple plans are purchased, the free tickets stack up. <b>Travel</b>
