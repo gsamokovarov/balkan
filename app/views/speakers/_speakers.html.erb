@@ -45,14 +45,14 @@
     We will close our <b>call for speakers</b> on <time datetime="2024-02-02">February 2, 2024</time>.
   </p>
 
-  <%= render "tickets/faq" do %>
-    <%= render "tickets/question", title: "Do you cover speaker accommodations?" do %>
+  <%= render "faq" do %>
+    <%= render "question", title: "Do you cover speaker accommodations?" do %>
       <p>
         Yes, we do! We will cover your accommodations for the duration of the
         conference. We will be in contact with you to arrange the details.
       </p>
     <% end %>
-    <%= render "tickets/question", title: "My company covers speaker expenses!" do %>
+    <%= render "question", title: "My company covers speaker expenses!" do %>
       <p>
         This is of great help to us! In return, we can offer a
         <%= link_to "Travel sponsor", sponsors_path(anchor: "travel"), class: "link-primary" %> package for your company.
