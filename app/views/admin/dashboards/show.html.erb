@@ -26,14 +26,17 @@
                 <th
                   colspan="3"
                   scope="colgroup"
-                  class="bg-gray-50 px-3 py-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-3"
+                  class="bg-banitsa-50 px-3 py-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-3"
                 >
-                  Order #<%= order.id %>
+                Order #<%= order.id %>
+                <% if order.refunded_at? %>
+                  (<span class="text-banitsa-600">Refunded</span>)
+                <% end %>
                 </th>
                 <th
                   colspan="2"
                   scope="colgroup"
-                  class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold text-gray-900"
+                  class="bg-banitsa-50 px-3 py-3 text-left text-sm font-semibold <%= order.refunded_at? ? "text-banitsa-600" : "text-gray-900" %>"
                 >
                   <%= format_money order.price %>
                 </th>

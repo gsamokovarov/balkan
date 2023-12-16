@@ -28,6 +28,8 @@ class Order < ApplicationRecord
   end
 
   def price
+    return 0 if refunded_at?
+
     tickets.sum(&:price)
   end
 end
