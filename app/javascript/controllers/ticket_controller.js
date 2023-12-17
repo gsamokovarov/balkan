@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-const TICKET_SCROLL_OFFSET = 48
+const TICKET_SCROLL_OFFSET = 36
 
 // Connects to data-controller="ticket"
 export default class extends Controller {
