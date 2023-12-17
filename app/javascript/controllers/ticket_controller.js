@@ -1,7 +1,10 @@
 import { Controller } from "@hotwired/stimulus";
 
+const TICKET_SCROLL_OFFSET = 48
+
 // Connects to data-controller="ticket"
 export default class extends Controller {
+
   static targets = ["tickets", "template", "summary", "buyButtonText"]
   static values = {
     count: { type: Number, default: 1 },
@@ -18,7 +21,7 @@ export default class extends Controller {
     newTicketRemoveButton.classList.remove("invisible")
     newTicketRemoveButton.classList.add("visible")
 
-    newTicket.scrollIntoView({ behavior: "smooth" })
+    scrollIntoViewWithOffset(newTicket, TICKET_SCROLL_OFFSET)
   }
 
   remove(event) {
@@ -51,7 +54,7 @@ export default class extends Controller {
   }
 
   calculatePrice() {
-    return this.formatMoney(
+    return formatMoney(
       this.countValue < 3
         ? this.countValue * this.priceValue
         : this.countValue * this.priceValue * 0.9
@@ -59,10 +62,14 @@ export default class extends Controller {
   }
 
   calculateDiscount() {
-    return this.formatMoney(this.countValue * this.priceValue * 0.1)
+    return formatMoney(this.countValue * this.priceValue * 0.1)
   }
+}
 
-  formatMoney(value) {
-    return value.toLocaleString("en-US", { style: "currency", currency: "EUR" })
-  }
+function formatMoney(value) {
+  return value.toLocaleString("en-US", { style: "currency", currency: "EUR" })
+}
+
+function scrollIntoViewWithOffset(element, offset) {
+  window.scrollTo({ top: element.offsetTop - offset, behavior: "smooth" })
 }
