@@ -4,7 +4,6 @@ const TICKET_SCROLL_OFFSET = 36
 
 // Connects to data-controller="ticket"
 export default class extends Controller {
-
   static targets = ["tickets", "template", "summary", "buyButtonText"]
   static values = {
     count: { type: Number, default: 1 },
