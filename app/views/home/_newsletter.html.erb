@@ -1,0 +1,9 @@
+<%= render "section", title: "Newsletter", title_element: "h1" do %>
+  <div class="prose-xl max-w-prose prose-invert">
+    <p>
+      Interested in Balkan Ruby? Subscribe to our newsletter to get updates about the conference.
+    </p>
+  </div>
+
+  <%= render "subscribers/form", event: @event %>
+<% end %>

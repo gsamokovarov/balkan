@@ -1,0 +1,11 @@
+<%= render "section", title: "Newsletter", title_element: "h1" do %>
+  <div class="prose-xl max-w-prose prose-invert">
+    <p>
+      <% if @subscriber.errors[:email].any? %>
+        Email <%= @subscriber.email %> is already subscribed.
+      <% else %>
+        Thank you for subscribing to our newsletter! We'll keep you up to date on <%= @subscriber.email %>.
+      <% end %>
+    </p>
+  </div>
+<% end %>
