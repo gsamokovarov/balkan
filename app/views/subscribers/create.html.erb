@@ -2,9 +2,10 @@
   <div class="prose-xl max-w-prose prose-invert">
     <p>
       <% if @subscriber.errors[:email].any? %>
-        Email <%= @subscriber.email %> is already subscribed.
+        Email <span class="text-banitsa-300"><%= @subscriber.email %></span> is already subscribed.
       <% else %>
-        Thank you for subscribing to our newsletter! We'll keep you up to date on <%= @subscriber.email %>.
+        Thank you for subscribing to our newsletter! We'll keep you up to date on
+        <span class="text-banitsa-300"><%= @subscriber.email %></span>.
       <% end %>
     </p>
   </div>

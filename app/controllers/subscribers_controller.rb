@@ -1,15 +1,16 @@
 class SubscribersController < ApplicationController
+  def show
+    @subscriber = Subscriber.find_by_token_for! :cancelation, params[:id]
+  end
+
   def create
     @subscriber = Subscriber.create subscriber_params
-
-    render :create, status: :created
+    SubscriberMailer.welcome_email(@subscriber).deliver_later if @subscriber.valid?
   end
 
   def destroy
     @subscriber = Subscriber.find_by_token_for! :cancelation, params[:id]
     @subscriber.destroy!
-
-    render :destroy
   end
 
   private

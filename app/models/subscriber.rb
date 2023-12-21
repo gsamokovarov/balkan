@@ -5,7 +5,7 @@ class Subscriber < ApplicationRecord
 
   generates_token_for :cancelation
 
-  def unsubscribe_url
-    Link.subscriber_url token_for(:cancelation)
+  def cancel_url
+    Link.subscriber_url generate_token_for(:cancelation)
   end
 end
