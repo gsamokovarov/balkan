@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :tickets, only: [:show]
   resources :speakers, only: [:index]
   resources :checkouts, only: [:index, :show, :create]
-  resources :subscribers, only: [:show, :create, :destroy]
+  resources :subscribers, only: [:new, :show, :create, :destroy]
   resource :thanks, only: [:show]
 
   namespace :webhooks do

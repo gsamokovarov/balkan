@@ -1,12 +1,14 @@
 <%= render "section", title: "Newsletter", title_element: "h1" do %>
-  <div class="prose-xl max-w-prose prose-invert">
-    <p>
-      <% if @subscriber.errors[:email].any? %>
-        Email <span class="text-banitsa-300"><%= @subscriber.email %></span> is already subscribed.
-      <% else %>
-        Thank you for subscribing to our newsletter! We'll keep you up to date on
-        <span class="text-banitsa-300"><%= @subscriber.email %></span>.
-      <% end %>
-    </p>
-  </div>
+  <%= turbo_frame_tag "newsletter" do %>
+    <div class="prose-xl max-w-prose prose-invert">
+      <p>
+        <% if @subscriber.errors[:email].any? %>
+          Email <span class="text-banitsa-300"><%= @subscriber.email %></span> is already subscribed.
+        <% else %>
+          Thank you for subscribing to our newsletter! We'll keep you up to date on
+          <span class="text-banitsa-300"><%= @subscriber.email %></span>.
+        <% end %>
+      </p>
+    </div>
+  <% end %>
 <% end %>
