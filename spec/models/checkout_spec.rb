@@ -73,6 +73,7 @@ RSpec.case Checkout, type: :model do
 
     assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
     assert_eq order.issue_invoice, false
+    assert_eq order.amount, "100.0".to_d
     assert_eq ticket["name"], "John Doe"
     assert_eq ticket["email"], "john@example.com"
     assert_eq ticket["price"], "100.0"
@@ -109,6 +110,7 @@ RSpec.case Checkout, type: :model do
     order = Order.last
     assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
     assert_eq order.issue_invoice, false
+    assert_eq order.amount, "270.0".to_d
 
     ticket1, ticket2, ticket3 = order.pending_tickets
 
@@ -158,5 +160,6 @@ RSpec.case Checkout, type: :model do
 
     assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
     assert_eq order.issue_invoice, true
+    assert_eq order.amount, "100.0".to_d
   end
 end

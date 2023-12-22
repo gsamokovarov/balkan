@@ -14,7 +14,8 @@ module Checkout
 
       stripe_session = create_stripe_checkout_session(pending_tickets, issue_invoice:, ticket_type:)
 
-      order.update!(stripe_checkout_session_uid: stripe_session.id,
+      order.update!(amount: pending_tickets.sum { _1["price"] },
+                    stripe_checkout_session_uid: stripe_session.id,
                     pending_tickets:,
                     issue_invoice:)
 

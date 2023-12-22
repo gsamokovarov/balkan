@@ -23,6 +23,7 @@ RSpec.describe Order do
       id: "test",
       customer_details: { email: "test@example.com" },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 30_000,
     )
 
     order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
@@ -47,6 +48,7 @@ RSpec.describe Order do
       id: "test",
       customer_details: { email: "test@example.com" },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 30_000,
     )
 
     order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
@@ -56,6 +58,7 @@ RSpec.describe Order do
     end
 
     assert_eq order.completed_at?, true
+    assert_eq order.amount, "300.0".to_d
     assert_eq order.tickets.count, 2
 
     ticket1, ticket2 = order.tickets
@@ -80,6 +83,7 @@ RSpec.describe Order do
       id: "test",
       customer_details: { email: "test@example.com" },
       total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 15_000,
     )
 
     order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params]
@@ -97,6 +101,7 @@ RSpec.describe Order do
       id: "test",
       customer_details: { email: "test@example.com" },
       total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 25_500,
     )
 
     order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
@@ -107,6 +112,7 @@ RSpec.describe Order do
 
     assert_eq order.completed_at?, true
     assert_eq order.tickets.count, 2
+    assert_eq order.amount, "255.0".to_d
 
     ticket1, ticket2 = order.tickets
 

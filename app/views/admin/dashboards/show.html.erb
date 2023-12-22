@@ -29,16 +29,16 @@
                   class="bg-banitsa-50 px-3 py-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-3"
                 >
                 Order #<%= order.id %>
-                <% if order.refunded_at? %>
-                  (<span class="text-banitsa-600">Refunded</span>)
+                <% if order.refunded? %>
+                  (<span class="text-banitsa-600">Refunded <%= format_money order.refunded_amount %></span>)
                 <% end %>
                 </th>
                 <th
                   colspan="2"
                   scope="colgroup"
-                  class="bg-banitsa-50 px-3 py-3 text-left text-sm font-semibold <%= order.refunded_at? ? "text-banitsa-600" : "text-gray-900" %>"
+                  class="bg-banitsa-50 px-3 py-3 text-left text-sm font-semibold <%= order.refunded? ? "text-banitsa-600" : "text-gray-900" %>"
                 >
-                  <%= format_money order.price %>
+                  <%= format_money order.gross_amount %>
                 </th>
               </tr>
               <% order.tickets.each do |ticket| %>
@@ -54,9 +54,12 @@
           <tfoot>
             <tr class="border-t border-gray-300">
               <th scope="row" colspan="2" class="hidden sm:table-cell sm:pt-6" />
-              <th scope="row" class="hidden py-6 text-left text-sm font-medium uppercase text-gray-500 sm:table-cell">Total</th>
-              <th scope="row" class="px-3 py-6 text-left text-sm font-medium uppercase text-gray-500 sm:hidden">Total</th>
-              <td scope="row" class="px-3 py-6 text-left text-sm font-semibold text-gray-900 sm:pr-0"><%= format_money @orders.sum(:price) %></td>
+              <th scope="row" class="hidden py-4 text-left text-sm font-medium uppercase text-gray-500 sm:table-cell">Total</th>
+              <th scope="row" class="px-3 py-4 text-left text-sm font-medium uppercase text-gray-500 sm:hidden">Total</th>
+              <td scope="row" class="px-3 py-4 text-left text-sm font-semibold text-gray-900 sm:pr-0">
+                <%= format_money @orders.sum(&:gross_amount) %><br>
+                <%= format_money @orders.sum(&:net_amount) %> NET
+              </td>
             </tr>
           <tfoot>
         </table>
