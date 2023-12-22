@@ -75,7 +75,7 @@ RSpec.case Checkout, type: :model do
     assert_eq order.issue_invoice, false
     assert_eq ticket["name"], "John Doe"
     assert_eq ticket["email"], "john@example.com"
-    assert_eq ticket["price"], "150.0"
+    assert_eq ticket["price"], "100.0"
     assert_eq ticket["shirt_size"], "XXL"
     assert_eq ticket["ticket_type_id"], ticket_type.id
   end

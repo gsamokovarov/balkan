@@ -4,11 +4,11 @@ current_event = Event.find_or_create_by! name: "Balkan Ruby 2024" do
 end
 
 current_event.ticket_types.find_or_create_by! name: "Early Bird" do
-  _1.price = 150
+  _1.price = 100
   _1.enabled = true
 end
 
 current_event.ticket_types.find_or_create_by! name: "Regular" do
-  _1.price = 175
+  _1.price = 120
   _1.enabled = false
 end

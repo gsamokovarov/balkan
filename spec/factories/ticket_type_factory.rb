@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :ticket_type do
-    event
+    event { association :event, :balkan2024 }
     name { "Early Bird" }
-    price { 150 }
+    price { 100 }
     enabled { false }
 
     trait :enabled do

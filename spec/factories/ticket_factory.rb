@@ -5,7 +5,7 @@ FactoryBot.define do
     shirt_size { "M" }
 
     trait :early_bird do
-      price { 150 }
+      price { 100 }
     end
 
     trait :genadi do
