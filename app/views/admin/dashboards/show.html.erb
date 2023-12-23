@@ -30,7 +30,7 @@
                 </th>
                 <th scope="colgroup" class="bg-banitsa-50 px-3 py-3 text-left text-sm font-semibold">
                 <% if order.refunded? %>
-                  (<span class="text-banitsa-600">Refunded <%= format_money order.refunded_amount %></span>)
+                  <span class="text-banitsa-600">Refunded <%= format_money order.refunded_amount %></span>
                 <% else %>
                   Completed
                 <% end %>
