@@ -59,20 +59,26 @@
       sm:grid-cols-3
       gap-4
     ">
-      <%= image_tag "memories/balkan_from_atop.jpg",
+      <%= image_tag "memories/svetlin_top.jpg",
         alt: "Ruby Banitsa event",
         class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2 col-span-2",
         lazy: true %>
 
-      <%= image_tag "memories/balkan_squat.jpg",
+      <%= image_tag "memories/svetlin_stefan_batsov.jpg",
         alt: "Ruby Banitsa event",
         class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2",
         lazy: true %>
 
-      <%= image_tag "memories/balkan_work.jpg",
+      <%= image_tag "memories/svetlin_code.jpg",
         alt: "Ruby Banitsa event",
-        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover col-span-3",
+        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover sm:object-bottom col-span-3",
         lazy: true %>
     </div>
+
+     <div class="prose prose-lg prose-invert text-white/70">
+       <p>
+         Photos by <%= link_to "Svetlin Simonyan", "https://github.com/svetlins", class: "link-secondary" %>
+       </p>
+     </div>
   </div>
 <% end %>
