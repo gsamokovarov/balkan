@@ -1,102 +1,69 @@
 <%# locals: (orders:) %>
 
-<div class="px-4 sm:px-6 lg:px-8">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold leading-6 text-gray-900">Orders</h1>
-      <p class="mt-2 text-sm text-gray-700">A list of all completed orders.</p>
-    </div>
-    <div class="mt-4 font-medium text-banitsa-500 sm:ml-16 sm:mt-0 sm:flex-none">
-      Tickets: <%= orders.reject(&:fully_refunded?).sum { _1.tickets.size } %>
-    </div>
-  </div>
-  <div class="mt-8 flow-root">
-    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-        <table class="min-w-full divide-y divide-gray-300">
-          <thead>
-            <tr>
-              <th scope="col" class="py-3.5 pl-4 pr-3 text-left tracking-wide text-sm font-semibold text-gray-900 sm:pl-0">ID</th>
-              <th scope="col" class="px-3 py-3.5 text-left tracking-wide text-sm font-semibold text-gray-900">Tickets</th>
-              <th scope="col" class="px-3 py-3.5 text-left tracking-wide text-sm font-semibold text-gray-900">Invoice</th>
-              <th scope="col" class="px-3 py-3.5 text-left tracking-wide text-sm font-semibold text-gray-900">Date</th>
-              <th scope="col" class="px-3 py-3.5 text-left tracking-wide text-sm font-semibold text-gray-900">Status</th>
-              <th scope="col" class="px-3 py-3.5 text-left tracking-wide text-sm font-semibold text-gray-900">Amount</th>
-              <th scope="col" class="px-3 py-3.5 text-left tracking-wide text-sm font-semibold text-gray-900" />
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200 bg-white">
-            <% orders.each do |order| %>
-              <tr>
-                <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                  <div class="font-medium text-gray-900">
-                    <%= order.id %>
-                  </div>
-                </td>
-                <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  <div class="font-medium text-gray-900">
-                    <% first_ticket = order.tickets.first %>
-                    <%= first_ticket.ticket_type.name %> – <%= format_money first_ticket.price %>
-                  </div>
-                  <% order.tickets.each do |ticket| %>
-                    <div class="mt-1 font-medium text-gray-500">
-                      <%= ticket.name %> (<%= ticket.email %>)
-                    </div>
-                  <% end %>
-                </td>
-                <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  <div class="font-medium text-gray-900">
-                    <% if order.issue_invoice? %>
-                      <span class="text-banitsa-500">Yes</span>
-                    <% else %>
-                      No
-                    <% end %>
-                  </div>
-                </td>
-                <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  <div class="font-medium text-gray-500">
-                    <%= order.created_at.to_fs :long %>
-                  </div>
-                </td>
-                <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  <%= admin_badge order.refunded? ? :danger : :primary do %>
-                    <% if order.refunded? %>
-                      Refunded <%= format_money order.refunded_amount %>
-                    <% else %>
-                      Completed
-                    <% end %>
-                  <% end %>
-                </td>
-                <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                  <div class="font-medium text-gray-900"><%= format_money order.gross_amount %></div>
-                </td>
-                <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                  <div class="font-medium">
-                    <a href="#" class="text-banitsa-500 hover:text-banitsa-700">Edit</a>
-                  </div>
-                </td>
-              </tr>
+<div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+  <table class="min-w-full divide-y divide-gray-300">
+    <thead>
+      <tr>
+        <th scope="col" class="py-3 pl-4 pr-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500 sm:pl-3">Name</th>
+        <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Invoice</th>
+        <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Status</th>
+        <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Email</th>
+        <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">T-shirt</th>
+        <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Price</th>
+        <th scope="col" class="relative py-3 pl-3 pr-4 sm:pr-0" />
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white">
+      <% orders.each do |order| %>
+        <tr class="border-t border-gray-200">
+          <th scope="colgroup" class="bg-gray-50 px-3 py-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-3" >
+            Order #<%= order.id %>
+          </th>
+          <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold">
+            <% if order.refunded? %>
+              <%= admin_badge :danger do %>
+                Refunded <%= format_money order.refunded_amount %>
+              <% end %>
+            <% else %>
+              <%= admin_badge :success do %>
+                Completed
+              <% end %>
             <% end %>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th scope="row" colspan="5" class="hidden pr-5 pt-6 text-right tracking-wide text-sm font-semibold text-gray-900 sm:table-cell sm:pl-0">Total Gross</th>
-              <th scope="row" class="pr-5 pt-6 text-left tracking-wide text-sm font-semibold text-gray-900 sm:hidden">Total Gross</th>
-              <td class="pr-4 pt-6 text-sm font-medium text-gray-900 sm:pr-0">
-                <%= format_money orders.sum(&:gross_amount) %>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row" colspan="5" class="hidden pr-5 pt-4 text-right tracking-wide text-sm font-semibold text-gray-900 sm:table-cell sm:pl-0">Total Net</th>
-              <th scope="row" class="pr-5 pt-4 text-left tracking-wide text-sm font-semibold text-gray-900 sm:hidden">Total Net</th>
-              <td class="pr-4 pt-4 text-sm font-medium text-gray-900 sm:pr-0">
-                <%= format_money orders.sum(&:net_amount) %>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-  </div>
+          </th>
+          <th scope="colgroup" colspan="3" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold" >
+            <%= order.issue_invoice? ? "Yes" : "No" %>
+          </th>
+          <th
+            colspan="2"
+            scope="colgroup"
+            class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold text-gray-900"
+          >
+            <%= format_money order.amount %>
+          </th>
+        </tr>
+        <% order.tickets.each do |ticket| %>
+          <tr class="border-t border-gray-300">
+            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-3"><%= ticket.name %></td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" />
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" />
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= ticket.email %></td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= ticket.shirt_size %></td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= format_money ticket.price %></td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to "View", ticket.event_access_url %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr class="border-t border-gray-300">
+        <th scope="row" colspan="4" class="hidden sm:table-cell sm:pt-6" />
+        <th scope="row" class="hidden py-4 text-left text-sm font-medium uppercase text-gray-500 sm:table-cell">Total</th>
+        <th scope="row" class="px-3 py-4 text-left text-sm font-medium uppercase text-gray-500 sm:hidden">Total</th>
+        <td scope="row" class="px-3 py-4 text-left text-sm font-semibold text-gray-900 sm:pr-0">
+          <div><%= format_money orders.sum(&:gross_amount) %> GROSS</div>
+          <div><%= format_money orders.sum(&:net_amount) %> NET</div>
+        </td>
+      </tr>
+    <tfoot>
+  </table>
 </div>
-

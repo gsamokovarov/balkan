@@ -1,6 +1,22 @@
 <% title "Dashboard" %>
 
 <div class="p-4 sm:p-6 lg:p-8 sm:border-2 sm:border-gray-300 sm:rounded-lg">
-  <%= render "orders", orders: @orders %>
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold leading-6 text-gray-900">Orders</h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all tickets by orders.</p>
+    </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <%= admin_badge :primary do %>
+        <span class="text-sm font-semibold">
+          Tickets: <%= @orders.reject(&:fully_refunded?).sum { _1.tickets.size } %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <%= render "orders", orders: @orders %>
+    </div>
+  </div>
 </div>
-

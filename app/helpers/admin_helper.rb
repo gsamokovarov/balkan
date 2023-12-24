@@ -1,6 +1,7 @@
 module AdminHelper
   ADMIN_BADGE_TYPES = {
-    primary: "ring-green-600/20 bg-green-50 text-green-700",
+    primary: "ring-gray-600/20 bg-gray-50 text-gray-700",
+    success: "ring-green-600/20 bg-green-50 text-green-700",
     danger: "ring-banitsa-500/20 bg-banitsa-50 text-banitsa-500"
   }
 
