@@ -98,6 +98,9 @@ Style/ClassAndModuleChildren:
 Style/MethodCallWithArgsParentheses:
   EnforcedStyle: omit_parentheses
 
+Style/MutableConstant:
+  Enabled: false
+
 # I do that a lot. Think it's okay.
 Lint/AssignmentInCondition:
   Enabled: false

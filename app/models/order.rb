@@ -10,6 +10,7 @@ class Order < ApplicationRecord
   def tax_amount = (amount * BULGARIAN_VAT) + 2.50
 
   def refunded? = refunded_amount.positive?
+  def fully_refunded? = refunded_amount == amount
 
   def expire!(checkout_session)
     update! expired_at: Time.current,
