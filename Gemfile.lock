@@ -145,6 +145,7 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.5)
     minitest (5.20.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
@@ -158,11 +159,8 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.5-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.15.5-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.15.5-x86_64-linux)
+    nokogiri (1.15.5)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     parallel (1.23.0)
     parser (3.2.2.4)
@@ -338,7 +336,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.0p0
 
 BUNDLED WITH
    2.4.21
