@@ -54,16 +54,5 @@
         <% end %>
       <% end %>
     </tbody>
-    <tfoot>
-      <tr class="border-t border-gray-300">
-        <th scope="row" colspan="4" class="hidden sm:table-cell sm:pt-6" />
-        <th scope="row" class="hidden py-4 text-left text-sm font-medium uppercase text-gray-500 sm:table-cell">Total</th>
-        <th scope="row" class="px-3 py-4 text-left text-sm font-medium uppercase text-gray-500 sm:hidden">Total</th>
-        <td scope="row" class="px-3 py-4 text-left text-sm font-semibold text-gray-900 sm:pr-0">
-          <div><%= format_money orders.sum(&:gross_amount) %> GROSS</div>
-          <div><%= format_money orders.sum(&:net_amount) %> NET</div>
-        </td>
-      </tr>
-    <tfoot>
   </table>
 </div>

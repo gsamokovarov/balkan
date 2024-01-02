@@ -3,7 +3,9 @@
 <div class="flex flex-col gap-12">
   <%= render "section", title: "Statistics", description: "Important metrics for #{@event.name}" do %>
     <%= render "stats", data: {
-      "Tickets" => @orders.reject(&:fully_refunded?).sum { _1.tickets.size },
+      "Tickets count" => @orders.reject(&:fully_refunded?).sum { _1.tickets.size },
+      "Tickets gross" => format_money(@orders.sum(&:gross_amount)),
+      "Tickets net" => format_money(@orders.sum(&:net_amount)),
       "Newsletter subscribers" => @event.subscribers.count,
       "Unfinished orders" => @event.orders.where("completed_at IS NULL").count,
     } %>
