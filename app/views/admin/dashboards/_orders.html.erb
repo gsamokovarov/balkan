@@ -8,7 +8,6 @@
         <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Status</th>
         <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Invoice</th>
         <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Email</th>
-        <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">T-shirt</th>
         <th scope="col" class="px-3 py-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Price</th>
         <th scope="col" class="relative py-3 pl-3 pr-4 sm:pr-0" />
       </tr>
@@ -47,7 +46,6 @@
             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" />
             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" />
             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= ticket.email %></td>
-            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= ticket.shirt_size %></td>
             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= format_money ticket.price %></td>
             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to "View", ticket.event_access_url %></td>
           </tr>
