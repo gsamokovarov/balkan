@@ -1,19 +1,11 @@
 class Admin::ApplicationController < ApplicationController
-  layout "admin/application"
+  layout -> { turbo_frame_request? ? "turbo_rails/frame" : "admin/application" }
 
-  cattr_accessor :admin_name
-  cattr_accessor :admin_password
-
-  before_action :authenticate_admin
+  before_action :require_authentication
 
   private
 
-  def authenticate_admin
-    authenticate_or_request_with_http_basic do |name, password|
-      ActiveSupport::SecurityUtils.secure_compare(name, admin_name) &
-        ActiveSupport::SecurityUtils.secure_compare(password, admin_password)
-    end
-
-    cookies.signed[:admin] = { value: true, expires: 3.months }
+  def require_authentication
+    redirect_to admin_login_path unless session[:admin]
   end
 end

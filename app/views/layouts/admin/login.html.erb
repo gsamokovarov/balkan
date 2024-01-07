@@ -1,0 +1,38 @@
+<html class="h-full">
+  <head>
+    <title>Balkan Ruby Admin – <%= yield :title %></title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <%= render "ogp" %>
+
+    <%= yield :head %>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    >
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="antialiased h-full">
+    <div class="min-h-full">
+      <main>
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <%= yield %>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

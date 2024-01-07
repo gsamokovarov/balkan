@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboards#show"
+    resource :login, only: [:show, :create]
   end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
