@@ -1,3 +1,10 @@
+<%
+  partners = {
+    "https://www.rubycommunityconference.com" => "community/rubycommunityconference.png",
+    "https://2024.euruko.org" => "community/euruko.png",
+  }
+%>
+
 <%= render "section", title: "Community partners", title_element: "h2" do %>
   <div class="prose-xl max-w-prose prose-invert">
     <p>
@@ -5,11 +12,11 @@
     </p>
   </div>
 
-  <div class="flex flex-wrap gap-8">
-    <%= link_to "https://www.rubycommunityconference.com" do %>
-      <%= image_tag "community/rubycommunityconference.png",
-        class: "bg-white border-2 border-white rounded-md shrink-0 h-16 p-2 object-cover",
-        lazy: true %>
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <% partners.each do |link, image_asset| %>
+      <%= link_to link, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
+        <%= image_tag image_asset, class: "w-auto h-full object-contain", lazy: true %>
+      <% end %>
     <% end %>
   </div>
 <% end %>
