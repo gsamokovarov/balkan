@@ -5,7 +5,8 @@ class Order < ApplicationRecord
   belongs_to :event
   has_many :tickets
 
-  def email = stripe_object&.customer_details&.email
+  def customer_email = stripe_object&.customer_details&.email
+  def customer_name = stripe_object&.customer_details&.name
   def stripe_object = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
 
   def gross_amount = amount - refunded_amount
