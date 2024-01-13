@@ -1,7 +1,7 @@
 namespace :accounting do
   desc "Generate a report for accounting"
   task report: :environment do
-    orders = Order.where("completed_at IS NOT NULL").order "created_at DESC"
+    orders = Order.where("completed_at IS NOT NULL").order "completed_at DESC"
 
     puts "Date,Name,Amount,Refunded"
     orders.each do |order|
