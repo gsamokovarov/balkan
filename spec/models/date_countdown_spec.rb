@@ -11,6 +11,14 @@ RSpec.case DateCountdown do
     end
   end
 
+  test "counters as pair of units and value" do
+    travel_to Time.zone.local(2024, 2, 1, 12, 0, 0) do
+      countdown = DateCountdown.until Date.new(2024, 2, 2)
+
+      assert_eq countdown.counters, [["days", 1], ["hours", 11]]
+    end
+  end
+
   test "same day" do
     travel_to Time.zone.local(2024, 2, 2, 23, 0, 0) do
       countdown = DateCountdown.until Date.new(2024, 2, 2)

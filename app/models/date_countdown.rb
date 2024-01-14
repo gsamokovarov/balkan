@@ -13,5 +13,6 @@ class DateCountdown
     @hours = days.negative? ? 0 : hours
   end
 
+  def counters = [["days", days], ["hours", hours]]
   def past? = days.negative?
 end

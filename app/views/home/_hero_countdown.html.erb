@@ -9,19 +9,14 @@
     </div>
 
     <div class="mx-auto flex justify-center gap-8 w-fit">
-      <div class="mx-auto flex flex-col gap-y-4 w-36">
-        <dt class="text-lg text-center text-white/70">days</dt>
-        <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
-          <%= format "%02d", @event.speaker_applications_countdown.days %>
-        </dd>
-      </div>
-
-      <div class="mx-auto flex flex-col gap-y-4 w-36">
-        <dt class="text-lg text-center text-white/70">hours</dt>
-        <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
-          <%= format "%02d", @event.speaker_applications_countdown.hours %>
-        </dd>
-      </div>
+      <% @event.speaker_applications_countdown.counters.each do |unit, value| %>
+        <div class="flex flex-col gap-y-4 w-36">
+          <dt class="text-lg text-center text-white/70"><%= unit %></dt>
+          <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
+            <%= format "%02d", value %>
+          </dd>
+        </div>
+      <% end %>
     </div>
 
     <div class="mx-auto" data-controller="hero">
