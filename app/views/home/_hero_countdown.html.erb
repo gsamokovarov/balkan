@@ -1,40 +1,44 @@
-<% cfp_end_date = Date.new(2024, 2, 2) %>
-
-<div class="flex flex-col p-8 gap-8 border-2 border-white rounded-lg w-full sm:w-fit">
-  <div class="mx-auto">
-    <p class="text-xl leading-7 text-white">Speaker applications end in:</h2>
-  </div>
-
-  <div class="mx-auto flex justify-center gap-8 w-fit">
-    <div class="mx-auto flex flex-col gap-y-4">
-      <dt class="text-lg text-center text-white/70">days</dt>
-      <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
-        <%= (cfp_end_date - Date.current).to_i %>
-      </dd>
+<div class="flex flex-col justify-center p-8 gap-8 border-2 border-white rounded-lg w-full sm:w-fit">
+  <% if @event.speaker_applications_countdown.past? %>
+    <div class="mx-auto self-center">
+      <p class="text-xl text-white">Speaker applications are closed</h2>
+    </div>
+  <% else %>
+    <div class="mx-auto">
+      <p class="text-xl text-white text-center">Speaker applications end in:</h2>
     </div>
 
-    <div class="mx-auto flex flex-col gap-y-4">
-      <dt class="text-lg text-center text-white/70">hours</dt>
-      <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
-        <%= (DateTime.current.seconds_until_end_of_day / 3600).to_i.to_s.rjust(2, "0") %>
-      </dd>
-    </div>
-  </div>
+    <div class="mx-auto flex justify-center gap-8 w-fit">
+      <div class="mx-auto flex flex-col gap-y-4">
+        <dt class="text-lg text-center text-white/70">days</dt>
+        <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
+          <%= format "%02d", @event.speaker_applications_countdown.days %>
+        </dd>
+      </div>
 
-  <div class="mx-auto" data-controller="hero">
-    <button data-action="hero#scrollToSpeakers" class="btn-secondary w-fit">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-5 h-5"
-      >
-        <path d="M7 4a3 3 0 016 0v6a3 3 0 11-6 0V4z"/>
-        <path
-          d="M5.5 9.643a.75.75 0 00-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-1.5v-1.546A6.001 6.001 0 0016 10v-.357a.75.75 0 00-1.5 0V10a4.5 4.5 0 01-9 0v-.357z"
-        />
-      </svg>
-      <span>Speak at Balkan Ruby</span>
-    </button>
-  </div>
+      <div class="mx-auto flex flex-col gap-y-4">
+        <dt class="text-lg text-center text-white/70">hours</dt>
+        <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
+          <%= format "%02d", @event.speaker_applications_countdown.hours %>
+        </dd>
+      </div>
+    </div>
+
+    <div class="mx-auto" data-controller="hero">
+      <button data-action="hero#scrollToSpeakers" class="btn-secondary w-fit">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-5 h-5"
+        >
+          <path d="M7 4a3 3 0 016 0v6a3 3 0 11-6 0V4z"/>
+          <path
+            d="M5.5 9.643a.75.75 0 00-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-1.5v-1.546A6.001 6.001 0 0016 10v-.357a.75.75 0 00-1.5 0V10a4.5 4.5 0 01-9 0v-.357z"
+          />
+        </svg>
+        <span>Speak at Balkan Ruby</span>
+      </button>
+    </div>
+  <% end %>
 </div>

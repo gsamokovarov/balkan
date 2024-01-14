@@ -21,6 +21,7 @@ Capybara.javascript_driver = :selenium_chrome
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include SpecSupport::StripeHelper
 
   config.use_transactional_fixtures = true
