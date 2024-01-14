@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_22_174818) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_14_084244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_174818) do
     t.date "end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "speaker_applications_end_date", default: "2024-02-02", null: false
   end
 
   create_table "orders", force: :cascade do |t|
