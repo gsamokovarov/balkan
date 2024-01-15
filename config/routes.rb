@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboards#show"
+    get "report" => "dashboards#report", as: :report
     resource :login, only: [:show, :create]
   end
 

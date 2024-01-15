@@ -1,4 +1,4 @@
-<%# locals: (title:, description: "") %>
+<%# locals: (title:, description: "", cta: nil) %>
 
 <div class="p-4 sm:p-6 lg:p-8 sm:border-2 sm:border-gray-300 sm:rounded-lg">
   <div class="sm:flex sm:items-center">
@@ -6,6 +6,11 @@
       <h1 class="text-base font-semibold leading-6 text-gray-900"><%= title %></h1>
       <p class="mt-2 text-sm text-gray-700"><%= description %></p>
     </div>
+    <% if cta %>
+      <div class="mt-4 sm:mt-0 sm:ml-6 sm:flex-shrink-0 sm:flex sm:items-center">
+        <%= cta.call %>
+      </div>
+    <% end %>
   </div>
   <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

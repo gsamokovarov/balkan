@@ -11,7 +11,11 @@
     } %>
   <% end %>
 
-  <%= render "section", title: "Orders", description: "A list of all tickets by orders" do %>
+  <%= render "section", title: "Orders", description: "A list of all tickets by orders", cta: -> {
+    admin_button :primary, link: true, href: admin_report_path, download: true do
+      "Export report"
+    end
+  } do %>
     <%= render "orders", orders: @orders %>
   <% end %>
 </div>
