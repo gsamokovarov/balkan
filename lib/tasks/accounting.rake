@@ -5,7 +5,7 @@ namespace :accounting do
 
     puts "Date,Name,Amount,Refunded"
     orders.each do |order|
-      puts [order.created_at.to_date.iso8601, order.customer_name, order.amount, order.refunded_amount].join(",")
+      puts [order.completed_at.to_date.iso8601, order.customer_name, order.amount, order.refunded_amount].join(",")
     end
   end
 end
