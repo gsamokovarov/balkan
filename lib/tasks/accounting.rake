@@ -3,9 +3,6 @@ namespace :accounting do
   task report: :environment do
     orders = Order.where("completed_at IS NOT NULL").order "completed_at DESC"
 
-    puts "Date,Name,Amount,Refunded"
-    orders.each do |order|
-      puts [order.completed_at.to_date.iso8601, order.customer_name, order.amount, order.refunded_amount].join(",")
-    end
+    puts OrderReport.export_csv(orders)
   end
 end
