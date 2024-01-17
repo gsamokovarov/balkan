@@ -1,10 +1,10 @@
 class CheckoutsController < ApplicationController
   def index
-    @ticket_types = TicketType.all
+    @ticket_types = @event.ticket_types.enabled.order :price
   end
 
   def show
-    @ticket_type = TicketType.enabled.find(params[:id].to_i)
+    @ticket_type = @event.ticket_types.enabled.find params[:id]
   end
 
   def create

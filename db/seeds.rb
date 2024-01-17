@@ -10,5 +10,10 @@ end
 
 current_event.ticket_types.find_or_create_by! name: "Regular" do
   _1.price = 120
-  _1.enabled = false
+  _1.enabled = true
+end
+
+current_event.ticket_types.find_or_create_by! name: "Supporter" do
+  _1.price = 200
+  _1.enabled = true
 end

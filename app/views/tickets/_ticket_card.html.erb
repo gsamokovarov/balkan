@@ -1,9 +1,11 @@
-<div class="p-2 sm:p-3 bg-black border-2 <%= ticket_type.enabled ? "border-white" : "border-neutral-600" %> rounded-md">
+<%# locals: (ticket_type:) %>
+
+<div class="p-2 sm:p-3 bg-black border-2 border-white rounded-md">
   <div class="w-full aspect-square">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
-      class="<%= ticket_type.enabled ? "text-white" : "text-neutral-600" %>"
+      class="text-white"
     >
       <g color="currentColor" weight="regular">
       <path
@@ -18,7 +20,7 @@
     </svg>
   </div>
   <div class="mt-4 text-center">
-    <h2 class="sm:text-lg font-medium leading-none <%= ticket_type.enabled ? "text-white" : "text-neutral-600" %>">
+    <h2 class="sm:text-lg font-medium leading-none text-white">
       <%= ticket_type.name %>
     </h2>
     <p class="font-medium text-neutral-600">
