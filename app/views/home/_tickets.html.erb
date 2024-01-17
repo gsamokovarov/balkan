@@ -1,12 +1,3 @@
 <%= render "section", title: "Tickets", title_element: "h2" do %>
-  <div class="flex flex-shrink gap-8">
-    <% @ticket_types.each do |ticket_type| %>
-      <%= render "tickets/ticket_card_link", ticket_type: %>
-    <% end %>
-  </div>
-
-  <p class="text-xl py-3">
-    Early Bird tickets are available until we announce the speaker lineup.
-    <%= link_to "Get yours now!", checkouts_path, class: "link-primary" %>
-  </p>
+  <%= render "tickets/tickets_for_sale", ticket_types: @ticket_types %>
 <% end %>

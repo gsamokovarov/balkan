@@ -1,0 +1,17 @@
+<%# locals: (ticket_types:) %>
+
+<div class="flex flex-shrink sm:flex-shrink-0 sm:flex-wrap gap-8">
+  <% ticket_types.each do |ticket_type| %>
+    <%= render "tickets/ticket_card_link", ticket_type: %>
+  <% end %>
+</div>
+
+<div class="prose prose-xl prose-invert text-white">
+  <p>
+    Early Bird tickets are available until we announce the speaker lineup.
+  </p>
+  <p>
+    Supporter tickets get our eternal gratitude and a hand-made item, made by
+    the organizers!
+  </p>
+</div>
