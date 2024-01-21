@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   direct(:banitsa) { "https://rubybanitsa.com" }
   direct(:neuvents) { "https://neuvents.com" }
   direct(:cfp) { "https://forms.gle/NJY9PJWpud39ZQAr8" }
+  direct(:cfp_responses) { "https://docs.google.com/spreadsheets/d/1A5BSvPOznCgHC9sbXpYelbjSVjIwODYCs0e1onNEyxU/edit?usp=sharing" }
 end
