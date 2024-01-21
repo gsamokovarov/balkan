@@ -18,17 +18,18 @@ module AdminHelper
     primary: "bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600"
   }
 
-  def admin_button(variant, link: false, **, &)
+  def admin_button(variant, link: false, **options, &)
     classes = [
       "block rounded-md px-3 py-2 text-center text-sm font-semibold shadow-sm",
       "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-      ADMIN_BUTTON_VARIANTS.fetch(variant)
+      ADMIN_BUTTON_VARIANTS.fetch(variant),
+      options[:class]
     ]
 
     if link
-      tag.a(class: classes, **, &)
+      tag.a(**options, class: classes, &)
     else
-      tag.button(class: classes, **, &)
+      tag.button(**options, class: classes, &)
     end
   end
 end
