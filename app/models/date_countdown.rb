@@ -9,7 +9,7 @@ class DateCountdown
   attr_reader :days, :hours
 
   def initialize(days:, hours:)
-    @days = days
+    @days = days.to_i
     @hours = days.negative? ? 0 : hours
   end
 

@@ -1,0 +1,57 @@
+<% cfp_countdown = DateCountdown.until Date.new(2024, 2, 2) %>
+
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    Welcome to the very first <b>Balkan Ruby</b> newsletter! I'm Genadi, the
+    organizer, and I'm happy to share a bit of news with you.
+  </p>
+
+  <p class="pb-2">
+    Let's start with the venue! We're going to be at
+    <%= link_to "Hall 6", "https://ndk.bg/halls-21EN.html?hall=6", class: "link-primary" %>
+    of the <%= link_to "National Palace of Culture", "https://ndk.bg/home", class: "link-primary" %>, or
+    how we call it around here – NDK. It's a 2-floor hall, with plenty of space
+    for activities and a spacious, secluded outdoor area. We will share more
+    about Sofia as the event approaches.
+  </p>
+
+  <p class="pb-2">
+    It's the same venue we were five years ago for our <%= link_to "2019 edition", "https://old.balkanruby.com/2019", class: "link-primary" %>.
+    You can check our <%= link_to "2019 photo album", "https://photos.app.goo.gl/YJ5Lai6FMhwLVj7b7", class: "link-primary" %>
+    for a glimpse.
+  </p>
+
+  <p class="pb-2">
+    Next, we are looking for speakers until February 2, 2024, end the of day Sofia time. That's in
+    <b><%= cfp_countdown.days %></b> days and <b><%= cfp_countdown.hours %></b> hours as of
+    sending this email! If you, or someone you know, would like to speak at the
+    conference, please submit a talk <%= link_to "here", cfp_url, class: "link-primary" %>.
+  </p>
+
+  <p class="pb-2">
+    On to the tickets! We have sold 22 tickets so far and you may expect a small
+    and personal event. Our <%= link_to "Early Bird tickets", checkout_url(1), class: "link-primary" %> will be available until we
+    announce the speaker lineup and now is a great time to book yours and
+    save a bit. If you're willing to spend a bit more and help us with conference expenses,
+    we introduced a <%= link_to "Supporter ticket", checkout_url(3), class: "link-primary" %>!
+    As a thank you, <b>Supporter tickets</b> will get a hand-made gift, made by us – the organizers,
+    that you can take home and display!
+  </p>
+
+  <p class="pb-2">
+    Talking about support, we are looking for sponsors! If you or your company
+    would like to help us make a great event and promote your brand in
+    Bulgaria, the Balkans, and beyond – you can get in touch by replying to this
+    email.
+  </p>
+
+  <p class="pb-2">
+    That's all for now! We will be sending more updates as we get closer to the event.
+  </p>
+
+  <%= render "closer" %>
+</div>
