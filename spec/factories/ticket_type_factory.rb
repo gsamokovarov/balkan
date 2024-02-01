@@ -8,5 +8,11 @@ FactoryBot.define do
     trait :enabled do
       enabled { true }
     end
+
+    trait :free do
+      name { "Free" }
+      price { 0 }
+      enabled { false }
+    end
   end
 end
