@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Order do
-  test "#expire! does not create tickets" do
+  test "expired orders don't create tickets" do
     ticket_type = create :ticket_type, :enabled
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from id: "test"
@@ -15,7 +15,7 @@ RSpec.describe Order do
     assert_eq Ticket.count, 0
   end
 
-  test "#complete! sends welcome emails" do
+  test "completed orders send welcome emails" do
     ticket_type = create :ticket_type, :enabled
     ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
@@ -40,7 +40,7 @@ RSpec.describe Order do
     assert_eq email2.subject, "Welcome to Balkan Ruby!"
   end
 
-  test "#complete! creates tickets" do
+  test "completed orders create tickets" do
     ticket_type = create :ticket_type, :enabled
     ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
@@ -76,7 +76,7 @@ RSpec.describe Order do
     assert_eq ticket2.ticket_type, ticket_type
   end
 
-  test "#complete! fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
+  test "completion fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
     ticket_type = double id: 42
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
@@ -93,7 +93,7 @@ RSpec.describe Order do
     end
   end
 
-  test "#complete! creates tickets and applies an incoming promo code discount" do
+  test "completion creates tickets and applies an incoming promo code discount" do
     ticket_type = create :ticket_type, :enabled
     ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
@@ -118,6 +118,23 @@ RSpec.describe Order do
 
     assert_eq ticket1.price, "127.5".to_d
     assert_eq ticket2.price, "127.5".to_d
+  end
+
+  test "free orders have empty but valid stripe inferred data" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
+
+    assert_eq order.customer_email, nil
+    assert_eq order.customer_name, nil
+  end
+
+  test "free orders have zero amounts" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
+
+    assert_eq order.gross_amount, 0
+    assert_eq order.net_amount, 0
+    assert_eq order.tax_amount, 0
   end
 
   def build_ticket_params(index:, price:, ticket_type:)
