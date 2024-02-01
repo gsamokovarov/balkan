@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_01_091753) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_01_170227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_091753) do
     t.bigint "event_id", null: false
     t.string "email", default: "", null: false
     t.string "stripe_checkout_session_uid", default: "", null: false
-    t.json "stripe_checkout_session", default: "{}", null: false
+    t.json "stripe_checkout_session"
     t.datetime "completed_at", precision: nil
     t.datetime "expired_at", precision: nil
     t.boolean "issue_invoice", default: false, null: false
