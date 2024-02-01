@@ -11,7 +11,7 @@ class Order < ApplicationRecord
 
   def gross_amount = amount - refunded_amount
   def net_amount = gross_amount - tax_amount
-  def tax_amount = (amount * BULGARIAN_VAT) + 2.50
+  def tax_amount = free? ? 0 : (amount * BULGARIAN_VAT) + 2.50
 
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded_amount == amount
