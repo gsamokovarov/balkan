@@ -37,7 +37,10 @@
           <span>Buy a ticket</span>
         </button>
       </div>
-      <%= render "hero_countdown" %>
+
+      <% if @event.speaker_applications_countdown.ongoing? %>
+        <%= render "hero_countdown" %>
+      <% end %>
     </div>
 
     <div class="

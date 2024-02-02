@@ -1,4 +1,4 @@
-class DateCountdown
+class FinalCountdown
   def self.until(date)
     days = date - Date.current
     hours = Time.current.seconds_until_end_of_day / 1.hour
@@ -14,5 +14,5 @@ class DateCountdown
   end
 
   def counters = [["days", days], ["hours", hours]]
-  def past? = days.negative?
+  def ongoing? = days >= 0
 end
