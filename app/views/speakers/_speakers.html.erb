@@ -3,61 +3,64 @@
     <% @speakers.each.with_index do |speaker, index| %>
       <%= render "speakers/speaker", speaker:, rotation_class: card_rotation(index) %>
     <% end %>
+    <%= render "speakers/future_speaker", rotation_class: card_rotation(@speakers.size) %>
   </div>
 
-  <div class="prose-xl max-w-prose prose-invert">
-    <p>
-      Balkan Ruby is a technical event by heart but also a small business. As we
-      are rebuilding it for 2024 and facing the new economic realities, we want
-      to discuss them.
-    </p>
-
-    <p>
-      We are looking for two kinds of talks: <b>technical talks</b> about making
-      businesses run <b>in Ruby</b> and talks about running an enterprise
-      <b>with Ruby</b> – be it a small company, a consultancy, a service company, a
-      side gig, freelancing, sustaining an OSS project, running event –
-      whatever pay the bills.
-    </p>
-
-    <p>
-      There are 12 talking slots (7 available), 30 minutes each. We are a 2-day
-      event running on a single track.
-    </p>
-  </div>
-
-  <%= link_to cfp_url, class: "btn-primary" do %>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      class="w-5 h-5"
-    >
-      <path d="M7 4a3 3 0 016 0v6a3 3 0 11-6 0V4z"/>
-      <path
-        d="M5.5 9.643a.75.75 0 00-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-1.5v-1.546A6.001 6.001 0 0016 10v-.357a.75.75 0 00-1.5 0V10a4.5 4.5 0 01-9 0v-.357z"
-      />
-    </svg>
-    <span>Become a speaker</span>
-  <% end %>
-
-  <div class="prose prose-lg prose-invert text-white/70">
-    We will close our <b>applications form</b> on <time datetime="2024-02-02">February 2, 2024</time>,
-    at the end of the day, Sofia time.
-  </p>
-
-  <%= render "faq" do %>
-    <%= render "question", title: "Do you cover speaker accommodations?" do %>
+  <% if @event.speaker_applications_countdown.ongoing? %>
+    <div class="prose-xl max-w-prose prose-invert">
       <p>
-        Yes, we do! We will cover your accommodations for the duration of the
-        conference. We will be in contact with you to arrange the details.
+        Balkan Ruby is a technical event by heart but also a small business. As we
+        are rebuilding it for 2024 and facing the new economic realities, we want
+        to discuss them.
       </p>
+
+      <p>
+        We are looking for two kinds of talks: <b>technical talks</b> about making
+        businesses run <b>in Ruby</b> and talks about running an enterprise
+        <b>with Ruby</b> – be it a small company, a consultancy, a service company, a
+        side gig, freelancing, sustaining an OSS project, running event –
+        whatever pay the bills.
+      </p>
+
+      <p>
+        There are 12 talking slots (7 available), 30 minutes each. We are a 2-day
+        event running on a single track.
+      </p>
+    </div>
+
+    <%= link_to cfp_url, class: "btn-primary" do %>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="w-5 h-5"
+      >
+        <path d="M7 4a3 3 0 016 0v6a3 3 0 11-6 0V4z"/>
+        <path
+          d="M5.5 9.643a.75.75 0 00-1.5 0V10c0 3.06 2.29 5.585 5.25 5.954V17.5h-1.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-1.5v-1.546A6.001 6.001 0 0016 10v-.357a.75.75 0 00-1.5 0V10a4.5 4.5 0 01-9 0v-.357z"
+        />
+      </svg>
+      <span>Become a speaker</span>
     <% end %>
-    <%= render "question", title: "My company covers speaker expenses!" do %>
-      <p>
-        This is of great help to us! In return, we can offer a
-        <%= link_to "Travel sponsor", sponsors_path(anchor: "travel"), class: "link-primary" %> package for your company.
-      </p>
+
+    <div class="prose prose-lg prose-invert text-white/70">
+      We will close our <b>applications form</b> on <time datetime="2024-02-02">February 2, 2024</time>,
+      at the end of the day, Sofia time.
+    </p>
+
+    <%= render "faq" do %>
+      <%= render "question", title: "Do you cover speaker accommodations?" do %>
+        <p>
+          Yes, we do! We will cover your accommodations for the duration of the
+          conference. We will be in contact with you to arrange the details.
+        </p>
+      <% end %>
+      <%= render "question", title: "My company covers speaker expenses!" do %>
+        <p>
+          This is of great help to us! In return, we can offer a
+          <%= link_to "Travel sponsor", sponsors_path(anchor: "travel"), class: "link-primary" %> package for your company.
+        </p>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
