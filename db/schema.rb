@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_01_170227) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_03_165319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_170227) do
     t.decimal "refunded_amount", default: "0.0", null: false
     t.boolean "free", default: false, null: false
     t.text "free_reason"
+    t.text "name"
     t.index ["event_id"], name: "index_orders_on_event_id"
   end
 
