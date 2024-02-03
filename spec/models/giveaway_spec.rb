@@ -12,6 +12,8 @@ RSpec.case Giveaway do
     assert_eq ticket.shirt_size, "S"
 
     order = ticket.order
+    assert_eq order.email, "genadi@hey.com"
+    assert_eq order.name, "Genadi"
     assert_eq order.free?, true
     assert_eq order.free_reason, "Giveaway"
     assert_eq order.completed_at.present?, true
