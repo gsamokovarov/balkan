@@ -5,13 +5,14 @@ module AdminHelper
     danger: "ring-banitsa-500/20 bg-banitsa-50 text-banitsa-500"
   }
 
-  def admin_badge(variant, &)
+  def admin_badge(variant, content = nil, **options, &)
     classes = [
       "inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset",
-      ADMIN_BADGE_VARIANTS.fetch(variant)
+      ADMIN_BADGE_VARIANTS.fetch(variant),
+      options[:class]
     ]
 
-    tag.span(class: classes, &)
+    tag.span(content, class: classes, **options, &)
   end
 
   ADMIN_BUTTON_VARIANTS = {

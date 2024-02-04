@@ -1,5 +1,7 @@
 <%# locals: (orders:) %>
 
+<% console %>
+
 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
   <table class="min-w-full divide-y divide-gray-300">
     <thead>
@@ -28,11 +30,9 @@
           </th>
           <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold">
             <% if order.refunded? %>
-              <%= admin_badge :danger do %>
-                Refunded <%= format_money order.refunded_amount %>
-              <% end %>
+              <%= admin_badge :danger, "Refunded", title: format_money(order.refunded_amount) %>
             <% else %>
-              <%= admin_badge(:success) { order.free? ? "Free" : "Completed" } %>
+              <%= admin_badge(:success, order.free? ? "Free" : "Completed") %>
             <% end %>
           </th>
           <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold">
