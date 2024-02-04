@@ -19,7 +19,6 @@
           <th scope="colgroup" class="bg-gray-50 px-3 py-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-3">
             <%= order.name %>
             <span class="text-gray-500">#<%= order.id %></span>
-            <%= admin_badge(:success) { "Free" } if order.free? %>
           </th>
           <th
             scope="colgroup"
@@ -33,9 +32,7 @@
                 Refunded <%= format_money order.refunded_amount %>
               <% end %>
             <% else %>
-              <%= admin_badge :success do %>
-                Completed
-              <% end %>
+              <%= admin_badge(:success) { order.free? ? "Free" : "Completed" } %>
             <% end %>
           </th>
           <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold">
