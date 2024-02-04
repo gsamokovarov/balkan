@@ -21,7 +21,7 @@ RSpec.describe Order do
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",
-      customer_details: { email: "test@example.com" },
+      customer_details: { name: "Test", email: "test@example.com" },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
       amount_total: 30_000,
     )
@@ -46,7 +46,7 @@ RSpec.describe Order do
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",
-      customer_details: { email: "test@example.com" },
+      customer_details: { name: "Test", email: "test@example.com" },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
       amount_total: 30_000,
     )
@@ -57,6 +57,8 @@ RSpec.describe Order do
       order.complete! checkout_session
     end
 
+    assert_eq order.name, "Test"
+    assert_eq order.email, "test@example.com"
     assert_eq order.completed_at?, true
     assert_eq order.amount, "300.0".to_d
     assert_eq order.tickets.count, 2
@@ -81,7 +83,7 @@ RSpec.describe Order do
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",
-      customer_details: { email: "test@example.com" },
+      customer_details: { name: "Test", email: "test@example.com" },
       total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
       amount_total: 15_000,
     )
@@ -99,7 +101,7 @@ RSpec.describe Order do
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",
-      customer_details: { email: "test@example.com" },
+      customer_details: { name: "Test", email: "test@example.com" },
       total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
       amount_total: 25_500,
     )

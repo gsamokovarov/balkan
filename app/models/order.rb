@@ -26,6 +26,7 @@ class Order < ApplicationRecord
       update! completed_at: Time.current,
               stripe_checkout_session: checkout_session.as_json,
               email: checkout_session.customer_details.email,
+              name: checkout_session.customer_details.name,
               amount: checkout_session.amount_total / 100.to_d
 
       tickets.create!(pending_tickets.map do |ticket|
