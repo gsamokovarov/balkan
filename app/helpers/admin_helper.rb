@@ -2,6 +2,7 @@ module AdminHelper
   ADMIN_BADGE_VARIANTS = {
     primary: "ring-gray-600/20 bg-gray-50 text-gray-700",
     success: "ring-green-600/20 bg-green-50 text-green-700",
+    warning: "ring-yellow-600/20 bg-yellow-50 text-yellow-800",
     danger: "ring-banitsa-500/20 bg-banitsa-50 text-banitsa-500"
   }
 

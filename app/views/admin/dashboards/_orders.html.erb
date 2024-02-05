@@ -29,8 +29,10 @@
           <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold">
             <% if order.refunded? %>
               <%= admin_badge :danger, "Refunded", title: format_money(order.refunded_amount) %>
+            <% elsif order.free? %>
+              <%= admin_badge :warning, "Free", title: order.free_reason %>
             <% else %>
-              <%= admin_badge(:success, order.free? ? "Free" : "Completed") %>
+              <%= admin_badge :success, "Completed" %>
             <% end %>
           </th>
           <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold">
