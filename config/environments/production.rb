@@ -76,7 +76,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     user_name: "apikey",
-    password: Early::SENDGRID_API_KEY,
+    password: credentials.sendgrid_api_key!,
     domain: "balkanruby.com",
     address: "smtp.sendgrid.net",
     port: 587,

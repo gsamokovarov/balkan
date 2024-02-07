@@ -6,7 +6,7 @@ module Webhooks
 
       begin
         event = Stripe::Webhook.construct_event payload, sig_header,
-                                                Early::STRIPE_WEBHOOK_SECRET
+                                                Settings.stripe_webhook_secret
 
         case event.type
         when "checkout.session.completed"
