@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_08_085904) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_08_114559) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_085904) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_invoice_sequences_on_event_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "invoice_sequence_id", null: false
+    t.integer "number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_sequence_id"], name: "index_invoices_on_invoice_sequence_id"
+    t.index ["order_id"], name: "index_invoices_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -83,6 +93,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_085904) do
   end
 
   add_foreign_key "invoice_sequences", "events"
+  add_foreign_key "invoices", "invoice_sequences"
+  add_foreign_key "invoices", "orders"
   add_foreign_key "orders", "events"
   add_foreign_key "subscribers", "events"
   add_foreign_key "ticket_types", "events"
