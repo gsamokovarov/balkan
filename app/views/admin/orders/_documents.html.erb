@@ -8,5 +8,13 @@
       <iframe src="<%= admin_order_path order, format: :pdf, locale: :en %>" class="w-full h-[770px] border-2 border-gray-300 rounded-md"></iframe>
       <iframe src="<%= admin_order_path order, format: :pdf, locale: :bg %>" class="w-full h-[770px] border-2 border-gray-300 rounded-md"></iframe>
     </div>
+
+    <div class="mt-4">
+      <%= turbo_frame_tag "invoice" do %>
+        <%= form_with url: invoice_admin_order_path do |form| %>
+          <%= admin_button(:primary, type: :submit, class: "w-fit") { "Send to customer" } %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 <% end %>

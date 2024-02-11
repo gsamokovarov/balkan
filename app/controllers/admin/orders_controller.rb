@@ -20,5 +20,11 @@ class Admin::OrdersController < Admin::ApplicationController
     send_data report, filename: "orders-#{Date.current.iso8601}.csv", type: :csv
   end
 
+  def invoice
+    @order = Order.completed.includes(tickets: :ticket_type).find params[:id]
+
+    InvoiceMailer.issue_email(@order).deliver_later
+  end
+
   private def locale = params.fetch(:locale, I18n.locale)
 end
