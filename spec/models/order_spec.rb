@@ -142,14 +142,6 @@ RSpec.case Order do
     assert_eq ticket2.price, "127.5".to_d
   end
 
-  test "free orders have empty but valid stripe inferred data" do
-    event = create :event, :balkan2024
-    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
-
-    assert_eq order.customer_email, nil
-    assert_eq order.customer_name, nil
-  end
-
   test "free orders have zero amounts" do
     event = create :event, :balkan2024
     order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current

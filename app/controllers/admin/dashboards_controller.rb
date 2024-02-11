@@ -5,7 +5,7 @@ class Admin::DashboardsController < Admin::ApplicationController
 
   def report
     orders = Order.where("completed_at IS NOT NULL").order("completed_at DESC")
-    report = OrderReport.export_csv orders
+    report = Order::Report.export_csv orders
 
     send_data report, filename: "orders-#{Date.current.iso8601}.csv", type: :csv
   end
