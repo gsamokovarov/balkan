@@ -37,6 +37,8 @@ class Order < ApplicationRecord
         ticket["price"] = ticket["price"].to_d - individual_discount
         ticket
       end)
+
+      Invoice.issue self if issue_invoice?
     end
 
     tickets.each do
