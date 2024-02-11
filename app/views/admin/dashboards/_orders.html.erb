@@ -41,12 +41,11 @@
           <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold">
             <%= order.email %>
           </th>
-          <th
-            colspan="2"
-            scope="colgroup"
-            class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold text-gray-900"
-          >
+          <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold text-gray-900">
             <%= format_money order.amount %>
+          </th>
+          <th scope="colgroup" class="bg-gray-50 px-3 py-3 text-left text-sm font-semibold text-gray-900">
+            <%= link_to "View order", admin_order_path(order) %>
           </th>
         </tr>
         <% order.tickets.each do |ticket| %>
@@ -64,7 +63,7 @@
               <%= format_money ticket.price %>
             </td>
             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-              <%= link_to "View", ticket.event_access_url %>
+              <%= link_to "View ticket", ticket.event_access_url %>
             </td>
           </tr>
         <% end %>

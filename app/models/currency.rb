@@ -4,7 +4,8 @@ module Currency
   EUR_TO_BGN_RATE = "1.95583".to_d
 
   def format_money(eur, locale:)
-    if locale == :bg
+    case locale
+    when :bg, "bg"
       "#{to_bgn(eur).round(2, :down)} лв."
     else
       "€#{eur.round(2, :down)}"

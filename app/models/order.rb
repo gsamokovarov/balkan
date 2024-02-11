@@ -1,10 +1,13 @@
 class Order < ApplicationRecord
+  INVOICING_START_DATE = Date.new 2024, 2, 3
   BULGARIAN_VAT = "0.2".to_d
 
   belongs_to :event
   has_many :tickets
   has_one :invoice_sequence, through: :event
   has_one :invoice
+
+  def self.completed = where("completed_at IS NOT NULL")
 
   def stripe_object = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
 
@@ -42,5 +45,9 @@ class Order < ApplicationRecord
     tickets.each do
       TicketMailer.welcome_email(_1).deliver_later
     end
+  end
+
+  def invoicable?
+    issue_invoice? && completed_at.after?(INVOICING_START_DATE)
   end
 end

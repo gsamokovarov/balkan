@@ -12,7 +12,7 @@
   <% end %>
 
   <%= render "section", title: "Orders", description: "A list of all tickets by orders", cta: -> {
-    admin_button :primary, link: true, href: admin_report_path, download: true do
+    admin_button :primary, link: true, href: report_admin_orders_path, download: true do
       "Export report"
     end
   } do %>
