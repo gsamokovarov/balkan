@@ -1,9 +1,10 @@
 class Order < ApplicationRecord
-  STRIPE_FEE = "2.50".to_d
   BULGARIAN_VAT = "0.2".to_d
 
   belongs_to :event
   has_many :tickets
+  has_one :invoice_sequence, through: :event
+  has_one :invoice
 
   def customer_email = stripe_object&.customer_details&.email
   def customer_name = stripe_object&.customer_details&.name
@@ -11,7 +12,7 @@ class Order < ApplicationRecord
 
   def gross_amount = amount - refunded_amount
   def net_amount = gross_amount - tax_amount
-  def tax_amount = free? ? 0 : (amount * BULGARIAN_VAT) + 2.50
+  def tax_amount = free? ? 0 : (amount * BULGARIAN_VAT)
 
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded_amount == amount
