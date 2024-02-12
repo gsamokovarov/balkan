@@ -64,7 +64,7 @@ module Invoice::PdfDocument
 
       grid([1, 0], [1, 3]).bounding_box do
         text t("invoice"), size: 22, style: :bold
-        text "<b>#{t 'number'}</b>: #{invoice.number}", inline_format: true
+        text "<b>#{t 'number'}</b>: #{format '%010d', invoice.number}", inline_format: true
         text "<b>#{t 'date_of_issue'}</b>: #{invoice.created_at.to_date.iso8601}", inline_format: true
         text "<b>#{t 'date_of_tax_event'}</b>: #{order.completed_at.to_date.iso8601}", inline_format: true
       end
