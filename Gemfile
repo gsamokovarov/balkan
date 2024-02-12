@@ -39,3 +39,5 @@ group :development, :test do
 end
 
 gem "prawn", "~> 2.4"
+
+gem "matrix", "~> 0.4.2"

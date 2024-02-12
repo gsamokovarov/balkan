@@ -326,6 +326,7 @@ DEPENDENCIES
   icalendar
   importmap-rails
   jbuilder
+  matrix (~> 0.4.2)
   pg
   prawn (~> 2.4)
   puma (>= 5.0)
