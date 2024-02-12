@@ -3,7 +3,6 @@ source "https://rubygems.org"
 ruby "3.3.0"
 
 gem "bootsnap", require: false
-gem "early", "~> 0.3.1"
 gem "frozen_record", "~> 0.27.0"
 gem "honeybadger", "~> 5.3"
 gem "icalendar"
