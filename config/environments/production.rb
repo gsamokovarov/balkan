@@ -71,22 +71,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "balkan_production"
 
-  config.action_mailer.perform_caching = false
-
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    user_name: "apikey",
-    password: credentials.sendgrid_api_key!,
-    domain: "balkanruby.com",
-    address: "smtp.sendgrid.net",
-    port: 587,
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
-
-  config.action_mailer.default_url_options = { host: "balkanruby.com" }
-  config.action_mailer.asset_host = "https://balkanruby.com"
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
