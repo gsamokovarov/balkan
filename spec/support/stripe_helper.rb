@@ -39,7 +39,7 @@ module SpecSupport
 
     def stripe_post(payload)
       stub(Stripe::Webhook).to receive(:construct_event)
-        .with("", nil, Early::STRIPE_WEBHOOK_SECRET)
+        .with("", nil, Settings.stripe_webhook_secret)
         .and_return Hashie::Mash.new(payload)
 
       post "/webhooks/stripe", params: payload.to_s
