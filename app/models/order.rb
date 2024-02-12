@@ -1,17 +1,19 @@
 class Order < ApplicationRecord
-  STRIPE_FEE = "2.50".to_d
+  INVOICING_START_DATE = Date.new 2024, 2, 3
   BULGARIAN_VAT = "0.2".to_d
 
   belongs_to :event
   has_many :tickets
+  has_one :invoice_sequence, through: :event
+  has_one :invoice
 
-  def customer_email = stripe_object&.customer_details&.email
-  def customer_name = stripe_object&.customer_details&.name
+  def self.completed = where("completed_at IS NOT NULL")
+
   def stripe_object = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
 
   def gross_amount = amount - refunded_amount
   def net_amount = gross_amount - tax_amount
-  def tax_amount = free? ? 0 : (amount * BULGARIAN_VAT) + 2.50
+  def tax_amount = free? ? 0 : (amount * BULGARIAN_VAT)
 
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded_amount == amount
@@ -36,10 +38,16 @@ class Order < ApplicationRecord
         ticket["price"] = ticket["price"].to_d - individual_discount
         ticket
       end)
+
+      Invoice.issue self if issue_invoice?
     end
 
     tickets.each do
       TicketMailer.welcome_email(_1).deliver_later
     end
+  end
+
+  def invoicable?
+    issue_invoice? && completed_at.after?(INVOICING_START_DATE)
   end
 end

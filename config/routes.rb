@@ -16,8 +16,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboards#show"
-    get "report" => "dashboards#report", as: :report
     resource :login, only: [:show, :create]
+    resources :orders, only: [:show] do
+      collection do
+        get :report
+      end
+
+      member do
+        post :invoice
+      end
+    end
   end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }

@@ -1,0 +1,26 @@
+bg:
+  invoicing:
+    receiver: Получател
+    supplier: Доставчик
+    company_id: ЕИК/Булстат
+    vat_id: ЗДДС №
+    ceo: М.О.Л.
+    invoice: Фактура
+    number: Номер
+    date_of_issue: Дата на издаване
+    date_of_tax_event: Дата на данъчно събитие
+    items: Продукти
+    price: Цена
+    payment_method: Метод на плащане
+    bank_payment: Банкова карта
+    invoice_total: Сума по фактура
+    vat_percentage: Процент ДДС
+    calculated_vat: Начислен ДДС
+    total: Всичко
+    neuvents:
+      company_name: НОЙВЕНТС ООД
+      address: София, ул. Банат 3, ет. 1, ап. 3
+      country: Българиа
+      company_id: 203844519
+      vat_id: BG203844519
+      ceo: Светлозар Михайлов

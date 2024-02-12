@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Order do
+RSpec.case Order do
   test "expired orders don't create tickets" do
     ticket_type = create :ticket_type, :enabled
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
@@ -78,6 +78,26 @@ RSpec.describe Order do
     assert_eq ticket2.ticket_type, ticket_type
   end
 
+  test "completed orders create invoices when requested" do
+    ticket_type = create :ticket_type, :enabled
+    ticket1_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: { name: "Test", email: "test@example.com" },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 30_000,
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test",
+                           pending_tickets: [ticket1_params, ticket2_params],
+                           issue_invoice: true
+
+    order.complete! checkout_session
+
+    assert_eq order.invoice.number, 10_001_049
+  end
+
   test "completion fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
     ticket_type = double id: 42
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
@@ -120,14 +140,6 @@ RSpec.describe Order do
 
     assert_eq ticket1.price, "127.5".to_d
     assert_eq ticket2.price, "127.5".to_d
-  end
-
-  test "free orders have empty but valid stripe inferred data" do
-    event = create :event, :balkan2024
-    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
-
-    assert_eq order.customer_email, nil
-    assert_eq order.customer_name, nil
   end
 
   test "free orders have zero amounts" do
