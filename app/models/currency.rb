@@ -3,15 +3,15 @@ module Currency
 
   EUR_TO_BGN_RATE = "1.95583".to_d
 
-  def format_money(eur, locale:)
-    bulgarian = locale.to_sym == :bg
-    unit = bulgarian ? "лв." : "€"
-    format = bulgarian ? "%n %u" : "%u%n"
-    currency = bulgarian ? eur_to_bgn(eur) : eur
-    round_mode = bulgarian ? :down : :half_up
+  def eur_to_bgn(eur) = eur * EUR_TO_BGN_RATE
 
-    ActiveSupport::NumberHelper.number_to_currency currency, unit:, locale:, format:, round_mode:
+  def format_money(eur, locale:)
+    currency = bulgarian?(locale) ? eur_to_bgn(eur) : eur
+    unit = bulgarian?(locale) ? "лв." : "€"
+    format = bulgarian?(locale) ? "%n %u" : "%u%n"
+
+    ActiveSupport::NumberHelper.number_to_currency currency, unit:, locale:, format:
   end
 
-  private def eur_to_bgn(eur) = eur * EUR_TO_BGN_RATE
+  private def bulgarian?(locale) = locale.to_sym == :bg
 end
