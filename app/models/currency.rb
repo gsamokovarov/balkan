@@ -9,8 +9,9 @@ module Currency
     currency = bulgarian?(locale) ? eur_to_bgn(eur) : eur
     unit = bulgarian?(locale) ? "лв." : "€"
     format = bulgarian?(locale) ? "%n %u" : "%u%n"
+    round_mode = bulgarian?(locale) ? :down : :half_up
 
-    ActiveSupport::NumberHelper.number_to_currency currency, unit:, locale:, format:
+    ActiveSupport::NumberHelper.number_to_currency currency, unit:, locale:, format:, round_mode:
   end
 
   private def bulgarian?(locale) = locale.to_sym == :bg
