@@ -14,8 +14,7 @@ en:
     payment_method: Payment method
     bank_payment: Stripe / Credit Card
     invoice_total: Invoice total
-    vat_percentage: VAT percentage
-    calculated_vat: Calculated VAT
+    vat: VAT 20%
     total: Total
     neuvents:
       company_name: NEUVENTS LTD

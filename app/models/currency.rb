@@ -8,8 +8,9 @@ module Currency
     unit = bulgarian ? "лв." : "€"
     format = bulgarian ? "%n %u" : "%u%n"
     currency = bulgarian ? eur_to_bgn(eur) : eur
+    round_mode = bulgarian ? :down : :half_up
 
-    ActiveSupport::NumberHelper.number_to_currency currency, unit:, locale:, format:, round_mode: :down
+    ActiveSupport::NumberHelper.number_to_currency currency, unit:, locale:, format:, round_mode:
   end
 
   private def eur_to_bgn(eur) = eur * EUR_TO_BGN_RATE

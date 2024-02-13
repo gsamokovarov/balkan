@@ -14,8 +14,7 @@ bg:
     payment_method: Метод на плащане
     bank_payment: Банкова карта
     invoice_total: Сума по фактура
-    vat_percentage: Процент ДДС
-    calculated_vat: Начислен ДДС
+    vat: ДДС 20%
     total: Всичко
     neuvents:
       company_name: НОЙВЕНТС ООД
