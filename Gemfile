@@ -3,12 +3,15 @@ source "https://rubygems.org"
 ruby "3.3.0"
 
 gem "bootsnap", require: false
+gem "countries", require: "countries/global"
 gem "frozen_record", "~> 0.27.0"
 gem "honeybadger", "~> 5.3"
 gem "icalendar"
 gem "importmap-rails"
 gem "jbuilder"
+gem "matrix", "~> 0.4.2"
 gem "pg"
+gem "prawn", "~> 2.4"
 gem "puma", ">= 5.0"
 gem "rails", "~> 7.1.1"
 gem "rqrcode", "~> 2.0"
@@ -36,7 +39,3 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
 end
-
-gem "prawn", "~> 2.4"
-
-gem "matrix", "~> 0.4.2"
