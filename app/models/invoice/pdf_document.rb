@@ -40,7 +40,7 @@ module Invoice::PdfDocument
         text t("receiver"), size: 14, style: :bold
         text order.stripe_object.customer_details.name
         text order.stripe_object.customer_details.address.line1
-        text order.stripe_object.customer_details.address.country
+        text Country[order.stripe_object.customer_details.address.country].translations[locale]
         move_down 10
         text "<b>#{t 'company_id'}</b>:", inline_format: true
         text <<~TEXT, inline_format: true
