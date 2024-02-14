@@ -16,6 +16,9 @@ bg:
     invoice_total: Сума по фактура
     vat: ДДС 20%
     total: Всичко
+    tickets:
+      one: "%{type} билет"
+      other: "%{count} × %{type} билета"
     neuvents:
       company_name: НОЙВЕНТС ООД
       address: София, ул. Банат 3, ет. 1, ап. 3

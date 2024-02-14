@@ -16,6 +16,9 @@ en:
     invoice_total: Invoice total
     vat: VAT 20%
     total: Total
+    tickets:
+      one: "%{type} ticket"
+      other: "%{count} × %{type} tickets"
     neuvents:
       company_name: NEUVENTS LTD
       address: Sofia, Banat 3 str., floor 1, apt. 3

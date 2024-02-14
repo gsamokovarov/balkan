@@ -13,6 +13,7 @@ class Invoice < ApplicationRecord
     create! order:, invoice_sequence:, number: invoice_sequence.next_invoice_number
   end
 
+  def amounts(locale:) = Invoice::Amounts.new(order.gross_amount, locale:)
   def document(locale:) = Invoice::PdfDocument.generate(self, locale:)
   def filename(locale:) = "balkanruby-#{number}-#{locale}.pdf"
 end
