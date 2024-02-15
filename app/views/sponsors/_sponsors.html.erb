@@ -7,7 +7,7 @@
 
   <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
     <% @event.sponsors.each do |sponsor| %>
-      <%= link_to sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
+      <%= link_to sponsor.name, sponsor.url, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
         <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
       <% end %>
     <% end %>
