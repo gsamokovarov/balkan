@@ -4,7 +4,7 @@
   <div class="flex flex-col gap-10">
     <% @event.sponsors.each do |sponsor| %>
       <div class="flex flex-col gap-8">
-        <h2 id="<%= sponsors.name %>" class="text-2xl sm:text-3xl font-extrabold">
+        <h2 id="<%= sponsor.name %>" class="text-2xl sm:text-3xl font-extrabold">
           <%= link_to sponsor.name, sponsor.url %>
         </h2>
 
