@@ -11,7 +11,7 @@ module Invoice::PdfDocument
   class Template
     include Prawn::View
 
-    attr_reader :invoice, :order, :amounts, :locale
+    attr_reader :invoice, :order, :invoice_amount, :locale
 
     def self.render(invoice, locale:, &)
       new(invoice, locale:, &).render
@@ -19,8 +19,8 @@ module Invoice::PdfDocument
 
     def initialize(invoice, locale:, &)
       @invoice = invoice
+      @invoice_amount = invoice.amount(locale:)
       @order = invoice.order
-      @amounts = invoice.amounts(locale:)
       @locale = locale
 
       update(&)
@@ -77,7 +77,7 @@ module Invoice::PdfDocument
 
       grid([2, 3], [2, 6]).bounding_box do
         text t("price"), size: 14, style: :bold
-        text amounts.net_format
+        text invoice_amount.net_format
       end
 
       grid([3, 0], [3, 3]).bounding_box do
@@ -85,9 +85,9 @@ module Invoice::PdfDocument
       end
 
       grid([3, 3], [3, 6]).bounding_box do
-        text "#{t 'invoice_total'}: <b>#{amounts.net_format}</b>", inline_format: true
-        text "#{t 'vat'}: <b>#{amounts.tax_format}</b>", inline_format: true
-        text "#{t 'total'}: <b>#{amounts.gross_format}</b>", inline_format: true
+        text "#{t 'invoice_total'}: <b>#{invoice_amount.net_format}</b>", inline_format: true
+        text "#{t 'vat'}: <b>#{invoice_amount.tax_format}</b>", inline_format: true
+        text "#{t 'total'}: <b>#{invoice_amount.gross_format}</b>", inline_format: true
       end
     end
   end

@@ -1,4 +1,4 @@
-class Invoice::Amounts
+class Invoice::Amount
   EUR_TO_BGN_RATE = "1.95583".to_d
   BULGARIAN_VAT = "0.2".to_d
 
