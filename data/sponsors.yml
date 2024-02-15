@@ -1,0 +1,15 @@
+- name: "Honeybadger"
+  logo: "sponsors/honeybadger.png"
+  url: "https://honeybadger.io"
+  description: >
+    Honeybadger combines ALL the monitoring! Error monitoring, uptime
+    monitoring, cron and heartbeat monitoring, performance monitoring, plus
+    status pages into a single easy-to-use platform. It’s everything you need
+    to keep production healthy and your customers happy.
+
+    Best of all, Honeybadger installs with two lines of code so you can
+    simplify your stack, lower your bills, and speed up your workflow in as
+    little as five minutes. Too good to be true?
+    <a class="link-primary" href="https://www.honeybadger.io/?utm_source=balkanruby&utm_medium=conference&utm_campaign=ruby">
+      Click here and see for yourself.
+    </a>

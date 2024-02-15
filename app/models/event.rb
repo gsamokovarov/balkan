@@ -6,4 +6,6 @@ class Event < ApplicationRecord
   has_one :invoice_sequence
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
+
+  def sponsors = Sponsor.all
 end
