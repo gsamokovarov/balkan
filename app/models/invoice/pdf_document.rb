@@ -11,7 +11,7 @@ module Invoice::PdfDocument
   class Template
     include Prawn::View
 
-    attr_reader :invoice, :order, :invoice_amount, :locale
+    attr_reader :invoice, :order, :invoice_amount, :invoice_customer
 
     def self.render(invoice, locale:, &)
       new(invoice, locale:, &).render
@@ -20,13 +20,13 @@ module Invoice::PdfDocument
     def initialize(invoice, locale:, &)
       @invoice = invoice
       @invoice_amount = invoice.amount(locale:)
+      @invoice_customer = invoice.customer(locale:)
       @order = invoice.order
-      @locale = locale
 
       update(&)
     end
 
-    def t(key, **options) = I18n.t "invoicing.#{key}", **options.merge(locale:)
+    def t(key, **options) = I18n.t "invoicing.#{key}", **options.merge(locale: @locale)
   end
 
   def generate(invoice, locale:)
@@ -39,14 +39,12 @@ module Invoice::PdfDocument
 
       grid([0, 0], [0, 3]).bounding_box do
         text t("receiver"), size: 14, style: :bold
-        text order.stripe_object.customer_details.name
-        text order.stripe_object.customer_details.address.line1
-        text Country[order.stripe_object.customer_details.address.country].translations[locale]
+        text invoice_customer.name
+        text invoice_customer.address
+        text invoice_customer.country
         move_down 10
         text "<b>#{t 'company_id'}</b>:", inline_format: true
-        text <<~TEXT, inline_format: true
-          <b>#{t 'vat_id'}</b>: #{order.stripe_object.customer_details.tax_ids.first.value}
-        TEXT
+        text "<b>#{t 'vat_id'}</b>: #{invoice_customer.vat_id}", inline_format: true
         text "<b>#{t 'ceo'}</b>:", inline_format: true
       end
 
