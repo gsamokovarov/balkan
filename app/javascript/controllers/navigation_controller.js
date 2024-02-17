@@ -8,43 +8,40 @@ export default class extends Controller {
     open: { type: Boolean, default: false },
   };
 
+  collapse = () => {
+    this.openValue = false
+  }
+
+  connect() {
+    document.addEventListener("turbo:before-cache", this.collapse)
+  }
+
+  disconnect() {
+    document.removeEventListener("turbo:before-cache", this.collapse)
+  }
+
   toggleOpen() {
-    this.openValue = !this.openValue;
-
-    const headerClasses = ["fixed", "inset-0", "overflow-y-auto"];
-
-    document.body.classList.toggle("overflow-hidden", this.openValue);
-
-    this.menuTarget.classList.toggle("flex", this.openValue);
-    this.menuTarget.classList.toggle("hidden", !this.openValue);
-
-    if (open) {
-      this.element.classList.add(...headerClasses);
-      this.openIconTarget.classList.add("hidden");
-      this.closeIconTarget.classList.remove("hidden");
-    } else {
-      this.element.classList.remove(...headerClasses);
-      this.openIconTarget.classList.remove("hidden");
-      this.closeIconTarget.classList.add("hidden");
-    }
+    this.openValue = !this.openValue
   }
 
   openValueChanged(open) {
-    const headerClasses = ["fixed", "inset-0", "overflow-y-auto"];
+    console.log(open)
 
-    document.body.classList.toggle("overflow-hidden", open);
+    const headerClasses = ["fixed", "inset-0", "overflow-y-auto"]
 
-    this.menuTarget.classList.toggle("flex", open);
-    this.menuTarget.classList.toggle("hidden", !open);
+    document.body.classList.toggle("overflow-hidden", open)
+
+    this.menuTarget.classList.toggle("flex", open)
+    this.menuTarget.classList.toggle("hidden", !open)
 
     if (open) {
-      this.element.classList.add(...headerClasses);
-      this.openIconTarget.classList.add("hidden");
-      this.closeIconTarget.classList.remove("hidden");
+      this.element.classList.add(...headerClasses)
+      this.openIconTarget.classList.add("hidden")
+      this.closeIconTarget.classList.remove("hidden")
     } else {
-      this.element.classList.remove(...headerClasses);
-      this.openIconTarget.classList.remove("hidden");
-      this.closeIconTarget.classList.add("hidden");
+      this.element.classList.remove(...headerClasses)
+      this.openIconTarget.classList.remove("hidden")
+      this.closeIconTarget.classList.add("hidden")
     }
   }
 }
