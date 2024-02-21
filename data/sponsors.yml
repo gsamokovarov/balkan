@@ -13,3 +13,11 @@
     <a class="link-primary" href="https://www.honeybadger.io/?utm_source=balkanruby&utm_medium=conference&utm_campaign=ruby">
       Click here and see for yourself.
     </a>
+- name: "AppSignal"
+  logo: "sponsors/appsignal.png"
+  url: "https://appsignal.com"
+  description: >
+    AppSignal APM helps you find bugs and slow actions before the rest of the
+    world finds out. Error tracking, performance monitoring, custom metrics,
+    host monitoring, logging, anomaly detection, uptime monitoring, and public
+    status pages, starting at €18 monthly. Made in Europe.
