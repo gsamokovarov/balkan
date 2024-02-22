@@ -3,7 +3,6 @@
     <% @speakers.each.with_index do |speaker, index| %>
       <%= render "speakers/speaker", speaker:, rotation_class: card_rotation(index) %>
     <% end %>
-    <%= render "speakers/future_speaker", rotation_class: card_rotation(@speakers.size) %>
   </div>
 
   <% if @event.speaker_applications_countdown.ongoing? %>
