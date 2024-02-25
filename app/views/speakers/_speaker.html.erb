@@ -1,14 +1,9 @@
-<div class="
-  rounded-md
-  <%= rotation_class %>
-  transition
-  ease-in-out
-  h-min
-  hover:shadow-brutal
-  hover:-translate-x-1
-  hover:-translate-y-1
-  hover:scale-110
-  hover:z-10
-">
-  <%= render "speakers/speaker_card", speaker: speaker %>
-</div>
+<%# locals: (speaker:, rotation_class:) %>
+
+<%= link_to speaker.talk, class: [
+  rotation_class,
+  "rounded-md transition ease-in-out h-min",
+  "hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1 hover:scale-110 hover:z-10"
+] do %>
+  <%= render "speakers/speaker_card", speaker:, details: true %>
+<% end %>
