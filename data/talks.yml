@@ -102,7 +102,8 @@
       social_url: "https://x.com/rstankov"
       about: >
         <p>
-          Radoslav was the CTO of Product Hunt. He recently built Angry Buildings as the single technical person on the team.
+          Radoslav was the CTO of Product Hunt. He recently built Angry
+          Buildings as the single technical person on the team.
         </p>
 - id: 6
   name: "How (and why) to run SQLite in production"
@@ -221,8 +222,12 @@
 - id: 10
   name: "Тоо much of Good Thing"
   about: >
-    <p>We all dream of being successful, to make it big.<p>
-    <p>We wish it for ourselves, for the companies we work for, for the project we work in our spare time.</p>
+    <p>
+      We all dream of being successful, to make it big.
+    <p>
+    <p>
+      We wish it for ourselves, for the companies we work for, for the project we work in our spare time.
+    </p>
     <p>
       When success hits, it can swipe your life in a direction you hadn't
       expected. This is the story of what happens when our traffic quadrupled
@@ -294,12 +299,6 @@
           than 400 apps running it in production.
         </p>
         <p>
-          I made many mistakes and learned a lot along the way.I'd like to
+          I made many mistakes and learned a lot along the way. I'd like to
           share those mistakes and tips and tricks on how to avoid them.
-        </p>
-        <p>
-          I want to share to developers how to get started with projects like
-          this, how to keep motivated and continue working on them, how to
-          collect feedback from users and to prioritize it, and how to take
-          decisions that will create and grow your business.
         </p>
