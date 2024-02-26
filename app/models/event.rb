@@ -7,6 +7,7 @@ class Event < ApplicationRecord
 
   def speakers = Talk.all.flat_map(&:speakers)
   def sponsors = Sponsor.all
+  def community_partners = CommunityPartner.all
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
   def beginning_countdown = FinalCountdown.until start_date

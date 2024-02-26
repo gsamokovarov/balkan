@@ -1,10 +1,3 @@
-<%
-  partners = {
-    "https://www.rubycommunityconference.com" => "community/rubycommunityconference.png",
-    "https://2024.euruko.org" => "community/euruko.png",
-  }
-%>
-
 <%= render "section", title: "Community partners", title_element: "h2" do %>
   <div class="prose-xl max-w-prose prose-invert">
     <p>
@@ -13,9 +6,9 @@
   </div>
 
   <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-    <% partners.each do |link, image_asset| %>
-      <%= link_to link, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
-        <%= image_tag image_asset, class: "w-auto h-full object-contain", lazy: true %>
+    <% @event.community_partners.each do |partner| %>
+      <%= link_to partner.url, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
+        <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
       <% end %>
     <% end %>
   </div>
