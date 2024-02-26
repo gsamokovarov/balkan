@@ -51,7 +51,7 @@ RSpec.case Invoice do
     assert_eq invoice3.number, 10_001_051
   end
 
-  test "invoice details accept no tax IDs" do
+  test "invoice customer details can lack tax ID" do
     order = create :order, stripe_checkout_session_uid: "test",
                            stripe_checkout_session: {
                              id: "test",
