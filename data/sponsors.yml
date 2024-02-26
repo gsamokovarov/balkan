@@ -1,4 +1,5 @@
 - name: "Honeybadger"
+  type: "basic"
   logo: "sponsors/honeybadger.png"
   url: "https://honeybadger.io"
   description: >
@@ -14,6 +15,7 @@
       Click here and see for yourself.
     </a>
 - name: "AppSignal"
+  type: "basic"
   logo: "sponsors/appsignal.png"
   url: "https://appsignal.com"
   description: >
@@ -21,3 +23,11 @@
     world finds out. Error tracking, performance monitoring, custom metrics,
     host monitoring, logging, anomaly detection, uptime monitoring, and public
     status pages, starting at €18 monthly. Made in Europe.
+- name: "Trailblazer"
+  type: "travel"
+  logo: "sponsors/trailblazer.png"
+  description: null
+- name: "Avo"
+  type: "travel"
+  logo: "sponsors/avo.png"
+  description: null

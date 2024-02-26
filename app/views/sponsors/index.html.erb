@@ -1,16 +1,13 @@
 <% title "Sponsors" %>
 
 <%= render "section", title: "Sponsors", title_element: "h1" do %>
-  <div class="flex flex-col gap-10">
-    <% @event.sponsors.each do |sponsor| %>
-      <div class="flex flex-col gap-8">
-        <h2 id="<%= sponsor.name %>" class="text-2xl sm:text-3xl font-extrabold">
-          <%= link_to sponsor.name, sponsor.url %>
-        </h2>
-
+  <div class="space-y-10">
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Basic</h2>
+    <% @event.sponsors.basic.each do |sponsor| %>
+      <div id="<%= sponsor.name %>" class="space-y-8">
         <%= link_to sponsor.url do %>
           <%= image_tag sponsor.logo,
-            class: "w-full md:w-1/2 h-auto p-4 bg-white rounded-md object-contain",
+            class: "w-full md:w-1/2 h-48 p-4 bg-white rounded-md object-contain",
             lazy: true %>
         <% end %>
 
@@ -19,6 +16,17 @@
             <%= sponsor.description.html_safe %>
           </p>
         </div>
+      </div>
+    <% end %>
+
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Travel</h2>
+    <% @event.sponsors.travel.each do |sponsor| %>
+      <div id="<%= sponsor.name %>" class="space-y-8">
+        <%= link_to sponsor.url do %>
+          <%= image_tag sponsor.logo,
+            class: "w-full md:w-1/2 h-24 p-4 bg-white rounded-md object-contain",
+            lazy: true %>
+        <% end %>
       </div>
     <% end %>
   </div>
