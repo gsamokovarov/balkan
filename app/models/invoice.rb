@@ -23,6 +23,6 @@ class Invoice < ApplicationRecord
     Customer.new name: order.stripe_object.customer_details.name,
                  address: order.stripe_object.customer_details.address.line1,
                  country: Country[order.stripe_object.customer_details.address.country].translations[locale],
-                 vat_id: order.stripe_object.customer_details.tax_ids.first.value
+                 vat_id: order.stripe_object.customer_details.tax_ids.first&.value
   end
 end
