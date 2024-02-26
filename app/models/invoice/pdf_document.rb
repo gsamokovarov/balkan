@@ -19,6 +19,7 @@ module Invoice::PdfDocument
 
     def initialize(invoice, locale:, &)
       @invoice = invoice
+      @locale = locale
       @invoice_amount = invoice.amount(locale:)
       @invoice_customer = invoice.customer(locale:)
       @order = invoice.order
