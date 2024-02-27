@@ -52,7 +52,7 @@ module Invoice::PdfDocument
       grid([0, 3], [0, 6]).bounding_box do
         text t("supplier"), size: 14, style: :bold
         text t("neuvents.company_name")
-        text t("neuvents.address")
+        text t("neuvents.address"), overflow: :shrink_to_fit
         text t("neuvents.country")
         move_down 10
         text "<b>#{t 'company_id'}</b>: #{t 'neuvents.company_id'}", inline_format: true
