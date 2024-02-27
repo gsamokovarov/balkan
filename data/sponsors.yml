@@ -25,9 +25,11 @@
     status pages, starting at €18 monthly. Made in Europe.
 - name: "Trailblazer"
   type: "travel"
+  url: "https://trailblazer.to"
   logo: "sponsors/trailblazer.png"
   description: null
 - name: "Avo"
   type: "travel"
+  url: "https://avohq.io"
   logo: "sponsors/avo.png"
   description: null
