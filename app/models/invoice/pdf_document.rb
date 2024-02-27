@@ -27,6 +27,16 @@ module Invoice::PdfDocument
       update(&)
     end
 
+    def fit_text(string, width:)
+      box = Prawn::Text::Box.new string,
+                                 document:,
+                                 width:,
+                                 at: [bounds.left, cursor],
+                                 overflow: :shrink_to_fit
+      box.render
+      move_down box.height
+    end
+
     def t(key, **options) = I18n.t "invoicing.#{key}", **options.merge(locale: @locale)
   end
 
@@ -38,10 +48,11 @@ module Invoice::PdfDocument
 
       define_grid columns: 6, rows: 4, gutter: 10
 
-      grid([0, 0], [0, 3]).bounding_box do
+      column = grid([0, 0], [0, 2])
+      column.bounding_box do
         text t("receiver"), size: 14, style: :bold
         text invoice_customer.name
-        text_box invoice_customer.address, overflow: :shrink_to_fit
+        fit_text invoice_customer.address, width: column.width
         text invoice_customer.country
         move_down 10
         text "<b>#{t 'company_id'}</b>:", inline_format: true
