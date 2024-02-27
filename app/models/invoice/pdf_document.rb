@@ -41,7 +41,7 @@ module Invoice::PdfDocument
       grid([0, 0], [0, 3]).bounding_box do
         text t("receiver"), size: 14, style: :bold
         text invoice_customer.name
-        text invoice_customer.address
+        text_box invoice_customer.address, overflow: :shrink_to_fit
         text invoice_customer.country
         move_down 10
         text "<b>#{t 'company_id'}</b>:", inline_format: true
@@ -52,7 +52,7 @@ module Invoice::PdfDocument
       grid([0, 3], [0, 6]).bounding_box do
         text t("supplier"), size: 14, style: :bold
         text t("neuvents.company_name")
-        text t("neuvents.address"), overflow: :shrink_to_fit
+        text t("neuvents.address")
         text t("neuvents.country")
         move_down 10
         text "<b>#{t 'company_id'}</b>: #{t 'neuvents.company_id'}", inline_format: true
