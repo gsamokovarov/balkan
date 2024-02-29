@@ -51,9 +51,9 @@ module Invoice::PdfDocument
       column = grid([0, 0], [0, 2])
       column.bounding_box do
         text t("receiver"), size: 14, style: :bold
-        text invoice_customer.name
+        fit_text invoice_customer.name, width: column.width
         fit_text invoice_customer.address, width: column.width
-        text invoice_customer.country
+        fit_text invoice_customer.country, width: column.width
         move_down 10
         text "<b>#{t 'company_id'}</b>:", inline_format: true
         text "<b>#{t 'vat_id'}</b>: #{invoice_customer.vat_id}", inline_format: true
