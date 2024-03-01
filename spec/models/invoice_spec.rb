@@ -71,4 +71,31 @@ RSpec.case Invoice do
 
     assert_eq invoice.customer(locale: "en").vat_id, nil
   end
+
+  test "document smoke test" do
+    event = create :event, :balkan2024
+    order = create :order, event:,
+                           stripe_checkout_session_uid: "test",
+                           stripe_checkout_session: {
+                             id: "test",
+                             customer_details: {
+                               name: "Test",
+                               email: "test@example.com",
+                               address: { line1: "Test", city: "Test", postal_code: "1234", country: "BG" },
+                               tax_ids: []
+                             },
+                             total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+                             amount_total: 30_000,
+                           },
+                           issue_invoice: true,
+                           completed_at: Time.current,
+                           amount: 300
+    ticket_type = create :ticket_type, event:, enabled: true
+    create_list(:ticket, 3, :genadi, order:, ticket_type:, price: 100)
+
+    invoice = Invoice.issue order
+
+    assert invoice.document(locale: "en")
+    assert invoice.document(locale: "bg")
+  end
 end
