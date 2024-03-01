@@ -72,30 +72,83 @@ RSpec.case Invoice do
     assert_eq invoice.customer(locale: "en").vat_id, nil
   end
 
-  test "document smoke test" do
+  test "English document smoke test" do
+    invoice = create_invoice_for_document_generation(
+      name: "Test",
+      email: "test@example.com",
+      address: "Test",
+      country: "BG",
+      amount: "300".to_d,
+      ticket_count: 3
+    )
+
+    pdf = invoice.document(locale: "en")
+
+    assert_pdf_content pdf,
+                       "Supplier NEUVENTS LTD",
+                       "Invoice total: € 250.00",
+                       "VAT 20%: € 50.00",
+                       "Total: € 300.00"
+  end
+
+  test "Bulgarian document smoke test" do
+    invoice = create_invoice_for_document_generation(
+      name: "Test",
+      email: "test@example.com",
+      address: "Test",
+      country: "BG",
+      amount: "300".to_d,
+      ticket_count: 3
+    )
+
+    pdf = invoice.document(locale: "bg")
+
+    assert_pdf_content pdf,
+                       "Доставчик НОЙВЕНТС ООД",
+                       "Сума по фактура : 488.96 лв .",
+                       "ДДС 20%: 97.79 лв .",
+                       "Всичко : 586.75 лв ."
+  end
+
+  def create_invoice_for_document_generation(
+    name:,
+    email:,
+    address:,
+    country:,
+    amount:,
+    ticket_count:,
+    tax_id: nil
+  )
     event = create :event, :balkan2024
     order = create :order, event:,
+                           email:,
+                           amount:,
                            stripe_checkout_session_uid: "test",
                            stripe_checkout_session: {
                              id: "test",
                              customer_details: {
-                               name: "Test",
-                               email: "test@example.com",
-                               address: { line1: "Test", city: "Test", postal_code: "1234", country: "BG" },
-                               tax_ids: []
+                               name:,
+                               email:,
+                               address: { line1: address, country: },
+                               tax_ids: Array(tax_id)
                              },
                              total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
-                             amount_total: 30_000,
+                             amount_total: amount * 1000,
                            },
                            issue_invoice: true,
-                           completed_at: Time.current,
-                           amount: 300
+                           completed_at: Time.current
     ticket_type = create :ticket_type, event:, enabled: true
-    create_list(:ticket, 3, :genadi, order:, ticket_type:, price: 100)
+    create_list :ticket, ticket_count, :genadi, order:, ticket_type:, price: amount / ticket_count
 
-    invoice = Invoice.issue order
+    Invoice.issue order
+  end
 
-    assert invoice.document(locale: "en")
-    assert invoice.document(locale: "bg")
+  def assert_pdf_content(pdf, *contents)
+    text_analysis = PDF::Inspector::Text.analyze pdf
+    text_content = text_analysis.strings.map(&:strip).join " "
+
+    contents.each do |content|
+      assert_include? text_content, content
+    end
   end
 end

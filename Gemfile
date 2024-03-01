@@ -32,6 +32,7 @@ end
 group :test do
   gem "capybara"
   gem "hashie"
+  gem "pdf-inspector", require: "pdf/inspector"
   gem "selenium-webdriver"
 end
 
