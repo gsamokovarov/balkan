@@ -2,8 +2,6 @@ class InvoiceMailer < ApplicationMailer
   def issue_email(order)
     precondition order.invoice
 
-    binding.irb
-
     @order = order
     @invoice = order.invoice
 
