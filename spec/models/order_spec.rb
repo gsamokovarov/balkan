@@ -147,13 +147,12 @@ RSpec.case Order do
     assert_eq ticket2.price, "127.5".to_d
   end
 
-  test "free orders have zero amounts" do
+  test "free orders have zero amount" do
     event = create :event, :balkan2024
     order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
 
-    assert_eq order.gross_amount, 0
-    assert_eq order.net_amount, 0
-    assert_eq order.tax_amount, 0
+    assert_eq order.amount, 0
+    assert_eq order.refunded_amount, 0
   end
 
   def build_ticket_params(index:, price:, ticket_type:)

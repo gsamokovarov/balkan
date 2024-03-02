@@ -1,6 +1,5 @@
 class Order < ApplicationRecord
   INVOICING_START_DATE = Date.new 2024, 2, 3
-  BULGARIAN_VAT = "1.2".to_d
 
   belongs_to :event
   has_many :tickets
@@ -10,10 +9,6 @@ class Order < ApplicationRecord
   def self.completed = where("completed_at IS NOT NULL")
 
   def stripe_object = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
-
-  def gross_amount = amount - refunded_amount
-  def net_amount = gross_amount / BULGARIAN_VAT
-  def tax_amount = free? ? 0 : gross_amount - net_amount
 
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded_amount == amount

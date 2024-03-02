@@ -1,4 +1,4 @@
-<%= render "section", title: "Order ##{@order.id}", description: "Total: #{format_money @order.gross_amount}" do %>
+<%= render "section", title: "Order ##{@order.id}", description: "Total: #{format_money @order.amount}" do %>
   <%= render "tickets", order: @order %>
   <%= render "documents", order: @order %>
 <% end %>
