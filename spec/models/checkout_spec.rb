@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.case Checkout, type: :model do
-  test ".create_link raises an ActiveRecord::RecordInvalid for invalid ticket data" do
+  test "raises an ActiveRecord::RecordInvalid for invalid ticket data" do
     ticket_type = create :ticket_type, :enabled
 
     assert_raise_error ActiveModel::StrictValidationFailed do
@@ -9,7 +9,7 @@ RSpec.case Checkout, type: :model do
     end
   end
 
-  test ".create_link requires at least one ticket to create" do
+  test "requires at least one ticket to create" do
     ticket_type = create :ticket_type, :enabled
 
     assert_raise_error Precondition::Error do
@@ -17,7 +17,7 @@ RSpec.case Checkout, type: :model do
     end
   end
 
-  test ".create_link raises an ActiveRecord::RecordNotFound for disabled ticket type" do
+  test "raises an ActiveRecord::RecordNotFound for disabled ticket type" do
     ticket_type = create :ticket_type
 
     assert_raise_error ActiveRecord::RecordNotFound do
@@ -25,7 +25,7 @@ RSpec.case Checkout, type: :model do
     end
   end
 
-  test ".create_link returns the stripe checkout url" do
+  test "returns the stripe checkout url" do
     ticket_type = create :ticket_type, :enabled
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
@@ -46,7 +46,7 @@ RSpec.case Checkout, type: :model do
     assert_eq Checkout.create_link(params), "https://stripe-checkout-link.com"
   end
 
-  test ".create_link creates an order with tickets metadata" do
+  test "creates an order with tickets metadata" do
     ticket_type = create :ticket_type, :enabled
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
@@ -81,7 +81,7 @@ RSpec.case Checkout, type: :model do
     assert_eq ticket["ticket_type_id"], ticket_type.id
   end
 
-  test ".create_link creates an order with 10% discount for 3 or more tickets" do
+  test "creates an order with 10% discount for 3 or more tickets" do
     ticket_type = create :ticket_type, :enabled
     params = {
       tickets: [
@@ -133,7 +133,7 @@ RSpec.case Checkout, type: :model do
     assert_eq ticket3["ticket_type_id"], ticket_type.id
   end
 
-  test ".create_link creates an order marked for invoice issuing" do
+  test "creates an order marked for invoice issuing" do
     ticket_type = create :ticket_type, :enabled
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],

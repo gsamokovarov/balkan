@@ -42,9 +42,8 @@ class Order < ApplicationRecord
       Invoice.issue self if issue_invoice?
     end
 
-    tickets.each do
-      TicketMailer.welcome_email(_1).deliver_later
-    end
+    tickets.each { TicketMailer.welcome_email(_1).deliver_later }
+    InvoiceMailer.issue_email(self).deliver_later if issue_invoice?
   end
 
   def invoicable?

@@ -84,7 +84,12 @@ RSpec.case Order do
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",
-      customer_details: { name: "Test", email: "test@example.com" },
+      customer_details: {
+        name: "Test",
+        email: "test@example.com",
+        address: { line1: "Test", city: "Test", country: "BG", postal_code: "Test" },
+        tax_ids: [type: "bg_vat", value: "BG123456789"]
+      },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
       amount_total: 30_000,
     )
