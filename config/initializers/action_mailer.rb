@@ -1,4 +1,4 @@
-Rails.configuration.to_prepare do
+Rails.configuration.after_initialize do
   next unless Rails.env.production?
 
   Rails.configuration.action_mailer.perform_caching = false
