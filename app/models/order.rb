@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   def stripe_object = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
 
   def refunded? = refunded_amount.positive?
-  def fully_refunded? = refunded_amount == amount
+  def fully_refunded? = refunded? && refunded_amount == amount
 
   def expire!(checkout_session)
     update! expired_at: Time.current,

@@ -155,6 +155,14 @@ RSpec.case Order do
     assert_eq order.refunded_amount, 0
   end
 
+  test "free orders are not marked as refunded" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
+
+    assert_eq order.refunded?, false
+    assert_eq order.fully_refunded?, false
+  end
+
   def build_ticket_params(index:, price:, ticket_type:)
     {
       "name" => "John Doe #{index}",
