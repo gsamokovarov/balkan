@@ -11,13 +11,7 @@ module Settings
 
   private
 
-  class MissingError < StandardError
-    def initialize(name) = super("Credential #{name} or environment variable #{name.to_s.upcase} is missing")
-  end
-
   def get(name)
-    ENV.fetch name.to_s.upcase do
-      Rails.application.credentials.fetch(name) { raise MissingError, name }
-    end
+    Rails.configuration.credentials.fetch name, ENV.fetch(name.to_s.upcase)
   end
 end
