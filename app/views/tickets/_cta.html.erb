@@ -1,8 +1,10 @@
 <%= render "section", title: "Tickets", title_element: "h2" do %>
-  <p class="text-xl py-3">
-    Early Bird tickets are available until we announce the speaker lineup.
-    <%= link_to "Get yours now!", checkouts_path, class: "link-primary" %>
-  </p>
+  <div class="prose-xl max-w-prose prose-invert text-white">
+    <p>
+      Supporter tickets get our eternal gratitude and a hand-made item, made by
+      the organizers!
+    </p>
+  </div>
 
   <%= link_to checkouts_path, class: "btn-primary" do %>
     <svg
