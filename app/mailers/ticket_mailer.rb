@@ -3,6 +3,7 @@ class TicketMailer < ApplicationMailer
     @ticket = ticket
     @ticket_png = ticket.qrcode.as_png size: 240
 
+    attachments.inline["inline_ticket.png"] = @ticket_png.to_s
     attachments["balkan_ruby_ticket.png"] = @ticket_png.to_s
     attachments["balkan_ruby_event.ics"] = calendar_event ticket
 
@@ -13,6 +14,7 @@ class TicketMailer < ApplicationMailer
     @ticket = ticket
     @ticket_png = ticket.qrcode.as_png size: 240
 
+    attachments.inline["inline_ticket.png"] = @ticket_png.to_s
     attachments["balkan_ruby_ticket.png"] = @ticket_png.to_s
 
     mail to: @ticket.email, subject: "Your ticket for Balkan Ruby"
