@@ -51,27 +51,6 @@ RSpec.case Invoice do
     assert_eq invoice3.number, 10_001_051
   end
 
-  test "invoice customer details can lack tax ID" do
-    order = create :order, stripe_checkout_session_uid: "test",
-                           stripe_checkout_session: {
-                             id: "test",
-                             customer_details: {
-                               name: "Test",
-                               email: "test@example.com",
-                               address: { line1: "Test", city: "Test", postal_code: "1234", country: "BG" },
-                               tax_ids: []
-                             },
-                             total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
-                             amount_total: 30_000,
-                           },
-                           issue_invoice: true,
-                           completed_at: Time.current
-
-    invoice = Invoice.issue order
-
-    assert_eq invoice.customer(locale: "en").vat_id, nil
-  end
-
   test "English document smoke test" do
     invoice = create_invoice_for_document_generation(
       name: "Test",

@@ -8,21 +8,62 @@ module Invoice::PdfDocument
     bold_italic: Rails.root.join("app/assets/fonts/Inter-BoldItalic.ttf")
   }
 
+  CustomerDetails = Data.define :name, :address, :country, :vat_id do
+    def self.from_order(order, locale:)
+      new name: order.stripe_object.customer_details.name,
+          address: order.stripe_object.customer_details.address.line1,
+          country: Country[order.stripe_object.customer_details.address.country].translations[locale],
+          vat_id: order.stripe_object.customer_details.tax_ids.first&.value
+    end
+  end
+
+  class Amount
+    EUR_TO_BGN_RATE = "1.95583".to_d
+    BULGARIAN_VAT = "0.2".to_d
+
+    attr_reader :gross, :net, :tax
+
+    def initialize(gross_in_eur, locale: :en)
+      @bulgarian = locale.to_sym == :bg
+
+      @gross = round(@bulgarian ? eur_to_bgn(gross_in_eur) : gross_in_eur)
+      @net = round(@gross / (1 + BULGARIAN_VAT))
+      @tax = round(@gross - @net)
+    end
+
+    def gross_format = format gross
+    def net_format = format net
+    def tax_format = format tax
+
+    private
+
+    def round(amount) = amount.round 2, :half_even
+    def eur_to_bgn(eur) = eur * EUR_TO_BGN_RATE
+
+    def format(amount)
+      if @bulgarian
+        Kernel.format "%0.2f лв.", amount
+      else
+        Kernel.format "€%0.2f", amount
+      end
+    end
+  end
+
   class Template
     include Prawn::View
 
-    attr_reader :invoice, :order, :invoice_amount, :invoice_customer
+    attr_reader :invoice, :order, :invoice_amount, :customer_details
 
     def self.render(invoice, locale:, &)
       new(invoice, locale:, &).render
     end
 
     def initialize(invoice, locale:, &)
-      @invoice = invoice
       @locale = locale
-      @invoice_amount = invoice.amount(locale:)
-      @invoice_customer = invoice.customer(locale:)
+      @invoice = invoice
       @order = invoice.order
+      @invoice_amount = Amount.new(@order.amount, locale:)
+      @customer_details = CustomerDetails.from_order(@order, locale:)
 
       update(&)
     end
@@ -51,12 +92,12 @@ module Invoice::PdfDocument
       column = grid([0, 0], [0, 2])
       column.bounding_box do
         text t("receiver"), size: 14, style: :bold
-        fit_text invoice_customer.name, width: column.width
-        fit_text invoice_customer.address, width: column.width
-        fit_text invoice_customer.country, width: column.width
+        fit_text customer_details.name, width: column.width
+        fit_text customer_details.address, width: column.width
+        fit_text customer_details.country, width: column.width
         move_down 10
         text "<b>#{t 'company_id'}</b>:", inline_format: true
-        text "<b>#{t 'vat_id'}</b>: #{invoice_customer.vat_id}", inline_format: true
+        text "<b>#{t 'vat_id'}</b>: #{customer_details.vat_id}", inline_format: true
         text "<b>#{t 'ceo'}</b>:", inline_format: true
       end
 
