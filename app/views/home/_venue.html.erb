@@ -1,0 +1,36 @@
+<%= render "section", title: "Venue", title_element: "h2" do %>
+  <div class="prose-xl max-w-prose prose-invert">
+    <p>
+      <%= link_to "Barter Community Hub", "https://www.barter-hub.com", class: "link-primary" %> was
+      born in the minds of the people behind the <%= link_to "Puzl", "https://www.puzl.com", class: "link-primary" %> –
+      the best CowOrKing space in the region. Barter is a café, an event space, and everything in between. With
+      enough space, different rooms and a great terrace overlooking
+      <%= link_to "Vitosha mountain", "https://en.wikipedia.org/wiki/Vitosha", class: "link-primary" %>,
+      we believe it's the perfect place to host us this year.
+    </p>
+  </div>
+
+  <div class="-mx-4 px-4 h-72 flex gap-4 overflow-x-auto snap-x snap-mandatory sm:h-96">
+    <% %w(barter-1.jpg barter-2.jpg barter-3.jpg barter-4.jpg barter-5.jpg).each do |img| %>
+      <%= image_tag "venue/#{img}",
+        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 h-full object-cover sm:w-3/4",
+        lazy: true %>
+    <% end %>
+
+    <% %w(barter-room-1.jpg barter-room-2.jpg borter-room-3.jpg).each do |img| %>
+      <%= image_tag "venue/#{img}",
+        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 h-full object-cover object-left-bottom sm:w-3/4",
+        lazy: true %>
+    <% end %>
+  </div>
+
+  <div class="border-2 border-white rounded-md overflow-hidden h-72 sm:h-96">
+    <iframe
+      width="100%"
+      height="100%"
+      frameborder="0"
+      allowfullscreen="allowfullscreen"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB6mPgfYkFaseJDB7SI9Rv0RwPSg7wPqfg&amp;q=place_id:ChIJ87azfTmFqkAR1vTB0VusR5c">
+    </iframe>
+  </div>
+<% end %>
