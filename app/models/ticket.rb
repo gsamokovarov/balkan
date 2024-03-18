@@ -16,12 +16,6 @@ class Ticket < ApplicationRecord
 
   normalizes :email, with: -> { _1.downcase.strip }
 
-  def event_access_url
-    Link.ticket_url generate_token_for(:event_access)
-  end
-
-  def qrcode
-    event_access_token = generate_token_for(:event_access)
-    RQRCode::QRCode.new Link.ticket_url(event_access_token)
-  end
+  def event_access_url = Link.ticket_url generate_token_for(:event_access)
+  def qrcode = RQRCode::QRCode.new event_access_url
 end
