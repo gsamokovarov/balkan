@@ -180,8 +180,8 @@ RSpec.case Webhooks::StripesController, type: :request do
 
     ticket1, ticket2, ticket3 = order.tickets
 
-    assert_eq ActionMailer::Base.deliveries.count, 3
-    email1, email2, email3 = ActionMailer::Base.deliveries
+    assert_eq ActionMailer::Base.deliveries.count, 4
+    email1, email2, email3, email4 = ActionMailer::Base.deliveries
 
     assert_eq email1.to, [ticket1.email]
     assert_eq email1.subject, "Welcome to Balkan Ruby!"
@@ -191,6 +191,9 @@ RSpec.case Webhooks::StripesController, type: :request do
 
     assert_eq email3.to, [ticket3.email]
     assert_eq email3.subject, "Welcome to Balkan Ruby!"
+
+    assert_eq email4.to, ["genadi@hey.com"]
+    assert_eq email4.subject, "Balkan Ruby sale for €405.00"
   end
 
   test "finalizes order with promo code on checkout.session.completed" do

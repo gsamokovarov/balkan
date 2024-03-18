@@ -39,8 +39,8 @@ RSpec.case Order do
 
     order.complete! checkout_session
 
-    assert_eq ActionMailer::Base.deliveries.count, 3
-    email1, email2, email3 = ActionMailer::Base.deliveries
+    assert_eq ActionMailer::Base.deliveries.count, 4
+    email1, email2, email3, email4 = ActionMailer::Base.deliveries
 
     assert_eq email1.to, [ticket1_params["email"]]
     assert_eq email1.subject, "Welcome to Balkan Ruby!"
@@ -50,6 +50,9 @@ RSpec.case Order do
 
     assert_eq email3.to, [order.email]
     assert_eq email3.subject, "Balkan Ruby invoice"
+
+    assert_eq email4.to, ["genadi@hey.com"]
+    assert_eq email4.subject, "Balkan Ruby sale for €300.00"
   end
 
   test "completed orders create tickets" do
