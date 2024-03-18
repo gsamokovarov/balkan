@@ -123,7 +123,7 @@ module Invoice::PdfDocument
 
       grid([2, 0], [2, 3]).bounding_box do
         text t("items"), size: 14, style: :bold
-        text t("tickets", count: order.tickets.count, type: order.tickets.first.ticket_type.name)
+        text t("tickets", count: order.tickets.size, type: order.tickets.first.ticket_type.name)
       end
 
       grid([2, 3], [2, 6]).bounding_box do

@@ -21,23 +21,35 @@ RSpec.case Order do
     ticket2_params = build_ticket_params(index: 2, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
       id: "test",
-      customer_details: { name: "Test", email: "test@example.com" },
+      customer_details: {
+        name: "Test",
+        email: "test@example.com",
+        address: { line1: "Test", city: "Test", country: "BG", postal_code: "Test" },
+        tax_ids: [type: "bg_vat", value: "BG123456789"]
+      },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
       amount_total: 30_000,
     )
 
-    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket1_params, ticket2_params]
+    order = create :order, stripe_checkout_session_uid: "test",
+                           pending_tickets: [ticket1_params, ticket2_params],
+                           issue_invoice: true,
+                           email: "test@example.com",
+                           name: "Test"
 
     order.complete! checkout_session
 
-    assert_eq ActionMailer::Base.deliveries.count, 2
-    email1, email2 = ActionMailer::Base.deliveries
+    assert_eq ActionMailer::Base.deliveries.count, 3
+    email1, email2, email3 = ActionMailer::Base.deliveries
 
     assert_eq email1.to, [ticket1_params["email"]]
     assert_eq email1.subject, "Welcome to Balkan Ruby!"
 
     assert_eq email2.to, [ticket2_params["email"]]
     assert_eq email2.subject, "Welcome to Balkan Ruby!"
+
+    assert_eq email3.to, [order.email]
+    assert_eq email3.subject, "Balkan Ruby invoice"
   end
 
   test "completed orders create tickets" do

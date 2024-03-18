@@ -1,5 +1,5 @@
-class InvoiceMailer < ApplicationMailer
-  def issue_email(order)
+class OrderMailer < ApplicationMailer
+  def invoice_email(order)
     precondition order.invoice
 
     @order = order
