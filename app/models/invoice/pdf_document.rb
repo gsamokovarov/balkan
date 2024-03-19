@@ -50,6 +50,8 @@ module Invoice::PdfDocument
   end
 
   class Template
+    GENADI_AS_CEO_DATE = Date.new(2024, 3, 12)
+
     include Prawn::View
 
     attr_reader :invoice, :order, :invoice_amount, :customer_details
@@ -77,6 +79,12 @@ module Invoice::PdfDocument
       box.render
       move_down box.height
     end
+
+    def genadi_ceo? = invoice.created_at.after? GENADI_AS_CEO_DATE
+
+    private
+
+    attr_reader :locale
 
     def t(key, **options) = I18n.t "invoicing.#{key}", **options.merge(locale: @locale)
   end
@@ -111,7 +119,8 @@ module Invoice::PdfDocument
         text <<~TEXT, inline_format: true
           <b>#{t 'vat_id'}</b>: #{t 'neuvents.vat_id'}
         TEXT
-        text "<b>#{t 'ceo'}</b>: #{t 'neuvents.ceo'}", inline_format: true
+        text "<b>#{t 'ceo'}</b>: #{t(genadi_ceo? ? 'neuvents.genadi_ceo' : 'neuvents.svetli_ceo')}",
+             inline_format: true
       end
 
       grid([1, 0], [1, 3]).bounding_box do

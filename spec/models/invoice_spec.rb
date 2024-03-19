@@ -89,6 +89,42 @@ RSpec.case Invoice do
                        "Всичко : 586.75 лв ."
   end
 
+  test "Svetlio as МОЛ in documents before 2024-03-12" do
+    invoice = create_invoice_for_document_generation(
+      name: "Test",
+      email: "test@example.com",
+      address: "Test",
+      country: "BG",
+      amount: "300".to_d,
+      ticket_count: 3,
+      created_at: DateTime.new(2024, 3, 11)
+    )
+
+    en = invoice.document(locale: "en")
+    bg = invoice.document(locale: "bg")
+
+    assert_pdf_content en, "Svetlozar Mihaylov"
+    assert_pdf_content bg, "Светлозар Михайлов"
+  end
+
+  test "Genadi as МОЛ in documents after 2024-03-12" do
+    invoice = create_invoice_for_document_generation(
+      name: "Test",
+      email: "test@example.com",
+      address: "Test",
+      country: "BG",
+      amount: "300".to_d,
+      ticket_count: 3,
+      created_at: DateTime.new(2024, 3, 13)
+    )
+
+    en = invoice.document(locale: "en")
+    bg = invoice.document(locale: "bg")
+
+    assert_pdf_content en, "Genadi Samokovarov"
+    assert_pdf_content bg, "Генади Самоковаров"
+  end
+
   def create_invoice_for_document_generation(
     name:,
     email:,
@@ -96,7 +132,8 @@ RSpec.case Invoice do
     country:,
     amount:,
     ticket_count:,
-    tax_id: nil
+    tax_id: nil,
+    created_at: nil
   )
     event = create :event, :balkan2024
     order = create :order, event:,
@@ -119,7 +156,9 @@ RSpec.case Invoice do
     ticket_type = create :ticket_type, event:, enabled: true
     create_list :ticket, ticket_count, :genadi, order:, ticket_type:, price: amount / ticket_count
 
-    Invoice.issue order
+    invoice = Invoice.issue(order)
+    invoice.created_at = created_at if created_at
+    invoice
   end
 
   def assert_pdf_content(pdf, *contents)

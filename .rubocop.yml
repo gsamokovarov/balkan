@@ -115,6 +115,9 @@ Metrics/BlockLength:
 Metrics/AbcSize:
   Enabled: false
 
+Metrics/ParameterLists:
+  Enabled: false
+
 # Sometimes life leaves you no choice. True story.
 Lint/SuppressedException:
   Enabled: false
