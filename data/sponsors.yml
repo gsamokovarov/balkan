@@ -33,3 +33,8 @@
   url: "https://avohq.io"
   logo: "sponsors/avo.png"
   description: null
+- name: "Zendesk"
+  type: "travel"
+  url: "https://www.zendesk.com"
+  logo: "sponsors/zendesk.png"
+  description: null
