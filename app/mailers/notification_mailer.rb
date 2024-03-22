@@ -1,6 +1,4 @@
 class NotificationMailer < ApplicationMailer
-  default from: email_address_with_name("notifications@balkanruby.com", "Balkan Ruby")
-
   def sale_email(order)
     @order = order
 
