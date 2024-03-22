@@ -1,6 +1,6 @@
 <div class="w-prose">
   <p>
-    A new order by <%= link_to first_name(@order.name), admin_order_url(@order), class: "link-primary" %>
+    A new order by <%= link_to @order.name, admin_order_url(@order), class: "link-primary" %>
     for <b><%= format_money @order.amount %></b> has been placed.
   </p>
 </div>
