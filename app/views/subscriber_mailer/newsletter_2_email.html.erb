@@ -1,0 +1,45 @@
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    You are receiving this email because you have signed up for the <b>Balkan Ruby</b>
+    newsletter, or because you bought a ticket. I'm Genadi, the organizer,
+    and I'm happy to share our recent updates with you.
+  </p>
+
+  <p class="pb-2">
+    Let's start with the biggest one. We have moved our venue from the National
+    Palace of Culture to a smaller place called <%= link_to "Barter Community Hub", "https://www.barter-hub.com", class: "link-primary" %>.
+    It’s a lovely mixture between a cafè and a coworking space with a gorgeous
+    balcony overlooking Vitosha mountain. I believe that Barter is the better
+    place for an event of our size.
+  </p>
+
+  <p class="pb-2">
+    Moving to Barter means that we are able to continue the <%= link_to "Early Bird tickets", checkout_url(1), class: "link-primary" %> 
+    sale until <b>1st of April</b>. The new venue can comfortably host up to
+    100 people and we currently have 77 tickets sold. If you haven't bought yours
+    yet, do so before we sell out, and do so while the Early Bird tickets are
+    still available!
+  </p>
+
+  <p class="pb-2">
+    We'd suggest you to book your accommodations in the Sofia downtown area and
+    near a Metro station. Barter is located next to the <%= link_to "Vitosha metro station", "https://www.metrosofia.com/en/maps", class: "link-primary" %>.
+    You can book close to the venue but we believe you'll have more fun
+    downtown, where most of the city activities are on a walking distance.
+  </p>
+
+  <p class="pb-2">
+    Finally, if you have any questions reply to this email, or
+    join our #2024 channel on our <%= link_to "slack", "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw", class: "link-primary" %>!
+  </p>
+
+  <p class="pb-2">
+    That's all for now! We will be sending more updates as we get closer to the event.
+  </p>
+
+  <%= render "closer" %>
+</div>
