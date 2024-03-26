@@ -38,3 +38,8 @@
   url: "https://www.zendesk.com"
   logo: "sponsors/zendesk.png"
   description: null
+- name: "Test IO"
+  type: "travel"
+  url: "https://test.io"
+  logo: "sponsors/testio.png"
+  description: null
