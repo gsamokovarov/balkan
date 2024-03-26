@@ -21,7 +21,5 @@ class Subscriber < ApplicationRecord
     SQL
   end
 
-  def cancel_url
-    Link.subscriber_url generate_token_for(:cancelation)
-  end
+  def cancel_url = Link.subscriber_url generate_token_for(:cancelation)
 end
