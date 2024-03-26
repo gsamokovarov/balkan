@@ -7,7 +7,7 @@
 
   <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
     <% @event.community_partners.each do |partner| %>
-      <%= link_to partner.url, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
+      <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
         <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
       <% end %>
     <% end %>
