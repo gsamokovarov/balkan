@@ -5,11 +5,11 @@ class Subscriber < ApplicationRecord
 
   generates_token_for :cancelation
 
-  def self.with_ticket_holders(event)
+  def self.including_ticket_holders(event)
     ticket_emails = event.tickets.select :email
-    tickets_without_id = event.tickets.select "NULL as id, tickets.email"
+    tickets_query = event.tickets.select "NULL as id, tickets.email"
 
-    Subscriber.find_by_sql [<<-SQL, { event_id: event.id, tickets_without_id:, ticket_emails: }]
+    Subscriber.find_by_sql [<<-SQL, { event_id: event.id, tickets_query:, ticket_emails: }]
       SELECT subscribers.id, subscribers.email
         FROM subscribers
        WHERE subscribers.event_id = :event_id
@@ -17,7 +17,7 @@ class Subscriber < ApplicationRecord
 
       UNION ALL
 
-      :tickets_without_id
+      :tickets_query
     SQL
   end
 
