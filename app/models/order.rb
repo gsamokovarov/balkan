@@ -13,6 +13,8 @@ class Order < ApplicationRecord
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded? && refunded_amount == amount
 
+  def invoicable? = issue_invoice? && completed_at.after?(INVOICING_START_DATE)
+
   def expire!(checkout_session)
     update! expired_at: Time.current,
             stripe_checkout_session: checkout_session.as_json
@@ -40,9 +42,5 @@ class Order < ApplicationRecord
     tickets.each { TicketMailer.welcome_email(_1).deliver_later }
     OrderMailer.invoice_email(self).deliver_later if issue_invoice?
     NotificationMailer.sale_email(self).deliver_later
-  end
-
-  def invoicable?
-    issue_invoice? && completed_at.after?(INVOICING_START_DATE)
   end
 end
