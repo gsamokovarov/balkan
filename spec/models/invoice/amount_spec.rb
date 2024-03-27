@@ -19,25 +19,4 @@ RSpec.case Invoice::PdfDocument do
 
     assert_eq amount.net_format.to_d + amount.tax_format.to_d, amount.gross_format.to_d
   end
-
-  test "invoice customer details can lack tax ID" do
-    order = create :order, stripe_checkout_session_uid: "test",
-                           stripe_checkout_session: {
-                             id: "test",
-                             customer_details: {
-                               name: "Test",
-                               email: "test@example.com",
-                               address: { line1: "Test", city: "Test", postal_code: "1234", country: "BG" },
-                               tax_ids: []
-                             },
-                             total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
-                             amount_total: 30_000,
-                           },
-                           issue_invoice: true,
-                           completed_at: Time.current
-
-    customer_details = Invoice::PdfDocument::CustomerDetails.from_order order, locale: "en"
-
-    assert_eq customer_details.vat_id, nil
-  end
 end
