@@ -23,7 +23,7 @@ class Admin::OrdersController < Admin::ApplicationController
   def invoice
     @order = Order.completed.includes(tickets: :ticket_type).find params[:id]
 
-    InvoiceMailer.issue_email(@order).deliver_later
+    OrderMailer.invoice_email(@order).deliver_later
   end
 
   private def locale = params.fetch(:locale, I18n.locale)
