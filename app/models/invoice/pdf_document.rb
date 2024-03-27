@@ -8,15 +8,6 @@ module Invoice::PdfDocument
     bold_italic: Rails.root.join("app/assets/fonts/Inter-BoldItalic.ttf")
   }
 
-  CustomerDetails = Data.define :name, :address, :country, :vat_id do
-    def self.from_order(order, locale:)
-      new name: order.stripe_object.customer_details.name,
-          address: order.stripe_object.customer_details.address.line1,
-          country: Country[order.stripe_object.customer_details.address.country].translations[locale],
-          vat_id: order.stripe_object.customer_details.tax_ids.first&.value
-    end
-  end
-
   class Amount
     EUR_TO_BGN_RATE = "1.95583".to_d
     BULGARIAN_VAT = "0.2".to_d
@@ -65,7 +56,7 @@ module Invoice::PdfDocument
       @invoice = invoice
       @order = invoice.order
       @invoice_amount = Amount.new(@order.amount, locale:)
-      @customer_details = CustomerDetails.from_order(@order, locale:)
+      @customer_details = invoice.customer_details(locale:)
 
       update(&)
     end
