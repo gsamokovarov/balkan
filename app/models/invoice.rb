@@ -4,13 +4,13 @@ class Invoice < ApplicationRecord
 
   validates :number, presence: true, strict: true
 
-  def self.issue(order)
+  def self.issue(order, **attributes)
     precondition order.invoicable?, "Order is not invoicable"
     precondition order.invoice.nil?, "Invoice already issued for order"
 
     invoice_sequence = order.invoice_sequence
 
-    create! order:, invoice_sequence:, number: invoice_sequence.next_invoice_number
+    create! order:, **attributes, invoice_sequence:, number: invoice_sequence.next_invoice_number
   end
 
   def document(locale:) = Invoice::PdfDocument.generate(self, locale:)
