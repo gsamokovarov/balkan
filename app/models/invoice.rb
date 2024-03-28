@@ -5,6 +5,7 @@ class Invoice < ApplicationRecord
   belongs_to :order
 
   validates :number, presence: true, strict: true
+  validates :customer_country, inclusion: { in: Country.codes }, allow_nil: true
 
   def self.issue(order, **attributes)
     precondition order.invoicable?, "Order is not invoicable"
