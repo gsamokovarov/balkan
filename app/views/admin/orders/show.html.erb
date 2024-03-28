@@ -3,7 +3,7 @@
     <%= render "alert" do %>
       This order has been fully refunded. The tickets below won't be attending
     <% end %>
-  <% elsif @order.partially_refunded? %>
+  <% elsif @order.refunded? %>
     <%= render "alert" do %>
       This order has been partially refunded by <%= format_money @order.refunded_amount %>.
     <% end %>
