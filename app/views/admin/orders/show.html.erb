@@ -1,11 +1,10 @@
 <%= render "section", title: "Order ##{@order.id}", description: "Total: #{format_money @order.amount}" do %>
-  <% if @order.fully_refunded? %>
+  <% if @order.refunded? %>
     <%= render "alert" do %>
-      This order has been fully refunded. The tickets below won't be attending
-    <% end %>
-  <% elsif @order.refunded? %>
-    <%= render "alert" do %>
-      This order has been partially refunded by <%= format_money @order.refunded_amount %>.
+      This order has been refunded by <b><%= format_money @order.refunded_amount %></b>.
+      <% if @order.fully_refunded? %>
+        <b>The tickets won't be attending</b>!
+      <% end %>
     <% end %>
   <% end %>
 
