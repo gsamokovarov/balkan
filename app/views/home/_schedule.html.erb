@@ -5,7 +5,7 @@
         <h3 class="text-2xl sm:text-3xl font-extrabold"><%= day %></h3>
         <ol class="space-y-8 text-center py-8">
           <% timeslots.each do |slot| %>
-            <li class="border-b border-white/70 p-4">
+            <li class="border-b border-white/70 p-4 last:border-b-0">
               <div class="text-xl text-white min-w-0">
                 <% if slot.talk? %>
                   <%= link_to slot.talk, class: "link-secondary" do %>
