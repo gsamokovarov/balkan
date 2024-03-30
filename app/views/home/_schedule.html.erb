@@ -16,7 +16,9 @@
                   <p class="font-semibold truncate"><%= slot.type %></p>
                 <% end %>
               </div>
-              <p class="mt-1 text-lg font-mono text-white/70"><%= slot.time %></p>
+              <p class="mt-1 text-lg font-mono text-white/70">
+                <time datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+              </p>
             </li>
           <% end %>
         </ol>
