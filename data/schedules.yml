@@ -1,0 +1,29 @@
+- event_id: 1
+  timeslots:
+    "April 26":
+      - { time: "10:00", type: "Introduction", talk_id: null }
+      - { time: "10:10", type: "Talk", talk_id: 4 }
+      - { time: "10:40", type: "Break", talk_id: null }
+      - { time: "11:00", type: "Talk", talk_id: 12 }
+      - { time: "11:30", type: "Break", talk_id: null }
+      - { time: "12:00", type: "Talk", talk_id: 1 }
+      - { time: "12:30", type: "Lunch break", talk_id: null }
+      - { time: "14:30", type: "Talk", talk_id: 7 }
+      - { time: "15:00", type: "Break", talk_id: null }
+      - { time: "15:30", type: "Talk", talk_id: 8 }
+      - { time: "16:00", type: "Coffee break", talk_id: null }
+      - { time: "17:00", type: "Talk", talk_id: 11 }
+    "April 27":
+      - { time: "10:00", type: "Introduction", talk_id: null }
+      - { time: "10:10", type: "Talk", talk_id: 3 }
+      - { time: "10:40", type: "Break", talk_id: null }
+      - { time: "11:00", type: "Talk", talk_id: 9 }
+      - { time: "11:30", type: "Break", talk_id: null }
+      - { time: "12:00", type: "Talk", talk_id: 5 }
+      - { time: "12:30", type: "Lunch break", talk_id: null }
+      - { time: "14:30", type: "Talk", talk_id: 6 }
+      - { time: "15:00", type: "Break", talk_id: null }
+      - { time: "15:30", type: "Talk", talk_id: 10 }
+      - { time: "16:00", type: "Coffee break", talk_id: null }
+      - { time: "17:00", type: "Talk", talk_id: 2 }
+      - { time: "17:30", type: "Closing", talk_id: null }
