@@ -1,10 +1,4 @@
 <%= render "section", title: "Community partners", title_element: "h2" do %>
-  <div class="prose-xl max-w-prose prose-invert">
-    <p>
-      Balkan Ruby is supported by our friends:
-    </p>
-  </div>
-
   <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
     <% @event.community_partners.each do |partner| %>
       <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>

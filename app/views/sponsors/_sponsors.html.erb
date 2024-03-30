@@ -1,10 +1,4 @@
 <%= render "section", title: "Sponsors", title_element: "h2" do %>
-  <div class="prose-xl max-w-prose prose-invert">
-    <p>
-      Balkan Ruby is proudly sponsored by the following awesome companies:
-    </p>
-  </div>
-
   <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
     <% @event.sponsors.basic.each do |sponsor| %>
       <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
