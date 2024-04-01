@@ -2,11 +2,10 @@ module Checkout
   extend self
 
   def create_link(params)
+    ticket_type = TicketType.enabled.find params.fetch(:ticket_type_id)
+    precondition params[:tickets].present?, "At least 1 ticket needs to be created"
+
     ApplicationRecord.transaction do
-      ticket_type = TicketType.enabled.find params.fetch(:ticket_type_id)
-
-      precondition params[:tickets].present?, "At least 1 ticket needs to be created"
-
       order = Order.create!(event: ticket_type.event)
       pending_tickets = build_pending_tickets(order, params[:tickets], ticket_type:)
 
