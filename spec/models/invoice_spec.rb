@@ -72,6 +72,27 @@ RSpec.case Invoice do
     assert_eq invoice.customer_details(locale: :en).vat_id, nil
   end
 
+  test "invoice customer details from Stripe can address lines" do
+    order = create :order, stripe_checkout_session_uid: "test",
+                           stripe_checkout_session: {
+                             id: "test",
+                             customer_details: {
+                               name: "Test",
+                               email: "test@example.com",
+                               address: { line1: nil, city: "Test", postal_code: "1234", country: "BG" },
+                               tax_ids: []
+                             },
+                             total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+                             amount_total: 30_000,
+                           },
+                           issue_invoice: true,
+                           completed_at: Time.current
+
+    invoice = Invoice.issue order
+
+    assert_eq invoice.customer_details(locale: :en).address, "Test 1234"
+  end
+
   test "invoice customer details from manually created invoices" do
     order = create :order, stripe_checkout_session_uid: "test",
                            stripe_checkout_session: {

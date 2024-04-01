@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   def self.completed = where("completed_at IS NOT NULL")
 
-  def stripe_object = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
+  def stripe = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
 
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded? && refunded_amount == amount
