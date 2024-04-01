@@ -14,10 +14,18 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def report
-    orders = Order.where("completed_at IS NOT NULL").order("completed_at DESC")
-    report = Order::Report.export_csv orders
+    orders = Order.completed.includes(:invoice, tickets: :ticket_type).order("completed_at DESC")
 
-    send_data report, filename: "orders-#{Date.current.iso8601}.csv", type: :csv
+    respond_to do |format|
+      format.csv do
+        report = Order::Reporting.export_to_csv orders
+        send_data report, filename: "orders-#{Date.current.iso8601}.csv", type: :csv
+      end
+      format.tar do
+        report = Order::Reporting.export_invoices_to_tar orders
+        send_data report, filename: "invoices-#{Date.current.iso8601}.tar", type: "application/x-tar"
+      end
+    end
   end
 
   def invoice
