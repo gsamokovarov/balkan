@@ -23,7 +23,7 @@ class Admin::OrdersController < Admin::ApplicationController
       end
       format.tar do
         report = Order::Reporting.export_invoices_to_tar orders
-        send_data report, filename: "invoices-#{Date.current.iso8601}.tar", type: "application/x-tar"
+        send_data report, filename: "invoices-#{Date.current.iso8601}.tar", type: :tar
       end
     end
   end
