@@ -129,6 +129,8 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
+    invisible_captcha (2.3.0)
+      rails (>= 5.2)
     io-console (0.7.2)
     irb (1.11.2)
       rdoc
@@ -339,6 +341,7 @@ DEPENDENCIES
   honeybadger (~> 5.3)
   icalendar
   importmap-rails
+  invisible_captcha
   jbuilder
   matrix (~> 0.4.2)
   pdf-inspector

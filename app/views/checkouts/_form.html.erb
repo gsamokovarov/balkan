@@ -116,6 +116,8 @@
 
   <%= form.hidden_field :ticket_type_id, value: @ticket_type.id %>
 
+  <%= invisible_captcha %>
+
   <div class="flex flex-col gap-6">
     <p class="text-xl" data-ticket-target="summary">
       You are about to buy 1 ticket. Buy 2 more and save 10%

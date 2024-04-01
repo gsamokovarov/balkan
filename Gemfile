@@ -21,6 +21,7 @@ gem "stripe"
 gem "tailwindcss-rails", "~> 2.0"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]
+gem "invisible_captcha"
 
 group :development do
   gem "rspec-rails", "~> 6.1.0"

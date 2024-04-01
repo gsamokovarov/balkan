@@ -1,4 +1,6 @@
 class CheckoutsController < ApplicationController
+  invisible_captcha only: [:create]
+
   def index
     @ticket_types = @event.ticket_types.enabled.order :price
   end
