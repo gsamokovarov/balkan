@@ -27,7 +27,7 @@ RSpec.case "Admin", type: :feature do
 
     click_button "Sign in"
 
-    assert_have_content page, "Statistics"
+    assert_have_content page, "Health"
     assert_have_content page, "Orders"
     assert_eq current_path, admin_root_path
   end
