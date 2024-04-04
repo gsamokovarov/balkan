@@ -22,6 +22,8 @@ module Webhooks
         else
           preconditon_failure "Unhandled event type: #{event.type}"
         end
+      rescue ActiveRecord::RecordNotFound => e
+        Honeybadger.event "Stripe order not found", message: e.message, payload:
       rescue JSON::ParserError => e
         render json: { error: { message: e.message } }, status: :bad_request
         return
