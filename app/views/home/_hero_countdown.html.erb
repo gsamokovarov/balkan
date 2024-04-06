@@ -1,12 +1,12 @@
 <div class="shrink flex flex-col justify-center p-8 gap-8 border-2 border-white rounded-lg w-full sm:w-fit sm:border-0">
   <div class="mx-auto">
-    <p class="text-xl text-white text-nowrap text-center">Balkan Ruby starts in:</h2>
+    <p class="text-xl text-white font-bold text-nowrap text-center">Balkan Ruby starts in:</h2>
   </div>
 
   <div class="mx-auto flex justify-center gap-8 w-fit">
     <% @event.beginning_countdown.counters.each do |unit, value| %>
       <div class="flex flex-col gap-y-4 w-36">
-        <dt class="text-lg text-center text-white/70"><%= unit %></dt>
+        <dt class="text-lg text-center font-semibold text-white/70"><%= unit %></dt>
         <dd class="order-first bg-white text-8xl p-2 text-black text-center font-semibold rounded-md">
           <%= format "%02d", value %>
         </dd>
