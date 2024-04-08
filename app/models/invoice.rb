@@ -16,7 +16,7 @@ class Invoice < ApplicationRecord
     create! order:, **attributes, invoice_sequence:, number: invoice_sequence.next_invoice_number
   end
 
-  def document(locale:) = Invoice::PdfDocument.generate(self, locale:)
+  def document(locale:) = Invoice::Document.generate(self, locale:)
   def filename(locale:) = "balkanruby-#{number}-#{locale}.pdf"
 
   def customer_details(locale:)

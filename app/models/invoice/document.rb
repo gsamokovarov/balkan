@@ -1,4 +1,4 @@
-module Invoice::PdfDocument
+module Invoice::Document
   extend self
 
   INTER_FONT_FAMILY_DEFINITION = {
