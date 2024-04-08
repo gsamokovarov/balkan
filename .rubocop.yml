@@ -96,7 +96,11 @@ Style/ClassAndModuleChildren:
 
 # Dogfood the no-parens love.
 Style/MethodCallWithArgsParentheses:
+  Enabled: true
   EnforcedStyle: omit_parentheses
+  AllowParenthesesInMultilineCall: true
+  AllowParenthesesInChaining: true
+  AllowParenthesesInCamelCaseMethod: true
 
 Style/MutableConstant:
   Enabled: false
