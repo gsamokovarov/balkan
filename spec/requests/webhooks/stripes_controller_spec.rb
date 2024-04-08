@@ -71,9 +71,9 @@ RSpec.case Webhooks::StripesController, type: :request do
         request: { id: nil, idempotency_key: nil },
         type: "checkout.session.expired"
       }
-    stripe_checkout_session_uid = stripe_expired_payload.dig(:data, :object, :id)
+    stripe_checkout_session_uid = stripe_expired_payload.dig :data, :object, :id
     pending_tickets = (1..3).map do
-      build_ticket_params(index: _1, price: 150)
+      build_ticket_params index: _1, price: 150
     end
 
     order = create(:order, stripe_checkout_session_uid:, pending_tickets:)
@@ -163,9 +163,9 @@ RSpec.case Webhooks::StripesController, type: :request do
         type: "checkout.session.completed"
       }
 
-    stripe_checkout_session_uid = stripe_completed_payload.dig(:data, :object, :id)
+    stripe_checkout_session_uid = stripe_completed_payload.dig :data, :object, :id
     pending_tickets = (1..3).map do
-      build_ticket_params(index: _1, price: 150)
+      build_ticket_params index: _1, price: 150
     end
 
     order = create(:order, stripe_checkout_session_uid:, pending_tickets:)
@@ -288,9 +288,9 @@ RSpec.case Webhooks::StripesController, type: :request do
         type: "checkout.session.completed"
       }
 
-    stripe_checkout_session_uid = stripe_completed_payload.dig(:data, :object, :id)
+    stripe_checkout_session_uid = stripe_completed_payload.dig :data, :object, :id
     pending_tickets = (1..2).map do
-      build_ticket_params(index: _1, price: 150)
+      build_ticket_params index: _1, price: 150
     end
 
     order = create(:order, stripe_checkout_session_uid:, pending_tickets:)

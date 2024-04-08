@@ -7,7 +7,7 @@ namespace :orders do
     ActiveRecord::Base.transaction do
       checkout_sessions.each do |session|
         tax_ids = session.dig("customer_details", "tax_ids") || []
-        tax_id = tax_ids[0]&.dig("value")
+        tax_id = tax_ids[0]&.dig "value"
 
         order = Order.create! event: ticket_type.event,
                               email: session["customer_details"]["email"],

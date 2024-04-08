@@ -18,8 +18,8 @@ module Invoice::PdfDocument
       @bulgarian = locale.to_sym == :bg
 
       @gross = round(@bulgarian ? eur_to_bgn(gross_in_eur) : gross_in_eur)
-      @net = round(@gross / (1 + BULGARIAN_VAT))
-      @tax = round(@gross - @net)
+      @net = round @gross / (1 + BULGARIAN_VAT)
+      @tax = round @gross - @net
     end
 
     def gross_format = format gross
@@ -41,7 +41,7 @@ module Invoice::PdfDocument
   end
 
   class Template
-    GENADI_AS_CEO_DATE = Date.new(2024, 3, 12)
+    GENADI_AS_CEO_DATE = Date.new 2024, 3, 12
 
     include Prawn::View
 
@@ -88,7 +88,7 @@ module Invoice::PdfDocument
 
       define_grid columns: 6, rows: 4, gutter: 10
 
-      column = grid([0, 0], [0, 2])
+      column = grid [0, 0], [0, 2]
       column.bounding_box do
         text t("receiver"), size: 14, style: :bold
         fit_text customer_details.name, width: column.width

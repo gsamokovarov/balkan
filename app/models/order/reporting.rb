@@ -17,7 +17,7 @@ module Order::Reporting
 
   def export_invoices_to_tar(orders)
     tar_io = StringIO.new
-    Gem::Package::TarWriter.new(tar_io) do |tar|
+    Gem::Package::TarWriter.new tar_io do |tar|
       orders.each do |order|
         next unless order.invoicable?
 

@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def format_money(amount, currency: "€", precision: 2)
-    number_to_currency(amount, unit: currency, precision:)
+    number_to_currency amount, unit: currency, precision:
   end
 
   def title(name)

@@ -126,7 +126,7 @@ RSpec.case Invoice do
       ticket_count: 3
     )
 
-    pdf = invoice.document(locale: "en")
+    pdf = invoice.document locale: "en"
 
     assert_pdf_content pdf,
                        "Supplier NEUVENTS LTD",
@@ -145,7 +145,7 @@ RSpec.case Invoice do
       ticket_count: 3
     )
 
-    pdf = invoice.document(locale: "bg")
+    pdf = invoice.document locale: "bg"
 
     assert_pdf_content pdf,
                        "Доставчик НОЙВЕНТС ООД",
@@ -165,8 +165,8 @@ RSpec.case Invoice do
       created_at: DateTime.new(2024, 3, 11)
     )
 
-    en = invoice.document(locale: "en")
-    bg = invoice.document(locale: "bg")
+    en = invoice.document locale: "en"
+    bg = invoice.document locale: "bg"
 
     assert_pdf_content en, "Svetlozar Mihaylov"
     assert_pdf_content bg, "Светлозар Михайлов"
@@ -183,8 +183,8 @@ RSpec.case Invoice do
       created_at: DateTime.new(2024, 3, 13)
     )
 
-    en = invoice.document(locale: "en")
-    bg = invoice.document(locale: "bg")
+    en = invoice.document locale: "en"
+    bg = invoice.document locale: "bg"
 
     assert_pdf_content en, "Genadi Samokovarov"
     assert_pdf_content bg, "Генади Самоковаров"
@@ -221,7 +221,7 @@ RSpec.case Invoice do
     ticket_type = create :ticket_type, event:, enabled: true
     create_list :ticket, ticket_count, :genadi, order:, ticket_type:, price: amount / ticket_count
 
-    invoice = Invoice.issue(order)
+    invoice = Invoice.issue order
     invoice.created_at = created_at if created_at
     invoice
   end

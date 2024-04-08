@@ -6,7 +6,7 @@ module Checkout
     precondition params[:tickets].present?, "At least 1 ticket needs to be created"
 
     ApplicationRecord.transaction do
-      order = Order.create!(event: ticket_type.event)
+      order = Order.create! event: ticket_type.event
       pending_tickets = build_pending_tickets(order, params[:tickets], ticket_type:)
 
       issue_invoice = params[:invoice] == "1"
