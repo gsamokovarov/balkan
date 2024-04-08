@@ -71,11 +71,9 @@ module Invoice::PdfDocument
       move_down box.height
     end
 
-    def genadi_ceo? = invoice.created_at.after? GENADI_AS_CEO_DATE
-
     private
 
-    attr_reader :locale
+    def genadi_ceo? = invoice.created_at.after? GENADI_AS_CEO_DATE
 
     def t(key, **options) = I18n.t "invoicing.#{key}", **options.merge(locale: @locale)
   end
