@@ -136,23 +136,6 @@
           Rails the absolute best platforms in the world to run SQLite
           projects. For my day job, I am the engineering manager at Test IO.
         </p>
-- id: 7
-  name: "Using Ruby on Rails to become financially independent"
-  about: null
-  speakers:
-    - name: "Ruslan Leteyski"
-      avatar: "speakers/ruslan.jpg"
-      github_url: null
-      social_url: "https://x.com/leteyski"
-      about: >
-        <p>
-          Hey there, fellow entrepreneur. I'm Ruslan Leteyski, the founder of
-          Checkout X, and I've been in the trenches of building a bootstrapped
-          SaaS business. I turned a simple Shopify app into a powerhouse that
-          serviced 6,000 active merchants and generated €600k in monthly
-          recurring revenue, all while processing millions of transactions
-          every year.
-        </p>
 - id: 8
   name: "The history of a Rails monolith"
   about: >
@@ -301,4 +284,54 @@
         <p>
           I made many mistakes and learned a lot along the way. I'd like to
           share those mistakes and tips and tricks on how to avoid them.
+        </p>
+- id: 13
+  name: "Running a Fintech with Ruby"
+  about:
+    <p>
+      Devengo is a European fintech providing instant transfers and A2A (Account
+      to Account) banking infrastructure across the SEPA space.
+    </p>
+    <p>
+      For the last four years, we have been using Ruby/Rails as the core of our
+      tech stack, and it has taken us through a global pandemic, a few funding
+      rounds and even a pivot. As CTO, I've been lucky to have a first-row seat
+      in this journey and would love to share what we have learned about the
+      industry and using Ruby on it.
+    </p>
+    <p>
+      Ruby and almost indissolubly Rails have had for a very long time the
+      reputation of being a slow, too-unpredictable language and, as a
+      consequence, frown upon industries that prime performance and security.
+      Although some of the heaviest hitters in the world of transacting money
+      -Stripe, Shopify- depend on Ruby, we still get sceptical looks from time
+      to time when we describe our stack.
+    </p>
+    <p>
+      However, in our daily practice, we have not only not found the language a
+      source of problems but have come to appreciate it as a source of joy,
+      especially the devs that have come in contact with Ruby for the first time
+      when incorporated in Devengo. Nonetheless, there are some tough challenges to
+      overcome when building a scalable service in one of the most tightly
+      regulated and demanding spaces – Finance.
+    </p>
+  speakers:
+    - name: "Aitor Garcia Rey"
+      avatar: "speakers/aitor.jpg"
+      github_url: "https://github.com/aitor"
+      social_url: "https://x.com/_aitor"
+      about: >
+        <p>
+          Aitor García Rey is a founder, staff engineer and fractional CTO. He
+          has been shipping software used by small companies, VC-backed
+          startups and big publicly traded multinationals uninterruptedly for
+          more than 20 years, leading and mentoring highly technical teams.
+        </p>
+        <p>
+          During the last few years, he has been working extensively with
+          instant payments in the SEPA area, enabling the process of dozens of
+          thousands of transactions and millions of euros per month. After a
+          decade of living in Iceland, Aitor moved back with his family to his
+          hometown in the Basque Country, where his passion for gastronomy can
+          be more easily enjoyed.
         </p>
