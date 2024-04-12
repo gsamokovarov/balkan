@@ -1,7 +1,7 @@
 <%= render "section", title: "Something is missing", title_element: "h2", title_class: "text-banitsa-500" do %>
-  <div class="prose prose-xl prose-invert text-white">
+  <%= render "prose" do %>
     <p>
       Sorry, we can't find what you are looking for...
     </p>
-  </div>
+  <% end %>
 <% end %>
