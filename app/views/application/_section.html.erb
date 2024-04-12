@@ -1,14 +1,9 @@
-<%
-  title = local_assigns[:title]
-  title_element = local_assigns[:title_element] || "h2"
-  title_class = local_assigns[:title_class]
- %>
+<% title = local_assigns[:title] %>
+<% title_element = local_assigns[:title_element] %>
 
 <section class="py-16 space-y-10">
   <% if title %>
-    <%= tag.public_send title_element, id: title.downcase, class: ["text-3xl sm:text-4xl font-extrabold", title_class] do %>
-      <%= title %>
-    <% end %>
+    <%= render "section_title", title: title, element: title_element %>
   <% end %>
 
   <%= yield %>
