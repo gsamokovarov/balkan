@@ -28,7 +28,7 @@ class TicketMailer < ApplicationMailer
       e.dtstart = Icalendar::Values::Date.new ticket.event.start_date
       e.dtend = Icalendar::Values::Date.new ticket.event.end_date
       e.url = "https://balkanruby.com"
-      e.location = "bul. Cherni Vrah 47, Rooftop, 1407 Sofia"
+      e.location = 'Promishlena zona Hladilnika, Blvd. "Cherni vrah" 47, 1407 Sofia'
       e.organizer = "mailto:genadi@balkanruby.com"
       e.summary = "Balkan Ruby"
       e.description = "Balkan Ruby is back to business! April 26–27, 2024 in Sofia, Bulgaria"
