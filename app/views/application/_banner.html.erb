@@ -1,0 +1,10 @@
+<% if Banner.active? %>
+  <div class="flex items-center gap-x-6 bg-banitsa-500 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <p class="text-sm leading-6 text-white truncate">
+      <%= link_to "#venue", class: "font-semibold" do %>
+        We have moved to <b>Puzl CowOrKing Greenhouse</b> dedicated offices.
+      <% end %>
+    </p>
+    <div class="flex flex-1 justify-end"></div>
+  </div>
+<% end %>
