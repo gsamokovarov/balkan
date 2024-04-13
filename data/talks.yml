@@ -147,7 +147,7 @@
   name: "Using Ruby on Rails to become financially independent"
   about: >
     Sadly, Ruslan will not be able to attend.
-    <a class="link-primary" href="<%= Link.talk_path(13) %>">Aitor Garcia Rey</a>  will take over his slot.
+    <a class="link-primary" href="/talks/13">Aitor Garcia Rey</a>  will take over his slot.
   speakers:
     - name: "Ruslan Leteyski"
       avatar: "speakers/ruslan.jpg"
