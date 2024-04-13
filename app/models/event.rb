@@ -5,7 +5,7 @@ class Event < ApplicationRecord
   has_many :subscribers
   has_one :invoice_sequence
 
-  def speakers = Talk.all.flat_map(&:speakers)
+  def speakers = Talk.all.select(&:available).flat_map(&:speakers)
   def sponsors = Sponsor.all
   def community_partners = CommunityPartner.all
   def schedule = Schedule.find_by!(event_name: name)
