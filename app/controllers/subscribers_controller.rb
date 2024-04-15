@@ -1,4 +1,6 @@
 class SubscribersController < ApplicationController
+  invisible_captcha only: [:create, :destroy]
+
   def show
     @subscriber = Subscriber.find_by_token_for! :cancelation, params[:id]
   end

@@ -34,6 +34,8 @@
 
     <%= form.hidden_field :event_id, value: event.id %>
 
+    <%= invisible_captcha %>
+
     <%= form.button type: "submit", class: "btn-primary w-fit" do %>
       <svg
         xmlns="http://www.w3.org/2000/svg"
