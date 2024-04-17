@@ -23,6 +23,12 @@
     world finds out. Error tracking, performance monitoring, custom metrics,
     host monitoring, logging, anomaly detection, uptime monitoring, and public
     status pages, starting at €18 monthly. Made in Europe.
+- name: "Anonymous"
+  type: "party"
+  logo: "sponsors/anon.png"
+  url: null
+  description: >
+    An anonymous subject is sponsoring our party. Welcome to the Balkans!
 - name: "Trailblazer"
   type: "travel"
   url: "https://trailblazer.to"

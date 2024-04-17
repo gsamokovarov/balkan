@@ -10,11 +10,19 @@
             class: "w-full md:w-1/2 h-48 p-4 bg-white rounded-md object-contain",
             lazy: true %>
         <% end %>
-
         <div class="prose-xl max-w-prose prose-invert text-white">
-          <p>
-            <%= sponsor.description.html_safe %>
-          </p>
+          <p><%= sponsor.description.html_safe %></p>
+        </div>
+      </div>
+    <% end %>
+
+    <% @event.sponsors.party.each do |sponsor| %>
+      <div id="<%= sponsor.name %>" class="space-y-8">
+        <%= image_tag sponsor.logo,
+          class: "w-full md:w-1/2 h-48 p-4 bg-white rounded-md object-contain",
+          lazy: true %>
+        <div class="prose-xl max-w-prose prose-invert text-white">
+          <p><%= sponsor.description.html_safe %></p>
         </div>
       </div>
     <% end %>
