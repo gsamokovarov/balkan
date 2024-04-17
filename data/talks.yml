@@ -367,3 +367,18 @@
           hometown in the Basque Country, where his passion for gastronomy can
           be more easily enjoyed.
         </p>
+- id: 14
+  available: true
+  name: "Master of ceremonies"
+  about:
+    Give it up for our lovely master of ceremonies! 🫶
+  speakers:
+    - name: "Tsvetelina Borisova"
+      avatar: "speakers/tsvetelina.jpeg"
+      github_url: "https://github.com/tborisova"
+      social_url: null
+      about: >
+        <p>
+          Tsvetelina is a Team Lead at <a href="https://dext.com" class="link-primary">Dext</a>,
+          she loves cute doggos 🐶, recreation cooking and lately – experimenting with mobile development! 📱
+        </p>
