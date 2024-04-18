@@ -16,6 +16,7 @@
       </div>
     <% end %>
 
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Party</h2>
     <% @event.sponsors.party.each do |sponsor| %>
       <div id="<%= sponsor.name %>" class="space-y-8">
         <%= image_tag sponsor.logo,
