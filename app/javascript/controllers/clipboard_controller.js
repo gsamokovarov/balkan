@@ -14,8 +14,11 @@ export default class extends Controller {
   }
 
   indicate(copiedValue) {
+    const copiedContent = document.createElement("b")
+    copiedContent.textContent = copiedValue
+
     const previousHTML = this.indicatorTarget.innerHTML
-    this.indicatorTarget.innerHTML = `Copied <b>${copiedValue}</b> to clipboard!`
+    this.indicatorTarget.innerHTML = `Copied ${copiedContent.outerHTML}`
     setTimeout(() => {
       this.indicatorTarget.innerHTML = previousHTML
     }, 5000)
