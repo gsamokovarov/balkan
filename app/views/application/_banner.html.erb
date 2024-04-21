@@ -1,10 +1,11 @@
 <% if Banner.active? %>
-  <div class="flex items-center gap-x-6 bg-banitsa-500 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
-    <p class="text-sm leading-6 text-white truncate">
-      <%= link_to root_path(anchor: "venue"), class: "font-semibold" do %>
-        We have moved to <b>Puzl CowOrKing Greenhouse</b> dedicated offices.
-      <% end %>
+  <div data-controller="clipboard" data-banner-target="banner" class="flex items-center gap-x-6 bg-banitsa-500 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <p class="text-sm leading-6 text-white truncate" data-clipboard-target="indicator">
+      <span data-action="click->clipboard#copy" class="cursor-pointer" title="Click to copy discount code!">
+        Use code <b data-clipboard-target="source">KASNOELIBE</b> for 10% off at checkout!
+      </span>
     </p>
-    <div class="flex flex-1 justify-end"></div>
+    <div class="flex flex-1 justify-end">
+    </div>
   </div>
 <% end %>
