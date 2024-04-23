@@ -1,4 +1,4 @@
-<% if Banner.active? %>
+<% if Current.show_banner? %>
   <div data-controller="clipboard" data-banner-target="banner" class="flex items-center gap-x-6 bg-banitsa-500 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
     <p class="text-sm leading-6 text-white truncate" data-clipboard-target="indicator">
       <span data-action="click->clipboard#copy" class="cursor-pointer" title="Click to copy discount code!">
