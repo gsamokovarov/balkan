@@ -73,5 +73,11 @@
         "
       />
     </label>
+
+    <% if @ticket.supporter? %>
+      <%= render "alert" do %>
+        Supporter
+      <% end %>
+    <% end %>
   </div>
 <% end %>

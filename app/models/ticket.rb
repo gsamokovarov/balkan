@@ -18,4 +18,7 @@ class Ticket < ApplicationRecord
 
   def event_access_url = Link.ticket_url generate_token_for(:event_access)
   def qrcode = RQRCode::QRCode.new event_access_url
+
+  def net_price = (order.amount - order.refunded_amount) / order.tickets.count
+  def supporter? = net_price > 120
 end
