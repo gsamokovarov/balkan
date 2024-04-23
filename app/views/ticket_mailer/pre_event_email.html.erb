@@ -1,0 +1,61 @@
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    You are receiving this email because you bought a ticket for <b>Balkan Ruby</b>.
+    I'm Genadi, the organizer, and I'm happy to welcome you in Sofia in few short days!
+  </p>
+
+  <p class="pb-2">
+    Balkan Ruby 2024 will take place on 26th and 27th of April in
+    <%= link_to "Puzl CowOrKing", "https://puzl.com", class: "link-primary" %>.
+    The address is <%= link_to "Cherni Vrah Blvd 47, Sofia, Bulgaria", "https://maps.app.goo.gl/akDDN5uWZwt3FFwUA", class: "link-primary" %>.
+  </p>
+
+  <p class="pb-2">
+    We are located in the Greenhouse offices on the 4th floor of the Siven
+    building. To reach us, you have to take the elevator after the Athletic
+    gym, not the one close to the LIDL entrance. We will have signs to guide
+    you.
+  </p>
+
+  <%= render "ticket_info", ticket: @ticket, ticket_png: @ticket_png %>
+
+  <p class="pb-2">
+    During registration you'll receive a t-shirt only – we won't be giving away
+    goodie bags this year. You may want to bring a backpack, or a bag of your
+    own.
+  </p>
+
+  <p class="pb-2">
+    We have a <%= link_to "slack", "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw", class: "link-primary" %>
+    that we will use for real-time communication during the conference. The
+    organizers and speakers will be there, and you can chat with other
+    attendees. You can join it by clicking <%= link_to "this link", "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw", class: "link-primary" %>.
+  </p>
+
+  <p class="pb-2">
+    Thank you for for supporting Balkan Ruby and buying a ticket! Huge shootout
+    to our sponsors for making this event possible:
+    <%= link_to "Honeybadger", "https://honeybadger.io", class: "link-primary" %>,
+    <%= link_to "AppSignal", "https://appsignal.com", class: "link-primary" %>,
+    and the anonymous Balkan subject sponsoring the party!
+  </p>
+
+  <p class="pb-2">
+    Talking about the party, it will be on the 26th of April,
+    from 19:00 Sofia time at <%= link_to "Vitamin B", "https://maps.app.goo.gl/Dj5WeHC1p8iX1G5W8", class: "link-primary" %>.
+  </p>
+
+  <p class="pb-2">
+    If you have any questions reply to this email, or join our #2024 channel on
+    <%= link_to "slack", "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw", class: "link-primary" %>.
+  </p>
+
+  <p class="pb-2">
+    Best regards,<br>
+    Genadi Samokovarov
+  </p>
+</div>

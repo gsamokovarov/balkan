@@ -17,4 +17,11 @@ class TicketPreview < ActionMailer::Preview
 
     TicketMailer.ticket_email(ticket).deliver_now
   end
+
+  def balkan_2024_email
+    ticket = build :ticket, name: "Genadi Samokovarov"
+    ticket.event = ticket.order.event
+
+    TicketMailer.balkan_2024_email(ticket).deliver_now
+  end
 end

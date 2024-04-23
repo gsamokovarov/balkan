@@ -20,6 +20,16 @@ class TicketMailer < ApplicationMailer
     mail to: @ticket.email, subject: "Your ticket for Balkan Ruby"
   end
 
+  def pre_event_email(ticket)
+    @ticket = ticket
+    @ticket_png = ticket.qrcode.as_png size: 240
+
+    attachments.inline["inline_ticket.png"] = @ticket_png.to_s
+    attachments["balkan_ruby_ticket.png"] = @ticket_png.to_s
+
+    mail to: @ticket.email, subject: "Balkan Ruby is in a few days!"
+  end
+
   private
 
   def calendar_event(ticket)
