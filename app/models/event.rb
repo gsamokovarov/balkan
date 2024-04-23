@@ -12,4 +12,6 @@ class Event < ApplicationRecord
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
   def beginning_countdown = FinalCountdown.until start_date
+
+  def upcoming? = Date.current.before? start_date
 end
