@@ -1,6 +1,6 @@
 <%# locals: (ticket_types:) %>
 
-<% if @event.upcoming? %>
+<% if Current.event.upcoming? %>
   <div class="flex flex-shrink gap-4 sm:flex-shrink-0 sm:flex-wrap sm:gap-8">
     <% ticket_types.each do |ticket_type| %>
       <%= render "tickets/ticket_card_link", ticket_type: %>

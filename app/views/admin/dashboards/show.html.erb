@@ -6,8 +6,8 @@
       "Attendees" => @orders.reject(&:fully_refunded?).sum { _1.tickets.size },
       "Tickets gross" => format_money(@orders.sum(&:amount)),
       "Refunded amount" => format_money(@orders.sum(&:refunded_amount)),
-      "Newsletter subscribers" => @event.subscribers.count,
-      "Unfinished orders" => @event.orders.where("completed_at IS NULL").count,
+      "Newsletter subscribers" => Current.event.subscribers.count,
+      "Unfinished orders" => Current.event.orders.where("completed_at IS NULL").count,
     } %>
   <% end %>
 

@@ -3,7 +3,7 @@
 <%= render "section", title: "Sponsors", title_element: "h1" do %>
   <div class="space-y-10">
     <h2 class="text-2xl sm:text-3xl font-extrabold">Basic</h2>
-    <% @event.sponsors.basic.each do |sponsor| %>
+    <% Current.event.sponsors.basic.each do |sponsor| %>
       <div id="<%= sponsor.name %>" class="space-y-8">
         <%= link_to sponsor.url do %>
           <%= image_tag sponsor.logo,
@@ -17,7 +17,7 @@
     <% end %>
 
     <h2 class="text-2xl sm:text-3xl font-extrabold">Party</h2>
-    <% @event.sponsors.party.each do |sponsor| %>
+    <% Current.event.sponsors.party.each do |sponsor| %>
       <div id="<%= sponsor.name %>" class="space-y-8">
         <%= image_tag sponsor.logo,
           class: "w-full md:w-1/2 h-48 p-4 bg-white rounded-md object-contain",
@@ -29,7 +29,7 @@
     <% end %>
 
     <h2 class="text-2xl sm:text-3xl font-extrabold">Travel</h2>
-    <% @event.sponsors.travel.each do |sponsor| %>
+    <% Current.event.sponsors.travel.each do |sponsor| %>
       <div id="<%= sponsor.name %>" class="space-y-8">
         <%= link_to sponsor.url do %>
           <%= image_tag sponsor.logo,

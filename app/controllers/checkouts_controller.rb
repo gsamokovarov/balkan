@@ -2,11 +2,11 @@ class CheckoutsController < ApplicationController
   invisible_captcha only: [:create]
 
   def index
-    @ticket_types = @event.ticket_types.enabled.order :price
+    @ticket_types = Current.event.ticket_types.enabled.order :price
   end
 
   def show
-    @ticket_type = @event.ticket_types.enabled.find params[:id]
+    @ticket_type = Current.event.ticket_types.enabled.find params[:id]
   end
 
   def create

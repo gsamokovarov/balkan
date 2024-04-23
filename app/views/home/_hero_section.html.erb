@@ -18,7 +18,7 @@
         </p>
       </div>
 
-      <% if @event.upcoming? && @event.beginning_countdown.ongoing? %>
+      <% if Current.event.upcoming? && Current.event.beginning_countdown.ongoing? %>
         <%= render "hero_countdown" %>
       <% end %>
     </div>

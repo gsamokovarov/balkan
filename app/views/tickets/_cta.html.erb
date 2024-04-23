@@ -1,5 +1,5 @@
 <%= render "section", title: "Tickets", title_element: "h2" do %>
-  <% if @event.upcoming? %>
+  <% if Current.event.upcoming? %>
     <%= link_to checkouts_path, class: "btn-primary" do %>
       <svg
         xmlns="http://www.w3.org/2000/svg"
