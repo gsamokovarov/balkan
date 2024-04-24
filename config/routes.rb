@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :talks, only: [:show]
   resources :checkouts, only: [:index, :show, :create]
   resources :subscribers, only: [:new, :show, :create, :destroy]
+  resources :blogs, only: [:show]
   resource :thanks, only: [:show]
 
   namespace :webhooks do
