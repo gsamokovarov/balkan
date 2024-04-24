@@ -23,6 +23,16 @@
     world finds out. Error tracking, performance monitoring, custom metrics,
     host monitoring, logging, anomaly detection, uptime monitoring, and public
     status pages, starting at €18 monthly. Made in Europe.
+- name: "PlanA"
+  type: "basic"
+  logo: "sponsors/plana.svg"
+  url: "https://techplana.com"
+  description: >
+    We, at Plan A, are a team of experienced, yet ambitious professionals with
+    16+ years of experience in enterprise software development and project
+    management, specialized in delivering complex IT solutions and products.
+    Located in Sofia, Bulgaria, an EU member country, we are the ultimate tech
+    partner - reachable, competent, and flexible.
 - name: "Anonymous"
   type: "party"
   logo: "sponsors/anon.png"
