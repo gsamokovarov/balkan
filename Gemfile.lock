@@ -234,6 +234,7 @@ GEM
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
+    redcarpet (3.6.0)
     regexp_parser (2.9.0)
     reline (0.4.2)
       io-console (~> 0.5)
@@ -349,6 +350,7 @@ DEPENDENCIES
   prawn (~> 2.4)
   puma (>= 5.0)
   rails (~> 7.1.1)
+  redcarpet
   rqrcode (~> 2.0)
   rspec-rails (~> 6.1.0)
   rspec-xunit

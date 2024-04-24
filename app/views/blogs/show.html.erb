@@ -1,0 +1,29 @@
+<%= render "section", title: @blog_post.title, title_element: "h1" do %>
+	<article class="flex max-w-xl flex-col items-start justify-between text-white">
+		<div class="flex items-center gap-x-4 text-lg">
+			<time datetime="<%= @blog_post.date.iso8601 %>" class="text-white/70">
+				<%= @blog_post.date.strftime "%d %b %Y" %>
+			</time>
+		</div>
+		<%= render "prose", variant: :xl, class: "mt-3" do %>
+			<%= @blog_post.html_content.html_safe %>
+		<% end %>
+		<div class="relative mt-8 flex items-center gap-x-4">
+			<%= image_tag @blog_post.author.avatar, alt: @blog_post.author.name,
+				class: "h-12 w-12 rounded-full border-2 border-white bg-black" %>
+			<div class="text-lg leading-6">
+				<p class="font-semibold text-white">
+					<span class="absolute inset-0"></span>
+					<%= @blog_post.author.name %>
+				</p>
+				<p class="text-white/70"><%= @blog_post.author.about %></p>
+			</div>
+		</div>
+	</article>
+<% end %>
+
+<%= render "section_separator" %>
+
+<%= render "sponsors/sponsors" %>
+<%= render "section_separator" %>
+<%= render "tickets/cta" %>

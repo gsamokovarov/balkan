@@ -1,0 +1,30 @@
+- id: 1
+  date: 2024-04-24
+  title: Welcome to Balkan Ruby 2024
+  content: >
+    Hello kind folks, Balkan Ruby ruby is in few short days and I want to
+    welcome you to Sofia! Balkan Ruby 2024 will take place on 26th and 27th of
+    April in <a href= class="link-primary"> [Puzl CowOrKing](https://puzl.com).
+    The address is [Cherni Vrah Blvd 47, Sofia, Bulgaria]("https://maps.app.goo.gl/akDDN5uWZwt3FFwUA").
+
+
+    We are located in the Greenhouse offices on the 4th floor of the Siven
+    building. To reach us, you have to take the elevator after the Athletic
+    gym, not the one close to the LIDL entrance. We will have signs to guide
+    you.
+
+
+    For the registration, please show your ticket QR code. You'll receive a
+    t-shirt but we won't be giving goodie bags this year. You may want to bring
+    a backpack, or a bag of your own.
+
+
+    The conference party will take place on the 26th of April, from 19:00 Sofia
+    time in [Vitamin B](https://maps.app.goo.gl/Dj5WeHC1p8iX1G5W8).
+
+
+    See you, all, in Puzl!
+  author:
+    name: Genadi Samokovarov
+    about: Organizer
+    avatar: organizers/genadi.png
