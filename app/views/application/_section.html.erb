@@ -6,7 +6,7 @@
 
 <section class="py-16 space-y-10">
   <% if title %>
-    <%= tag.public_send title_element, id: title.downcase, class: ["text-3xl sm:text-4xl font-extrabold", title_class] do %>
+    <%= tag.public_send title_element, id: CGI.escape(title.downcase), class: ["text-3xl sm:text-4xl font-extrabold", title_class] do %>
       <%= title %>
     <% end %>
   <% end %>
