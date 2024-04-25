@@ -1,0 +1,110 @@
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d1.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+
+<section class="center bg-black">
+  <div class="text-4xl sm:text-5xl font-black pb-8">
+    Balkan Ruby is <span class="text-banitsa-500">back to business</span>
+  </div>
+  <div class="text-2xl sm:text-3xl font-semibold mt-3 text-white/70">
+    April 26-27 – Sofia, Bulgaria
+  </div>
+</section>
+
+<section class="center">
+  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, attendees! 🙇</div>
+  <div class="text-2xl sm:text-3xl font-semibold mt-3 text-white/70">
+    <span class="text-banitsa-500"><%= Current.event.tickets.count %></span> attendees
+  </div>
+</section>
+
+<section class="center">
+  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, community partners! 🙇</div>
+  <div class="grid grid-cols-2 gap-8 lg:grid-cols-5">
+    <% CommunityPartner.all.each do |partner| %>
+      <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
+        <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
+      <% end %>
+    <% end %>
+  </div>
+</section>
+
+<section class="center">
+  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, sponsors! 🙇</div>
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 pb-8">
+    <% Current.event.sponsors.basic.each do |sponsor| %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
+        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+      <% end %>
+    <% end %>
+    <% Current.event.sponsors.party.each do |sponsor| %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
+        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="grid grid-cols-2 gap-8 lg:grid-cols-4">
+    <% Current.event.sponsors.travel.each do |sponsor| %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-16 p-4 bg-white rounded-md" do %>
+        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+      <% end %>
+    <% end %>
+  </div>
+</section>
+
+<section class="center">
+  <div class="flex justify-center items-center pb-8">
+    <%= image_tag "logo-white.svg", class: "w-56", alt: "Balkan Ruby logo" %>
+  </div>
+  <div class="text-2xl sm:text-3xl font-semibold mt-3 text-white/70">
+    https://balkanruby.com
+  </div>
+</section>
+
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d1-1.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d1-2.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d1-3.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d1-4.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <div class="flex justify-center items-center shrink gap-8">
+    <%= image_tag "creative/speakers-d1-7.jpg", class: "w-2/5 border-2 border-white rounded-md" %>
+    <%= image_tag "creative/speakers-d1-8.jpg", class: "w-2/5 border-2 border-white rounded-md" %>
+  </div>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d1-5.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d1-6.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d2-6.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d2-0.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d2-1.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d2-2.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d2-3.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d2-5.jpg", class: "border-2 border-white rounded-md" %>
+</section>
+<section class="center bg-black">
+  <%= image_tag "creative/speakers-d2-4.jpg", class: "border-2 border-white rounded-md" %>
+</section>
