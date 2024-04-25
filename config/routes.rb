@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:new, :show, :create, :destroy]
   resources :blogs, only: [:show]
   resource :thanks, only: [:show]
+  resource :slides, only: [:show]
+
+  get "/intro", to: "slides#show"
 
   namespace :webhooks do
     resource :stripe, only: [:create]
