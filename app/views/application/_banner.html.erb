@@ -1,9 +1,9 @@
 <% if Current.show_banner? %>
-  <div data-controller="clipboard" data-banner-target="banner" class="flex items-center gap-x-6 bg-banitsa-500 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
-    <p class="text-sm leading-6 text-white truncate" data-clipboard-target="indicator">
-      <span data-action="click->clipboard#copy" class="cursor-pointer" title="Click to copy discount code!">
-        Use code <b data-clipboard-target="source">KASNOELIBE</b> for 10% off at checkout!
-      </span>
+  <div class="flex items-center gap-x-6 bg-banitsa-500 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <p class="text-sm leading-6 text-white truncate">
+      <%= link_to blog_path(2) do %>
+        <b>Party in Vitamin B starts at April 26th form 19:30.</b>
+      <% end %>
     </p>
     <div class="flex flex-1 justify-end">
     </div>
