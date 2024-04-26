@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.0" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 2603 2603"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:currentColor;stroke-width:55.5551;stroke-linecap:round}
+    .fil2 {fill:none}
+    .fil0 {fill:currentColor}
+    .fil1 {fill:#e03647}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata/>
+  <path class="fil0" d="M807 74c-285,237 -569,619 -751,943 81,310 159,686 278,988 273,183 659,435 968,539 379,-118 775,-423 1051,-657 85,-327 160,-617 194,-954 -226,-340 -423,-561 -733,-843 -367,-39 -624,-37 -1007,-16z"/>
+  <path class="fil1" d="M832 136c-270,225 -540,588 -713,895 77,294 151,651 264,938 259,174 625,414 919,512 360,-112 735,-401 998,-624 80,-310 151,-585 184,-905 -215,-323 -402,-533 -696,-801 -349,-37 -592,-34 -956,-15z"/>
+  <path class="fil2 str0" d="M1266 1185c136,0 164,105 132,187 -46,116 -558,190 -464,-248 76,-357 322,-415 536,-289 329,195 310,467 149,697 -136,194 -292,280 -444,282 -165,3 -361,-92 -483,-251 -151,-196 -138,-426 -48,-634 123,-284 308,-457 523,-502 399,-85 702,221 850,553 122,275 81,483 -148,752 -310,365 -536,234 -564,748"/>
+ </g>
+</svg>
