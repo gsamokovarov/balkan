@@ -1,7 +1,7 @@
 <% title "Tickets" %>
 
 <%= render "section", title: "Tickets", title_element: "h2" do %>
-  <%= render "tickets/tickets_for_sale", ticket_types: @ticket_types%>
+  <%= render "tickets/tickets_for_sale" %>
 <% end %>
 
 <%= render "section_separator" %>
@@ -38,6 +38,3 @@
     <% end %>
   <% end %>
 <% end %>
-
-<%= render "section_separator" %>
-<%= render "sponsors/sponsors" %>

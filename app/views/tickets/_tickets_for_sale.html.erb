@@ -1,15 +1,13 @@
-<%# locals: (ticket_types:) %>
-
 <% if Current.event.upcoming? %>
   <div class="flex flex-shrink gap-4 sm:flex-shrink-0 sm:flex-wrap sm:gap-8">
-    <% ticket_types.each do |ticket_type| %>
+    <% Current.event.ticket_types.each do |ticket_type| %>
       <%= render "tickets/ticket_card_link", ticket_type: %>
     <% end %>
   </div>
 
   <div class="prose-xl max-w-prose prose-invert text-white">
     <p>
-      Supporter tickets get our eternal gratitude and a hand-made item, made by
+      Supporter tickets get our eternal gratitude and a hand-made gift, made by
       the organizers!
     </p>
   </div>

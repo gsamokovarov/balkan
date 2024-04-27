@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
-    Current.event = Event.find_by! name: "Balkan Ruby 2024"
+    Current.event = Event.includes(:ticket_types).find_by! name: "Balkan Ruby 2025"
   end
 end
