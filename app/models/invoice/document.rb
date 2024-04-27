@@ -8,6 +8,11 @@ module Invoice::Document
     bold_italic: Rails.root.join("app/assets/fonts/Inter-BoldItalic.ttf")
   }
 
+  NOTO_SANS_JP_FAMILY_DEFINITION = {
+    normal: Rails.root.join("app/assets/fonts/NotoSansJP-Regular.ttf"),
+    bold: Rails.root.join("app/assets/fonts/NotoSansJP-Bold.ttf"),
+  }
+
   class Amount
     EUR_TO_BGN_RATE = "1.95583".to_d
     BULGARIAN_VAT = "0.2".to_d
@@ -80,9 +85,11 @@ module Invoice::Document
 
   def generate(invoice, locale:)
     Template.render invoice, locale: do
-      font_families.update "Inter" => INTER_FONT_FAMILY_DEFINITION
+      font_families.update "Inter" => INTER_FONT_FAMILY_DEFINITION,
+                           "NotoSansJP" => NOTO_SANS_JP_FAMILY_DEFINITION
 
       font "Inter"
+      fallback_fonts ["NotoSansJP"]
 
       define_grid columns: 6, rows: 4, gutter: 10
 
