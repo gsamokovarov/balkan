@@ -1,0 +1,27 @@
+<%= render "section", title: "Sponsorship", title_element: "h2" do %>
+  <div class="prose-lg max-w-prose prose-invert text-white/70">
+    <p>
+      By sponsoring Balkan Ruby, you are helping us make a great event while
+      promoting your brand to the passionate Ruby developers in Bulgaria, the
+      Balkans, and beyond!
+    </p>
+  </div>
+
+  <div class="flex gap-4 flex-wrap">
+    <%= link_to new_sponsor_path, class: "btn-primary" do %>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="w-5 h-5"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <span>Sponsor us</span>
+    <% end %>
+  </div>
+<% end %>
