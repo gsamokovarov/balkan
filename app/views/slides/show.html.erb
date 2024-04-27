@@ -175,7 +175,78 @@
 
 <section class="center">
   <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you 👋</div>
-  <div class="text-2xl sm:text-3xl font-semibold mt-3 text-white/70 fragment">
-    See you next year!
+</section>
+
+<% balkan2025 = Event.find_by! name: "Balkan Ruby 2025" %>
+
+<section class="center">
+  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, attendees! 🙇</div>
+</section>
+
+<section class="center">
+  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, community partners! 🙇</div>
+  <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
+    <% CommunityPartner.all.each do |partner| %>
+      <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
+        <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
+      <% end %>
+    <% end %>
+  </div>
+</section>
+
+<section class="center">
+  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, sponsors! 🙇</div>
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 pb-8">
+    <% Sponsor.all.basic.each do |sponsor| %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
+        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+      <% end %>
+    <% end %>
+    <% Sponsor.all.party.each do |sponsor| %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
+        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="grid grid-cols-2 gap-8 lg:grid-cols-4">
+    <% Sponsor.all.travel.each do |sponsor| %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-16 p-4 bg-white rounded-md" do %>
+        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+      <% end %>
+    <% end %>
+  </div>
+</section>
+
+<section class="center bg-black">
+  <div class="text-4xl sm:text-5xl font-black pb-8">
+    Balkan Ruby <span class="fragment">is
+      <span class="text-banitsa-500">back for good</span>!
+    </span>
+  </div>
+
+  <div class="fragment text-2xl sm:text-3xl font-semibold mt-3 text-white/70 pb-8">
+    April 25-26, 2025 – Sofia, Bulgaria
+  </div>
+
+  <div class="fragment">
+    <button class="btn-primary w-fit">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 256"
+        class="w-5 h-5 text-current"
+      >
+        <g color="currentColor" weight="regular">
+        <path
+          d="M24,167.2a7.9,7.9,0,0,1,6.4-7.8,32.1,32.1,0,0,0,0-62.8A7.9,7.9,0,0,1,24,88.8V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V88.8a7.9,7.9,0,0,1-6.4,7.8,32.1,32.1,0,0,0,0,62.8,7.9,7.9,0,0,1,6.4,7.8V192a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="16"
+          ></path>
+        </g>
+      </svg>
+      <span>Buy a ticket</span>
+    </button>
   </div>
 </section>
