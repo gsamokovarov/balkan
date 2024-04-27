@@ -26,3 +26,17 @@ end
 balkan2024.invoice_sequence = InvoiceSequence.find_or_create_by! event: balkan2024 do
   _1.initial_number = 10001049
 end
+
+balkan2025 = Event.find_or_create_by! name: "Balkan Ruby 2025" do
+  _1.start_date = Date.new(2024, 4, 25)
+  _1.end_date = Date.new(2024, 4, 26)
+end
+
+balkan2025.invoice_sequence = InvoiceSequence.find_or_create_by! event: balkan2024 do
+  _1.initial_number = balkan2024.invoice_sequence.next_invoice_number
+end
+
+balkan2025.ticket_types.find_or_create_by! name: "Blind Bird" do
+  _1.price = 90
+  _1.enabled = true
+end
