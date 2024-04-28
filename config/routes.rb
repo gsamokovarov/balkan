@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "home#show"
+  get "2024", to: "home#retrospective", as: :retro2024
 
   resources :sponsors, only: [:new, :index]
   resources :tickets, only: [:show]
@@ -12,8 +13,6 @@ Rails.application.routes.draw do
   resources :blogs, only: [:show]
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
-
-  get "/intro", to: "slides#show"
 
   namespace :webhooks do
     resource :stripe, only: [:create]

@@ -1,0 +1,21 @@
+<% title "April 26-27, 2024" %>
+
+<%= render "section", title: "2024", title_element: "h1" do %>
+  <%= render "prose" do %>
+    <p>
+      Balkan Ruby 2024 took place on April 26-27, 2024 in Sofia, Bulgaria, five
+      years after our last event in 2019. We had a great time and we hope you did
+      too. We're looking forward to seeing you again in <%= link_to "2025", root_path, class: "link-primary" %>!
+    </p>
+  <% end %>
+<% end %>
+
+<%= render "speakers/speakers" %>
+<%= render "section_separator" %>
+<%= render "venue" %>
+<%= render "section_separator" %>
+<%= render "tickets" %>
+<%= render "section_separator" %>
+<%= render "sponsors/sponsors" %>
+<%= render "section_separator" %>
+<%= render "community_partners" %>
