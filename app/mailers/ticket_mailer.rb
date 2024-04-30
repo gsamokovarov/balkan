@@ -30,6 +30,12 @@ class TicketMailer < ApplicationMailer
     mail to: @ticket.email, subject: "Balkan Ruby is in a few days!"
   end
 
+  def post_event_email(ticket)
+    @ticket = ticket
+
+    mail to: @ticket.email, subject: "Balkan Ruby 2024 was a GREAT SUCCESS"
+  end
+
   private
 
   def calendar_event(ticket)
