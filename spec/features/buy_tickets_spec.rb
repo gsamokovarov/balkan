@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.case "Buy tickets", type: :feature do
   test "returns 404 for a disabled ticket type" do
-    ticket_type = create :ticket_type
+    event = create :event, :balkan2025
+    ticket_type = create(:ticket_type, event:)
 
     visit checkout_path(ticket_type.id)
 
@@ -10,7 +11,8 @@ RSpec.case "Buy tickets", type: :feature do
   end
 
   test "redirects the user to Stripe checkout" do
-    ticket_type = create :ticket_type, :enabled
+    event = create :event, :balkan2025
+    ticket_type = create(:ticket_type, :enabled, event:)
 
     stub_stripe_checkout_with_invoice(
       [price: 100, description: "#{ticket_type.name} - John Doe"],

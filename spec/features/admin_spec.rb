@@ -9,7 +9,7 @@ RSpec.case "Admin", type: :feature do
   end
 
   test "requires authentication" do
-    create :event, :balkan2024
+    create :event, :balkan2025
 
     visit admin_root_path
 
@@ -18,7 +18,7 @@ RSpec.case "Admin", type: :feature do
 
   test "shows the admin dashboard after successful authentication" do
     Admin::User.setup_credentials username: "admin", password: "admin"
-    create :event, :balkan2024
+    create :event, :balkan2025
 
     visit admin_root_path
 

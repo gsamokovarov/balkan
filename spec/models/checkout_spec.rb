@@ -1,8 +1,10 @@
 require "rails_helper"
 
 RSpec.case Checkout, type: :model do
+  let(:event) { create :event, :balkan2025 }
+
   test "raises an ActiveRecord::RecordInvalid for invalid ticket data" do
-    ticket_type = create :ticket_type, :enabled
+    ticket_type = create(:ticket_type, :enabled, event:)
 
     assert_raise_error ActiveModel::StrictValidationFailed do
       Checkout.create_link tickets: [{}], ticket_type_id: ticket_type.id
@@ -10,7 +12,7 @@ RSpec.case Checkout, type: :model do
   end
 
   test "requires at least one ticket to create" do
-    ticket_type = create :ticket_type, :enabled
+    ticket_type = create(:ticket_type, :enabled, event:)
 
     assert_raise_error Precondition::Error do
       Checkout.create_link tickets: [], ticket_type_id: ticket_type.id
@@ -18,7 +20,7 @@ RSpec.case Checkout, type: :model do
   end
 
   test "raises an ActiveRecord::RecordNotFound for disabled ticket type" do
-    ticket_type = create :ticket_type
+    ticket_type = create(:ticket_type, event:)
 
     assert_raise_error ActiveRecord::RecordNotFound do
       Checkout.create_link tickets: [{}], ticket_type_id: ticket_type.id
@@ -26,7 +28,8 @@ RSpec.case Checkout, type: :model do
   end
 
   test "returns the stripe checkout url" do
-    ticket_type = create :ticket_type, :enabled
+    ticket_type = create(:ticket_type, :enabled, event:)
+
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
       ticket_type_id: ticket_type.id
@@ -47,7 +50,7 @@ RSpec.case Checkout, type: :model do
   end
 
   test "creates an order with tickets metadata" do
-    ticket_type = create :ticket_type, :enabled
+    ticket_type = create(:ticket_type, :enabled, event:)
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
       ticket_type_id: ticket_type.id
@@ -82,7 +85,7 @@ RSpec.case Checkout, type: :model do
   end
 
   test "creates an order with 10% discount for 3 or more tickets" do
-    ticket_type = create :ticket_type, :enabled
+    ticket_type = create(:ticket_type, :enabled, event:)
     params = {
       tickets: [
         { name: "John Doe", email: "john@example.com", shirt_size: "XXL" },
@@ -134,7 +137,7 @@ RSpec.case Checkout, type: :model do
   end
 
   test "creates an order marked for invoice issuing" do
-    ticket_type = create :ticket_type, :enabled
+    ticket_type = create(:ticket_type, :enabled, event:)
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
       ticket_type_id: ticket_type.id,
