@@ -36,6 +36,11 @@ balkan2025.invoice_sequence = InvoiceSequence.find_or_create_by! event: balkan20
   _1.initial_number = balkan2024.invoice_sequence.next_invoice_number
 end
 
+balkan2025.ticket_types.find_or_create_by! name: "Free" do
+  _1.price = 0
+  _1.enabled = false
+end
+
 balkan2025.ticket_types.find_or_create_by! name: "Blind Bird" do
   _1.price = 90
   _1.enabled = true
