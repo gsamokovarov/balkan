@@ -1,18 +1,27 @@
-<p class="pb-2">
-  Hi <%= first_name @ticket.name %>,
-</p>
+<div class="w-prose">
+  <p class="pb-2">
+    Hi <%= first_name @ticket.name %>,
+  </p>
 
-<p class="pb-2">
-  I'm Genadi and I'm happy to welcome you to <b>Balkan Ruby</b>!
-  Mark the dates <time datetime="2024-04-26"><b>April 26–27, 2024</b></time> in your
-  calendar and get ready for a trip to Sofia, Bulgaria. 🇧🇬
-</p>
+  <p class="pb-2">
+    I'm Genadi and I'm happy to welcome you to <b><%= @ticket.event.name %></b>!
+    Mark the dates
+    <time datetime="<%= @ticket.event.start_date.iso8601 %>">
+      <b><%=@ticket.event.start_date.to_fs :long_ordinal %></b>
+    </time>
+    and
+    <time datetime="<%= @ticket.event.end_date.iso8601 %>">
+      <b><%=@ticket.event.end_date.to_fs :long_ordinal %></b>
+    </time>
+    in your calendar and get ready for a trip to Sofia, Bulgaria. 🇧🇬
+  </p>
 
-<%= render "ticket_info", ticket: @ticket, ticket_png: @ticket_png %>
+  <%= render "ticket_info", ticket: @ticket, ticket_png: @ticket_png %>
 
-<%= render "get_in_touch" %>
+  <%= render "get_in_touch" %>
 
-<p class="pb-2">
-  Best regards,<br>
-  Genadi Samokovarov
-</p>
+  <p class="pb-2">
+    Best regards,<br>
+    Genadi Samokovarov
+  </p>
+</div>
