@@ -65,10 +65,10 @@ Rails.application.configure do
   config.log_level = ENV.fetch "RAILS_LOG_LEVEL", "info"
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :litecache
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter = :litejob
   # config.active_job.queue_name_prefix = "balkan_production"
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -84,6 +84,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.active_record.sqlite3_production_warning = false
 
   config.lts_domain = "2024.balkanruby.com"
 
