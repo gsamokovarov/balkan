@@ -17,6 +17,8 @@ module Settings
 
   def get(name)
     ENV.fetch name.to_s.upcase do
+      return "" if Rails.env == "development"
+
       Rails.application.credentials.fetch(name) { raise MissingError, name }
     end
   end
