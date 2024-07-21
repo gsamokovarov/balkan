@@ -16,6 +16,8 @@ module Settings
   end
 
   def get(name)
+    return if ENV["PRECOMPILING_ASSETS"] == "1"
+
     ENV.fetch name.to_s.upcase do
       return "" if Rails.env == "development"
 
