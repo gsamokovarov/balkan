@@ -52,6 +52,7 @@ def run_deploy_tasks
 
   on_server do
     sh! "docker run --rm " \
+        "--label app=#{app_name} " \
         "--env-file #{project_root}/env_file " \
         "-e GIT_REVISION=#{deployed_revision} " \
         "-v #{project_root}/db:/rails/db/#{deploy_env} " \
@@ -65,7 +66,7 @@ def start_new_container
   log "Starting container for new version"
 
   # Determine which ports are currently bound and which are free for the new container
-  running_containers = on_server { sh! "docker ps -q" }.output.split
+  running_containers = on_server { sh! "docker ps -q --filter label=app=#{app_name}" }.output.split
   bound_ports =
     running_containers.map do |container|
       port_settings = on_server { sh! "docker inspect --format '{{json .NetworkSettings.Ports}}' #{container}" }.output
@@ -79,6 +80,7 @@ def start_new_container
   log "  Using port #{available_port} for new container"
   on_server do
     sh! "docker run -d --rm " \
+        "--label app=#{app_name} " \
         "--env-file #{project_root}/env_file " \
         "-e GIT_REVISION=#{deployed_revision} " \
         "-v #{project_root}/db:/rails/db/#{deploy_env} " \
