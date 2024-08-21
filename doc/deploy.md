@@ -1,23 +1,34 @@
-# Provision
+Documentation for the `bin/deploy` script: how it works, how to configure it, and how to provision
+new servers.
 
-When you want to deploy Balkan Ruby on a new server, prepare it for service first by following the
-steps in this section.
+# Overview
+
+`bin/deploy` implements a simple deploy process for a self-hosted app on a server that you
+administer. It:
+1. Connects to the server via SSH. (All subsequent stages happen on the server)
+2. Fetches the code that will be deployed from GitHub.
+3. Builds a Docker image containing the app's code.
+4. Uses that image to run the app in a container.
+5. Configures nginx to expose the app container to the Internet.
 
 ## Prerequisites
 
-To add a new Balkan Ruby server, you will need:
+To deploy the app to a server, you will need:
 * A bare-bones Ubuntu 22.04 server. We're currently using Hetzner for virtual servers.
 * SSH access as `root` to that server.
 
-## Setup
+# Provision
 
-### Server settings (in cloud provider)
+When you want to deploy the app on a new server, prepare it for service first by following the
+steps in this section.
+
+## Server settings (in the cloud provider)
 
 - TODO: Restrict access to ports HTTPS and SSH
 
-### System settings (on server)
+## System settings (on the server)
 
-#### Update packages
+### Update packages
 
 Install latest updates. You'd likely want to do this periodically.
 
@@ -31,19 +42,19 @@ using `http://mirror.hetzner.com/ubuntu-ports/packages/` URLs instead of
 `http://mirror.hetzner.com/ubuntu/packages/` (see
 https://status.hetzner.com/incident/43b5f083-cb30-4c01-b904-b611206eb172).
 
-#### Tighten SSH config
+### Tighten SSH config
 
 In `/etc/ssh/sshd_config`:
 - Set `PasswordAuthentication` to `no`
 - Comment out the `Subsystem sftp` line
 
-#### Restart for changes to take effect
+### Restart for changes to take effect
 
 ```
 reboot
 ```
 
-### Docker
+## Docker
 
 Follow the [official docs](https://docs.docker.com/engine/install/ubuntu/).
 The following should just work:
@@ -52,9 +63,9 @@ The following should just work:
 curl -fsSL https://get.docker.com | sh
 ```
 
-### nginx
+## nginx
 
-#### Install
+### Install
 
 Follow the [official docs](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#installing-prebuilt-ubuntu-packages).
 In short:
@@ -70,7 +81,7 @@ apt install nginx
 systemctl start nginx
 ```
 
-#### Configure (part 1, before we have an SSL certificate)
+### Configure (part 1, before we have an SSL certificate)
 
 We need this first incomplete part of the nginx configuration so that we can issue an SSL certificate.
 
@@ -126,7 +137,7 @@ Apply the changes:
 nginx -s reload
 ```
 
-#### Issue SSL certificate
+### Issue SSL certificate
 
 Install certbot:
 
@@ -155,7 +166,7 @@ certbot renew --dry-run
 
 You should see a success message for the certificate we just issued.
 
-#### Configure nginx (part 2, after we have an SSL certificate)
+### Configure (part 2, after we have an SSL certificate)
 
 Create `/etc/nginx/rails_server.conf.template` with the following contents:
 
@@ -188,7 +199,7 @@ Apply the changes:
 nginx -s reload
 ```
 
-### Deploy user and directories
+## Deploy user and directories
 
 - Create deploy user
 
@@ -204,7 +215,7 @@ nginx -s reload
   chown balkan:balkan /var/lib/balkan/db
   ```
 
-### Secrets
+## Secrets
 
 Store `RAILS_MASTER_KEY` on the server:
 
@@ -212,7 +223,7 @@ Store `RAILS_MASTER_KEY` on the server:
 echo RAILS_MASTER_KEY=<actual_secret> > /var/lib/balkan/env_file
 ```
 
-### Database
+## Database
 
 If this is an existing app, restore its database to `/var/lib/balkan/db`.
 
@@ -226,7 +237,7 @@ docker run --rm <args inferred from bin/deploy> --entrypoint '/rails/bin/rails' 
 docker run --rm <args inferred from bin/deploy> --entrypoint '/rails/bin/rails' <app_image> -- db:schema:load
 ```
 
-### GitHub
+## GitHub
 
 Create and add a deploy key to grant the deploy user read-only access to this repository. Follow the
 [official docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys).
@@ -256,7 +267,20 @@ In short:
        IdentityFile ~/.ssh/github_deploy
    ```
 
-## Deploy
+# Configuration
+
+The deploy script expects certain configuration in `config/deploy.yml`:
+
+- `app_name`: Used as part of directory and Docker image names, so must be a valid identifier: only
+  letters, numbers, and underscores.
+- `github_repo`: The repo where the app's source is located, in the form `<username>/<repo_name>`.
+- `server`: The IP address of a provisioned server.
+- `local_ports`: An array of at least two ports that will be used by the run the app locally on the
+  server. These ports will not be exposed to the Internet. If you're using the server to host
+  multiple apps using this script, make sure that all apps are configured with unique ports so that
+  they do not conflict with each other.
+
+# Deploy
 
 Just pass the commit you want deployed to `bin/deploy`:
 

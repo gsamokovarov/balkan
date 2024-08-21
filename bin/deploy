@@ -73,8 +73,7 @@ def start_new_container
       (port_settings["3000/tcp"] || []).map { _1["HostPort"] }.compact
     end.flatten
 
-  possible_ports = %w[3001 3002]
-  available_port = (possible_ports - bound_ports).first
+  available_port = (app_local_ports - bound_ports).first
   raise "No TCP port available" unless available_port
 
   log "  Using port #{available_port} for new container"
@@ -191,6 +190,10 @@ end
 
 def app_repo
   deploy_config.fetch "github_repo"
+end
+
+def app_local_ports
+  deploy_config.fetch("local_ports").map(&:to_s)
 end
 
 def server
