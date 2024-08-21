@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get "up" => "rails/health#show", as: :rails_health_check
+  get "healthz" => "infra#health"
+  get "version" => "infra#version"
 
   root "home#show"
   get "2024", to: "home#retrospective", as: :retro2024

@@ -1,0 +1,208 @@
+#!/usr/bin/env ruby
+
+require "English"
+require "json"
+require "yaml"
+
+def deploy
+  raise "Supply the revision to be deployed (`bin/deploy <revision>`)" unless deployed_revision
+  raise "Configure server in deploy config file" unless server
+
+  build_new_image
+  run_deploy_tasks
+  new_container_port, old_containers = start_new_container
+  switch_traffic new_container_port
+  stop_old_container old_containers
+  clean_up
+end
+
+#
+# Top-level stages
+#
+
+def build_new_image
+  image_exists = on_server { sh "docker image inspect #{deployed_image}" }.success?
+  if image_exists
+    log "Using existing image #{deployed_image} for deploy"
+    return
+  end
+
+  log "Building new image #{deployed_image} for deploy"
+
+  source_dir = "#{project_root}/src/#{deployed_revision}"
+
+  on_server do
+    log "  Checking out source at revision #{deployed_revision}..."
+    sh! "rm -rf #{source_dir}"
+    sh! "git clone git@github.com:#{app_repo}.git #{source_dir}"
+  end
+  on_server dir: source_dir do
+    sh! "git checkout #{deployed_revision}"
+
+    log "  Building image..."
+    sh! "docker build -t #{deployed_image} ."
+
+    log "  Cleaning up source dir..."
+    sh! "rm -rf #{source_dir}"
+  end
+end
+
+def run_deploy_tasks
+  log "Running migrations"
+
+  on_server do
+    sh! "docker run --rm " \
+        "--env-file #{project_root}/env_file " \
+        "-e GIT_REVISION=#{deployed_revision} " \
+        "-v #{project_root}/db:/rails/db/#{deploy_env} " \
+        "--entrypoint '/rails/bin/rails' " \
+        "#{deployed_image} " \
+        "-- db:migrate"
+  end
+end
+
+def start_new_container
+  log "Starting container for new version"
+
+  # Determine which ports are currently bound and which are free for the new container
+  running_containers = on_server { sh! "docker ps -q" }.output.split
+  bound_ports =
+    running_containers.map do |container|
+      port_settings = on_server { sh! "docker inspect --format '{{json .NetworkSettings.Ports}}' #{container}" }.output
+      port_settings = JSON.parse port_settings
+      (port_settings["3000/tcp"] || []).map { _1["HostPort"] }.compact
+    end.flatten
+
+  possible_ports = %w[3001 3002]
+  available_port = (possible_ports - bound_ports).first
+  raise "No TCP port available" unless available_port
+
+  log "  Using port #{available_port} for new container"
+  on_server do
+    sh! "docker run -d --rm " \
+        "--env-file #{project_root}/env_file " \
+        "-e GIT_REVISION=#{deployed_revision} " \
+        "-v #{project_root}/db:/rails/db/#{deploy_env} " \
+        "-p 127.0.0.1:#{available_port}:3000 " \
+        "#{deployed_image}"
+  end
+
+  [available_port, running_containers]
+end
+
+def switch_traffic(new_container_port)
+  log "Switching traffic to new version"
+
+  log "  Waiting for new version to become ready"
+  health_checks = 1
+  loop do
+    new_container_ready = on_server { sh "curl -fs http://localhost:#{new_container_port}/healthz" }.success?
+    break if new_container_ready
+    raise "New container failed to start within 30 seconds, investigate!" if health_checks > 30
+
+    health_checks += 1
+    sleep 1
+  end
+
+  log "  Redirecting nginx to new version"
+  on_server do
+    sh! "ACTIVE_RAILS_PORT=#{new_container_port} envsubst < /etc/nginx/rails_server.conf.template > /etc/nginx/rails_server.conf"
+    sh! "nginx -s reload"
+  end
+end
+
+def stop_old_container(old_containers)
+  log "Stopping old container"
+
+  on_server do
+    sh! "docker kill -s SIGTERM #{old_containers.join ' '}"
+  end
+end
+
+def clean_up
+  log "Cleaning up"
+
+  all_images = on_server { sh! "docker image ls -q" }.output.split
+  images_to_clean_up = all_images[5..] || []
+  images_to_clean_up.each do |image_to_clean_up|
+    log "  Deleting old image #{image_to_clean_up}"
+    on_server { sh! "docker image rm #{image_to_clean_up}" }
+  end
+end
+
+#
+# Helpers
+#
+
+def on_server(user: :root, dir: nil, &)
+  RemoteExecutor.new(user, dir).instance_exec(&)
+end
+
+class RemoteExecutor
+  def initialize(remote_user, remote_dir)
+    @remote_user = remote_user
+    @remote_dir = remote_dir
+
+    raise "Invalid remote user #{@remote_user}" unless [:root, :balkan].include? @remote_user
+  end
+
+  def sh(command, raise_on_error: false)
+    dir_override = "cd #{@remote_dir};" if @remote_dir
+    user_override = "runuser -u balkan" if @remote_user == :balkan
+    ssh "#{dir_override} #{user_override} #{command}", raise_on_error:
+  end
+
+  def sh!(command)
+    sh command, raise_on_error: true
+  end
+end
+
+ExecResult = Struct.new :output, :exit_code do
+  def success? = exit_code.zero?
+end
+
+def ssh(remote_command, raise_on_error:)
+  remote_command = remote_command.gsub "'", %q('"'"')
+  output = `ssh root@#{server} '#{remote_command}'`
+  raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
+
+  ExecResult.new output: output.strip, exit_code: $CHILD_STATUS.exitstatus
+end
+
+def deployed_revision
+  ARGV.first
+end
+
+def deployed_image
+  "#{app_name}:#{deployed_revision}"
+end
+
+def deploy_config
+  @deploy_config ||= YAML.safe_load_file "config/deploy.yml"
+end
+
+def deploy_env
+  "production"
+end
+
+def app_name
+  deploy_config.fetch "app_name"
+end
+
+def app_repo
+  deploy_config.fetch "github_repo"
+end
+
+def server
+  deploy_config.fetch "server"
+end
+
+def log(message)
+  puts message
+end
+
+def project_root
+  "/var/lib/#{app_name}"
+end
+
+deploy
