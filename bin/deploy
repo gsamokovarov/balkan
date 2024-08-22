@@ -115,6 +115,11 @@ end
 def stop_old_container(old_containers)
   log "Stopping old container"
 
+  if old_containers.empty?
+    log "  (none found)"
+    return
+  end
+
   on_server do
     sh! "docker kill -s SIGTERM #{old_containers.join ' '}"
   end
