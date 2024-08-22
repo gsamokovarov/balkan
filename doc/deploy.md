@@ -1,6 +1,12 @@
 Documentation for the `bin/deploy` script: how it works, how to configure it, and how to provision
 new servers.
 
+**PLACEHOLDERS**: Some commands and configuration snippets described in this configuration are
+app-specific, i.e. their exact contents will vary from app to app. In order to make this
+documentation generic, the `#{app_name}` and `#{app_domain}` placeholders are used in such places.
+Replace the placeholders with the respective values in `config/deploy.yml` before executing the
+commands / copying the configuration.
+
 # Overview
 
 `bin/deploy` implements a simple deploy process for a self-hosted app on a server that you
@@ -126,8 +132,6 @@ http {
       root /usr/share/nginx/cert_validations;
     }
   }
-
-  #include /etc/nginx/rails_server.conf;
 }
 ```
 
@@ -151,7 +155,7 @@ snap install --classic certbot
 Issue a certificate:
 
 ```
-certbot certonly -m genadi@hey.com --webroot -w /usr/share/nginx/cert_validations -d balkanconf.com
+certbot certonly -m genadi@hey.com --webroot -w /usr/share/nginx/cert_validations -d #{app_domain}
 ```
 
 Let's Encrypt certificates are only valid for 90 days and need to be renewed regularly. There's no
@@ -168,15 +172,15 @@ You should see a success message for the certificate we just issued.
 
 ### Configure (part 2, after we have an SSL certificate)
 
-Create `/etc/nginx/rails_server.conf.template` with the following contents:
+Create `/etc/nginx/#{app_name}.conf.template` with the following contents:
 
 ```
 server {
   listen      443 ssl;
-  server_name balkanconf.com;
+  server_name #{app_domain};
 
-  ssl_certificate     /etc/letsencrypt/live/balkanconf.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/balkanconf.com/privkey.pem;
+  ssl_certificate     /etc/letsencrypt/live/#{app_domain}/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/#{app_domain}/privkey.pem;
 
   location / {
     proxy_pass http://localhost:$ACTIVE_RAILS_PORT;
@@ -184,12 +188,19 @@ server {
 }
 ```
 
-Uncomment the `#include` line in `/etc/nginx/nginx.conf`. That snippet must now look like this:
+Create a temporary dummy `#{app_name}.conf` file. This will get overwritten by the actual deploy
+process, but we need it for now to bootstrap nginx with a valid config:
+
+```
+ACTIVE_RAILS_PORT=80 envsubst < /etc/nginx/#{app_name}.conf.template > /etc/nginx/#{app_name}.conf
+```
+
+Add the following include line at the end of the `http` block in `/etc/nginx/nginx.conf`:
 
 ```
 http {
   ...
-  include /etc/nginx/rails_server.conf;
+  include /etc/nginx/#{app_name}.conf;
 }
 ```
 

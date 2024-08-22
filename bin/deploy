@@ -107,7 +107,7 @@ def switch_traffic(new_container_port)
 
   log "  Redirecting nginx to new version"
   on_server do
-    sh! "ACTIVE_RAILS_PORT=#{new_container_port} envsubst < /etc/nginx/rails_server.conf.template > /etc/nginx/rails_server.conf"
+    sh! "ACTIVE_RAILS_PORT=#{new_container_port} envsubst < /etc/nginx/#{app_name}.conf.template > /etc/nginx/#{app_name}.conf"
     sh! "nginx -s reload"
   end
 end
