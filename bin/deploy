@@ -52,6 +52,7 @@ def run_deploy_tasks
 
   on_server do
     sh! "docker run --rm " \
+        "--label app=#{app_name} " \
         "--env-file #{project_root}/env_file " \
         "-e GIT_REVISION=#{deployed_revision} " \
         "-v #{project_root}/db:/rails/db/#{deploy_env} " \
@@ -65,7 +66,7 @@ def start_new_container
   log "Starting container for new version"
 
   # Determine which ports are currently bound and which are free for the new container
-  running_containers = on_server { sh! "docker ps -q" }.output.split
+  running_containers = on_server { sh! "docker ps -q --filter label=app=#{app_name}" }.output.split
   bound_ports =
     running_containers.map do |container|
       port_settings = on_server { sh! "docker inspect --format '{{json .NetworkSettings.Ports}}' #{container}" }.output
@@ -73,13 +74,13 @@ def start_new_container
       (port_settings["3000/tcp"] || []).map { _1["HostPort"] }.compact
     end.flatten
 
-  possible_ports = %w[3001 3002]
-  available_port = (possible_ports - bound_ports).first
+  available_port = (app_local_ports - bound_ports).first
   raise "No TCP port available" unless available_port
 
   log "  Using port #{available_port} for new container"
   on_server do
     sh! "docker run -d --rm " \
+        "--label app=#{app_name} " \
         "--env-file #{project_root}/env_file " \
         "-e GIT_REVISION=#{deployed_revision} " \
         "-v #{project_root}/db:/rails/db/#{deploy_env} " \
@@ -106,7 +107,7 @@ def switch_traffic(new_container_port)
 
   log "  Redirecting nginx to new version"
   on_server do
-    sh! "ACTIVE_RAILS_PORT=#{new_container_port} envsubst < /etc/nginx/rails_server.conf.template > /etc/nginx/rails_server.conf"
+    sh! "ACTIVE_RAILS_PORT=#{new_container_port} envsubst < /etc/nginx/#{app_name}.conf.template > /etc/nginx/#{app_name}.conf"
     sh! "nginx -s reload"
   end
 end
@@ -122,7 +123,7 @@ end
 def clean_up
   log "Cleaning up"
 
-  all_images = on_server { sh! "docker image ls -q" }.output.split
+  all_images = on_server { sh! "docker image ls #{app_name} -q" }.output.split
   images_to_clean_up = all_images[5..] || []
   images_to_clean_up.each do |image_to_clean_up|
     log "  Deleting old image #{image_to_clean_up}"
@@ -143,12 +144,12 @@ class RemoteExecutor
     @remote_user = remote_user
     @remote_dir = remote_dir
 
-    raise "Invalid remote user #{@remote_user}" unless [:root, :balkan].include? @remote_user
+    raise "Invalid remote user #{@remote_user}" unless [:root, :rails].include? @remote_user
   end
 
   def sh(command, raise_on_error: false)
     dir_override = "cd #{@remote_dir};" if @remote_dir
-    user_override = "runuser -u balkan" if @remote_user == :balkan
+    user_override = "runuser -u rails" if @remote_user == :rails
     ssh "#{dir_override} #{user_override} #{command}", raise_on_error:
   end
 
@@ -191,6 +192,10 @@ end
 
 def app_repo
   deploy_config.fetch "github_repo"
+end
+
+def app_local_ports
+  deploy_config.fetch("local_ports").map(&:to_s)
 end
 
 def server
