@@ -203,6 +203,11 @@ def server
 end
 
 def log(message)
+  bold  = "\e[1m"
+  green = "\e[32m"
+  clear = "\e[0m"
+
+  message = "#{bold}#{green}#{message}#{clear}" if $stdout.tty?
   puts message
 end
 
