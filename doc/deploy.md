@@ -212,18 +212,18 @@ nginx -s reload
 
 ## Deploy user and directories
 
-- Create deploy user
+- Create app user (with the same UID as the user created in the Dockerfile)
 
   ```
-  useradd balkan --uid 1001 --create-home --shell /bin/bash
+  useradd rails --uid 1001 --create-home --shell /bin/bash
   ```
 
 - Create directories
 
   ```
-  mkdir -p /var/lib/balkan/db
-  mkdir -p /var/lib/balkan/src
-  chown balkan:balkan /var/lib/balkan/db
+  mkdir -p /var/lib/#{app_name}/db
+  mkdir -p /var/lib/#{app_name}/src
+  chown rails:rails /var/lib/#{app_name}/db
   ```
 
 ## Secrets
@@ -231,12 +231,13 @@ nginx -s reload
 Store `RAILS_MASTER_KEY` on the server:
 
 ```
-echo RAILS_MASTER_KEY=<actual_secret> > /var/lib/balkan/env_file
+echo RAILS_MASTER_KEY=<actual_secret> > /var/lib/#{app_name}/env_file
 ```
 
 ## Database
 
-If this is an existing app, restore its database to `/var/lib/balkan/db`.
+If this is an existing app, restore its database to `/var/lib/#{app_name}/db`. Make sure its owner
+user and group are `rails:rails`.
 
 If this is a new app, create its database by running `bin/rails db:create` in out of its images. You
 will likely have to do this at a later point, when you do have such an image. Examine `bin/deploy`
@@ -250,15 +251,14 @@ docker run --rm <args inferred from bin/deploy> --entrypoint '/rails/bin/rails' 
 
 ## GitHub
 
-Create and add a deploy key to grant the deploy user read-only access to this repository. Follow the
+Create and add a deploy key to grant the server read-only access to this repository. Follow the
 [official docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys).
 In short:
 
-1. Create a new SSH key for the deploy user on the server
+1. Create a new SSH key for the root user on the server
 
    ```
-   sudo -u balkan -i
-   ssh-keygen -t ed25519 -C "Hetzner_<serverIP>" -f .ssh/github_deploy
+   ssh-keygen -t ed25519 -C "Hetzner_<serverIP>" -f ~/.ssh/github_deploy
    ```
 
    Leave the passphrase empty.
@@ -282,9 +282,10 @@ In short:
 
 The deploy script expects certain configuration in `config/deploy.yml`:
 
+- `github_repo`: The repo where the app's source is located, in the form `<username>/<repo_name>`.
 - `app_name`: Used as part of directory and Docker image names, so must be a valid identifier: only
   letters, numbers, and underscores.
-- `github_repo`: The repo where the app's source is located, in the form `<username>/<repo_name>`.
+- `app_domain`: The hostname that this app will be accessible at.
 - `server`: The IP address of a provisioned server.
 - `local_ports`: An array of at least two ports that will be used by the run the app locally on the
   server. These ports will not be exposed to the Internet. If you're using the server to host

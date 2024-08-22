@@ -144,12 +144,12 @@ class RemoteExecutor
     @remote_user = remote_user
     @remote_dir = remote_dir
 
-    raise "Invalid remote user #{@remote_user}" unless [:root, :balkan].include? @remote_user
+    raise "Invalid remote user #{@remote_user}" unless [:root, :rails].include? @remote_user
   end
 
   def sh(command, raise_on_error: false)
     dir_override = "cd #{@remote_dir};" if @remote_dir
-    user_override = "runuser -u balkan" if @remote_user == :balkan
+    user_override = "runuser -u rails" if @remote_user == :rails
     ssh "#{dir_override} #{user_override} #{command}", raise_on_error:
   end
 
