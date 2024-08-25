@@ -9,28 +9,18 @@ Before running Balkan Ruby on your local macOS machine, you need the following s
 ### Ready...
 
 - Ruby 3.2.2
-- PostgreSQL v12+
-- Foreman or Hivemind
+- SQLite3
+- Foreman (or [hivemind](https://github.com/DarthSim/hivemind))
 
 Install Ruby 3.2.2 with `rbenv`, `chruby` or `asdf`. Use [Homebrew](https://brew.sh) for everything else:
 
 ```
-brew install postgresql hivemind
+brew install sqlite3
 ```
 
 With the dependencies installed, setup the project itself with `bin/setup`.
 
 ### Steady...
-
-(Import maps are great, you have nothing else to configure...)
-
-### Go!
-
-Having the required software and **env**ironment setup run the development server with `hivemind`.
-
-## Development
-
-### Setup
 
 Clone the repo.
 
@@ -44,13 +34,7 @@ Setup project environment.
 bin/setup
 ```
 
-Start the application.
-
-```sh
-bin/dev
-```
-
-### Stripe setup
+#### Stripe setup
 
 > **Warning**
 > Make sure you are using the test mode in Stripe.
@@ -62,12 +46,12 @@ bin/dev
 - STRIPE_SECRET_KEY
 - STRIPE_WEBHOOK_SECRET
 
-### Sendgrid setup
+#### Sendgrid setup
 
 The `SENDGRID_API_KEY` needs to be set with a random value e.g [.env.erb](./.env.erb).
 In development & test emails are not sent.
 
-### Admin setup
+#### Admin setup
 
 The admin is accessed at `/admin` and requires basic HTTP authentication
 controlled by 2 environment variables:
@@ -76,3 +60,11 @@ controlled by 2 environment variables:
 - `ADMIN_PASSWORD`
 
 Both of them default to `admin`.
+
+### Go!
+
+Start the application.
+
+```sh
+bin/dev
+```
