@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require "yaml"
+
+def connect
+  raise "Configure server in deploy config file" unless server
+
+  system "ssh root@#{server}", exception: true
+end
+
+def deploy_config = @deploy_config ||= YAML.safe_load_file("config/deploy.yml")
+def server = deploy_config.fetch "server"
+
+connect
