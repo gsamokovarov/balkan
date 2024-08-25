@@ -16,12 +16,12 @@ module Settings
   end
 
   def get(name)
-    return if ENV["PRECOMPILING_ASSETS"] == "1"
-
     ENV.fetch name.to_s.upcase do
-      return "" if Rails.env == "development"
+      Rails.application.credentials.fetch name do
+        return if ENV["SETTINGS_OPTIONAL"] == "1"
 
-      Rails.application.credentials.fetch(name) { raise MissingError, name }
+        raise MissingError, name
+      end
     end
   end
 end
