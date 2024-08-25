@@ -1,6 +1,6 @@
 github_repo: gsamokovarov/balkan
 app_name: balkan
-app_domain: balkanconf.com
+app_domain: balkanruby.com
 server: 168.119.247.9
 local_ports:
   - 3001
