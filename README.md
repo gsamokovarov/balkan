@@ -18,7 +18,7 @@ Install Ruby 3.2.2 with `rbenv`, `chruby` or `asdf`. Use [Homebrew](https://brew
 brew install sqlite3
 ```
 
-With the dependencies installed, setup the project itself with `bin/setup`.
+With the dependencies installed, proceed to the next step.
 
 ### Steady...
 
