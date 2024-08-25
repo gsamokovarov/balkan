@@ -140,9 +140,7 @@ end
 # Helpers
 #
 
-def on_server(user: :root, dir: nil, &)
-  RemoteExecutor.new(user, dir).instance_exec(&)
-end
+def on_server(user: :root, dir: nil, &) = RemoteExecutor.new(user, dir).instance_exec(&)
 
 class RemoteExecutor
   def initialize(remote_user, remote_dir)
@@ -158,9 +156,7 @@ class RemoteExecutor
     ssh "#{dir_override} #{user_override} #{command}", raise_on_error:
   end
 
-  def sh!(command)
-    sh command, raise_on_error: true
-  end
+  def sh!(command) = sh command, raise_on_error: true
 end
 
 ExecResult = Struct.new :output, :exit_code do
@@ -175,38 +171,6 @@ def ssh(remote_command, raise_on_error:)
   ExecResult.new output: output.strip, exit_code: $CHILD_STATUS.exitstatus
 end
 
-def deployed_revision
-  ARGV.first
-end
-
-def deployed_image
-  "#{app_name}:#{deployed_revision}"
-end
-
-def deploy_config
-  @deploy_config ||= YAML.safe_load_file "config/deploy.yml"
-end
-
-def deploy_env
-  "production"
-end
-
-def app_name
-  deploy_config.fetch "app_name"
-end
-
-def app_repo
-  deploy_config.fetch "github_repo"
-end
-
-def app_local_ports
-  deploy_config.fetch("local_ports").map(&:to_s)
-end
-
-def server
-  deploy_config.fetch "server"
-end
-
 def log(message)
   bold  = "\e[1m"
   green = "\e[32m"
@@ -216,8 +180,14 @@ def log(message)
   puts message
 end
 
-def project_root
-  "/var/lib/#{app_name}"
-end
+def deployed_revision = ARGV.first
+def deployed_image = "#{app_name}:#{deployed_revision}"
+def deploy_config = @deploy_config ||= YAML.safe_load_file("config/deploy.yml")
+def deploy_env = "production"
+def app_name = deploy_config.fetch "app_name"
+def app_repo = deploy_config.fetch "github_repo"
+def app_local_ports = deploy_config.fetch("local_ports").map(&:to_s)
+def server = deploy_config.fetch "server"
+def project_root = "/var/lib/#{app_name}"
 
 deploy
