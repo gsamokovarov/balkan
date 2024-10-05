@@ -50,7 +50,7 @@ Rails.application.configure do
 
   # Don't force SSL at the Rails server level. Outside HTTPS connections will terminate at the nginx reverse-proxy
   # server, which in turn will communicate with the Rails server via plain HTTP.
-  config.force_ssl = false
+  config.force_ssl = true
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new($stdout)
