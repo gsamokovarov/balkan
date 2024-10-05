@@ -11,6 +11,7 @@ commands / copying the configuration.
 
 `bin/deploy` implements a simple deploy process for a self-hosted app on a server that you
 administer. It:
+
 1. Connects to the server via SSH. (All subsequent stages happen on the server)
 2. Fetches the code that will be deployed from GitHub.
 3. Builds a Docker image containing the app's code.
@@ -20,8 +21,9 @@ administer. It:
 ## Prerequisites
 
 To deploy the app to a server, you will need:
-* A bare-bones Ubuntu 22.04 server. We're currently using Hetzner for virtual servers.
-* SSH access as `root` to that server.
+
+- A bare-bones Ubuntu 22.04 server. We're currently using Hetzner for virtual servers.
+- SSH access as `root` to that server.
 
 # Provision
 
@@ -51,6 +53,7 @@ https://status.hetzner.com/incident/43b5f083-cb30-4c01-b904-b611206eb172).
 ### Tighten SSH config
 
 In `/etc/ssh/sshd_config`:
+
 - Set `PasswordAuthentication` to `no`
 - Comment out the `Subsystem sftp` line
 
@@ -124,6 +127,10 @@ http {
 
   ssl_session_cache   shared:SSL:10m;
   ssl_session_timeout 10m;
+
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_set_header Host $http_host;
 
   server {
     listen 80;
