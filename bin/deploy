@@ -227,7 +227,7 @@ def log(message)
   puts message
 end
 
-def deployed_revision = ARGV.first
+def deployed_revision = ARGV.first || `git rev-parse HEAD`.strip
 def inspect_deploy? = ARGV.include? "--inspect"
 def deployed_image = "#{app_name}:#{deployed_revision}"
 def deploy_config = @deploy_config ||= YAML.safe_load_file("config/deploy.yml")
