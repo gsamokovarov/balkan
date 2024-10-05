@@ -203,19 +203,18 @@ end
 def ssh(remote_command, raise_on_error:, interactive: false)
   remote_command = remote_command.gsub "'", %q('"'"')
 
-  if interactive
-    spawn "ssh -tt root@#{server} '#{remote_command}'", out: $stdout, err: $stderr, in: $stdin
-    Process.wait
+  output =
+    if interactive
+      spawn "ssh -tt root@#{server} '#{remote_command}'", out: $stdout, err: $stderr, in: $stdin
+      Process.wait
+      nil
+    else
+      `ssh root@#{server} '#{remote_command}'`.strip
+    end
 
-    raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
+  raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
 
-    ExecResult.new output: "", exit_code: $CHILD_STATUS.exitstatus
-  else
-    output = `ssh root@#{server} '#{remote_command}'`
-    raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
-
-    ExecResult.new output: output.strip, exit_code: $CHILD_STATUS.exitstatus
-  end
+  ExecResult.new output:, exit_code: $CHILD_STATUS.exitstatus
 end
 
 def log(message)
@@ -227,7 +226,7 @@ def log(message)
   puts message
 end
 
-def deployed_revision = ARGV.first || `git rev-parse HEAD`.strip
+def deployed_revision = ARGV.first.then { _1 unless _1.to_s.start_with? "-" } || `git rev-parse HEAD`.strip
 def inspect_deploy? = ARGV.include? "--inspect"
 def deployed_image = "#{app_name}:#{deployed_revision}"
 def deploy_config = @deploy_config ||= YAML.safe_load_file("config/deploy.yml")
