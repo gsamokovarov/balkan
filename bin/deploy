@@ -8,6 +8,22 @@ def deploy
   raise "Supply the revision to be deployed (`bin/deploy <revision>`)" unless deployed_revision
   raise "Configure server in deploy config file" unless server
 
+  if inspect_deploy?
+    inspect_deploy
+  else
+    deploy_revision
+  end
+end
+
+def inspect_deploy
+  log "Inspecting revision #{deployed_revision}"
+
+  run_rails_console
+end
+
+def deploy_revision
+  log "Deploying revision #{deployed_revision}"
+
   build_new_image
   run_deploy_tasks
   new_container_port, old_containers = start_new_container
@@ -59,6 +75,27 @@ def run_deploy_tasks
         "--entrypoint '/rails/bin/rails' " \
         "#{deployed_image} " \
         "-- db:migrate"
+  end
+end
+
+def run_rails_console
+  image_exists = on_server { sh "docker image inspect #{deployed_image}" }.success?
+  unless image_exists
+    log "Cannot find #{deployed_image} for inspecting"
+    return
+  end
+
+  log "Running Rails console"
+
+  on_server do
+    sh! "docker run --rm -it " \
+        "--label app=#{app_name} " \
+        "--env-file #{project_root}/env_file " \
+        "-e GIT_REVISION=#{deployed_revision} " \
+        "-v #{project_root}/db:/rails/db/#{deploy_env} " \
+        "--entrypoint '/rails/bin/rails' " \
+        "#{deployed_image} " \
+        "console", interactive: true
   end
 end
 
@@ -150,25 +187,35 @@ class RemoteExecutor
     raise "Invalid remote user #{@remote_user}" unless [:root, :rails].include? @remote_user
   end
 
-  def sh(command, raise_on_error: false)
+  def sh(command, interactive: false, raise_on_error: false)
     dir_override = "cd #{@remote_dir};" if @remote_dir
     user_override = "runuser -u rails" if @remote_user == :rails
-    ssh "#{dir_override} #{user_override} #{command}", raise_on_error:
+    ssh "#{dir_override} #{user_override} #{command}", interactive:, raise_on_error:
   end
 
-  def sh!(command) = sh command, raise_on_error: true
+  def sh!(command, interactive: false) = sh command, interactive:, raise_on_error: true
 end
 
 ExecResult = Struct.new :output, :exit_code do
   def success? = exit_code.zero?
 end
 
-def ssh(remote_command, raise_on_error:)
+def ssh(remote_command, raise_on_error:, interactive: false)
   remote_command = remote_command.gsub "'", %q('"'"')
-  output = `ssh root@#{server} '#{remote_command}'`
-  raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
 
-  ExecResult.new output: output.strip, exit_code: $CHILD_STATUS.exitstatus
+  if interactive
+    spawn "ssh -tt root@#{server} '#{remote_command}'", out: $stdout, err: $stderr, in: $stdin
+    Process.wait
+
+    raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
+
+    ExecResult.new output: "", exit_code: $CHILD_STATUS.exitstatus
+  else
+    output = `ssh root@#{server} '#{remote_command}'`
+    raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
+
+    ExecResult.new output: output.strip, exit_code: $CHILD_STATUS.exitstatus
+  end
 end
 
 def log(message)
@@ -181,6 +228,7 @@ def log(message)
 end
 
 def deployed_revision = ARGV.first
+def inspect_deploy? = ARGV.include? "--inspect"
 def deployed_image = "#{app_name}:#{deployed_revision}"
 def deploy_config = @deploy_config ||= YAML.safe_load_file("config/deploy.yml")
 def deploy_env = "production"
