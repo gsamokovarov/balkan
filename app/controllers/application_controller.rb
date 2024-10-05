@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current
-    Rails.logger.info "Current host: #{request.host}"
-
     Current.event =
       case request.host
       when "conf.rubybanitsa.com"
