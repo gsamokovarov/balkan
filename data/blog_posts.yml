@@ -1,4 +1,5 @@
 - id: 1
+  event_id: 1
   date: 2024-04-24
   title: Welcome to Balkan Ruby 2024
   content: >
@@ -30,21 +31,20 @@
     avatar: organizers/genadi.png
 
 - id: 2
+  event_id: 1
   date: 2024-04-26
   title: Party in Vitamin B
   content: >
-
-    The conference party is today,the 26th of April, from 19:30 [Vitamin
-    B](https://maps.app.goo.gl/Dj5WeHC1p8iX1G5W8). The will be **free beer**
-    provided by our Anonymous sponsor. Thank you, you know who you are!
+    The conference party is today, the 26th of April, from 19:30 [Vitamin B](https://maps.app.goo.gl/Dj5WeHC1p8iX1G5W8).
+    There will be **free beer** provided by our Anonymous sponsor. Thank you, you know who you are!
 
 
     The **free beer** is a lager beer, specially chosen by our host, Vitamin B.
-    If you want another fancy beer, you have to pay it yourself. WELCOME TO THE
+    If you want another, fancie beer, you have to pay for it yourself. WELCOME TO THE
     BALKANS!!!
 
 
-    Oh, they serve food as well!
+    Oh, they serve food as well.
   author:
     name: Genadi Samokovarov
     about: Organizer

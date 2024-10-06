@@ -1,4 +1,5 @@
 - id: 1
+  event_id: 1
   available: true
   name: "Sustainable OSS Development"
   about: >
@@ -39,6 +40,7 @@
           him as an Emacs zealot (and they would be right)
         </p>
 - id: 2
+  event_id: 1
   available: true
   name: "Trailblazer – the Almost sustainable underdog"
   about: "Developing and sustaining Trailblazer full time is no small feat."
@@ -54,6 +56,7 @@
           around the corner. Say "Hi!" to him, he loves people.
         </p>
 - id: 3
+  event_id: 1
   available: true
   name: "A Dateless Mindset"
   about: >
@@ -72,6 +75,7 @@
           Everlasting student · Rails Core · Zeitwerk · Freelance · Life lover
         </p>
 - id: 4
+  event_id: 1
   available: true
   name: "How to do well in consulting"
   about: >
@@ -93,6 +97,7 @@
       about: >
         <p>Irina is the CEO of Evil Martians.</p>
 - id: 5
+  event_id: 1
   available: true
   name: "One engineer company with Ruby on Rails"
   about: >
@@ -111,6 +116,7 @@
           Buildings as the single technical person on the team.
         </p>
 - id: 6
+  event_id: 1
   available: true
   name: "How (and why) to run SQLite in production"
   about: >
@@ -143,6 +149,7 @@
           projects. For my day job, I am the engineering manager at Test IO.
         </p>
 - id: 7
+  event_id: 1
   available: false
   name: "Using Ruby on Rails to become financially independent"
   about: >
@@ -163,6 +170,7 @@
           every year.
         </p>
 - id: 8
+  event_id: 1
   available: true
   name: "The history of a Rails monolith"
   about: >
@@ -211,6 +219,7 @@
           several tech conferences and online webinars.
         </p>
 - id: 9
+  event_id: 1
   available: true
   name: "20 years and going: making it as a consultancy"
   about: >
@@ -231,6 +240,7 @@
           computer running and hiking.
         </p>
 - id: 10
+  event_id: 1
   available: true
   name: "Тоо much of a Good Thing"
   about: >
@@ -260,6 +270,7 @@
           Proud MC EuRuKo, Balkan Ruby, RubyDay, Ruby on Ice and others.
         </p>
 - id: 11
+  event_id: 1
   available: true
   name: "Writing and marketing Deployment from Scratch"
   about: >
@@ -284,6 +295,7 @@
           regularly watching Gordon Ramsay cooking shows.
         </p>
 - id: 12
+  event_id: 1
   available: true
   name: "Build a business on Open Source and Ruby"
   about: >
@@ -317,6 +329,7 @@
           share those mistakes and tips and tricks on how to avoid them.
         </p>
 - id: 13
+  event_id: 1
   available: true
   name: "Running a Fintech with Ruby"
   about:
@@ -368,6 +381,7 @@
           be more easily enjoyed.
         </p>
 - id: 14
+  event_id: 1
   available: true
   name: "Master of ceremonies"
   about:
