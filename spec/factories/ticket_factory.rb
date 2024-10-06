@@ -5,6 +5,7 @@ FactoryBot.define do
     shirt_size { "M" }
 
     trait :early_bird do
+      ticket_type { association :ticket_type, name: "Early Bird", price: 100 }
       price { 100 }
     end
 

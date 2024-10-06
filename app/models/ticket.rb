@@ -2,7 +2,7 @@ class Ticket < ApplicationRecord
   SHIRT_SIZES = %w[XS S M L XL XXL].freeze
 
   belongs_to :order
-  belongs_to :ticket_type, optional: true
+  belongs_to :ticket_type
   has_one :event, through: :order
 
   generates_token_for :event_access
@@ -19,6 +19,5 @@ class Ticket < ApplicationRecord
   def event_access_url = Link.ticket_url generate_token_for(:event_access)
   def qrcode = RQRCode::QRCode.new event_access_url
 
-  def net_price = (order.amount - order.refunded_amount) / order.tickets.count
-  def supporter? = net_price > 120
+  def supporter? = ticket_type.supporter?
 end
