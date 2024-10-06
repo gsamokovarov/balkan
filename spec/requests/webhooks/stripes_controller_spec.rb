@@ -72,8 +72,9 @@ RSpec.case Webhooks::StripesController, type: :request do
         type: "checkout.session.expired"
       }
     stripe_checkout_session_uid = stripe_expired_payload.dig :data, :object, :id
+    ticket_type = create :ticket_type, :enabled
     pending_tickets = (1..3).map do
-      build_ticket_params index: _1, price: 150
+      build_ticket_params index: _1, price: 150, ticket_type:
     end
 
     order = create(:order, stripe_checkout_session_uid:, pending_tickets:)
@@ -164,8 +165,9 @@ RSpec.case Webhooks::StripesController, type: :request do
       }
 
     stripe_checkout_session_uid = stripe_completed_payload.dig :data, :object, :id
+    ticket_type = create :ticket_type, :enabled
     pending_tickets = (1..3).map do
-      build_ticket_params index: _1, price: 150
+      build_ticket_params index: _1, price: 150, ticket_type:
     end
 
     order = create(:order, stripe_checkout_session_uid:, pending_tickets:)
@@ -289,8 +291,9 @@ RSpec.case Webhooks::StripesController, type: :request do
       }
 
     stripe_checkout_session_uid = stripe_completed_payload.dig :data, :object, :id
+    ticket_type = create :ticket_type, :enabled
     pending_tickets = (1..2).map do
-      build_ticket_params index: _1, price: 150
+      build_ticket_params index: _1, price: 150, ticket_type:
     end
 
     order = create(:order, stripe_checkout_session_uid:, pending_tickets:)
@@ -382,12 +385,13 @@ RSpec.case Webhooks::StripesController, type: :request do
     assert_have_http_status response, :ok
   end
 
-  def build_ticket_params(index:, price:)
+  def build_ticket_params(index:, price:, ticket_type:)
     {
       "name" => "John Doe #{index}",
       "email" => "john-#{index}@example.com",
       "price" => price.to_s,
-      "shirt_size" => "L"
+      "shirt_size" => "L",
+      "ticket_type_id" => ticket_type.id
     }
   end
 end

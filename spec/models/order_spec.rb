@@ -118,7 +118,7 @@ RSpec.case Order do
     assert_eq order.invoice.number, 10_001_049
   end
 
-  test "completion fails with ActiveRecord::InvalidForeignKey for missing ticket type" do
+  test "completion fails for pending tickets missing ticket type" do
     ticket_type = double id: 42
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
@@ -130,7 +130,7 @@ RSpec.case Order do
 
     order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params]
 
-    assert_raise_error ActiveRecord::InvalidForeignKey do
+    assert_raise_error ActiveRecord::RecordInvalid do
       order.complete! checkout_session
     end
   end
