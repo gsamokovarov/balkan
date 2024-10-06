@@ -1,6 +1,6 @@
 balkan2024 = Event.find_or_create_by! name: "Balkan Ruby 2024" do
-  _1.start_date = Date.new(2024, 4, 26)
-  _1.end_date = Date.new(2024, 4, 27)
+  _1.start_date = Date.new 2024, 4, 26
+  _1.end_date = Date.new 2024, 4, 27
 end
 
 balkan2024.ticket_types.find_or_create_by! name: "Free" do
@@ -24,16 +24,13 @@ balkan2024.ticket_types.find_or_create_by! name: "Supporter" do
 end
 
 balkan2024.invoice_sequence = InvoiceSequence.find_or_create_by! event: balkan2024 do
-  _1.initial_number = 10001049
+  _1.initial_number = 10_001_049
 end
 
 balkan2025 = Event.find_or_create_by! name: "Balkan Ruby 2025" do
-  _1.start_date = Date.new(2025, 4, 25)
-  _1.end_date = Date.new(2025, 4, 26)
-end
-
-balkan2025.invoice_sequence = InvoiceSequence.find_or_create_by! event: balkan2024 do
-  _1.initial_number = balkan2024.invoice_sequence.next_invoice_number
+  _1.start_date = Date.new 2025, 4, 25
+  _1.end_date = Date.new 2025, 4, 26
+  _1.invoice_sequence = balkan2024.invoice_sequence
 end
 
 balkan2025.ticket_types.find_or_create_by! name: "Free" do
@@ -48,5 +45,26 @@ end
 
 balkan2025.ticket_types.find_or_create_by! name: "Supporter" do
   _1.price = 200
+  _1.enabled = true
+end
+
+banitsa2024 = Event.find_or_create_by! name: "Ruby Banitsa 2024" do
+  _1.start_date = Date.new 2024, 12, 7
+  _1.end_date = Date.new 2024, 12, 7
+  _1.invoice_sequence = balkan2024.invoice_sequence
+end
+
+banitsa2024.ticket_types.find_or_create_by! name: "Student" do
+  _1.price = "12.34"
+  _1.enabled = false
+end
+
+banitsa2024.ticket_types.find_or_create_by! name: "Regular" do
+  _1.price = "42.0"
+  _1.enabled = true
+end
+
+banitsa2024.ticket_types.find_or_create_by! name: "Supporter" do
+  _1.price = "69"
   _1.enabled = true
 end
