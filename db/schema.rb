@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_27_131937) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_08_123451) do
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
     t.date "start_date", null: false
@@ -18,14 +18,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_27_131937) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "speaker_applications_end_date", default: "2024-02-02", null: false
+    t.integer "invoice_sequence_id"
+    t.index ["invoice_sequence_id"], name: "index_events_on_invoice_sequence_id"
   end
 
   create_table "invoice_sequences", force: :cascade do |t|
     t.integer "initial_number", null: false
-    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_invoice_sequences_on_event_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -93,7 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_27_131937) do
     t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id"
   end
 
-  add_foreign_key "invoice_sequences", "events"
+  add_foreign_key "events", "invoice_sequences"
   add_foreign_key "invoices", "invoice_sequences"
   add_foreign_key "invoices", "orders"
   add_foreign_key "orders", "events"
