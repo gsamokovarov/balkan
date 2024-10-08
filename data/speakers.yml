@@ -1,0 +1,39 @@
+- name: Radoslav Stankov
+  avatar: speakers/rado.png
+  github_url: "https://github.com/rstankov"
+  social_url: "https://x.com/rstankov"
+  about: >
+    <p>
+      Radoslav was the CTO of Product Hunt. He recently built Angry
+      Buildings as the single technical person on the team.
+    </p>
+- name: Bozhidar Batsov
+  avatar: speakers/bozhidar.jpg
+  github_url: "https://github.com/bbatsov"
+  social_url: "https://x.com/bbatsov"
+  about: >
+    <p>
+      Bozhidar is the author of RuboCop and the editor of the community Ruby
+      style guide. He's involved in a myriad of open-source projects, mostly
+      related to Ruby, Clojure and Emacs. Many people would probably describe
+      him as an Emacs zealot (and they would be right)
+    </p>
+- name: Ventsislav Nikolov
+  avatar: speakers/ventsi.jpg
+  github_url: "https://github.com/ventsislaf"
+  social_url: "https://twitter.com/ventsislaf"
+  about: >
+    <p>
+      Full-stack software developer. Building products from concept to launch with
+      Ruby, Hotwire, Elixir, React and Svelte. Co-founder of Ruby Lift.
+    </p>
+- name: Kasper Timm Hansen
+  avatar: speakers/kasper.jpg
+  github_url: "https://github.com/kaspth"
+  social_url: "https://twitter.com/kaspth"
+  about: >
+    <p>
+      On the Rails core team 2016-2022, now helping Rails shops upgrade their code
+      quality.
+    </p>
+
