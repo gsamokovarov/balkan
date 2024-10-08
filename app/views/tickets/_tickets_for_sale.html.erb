@@ -5,12 +5,14 @@
     <% end %>
   </div>
 
-  <div class="prose-xl max-w-prose prose-invert text-white">
-    <p>
-      Supporter tickets get our eternal gratitude and a hand-made gift, made by
-      the organizers!
-    </p>
-  </div>
+  <% if Current.event.balkan? %>
+    <div class="prose-xl max-w-prose prose-invert text-white">
+      <p>
+        Supporter tickets get our eternal gratitude and a hand-made gift, made by
+        the organizers!
+      </p>
+    </div>
+  <% end %>
 <% else %>
   <%= render "tickets/sold_out" %>
 <% end %>

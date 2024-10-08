@@ -2,14 +2,7 @@ class ApplicationMailer < ActionMailer::Base
   include MailHelper
   helper MailHelper
 
-  default from: email_address_with_name("genadi@balkanruby.com", "Genadi Samokovarov")
-  before_action :set_inline_logo
+  default from: email_address_with_name("genadi@hey.com", "Genadi Samokovarov")
 
   layout "mailer"
-
-  private
-
-  def set_inline_logo
-    attachments.inline["logo.png"] = Rails.root.join("app/assets/images/logo-email.png").read
-  end
 end

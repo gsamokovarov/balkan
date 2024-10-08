@@ -39,6 +39,10 @@ Rails.application.routes.draw do
   direct(:facebook) { "https://facebook.com/balkanruby" }
   direct(:youtube) { "https://www.youtube.com/@balkanruby6171" }
   direct(:banitsa) { "https://rubybanitsa.com" }
+  direct(:banitsa_twitter) { "https://twitter.com/@rubybanitsa" }
+  direct(:banitsa_facebook) { "https://facebook.com/rubybanitsa" }
+  direct(:banitsa_youtube) { "https://www.youtube.com/playlist?list=PLdorvCkWvyys-G8zXg1-bCHKULzUX-uyT" }
+  direct(:banitsa_contact) { "mailto:hi@rubybanitsa.com" }
   direct(:neuvents) { "https://neuvents.com" }
   direct(:cfp) { "https://forms.gle/NJY9PJWpud39ZQAr8" }
   direct(:cfp_responses) { "https://docs.google.com/spreadsheets/d/1A5BSvPOznCgHC9sbXpYelbjSVjIwODYCs0e1onNEyxU/edit?usp=sharing" }

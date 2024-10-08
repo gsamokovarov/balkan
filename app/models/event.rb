@@ -15,4 +15,10 @@ class Event < ApplicationRecord
   def beginning_countdown = FinalCountdown.until start_date
 
   def upcoming? = Date.current.before? start_date
+  def single_day? = start_date == end_date
+
+  def balkan? = name.include? "Balkan"
+  def banitsa? = name.include? "Banitsa"
+
+  def contact_email = balkan? ? "hi@balkanruby.com" : "hi@rubybanitsa.com"
 end

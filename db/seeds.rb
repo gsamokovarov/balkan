@@ -56,7 +56,7 @@ end
 
 banitsa2024.ticket_types.find_or_create_by! name: "Student" do
   _1.price = "12.34"
-  _1.enabled = false
+  _1.enabled = true
 end
 
 banitsa2024.ticket_types.find_or_create_by! name: "Regular" do

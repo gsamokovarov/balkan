@@ -20,20 +20,17 @@
     <% end %>
     <%= render "question", title: "Do you offer refunds?" do %>
       <p>
-        Yes, we do. Request one at <%= link_to "hi@balkanruby.com", "mailto://hi@balkanruby.com", class: "link-primary" %>
-        before <time datetime="2024-04-25">April 25, 2024</time>.
-      </p>
-    <% end %>
-    <%= render "question", title: "Do you offer childcare?" do %>
-      <p>
-        Yes, given enough interest, we will run a childcare program during the conference.
+        Yes, we do. Request one at <%= link_to Current.event.contact_email, "mailto://#{Current.event.contact_email}", class: "link-primary" %>
+        before <time datetime="<%= Current.event.start_date.iso8601 %>"><%= Current.event.start_date.to_fs :long  %></time>.
       </p>
     <% end %>
     <%= render "question", title: "What exactly do I get for my ticket?" do %>
       <p>
         You get access to the conference, swag, access to conference-run
-        parties, and other activities. Supporter tickets get a hand-made gift
-        made by the organizers.
+        parties, and other activities.
+        <% if Current.event.balkan? %>
+          Supporter tickets get a hand-made gift made by the organizers.
+        <% end %>
       </p>
     <% end %>
   <% end %>

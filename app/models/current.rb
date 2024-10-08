@@ -1,5 +1,5 @@
 class Current < ActiveSupport::CurrentAttributes
-  attribute :event
+  attribute :event, :host
 
   def show_banner? = false
 end

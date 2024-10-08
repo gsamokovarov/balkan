@@ -1,0 +1,56 @@
+<%= render "section" do %>
+  <div class="grid gap-8">
+    <div class="flex flex-col sm:flex-row gap-8" data-controller="hero">
+      <div class="flex flex-col gap-8">
+        <div>
+          <h1 class="text-4xl sm:text-5xl font-black">
+            Ruby Banitsa <span class="text-banitsa-500">conf</span>
+          </h1>
+          <div class="text-2xl sm:text-3xl font-semibold mt-3 text-white/70">
+            December 7th in Sofia, Bulgaria
+          </div>
+        </div>
+
+        <p class="text-xl max-w-prose">
+          We have been running Sofia's <%= link_to "Ruby Banitsa", banitsa_url, class: "link-primary" %> meetup for 7 years.
+          Let's celebrate it with our very first conference! A single-day event full of carbs, fun, and laid-back <span class="text-banitsa-500">Ruby</span>.
+        </p>
+      </div>
+
+      <% if Current.event.upcoming? && Current.event.beginning_countdown.ongoing? %>
+        <%= render "hero_countdown" %>
+      <% end %>
+    </div>
+
+    <div class="
+      -mx-4
+      px-4
+      h-72
+      flex
+      overflow-x-auto
+      snap-x
+      snap-mandatory
+      sm:mx-0
+      sm:px-0
+      sm:snap-none
+      sm:h-auto
+      sm:grid
+      sm:items-start
+      sm:grid-rows-[repeat(3,160px)]
+      sm:grid-cols-3
+      gap-4
+    ">
+      <%= image_tag "banitsa/puzl.jpg", alt: "Ruby Banitsa event",
+        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2 col-span-2",
+        lazy: true %>
+      <%= image_tag "banitsa/stefan.jpg", alt: "Ruby Banitsa event",
+        class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover",
+        lazy: true %>
+      <%= image_tag "banitsa/mitio.jpg", alt: "Ruby Banitsa event",
+        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object-left row-span-2",
+        lazy: true %>
+      <%= image_tag "banitsa/banitsa.jpg", alt: "Ruby Banitsa event",
+        class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object col-span-2",
+        lazy: true %>
+  </div>
+<% end %>

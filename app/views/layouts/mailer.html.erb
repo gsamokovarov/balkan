@@ -50,9 +50,11 @@
 
   <body class="antialiased text-black">
     <div class="flex flex-col">
-      <header class="py-6 px-4">
-        <%= image_tag attachments['logo.png'].url, title: "Balkan Ruby logo", alt: "Balkan Ruby logo" %>
-      </header>
+      <% if attachments['logo.png'] %>
+        <header class="py-6 px-4">
+          <%= image_tag attachments['logo.png'].url, title: "Logo", alt: "Logo" %>
+        </header>
+      <% end %>
 
       <div class="grow">
         <div class="mx-auto px-4">

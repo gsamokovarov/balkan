@@ -4,9 +4,9 @@ class TicketMailer < ApplicationMailer
     @ticket_png = ticket.qrcode.as_png size: 240
 
     attachments.inline["inline_ticket.png"] = @ticket_png.to_s
-    attachments["balkan_ruby_ticket.png"] = @ticket_png.to_s
+    attachments["ticket.png"] = @ticket_png.to_s
 
-    mail to: @ticket.email, subject: "Welcome to Balkan Ruby!"
+    mail to: @ticket.email, subject: "Welcome to #{ticket.event.name}"
   end
 
   def ticket_email(ticket)
@@ -14,9 +14,9 @@ class TicketMailer < ApplicationMailer
     @ticket_png = ticket.qrcode.as_png size: 240
 
     attachments.inline["inline_ticket.png"] = @ticket_png.to_s
-    attachments["balkan_ruby_ticket.png"] = @ticket_png.to_s
+    attachments["ticket.png"] = @ticket_png.to_s
 
-    mail to: @ticket.email, subject: "Your ticket for Balkan Ruby"
+    mail to: @ticket.email, subject: "Your ticket for #{ticket.event.name}"
   end
 
   def pre_event_email(ticket)
@@ -24,9 +24,9 @@ class TicketMailer < ApplicationMailer
     @ticket_png = ticket.qrcode.as_png size: 240
 
     attachments.inline["inline_ticket.png"] = @ticket_png.to_s
-    attachments["balkan_ruby_ticket.png"] = @ticket_png.to_s
+    attachments["ticket.png"] = @ticket_png.to_s
 
-    mail to: @ticket.email, subject: "Balkan Ruby is in a few days!"
+    mail to: @ticket.email, subject: "#{ticket.event.name} is in a few days!"
   end
 
   def post_event_email(ticket)

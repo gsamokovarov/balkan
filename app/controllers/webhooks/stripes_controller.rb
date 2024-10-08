@@ -20,7 +20,7 @@ module Webhooks
           order = Order.find_by! stripe_checkout_session_uid: checkout_session.id
           order.expire! checkout_session
         else
-          preconditon_failure "Unhandled event type: #{event.type}"
+          precondition_failure "Unhandled event type: #{event.type}"
         end
       rescue ActiveRecord::RecordNotFound => e
         Honeybadger.event "Stripe order not found", message: e.message, payload:

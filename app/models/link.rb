@@ -9,11 +9,9 @@ module Link
 
   delegate_missing_to :proxy
 
-  def with_lts_domain
-    precondition Rails.configuration.lts_domain, "LTS domain is not configured"
-
+  def with_host(domain)
     old_domain = proxy.default_url_options[:host]
-    proxy.default_url_options[:host] = Rails.configuration.lts_domain
+    proxy.default_url_options[:host] = domain || old_domain
 
     yield
   ensure
@@ -22,7 +20,5 @@ module Link
 
   private
 
-  def proxy
-    @proxy ||= ActionViewProxy.empty
-  end
+  def proxy = @proxy ||= ActionViewProxy.empty
 end

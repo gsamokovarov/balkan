@@ -17,7 +17,7 @@ class Invoice < ApplicationRecord
   end
 
   def document(locale:) = Invoice::Document.generate(self, locale:)
-  def filename(locale:) = "balkanruby-#{number}-#{locale}.pdf"
+  def filename(locale:) = "invoice-#{number}-#{locale}.pdf"
 
   def customer_details(locale:)
     name = customer_name || order.stripe.customer_details.name

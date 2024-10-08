@@ -1,0 +1,77 @@
+<footer class="py-16 bg-black text-white">
+  <%= render "container" do %>
+    <div class='flex flex-wrap flex-col sm:flex-row sm:justify-between items-center gap-12'>
+      <div class="flex items-center gap-2">
+        <p class="whitespace-nowrap">
+          Try <%= link_to "Banitsa", banitsa_url, class: "link-primary" %> while at
+          <%= link_to "Balkan Ruby", "https://balkanruby.com", class: "link-primary" %>.
+        </p>
+      </div>
+
+      <div class="flex items-center flex-wrap gap-10">
+        <%= link_to banitsa_twitter_url, class: "link-secondary", aria: { label: "Twitter" } do %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            class="w-6 h-6 fill-current"
+          >
+            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/>
+          </svg>
+        <% end %>
+
+        <%= link_to banitsa_facebook_url, class: "link-secondary", aria: { label: "Facebook" } do %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-6 h-6 fill-current"
+          >
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        <% end %>
+
+        <%= link_to banitsa_youtube_url, class: "link-secondary", aria: { label: "YouTube" } do %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-6 h-6 fill-current"
+          >
+            <path
+              d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"
+            ></path>
+            <polygon
+              class="fill-black stroke-black"
+              points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
+            ></polygon>
+          </svg>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='flex flex-wrap flex-col sm:flex-row sm:justify-between items-center gap-3 mt-6'>
+      <p class="text-sm text-white/70">
+        Ruby Banitsa is
+        <%= link_to neuvents_url, class: "link-secondary", aria: { label: "Neuvents" } do %>
+          <svg viewBox="0 0 53 75" class="w-5 mx-1 inline" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m48.9033181 29.0306593c0 .3554162-.2882458.6430099-.6436621.6430099h-14.9992174c-.3606334 0-.6534442.2928108-.6534442.6534442v17.136932c0 .4558457-.5836652.6462706-.8523468.2771594l-12.9293254-17.7388571c-.1499922-.2067283-.3906318-.3286785-.6462707-.3286785h-14.26556003c-.35672052 0-.64561849-.288898-.64561849-.6456185v-25.11781993c0-.3580248.29020225-.64822705.64822705-.64822705h44.33246957c.3612855 0 .6547485.29346295.6547485.65474845zm2.6137767-29.0306593h-50.86299849c-.3612855 0-.65409631.29346295-.65409631.65409631v73.69180739c0 .3612855.29281081.6540963.65409631.6540963h17.28757629c.3560684 0 .6443142-.2882458.6443142-.6443142v-17.3012712c0-.3919361.5008435-.5549711.7310488-.2386832l13.0584492 17.9162391c.1226023.1689042.3188964.2680295.526929.2680295h18.614681c.3612855 0 .6540963-.2928108.6540963-.6540963v-73.69180739c0-.36063336-.2928108-.65409631-.6540963-.65409631z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          </svg>
+        <% end %>
+        event.
+      </p>
+
+      <%= link_to "Code of Conduct", "https://berlincodeofconduct.org", class: "link-secondary text-white/70" %>
+      <%= link_to "Contact us", "mailto:hi@rubybanitsa.com", class: "link-secondary text-white/70" %>
+    </div>
+  <% end %>
+</footer>
