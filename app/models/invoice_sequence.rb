@@ -1,5 +1,4 @@
 class InvoiceSequence < ApplicationRecord
-  belongs_to :event
   has_many :invoices
 
   def next_invoice_number

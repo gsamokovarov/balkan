@@ -1,9 +1,9 @@
 class Event < ApplicationRecord
+  belongs_to :invoice_sequence
   has_many :orders
   has_many :ticket_types
   has_many :tickets, through: :orders
   has_many :subscribers
-  has_one :invoice_sequence
 
   def speakers = Talk.where(event_id: id).select(&:available).flat_map(&:speakers)
   def sponsors = Sponsor.all
