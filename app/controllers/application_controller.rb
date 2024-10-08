@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
       case request.host
       when "conf.rubybanitsa.com", -> _ { Rails.env.devleopment? }
         Event.includes(:ticket_types).find_by! name: "Ruby Banitsa 2024"
+      when "2024.balkanruby.com"
+        Event.includes(:ticket_types).find_by! name: "Balkan Ruby 2024"
       else
         Event.includes(:ticket_types).find_by! name: "Balkan Ruby 2025"
       end
