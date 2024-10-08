@@ -54,6 +54,11 @@ banitsa2024 = Event.find_or_create_by! name: "Ruby Banitsa 2024" do
   _1.invoice_sequence = balkan2024.invoice_sequence
 end
 
+banitsa2024.ticket_types.find_or_create_by! name: "Free" do
+  _1.price = 0
+  _1.enabled = false
+end
+
 banitsa2024.ticket_types.find_or_create_by! name: "Student" do
   _1.price = "12.34"
   _1.enabled = true
