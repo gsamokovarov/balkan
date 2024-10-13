@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_13_080746) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_13_135521) do
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
     t.date "start_date", null: false
@@ -44,15 +44,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_080746) do
   end
 
   create_table "lineup_members", force: :cascade do |t|
-    t.integer "event_id_id", null: false
-    t.integer "speaker_id_id", null: false
-    t.integer "talk_id_id"
+    t.integer "event_id", null: false
+    t.integer "speaker_id", null: false
+    t.integer "talk_id"
     t.boolean "announced", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id_id"], name: "index_lineup_members_on_event_id_id"
-    t.index ["speaker_id_id"], name: "index_lineup_members_on_speaker_id_id"
-    t.index ["talk_id_id"], name: "index_lineup_members_on_talk_id_id"
+    t.index ["event_id"], name: "index_lineup_members_on_event_id"
+    t.index ["speaker_id"], name: "index_lineup_members_on_speaker_id"
+    t.index ["talk_id"], name: "index_lineup_members_on_talk_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -134,9 +134,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_080746) do
   add_foreign_key "events", "invoice_sequences"
   add_foreign_key "invoices", "invoice_sequences"
   add_foreign_key "invoices", "orders"
-  add_foreign_key "lineup_members", "event_ids"
-  add_foreign_key "lineup_members", "speaker_ids"
-  add_foreign_key "lineup_members", "talk_ids"
+  add_foreign_key "lineup_members", "events"
+  add_foreign_key "lineup_members", "speakers"
+  add_foreign_key "lineup_members", "talks"
   add_foreign_key "orders", "events"
   add_foreign_key "subscribers", "events"
   add_foreign_key "talks", "event_ids"
