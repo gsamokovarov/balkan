@@ -8,13 +8,10 @@ class ApplicationController < ActionController::Base
   def set_current
     Current.host = request.host
     Current.event =
-      case request.host
-      when "conf.rubybanitsa.com", -> _ { Rails.env.devleopment? }
-        Event.includes(:ticket_types).find_by! name: "Ruby Banitsa 2024"
-      when "2024.balkanruby.com"
-        Event.includes(:ticket_types).find_by! name: "Balkan Ruby 2024"
+      if Rails.env.development?
+        Event.includes(:ticket_types).find_by! name: Settings.development_event
       else
-        Event.includes(:ticket_types).find_by! name: "Balkan Ruby 2025"
+        Event.includes(:ticket_types).find_by! host: request.host
       end
   end
 

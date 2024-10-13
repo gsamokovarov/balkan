@@ -1,10 +1,4 @@
 class Event < ApplicationRecord
-  HOSTS = {
-    "Ruby Banitsa 2024" => "conf.rubybanitsa.com",
-    "Balkan Ruby 2024" => "2024.balkanruby.com",
-    "Balkan Ruby 2025" => "balkanruby.com"
-  }
-
   belongs_to :invoice_sequence
   has_many :orders
   has_many :ticket_types
@@ -27,6 +21,4 @@ class Event < ApplicationRecord
   def banitsa? = name.include? "Banitsa"
 
   def contact_email = balkan? ? "hi@balkanruby.com" : "hi@rubybanitsa.com"
-
-  def host = HOSTS.fetch(name)
 end
