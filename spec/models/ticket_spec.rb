@@ -6,6 +6,6 @@ RSpec.case Ticket do
     ticket = create :ticket, :early_bird, order:, name: "John Doe", email: "john@example.com"
     token = ticket.generate_token_for :event_access
 
-    assert_eq ticket.event_access_url, "http://2024.balkanruby.com/tickets/#{token}"
+    assert_eq ticket.event_access_url, "http://www.example.com/tickets/#{token}"
   end
 end
