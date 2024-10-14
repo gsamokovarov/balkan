@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_13_135521) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_13_154400) do
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
     t.date "start_date", null: false
@@ -100,12 +100,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_135521) do
   end
 
   create_table "talks", force: :cascade do |t|
-    t.integer "event_id_id"
     t.string "name", null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id_id"], name: "index_talks_on_event_id_id"
+    t.integer "event_id", null: false
+    t.index ["event_id"], name: "index_talks_on_event_id"
   end
 
   create_table "ticket_types", force: :cascade do |t|
@@ -139,7 +139,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_135521) do
   add_foreign_key "lineup_members", "talks"
   add_foreign_key "orders", "events"
   add_foreign_key "subscribers", "events"
-  add_foreign_key "talks", "event_ids"
+  add_foreign_key "talks", "events"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "orders"
   add_foreign_key "tickets", "ticket_types"
