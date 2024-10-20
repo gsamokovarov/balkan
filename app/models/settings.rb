@@ -9,7 +9,7 @@ module Settings
   def stripe_secret_key = get :stripe_secret_key
   def stripe_webhook_secret = get :stripe_webhook_secret
 
-  def development_event = "Ruby Banitsa 2024"
+  def development_event = "Balkan Ruby 2025"
 
   private
 

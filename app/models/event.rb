@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :invoice_sequence
   has_many :orders
-  has_many :ticket_types
+  has_many :ticket_types, -> { order :price }
   has_many :tickets, through: :orders
   has_many :subscribers
 
