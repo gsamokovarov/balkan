@@ -1,6 +1,6 @@
 <%# locals: (speaker:, rotation_class:) %>
 
-<%= link_to speaker.talk, class: [
+<%= link_to talk_path(speaker.talk.id), class: [
   rotation_class,
   "rounded-md transition ease-in-out h-min",
   "hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1 hover:scale-110 hover:z-10"
