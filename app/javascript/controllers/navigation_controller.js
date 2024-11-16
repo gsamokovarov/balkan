@@ -25,8 +25,6 @@ export default class extends Controller {
   }
 
   openValueChanged(open) {
-    console.log(open)
-
     const headerClasses = ["fixed", "inset-0", "overflow-y-auto"]
 
     document.body.classList.toggle("overflow-hidden", open)
