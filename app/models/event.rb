@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   has_many :tickets, through: :orders
   has_many :subscribers
 
+  def static_speakers = StaticSpeaker.where(event_id: id)
   def speakers = StaticTalk.where(event_id: id).select(&:available).flat_map(&:speakers)
   def sponsors = Sponsor.all
   def community_partners = CommunityPartner.all

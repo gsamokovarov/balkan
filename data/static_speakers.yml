@@ -7,6 +7,7 @@
       Radoslav was the CTO of Product Hunt. He recently built Angry
       Buildings as the single technical person on the team.
     </p>
+  event_id: 3
 - name: Bozhidar Batsov
   avatar: speakers/bozhidar.jpg
   github_url: "https://github.com/bbatsov"
@@ -18,6 +19,7 @@
       related to Ruby, Clojure and Emacs. Many people would probably describe
       him as an Emacs zealot (and they would be right)
     </p>
+  event_id: 3
 - name: Ventsislav Nikolov
   avatar: speakers/ventsi.jpg
   github_url: "https://github.com/ventsislaf"
@@ -27,6 +29,7 @@
       Full-stack software developer. Building products from concept to launch with
       Ruby, Hotwire, Elixir, React and Svelte. Co-founder of Ruby Lift.
     </p>
+  event_id: 3
 - name: Kasper Timm Hansen
   avatar: speakers/kasper.jpg
   github_url: "https://github.com/kaspth"
@@ -36,4 +39,47 @@
       On the Rails core team 2016-2022, now helping Rails shops upgrade their code
       quality.
     </p>
+  event_id: 3
 
+- name: Julia López
+  avatar: speakers/julia.png
+  github_url:
+  social_url: https://x.com/yukideluxe
+  about: >
+    <p>
+      I am Julia López and I’ve been working with Rails for over a decade! Currently,
+      I am working as a Senior Software Engineer at Harvest, where we navigate the
+      intricacies of maintaining and enhancing a 17-year-old Rails application. After
+      the conference talks, you can find me at the Karaoke events!
+    </p>
+  event_id: 2
+- name: Bozhidar Batsov
+  avatar: speakers/bozhidar.jpg
+  github_url: "https://github.com/bbatsov"
+  social_url: "https://x.com/bbatsov"
+  about: >
+    <p>
+      Bozhidar is the author of RuboCop and the editor of the community Ruby
+      style guide. He's involved in a myriad of open-source projects, mostly
+      related to Ruby, Clojure and Emacs. Many people would probably describe
+      him as an Emacs zealot (and they would be right)
+    </p>
+  event_id: 2
+- name: Andrey Sitnik
+  avatar: speakers/andrey.jpg
+  github_url: "https://github.com/bbatsov"
+  social_url: "https://x.com/bbatsov"
+  about: >
+    <p>
+      Author of PostCSS and Autoprefixer, Principal Frontend Engineer at Evil Martians.
+    </p>
+  event_id: 2
+- name: Stefan Kanev
+  avatar: speakers/stefan.jpg
+  github_url: "https://github.com/bbatsov"
+  social_url: "https://x.com/bbatsov"
+  about: >
+    <p>
+      CTO at Dext. Host of https://tilde-slash.fm.
+    </p>
+  event_id: 2
