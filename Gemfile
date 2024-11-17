@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.3.3"
+ruby "3.3.6"
 
 gem "bootsnap", require: false
 gem "countries", require: "countries/global"
