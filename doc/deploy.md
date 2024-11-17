@@ -1,4 +1,4 @@
-Documentation for the `bin/deploy` script: how it works, how to configure it, and how to provision
+Documentation for the `bin/hamal` script: how it works, how to configure it, and how to provision
 new servers.
 
 **PLACEHOLDERS**: Some commands and configuration snippets described in this configuration are
@@ -9,7 +9,7 @@ commands / copying the configuration.
 
 # Overview
 
-`bin/deploy` implements a simple deploy process for a self-hosted app on a server that you
+`bin/hamal` implements a simple deploy process for a self-hosted app on a server that you
 administer. It:
 
 1. Connects to the server via SSH. (All subsequent stages happen on the server)
@@ -247,13 +247,13 @@ If this is an existing app, restore its database to `/var/lib/#{app_name}/db`. M
 user and group are `rails:rails`.
 
 If this is a new app, create its database by running `bin/rails db:create` in out of its images. You
-will likely have to do this at a later point, when you do have such an image. Examine `bin/deploy`
+will likely have to do this at a later point, when you do have such an image. Examine `bin/hamal`
 to determine what arguments to `docker run` are needed, e.g. to set ENV variables and mount host
 directories. The final commands you're looking for will look something like this:
 
 ```
-docker run --rm <args inferred from bin/deploy> --entrypoint '/rails/bin/rails' <app_image> -- db:create
-docker run --rm <args inferred from bin/deploy> --entrypoint '/rails/bin/rails' <app_image> -- db:schema:load
+docker run --rm <args inferred from bin/hamal> --entrypoint '/rails/bin/rails' <app_image> -- db:create
+docker run --rm <args inferred from bin/hamal> --entrypoint '/rails/bin/rails' <app_image> -- db:schema:load
 ```
 
 ## GitHub
@@ -304,7 +304,7 @@ The deploy script expects certain configuration in `config/deploy.yml`:
 Just pass the commit you want deployed to `bin/deploy`:
 
 ```
-bin/deploy b04c0b567dc0e94f2c87cbb06f778008e275804b
+bin/hamal b04c0b567dc0e94f2c87cbb06f778008e275804b
 ```
 
 Note: The commit must have been pushed to the Github repo. The deploy script does not deploy local
