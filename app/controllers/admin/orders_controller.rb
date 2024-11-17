@@ -1,4 +1,8 @@
 class Admin::OrdersController < Admin::ApplicationController
+  def index
+    @orders = Order.completed.includes(:event, :invoice, :tickets).order("completed_at DESC")
+  end
+
   def show
     @order = Order.completed.includes(tickets: :ticket_type).find params[:id]
 

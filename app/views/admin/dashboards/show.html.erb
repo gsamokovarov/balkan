@@ -11,33 +11,23 @@
     } %>
   <% end %>
 
-  <%= render "section", title: "Orders", cta: -> {
-    admin_button_group(
-      {name: "CSV Export", link: true, href: report_admin_orders_path(format: :csv)},
-      {name: "Invoice Export", link: true, href: report_admin_orders_path(format: :tar)},
-    )
-  } do %>
-    <%= render "orders", orders: @orders %>
+  <%= render "section", title: "Tickets" do %>
+    <%= render "admin/tickets/tickets", tickets: @orders.flat_map(&:tickets) %>
   <% end %>
 
   <%= render "section", title: "Shirts" do %>
     <% shirt_sizes = @orders.flat_map(&:tickets).group_by(&:shirt_size).transform_values(&:size) %>
 
     <%= render "stats", data: {
-      "XS (available 5)" => shirt_sizes["XS"],
-      "S (available 30)" => shirt_sizes["S"],
-      "M (available 55)" => shirt_sizes["M"],
-      "L (available 50)" => shirt_sizes["L"],
-      "XL (available 35)" => shirt_sizes["XL"],
-      "XXL (available 20)" => shirt_sizes["XXL"],
+      "XS (available 5)" => shirt_sizes["XS"] || 0,
+      "S (available 30)" => shirt_sizes["S"] || 0,
+      "M (available 55)" => shirt_sizes["M"] || 0,
+      "L (available 50)" => shirt_sizes["L"] || 0,
+      "XL (available 35)" => shirt_sizes["XL"] || 0,
+      "XXL (available 20)" => shirt_sizes["XXL"] || 0,
     } %>
   <% end %>
 
-  <%= render "section", title: "Accounting", cta: -> {
-    admin_button :primary, link: true, href: "https://docs.google.com/spreadsheets/d/1DSlirCX6E-LFo0sv4Sa6eQTKR1Gm0O5gk1ugHylOJx4/edit?usp=sharing" do
-      "View in Google Sheets"
-    end
-  } do %>
-    <iframe src="https://docs.google.com/spreadsheets/d/1DSlirCX6E-LFo0sv4Sa6eQTKR1Gm0O5gk1ugHylOJx4/edit?usp=sharing" class="w-full h-[620px] border-2 border-gray-300 rounded-md"></iframe>
-  <% end %>
+  <%= render "embedding",title: "Accounting", button_name: "View in Google Sheets",
+    link: "https://docs.google.com/spreadsheets/d/1DSlirCX6E-LFo0sv4Sa6eQTKR1Gm0O5gk1ugHylOJx4/edit?usp=sharing" %>
 </div>

@@ -1,0 +1,3 @@
+<%= render "section", title: "Orders", description: "Total: #{@orders.size}" do %>
+  <%= render "admin/orders/orders", orders: @orders %>
+<% end %>

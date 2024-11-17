@@ -23,8 +23,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboards#show"
+    get "/current/orders", to: "dashboards#orders", as: :current_orders
     resource :login, only: [:show, :create]
-    resources :orders, only: [:show] do
+    resources :tickets, only: [:index]
+    resources :orders, only: [:index, :show] do
       collection do
         get :report
       end

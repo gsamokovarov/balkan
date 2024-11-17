@@ -1,0 +1,45 @@
+<%# locals: (tickets:) %>
+
+<div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+	<table class="min-w-full divide-y divide-gray-300">
+		<thead>
+			<tr>
+				<th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">#</th>
+				<th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Name</th>
+				<th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Email</th>
+				<th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Date</th>
+				<th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Type</th>
+				<th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Shirt</th>
+				<th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Price</th>
+			</tr>
+		</thead>
+		<tbody class="divide-y divide-gray-200 bg-white">
+			<% tickets.each do |ticket| %>
+				<tr class="border-t border-gray-300">
+					<td class="whitespace-nowrap p-3 text-sm font-semibold text-gray-500">
+						<%= link_to ticket.id, ticket.event_access_url, data_turbo_disable: true %>
+					</td>
+					<td class="whitespace-nowrap p-3 text-sm font-semibold text-gray-900">
+						<%= link_to ticket.name, ticket.event_access_url, data_turbo_disable: true %>
+					</td>
+					<td class="whitespace-nowrap p-3 text-sm font-semibold text-gray-900">
+						<%= link_to ticket.email, ticket.event_access_url, data_turbo_disable: true %>
+					</td>
+					<td class="whitespace-nowrap p-3 text-sm font-semibold text-gray-900">
+						<%= ticket.created_at.to_date.iso8601 %>
+					</td>
+					<td class="whitespace-nowrap p-3 text-sm font-semibold text-gray-900">
+						<%= ticket.ticket_type.name %>
+					</td>
+					<td class="whitespace-nowrap p-3 text-sm font-semibold text-gray-900">
+						<%= ticket.shirt_size %>
+					</td>
+					<td class="whitespace-nowrap p-3 text-sm font-semibold text-gray-900">
+						<%= format_money ticket.price %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+

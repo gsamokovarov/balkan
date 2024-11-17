@@ -8,6 +8,6 @@
     <% end %>
   <% end %>
 
-  <%= render "tickets", order: @order %>
+  <%= render "admin/tickets/tickets", tickets: @order.tickets %>
   <%= render "documents", order: @order %>
 <% end %>

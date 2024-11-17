@@ -53,4 +53,17 @@ module AdminHelper
       content
     end
   end
+
+  def admin_find_current_nav_link(nav_links)
+    nav_links.each do |link|
+      if nested_nav_links = link[:items]
+        nested_link = admin_find_current_nav_link nested_nav_links
+        return nested_link if nested_link
+      elsif link[:path]
+        return link if current_page? link[:path]
+      end
+    end
+
+    nil
+  end
 end

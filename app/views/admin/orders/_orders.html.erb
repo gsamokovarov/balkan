@@ -1,0 +1,57 @@
+<%# locals: (orders:) %>
+
+<div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+  <table class="min-w-full divide-y divide-gray-300">
+    <thead>
+      <tr>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">#</th>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Name</th>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Date</th>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Status</th>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Event</th>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Invoice</th>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Email</th>
+        <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">Price</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <% orders.each do |order| %>
+        <tr class="border-t border-gray-200">
+          <td scope="colgroup" class="p-3 text-left text-sm font-semibold text-gray-500 sm:pl-3">
+            <%= link_to order.id, admin_order_path(order) %>
+          </td>
+          <td scope="colgroup" class="p-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">
+            <%= link_to order.name, admin_order_path(order) %>
+          </td>
+          <td
+            scope="colgroup"
+            class="p-3 text-nowrap text-left text-sm font-semibold text-gray-900 sm:pl-3"
+          >
+            <%= order.completed_at.to_date.iso8601 %>
+          </td>
+          <td scope="colgroup" class="p-3 text-left text-sm font-semibold">
+            <% if order.refunded? %>
+              <%= admin_badge :danger, "Refunded", title: format_money(order.refunded_amount) %>
+            <% elsif order.free? %>
+              <%= admin_badge :warning, "Free", title: order.free_reason %>
+            <% else %>
+              <%= admin_badge :success, "Completed" %>
+            <% end %>
+          </td>
+          <td scope="colgroup" class=" whitespace-nowrap p-3 text-left text-sm font-semibold text-gray-900">
+            <%= order.event.name %>
+          </td>
+          <td scope="colgroup" class="p-3 text-left text-sm font-semibold">
+            <%= order.issue_invoice? ? "Yes" : "No" %>
+          </td>
+          <td scope="colgroup" class="p-3 text-left text-sm font-semibold">
+            <%= order.email %>
+          </td>
+          <td scope="colgroup" class="p-3 text-left text-sm font-semibold text-gray-900">
+            <%= format_money order.amount %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
