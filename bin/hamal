@@ -211,20 +211,20 @@ class RemoteExecutor
     raise "Invalid remote user #{@remote_user}" unless [:root, :rails].include? @remote_user
   end
 
-  def sh(command, interactive: false, raise_on_error: false)
+  def sh(command, interactive: false, abort_on_error: false)
     dir_override = "cd #{@remote_dir};" if @remote_dir
     user_override = "runuser -u rails" if @remote_user == :rails
-    ssh "#{dir_override} #{user_override} #{command}", interactive:, raise_on_error:
+    ssh "#{dir_override} #{user_override} #{command}", interactive:, raise_on_error: abort_on_error
   end
 
-  def sh!(command, interactive: false) = sh command, interactive:, raise_on_error: true
+  def sh!(command, interactive: false) = sh command, interactive:, abort_on_error: true
 end
 
 ExecResult = Struct.new :output, :exit_code do
   def success? = exit_code.zero?
 end
 
-def ssh(remote_command, raise_on_error:, interactive: false)
+def ssh(remote_command, abort_on_error:, interactive: false)
   remote_command = remote_command.gsub "'", %q('"'"')
 
   output =
@@ -236,7 +236,7 @@ def ssh(remote_command, raise_on_error:, interactive: false)
       `ssh root@#{server} '#{remote_command}'`.strip
     end
 
-  raise "Failed to execute `#{remote_command}` on `#{server}`" if raise_on_error && !$CHILD_STATUS.success?
+  abort "Failed to execute `#{remote_command}` on `#{server}`" if abort_on_error && !$CHILD_STATUS.success?
 
   ExecResult.new output:, exit_code: $CHILD_STATUS.exitstatus
 end
