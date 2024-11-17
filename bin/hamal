@@ -24,7 +24,6 @@ end
 #
 
 def deploy_command
-  deploy
   build_new_image
   run_deploy_tasks
   new_container_port, old_containers = start_new_container
