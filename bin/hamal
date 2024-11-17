@@ -214,7 +214,7 @@ class RemoteExecutor
   def sh(command, interactive: false, abort_on_error: false)
     dir_override = "cd #{@remote_dir};" if @remote_dir
     user_override = "runuser -u rails" if @remote_user == :rails
-    ssh "#{dir_override} #{user_override} #{command}", interactive:, raise_on_error: abort_on_error
+    ssh "#{dir_override} #{user_override} #{command}", interactive:, abort_on_error:
   end
 
   def sh!(command, interactive: false) = sh command, interactive:, abort_on_error: true
