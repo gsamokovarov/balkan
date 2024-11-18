@@ -15,19 +15,5 @@
     <%= render "admin/tickets/tickets", tickets: @orders.flat_map(&:tickets) %>
   <% end %>
 
-  <%= render "section", title: "Shirts" do %>
-    <% shirt_sizes = @orders.flat_map(&:tickets).group_by(&:shirt_size).transform_values(&:size) %>
-
-    <%= render "stats", data: {
-      "XS (available 5)" => shirt_sizes["XS"] || 0,
-      "S (available 30)" => shirt_sizes["S"] || 0,
-      "M (available 55)" => shirt_sizes["M"] || 0,
-      "L (available 50)" => shirt_sizes["L"] || 0,
-      "XL (available 35)" => shirt_sizes["XL"] || 0,
-      "XXL (available 20)" => shirt_sizes["XXL"] || 0,
-    } %>
-  <% end %>
-
-  <%= render "embedding",title: "Accounting", button_name: "View in Google Sheets",
-    link: "https://docs.google.com/spreadsheets/d/1DSlirCX6E-LFo0sv4Sa6eQTKR1Gm0O5gk1ugHylOJx4/edit?usp=sharing" %>
+  <%= render "embedding", title: "Call for speakers", button_name: "View results", link: cfp2025_responses_url %>
 </div>
