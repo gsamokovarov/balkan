@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   direct(:banitsa_youtube) { "https://www.youtube.com/playlist?list=PLdorvCkWvyys-G8zXg1-bCHKULzUX-uyT" }
   direct(:banitsa_contact) { "mailto:hi@rubybanitsa.com" }
   direct(:neuvents) { "https://neuvents.com" }
-  direct(:cfp) { "https://forms.gle/NJY9PJWpud39ZQAr8" }
-  direct(:cfp_responses) { "https://docs.google.com/spreadsheets/d/1A5BSvPOznCgHC9sbXpYelbjSVjIwODYCs0e1onNEyxU/edit?usp=sharing" }
+  direct(:cfp2024) { "https://forms.gle/NJY9PJWpud39ZQAr8" }
+  direct(:cfp2024_responses) { "https://docs.google.com/spreadsheets/d/1A5BSvPOznCgHC9sbXpYelbjSVjIwODYCs0e1onNEyxU/edit?usp=sharing" }
   direct(:slack) { "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw" }
 end
