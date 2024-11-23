@@ -1,9 +1,7 @@
 <%# locals: (orders:) %>
 
 <%= admin_table orders do
-  column "#",   -> { link_to _1.id, admin_order_path(_1) }
-  column :name, -> { link_to _1.name, admin_order_path(_1) }
-  column :date, -> { _1.completed_at.to_date.iso8601 }
+  column "#", -> { link_to _1.id, admin_order_path(_1) }
 
   column :status do |order|
     if order.refunded?
@@ -15,9 +13,10 @@
     end
   end
 
+  column :name,    -> { link_to _1.name, admin_order_path(_1) }
+  column :email
+  column :date,    -> { _1.completed_at.to_date.iso8601 }
   column :event,   -> { _1.event.name }
   column :invoice, -> { _1.issue_invoice? ? "Yes" : "No" }
-  column :email,   -> { _1.email }
   column :price,   -> { format_money _1.amount }
 end %>
-
