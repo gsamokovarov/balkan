@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         post :invoice
       end
     end
+    resources :speakers
   end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }

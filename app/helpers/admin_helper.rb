@@ -22,7 +22,7 @@ module AdminHelper
 
   def admin_button(variant, link: false, **options, &)
     classes = [
-      "block rounded-md px-3 py-2 text-center text-sm font-semibold shadow-sm",
+      "inline-block rounded-md px-3 py-2 text-center text-sm font-semibold shadow-sm",
       "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
       ADMIN_BUTTON_VARIANTS.fetch(variant),
       options[:class]
@@ -65,6 +65,14 @@ module AdminHelper
     end
 
     nil
+  end
+
+  def admin_form(object, **options, &)
+    options[:html] = { class: "space-y-6", "data-turbo": false, **(options[:html] || {}) }
+
+    tag.div class: "sm:max-w-sm" do
+      form_with model: object, builder: Admin::FormBuilder, **options, &
+    end
   end
 
   def admin_table(objects, &)

@@ -1,0 +1,10 @@
+<%# locals: (speaker:) %>
+
+<%= admin_form [:admin, speaker] do |f| %>
+  <%= f.text_input :name %>
+  <%= f.text_area_input :bio %>
+  <%= f.text_input :github_url %>
+  <%= f.text_input :twitter_url %>
+  <%= f.file_input :avatar %>
+  <%= f.submit %>
+<% end %>
