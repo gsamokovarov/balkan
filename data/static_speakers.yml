@@ -40,6 +40,16 @@
       quality.
     </p>
   event_id: 3
+- name: Nikola Jichev
+  avatar: speakers/nikola.jpg
+  github_url: "https://github.com/njichev"
+  social_url:
+  about: >
+    <p>
+      On the Rails core team 2016-2022, now helping Rails shops upgrade their code
+      quality.
+    </p>
+  event_id: 3
 
 - name: Julia López
   avatar: speakers/julia.png
