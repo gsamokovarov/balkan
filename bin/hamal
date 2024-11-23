@@ -14,6 +14,8 @@ def main
     console_command
   when "logs"
     logs_command
+  when "sudo"
+    sudo_command
   else
     help_command
   end
@@ -65,6 +67,10 @@ def logs_command
   end
 end
 
+def sudo_command
+  system "ssh root@#{server}", exception: true
+end
+
 def help_command
   puts <<~HELP
     Usage: bin/hamal [command]
@@ -73,6 +79,7 @@ def help_command
       deploy   - Deploy the app to the server
       console  - Run Rails console in the deployed container
       logs     - Follow logs of the deployed container
+      sudo     - SSH into the server as administrator
   HELP
 end
 
