@@ -80,7 +80,7 @@ module Invoice::Document
 
     def genadi_ceo? = invoice.created_at.after? GENADI_AS_CEO_DATE
 
-    def t(key, **options) = I18n.t "invoicing.#{key}", **options.merge(locale: @locale)
+    def t(key, **) = I18n.t("invoicing.#{key}", **, locale: @locale)
   end
 
   def generate(invoice, locale:)
