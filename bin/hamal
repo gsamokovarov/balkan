@@ -116,6 +116,7 @@ def run_deploy_tasks
         "--env-file #{project_root}/env_file " \
         "-e GIT_REVISION=#{deployed_revision} " \
         "-v #{project_root}/db:/rails/db/#{deploy_env} " \
+        "-v #{project_root}/storage:/rails/storage " \
         "--entrypoint '/rails/bin/rails' " \
         "#{deployed_image} " \
         "-- db:migrate"
@@ -144,6 +145,7 @@ def start_new_container
         "--env-file #{project_root}/env_file " \
         "-e GIT_REVISION=#{deployed_revision} " \
         "-v #{project_root}/db:/rails/db/#{deploy_env} " \
+        "-v #{project_root}/storage:/rails/storage " \
         "-p 127.0.0.1:#{available_port}:3000 " \
         "#{deployed_image}"
   end
