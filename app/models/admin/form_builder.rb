@@ -33,12 +33,13 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     ]
 
     image_preview_classes = [
-      "w-full mb-2 aspect-square object-cover rounded-md border-1 border-gray-300"
+      "w-full aspect-square object-cover rounded-md border-1 border-gray-300"
     ]
 
     input_for method do
       attachment = object.public_send method
       if attachment.attached?
+        file_classes << "mt-2"
         @template.concat @template.image_tag(attachment, class: image_preview_classes)
       end
       @template.concat file_field(method, class: file_classes, **)
