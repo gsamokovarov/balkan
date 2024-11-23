@@ -5,7 +5,7 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600"
   }
 
-  def text_input(method, **options)
+  def text_input(method, **)
     classes = [
       FIELD_CLASSES[:base],
       object.errors[method].any? && FIELD_CLASSES[:error],
@@ -13,11 +13,11 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     ]
 
     input_for method do
-      @template.concat text_field(method, class: classes, **options)
+      @template.concat text_field(method, class: classes, **)
     end
   end
 
-  def text_area_input(method, **options)
+  def text_area_input(method, **)
     classes = [
       FIELD_CLASSES[:base],
       object.errors[method].any? && FIELD_CLASSES[:error],
@@ -25,7 +25,19 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     ]
 
     input_for method do
-      @template.concat text_area(method, class: classes, **options)
+      @template.concat text_area(method, class: classes, **)
+    end
+  end
+
+  def password_input(method, **)
+    classes = [
+      FIELD_CLASSES[:base],
+      object.errors[method].any? && FIELD_CLASSES[:error],
+      object.errors[method].none? && FIELD_CLASSES[:valid]
+    ]
+
+    input_for method do
+      @template.concat password_field(method, class: classes, **)
     end
   end
 
@@ -62,9 +74,9 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
   private
 
   def input_for(method, &block)
-    @template.tag.div class: "space-y-6" do
+    @template.tag.div do
       @template.concat label(method, class: "block text-sm font-medium leading-6 text-gray-900")
-      @template.concat @template.tag.div(&block)
+      @template.concat @template.tag.div(class: "mt-2", &block)
       if object.errors[method].any?
         @template.concat @template.tag.p object.errors[method].first, class: "mt-2 text-sm text-red-600"
       end
