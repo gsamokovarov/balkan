@@ -35,7 +35,7 @@
       <main class="py-10 lg:pl-52">
         <div class="px-4 sm:px-6 lg:px-8">
           <% flash.each do |type, message| %>
-            <%= render "admin/application/alert" do %>
+            <%= render "admin/application/alert", temporary: true do %>
               <%= message %>
             <% end %>
           <% end %>
