@@ -113,6 +113,9 @@ GEM
     factory_bot_rails (6.4.2)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     frozen_record (0.27.0)
       activemodel
     globalid (1.2.1)
@@ -125,6 +128,9 @@ GEM
     icalendar (2.8.0)
       ice_cube (~> 0.16)
     ice_cube (0.16.4)
+    image_processing (1.13.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (1.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -147,6 +153,7 @@ GEM
       rackup (~> 2)
       sqlite3 (>= 1.6.0, < 2.0.0)
       tilt (~> 2)
+    logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -157,6 +164,7 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.1)
     msgpack (1.7.2)
@@ -285,6 +293,9 @@ GEM
       parser (>= 3.3.1.0)
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
+    ruby-vips (2.2.2)
+      ffi (~> 1.12)
+      logger
     rubyzip (2.3.2)
     selenium-webdriver (4.15.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -353,6 +364,7 @@ DEPENDENCIES
   hashie
   honeybadger (~> 5.3)
   icalendar
+  image_processing
   importmap-rails
   invisible_captcha
   jbuilder
