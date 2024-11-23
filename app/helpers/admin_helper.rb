@@ -66,4 +66,8 @@ module AdminHelper
 
     nil
   end
+
+  def admin_table(objects, &)
+    render "admin/application/table", objects:, table_def: Admin::TableDefinition.new(self, &)
+  end
 end
