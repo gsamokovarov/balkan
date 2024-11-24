@@ -35,5 +35,5 @@ class Admin::TalksController < Admin::ApplicationController
     end
   end
 
-  private def talk_params = params.require(:talk).permit(:title, :description, :speaker_id)
+  private def talk_params = params.require(:talk).permit(:name, :description, speaker_ids: [])
 end

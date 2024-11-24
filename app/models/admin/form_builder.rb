@@ -26,6 +26,12 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def select_input(method, choices, **)
+    input_for method do
+      @template.concat select(method, choices, {}, class: field_classes(method), **)
+    end
+  end
+
   def file_input(method, **)
     file_classes = [
       "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",
