@@ -16,7 +16,7 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
 
   def text_area_input(method, **)
     input_for method do
-      @template.concat text_area(method, class: field_classes(method), **)
+      @template.concat text_area(method, class: field_classes(method), rows: 8, **)
     end
   end
 
