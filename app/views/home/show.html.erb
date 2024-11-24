@@ -1,4 +1,6 @@
-<% if Current.event.balkan? %>
+<% if Current.event.balkan?(2024) %>
+  <%= render "balkan_2024" %>
+<% elsif Current.event.balkan? %>
   <%= render "balkan" %>
 <% else %>
   <%= render "banitsa" %>

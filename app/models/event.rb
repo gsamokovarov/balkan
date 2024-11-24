@@ -18,8 +18,8 @@ class Event < ApplicationRecord
   def upcoming? = Date.current.before? start_date
   def single_day? = start_date == end_date
 
-  def balkan? = name.include? "Balkan"
-  def banitsa? = name.include? "Banitsa"
+  def balkan?(year = nil) = name.match? "Balkan.*#{year}"
+  def banitsa?(year = nil) = name.match? "Banitsa.*#{year}"
 
   def contact_email = balkan? ? "hi@balkanruby.com" : "hi@rubybanitsa.com"
 end
