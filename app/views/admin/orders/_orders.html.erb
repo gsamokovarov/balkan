@@ -13,8 +13,8 @@
     end
   end
 
-  column :name,    -> { link_to _1.name, admin_order_path(_1) }
-  column :email
+  column :name,    -> { link_to truncate(_1.name, length: 20), admin_order_path(_1), title: _1.name }
+  column :email,   -> { link_to truncate(_1.email, length: 20), admin_order_path(_1), title: _1.name }
   column :date,    -> { _1.completed_at.to_date.iso8601 }
   column :event,   -> { _1.event.name }
   column :invoice, -> { _1.issue_invoice? ? "Yes" : "No" }
