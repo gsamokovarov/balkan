@@ -30,10 +30,12 @@ Rails.application.routes.draw do
       collection do
         get :report
       end
-
       member do
         post :invoice
       end
+    end
+    resources :events, only: [] do
+      resources :lineup
     end
     resources :speakers
     resources :talks

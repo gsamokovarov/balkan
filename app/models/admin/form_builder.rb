@@ -26,9 +26,18 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def select_input(method, choices, **)
+  def readonly_input(method, choices = [], options = {}, html_options = {})
+    readonly_classes = field_classes method, "bg-opacity-50 cursor-not-allowed"
+
     input_for method do
-      @template.concat select(method, choices, {}, class: field_classes(method), **)
+      @template.concat select(method, choices, options, class: readonly_classes, disabled: true, **html_options)
+    end
+  end
+
+  def select_input(method, choices, options = {}, html_options = {})
+    error_method = method.to_s.delete_suffix "_id"
+    input_for method, error_method: do
+      @template.concat select(method, choices, options, class: field_classes(method), **html_options)
     end
   end
 
@@ -59,21 +68,22 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def input_for(method, &block)
+  def input_for(method, error_method: method, &block)
     @template.tag.div do
       @template.concat label(method, class: "block text-sm font-medium leading-6 text-gray-900")
       @template.concat @template.tag.div(class: "mt-2", &block)
-      if object.errors[method].any?
-        @template.concat @template.tag.p object.errors[method].first, class: "mt-2 text-sm text-red-600"
+      if object.errors[error_method].any?
+        @template.concat @template.tag.p object.errors[error_method].first, class: "mt-2 text-sm text-red-600"
       end
     end
   end
 
-  def field_classes(method)
+  def field_classes(method, *)
     [
       *FIELD_CLASSES[:base],
       object.errors[method].any? && FIELD_CLASSES[:error],
-      object.errors[method].none? && FIELD_CLASSES[:valid]
+      object.errors[method].none? && FIELD_CLASSES[:valid],
+      *
     ]
   end
 end
