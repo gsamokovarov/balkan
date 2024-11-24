@@ -3,7 +3,7 @@
 <%= admin_table speakers do
   column "#",   -> { link_to _1.id, admin_speaker_path(_1) }
   column :name, -> { link_to _1.name, admin_speaker_path(_1) }
-  column :bio,  -> { truncate _1.bio, length: 50 }
+  column :bio,  -> { truncate _1.bio, length: 30 }
   column :github_url
   column :social_url
   column :avatar, -> { _1.avatar.attached? ? "Yes" : "No" }
