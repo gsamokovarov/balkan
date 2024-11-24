@@ -27,7 +27,7 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def readonly_input(method, choices = [], options = {}, html_options = {})
-    readonly_classes = field_classes method, "bg-opacity-50 cursor-not-allowed"
+    readonly_classes = field_classes method, "opacity-50 cursor-not-allowed"
 
     input_for method do
       @template.concat select(method, choices, options, class: readonly_classes, disabled: true, **html_options)
