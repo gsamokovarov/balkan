@@ -1,0 +1,11 @@
+<%= render "section", title: "Talks", cta: -> {
+  admin_button(:primary, link: true, href: new_admin_talk_path) { "New talk" }
+} do %>
+  <% if @talks.any? %>
+    <%= render "talks", talks: @talks %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: true, href: new_admin_talk_path) { "New talk" } %>
+    <% end %>
+  <% end %>
+<% end %>

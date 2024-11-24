@@ -1,0 +1,8 @@
+<%# locals: (talk:) %>
+
+<%= admin_form [:admin, talk] do |f| %>
+  <%= f.text_input :name %>
+  <%= f.text_area_input :description %>
+  <%= f.select_input :speaker_ids, Speaker.all.map { [_1.name, _1.id] }, multiple: true %>
+  <%= f.submit %>
+<% end %>
