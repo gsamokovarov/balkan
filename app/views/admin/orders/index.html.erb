@@ -1,4 +1,4 @@
-<%= render "section", title: "Order history", description: "Total: #{@orders.size}", cta: -> {
+<%= render "section", title: "Order history", description: "Total: #{@orders.total_count}", cta: -> {
   admin_button_group(
     {name: "CSV Export", link: true, href: report_admin_orders_path(format: :csv)},
     {name: "Invoice Export", link: true, href: report_admin_orders_path(format: :tar)},

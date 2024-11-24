@@ -1,7 +1,7 @@
 <%# locals: (scope:, current_page:) %>
 
 <%
-  total_count = scope.limit(nil).offset(nil).count
+  total_count = scope.total_count
   per_page = scope.limit_value || 50
   total_pages = (total_count.to_f / per_page).ceil
   has_next_page = total_count > current_page * scope.limit_value.to_i
