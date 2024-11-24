@@ -78,4 +78,8 @@ module AdminHelper
   def admin_table(objects, &)
     render "admin/application/table", objects:, table_def: Admin::TableDefinition.new(self, &)
   end
+
+  def admin_paginate(scope)
+    render "admin/application/pagination", scope:, current_page: [params[:page].to_i, 1].max
+  end
 end

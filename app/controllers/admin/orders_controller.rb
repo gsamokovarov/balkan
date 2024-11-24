@@ -1,6 +1,6 @@
 class Admin::OrdersController < Admin::ApplicationController
   def index
-    @orders = Order.completed.includes(:event, :invoice, :tickets).order("completed_at DESC")
+    @orders = Order.completed.includes(:event, :invoice, :tickets).order("completed_at DESC").page(params[:page])
   end
 
   def show
