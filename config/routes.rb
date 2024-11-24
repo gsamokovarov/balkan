@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       end
     end
     resources :speakers
+    resources :talks
   end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
