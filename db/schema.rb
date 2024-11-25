@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_23_181625) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_25_090324) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -78,6 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_23_181625) do
     t.boolean "announced", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role", default: "Speaker"
     t.index ["event_id"], name: "index_lineup_members_on_event_id"
     t.index ["speaker_id"], name: "index_lineup_members_on_speaker_id"
     t.index ["talk_id"], name: "index_lineup_members_on_talk_id"
