@@ -1,4 +1,4 @@
-class Admin::LineupController < Admin::ApplicationController
+class Admin::LineupMembersController < Admin::ApplicationController
   def index
     @lineup_members = LineupMember.includes(:talk, :speaker).for(lineup_event)
   end
@@ -29,7 +29,7 @@ class Admin::LineupController < Admin::ApplicationController
     @lineup_member = LineupMember.find params[:id]
 
     if @lineup_member.update lineup_member_params
-      redirect_to admin_event_lineup_index_path(@lineup_member.event, @lineup_member), notice: "Lineup member updated"
+      redirect_to admin_event_lineup_members_path(@lineup_member.event), notice: "Lineup member updated"
     else
       render :show
     end

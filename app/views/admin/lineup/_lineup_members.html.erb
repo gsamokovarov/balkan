@@ -1,7 +1,0 @@
-<%# locals: (lineup_members:) %>
-
-<%= admin_table lineup_members do
-  column "#",      -> { link_to _1.id, admin_event_lineup_path(_1.event, _1) }
-  column :talk,    -> it { link_to_if it, truncate(it.talk&.name, length: 30) || "-", admin_talk_path(it) }
-  column :speaker, -> { link_to _1.speaker&.name, admin_speaker_path(_1) }
-end %>

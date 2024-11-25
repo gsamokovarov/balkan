@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       end
     end
     resources :events, only: [] do
-      resources :lineup
+      resources :lineup_members
     end
     resources :speakers
     resources :talks

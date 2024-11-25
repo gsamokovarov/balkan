@@ -1,15 +1,6 @@
 <%# locals: (lineup_member:) %>
 
-<% 
-  url =
-    if lineup_member.persisted?
-      admin_event_lineup_path(lineup_member.event, lineup_member)
-    else
-      new_admin_event_lineup_path(lineup_event)
-    end
-%>
-
-<%= admin_form lineup_member, url: do |f| %>
+<%= admin_form [:admin, lineup_member.event || lineup_event, lineup_member] do |f| %>
   <%= f.readonly_input :event_id, Event.all.map { [_1.name, _1.id] }, selected: lineup_member.event_id || lineup_event.id %>
   <%= f.select_input :speaker_id, Speaker.all.map { [_1.name, _1.id] }, include_blank: true %>
   <%= f.select_input :talk_id, Talk.all.map { [_1.name, _1.id] }, include_blank: true %>
