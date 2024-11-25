@@ -229,8 +229,9 @@ nginx -s reload
 
   ```
   mkdir -p /var/lib/#{app_name}/db
+  mkdir -p /var/lib/#{app_name}/storage
   mkdir -p /var/lib/#{app_name}/src
-  chown rails:rails /var/lib/#{app_name}/db
+  chown rails:rails /var/lib/#{app_name}/db /var/lib/#{app_name}/storage
   ```
 
 ## Secrets
