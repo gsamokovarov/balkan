@@ -41,6 +41,14 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def enum_input(method, choices, options = {}, html_options = {})
+    enum_choices = choices.map { |choice,| [choice.humanize, choice] }
+
+    input_for method do
+      @template.concat select(method, enum_choices, options, class: field_classes(method), **html_options)
+    end
+  end
+
   def file_input(method, **)
     file_classes = [
       "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",

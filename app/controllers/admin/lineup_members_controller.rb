@@ -37,7 +37,7 @@ class Admin::LineupMembersController < Admin::ApplicationController
 
   private
 
-  def lineup_member_params = params.require(:lineup_member).permit(:event_id, :speaker_id, :talk_id)
+  def lineup_member_params = params.require(:lineup_member).permit(:event_id, :speaker_id, :talk_id, :role, :status)
 
   helper_method def lineup_event = Event.find(params[:event_id])
 end
