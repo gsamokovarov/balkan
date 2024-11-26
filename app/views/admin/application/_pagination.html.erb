@@ -45,6 +45,13 @@
           </svg>
         <% end %>
 
+        <% if visible_pages.first > 1 %>
+          <%= link_to 1, page_url.(1), class: [
+            "relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+            "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
+          ] %>
+          <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">...</span>
+        <% end %>
         <% visible_pages.each do |visible_page| %>
           <%= link_to visible_page, page_url.(visible_page), class: [
             "relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
