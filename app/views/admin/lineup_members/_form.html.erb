@@ -2,7 +2,9 @@
 
 <%= admin_form [:admin, lineup_member.event || lineup_event, lineup_member] do |f| %>
   <%= f.readonly_input :event_id, Event.all.map { [_1.name, _1.id] }, selected: lineup_member.event_id || lineup_event.id %>
-  <%= f.select_input :speaker_id, Speaker.all.map { [_1.name, _1.id] }, include_blank: true %>
+  <%= f.select_input :speaker_id, Speaker.all.map { [_1.name, _1.id] }, include_blank: true do %>
+    <%= link_to "New speaker", new_admin_speaker_path, class: "text-indigo-600 hover:underline" %>
+  <% end %>
   <%= f.select_input :talk_id, Talk.all.map { [_1.name, _1.id] }, include_blank: true %>
   <%= f.enum_input :status, LineupMember.statuses %>
   <%= f.text_input :role %>
