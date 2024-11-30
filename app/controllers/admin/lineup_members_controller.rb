@@ -15,7 +15,7 @@ class Admin::LineupMembersController < Admin::ApplicationController
     @lineup_member = LineupMember.new lineup_member_params
 
     if @lineup_member.save
-      redirect_to [:admin, @lineup_member], notice: "Lineup member created"
+      redirect_to admin_event_lineup_members_path(@lineup_member.event), notice: "Lineup member created"
     else
       render :new
     end
