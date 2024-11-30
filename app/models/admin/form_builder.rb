@@ -8,49 +8,49 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600"
   }
 
-  def text_input(method, **)
-    input_for method do
+  def text_input(method, **, &addendum)
+    input_for method, addendum: do
       @template.concat text_field(method, class: field_classes(method), **)
     end
   end
 
-  def text_area_input(method, **)
-    input_for method do
+  def text_area_input(method, **, &addendum)
+    input_for method, addendum: do
       @template.concat text_area(method, class: field_classes(method), rows: 8, **)
     end
   end
 
-  def password_input(method, **)
-    input_for method do
+  def password_input(method, **, &addendum)
+    input_for method, addendum: do
       @template.concat password_field(method, class: field_classes(method), **)
     end
   end
 
-  def readonly_input(method, choices = [], options = {}, html_options = {})
+  def readonly_input(method, choices = [], options = {}, html_options = {}, &addendum)
     readonly_classes = field_classes method, "opacity-50 cursor-not-allowed"
 
     error_method = method.to_s.delete_suffix "_id"
-    input_for method, error_method: do
+    input_for method, error_method:, addendum: do
       @template.concat select(method, choices, options, class: readonly_classes, disabled: true, **html_options)
     end
   end
 
-  def select_input(method, choices, options = {}, html_options = {})
+  def select_input(method, choices, options = {}, html_options = {}, &addendum)
     error_method = method.to_s.delete_suffix "_id"
-    input_for method, error_method: do
+    input_for method, error_method:, addendum: do
       @template.concat select(method, choices, options, class: field_classes(method), **html_options)
     end
   end
 
-  def enum_input(method, choices, options = {}, html_options = {})
+  def enum_input(method, choices, options = {}, html_options = {}, &addendum)
     enum_choices = choices.map { |choice,| [choice.humanize, choice] }
 
-    input_for method do
+    input_for method, addendum: do
       @template.concat select(method, enum_choices, options, class: field_classes(method), **html_options)
     end
   end
 
-  def file_input(method, **)
+  def file_input(method, **, &addendum)
     file_classes = [
       "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",
       "focus:ring-indigo-600"
@@ -60,7 +60,7 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
       "w-full mb-2 aspect-square object-cover rounded-md border-1 border-gray-300"
     ]
 
-    input_for method do
+    input_for method, addendum: do
       attachment = object.public_send method
       if attachment.attached?
         @template.concat @template.image_tag(attachment, class: image_preview_classes)
@@ -77,13 +77,14 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def input_for(method, error_method: method, &block)
+  def input_for(method, error_method: method, addendum: nil, &block)
     @template.tag.div do
       @template.concat label(method, class: "block text-sm font-medium leading-6 text-gray-900")
       @template.concat @template.tag.div(class: "mt-2", &block)
       if object.errors[error_method].any?
         @template.concat @template.tag.p object.errors[error_method].first, class: "mt-2 text-sm text-red-600"
       end
+      @template.concat @template.tag.div(class: "mt-2", &addendum) if addendum
     end
   end
 
