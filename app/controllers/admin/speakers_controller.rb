@@ -15,7 +15,7 @@ class Admin::SpeakersController < Admin::ApplicationController
     @speaker = Speaker.new speaker_params
 
     if @speaker.save
-      redirect_to [:admin, @speaker], notice: "Speaker created"
+      redirect_to admin_speakers_path, notice: "Speaker created"
     else
       render :new
     end
