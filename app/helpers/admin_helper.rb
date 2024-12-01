@@ -37,20 +37,16 @@ module AdminHelper
 
   def admin_button_group(*links)
     tag.span class: "isolate inline-flex rounded-md shadow-sm" do
-      content = capture { "" }
       links.each_with_index do |link, index|
         classes = [
           index.zero? && "rounded-l-md",
           index.positive? && "-ml-px",
           index == links.size - 1 && "rounded-r-md",
-          "relative inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          "relative inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900",
+          "ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
         ]
-        content <<
-          capture do
-            tag.a(href: link[:href], class: classes) { link[:name] }
-          end
+        concat tag.a(href: link[:href], class: classes) { link[:name] }
       end
-      content
     end
   end
 
