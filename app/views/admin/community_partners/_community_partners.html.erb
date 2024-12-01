@@ -1,0 +1,8 @@
+<%# locals: (community_partners:) %>
+
+<%= admin_table community_partners do
+  column "#",   -> { link_to _1.id, [:admin, _1.event, _1] }
+  column :name, -> { link_to _1.name, [:admin, _1.event, _1] }
+  column :url,  -> { link_to _1.url, [:admin, _1.event, _1] }
+  column :logo, -> { link_to _1.logo.attached? ? "Yes" : "No", [:admin, _1.event, _1] }
+end %>

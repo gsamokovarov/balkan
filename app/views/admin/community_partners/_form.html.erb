@@ -1,0 +1,8 @@
+<%# locals: (community_partner:) %>
+
+<%= admin_form [:admin, community_partner.event || event, community_partner] do |f| %>
+  <%= f.text_input :name %>
+  <%= f.text_input :url %>
+  <%= f.file_input :logo %>
+  <%= f.submit %>
+<% end %>

@@ -23,8 +23,8 @@
                   >
                     <% nav[:items].each do |item| %>
                       <li>
-                        <%= link_to item[:name], item[:path], class: [
-                          "block rounded-md py-2 pl-9 pr-2 text-sm/6 text-gray-700 hover:bg-gray-50",
+                        <%= link_to item[:name], item[:path], title: item[:name], class: [
+                          "block rounded-md py-2 pl-9 pr-2 text-sm/6 text-gray-700 truncate hover:bg-gray-50",
                           "bg-gray-50": current_page?(item[:path])
                         ] %>
                       </li>
@@ -32,8 +32,8 @@
                   </ul>
                 </div>
               <% else %>
-                <%= link_to nav[:name], nav[:path], class: [
-                  "block rounded-md py-2 pl-10 pr-2 text-sm/6 font-semibold text-gray-700 hover:bg-gray-50",
+                <%= link_to nav[:name], nav[:path], title: nav[:name], class: [
+                  "block rounded-md py-2 pl-10 pr-2 text-sm/6 font-semibold text-gray-700 truncate hover:bg-gray-50",
                   "bg-gray-50": current_page?(nav[:path])
                 ] %>
               <% end %>
