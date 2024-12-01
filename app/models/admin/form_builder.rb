@@ -57,7 +57,7 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     ]
 
     image_preview_classes = [
-      "w-full mb-2 aspect-square object-cover rounded-md border-1 border-gray-300"
+      "w-full mb-2 aspect-square object-scale-down rounded-md border-1 border-gray-300"
     ]
 
     input_for method, addendum: do
