@@ -8,6 +8,31 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600"
   }
 
+  def check_box_input(method, **, &addendum)
+    field_classes = [
+      "rounded-md border-0 p-3 text-indigo-600 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset",
+      "sm:text-sm sm:leading-6",
+      object.errors[method].any? && FIELD_CLASSES[:error],
+      object.errors[method].none? && FIELD_CLASSES[:valid]
+    ]
+
+    input_for method, addendum: do
+      @template.concat check_box(method, class: field_classes, **)
+    end
+  end
+
+  def email_input(method, **, &addendum)
+    input_for method, addendum: do
+      @template.concat email_field(method, class: field_classes(method), **)
+    end
+  end
+
+  def number_input(method, **, &addendum)
+    input_for method, addendum: do
+      @template.concat number_field(method, class: field_classes(method), **)
+    end
+  end
+
   def text_input(method, **, &addendum)
     input_for method, addendum: do
       @template.concat text_field(method, class: field_classes(method), **)
@@ -23,6 +48,12 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
   def password_input(method, **, &addendum)
     input_for method, addendum: do
       @template.concat password_field(method, class: field_classes(method), **)
+    end
+  end
+
+  def datetime_input(method, **, &addendum)
+    input_for method, addendum: do
+      @template.concat datetime_field(method, class: field_classes(method), **)
     end
   end
 

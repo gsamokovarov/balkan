@@ -17,6 +17,16 @@ class Admin::OrdersController < Admin::ApplicationController
     end
   end
 
+  def update
+    @order = Order.completed.find params[:id]
+
+    if @order.update order_params
+      redirect_to admin_orders_path, notice: "Order updated"
+    else
+      render :show
+    end
+  end
+
   def report
     orders = Order.completed.includes(:invoice, tickets: :ticket_type).order("completed_at DESC")
 
@@ -38,5 +48,8 @@ class Admin::OrdersController < Admin::ApplicationController
     OrderMailer.invoice_email(@order).deliver_later
   end
 
-  private def locale = params.fetch(:locale, I18n.locale)
+  private
+
+  def locale = params.fetch(:locale, I18n.locale)
+  def order_params = params.require(:order).permit(:name, :email, :amount, :refunded_amount, :issue_invoice, :invoice_id)
 end

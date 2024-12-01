@@ -1,0 +1,23 @@
+<%# locals: (order:) %>
+
+<%= admin_form [:admin, order] do |f| %>
+  <%= f.readonly_input :event_id, [[order.event.name, order.event.id]] %>
+  <%= f.readonly_input :status, [
+    if order.refunded?
+      "Refunded"
+    elsif order.free?
+      "Free"
+    else
+      "Completed"
+    end
+  ] %>
+  <%= f.text_input :name %>
+  <%= f.email_input :email %>
+  <%= f.number_input :amount %>
+  <%= f.number_input :refunded_amount %>
+  <%= f.check_box_input :issue_invoice %>
+  <% if order.free? %>
+    <%= f.text_area_input :free_reason %>
+  <% end %>
+  <%= f.submit %>
+<% end %>

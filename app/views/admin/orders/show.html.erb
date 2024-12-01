@@ -1,13 +1,30 @@
-<%= render "section", title: "Order ##{@order.id}", description: "Total: #{format_money @order.amount}" do %>
-  <% if @order.refunded? %>
-    <%= render "alert" do %>
-      This order has been refunded by <b><%= format_money @order.refunded_amount %></b>.
-      <% if @order.fully_refunded? %>
-        <b>The tickets won't be attending</b>!
+<div class="flex flex-col gap-12">
+  <%= render "section", title: "Order ##{@order.id}", description: "Total: #{format_money @order.amount}" do %>
+    <% if @order.refunded? %>
+      <%= render "alert" do %>
+        This order has been refunded by <b><%= format_money @order.refunded_amount %></b>.
+        <% if @order.fully_refunded? %>
+          <b>None of the tickets will be attending!</b>
+        <% end %>
       <% end %>
+    <% end %>
+
+    <%= render "form", order: @order %>
+  <% end %>
+
+  <%= render 'section', title: "Tickets", description: "#{@order.tickets.size} #{@order.tickets.first.ticket_type.name}" do %>
+    <% if @order.tickets.size.positive? %>
+      <%= render "admin/tickets/tickets", tickets: @order.tickets %>
+    <% else %>
+      <%= render "empty_state" %>
     <% end %>
   <% end %>
 
-  <%= render "admin/tickets/tickets", tickets: @order.tickets %>
-  <%= render "documents", order: @order %>
-<% end %>
+  <%= render 'section', title: "Documents" do %>
+    <% if @order.issue_invoice? %>
+      <%= render "documents", order: @order %>
+    <% else %>
+      <%= render "empty_state" %>
+    <% end %>
+  <% end %>
+<div>

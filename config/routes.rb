@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get "/current/orders", to: "dashboards#orders", as: :current_orders
     resource :login, only: [:show, :create]
     resources :tickets, only: [:index]
-    resources :orders, only: [:index, :show] do
+    resources :orders, only: [:index, :show, :update] do
       collection do
         get :report
       end

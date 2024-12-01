@@ -113,6 +113,9 @@ Lint/AssignmentInCondition:
 Metrics/MethodLength:
   Enabled: false
 
+Metrics/ClassLength:
+  Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
 
