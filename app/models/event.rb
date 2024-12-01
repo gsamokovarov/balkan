@@ -5,9 +5,9 @@ class Event < ApplicationRecord
   has_many :tickets, through: :orders
   has_many :subscribers
   has_many :lineup_members
+  has_many :community_partners
 
   def sponsors = Sponsor.all
-  def community_partners = StaticCommunityPartner.all
   def schedule = Schedule.find_by!(event_id: id)
   def blog_posts = BlogPost.where(event_id: id).order(id: :desc)
 
