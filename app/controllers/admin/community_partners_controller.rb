@@ -8,11 +8,11 @@ class Admin::CommunityPartnersController < Admin::ApplicationController
   end
 
   def new
-    @community_partner = CommunityPartner.new
+    @community_partner = CommunityPartner.new event:
   end
 
   def create
-    @community_partner = CommunityPartner.new community_partner_params
+    @community_partner = CommunityPartner.new(**community_partner_params, event:)
 
     if @community_partner.save
       redirect_to admin_event_community_partners_path(event), notice: "Community partner created"
@@ -38,6 +38,5 @@ class Admin::CommunityPartnersController < Admin::ApplicationController
   private
 
   def community_partner_params = params.require(:community_partner).permit(:event_id, :name, :url, :logo)
-
-  helper_method def event = @event ||= Event.find(params[:event_id])
+  def event = Event.find(params[:event_id])
 end
