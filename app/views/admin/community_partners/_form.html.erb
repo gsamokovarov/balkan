@@ -1,6 +1,7 @@
 <%# locals: (community_partner:) %>
 
 <%= admin_form [:admin, community_partner.event || event, community_partner] do |f| %>
+  <%= f.readonly_input :event_id, Event.all.map { [_1.name, _1.id] }, selected: community_partner.event_id || event.id %>
   <%= f.text_input :name %>
   <%= f.text_input :url %>
   <%= f.file_input :logo %>
