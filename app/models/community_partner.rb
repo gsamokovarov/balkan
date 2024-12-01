@@ -4,4 +4,6 @@ class CommunityPartner < ApplicationRecord
 
   validates :name, presence: true
   validates :url, presence: true
+
+  def self.for(event) = where(event:)
 end

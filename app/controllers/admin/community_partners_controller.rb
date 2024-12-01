@@ -1,6 +1,6 @@
 class Admin::CommunityPartnersController < Admin::ApplicationController
   def index
-    @community_partners = CommunityPartner.all
+    @community_partners = CommunityPartner.for event
   end
 
   def show
