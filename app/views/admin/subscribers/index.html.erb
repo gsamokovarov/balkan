@@ -1,0 +1,8 @@
+<%= render "section", title: "Subscribers" do %>
+  <% if @subscribers.any? %>
+    <%= render "subscribers", subscribers: @subscribers %>
+    <%= admin_paginate @subscribers %>
+  <% else %>
+    <%= render "empty_state" %>
+  <% end %>
+<% end %>

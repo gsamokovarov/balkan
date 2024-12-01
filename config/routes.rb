@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :events, only: [] do
       resources :lineup_members, only: [:index, :show, :new, :create, :edit, :update]
       resources :community_partners, only: [:index, :show, :new, :create, :edit, :update]
+      resources :subscribers, only: [:index]
     end
     resources :speakers
     resources :talks

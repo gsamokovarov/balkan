@@ -1,0 +1,7 @@
+<%# locals: (subscribers:) %>
+
+<%= admin_table subscribers do
+  column "#",   -> { _1.id }
+  column :email
+  column :date, -> { _1.created_at.to_fs :long }
+end %>
