@@ -1,0 +1,13 @@
+<%# locals: (member:, rotation_class:) %>
+
+<% if member.talk %>
+  <%= link_to talk_path(member.talk_id), class: [
+    rotation_class,
+    "rounded-md transition ease-in-out h-min",
+    "hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1 hover:scale-110 hover:z-10"
+  ] do %>
+    <%= render "avatar_card", avatar: member.speaker.avatar, title: member.speaker.name, subtitle: member.talk.name %>
+  <% end %>
+<% else %>
+  <%= render "avatar_card", avatar: member.speaker.avatar, title: member.speaker.name, subtitle: member.role %>
+<% end %>
