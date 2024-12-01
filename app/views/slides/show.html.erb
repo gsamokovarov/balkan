@@ -23,7 +23,7 @@
 <section class="center">
   <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, community partners! 🙇</div>
   <div class="grid grid-cols-2 gap-8 lg:grid-cols-5">
-    <% CommunityPartner.all.each do |partner| %>
+    <% StaticCommunityPartner.all.each do |partner| %>
       <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
         <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
       <% end %>
@@ -186,7 +186,7 @@
 <section class="center">
   <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, community partners! 🙇</div>
   <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
-    <% CommunityPartner.all.each do |partner| %>
+    <% StaticCommunityPartner.all.each do |partner| %>
       <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
         <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
       <% end %>

@@ -1,8 +1,8 @@
 <%= render "section", title: "Community partners", title_element: "h2" do %>
   <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
     <% [
-      CommunityPartner.new(name: "Puzl", url: "https://puzl.com/", logo: "community/puzl.png"),
-      CommunityPartner.new(name: "Barter Community Hub", url: "https://barter-hub.com/", logo: "community/barter.png")
+      StaticCommunityPartner.new(name: "Puzl", url: "https://puzl.com/", logo: "community/puzl.png"),
+      StaticCommunityPartner.new(name: "Barter Community Hub", url: "https://barter-hub.com/", logo: "community/barter.png")
     ].each do |partner| %>
       <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white rounded-md" do %>
         <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>

@@ -1,2 +1,0 @@
-class CommunityPartner < ApplicationFrozenRecord
-end
