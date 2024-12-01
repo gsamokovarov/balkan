@@ -1,4 +1,4 @@
-<%= render "section", title: "Orders", description: "Total: #{@orders.total_count}" do %>
+<%= render "section", title: "Orders" do %>
   <%= render "admin/orders/orders", orders: @orders %>
   <%= admin_paginate @orders %>
 <% end %>
