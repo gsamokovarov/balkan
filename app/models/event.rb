@@ -6,8 +6,6 @@ class Event < ApplicationRecord
   has_many :subscribers
   has_many :lineup_members
 
-  def static_speakers = StaticSpeaker.where(event_id: id)
-  def speakers = StaticTalk.where(event_id: id).select(&:available).flat_map(&:speakers)
   def sponsors = Sponsor.all
   def community_partners = CommunityPartner.all
   def schedule = Schedule.find_by!(event_id: id)

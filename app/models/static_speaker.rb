@@ -1,2 +1,0 @@
-class StaticSpeaker < ApplicationFrozenRecord
-end
