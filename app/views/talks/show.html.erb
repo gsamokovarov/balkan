@@ -32,20 +32,20 @@
       </div>
 
       <div class="shrink">
-        <% if speaker.about %>
+        <% if speaker.bio %>
           <h2 class="text-2xl sm:text-3xl font-extrabold"><%= speaker.name %></h2>
           <%= render "prose", variant: :lg, class: "text-white/70" do %>
-            <%= speaker.about.html_safe %>
+            <%= speaker.bio.html_safe %>
           <% end %>
         <% end %>
       </div>
     </div>
   <% end %>
 
-  <% if @talk.about %>
+  <% if @talk.description %>
     <%= render "prose" do %>
       <h2 class="text-2xl sm:text-3xl font-extrabold">About</h2>
-      <%= @talk.about.html_safe %>
+      <%= @talk.description.html_safe %>
     <% end %>
   <% end %>
 <% end %>
