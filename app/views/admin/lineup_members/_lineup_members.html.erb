@@ -16,7 +16,7 @@
   end
 
   column :role,    -> { link_to _1.role, [:admin, _1.event, _1] }
-  column :speaker, -> { link_to _1.speaker&.name, admin_speaker_path(_1) }
+  column :speaker, -> { link_to _1.speaker.name, admin_speaker_path(_1.speaker) }
 
   column :talk do |member|
     if member.talk
