@@ -198,11 +198,9 @@ end
 def clean_up
   log "Cleaning up"
 
-  all_images = on_server { sh! "docker image ls #{app_name} -q" }.output.split
-  images_to_clean_up = all_images[5..] || []
-  images_to_clean_up.each do |image_to_clean_up|
-    log "  Deleting old image #{image_to_clean_up}"
-    on_server { sh! "docker image rm #{image_to_clean_up}" }
+  log "  Pruning docker object older than 24 hours"
+  on_server do
+    sh! 'docker system prune --filter "until=24h"'
   end
 end
 
