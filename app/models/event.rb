@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   has_many :community_partners
 
   def sponsors = Sponsor.all
-  def schedule = Schedule.find_by!(event_id: id)
+  def schedule = StaticSchedule.find_by!(event_id: id)
   def blog_posts = BlogPost.where(event_id: id).order(id: :desc)
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
