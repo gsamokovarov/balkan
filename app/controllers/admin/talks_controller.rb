@@ -15,7 +15,7 @@ class Admin::TalksController < Admin::ApplicationController
     @talk = Talk.new talk_params
 
     if @talk.save
-      redirect_to [:admin, @talk], notice: "Talk created"
+      redirect_to admin_talks_path, notice: "Talk created"
     else
       render :new
     end
