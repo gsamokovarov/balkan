@@ -198,7 +198,7 @@ end
 def clean_up
   log "Cleaning up"
 
-  log "  Pruning unused docker objects older than 24 hours"
+  log "  Removing unused docker objects"
   on_server do
     sh! 'docker system prune --all --force --filter "until=24h"'
   end
