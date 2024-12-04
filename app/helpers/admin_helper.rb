@@ -17,7 +17,8 @@ module AdminHelper
   end
 
   ADMIN_BUTTON_VARIANTS = {
-    primary: "bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600 ring-indigo-300"
+    primary: "bg-indigo-600 text-white ring-indigo-300 hover:bg-indigo-500 focus-visible:outline-indigo-600",
+    secondary: "bg-indigo-600 text-gray-900 ring-gray-300 hover:bg-gray-50 focus-visible:outline-indigo-gray-600"
   }
 
   def admin_button(variant, link: false, **options, &)
