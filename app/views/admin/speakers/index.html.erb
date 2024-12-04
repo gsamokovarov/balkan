@@ -1,11 +1,11 @@
 <%= render "section", title: "Speakers", cta: -> {
-  admin_button(:primary, link: true, href: new_admin_speaker_path) { "New speaker" }
+  admin_button(:primary, link: new_admin_speaker_path) { "New speaker" }
 } do %>
   <% if @speakers.any? %>
     <%= render "speakers", speakers: @speakers %>
   <% else %>
     <%= render "empty_state" do %>
-      <%= admin_button(:primary, link: true, href: new_admin_speaker_path) { "New speaker" } %>
+      <%= admin_button(:primary, link: new_admin_speaker_path) { "New speaker" } %>
     <% end %>
   <% end %>
 <% end %>

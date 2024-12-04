@@ -1,11 +1,11 @@
 <%= render "section", title: "Lineup members", cta: -> {
-  admin_button(:primary, link: true, href: new_admin_event_lineup_member_path) { "New lineup member" }
+  admin_button(:primary, link: new_admin_event_lineup_member_path) { "New lineup member" }
 } do %>
   <% if @lineup_members.any? %>
     <%= render "lineup_members", lineup_members: @lineup_members %>
   <% else %>
     <%= render "empty_state" do %>
-      <% admin_button(:primary, link: true, href: new_admin_event_lineup_member_path) { "New lineup member" } %>
+      <% admin_button(:primary, link: new_admin_event_lineup_member_path) { "New lineup member" } %>
     <% end %>
   <% end %>
 <% end %>

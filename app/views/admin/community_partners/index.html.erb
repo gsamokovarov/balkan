@@ -1,11 +1,11 @@
 <%= render "section", title: "Community partners", cta: -> {
-  admin_button(:primary, link: true, href: new_admin_event_community_partner_path) { "New community partner" }
+  admin_button(:primary, link: new_admin_event_community_partner_path) { "New community partner" }
 } do %>
   <% if @community_partners.any? %>
     <%= render "community_partners", community_partners: @community_partners %>
   <% else %>
     <%= render "empty_state" do %>
-      <% admin_button(:primary, link: true, href: new_admin_event_community_partner_path) { "New community partner" } %>
+      <% admin_button(:primary, link: new_admin_event_community_partner_path) { "New community partner" } %>
     <% end %>
   <% end %>
 <% end %>

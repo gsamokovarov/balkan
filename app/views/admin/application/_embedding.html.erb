@@ -1,7 +1,7 @@
 <%# locals: (title:, button_name:, link:) %>
 
 <%= render "section", title:, cta: -> {
-  admin_button(:primary, link: true, href: link) { button_name }
+  admin_button(:primary, link: link) { button_name }
 } do %>
   <iframe src="<%= link %>" class="w-full h-[620px] border-2 border-gray-300 rounded-md"></iframe>
 <% end %>

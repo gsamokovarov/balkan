@@ -30,7 +30,7 @@ module AdminHelper
     ]
 
     if link
-      tag.a(**options, class: classes, &)
+      tag.a(**options, href: link, class: classes, &)
     else
       tag.button(**options, class: classes, &)
     end
