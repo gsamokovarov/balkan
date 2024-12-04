@@ -34,14 +34,14 @@
 
       <main class="py-10 lg:pl-56">
         <div class="px-4 sm:px-6 lg:px-8">
-          <% flash.each do |type, message| %>
-            <%= render "admin/application/alert", temporary: true do %>
-              <%= message %>
-            <% end %>
-          <% end %>
-
           <%= yield %>
         </div>
+
+        <% flash.each do |type, message| %>
+          <%= render "admin/application/alert", class: "fixed bottom-8 left-1/2 -translate-x-1/2 shadow-sm", temporary: true do %>
+            <%= message %>
+          <% end %>
+        <% end %>
       </main>
     </div>
   </body>
