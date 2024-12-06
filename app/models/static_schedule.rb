@@ -1,7 +1,12 @@
 class StaticSchedule < ApplicationFrozenRecord
-  Timeslot = Data.define :time, :type, :talk_id do
-    def talk? = talk_id.present?
-    def talk = Talk.find(talk_id)
+  class Timeslot
+    attr_reader :time, :type, :talk
+
+    def initialize(attributes = {})
+      @time = attributes.with_indifferent_access[:time]
+      @type = attributes.with_indifferent_access[:type]
+      @talk = Talk.find_by id: attributes.with_indifferent_access[:talk_id]
+    end
   end
 
   def timeslots = super.transform_values { |slots| slots.map { Timeslot.new(**_1) } }
