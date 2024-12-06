@@ -105,6 +105,10 @@ Style/MethodCallWithArgsParentheses:
 Style/MutableConstant:
   Enabled: false
 
+# I like the value omission hash syntax.
+Style/HashSyntax:
+  EnforcedShorthandSyntax: always
+
 # I do that a lot. Think it's okay.
 Lint/AssignmentInCondition:
   Enabled: false
