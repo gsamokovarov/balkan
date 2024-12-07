@@ -1,5 +1,5 @@
 class Current < ActiveSupport::CurrentAttributes
   attribute :event, :host
 
-  def show_banner? = event.banitsa?(2024)
+  def show_banner? = false
 end
