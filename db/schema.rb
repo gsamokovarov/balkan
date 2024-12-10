@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_01_123821) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_02_070551) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -113,6 +113,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_01_123821) do
     t.index ["event_id"], name: "index_orders_on_event_id"
   end
 
+  create_table "schedule_slots", force: :cascade do |t|
+    t.integer "schedule_id", null: false
+    t.integer "lineup_member_id"
+    t.date "date", null: false
+    t.datetime "time", null: false
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lineup_member_id"], name: "index_schedule_slots_on_lineup_member_id"
+    t.index ["schedule_id"], name: "index_schedule_slots_on_schedule_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_schedules_on_event_id", unique: true
+  end
+
   create_table "speakers", force: :cascade do |t|
     t.string "name", null: false
     t.string "bio"
@@ -178,6 +198,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_01_123821) do
   add_foreign_key "lineup_members", "speakers"
   add_foreign_key "lineup_members", "talks"
   add_foreign_key "orders", "events"
+  add_foreign_key "schedule_slots", "lineup_members"
+  add_foreign_key "schedule_slots", "schedules"
+  add_foreign_key "schedules", "events"
   add_foreign_key "subscribers", "events"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "orders"
