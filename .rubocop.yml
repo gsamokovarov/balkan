@@ -109,6 +109,10 @@ Style/MutableConstant:
 Style/HashSyntax:
   EnforcedShorthandSyntax: always
 
+# I like the value omission hash syntax.
+Style/SaveNavigationChainLength:
+  Enabled: false
+
 # I do that a lot. Think it's okay.
 Lint/AssignmentInCondition:
   Enabled: false
@@ -127,6 +131,12 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
   Enabled: false
 
 # Sometimes life leaves you no choice. True story.

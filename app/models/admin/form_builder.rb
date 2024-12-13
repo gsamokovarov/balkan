@@ -8,52 +8,52 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
     valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600"
   }
 
-  def check_box_input(method, **, &addendum)
+  def check_box_input(method, label: method, **, &addendum)
     field_classes = [
       "rounded-md border-0 p-3 text-indigo-600 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset",
       "sm:text-sm sm:leading-6",
-      object.errors[method].any? && FIELD_CLASSES[:error],
-      object.errors[method].none? && FIELD_CLASSES[:valid]
+      object_errors(method).any? ? FIELD_CLASSES[:error] : FIELD_CLASSES[:valid]
     ]
 
-    input_for method, addendum: do
+
+    input_for method, label:, addendum: do
       @template.concat check_box(method, class: field_classes, **)
     end
   end
 
-  def email_input(method, **, &addendum)
-    input_for method, addendum: do
+  def email_input(method, label: method, **, &addendum)
+    input_for method, label:, addendum: do
       @template.concat email_field(method, class: field_classes(method), **)
     end
   end
 
-  def number_input(method, **, &addendum)
-    input_for method, addendum: do
+  def number_input(method, label: method, **, &addendum)
+    input_for method, label:, addendum: do
       @template.concat number_field(method, class: field_classes(method), **)
     end
   end
 
-  def text_input(method, **, &addendum)
-    input_for method, addendum: do
+  def text_input(method, label: method, **, &addendum)
+    input_for method, label:, addendum: do
       @template.concat text_field(method, class: field_classes(method), **)
     end
   end
 
-  def text_area_input(method, **, &addendum)
-    input_for method, addendum: do
+  def text_area_input(method, label: method, **, &addendum)
+    input_for method, label:, addendum: do
       @template.concat text_area(method, class: field_classes(method), rows: 8, **)
     end
   end
 
-  def password_input(method, **, &addendum)
-    input_for method, addendum: do
+  def password_input(method, label: method, **, &addendum)
+    input_for method, label:, addendum: do
       @template.concat password_field(method, class: field_classes(method), **)
     end
   end
 
-  def datetime_input(method, **, &addendum)
-    input_for method, addendum: do
-      @template.concat datetime_field(method, class: field_classes(method), **)
+  def time_input(method, label: method, **, &addendum)
+    input_for method, label:, addendum: do
+      @template.concat time_field(method, class: field_classes(method), **)
     end
   end
 
@@ -68,7 +68,7 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
 
   def select_input(method, choices, options = {}, html_options = {}, &addendum)
     error_method = method.to_s.delete_suffix "_id"
-    input_for method, error_method:, addendum: do
+    input_for method, error_method:, label: options.delete(:label) || method, addendum: do
       @template.concat select(method, choices, options, class: field_classes(method), **html_options)
     end
   end
@@ -76,12 +76,12 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
   def enum_input(method, choices, options = {}, html_options = {}, &addendum)
     enum_choices = choices.map { |choice,| [choice.humanize, choice] }
 
-    input_for method, addendum: do
+    input_for method, label: options.delete(:label) || method, addendum: do
       @template.concat select(method, enum_choices, options, class: field_classes(method), **html_options)
     end
   end
 
-  def file_input(method, **, &addendum)
+  def file_input(method, label: method, **, &addendum)
     file_classes = [
       "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",
       "focus:ring-indigo-600"
@@ -91,7 +91,7 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
       "w-full mb-2 aspect-square object-scale-down rounded-md border-1 border-gray-300"
     ]
 
-    input_for method, addendum: do
+    input_for method, label:, addendum: do
       attachment = object.public_send method
       if attachment.attached?
         @template.concat @template.image_tag(attachment, class: image_preview_classes)
@@ -108,23 +108,20 @@ class Admin::FormBuilder < ActionView::Helpers::FormBuilder
 
   private
 
-  def input_for(method, error_method: method, addendum: nil, &block)
+  def input_for(method, error_method: method, label: method, addendum: nil, &block)
     @template.tag.div do
-      @template.concat label(method, class: "block text-sm font-medium leading-6 text-gray-900")
+      @template.concat label(label, class: "block text-sm font-medium leading-6 text-gray-900")
       @template.concat @template.tag.div(class: "mt-2", &block)
-      if object.errors[error_method].any?
-        @template.concat @template.tag.p object.errors[error_method].first, class: "mt-2 text-sm text-red-600"
+      if object_errors(error_method).any?
+        @template.concat @template.tag.p object_errors(error_method).first, class: "mt-2 text-sm text-red-600"
       end
       @template.concat @template.tag.div(class: "mt-2", &addendum) if addendum
     end
   end
 
-  def field_classes(method, *)
-    [
-      *FIELD_CLASSES[:base],
-      object.errors[method].any? && FIELD_CLASSES[:error],
-      object.errors[method].none? && FIELD_CLASSES[:valid],
-      *
-    ]
+  def field_classes(error_method, *)
+    [*FIELD_CLASSES[:base], object_errors(error_method).any? ? FIELD_CLASSES[:error] : FIELD_CLASSES[:valid], *]
   end
+
+  def object_errors(error_method) = object.respond_to?(:errors) ? object.errors[error_method] : []
 end

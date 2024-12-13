@@ -1,28 +1,36 @@
-<%= render "section", title: "Schedule", title_element: "h2" do %>
-  <div class="grid grid-cols-1 gap-8 md:grid-cols-<%= Current.event.schedule.timeslots.size %>">
-    <% Current.event.schedule.timeslots.each do |day, timeslots| %>
-      <div class="border-2 border-white rounded-md p-8">
-        <h3 class="text-2xl sm:text-3xl font-extrabold"><%= day %></h3>
-        <ol class="text-center pt-8">
-          <% timeslots.each do |slot| %>
-            <li class="border-b border-white/70 px-4 py-8 last:border-b-0">
-              <div class="text-xl text-white min-w-0">
-                <% if slot.talk %>
-                  <%= link_to slot.talk, class: "link-secondary", title: "#{slot.talk.speaker_names}\n#{slot.talk.name}" do %>
-                    <p class="font-semibold truncate"><%= slot.talk.speaker_names %></p>
-                    <p class="mt-1 text-lg truncate"><%= slot.talk.name %></p>
+<% schedule = Current.event.schedule %>
+
+<% if schedule.published? && Current.event.upcoming? %>
+  <%= render "section", title: "Schedule", title_element: "h2" do %>
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-<%= schedule.dates.size %>">
+      <% schedule.dates.each do |day| %>
+        <div class="border-2 border-white rounded-md p-8">
+          <h3 class="text-2xl sm:text-3xl font-extrabold"><%= day %></h3>
+          <ol class="text-center pt-8">
+            <% schedule.slots_for(day).each do |slot| %>
+              <li class="border-b border-white/70 px-4 py-8 last:border-b-0">
+                <div class="text-xl text-white min-w-0">
+                  <% if slot.lineup_member %>
+                    <% if talk = slot.lineup_member.talk %>
+                      <%= link_to talk, class: "link-secondary", title: "#{talk.speaker_names}\n#{talk.name}" do %>
+                        <p class="font-semibold truncate"><%= talk.speaker_names %></p>
+                        <p class="mt-1 text-lg truncate"><%= talk.name %></p>
+                      <% end %>
+                    <% else %>
+                      <p class="font-semibold truncate"><%= slot.lineup_member.speaker.name %></p>
+                    <% end %>
+                  <% else %>
+                    <p class="font-semibold truncate"><%= slot.description %></p>
                   <% end %>
-                <% else %>
-                  <p class="font-semibold truncate"><%= slot.type %></p>
-                <% end %>
-              </div>
-              <p class="mt-1 text-lg font-mono text-white/70">
-                <time datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
-              </p>
-            </li>
-          <% end %>
-        </ol>
-      </div>
-    <% end %>
-  </div>
+                </div>
+                <p class="mt-1 text-lg font-mono text-white/70">
+                  <time datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+                </p>
+              </li>
+            <% end %>
+          </ol>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
