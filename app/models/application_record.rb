@@ -9,5 +9,24 @@ class ApplicationRecord < ActiveRecord::Base
       define_method attribute, -> { read_attribute(field).presence }
       define_method "#{attribute}=", -> value { write_attribute(field, value.presence ? Time.current : nil) }
     end
+
+    def accepts_nested_attributes_for(*attr_names, destroy_missing: false, **options)
+      options[:allow_destroy] = true if destroy_missing
+      super(*attr_names, options)
+
+      attr_names.each { |association_name| class_eval <<~RUBY, __FILE__, __LINE__ + 1 } if destroy_missing
+        def #{association_name}_attributes=(attributes)
+          if attributes.is_a?(Array)
+            new_attributes = attributes.dup
+            #{association_name}.ids.each do |id|
+              attribute_id = attributes.find { _1[:id] == id || _1[:id] == id.to_s }&.fetch(:id)
+              attributes << { id:, _destroy: true } unless attribute_id
+            end
+          end
+
+          super(attributes)
+        end
+      RUBY
+    end
   end
 end
