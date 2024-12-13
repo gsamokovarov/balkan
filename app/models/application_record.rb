@@ -17,7 +17,6 @@ class ApplicationRecord < ActiveRecord::Base
       attr_names.each { |association_name| class_eval <<~RUBY, __FILE__, __LINE__ + 1 } if destroy_missing
         def #{association_name}_attributes=(attributes)
           if attributes.is_a?(Array)
-            new_attributes = attributes.dup
             #{association_name}.ids.each do |id|
               attribute_id = attributes.find { _1[:id] == id || _1[:id] == id.to_s }&.fetch(:id)
               attributes << { id:, _destroy: true } unless attribute_id
