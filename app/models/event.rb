@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :invoice_sequence
+  has_one :schedule
   has_many :orders
   has_many :ticket_types, -> { order :price }
   has_many :tickets, through: :orders
@@ -8,7 +9,6 @@ class Event < ApplicationRecord
   has_many :community_partners
 
   def sponsors = Sponsor.all
-  def schedule = StaticSchedule.find_by!(event_id: id)
   def blog_posts = BlogPost.where(event_id: id).order(id: :desc)
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
