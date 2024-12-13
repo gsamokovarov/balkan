@@ -3,7 +3,7 @@
 <%= admin_form schedule, url: admin_event_schedule_path(schedule.event) do |f| %>
   <%= f.readonly_input :event_id, [[schedule.event.name, schedule.event.id]] %>
 
-  <% schedule.event.dates.each do |date| %>
+  <% schedule.dates.each do |date| %>
     <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
       <%= f.fields :slots_attributes, index: "" do |slots_form| %>
         <legend class="text-sm font-medium leading-6 text-gray-500">

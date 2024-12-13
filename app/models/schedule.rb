@@ -6,5 +6,6 @@ class Schedule < ApplicationRecord
 
   time_as_boolean :published
 
+  def dates = event.start_date..event.end_date
   def slots_for(date) = slots.select { _1.date == date }
 end
