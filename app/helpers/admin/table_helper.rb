@@ -1,4 +1,4 @@
-class Admin::TableDefinition
+module Admin::TableHelper
   class Column
     def initialize(view_context, name = nil, getter = nil, &block)
       @view_context = view_context
@@ -12,14 +12,16 @@ class Admin::TableDefinition
     def value(object) = @getter ? @view_context.instance_exec(object, &@getter) : object.public_send(@name)
   end
 
-  attr_reader :columns
+  class Definition
+    attr_reader :columns
 
-  def initialize(view_context, &)
-    @view_context = view_context
-    @columns = []
+    def initialize(view_context, &)
+      @view_context = view_context
+      @columns = []
 
-    instance_eval(&)
+      instance_eval(&)
+    end
+
+    def column(...) = @columns << Column.new(@view_context, ...)
   end
-
-  def column(...) = @columns << Column.new(@view_context, ...)
 end

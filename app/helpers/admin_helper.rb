@@ -68,12 +68,12 @@ module AdminHelper
     options[:html] = { class: "space-y-6", "data-turbo": false, **(options[:html] || {}) }
 
     tag.div class: "sm:max-w-sm" do
-      form_with model: object, builder: Admin::FormBuilder, **options, &
+      form_with model: object, builder: Admin::FormHelper::Builder, **options, &
     end
   end
 
   def admin_table(objects, &)
-    render "admin/application/table", objects:, table_def: Admin::TableDefinition.new(self, &)
+    render "admin/application/table", objects:, table_def: Admin::TableHelper::Definition.new(self, &)
   end
 
   def admin_paginate(scope)
