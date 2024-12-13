@@ -109,8 +109,8 @@ Style/MutableConstant:
 Style/HashSyntax:
   EnforcedShorthandSyntax: always
 
-# I like the value omission hash syntax.
-Style/SaveNavigationChainLength:
+# This is an application, not a library. We don't need to go that far.
+Style/DocumentDynamicEvalDefinition:
   Enabled: false
 
 # I do that a lot. Think it's okay.
