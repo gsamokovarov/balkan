@@ -1,0 +1,9 @@
+<%= render "section", title: "Schedule" do %>
+  <% if @schedule %>
+    <%= render "form", schedule: @schedule %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_event_schedule_path(Current.event)) { "New schedule" } %>
+    <% end %>
+  <% end %>
+<% end %>

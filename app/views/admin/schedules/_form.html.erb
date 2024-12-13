@@ -1,0 +1,33 @@
+<%# locals: (schedule:) %>
+
+<%= admin_form schedule, url: admin_event_schedule_path(schedule.event) do |f| %>
+  <%= f.readonly_input :event_id, [[schedule.event.name, schedule.event.id]] %>
+
+  <% schedule.event.dates.each do |date| %>
+    <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
+      <%= f.fields :slots_attributes, index: "" do |slots_form| %>
+        <legend class="text-sm font-medium leading-6 text-gray-500">
+          <%= date.strftime("%B-%d") %>
+        </legend>
+
+        <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300">
+          <% schedule.slots_for(date).each do |slot| %>
+            <%= f.fields_for :slots_attributes, slot, index: "" do |sf| %>
+              <%= render "slot_form", form: sf, schedule:, date: %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <template data-appendable-target="template">
+          <%= render "slot_form", form: slots_form, schedule:, date: %>
+        </template>
+
+        <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add slot" } %>
+      <% end %>
+    </fieldset>
+  <% end %>
+
+  <%= f.check_box_input :published %>
+
+  <%= f.submit %>
+<% end %>

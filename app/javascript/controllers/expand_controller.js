@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="navigation"
+// Connects to data-controller="expand"
 export default class extends Controller {
   static targets = ["target"];
 
