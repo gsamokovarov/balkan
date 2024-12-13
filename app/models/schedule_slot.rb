@@ -1,6 +1,6 @@
 class ScheduleSlot < ApplicationRecord
   belongs_to :schedule
-  belongs_to :lineup_member
+  belongs_to :lineup_member, optional: true
 
   validates :date, presence: true
   validates :time, presence: true
