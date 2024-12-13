@@ -1,14 +1,14 @@
 class Admin::SchedulesController < Admin::ApplicationController
   def show
-    @schedule = Schedule.find_by event_id: params[:event_id]
+    @schedule = event.schedule
   end
 
   def new
-    @schedule = Schedule.new event:
+    @schedule = event.build_schedule
   end
 
   def create
-    @schedule = Schedule.create event:, **schedule_params
+    @schedule = event.create_schedule schedule_params
 
     if @schedule.valid?
       redirect_to admin_event_schedule_path(event), notice: "Schedule created"
@@ -18,7 +18,7 @@ class Admin::SchedulesController < Admin::ApplicationController
   end
 
   def update
-    @schedule = Schedule.find_by! params[:event_id]
+    @schedule = event.schedule
 
     if @schedule.update schedule_params
       redirect_to admin_event_schedule_path(event), notice: "Schedule updated"
