@@ -1,3 +1,7 @@
 <%= render "section", title: @talk.name do %>
   <%= render "form", talk: @talk %>
 <% end %>
+
+<%= render "section", title: "Thumbnail" do %>
+  <%= render "thumbnail", talk: @talk, event: Current.event %>
+<% end %>

@@ -8,9 +8,7 @@ Rails.application.routes.draw do
   resources :sponsors, only: [:new, :index]
   resources :tickets, only: [:show]
   resources :speakers, only: [:index]
-  resources :talks, only: [:show] do
-    get :thumbnail, on: :member
-  end
+  resources :talks, only: [:show]
   resources :checkouts, only: [:index, :show, :create]
   resources :subscribers, only: [:new, :show, :create, :destroy]
   resources :blogs, only: [:show]

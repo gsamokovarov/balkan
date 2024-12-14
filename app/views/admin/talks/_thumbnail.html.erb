@@ -1,11 +1,13 @@
-<section class="relative w-[960px] h-[540px] p-16 flex">
+<%# locals: (talk:, event:) %>
+
+<section class="relative w-[960px] h-[540px] p-16 flex bg-black">
   <div class="relative w-1/2 flex flex-col justify-center gap-8">
-    <% if Current.event.banitsa? %>
+    <% if event.banitsa? %>
       <%= render "banitsa/header_logo" %>
     <% else %>
       <%= render "application/header_logo" %>
     <% end %>
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-banitsa-500 text-center"><%= @talk.name %></h1>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-banitsa-500 text-center"><%= talk.name %></h1>
     <div class="absolute bottom-4 left-4 w-full">
       <svg viewBox="0 0 53 75" class="w-8 inline" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -16,9 +18,9 @@
       </svg>
     </div>
   </div>
-  <div class="absolute top-1/4 right-0 w-1/2 flex flex-col justify-center items-center -z-10">
-    <div class="grid grid-cols-<%= @talk.speakers.size %>">
-      <% @talk.speakers.each.with_index do |speaker, index| %>
+  <div class="absolute top-1/4 right-0 w-1/2 flex flex-col justify-center items-center">
+    <div class="grid grid-cols-<%= talk.speakers.size %>">
+      <% talk.speakers.each.with_index do |speaker, index| %>
         <div class="<%= card_rotation(index) %> rounded-md max-w-64">
           <%= render "avatar_card", avatar: speaker.avatar, title: speaker.name, class: "text-white/70" %>
         </div>
