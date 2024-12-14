@@ -9,7 +9,7 @@ class Event < ApplicationRecord
   has_many :community_partners
   has_many :embeddings
 
-  def sponsors = Sponsor.all
+  def sponsors = StaticSponsor.all
   def blog_posts = BlogPost.where(event_id: id).order(id: :desc)
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
