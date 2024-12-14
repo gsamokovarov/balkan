@@ -1,6 +1,10 @@
 <section class="relative w-[960px] h-[540px] p-16 flex">
   <div class="relative w-1/2 flex flex-col justify-center gap-8">
-    <%= image_tag "logo-white.svg", class: "inline h-16", alt: "Balkan Ruby logo" %>
+    <% if Current.event.banitsa? %>
+      <%= render "banitsa/header_logo" %>
+    <% else %>
+      <%= render "application/header_logo" %>
+    <% end %>
     <h1 class="text-3xl sm:text-4xl font-extrabold text-banitsa-500 text-center"><%= @talk.name %></h1>
     <div class="absolute bottom-4 left-4 w-full">
       <svg viewBox="0 0 53 75" class="w-8 inline" xmlns="http://www.w3.org/2000/svg">
