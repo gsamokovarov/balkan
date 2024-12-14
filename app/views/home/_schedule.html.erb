@@ -1,6 +1,6 @@
 <% schedule = Current.event.schedule %>
 
-<% if schedule.published? %>
+<% if schedule&.published? %>
   <%= render "section", title: "Schedule", title_element: "h2" do %>
     <div class="grid grid-cols-1 gap-8 md:grid-cols-<%= schedule.dates.size %>">
       <% schedule.dates.each do |day| %>
