@@ -1,8 +1,10 @@
 <% title "April 26-27, 2024" %>
 
 <%= render "hero_section_2024" %>
-<%= render "section_separator" %>
-<%= render "schedule" %>
+<% if Current.event.schedule&.published? %>
+  <%= render "section_separator" %>
+  <%= render "schedule", schedule: Current.event.schedule %>
+<% end %>
 <%= render "section_separator" %>
 <%= render "speakers/speakers" %>
 <%= render "section_separator" %>
