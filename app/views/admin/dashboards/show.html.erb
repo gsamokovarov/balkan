@@ -11,8 +11,8 @@
     } %>
   <% end %>
 
-  <%= render "section", title: "Tickets", description: "Last 15 tickets sold" do %>
-    <%= render "admin/tickets/tickets", tickets: @orders.flat_map(&:tickets).first(15) %>
+  <%= render "section", title: "Tickets", description: "Tickets from the last 10 orders" do %>
+    <%= render "admin/tickets/tickets", tickets: @orders.first(10).flat_map(&:tickets) %>
   <% end %>
 
   <% Current.event.embeddings.each do |embedding| %>
