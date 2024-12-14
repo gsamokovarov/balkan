@@ -1,0 +1,11 @@
+<%= render "section", title: "Embeddings", cta: -> {
+  admin_button(:primary, link: new_admin_event_embedding_path) { "New embedding" }
+} do %>
+  <% if @embeddings.any? %>
+    <%= render "embeddings", embeddings: @embeddings %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <% admin_button(:primary, link: new_admin_event_embedding_path) { "New embedding" } %>
+    <% end %>
+  <% end %>
+<% end %>

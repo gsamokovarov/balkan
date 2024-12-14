@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   has_many :subscribers
   has_many :lineup_members
   has_many :community_partners
+  has_many :embeddings
 
   def sponsors = Sponsor.all
   def blog_posts = BlogPost.where(event_id: id).order(id: :desc)

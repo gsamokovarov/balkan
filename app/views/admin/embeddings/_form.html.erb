@@ -1,0 +1,9 @@
+<%# locals: (embedding:) %>
+
+<%= admin_form [:admin, embedding.event, embedding] do |f| %>
+  <%= f.readonly_input :event_id, [[embedding.event.name, embedding.event.id]] %>
+  <%= f.text_input :name %>
+  <%= f.text_input :description %>
+  <%= f.text_input :url %>
+  <%= f.submit %>
+<% end %>

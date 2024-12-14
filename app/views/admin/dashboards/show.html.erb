@@ -15,5 +15,15 @@
     <%= render "admin/tickets/tickets", tickets: @orders.flat_map(&:tickets) %>
   <% end %>
 
-  <%= render "embedding", title: "Call for speakers", button_name: "View results", link: cfp2025_responses_url %>
+  <% Current.event.embeddings.each do |embedding| %>
+    <%= render "embedding", embedding: %>
+  <% end %>
+
+  <% if Current.event.embeddings.none? %>
+    <%= render "section", title: "Embeddings" do %>
+      <%= render "empty_state" do %>
+        <% admin_button(:primary, link: new_admin_event_embedding_path(Current.event)) { "New embedding" } %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
