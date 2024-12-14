@@ -1,0 +1,9 @@
+<%# locals: (ticket_type:) %>
+
+<%= admin_form [:admin, ticket_type.event, ticket_type] do |f| %>
+  <%= f.readonly_input :event_id, [[ticket_type.event.name, ticket_type.event.id]] %>
+  <%= f.text_input :name %>
+  <%= f.number_input :price %>
+  <%= f.check_box_input :enabled %>
+  <%= f.submit %>
+<% end %>
