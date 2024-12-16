@@ -1,12 +1,6 @@
 <%# locals: (event:) -%>
 
 <%= turbo_frame_tag "newsletter" do %>
-  <div class="prose-xl max-w-prose prose-invert">
-    <p>
-      Subscribe to our newsletter for updates
-    </p>
-  </div>
-
   <%= form_with scope: :subscriber, url: subscribers_path, class: "flex flex-col gap-12" do |form| %>
     <label class="flex flex-col gap-3">
       <span class="text-xl">Email</span>

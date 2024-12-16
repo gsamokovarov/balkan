@@ -1,3 +1,9 @@
 <%= render "section", title: "Newsletter", title_element: "h2" do %>
+  <div class="prose-xl max-w-prose prose-invert pb-8">
+    <p>
+      Subscribe to our newsletter for updates
+    </p>
+  </div>
+
   <%= render "subscribers/form", event: Current.event %>
 <% end %>
