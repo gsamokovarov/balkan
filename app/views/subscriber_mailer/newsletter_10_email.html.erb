@@ -1,0 +1,56 @@
+<% cfp_countdown = FinalCountdown.until Date.new(2025, 2, 2) %>
+
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    Welcome to the <b>Balkan Ruby 2025</b> newsletter! I'm Genadi, the
+    organizer, and I'm happy to share a bit of news with you.
+  </p>
+
+  <p class="pb-2">
+    Let's start with a bit of nostalgia! The videos for Balkan Ruby 2024 are
+    <%= link_to "available on YouTube", "https://youtube.com/playlist?list=PLAkGYJoUfB0s1x8AcxBlnpnKFOPblEkRa&si=7MKLsbif8XbGvAB2", class: "link-primary" %>.
+    Our theme for 2024 was <strong>back to business</strong> as you can tell from the talks. This year, we're looking for something different.
+  </p>
+
+  <p class="pb-2">
+    This year, it's all about the <strong>long term</strong>. We are looking
+    for speakers until February 2, 2025, end the of day Sofia time. That's in
+    <b><%= cfp_countdown.days %></b> days and <b><%= cfp_countdown.hours %></b> hours as of
+    sending this email! If you, or someone you know, would like to speak at the
+    conference, please submit a talk <%= link_to "here", cfp2025_url, class: "link-primary" %>.
+  </p>
+
+  <p class="pb-2">
+    On to the tickets! Our cheapest tickets, the <%= link_to "Blind Bird tickets", checkout_url(6), class: "link-primary" %>,
+    will be available until the end of 2024. Now is a great time to book yours and save a bit.
+
+    If you're willing to spend a bit more and help us with conference expenses,
+    we introduced a <%= link_to "Supporter ticket", checkout_url(7), class: "link-primary" %>!
+    As a thank you, <b>Supporter tickets</b> will get a hand-made gift, made by us – the organizers,
+    that you can take home and display!
+  </p>
+
+  <p class="pb-2">
+    Talking about support, we are looking for sponsors! If you or your company
+    would like to help us make a great event and promote your brand in
+    Bulgaria, the Balkans, and beyond – you can get in touch by replying to this
+    email.
+  </p>
+
+  <p class="pb-2">
+    Balkan Ruby 2025 will be on 25–26 April 2025 in Sofia, Bulgaria. Our lineup
+    includes Andrey Sitnik, Julia López, Bozhidar Batsov, Stefan Kanev, and you! Please, do apply to
+    our <%= link_to "CFP", cfp2025_url, class: "link-primary" %> and share your <strong>long term</strong>
+    knowledge with the community.
+  </p>
+
+  <p class="pb-2">
+    That's all for now! We will be sending more updates as we get closer to the event.
+  </p>
+
+  <%= render "closer" %>
+</div>
