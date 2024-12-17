@@ -11,7 +11,7 @@
             lazy: true %>
         <% end %>
         <div class="prose-xl max-w-prose prose-invert text-white">
-          <p><%= sponsor.description.html_safe %></p>
+          <p><%= render_markdown sponsor.description %></p>
         </div>
       </div>
     <% end %>
@@ -23,7 +23,7 @@
           class: "w-full md:w-1/2 h-48 p-4 bg-white rounded-md object-contain",
           lazy: true %>
         <div class="prose-xl max-w-prose prose-invert text-white">
-          <p><%= sponsor.description.html_safe %></p>
+          <p><%= render_markdown sponsor.description %></p>
         </div>
       </div>
     <% end %>

@@ -6,7 +6,7 @@
 			</time>
 		</div>
 		<%= render "prose", variant: :xl, class: "mt-3" do %>
-			<%= @blog_post.html_content.html_safe %>
+			<%= render_markdown @blog_post.html_content %>
 		<% end %>
 		<div class="relative mt-8 flex items-center gap-x-4">
 			<%= image_tag @blog_post.author.avatar, alt: @blog_post.author.name,

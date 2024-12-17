@@ -35,7 +35,7 @@
         <% if speaker.bio %>
           <h2 class="text-2xl sm:text-3xl font-extrabold"><%= speaker.name %></h2>
           <%= render "prose", variant: :lg, class: "text-white/70" do %>
-            <%= speaker.bio.html_safe %>
+            <%= render_markdown speaker.bio %>
           <% end %>
         <% end %>
       </div>
@@ -45,7 +45,7 @@
   <% if @talk.description %>
     <%= render "prose" do %>
       <h2 class="text-2xl sm:text-3xl font-extrabold">About</h2>
-      <%= @talk.description.html_safe %>
+      <%= render_markdown @talk.description %>
     <% end %>
   <% end %>
 <% end %>
