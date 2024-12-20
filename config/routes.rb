@@ -58,4 +58,5 @@ Rails.application.routes.draw do
   direct(:cfp2024_responses) { "https://docs.google.com/spreadsheets/d/1A5BSvPOznCgHC9sbXpYelbjSVjIwODYCs0e1onNEyxU/edit?usp=sharing" }
   direct(:cfp2025_responses) { "https://docs.google.com/spreadsheets/d/1-aFGdBqVMQkP5JJq-1g-VyRUuvpYc_ZKBSct9cMvuA0/edit?usp=sharing" }
   direct(:slack) { "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw" }
+  direct(:balkan2025) { "https://balkanruby.com" }
 end
