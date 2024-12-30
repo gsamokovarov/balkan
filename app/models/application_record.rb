@@ -8,7 +8,7 @@ class ApplicationRecord < ActiveRecord::Base
     def time_as_boolean(attribute, field: "#{attribute}_at")
       define_method attribute, -> { read_attribute(field) ? true : false }
       define_method "#{attribute}=", -> value { write_attribute(field, value.presence ? Time.current : nil) }
-      alias_attribute "#{attribute}?", attribute
+      alias_method "#{attribute}?", attribute
     end
 
     def accepts_nested_attributes_for(*attr_names, destroy_missing: false, **options)
