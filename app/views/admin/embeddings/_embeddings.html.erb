@@ -1,8 +1,8 @@
 <%# locals: (embeddings:) %>
 
 <%= admin_table embeddings do
-  column "#",          -> { link_to _1.id, [:admin, _1.event, _1] }
-  column :name,        -> { link_to _1.name, [:admin, _1.event, _1] }
-  column :description, -> { link_to truncate(_1.description, length: 50), [:admin, _1.event, _1] }
-  column :url,         -> { link_to truncate(_1.url, length: 50), _1.url, class: "text-indigo-600 hover:underline", target: "_blank", rel: "noopener" }
+  column "#",          -> { link_to it.id, [:admin, it.event, it] }
+  column :name,        -> { link_to it.name, [:admin, it.event, it] }
+  column :description, -> { link_to truncate(it.description, length: 50), [:admin, it.event, it] }
+  column :url,         -> { link_to truncate(it.url, length: 50), it.url, class: "text-indigo-600 hover:underline", target: "_blank", rel: "noopener" }
 end %>

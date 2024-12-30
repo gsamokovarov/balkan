@@ -19,7 +19,7 @@
                     <%= nav[:name] %>
                   </button>
                   <ul data-expand-target="target"
-                    class="mt-1 px-2 <%= "hidden" if nav[:items].none? { current_page? _1[:path] } %>"
+                    class="mt-1 px-2 <%= "hidden" if nav[:items].none? { current_page? it[:path] } %>"
                   >
                     <% nav[:items].each do |item| %>
                       <li>

@@ -18,8 +18,8 @@ namespace :orders do
                               issue_invoice: !tax_id.nil?
 
         # While doing the stripe setup apparently I swapped the keys of the custom fields...
-        shirt_size_field = session["custom_fields"].find { _1["key"] == "childcare" }
-        attendee_name_field = session["custom_fields"].find { _1["key"] == "tshirtsize" }
+        shirt_size_field = session["custom_fields"].find { it["key"] == "childcare" }
+        attendee_name_field = session["custom_fields"].find { it["key"] == "tshirtsize" }
 
         order.tickets.create! ticket_type:,
                               name: attendee_name_field["text"]["value"],

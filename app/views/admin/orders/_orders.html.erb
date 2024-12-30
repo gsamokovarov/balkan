@@ -1,7 +1,7 @@
 <%# locals: (orders:) %>
 
 <%= admin_table orders do
-  column "#", -> { link_to _1.id, admin_order_path(_1) }
+  column "#", -> { link_to it.id, admin_order_path(it) }
 
   column :status do |order|
     if order.refunded?
@@ -13,10 +13,10 @@
     end
   end
 
-  column :name,    -> { link_to truncate(_1.name, length: 20), admin_order_path(_1), title: _1.name }
-  column :email,   -> { link_to truncate(_1.email, length: 20), admin_order_path(_1), title: _1.name }
-  column :date,    -> { _1.completed_at.to_date.iso8601 }
-  column :event,   -> { _1.event.name }
-  column :invoice, -> { _1.issue_invoice? ? "Yes" : "No" }
-  column :price,   -> { format_money _1.amount }
+  column :name,    -> { link_to truncate(it.name, length: 20), admin_order_path(it), title: it.name }
+  column :email,   -> { link_to truncate(it.email, length: 20), admin_order_path(it), title: it.name }
+  column :date,    -> { it.completed_at.to_date.iso8601 }
+  column :event,   -> { it.event.name }
+  column :invoice, -> { it.issue_invoice? ? "Yes" : "No" }
+  column :price,   -> { format_money it.amount }
 end %>

@@ -1,8 +1,8 @@
 <%# locals: (ticket_types:) %>
 
 <%= admin_table ticket_types do
-  column "#",      -> { link_to _1.id, [:admin, _1.event, _1] }
-  column :name,    -> { link_to _1.name, [:admin, _1.event, _1] }
-  column :price,   -> { link_to _1.price, [:admin, _1.event, _1] }
-  column :enabled, -> { _1.enabled ? "Yes" : "No" }
+  column "#",      -> { link_to it.id, [:admin, it.event, it] }
+  column :name,    -> { link_to it.name, [:admin, it.event, it] }
+  column :price,   -> { link_to it.price, [:admin, it.event, it] }
+  column :enabled, -> { it.enabled ? "Yes" : "No" }
 end %>

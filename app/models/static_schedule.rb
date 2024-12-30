@@ -9,5 +9,5 @@ class StaticSchedule < ApplicationFrozenRecord
     end
   end
 
-  def timeslots = super.transform_values { |slots| slots.map { Timeslot.new(**_1) } }
+  def timeslots = super.transform_values { |slots| slots.map { Timeslot.new(**it) } }
 end

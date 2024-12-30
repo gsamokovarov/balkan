@@ -24,9 +24,9 @@ module SpecSupport
           {
             price_data: {
               currency: "eur",
-              unit_amount: (_1[:price] * 100).to_i,
+              unit_amount: (it[:price] * 100).to_i,
               product_data: {
-                name: _1[:description],
+                name: it[:description],
               },
             },
             quantity: 1,

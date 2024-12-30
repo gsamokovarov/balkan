@@ -1,11 +1,11 @@
 <%# locals: (talks:) %>
 
 <%= admin_table talks do
-  column "#",           -> { link_to _1.id, admin_talk_path(_1) }
-  column :name,         -> { link_to truncate(_1.name, length: 30), admin_talk_path(_1) }
-  column :description,  -> { truncate _1.description, length: 30 }
+  column "#",           -> { link_to it.id, admin_talk_path(it) }
+  column :name,         -> { link_to truncate(it.name, length: 30), admin_talk_path(it) }
+  column :description,  -> { truncate it.description, length: 30 }
 
   column :speakers do |talk|
-    talk.speakers.map { link_to _1.name, admin_speaker_path(_1) }.join(", ").html_safe
+    talk.speakers.map { link_to it.name, admin_speaker_path(it) }.join(", ").html_safe
   end
 end %>

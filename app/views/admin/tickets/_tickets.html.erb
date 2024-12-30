@@ -1,11 +1,11 @@
 <%# locals: (tickets:) %>
 
 <%= admin_table tickets do
-  column "#",    -> { link_to _1.id, _1.event_access_url, "data-turbo": false }
-  column :name,  -> { link_to _1.name, _1.event_access_url, "data-turbo": false }
-  column :email, -> { link_to _1.email, _1.event_access_url, "data-turbo": false }
-  column :date,  -> { link_to _1.created_at.to_date, _1.event_access_url, "data-turbo": false }
-  column :type,  -> { _1.ticket_type.name }
-  column :shirt, -> { _1.shirt_size }
-  column :price, -> { format_money _1.price }
+  column "#",    -> { link_to it.id, it.event_access_url, "data-turbo": false }
+  column :name,  -> { link_to it.name, it.event_access_url, "data-turbo": false }
+  column :email, -> { link_to it.email, it.event_access_url, "data-turbo": false }
+  column :date,  -> { link_to it.created_at.to_date, it.event_access_url, "data-turbo": false }
+  column :type,  -> { it.ticket_type.name }
+  column :shirt, -> { it.shirt_size }
+  column :price, -> { format_money it.price }
 end %>

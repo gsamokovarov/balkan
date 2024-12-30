@@ -1,7 +1,7 @@
 <%# locals: (lineup_members:) %>
 
 <%= admin_table lineup_members do
-  column "#", -> { link_to _1.id, [:admin, _1.event, _1] }
+  column "#", -> { link_to it.id, [:admin, it.event, it] }
 
   column :status do |member|
     link_to [:admin, member.event, member] do
@@ -15,8 +15,8 @@
     end
   end
 
-  column :role,    -> { link_to _1.role, [:admin, _1.event, _1] }
-  column :speaker, -> { link_to _1.speaker.name, admin_speaker_path(_1.speaker) }
+  column :role,    -> { link_to it.role, [:admin, it.event, it] }
+  column :speaker, -> { link_to it.speaker.name, admin_speaker_path(it.speaker) }
 
   column :talk do |member|
     if member.talk

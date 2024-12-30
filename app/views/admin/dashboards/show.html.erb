@@ -3,7 +3,7 @@
 <div class="flex flex-col gap-12">
   <%= render "section", title: "Health" do %>
     <%= render "stats", data: {
-      "Attendees" => @orders.reject(&:fully_refunded?).sum { _1.tickets.size },
+      "Attendees" => @orders.reject(&:fully_refunded?).sum { it.tickets.size },
       "Tickets gross" => format_money(@orders.sum(&:amount)),
       "Refunded amount" => format_money(@orders.sum(&:refunded_amount)),
       "Newsletter subscribers" => Current.event.subscribers.count,

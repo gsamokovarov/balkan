@@ -3,7 +3,7 @@
 <div class="p-2 sm:p-3 bg-black border-2 border-white rounded-md <%= binding.local_variable_get :class %>">
   <div class="border-2 border-white rounded-sm overflow-hidden">
     <% case avatar %>
-    <% when String, -> { ActiveStorage::Attached::One === _1 && _1.attached? } %>
+    <% when String, -> { ActiveStorage::Attached::One === it && it.attached? } %>
       <%= image_tag avatar, alt: title ? "#{title} avatar" : nil, class: "w-full aspect-square object-cover", lazy: true %>
     <% else %>
       <div class="w-full aspect-square">

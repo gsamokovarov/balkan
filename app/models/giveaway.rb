@@ -21,8 +21,8 @@ module Giveaway
       name, email = tickets.first.values_at :name, :email
 
       order = Order.create! event:, name:, email:, free: true, free_reason: reason, completed_at: Time.current
-      tickets = order.tickets.create! tickets.map { { **_1, ticket_type:, price: 0 } }
-      tickets.each { TicketMailer.welcome_email(_1).deliver_later }
+      tickets = order.tickets.create! tickets.map { { **it, ticket_type:, price: 0 } }
+      tickets.each { TicketMailer.welcome_email(it).deliver_later }
       tickets
     end
   end

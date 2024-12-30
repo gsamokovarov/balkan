@@ -6,7 +6,7 @@
   total_pages = (total_count.to_f / per_page).ceil
   has_next_page = total_count > current_page * scope.limit_value.to_i
   visible_pages = ([current_page - 1, 1].max)..([current_page + 1, total_pages].min)
-  page_url = -> { url_for(**params.to_unsafe_h, page: _1, only_path: true) }
+  page_url = -> { url_for(**params.to_unsafe_h, page: it, only_path: true) }
 %>
 
 <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">

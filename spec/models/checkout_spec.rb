@@ -39,7 +39,7 @@ RSpec.case Checkout, type: :model do
       params[:tickets].map do
         {
           price: ticket_type.price,
-          description: "#{ticket_type.name} - #{_1[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}"
         }
       end,
       session_id: "stripe-session-id",
@@ -60,7 +60,7 @@ RSpec.case Checkout, type: :model do
       params[:tickets].map do
         {
           price: ticket_type.price,
-          description: "#{ticket_type.name} - #{_1[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}"
         }
       end,
       session_id: "stripe-session-id",
@@ -99,7 +99,7 @@ RSpec.case Checkout, type: :model do
       params[:tickets].map do
         {
           price: ticket_type.price * 0.9,
-          description: "#{ticket_type.name} - #{_1[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}"
         }
       end,
       session_id: "stripe-session-id",
@@ -148,7 +148,7 @@ RSpec.case Checkout, type: :model do
       params[:tickets].map do
         {
           price: ticket_type.price,
-          description: "#{ticket_type.name} - #{_1[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}"
         }
       end,
       session_id: "stripe-session-id",

@@ -19,7 +19,7 @@ class ApplicationRecord < ActiveRecord::Base
         def #{association_name}_attributes=(attributes)
           if attributes.is_a?(Array)
             #{association_name}.ids.each do |id|
-              attribute_id = attributes.find { _1[:id] == id || _1[:id] == id.to_s }&.fetch(:id)
+              attribute_id = attributes.find { it[:id] == id || it[:id] == id.to_s }&.fetch(:id)
               attributes << { id:, _destroy: true } unless attribute_id
             end
           end

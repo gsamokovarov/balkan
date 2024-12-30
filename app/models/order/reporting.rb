@@ -23,8 +23,8 @@ module Order::Reporting
 
         invoice = order.invoice
 
-        tar.add_file(invoice.filename(locale: :en), 0o644) { _1.write invoice.document(locale: :en) }
-        tar.add_file(invoice.filename(locale: :bg), 0o644) { _1.write invoice.document(locale: :bg) }
+        tar.add_file(invoice.filename(locale: :en), 0o644) { it.write invoice.document(locale: :en) }
+        tar.add_file(invoice.filename(locale: :bg), 0o644) { it.write invoice.document(locale: :bg) }
       end
     end
     tar_io.rewind

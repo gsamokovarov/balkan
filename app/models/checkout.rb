@@ -15,7 +15,7 @@ module Checkout
 
       stripe_session = create_stripe_checkout_session(pending_tickets, issue_invoice:, ticket_type:)
 
-      order.update!(amount: pending_tickets.sum { _1["price"] },
+      order.update!(amount: pending_tickets.sum { it["price"] },
                     stripe_checkout_session_uid: stripe_session.id,
                     pending_tickets:,
                     issue_invoice:)
@@ -49,9 +49,9 @@ module Checkout
       {
         price_data: {
           currency: "eur",
-          unit_amount: (_1["price"] * 100).to_i,
+          unit_amount: (it["price"] * 100).to_i,
           product_data: {
-            name: "#{ticket_type.name} - #{_1['name']}",
+            name: "#{ticket_type.name} - #{it['name']}",
           },
         },
         quantity: 1,
@@ -63,7 +63,7 @@ module Checkout
     discounted_price = ticket_type.price * 0.9 if tickets.size >= 3
     pending_tickets =
       tickets.map do
-        ticket = order.tickets.build _1
+        ticket = order.tickets.build it
         ticket.price = discounted_price || ticket_type.price
         ticket.ticket_type = ticket_type
 

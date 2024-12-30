@@ -14,7 +14,7 @@ class Ticket < ApplicationRecord
     validates :shirt_size, inclusion: { in: SHIRT_SIZES }
   end
 
-  normalizes :email, with: -> { _1.downcase.strip }
+  normalizes :email, with: -> { it.downcase.strip }
 
   def event_access_url = Link.with_host(event.host) { Link.ticket_url generate_token_for(:event_access) }
   def qrcode = RQRCode::QRCode.new event_access_url
