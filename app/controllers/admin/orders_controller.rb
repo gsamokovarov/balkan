@@ -28,7 +28,11 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def report
-    orders = Order.completed.includes(:invoice, tickets: :ticket_type).order("completed_at DESC")
+    orders =
+      Order.completed
+        .includes(:invoice, tickets: :ticket_type)
+        .where(created_at: Date.current.prev_month.beginning_of_month..)
+        .order("completed_at DESC")
 
     respond_to do |format|
       format.csv do
