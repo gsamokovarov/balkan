@@ -36,17 +36,17 @@ module AdminHelper
     end
   end
 
-  def admin_button_group(*links)
+  def admin_button_group(*buttons)
     tag.span class: "isolate inline-flex rounded-md shadow-sm" do
-      links.each_with_index do |link, index|
+      buttons.each_with_index do |button, index|
         classes = [
           index.zero? && "rounded-l-md",
           index.positive? && "-ml-px",
-          index == links.size - 1 && "rounded-r-md",
+          index == buttons.size - 1 && "rounded-r-md",
           "relative inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900",
           "ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
         ]
-        concat tag.a(href: link[:href], class: classes) { link[:name] }
+        concat tag.a(href: button[:link], class: classes) { button[:name] }
       end
     end
   end
