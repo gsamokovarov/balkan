@@ -129,6 +129,8 @@ GEM
       activemodel
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hamal (0.1.0)
+      json
     hashery (2.1.2)
     hashie (3.6.0)
     honeybadger (5.8.0)
@@ -151,7 +153,7 @@ GEM
     irb (1.14.3)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.8.2)
+    json (2.9.1)
     language_server-protocol (3.17.0.3)
     logger (1.6.4)
     loofah (2.23.1)
@@ -363,6 +365,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   frozen_record (~> 0.27.0)
+  hamal
   hashie
   honeybadger (~> 5.3)
   icalendar

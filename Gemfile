@@ -27,6 +27,7 @@ gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development do
+  gem "hamal"
   gem "rspec-rails", "~> 6.1.0"
   gem "rspec-xunit"
   gem "rubocop"
