@@ -3,8 +3,8 @@
 <%= render "section", title: "Community partners", highlight: do %>
   <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
     <% Current.event.community_partners.each do |partner| %>
-      <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal" do %>
-        <%= image_tag partner.logo, class: "w-auto h-full bg-white object-contain", alt: partner.name, lazy: true %>
+      <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal" do %>
+        <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
       <% end %>
     <% end %>
   </div>
