@@ -16,8 +16,8 @@ module.exports = {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       boxShadow: {
-        brutal: "4px 4px #fff",
-        "brutal-md": "6px 6px #fff",
+        brutal: "4px 4px #000",
+        "brutal-md": "6px 6px #000",
       },
       colors: {
         current: "currentColor",

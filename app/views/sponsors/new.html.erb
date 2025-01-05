@@ -1,7 +1,7 @@
 <% title "Sponsorship" %>
 
-<%= render "section", title: "Sponsorship", title_element: "h1" do %>
-  <div class="prose prose-xl prose-invert">
+<%= render "section", title: "Sponsorship", title_element: "h1", highlight: true do %>
+  <%= render "prose", variant: "xl" do %>
     <p>
       By sponsoring Balkan Ruby, you are helping us make a great event while
       promoting your brand to the passionate Ruby developers in Bulgaria, the
@@ -10,7 +10,7 @@
     <p>
       Check out our sponsorship packages below:
     </p>
-  </div>
+  <% end %>
 
   <div class="flex flex-wrap lg:flex-nowrap lg:flex-shrink gap-8">
     <%= render "package", name: "Basic", price: "€1250", limited: false do %>
@@ -65,11 +65,11 @@
     <% end %>
   </div>
 
-  <div class="prose prose-lg prose-invert text-white/70">
+  <%= render "prose", variant: "xl", class: "text-gray-500" do %>
     <p>
       <b>Exclusive</b> packages are in limited availability and can sell out.
     </p>
-  </div>
+  <% end %>
 
   <h2 class="text-2xl sm:text-3xl font-extrabold">Supporter</h2>
 
@@ -83,11 +83,11 @@
     <% end %>
   </div>
 
-  <div class="prose prose-lg prose-invert text-white/70">
+  <%= render "prose", variant: "xl", class: "text-gray-500" do %>
     <p>
       <b>Supporter</b> packages are given to companies paying for conference expenses like speaker travel.
     </p>
-  </div>
+  <% end %>
 
   <div class="flex gap-4 flex-wrap">
     <%= link_to "mailto:hi@balkanruby.com?subject=Balkan Ruby sponsorship", class: "btn-primary" do %>
@@ -108,9 +108,7 @@
   </div>
 <% end %>
 
-<%= render "section_separator" %>
-
-<%= render "section", title: "FAQ", title_element: "h2" do %>
+<%= render "section", title: "FAQ" do %>
   <%= render "faq" do %>
     <%= render "question", title: "Do I have to provide the banners and roll-up posters?" do %>
       <p>
@@ -140,5 +138,4 @@
   <% end %>
 <% end %>
 
-<%= render "section_separator" %>
-<%= render "tickets/cta" %>
+<%= render "tickets/cta", highlight: true %>

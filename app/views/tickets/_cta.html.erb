@@ -1,5 +1,10 @@
-<%= render "section", title: "Tickets", title_element: "h2" do %>
+<%# locals: (highlight: false) %>
+
+<%= render "section", title: "Tickets", highlight: do %>
   <% if Current.event.upcoming? %>
+    <%= render "prose" do %>
+      Support <%= Current.event.name %> by purchasing a ticket. ❤️
+    <% end %>
     <%= render "tickets/buy_button" %>
   <% else %>
     <%= render "tickets/sold_out" %>

@@ -6,12 +6,12 @@
   </div>
 
   <% if Current.event.balkan? %>
-    <div class="prose-xl max-w-prose prose-invert text-white">
+    <%= render "prose" do %>
       <p>
         Supporter tickets get our eternal gratitude and a hand-made gift, made by
         the organizers!
       </p>
-    </div>
+    <% end %>
   <% end %>
 <% else %>
   <%= render "tickets/sold_out" %>

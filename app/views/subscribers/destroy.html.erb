@@ -1,10 +1,12 @@
-<%= render "section", title: "Newsletter", title_element: "h1" do %>
+<%= render "section", title: "Newsletter", title_element: "h1", highlight: true do %>
   <%= turbo_frame_tag "newsletter" do %>
-    <div class="prose-xl max-w-prose prose-invert">
+    <%= render "prose", class: "my-10" do
       <p>
         You have been unsubscribed from our newsletter. You will no longer receive
-        updates on <span class="text-banitsa-300"><%= @subscriber.email %></span>.
+        updates on <span class="text-banitsa-600"><%= @subscriber.email %></span>.
       </p>
-    </div>
+    <% end %>
   <% end %>
 <% end %>
+
+<%= render "tickets/cta" %>
