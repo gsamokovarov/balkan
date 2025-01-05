@@ -1,12 +1,12 @@
-<%= render "section" do %>
+<%= render "section", highlight: true do %>
   <div class="grid gap-8">
     <div class="flex flex-col sm:flex-row gap-8" data-controller="hero">
       <div class="flex flex-col gap-8">
         <div>
           <h1 class="text-4xl sm:text-5xl font-black">
-            Ruby Banitsa <span class="text-banitsa-500">conf</span>
+            Ruby Banitsa <span class="text-banitsa-600">conf</span>
           </h1>
-          <div class="text-2xl sm:text-3xl font-semibold mt-3 text-white/70">
+          <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-500">
             December 7th in Sofia, Bulgaria
           </div>
         </div>
@@ -41,16 +41,16 @@
       gap-4
     ">
       <%= image_tag "banitsa/puzl.jpg", alt: "Ruby Banitsa event",
-        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2 col-span-2",
+        class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover row-span-2 col-span-2",
         lazy: true %>
       <%= image_tag "banitsa/stefan.jpg", alt: "Ruby Banitsa event",
-        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover",
+        class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover",
         lazy: true %>
       <%= image_tag "banitsa/mitio.jpg", alt: "Ruby Banitsa event",
-        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object-left row-span-2",
+        class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object-left row-span-2",
         lazy: true %>
       <%= image_tag "banitsa/banitsa.jpg", alt: "Ruby Banitsa event",
-        class: "snap-always snap-center border-2 border-white rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object col-span-2",
+        class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 sm:w-full h-full object-cover object col-span-2",
         lazy: true %>
   </div>
 <% end %>

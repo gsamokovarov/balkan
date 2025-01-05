@@ -2,14 +2,9 @@
 
 <%= render "hero_section_2024" %>
 <% if Current.event.schedule&.published? %>
-  <%= render "section_separator" %>
   <%= render "schedule", schedule: Current.event.schedule %>
 <% end %>
-<%= render "section_separator" %>
 <%= render "speakers/speakers" %>
-<%= render "section_separator" %>
-<%= render "venue" %>
-<%= render "section_separator" %>
+<%= render "venue", highlight: true %>
 <%= render "sponsors/sponsors" %>
-<%= render "section_separator" %>
-<%= render "community_partners" %>
+<%= render "community_partners", highlight: true %>

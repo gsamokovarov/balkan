@@ -1,12 +1,10 @@
 <% title @ticket_type.name %>
 
-<%= render "section", title: "Buy #{@ticket_type.name} tickets", title_element: "h1" do %>
+<%= render "section", title: "Buy #{@ticket_type.name} tickets", highlight: true do %>
   <%= render "form", ticket_type: @ticket_type %>
 <% end %>
 
-<%= render "section_separator" %>
-
-<%= render "section", title: "FAQ", title_element: "h2" do %>
+<%= render "section", title: "FAQ" do %>
   <%= render "faq" do %>
     <%= render "question", title: "Do you offer refunds?" do %>
       <p>

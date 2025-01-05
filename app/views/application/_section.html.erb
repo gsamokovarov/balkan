@@ -2,9 +2,10 @@
   title = local_assigns[:title]
   title_element = local_assigns[:title_element] || "h2"
   title_class = local_assigns[:title_class]
+  highlight = local_assigns[:highlight] ? "bg-banitsa-50 w-full sm:rounded-md sm:w-auto sm:border-2 sm:border-black" : nil
  %>
 
-<section class="py-16 space-y-10">
+<section class="px-8 py-16 space-y-10 <%= local_assigns[:class] %> <%= highlight %>">
   <% if title %>
     <%= tag.public_send title_element, id: CGI.escape(title.downcase), class: ["text-3xl sm:text-4xl font-extrabold", title_class] do %>
       <%= title %>

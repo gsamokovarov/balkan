@@ -1,6 +1,6 @@
 <% title @talk.name %>
 
-<%= render "section", title: @talk.name, title_element: "h1" do %>
+<%= render "section", title: @talk.name, title_element: "h1", highlight: true do %>
   <% @talk.speakers.each do |speaker| %>
     <div class="flex flex-col sm:flex-row gap-10">
       <div class="w-64 shrink-0 space-y-10">
@@ -33,8 +33,8 @@
 
       <div class="shrink">
         <% if speaker.bio %>
-          <h2 class="text-2xl sm:text-3xl font-extrabold"><%= speaker.name %></h2>
-          <%= render "prose", variant: :lg, class: "text-white/70" do %>
+          <%= render "prose", variant: :lg do %>
+            <h2 class="text-2xl sm:text-3xl font-extrabold"><%= speaker.name %></h2>
             <%= render_markdown speaker.bio %>
           <% end %>
         <% end %>
@@ -50,5 +50,4 @@
   <% end %>
 <% end %>
 
-<%= render "section_separator" %>
 <%= render "tickets/cta" %>

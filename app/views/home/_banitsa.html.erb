@@ -2,14 +2,9 @@
 
 <%= render "banitsa/hero_section" %>
 <% if Current.event.schedule&.published? %>
-  <%= render "section_separator" %>
   <%= render "schedule", schedule: Current.event.schedule %>
 <% end %>
-<%= render "section_separator" %>
 <%= render "speakers/speakers" %>
-<%= render "section_separator" %>
-<%= render "tickets" %>
-<%= render "section_separator" %>
+<%= render "tickets", highlight: true %>
 <%= render "banitsa/venue" %>
-<%= render "section_separator" %>
-<%= render "community_partners" %>
+<%= render "community_partners", highlight: true %>

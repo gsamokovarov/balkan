@@ -1,3 +1,5 @@
-<%= render "section", title: "Newsletter", title_element: "h1" do %>
+<%= render "section", title: "Newsletter", title_element: "h1", highlight: true do %>
   <%= render "subscribers/form", event: Current.event %>
 <% end %>
+
+<%= render "tickets/cta" %>

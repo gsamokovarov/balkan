@@ -1,31 +1,31 @@
 <%= render "section", title: "Sponsors", title_element: "h2" do %>
   <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
     <% Current.event.sponsors.basic.each do |sponsor| %>
-      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal" do %>
         <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
       <% end %>
     <% end %>
     <% Current.event.sponsors.party.each do |sponsor| %>
-      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white rounded-md" do %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal" do %>
         <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
       <% end %>
     <% end %>
   </div>
   <div class="grid grid-cols-2 gap-8 lg:grid-cols-4">
     <% Current.event.sponsors.travel.each do |sponsor| %>
-      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-16 p-4 bg-white rounded-md" do %>
+      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-16 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal" do %>
         <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
       <% end %>
     <% end %>
   </div>
 
-  <div class="prose max-w-prose prose-invert text-white/70">
+  <%= render "prose", variant: "lg" do %>
     <p>
       By sponsoring Balkan Ruby, you are helping us make a great event while
       promoting your brand to the passionate Ruby developers in Bulgaria, the
       Balkans, and beyond!
     </p>
-  </div>
+  <% end %>
 
   <%= link_to new_sponsor_path, class: "btn-primary" do %>
     <svg

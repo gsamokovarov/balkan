@@ -1,7 +1,7 @@
 <%# locals: (avatar: nil, subtitle: nil, title: nil, class: nil) %>
 
-<div class="p-2 sm:p-3 bg-black border-2 border-white rounded-md <%= binding.local_variable_get :class %>">
-  <div class="border-2 border-white rounded-sm overflow-hidden">
+<div class="p-2 sm:p-3 bg-white border-2 border-black rounded-md <%= binding.local_variable_get :class %>">
+  <div class="border-2 border-black rounded-sm overflow-hidden">
     <% case avatar %>
     <% when String, -> { ActiveStorage::Attached::One === it && it.attached? } %>
       <%= image_tag avatar, alt: title ? "#{title} avatar" : nil, class: "w-full aspect-square object-cover", lazy: true %>
@@ -11,7 +11,7 @@
           xmlns="http://www.w3.org/2000/svg"
           creator="Katerina Limpitsouni"
           viewBox="0 0 26.97336 37.28118"
-          class="p-2 w-full h-full fill-white"
+          class="p-2 w-full h-full fill-current"
         >
           <path
             d="M12.46307,.00449c-2.69892,.27196-5.1135,1.87721-6.42248,4.2618-1.3847,2.52254-1.22323,5.5874,.27816,8.02657,3.29213,5.34843,11.20045,5.37412,15.04687,.65181,1.0612-1.30286,1.891-2.96333,1.62114-4.68774-.22289-1.42428-1.32137-2.73057-2.78772-2.93295-.94403-.13029-1.35231,1.31481-.39876,1.44642,1.11555,.15397,1.76857,1.13968,1.74166,2.2309-.0311,1.2612-.81025,2.45941-1.64783,3.3519-1.52795,1.62813-3.70395,2.61542-5.94461,2.6067-2.3762-.00924-4.75973-1.11839-6.12418-3.09706-1.27106-1.84323-1.66123-4.24615-.74685-6.32654,.94284-2.14514,3.03268-3.7948,5.38459-4.0318,.95133-.09586,.96122-1.59686,0-1.5h0Z"

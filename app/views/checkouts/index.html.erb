@@ -1,14 +1,13 @@
 <% title "Tickets" %>
 
-<%= render "section", title: "Tickets", title_element: "h2" do %>
+<%= render "section", title: "Tickets", highlight: true do %>
   <%= render "tickets/tickets_for_sale" %>
 <% end %>
 
-<%= render "section_separator" %>
-
-<%= render "section", title: "FAQ", title_element: "h2" do %>
+<%= render "section", title: "FAQ" do %>
   <%= render "faq" do %>
-    <%= render "question", title: "Can I buy tickets in bulk?" do %> <p>
+    <%= render "question", title: "Can I buy tickets in bulk?" do %>
+      <p>
         Yes, and you will save doing so! We'll give you 10% off when buying 3
         tickets or more. The discount is applied automatically.
       </p>
