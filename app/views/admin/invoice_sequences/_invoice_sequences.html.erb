@@ -1,0 +1,6 @@
+<%# locals: (invoice_sequences:) %>
+
+<%= admin_table invoice_sequences do
+  column "#", -> { it.id }
+  column :initial_number
+end %>

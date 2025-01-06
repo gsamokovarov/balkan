@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     end
     resources :speakers
     resources :talks
+    resources :invoice_sequences, only: [:index]
   end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
