@@ -3,10 +3,10 @@
 <%= render "section", title: "Ticket", title_element: "h1" do %>
   <div
     data-ticket-target="template"
-    class="border-2 border-white rounded-md flex flex-col gap-6 p-4 w-full sm:w-72"
+    class="border-2 border-black rounded-md flex flex-col gap-6 p-4 w-full sm:w-72"
   >
     <div class="flex flex-1 w-full justify-center">
-      <div class="border-2 border-black rounded-md bg-white w-full">
+      <div class="border-4 border-black rounded-md bg-white w-full">
         <%== @ticket.qrcode.as_svg use_path: true, viewbox: true %>
       </div>
     </div>
