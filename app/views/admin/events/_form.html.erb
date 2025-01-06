@@ -1,0 +1,11 @@
+<%# locals: (event:) %>
+
+<%= admin_form [:admin, event] do |f| %>
+  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.initial_number, it.id] }, include_blank: true %>
+  <%= f.text_input :name %>
+  <%= f.text_input :host %>
+  <%= f.date_input :start_date %>
+  <%= f.date_input :end_date %>
+  <%= f.date_input :speaker_applications_end_date %>
+  <%= f.submit %>
+<% end %>

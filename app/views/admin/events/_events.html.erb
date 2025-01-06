@@ -1,0 +1,8 @@
+<%# locals: (events:) %>
+
+<%= admin_table events do
+  column "#",    -> { link_to it.id, [:admin, it] }
+  column :name,  -> { link_to it.name, [:admin, it] }
+  column :host,  -> { link_to it.host || "–", [:admin, it] }
+  column :dates, -> { link_to [it.start_date, it.end_date].to_a.join(" – "), [:admin, it] }
+end %>

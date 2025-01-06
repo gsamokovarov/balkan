@@ -51,6 +51,12 @@ module Admin::FormHelper
       end
     end
 
+    def date_input(method, label: method, **, &addendum)
+      input_for method, label:, addendum: do
+        @template.concat date_field(method, class: field_classes(method), **)
+      end
+    end
+
     def time_input(method, label: method, **, &addendum)
       input_for method, label:, addendum: do
         @template.concat time_field(method, class: field_classes(method), **)

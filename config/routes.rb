@@ -32,7 +32,7 @@ Rails.application.routes.draw do
         post :invoice
       end
     end
-    resources :events, only: [] do
+    resources :events, only: [:index, :show, :new, :create, :edit, :update] do
       resources :ticket_types, only: [:index, :show, :new, :create, :edit, :update]
       resources :embeddings, only: [:index, :show, :new, :create, :edit, :update]
       resources :lineup_members, only: [:index, :show, :new, :create, :edit, :update]

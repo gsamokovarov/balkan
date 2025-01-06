@@ -9,6 +9,10 @@ class Event < ApplicationRecord
   has_many :community_partners
   has_many :embeddings
 
+  validates :name, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+
   def sponsors = StaticSponsor.all
   def blog_posts = BlogPost.where(event_id: id).order(id: :desc)
 
