@@ -21,7 +21,7 @@
   <% end %>
 
   <%= render 'section', title: "Documents" do %>
-    <% if @order.issue_invoice? %>
+    <% if @order.invoicable? %>
       <%= render "documents", order: @order %>
     <% else %>
       <%= render "empty_state" %>
