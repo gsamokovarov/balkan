@@ -5,7 +5,7 @@
   highlight = local_assigns[:highlight] ? "bg-banitsa-50 w-full sm:rounded-md sm:w-auto sm:border-2 sm:border-black" : nil
  %>
 
-<section class="px-8 py-16 space-y-10 <%= local_assigns[:class] %> <%= highlight %>">
+<section class="px-4 py-16 space-y-10 <%= local_assigns[:class] %> <%= highlight %> sm:p-8">
   <% if title %>
     <%= tag.public_send title_element, id: CGI.escape(title.downcase), class: ["text-3xl sm:text-4xl font-extrabold", title_class] do %>
       <%= title %>
