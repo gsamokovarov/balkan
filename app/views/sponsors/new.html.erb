@@ -12,82 +12,85 @@
     </p>
   <% end %>
 
-  <div class="flex flex-wrap lg:flex-nowrap lg:flex-shrink gap-8">
-    <%= render "package", name: "Basic", price: "€1250", limited: false do %>
-      <ul>
-        <li>Banner at the event</li>
-        <li>Logo on the website</li>
-        <li>Brand promotion on social media</li>
-        <li>Mentions from the stage</li>
-        <li>1 free ticket</li>
-      </ul>
-    <% end %>
-    <%= render "package", name: "Standard", price: "€2500", limited: false do %>
-      <ul>
-        <li><b>Table at the conference</b></li>
-        <li>Banner at the event</li>
-        <li>Logo on the website</li>
-        <li>Brand promotion on social media</li>
-        <li>Mentions from the stage</li>
-        <li>2 free tickets</li>
-      </ul>
-    <% end %>
-    <%= render "package", name: "Pro", price: "€3500", limited: false do %>
-      <ul>
-        <li><b>Table at the conference</b></li>
-        <li><b>Your logo on our video recordings</b></li>
-        <li>Banner at the event</li>
-        <li>Logo on the website</li>
-        <li>Brand promotion on social media</li>
-        <li>Mentions from the stage</li>
-        <li>3 free tickets</li>
-      </ul>
+  <div class="space-y-8">
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Sponsor</h2>
+    <div class="flex flex-wrap lg:flex-nowrap lg:flex-shrink gap-4">
+      <%= render "package", name: "Basic", price: "€1250", limited: false do %>
+        <ul>
+          <li>Banner at the event</li>
+          <li>Logo on the website</li>
+          <li>Brand promotion on social media</li>
+          <li>Mentions from the stage</li>
+          <li>1 free ticket</li>
+        </ul>
+      <% end %>
+      <%= render "package", name: "Standard", price: "€2500", limited: false do %>
+        <ul>
+          <li><b>Table at the conference</b></li>
+          <li>Banner at the event</li>
+          <li>Logo on the website</li>
+          <li>Brand promotion on social media</li>
+          <li>Mentions from the stage</li>
+          <li>2 free tickets</li>
+        </ul>
+      <% end %>
+      <%= render "package", name: "Pro", price: "€3500", limited: false do %>
+        <ul>
+          <li><b>Table at the conference</b></li>
+          <li><b>Your logo on our video recordings</b></li>
+          <li>Banner at the event</li>
+          <li>Logo on the website</li>
+          <li>Brand promotion on social media</li>
+          <li>Mentions from the stage</li>
+          <li>3 free tickets</li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-8">
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Exclusive</h2>
+    <div class="flex flex-wrap lg:flex-nowrap lg:flex-shrink gap-4">
+      <%= render "package", name: "T-shirt", price: "€1200", limited: true do %>
+        <ul>
+          <li><b>Your logo on the sleeves of our t-shirts</b></li>
+        </ul>
+      <% end %>
+      <%= render "package", name: "Coffee", price: "€1200", limited: true do %>
+        <ul>
+          <li><b>Espresso with your branding</b></li>
+        </ul>
+      <% end %>
+      <%= render "package", name: "Party", price: "€1200", limited: true do %>
+        <ul>
+          <li><b>Your branding on the conference party</b></li>
+        </ul>
+      <% end %>
+    </div>
+    <%= render "prose", variant: "xl", class: "text-gray-500" do %>
+      <p>
+        <b>Exclusive</b> packages are in limited availability and can sell out.
+      </p>
     <% end %>
   </div>
 
-  <h2 class="text-2xl sm:text-3xl font-extrabold">Exclusive</h2>
-
-  <div class="flex flex-wrap lg:flex-nowrap lg:flex-shrink gap-8">
-    <%= render "package", name: "T-shirt", price: "€1200", limited: true do %>
-      <ul>
-        <li><b>Your logo on the sleeves of our t-shirts</b></li>
-      </ul>
-    <% end %>
-    <%= render "package", name: "Coffee", price: "€1200", limited: true do %>
-      <ul>
-        <li><b>Espresso with your branding</b></li>
-      </ul>
-    <% end %>
-    <%= render "package", name: "Party", price: "€1200", limited: true do %>
-      <ul>
-        <li><b>Your branding on the conference party</b></li>
-      </ul>
+  <div class="space-y-8">
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Supporter</h2>
+    <div class="flex flex-wrap lg:flex-nowrap lg:flex-shrink gap-4">
+      <%= render "package", name: "Speaker travel", price: nil, limited: false do %>
+        <ul>
+          <li>Logo on the website</li>
+          <li>Brand promotion on social media</li>
+          <li>Mentions from the stage</li>
+        </ul>
+      <% end %>
+    </div>
+    <%= render "prose", variant: "xl", class: "text-gray-500" do %>
+      <p>
+        <b>Supporter</b> packages are given to companies paying for conference expenses like speaker travel.
+      </p>
     <% end %>
   </div>
-
-  <%= render "prose", variant: "xl", class: "text-gray-500" do %>
-    <p>
-      <b>Exclusive</b> packages are in limited availability and can sell out.
-    </p>
-  <% end %>
-
-  <h2 class="text-2xl sm:text-3xl font-extrabold">Supporter</h2>
-
-  <div class="flex flex-wrap lg:flex-nowrap lg:flex-shrink gap-8">
-    <%= render "package", name: "Speaker travel", price: nil, limited: false do %>
-      <ul>
-        <li>Logo on the website</li>
-        <li>Brand promotion on social media</li>
-        <li>Mentions from the stage</li>
-      </ul>
-    <% end %>
-  </div>
-
-  <%= render "prose", variant: "xl", class: "text-gray-500" do %>
-    <p>
-      <b>Supporter</b> packages are given to companies paying for conference expenses like speaker travel.
-    </p>
-  <% end %>
 
   <div class="flex gap-4 flex-wrap">
     <%= link_to "mailto:hi@balkanruby.com?subject=Balkan Ruby sponsorship", class: "btn-primary" do %>

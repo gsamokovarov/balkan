@@ -1,6 +1,6 @@
 <%= render "section", title: "Newsletter", title_element: "h1" do %>
   <%= turbo_frame_tag "newsletter" do %>
-    <%= render "prose" do %>
+    <%= render "prose", class: "my-10" do %>
       <p>
         <% if @subscriber.errors[:email].any? %>
           Email <span class="text-banitsa-600"><%= @subscriber.email %></span> is already subscribed.
