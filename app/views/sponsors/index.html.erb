@@ -1,7 +1,7 @@
 <% title "Sponsors" %>
 
 <%= render "section", title: "Sponsors", title_element: "h1", class: "bg-banitsa-50 p-8 -mx-8 mt-10 rounded-md border-2 border-black" do %>
-  <div class="space-y-10">
+  <div class="space-y-8">
     <h2 class="text-2xl sm:text-3xl font-extrabold">Basic</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <% Current.event.sponsors.basic.each do |sponsor| %>
@@ -17,7 +17,9 @@
         </div>
       <% end %>
     </div>
+  </div>
 
+  <div class="space-y-8">
     <h2 class="text-2xl sm:text-3xl font-extrabold">Party</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <% Current.event.sponsors.party.each do |sponsor| %>
@@ -31,7 +33,9 @@
         </div>
       <% end %>
     </div>
+  </div>
 
+  <div class="space-y-8">
     <h2 class="text-2xl sm:text-3xl font-extrabold">Travel</h2>
     <div class="grid grid-cols-1 w-full md:grid-cols-3 lg:grid-cols-4 gap-8">
       <% Current.event.sponsors.travel.each do |sponsor| %>
