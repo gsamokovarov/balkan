@@ -1,7 +1,7 @@
 <%# locals: (event:) -%>
 
 <%= turbo_frame_tag "newsletter" do %>
-  <%= form_with scope: :subscriber, url: subscribers_path, class: "flex flex-col gap-12" do |form| %>
+  <%= form_with scope: :subscriber, url: subscribers_path, class: "flex flex-col gap-10" do |form| %>
     <label class="flex flex-col gap-3">
       <span class="text-xl">Email</span>
       <%= form.email_field :email,
