@@ -1,5 +1,5 @@
 <% if Current.event.upcoming? %>
-  <div class="grid grid-cols-2 gap-4 sm:flex sm:items-center sm:flex-wrap sm:gap-8">
+  <div class="grid grid-cols-2 gap-4 sm:flex sm:items-center sm:flex-wrap sm:gap-6">
     <% Current.event.ticket_types.enabled.each do |ticket_type| %>
       <%= render "tickets/ticket_card_link", ticket_type: %>
     <% end %>
