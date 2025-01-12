@@ -1,2 +1,0 @@
-class StaticCommunityPartner < ApplicationFrozenRecord
-end
