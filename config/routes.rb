@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       resource :schedule, only: [:show, :new, :create, :edit, :update]
     end
     resources :speakers
+    resources :sponsors, only: [:index, :show, :new, :create, :edit, :update]
     resources :talks
     resources :invoice_sequences, only: [:index]
   end

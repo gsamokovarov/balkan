@@ -1,0 +1,9 @@
+<%# locals: (sponsor:) %>
+
+<%= admin_form [:admin, sponsor] do |f| %>
+  <%= f.text_input :name %>
+  <%= f.text_area_input :description %>
+  <%= f.text_input :url %>
+  <%= f.file_input :logo %>
+  <%= f.submit %>
+<% end %>
