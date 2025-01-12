@@ -39,13 +39,13 @@ export default class extends Controller {
 
   countValueChanged() {
     if (this.countValue < 3) {
-      this.summaryTarget.classList.remove("text-banitsa-600", "text-x-green")
+      this.summaryTarget.classList.remove("text-banitsa-600", "text-teal-600")
       if (this.countValue === 2) this.summaryTarget.classList.add("text-banitsa-600")
       this.summaryTarget.textContent = `Buy ${3 - this.countValue} more and save 10%`
     } else {
       this.summaryTarget.classList.remove("text-banitsa-600")
       this.summaryTarget.textContent = `You are saving ${this.calculateDiscount()} (10%) 🎉`
-      this.summaryTarget.classList.add("text-x-green")
+      this.summaryTarget.classList.add("text-teal-600")
     }
 
     this.buyButtonTextTarget.textContent = `Pay ${this.calculatePrice()}`
