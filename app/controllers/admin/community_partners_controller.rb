@@ -1,20 +1,20 @@
 class Admin::CommunityPartnersController < Admin::ApplicationController
   def index
-    @community_partners = CommunityPartner.with_attached_logo.for event
+    @community_partners = event.community_partners.with_attached_logo
   end
 
   def show
-    @community_partner = CommunityPartner.find params[:id]
+    @community_partner = event.community_partners.find params[:id]
   end
 
   def new
-    @community_partner = CommunityPartner.new event:
+    @community_partner = event.community_partners.new
   end
 
   def create
-    @community_partner = CommunityPartner.new(**community_partner_params, event:)
+    @community_partner = event.community_partners.create(**community_partner_params)
 
-    if @community_partner.save
+    if @community_partner.valid?
       redirect_to admin_event_community_partners_path(event), notice: "Community partner created"
     else
       render :new
@@ -22,11 +22,11 @@ class Admin::CommunityPartnersController < Admin::ApplicationController
   end
 
   def edit
-    @community_partner = CommunityPartner.find params[:id]
+    @community_partner = event.community_partners.find params[:id]
   end
 
   def update
-    @community_partner = CommunityPartner.find params[:id]
+    @community_partner = event.community_partners.find params[:id]
 
     if @community_partner.update community_partner_params
       redirect_to admin_event_community_partners_path(event), notice: "Community partner updated"
