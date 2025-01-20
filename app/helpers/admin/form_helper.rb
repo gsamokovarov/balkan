@@ -33,14 +33,14 @@ module Admin::FormHelper
       end
     end
 
-    def text_input(method, label: method, **, &addendum)
-      input_for method, label:, addendum: do
+    def text_input(method, label: method, class: nil, **, &addendum)
+      input_for method, class:, label:, addendum: do
         @template.concat text_field(method, class: field_classes(method), **)
       end
     end
 
-    def text_area_input(method, label: method, **, &addendum)
-      input_for method, label:, addendum: do
+    def text_area_input(method, label: method, class: nil, **, &addendum)
+      input_for method, class:, label:, addendum: do
         @template.concat text_area(method, class: field_classes(method), rows: 8, **)
       end
     end
@@ -114,8 +114,8 @@ module Admin::FormHelper
 
     private
 
-    def input_for(method, error_method: method, label: method, addendum: nil, &block)
-      @template.tag.div do
+    def input_for(method, error_method: method, label: method, addendum: nil, class: nil, &block)
+      @template.tag.div class: do
         @template.concat label(label, class: "block text-sm font-medium leading-6 text-gray-900")
         @template.concat @template.tag.div(class: "mt-2", &block)
         if object_errors(error_method).any?

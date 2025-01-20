@@ -1,0 +1,29 @@
+<%# locals: (sponsorship_package:) %>
+
+<%= admin_form [:admin, sponsorship_package.event, sponsorship_package] do |f| %>
+  <%= f.readonly_input :event_id, [[sponsorship_package.event.name, sponsorship_package.event.id]] %>
+  <%= f.text_input :name, required: true %>
+  <%= f.text_input :description %>
+
+  <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
+    <legend class="text-sm font-medium leading-6 text-gray-500">Variants</legend>
+
+    <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300">
+      <% sponsorship_package.variants.each do |variant| %>
+        <%= f.fields_for :variants_attributes, variant, index: "" do |form| %>
+          <%= render "variant_form", form: %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <template data-appendable-target="template">
+      <%= f.fields :variants_attributes, index: "" do |form| %>
+        <%= render "variant_form", form: %>
+      <% end %>
+    </template>
+
+    <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add variant" } %>
+  </fieldset>
+
+  <%= f.submit %>
+<% end %>
