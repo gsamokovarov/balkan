@@ -1,0 +1,9 @@
+<%# locals: (sponsors:) %>
+
+<%= admin_table sponsors do
+  column "#",          -> { link_to it.id, [:admin, it] }
+  column :name,        -> { link_to it.name, [:admin, it] }
+  column :description, -> { link_to truncate(it.description, length: 50), [:admin, it] }
+  column :url,         -> { link_to it.url, it.url, class: "text-indigo-600 hover:underline", target: "_blank", rel: "noopener" }
+  column :logo,        -> { link_to it.logo.attached? ? "Yes" : "No", [:admin, it] }
+end %>

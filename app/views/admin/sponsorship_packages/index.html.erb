@@ -1,0 +1,11 @@
+<%= render "section", title: "Sponsorship packages", cta: -> {
+  admin_button(:primary, link: new_admin_event_sponsorship_package_path) { "New sponsorship package" }
+} do %>
+  <% if @sponsorship_packages.any? %>
+    <%= render "sponsorship_packages", sponsorship_packages: @sponsorship_packages %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <% admin_button(:primary, link: new_admin_event_sponsorship_package_path) { "New sponsorship package" } %>
+    <% end %>
+  <% end %>
+<% end %>

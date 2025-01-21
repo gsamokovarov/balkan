@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_13_161652) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_14_185110) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -159,6 +159,47 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_13_161652) do
     t.index ["talk_id"], name: "index_speakers_talks_on_talk_id"
   end
 
+  create_table "sponsors", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsorship_packages", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "name", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_sponsorship_packages_on_event_id"
+  end
+
+  create_table "sponsorship_variants", force: :cascade do |t|
+    t.integer "package_id", null: false
+    t.string "name", null: false
+    t.decimal "price", null: false
+    t.integer "quantity"
+    t.string "perks", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_sponsorship_variants_on_package_id"
+  end
+
+  create_table "sponsorships", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "sponsor_id", null: false
+    t.integer "variant_id", null: false
+    t.decimal "price_paid", null: false
+    t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_sponsorships_on_event_id"
+    t.index ["sponsor_id"], name: "index_sponsorships_on_sponsor_id"
+    t.index ["variant_id"], name: "index_sponsorships_on_variant_id"
+  end
+
   create_table "subscribers", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.text "email", null: false
@@ -212,6 +253,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_13_161652) do
   add_foreign_key "schedule_slots", "lineup_members"
   add_foreign_key "schedule_slots", "schedules"
   add_foreign_key "schedules", "events"
+  add_foreign_key "sponsorship_packages", "events"
+  add_foreign_key "sponsorship_variants", "sponsorship_packages", column: "package_id"
+  add_foreign_key "sponsorships", "events"
+  add_foreign_key "sponsorships", "sponsors"
+  add_foreign_key "sponsorships", "sponsorship_variants", column: "variant_id"
   add_foreign_key "subscribers", "events"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "orders"

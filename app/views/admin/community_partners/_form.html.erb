@@ -1,6 +1,6 @@
 <%# locals: (community_partner:) %>
 
-<%= admin_form [:admin, community_partner.event || event, community_partner] do |f| %>
+<%= admin_form [:admin, community_partner.event , community_partner] do |f| %>
   <%= f.readonly_input :event_id, [[community_partner.event.name, community_partner.event.id]] %>
   <%= f.text_input :name %>
   <%= f.text_input :url %>
