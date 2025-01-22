@@ -18,18 +18,28 @@ module AdminHelper
 
   ADMIN_BUTTON_VARIANTS = {
     primary: "bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600",
-    secondary: "bg-white text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50 focus-visible:outline-indigo-gray-600",
+    secondary: "bg-white text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50 focus-visible:outline-gray-600",
+    danger: "bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600",
   }
 
-  def admin_button(variant, link: false, **options, &)
+  ADMIN_BUTTON_SIZES = {
+    small: "px-2 py-1 text-sm",
+    medium: "px-3 py-2 text-sm",
+  }
+
+  def admin_button(variant, size = :medium, link: false, delete: nil, **options, &)
     classes = [
-      "inline-block rounded-md px-3 py-2 text-center text-sm font-semibold shadow-sm",
+      "inline-block rounded-md text-center font-semibold shadow-sm",
       "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+      ADMIN_BUTTON_SIZES.fetch(size),
       ADMIN_BUTTON_VARIANTS.fetch(variant),
       options[:class],
     ]
 
-    if link
+    if delete
+      button_to(delete, method: :delete, class: classes, form_class: "m-0",
+                        data: { turbo_confirm: "Are you sure?" }, **options, &)
+    elsif link
       tag.a(**options, href: link, class: classes, &)
     else
       tag.button(**options, class: classes, &)

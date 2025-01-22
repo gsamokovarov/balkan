@@ -4,4 +4,8 @@
   column "#",   -> { it.id }
   column :email
   column :date, -> { it.created_at.to_fs :long }
+
+  column do
+    admin_button(:danger, :small, delete: [:admin, it.event, it]) { "Delete" }
+  end
 end %>
