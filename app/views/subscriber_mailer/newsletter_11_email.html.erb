@@ -1,0 +1,39 @@
+<% cfp_countdown = FinalCountdown.until Date.new(2025, 2, 2) %>
+
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    You're receiving this email because you signed up for the Balkan Ruby
+    newsletter or purchased a ticket. I'm Genadi, the organizer, and I'm
+    excited to share some recent updates with you!
+  </p>
+
+  <p class="pb-2">
+    First, a quick reminder about our Call for Speakers, also known as Call for
+    Papers, or simply CFP. Whatever term you prefer, the process is closing
+    soon – just <b><%= cfp_countdown.days %></b> days and
+    <b><%= cfp_countdown.hours %></b> hours from the time this email is sent!
+
+    This year's theme is <strong>the long term</strong>. Whatever the long term
+    means to you, your projects, or your career, we’d love to hear your
+    perspective. Be sure to <%= link_to "submit", cfp2025_url, class: "link-primary" %>
+    your proposal by February 2, 2025, end of the day (Sofia time).
+  </p>
+
+  <p class="pb-2">
+    Mark your calendars! <%= link_to "Balkan Ruby 2025", root_url %> will take
+    place on April 25–26 in Sofia, Bulgaria. Our lineup already includes Andrey
+    Sitnik, Julia López, Bozhidar Batsov, and Stefan Kanev. You could join them
+    by <%= link_to "submitting", cfp2025_url, class: "link-primary" %> your CFP.
+  </p>
+
+  <p class="pb-2">
+    Stay tuned for more updates – we've got plenty to share. Have we mentioned
+    the venue yet?
+  </p>
+
+  <%= render "closer" %>
+</div>
