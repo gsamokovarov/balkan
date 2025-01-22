@@ -32,18 +32,18 @@ RSpec.case Checkout, type: :model do
 
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
-      ticket_type_id: ticket_type.id
+      ticket_type_id: ticket_type.id,
     }
 
     stub_stripe_checkout(
       params[:tickets].map do
         {
           price: ticket_type.price,
-          description: "#{ticket_type.name} - #{it[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}",
         }
       end,
       session_id: "stripe-session-id",
-      session_url: "https://stripe-checkout-link.com"
+      session_url: "https://stripe-checkout-link.com",
     )
 
     assert_eq Checkout.create_link(params), "https://stripe-checkout-link.com"
@@ -53,18 +53,18 @@ RSpec.case Checkout, type: :model do
     ticket_type = create(:ticket_type, :enabled, event:)
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
-      ticket_type_id: ticket_type.id
+      ticket_type_id: ticket_type.id,
     }
 
     stub_stripe_checkout(
       params[:tickets].map do
         {
           price: ticket_type.price,
-          description: "#{ticket_type.name} - #{it[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}",
         }
       end,
       session_id: "stripe-session-id",
-      session_url: "https://stripe-checkout-link.com"
+      session_url: "https://stripe-checkout-link.com",
     )
 
     assert_change Order, :count do
@@ -90,20 +90,20 @@ RSpec.case Checkout, type: :model do
       tickets: [
         { name: "John Doe", email: "john@example.com", shirt_size: "XXL" },
         { name: "Jane Doe", email: "jane@example.com", shirt_size: "XS" },
-        { name: "Jake Doe", email: "jake@example.com", shirt_size: "L" }
+        { name: "Jake Doe", email: "jake@example.com", shirt_size: "L" },
       ],
-      ticket_type_id: ticket_type.id
+      ticket_type_id: ticket_type.id,
     }
 
     stub_stripe_checkout(
       params[:tickets].map do
         {
           price: ticket_type.price * 0.9,
-          description: "#{ticket_type.name} - #{it[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}",
         }
       end,
       session_id: "stripe-session-id",
-      session_url: "https://stripe-checkout-link.com"
+      session_url: "https://stripe-checkout-link.com",
     )
 
     assert_change Order, :count do
@@ -141,18 +141,18 @@ RSpec.case Checkout, type: :model do
     params = {
       tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
       ticket_type_id: ticket_type.id,
-      invoice: "1"
+      invoice: "1",
     }
 
     stub_stripe_checkout_with_invoice(
       params[:tickets].map do
         {
           price: ticket_type.price,
-          description: "#{ticket_type.name} - #{it[:name]}"
+          description: "#{ticket_type.name} - #{it[:name]}",
         }
       end,
       session_id: "stripe-session-id",
-      session_url: "https://stripe-checkout-link.com"
+      session_url: "https://stripe-checkout-link.com",
     )
 
     assert_change Order, :count do

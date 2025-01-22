@@ -3,17 +3,17 @@ module Admin::FormHelper
     FIELD_CLASSES = {
       base: [
         "block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset",
-        "sm:text-sm sm:leading-6"
+        "sm:text-sm sm:leading-6",
       ],
       error: "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
-      valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600"
+      valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600",
     }
 
     def check_box_input(method, label: method, **, &addendum)
       field_classes = [
         "rounded-md border-0 p-3 text-indigo-600 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset",
         "sm:text-sm sm:leading-6",
-        object_errors(method).any? ? FIELD_CLASSES[:error] : FIELD_CLASSES[:valid]
+        object_errors(method).any? ? FIELD_CLASSES[:error] : FIELD_CLASSES[:valid],
       ]
 
       input_for method, label:, addendum: do
@@ -90,11 +90,11 @@ module Admin::FormHelper
     def file_input(method, label: method, **, &addendum)
       file_classes = [
         "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",
-        "focus:ring-indigo-600"
+        "focus:ring-indigo-600",
       ]
 
       image_preview_classes = [
-        "w-full mb-2 aspect-square object-scale-down rounded-md border-1 border-gray-300"
+        "w-full mb-2 aspect-square object-scale-down rounded-md border-1 border-gray-300",
       ]
 
       input_for method, label:, addendum: do

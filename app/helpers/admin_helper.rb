@@ -3,14 +3,14 @@ module AdminHelper
     primary: "ring-gray-600/20 bg-gray-50 text-gray-700",
     success: "ring-green-600/20 bg-green-50 text-green-700",
     warning: "ring-yellow-600/20 bg-yellow-50 text-yellow-800",
-    danger: "ring-banitsa-500/20 bg-banitsa-50 text-banitsa-500"
+    danger: "ring-banitsa-500/20 bg-banitsa-50 text-banitsa-500",
   }
 
   def admin_badge(variant, content = nil, **options, &)
     classes = [
       "inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset",
       ADMIN_BADGE_VARIANTS.fetch(variant),
-      options[:class]
+      options[:class],
     ]
 
     tag.span(content, class: classes, **options, &)
@@ -18,7 +18,7 @@ module AdminHelper
 
   ADMIN_BUTTON_VARIANTS = {
     primary: "bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600",
-    secondary: "bg-white text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50 focus-visible:outline-indigo-gray-600"
+    secondary: "bg-white text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50 focus-visible:outline-indigo-gray-600",
   }
 
   def admin_button(variant, link: false, **options, &)
@@ -26,7 +26,7 @@ module AdminHelper
       "inline-block rounded-md px-3 py-2 text-center text-sm font-semibold shadow-sm",
       "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
       ADMIN_BUTTON_VARIANTS.fetch(variant),
-      options[:class]
+      options[:class],
     ]
 
     if link
@@ -44,7 +44,7 @@ module AdminHelper
           index.positive? && "-ml-px",
           index == buttons.size - 1 && "rounded-r-md",
           "relative inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900",
-          "ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+          "ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10",
         ]
         concat tag.a(href: button[:link], class: classes) { button[:name] }
       end

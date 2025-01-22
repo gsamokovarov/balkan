@@ -59,7 +59,7 @@ RSpec.case Invoice do
                                name: "Test",
                                email: "test@example.com",
                                address: { line1: "Test", city: "Test", postal_code: "1234", country: "BG" },
-                               tax_ids: []
+                               tax_ids: [],
                              },
                              total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
                              amount_total: 30_000,
@@ -80,7 +80,7 @@ RSpec.case Invoice do
                                name: "Test",
                                email: "test@example.com",
                                address: { line1: nil, city: "Test", postal_code: "1234", country: "BG" },
-                               tax_ids: []
+                               tax_ids: [],
                              },
                              total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
                              amount_total: 30_000,
@@ -123,7 +123,7 @@ RSpec.case Invoice do
       address: "Test",
       country: "BG",
       amount: "300".to_d,
-      ticket_count: 3
+      ticket_count: 3,
     )
 
     pdf = invoice.document locale: "en"
@@ -142,7 +142,7 @@ RSpec.case Invoice do
       address: "Test",
       country: "BG",
       amount: "300".to_d,
-      ticket_count: 3
+      ticket_count: 3,
     )
 
     pdf = invoice.document locale: "bg"
@@ -162,7 +162,7 @@ RSpec.case Invoice do
       country: "BG",
       amount: "300".to_d,
       ticket_count: 3,
-      created_at: DateTime.new(2024, 3, 11)
+      created_at: DateTime.new(2024, 3, 11),
     )
 
     en = invoice.document locale: "en"
@@ -180,7 +180,7 @@ RSpec.case Invoice do
       country: "BG",
       amount: "300".to_d,
       ticket_count: 3,
-      created_at: DateTime.new(2024, 3, 13)
+      created_at: DateTime.new(2024, 3, 13),
     )
 
     en = invoice.document locale: "en"
@@ -211,7 +211,7 @@ RSpec.case Invoice do
                                name:,
                                email:,
                                address: { line1: address, country: },
-                               tax_ids: Array(tax_id)
+                               tax_ids: Array(tax_id),
                              },
                              total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
                              amount_total: amount * 1000,

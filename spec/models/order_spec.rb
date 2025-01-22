@@ -25,7 +25,7 @@ RSpec.case Order do
         name: "Test",
         email: "test@example.com",
         address: { line1: "Test", city: "Test", country: "BG", postal_code: "Test" },
-        tax_ids: [type: "bg_vat", value: "BG123456789"]
+        tax_ids: [type: "bg_vat", value: "BG123456789"],
       },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
       amount_total: 30_000,
@@ -103,7 +103,7 @@ RSpec.case Order do
         name: "Test",
         email: "test@example.com",
         address: { line1: "Test", city: "Test", country: "BG", postal_code: "Test" },
-        tax_ids: [type: "bg_vat", value: "BG123456789"]
+        tax_ids: [type: "bg_vat", value: "BG123456789"],
       },
       total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
       amount_total: 30_000,
@@ -184,7 +184,7 @@ RSpec.case Order do
       "email" => "john-#{index}@example.com",
       "price" => price,
       "shirt_size" => "L",
-      "ticket_type_id" => ticket_type.id
+      "ticket_type_id" => ticket_type.id,
     }
   end
 end

@@ -36,7 +36,7 @@ RSpec.case Webhooks::StripesController, type: :request do
             invoice: nil,
             invoice_creation: {
               enabled: false,
-              invoice_data: { account_tax_ids: nil, custom_fields: nil, description: nil, footer: nil, metadata: {}, rendering_options: nil }
+              invoice_data: { account_tax_ids: nil, custom_fields: nil, description: nil, footer: nil, metadata: {}, rendering_options: nil },
             },
             livemode: true,
             locale: nil,
@@ -63,13 +63,13 @@ RSpec.case Webhooks::StripesController, type: :request do
             tax_id_collection: { enabled: true },
             total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
             ui_mode: "hosted",
-            url: nil
-          }
+            url: nil,
+          },
         },
         livemode: true,
         pending_webhooks: 1,
         request: { id: nil, idempotency_key: nil },
-        type: "checkout.session.expired"
+        type: "checkout.session.expired",
       }
     stripe_checkout_session_uid = stripe_expired_payload.dig :data, :object, :id
     ticket_type = create :ticket_type, :enabled
@@ -121,14 +121,14 @@ RSpec.case Webhooks::StripesController, type: :request do
               name: "Tutuf Ltd",
               phone: nil,
               tax_exempt: "none",
-              tax_ids: [type: "eu_vat", value: "..."]
+              tax_ids: [type: "eu_vat", value: "..."],
             },
             customer_email: nil,
             expires_at: 1_701_416_161,
             invoice: nil,
             invoice_creation: {
               enabled: false,
-              invoice_data: { account_tax_ids: nil, custom_fields: nil, description: nil, footer: nil, metadata: {}, rendering_options: nil }
+              invoice_data: { account_tax_ids: nil, custom_fields: nil, description: nil, footer: nil, metadata: {}, rendering_options: nil },
             },
             livemode: true,
             locale: nil,
@@ -155,13 +155,13 @@ RSpec.case Webhooks::StripesController, type: :request do
             tax_id_collection: { enabled: true },
             total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
             ui_mode: "hosted",
-            url: nil
-          }
+            url: nil,
+          },
         },
         livemode: true,
         pending_webhooks: 1,
         request: { id: nil, idempotency_key: nil },
-        type: "checkout.session.completed"
+        type: "checkout.session.completed",
       }
 
     stripe_checkout_session_uid = stripe_completed_payload.dig :data, :object, :id
@@ -234,13 +234,13 @@ RSpec.case Webhooks::StripesController, type: :request do
                 line1: "Line 1",
                 line2: nil,
                 postal_code: "1000",
-                state: nil
+                state: nil,
               },
               email: "svetlozar.mihaylov@raketadesign.com",
               name: "SVETLOZAR MIHAYLOV",
               phone: nil,
               tax_exempt: "none",
-              tax_ids: []
+              tax_ids: [],
             },
             customer_email: nil,
             expires_at: 1_701_620_563,
@@ -253,8 +253,8 @@ RSpec.case Webhooks::StripesController, type: :request do
                 description: nil,
                 footer: nil,
                 metadata: {},
-                rendering_options: nil
-              }
+                rendering_options: nil,
+              },
             },
             livemode: false,
             locale: nil,
@@ -281,13 +281,13 @@ RSpec.case Webhooks::StripesController, type: :request do
             tax_id_collection: { enabled: true },
             total_details: { amount_discount: 4500, amount_shipping: 0, amount_tax: 0 },
             ui_mode: "hosted",
-            url: nil
-          }
+            url: nil,
+          },
         },
         livemode: true,
         pending_webhooks: 1,
         request: { id: nil, idempotency_key: nil },
-        type: "checkout.session.completed"
+        type: "checkout.session.completed",
       }
 
     stripe_checkout_session_uid = stripe_completed_payload.dig :data, :object, :id
@@ -342,7 +342,7 @@ RSpec.case Webhooks::StripesController, type: :request do
             invoice: nil,
             invoice_creation: {
               enabled: false,
-              invoice_data: { account_tax_ids: nil, custom_fields: nil, description: nil, footer: nil, metadata: {}, rendering_options: nil }
+              invoice_data: { account_tax_ids: nil, custom_fields: nil, description: nil, footer: nil, metadata: {}, rendering_options: nil },
             },
             livemode: true,
             locale: nil,
@@ -369,13 +369,13 @@ RSpec.case Webhooks::StripesController, type: :request do
             tax_id_collection: { enabled: true },
             total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
             ui_mode: "hosted",
-            url: nil
-          }
+            url: nil,
+          },
         },
         livemode: true,
         pending_webhooks: 1,
         request: { id: nil, idempotency_key: nil },
-        type: "checkout.session.expired"
+        type: "checkout.session.expired",
       }
 
     create :order, stripe_checkout_session_uid: "test-1234"
@@ -391,7 +391,7 @@ RSpec.case Webhooks::StripesController, type: :request do
       "email" => "john-#{index}@example.com",
       "price" => price.to_s,
       "shirt_size" => "L",
-      "ticket_type_id" => ticket_type.id
+      "ticket_type_id" => ticket_type.id,
     }
   end
 end

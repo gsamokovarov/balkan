@@ -17,7 +17,7 @@ RSpec.case "Buy tickets", type: :feature do
     stub_stripe_checkout_with_invoice(
       [price: 100, description: "#{ticket_type.name} - John Doe"],
       session_id: "stripe-session-id",
-      session_url: "https://stripe-checkout-link.com/payment"
+      session_url: "https://stripe-checkout-link.com/payment",
     )
 
     visit checkout_path(ticket_type.id)

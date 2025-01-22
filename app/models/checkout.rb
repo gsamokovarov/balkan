@@ -33,7 +33,7 @@ module Checkout
       cancel_url: Link.root_url,
       line_items: build_stripe_products(pending_tickets, ticket_type),
       mode: "payment",
-      allow_promotion_codes: true
+      allow_promotion_codes: true,
     }
 
     if issue_invoice

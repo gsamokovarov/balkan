@@ -11,7 +11,7 @@ Rails.configuration.to_prepare do
     address: "smtp.sendgrid.net",
     port: 587,
     authentication: :plain,
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
   }
 
   Rails.configuration.action_mailer.default_url_options = { host: "balkanruby.com" }

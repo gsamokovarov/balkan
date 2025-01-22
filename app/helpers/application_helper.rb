@@ -8,7 +8,7 @@ module ApplicationHelper
     "rotate-0",
     "rotate-6",
     "rotate-1",
-    "-rotate-3"
+    "-rotate-3",
   ].freeze
 
   def card_rotation(index)

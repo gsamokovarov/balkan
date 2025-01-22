@@ -5,7 +5,7 @@ module Invoice::Document
     normal: Rails.root.join("app/assets/fonts/Inter-Regular.ttf"),
     italic: Rails.root.join("app/assets/fonts/Inter-Italic.ttf"),
     bold: Rails.root.join("app/assets/fonts/Inter-Bold.ttf"),
-    bold_italic: Rails.root.join("app/assets/fonts/Inter-BoldItalic.ttf")
+    bold_italic: Rails.root.join("app/assets/fonts/Inter-BoldItalic.ttf"),
   }
 
   NOTO_SANS_JP_FAMILY_DEFINITION = {

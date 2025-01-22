@@ -19,13 +19,13 @@ class OrderPreview < ActionMailer::Preview
                                 "line1" => "Garibaldi",
                                 "line2" => nil,
                                 "postal_code" => "1337",
-                                "state" => nil
+                                "state" => nil,
                               },
                               "email" => "office@company.com",
                               "name" => "Company",
                               "phone" => nil,
                               "tax_exempt" => "none",
-                              "tax_ids" => ["type" => "eu_vat", "value" => "BG200000000"]
+                              "tax_ids" => ["type" => "eu_vat", "value" => "BG200000000"],
                             },
                           }
 

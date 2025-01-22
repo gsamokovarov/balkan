@@ -43,7 +43,7 @@ RSpec.case Giveaway do
       { name: "Genadi 1", email: "genadi1@hey.com", shirt_size: "S" },
       { name: "Genadi 2", email: "genadi2@hey.com", shirt_size: "S" },
       { name: "Genadi 3", email: "genadi3@hey.com", shirt_size: "S" },
-      { name: "Genadi 4", email: "genadi4@hey.com", shirt_size: "S" }
+      { name: "Genadi 4", email: "genadi4@hey.com", shirt_size: "S" },
     ]
 
     assert_eq tickets[0].name, "Genadi 1"
