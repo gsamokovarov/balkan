@@ -1,6 +1,6 @@
 class Admin::SubscribersController < Admin::ApplicationController
   def index
-    @subscribers = Subscriber.for(Event.find(params[:event_id])).page(params[:page])
+    @subscribers = event.subscribers.page params[:page]
   end
 
   def destroy
@@ -9,4 +9,8 @@ class Admin::SubscribersController < Admin::ApplicationController
 
     redirect_to admin_event_subscribers_path(subscriber.event), notice: "Subscriber #{subscriber.email} was deleted"
   end
+
+  private
+
+  def event = Event.find params[:event_id]
 end

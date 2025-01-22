@@ -6,8 +6,6 @@ class Subscriber < ApplicationRecord
   generates_token_for :cancelation
 
   class << self
-    def for(event) = where(event:)
-
     def including_ticket_holders(event)
       ticket_emails = event.tickets.select :email
       tickets_query = event.tickets.select "NULL as id, tickets.email"
