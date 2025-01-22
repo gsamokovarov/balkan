@@ -9,6 +9,7 @@ class Event < ApplicationRecord
   has_many :community_partners
   has_many :embeddings
   has_many :sponsorship_packages
+  has_many :sponsorships
 
   validates :name, presence: true
   validates :start_date, presence: true

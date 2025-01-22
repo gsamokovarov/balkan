@@ -1,0 +1,8 @@
+<%# locals: (sponsorships:) %>
+
+<%= admin_table sponsorships do
+  column "#",         -> { link_to it.id, [:admin, it.event, it] }
+  column :sponsor,    -> { link_to it.sponsor.name, [:admin, it.event, it] }
+  column :variant,    -> { link_to it.variant.display_name, [:admin, it.event, it] }
+  column :price_paid, -> { link_to it.price_paid, [:admin, it.event, it] }
+end %>

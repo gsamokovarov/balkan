@@ -4,4 +4,6 @@ class SponsorshipVariant < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
   validates :perks, presence: true
+
+  def display_name = "(#{package.name}) #{name}"
 end
