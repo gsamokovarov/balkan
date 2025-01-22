@@ -6,6 +6,6 @@
   column :date, -> { it.created_at.to_fs :long }
 
   column do
-    admin_button(:danger, :small, delete: [:admin, it.event, it]) { "Delete" }
+    admin_button(:danger, :small, delete: [:admin, it.event, it, page: params[:page]]) { "Delete" }
   end
 end %>

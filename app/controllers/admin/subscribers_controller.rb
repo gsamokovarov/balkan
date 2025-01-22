@@ -7,7 +7,8 @@ class Admin::SubscribersController < Admin::ApplicationController
     subscriber = Subscriber.find params[:id]
     subscriber.destroy
 
-    redirect_to admin_event_subscribers_path(subscriber.event), notice: "Subscriber #{subscriber.email} was deleted"
+    redirect_to admin_event_subscribers_path(subscriber.event, page: params[:page]),
+                notice: "Subscriber #{subscriber.email} was deleted"
   end
 
   private
