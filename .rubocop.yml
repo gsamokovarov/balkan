@@ -109,6 +109,10 @@ Style/MutableConstant:
 Style/HashSyntax:
   EnforcedShorthandSyntax: always
 
+# Omitting the parens in an array is beautiful!
+Style/HashAsLastArrayItem:
+  Enabled: false
+
 # This is an application, not a library. We don't need to go that far.
 Style/DocumentDynamicEvalDefinition:
   Enabled: false
