@@ -2,7 +2,7 @@
   { name: "Dashboard", path: admin_root_path },
   { name: "Current event", items: [
     { name: "Ticket types", path: admin_event_ticket_types_path(Current.event) },
-    { name: "Tickets", path: admin_tickets_path },
+    { name: "Tickets", path: admin_event_tickets_path(Current.event) },
     { name: "Orders", path: admin_current_orders_path },
     { name: "Subscribers", path: admin_event_subscribers_path(Current.event) },
     { name: "Embeddings", path: admin_event_embeddings_path(Current.event) },

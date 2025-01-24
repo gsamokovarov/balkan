@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     root "dashboards#show"
     get "/current/orders", to: "dashboards#orders", as: :current_orders
     resource :login, only: [:show, :create]
-    resources :tickets, only: [:index]
     resources :orders, only: [:index, :show, :update] do
       collection do
         get :report
@@ -33,6 +32,7 @@ Rails.application.routes.draw do
       end
     end
     resources :events, only: [:index, :show, :new, :create, :edit, :update] do
+      resources :tickets, only: [:index]
       resources :ticket_types, only: [:index, :show, :new, :create, :edit, :update]
       resources :embeddings, only: [:index, :show, :new, :create, :edit, :update]
       resources :lineup_members, only: [:index, :show, :new, :create, :edit, :update]
