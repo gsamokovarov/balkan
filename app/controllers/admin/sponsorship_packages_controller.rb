@@ -40,7 +40,7 @@ class Admin::SponsorshipPackagesController < Admin::ApplicationController
   def event = Event.find(params[:event_id])
 
   def sponsorship_package_params
-    params.require(:sponsorship_package).permit(:name, :kind, :price, :perks, :quantity, :event_id,
+    params.require(:sponsorship_package).permit(:name, :description, :event_id,
                                                 variants_attributes: [[:id, :name, :price, :perks, :quantity]])
   end
 end
