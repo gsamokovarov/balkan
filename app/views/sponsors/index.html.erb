@@ -1,54 +1,23 @@
 <% title "Sponsors" %>
 
 <%= render "section", title: "Sponsors", title_element: "h1", highlight: true do %>
-  <div class="space-y-8">
-    <h2 class="text-2xl sm:text-3xl font-extrabold">Basic</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <% Current.event.sponsors.basic.each do |sponsor| %>
-        <div id="<%= sponsor.name %>" class="space-y-8">
-          <%= link_to sponsor.url do %>
-            <%= image_tag sponsor.logo,
+  <% Current.event.sponsors.each do |package, sponsorships| %>
+    <div class="space-y-8">
+      <h2 class="text-2xl sm:text-3xl font-extrabold"><%= package.name %></h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <% sponsorships.each do |sponsorship| %>
+          <div id="<%= sponsorship.sponsor.name %>" class="space-y-8">
+            <%= image_tag sponsorship.sponsor.logo,
               class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain",
               lazy: true %>
-          <% end %>
-          <%= render "prose" do %>
-            <%= render_markdown sponsor.description %>
-          <% end %>
-        </div>
-      <% end %>
+            <% if sponsorship.sponsor.description? %>
+              <%= render("prose") { render_markdown sponsorship.sponsor.description } %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
-
-  <div class="space-y-8">
-    <h2 class="text-2xl sm:text-3xl font-extrabold">Party</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <% Current.event.sponsors.party.each do |sponsor| %>
-        <div id="<%= sponsor.name %>" class="space-y-8">
-          <%= image_tag sponsor.logo,
-            class: "w-full md:w-1/2 h-48 p-4 bg-white border-2 border-black rounded-md object-contain",
-            lazy: true %>
-          <%= render "prose" do %>
-            <%= render_markdown sponsor.description %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="space-y-8">
-    <h2 class="text-2xl sm:text-3xl font-extrabold">Travel</h2>
-    <div class="grid grid-cols-1 w-full md:grid-cols-3 lg:grid-cols-4 gap-8">
-      <% Current.event.sponsors.travel.each do |sponsor| %>
-        <div id="<%= sponsor.name %>" class="space-y-8">
-          <%= link_to sponsor.url do %>
-            <%= image_tag sponsor.logo,
-              class: "w-full h-24 p-4 bg-white border-2 border-black rounded-md object-contain",
-              lazy: true %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 <% end %>
 
 <%= render "section", title: "Sponsorship" do %>

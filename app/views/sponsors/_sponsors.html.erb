@@ -1,23 +1,23 @@
-<%= render "section", title: "Sponsors", title_element: "h2" do %>
-  <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-    <% Current.event.sponsors.basic.each do |sponsor| %>
-      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
-        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+<%# locals: (title_element: "h2", highlight: nil) %>
+
+<%= render "section", title: "Sponsors", title_element:, highlight: do %>
+  <% if Current.event.sponsors.any? %>
+    <div class="grid grid-cols-4 gap-8">
+      <% Current.event.sponsors.each_with_index do |(_, sponsorship), index| %>
+        <% sponsorship.each do |sponsorship| %>
+          <%= link_to sponsors_path(anchor: sponsorship.sponsor.name),
+                     title: sponsorship.sponsor.name,
+                     class: [
+                       "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md",
+                       index.zero? ? "col-span-2" : "col-span-1",
+                       "transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1"
+                     ] do %>
+            <%= image_tag sponsorship.sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
-    <% Current.event.sponsors.party.each do |sponsor| %>
-      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
-        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="grid grid-cols-2 gap-8 lg:grid-cols-4">
-    <% Current.event.sponsors.travel.each do |sponsor| %>
-      <%= link_to sponsors_path(anchor: sponsor.name), title: sponsor.name, class: "flex justify-center w-full h-16 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
-        <%= image_tag sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
-      <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <%= render "prose" do %>
     <p>

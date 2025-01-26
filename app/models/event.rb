@@ -15,8 +15,9 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  def sponsors = StaticSponsor.all
   def blog_posts = BlogPost.where(event_id: id).order(id: :desc)
+
+  def sponsors = sponsorships.includes(:package, :sponsor).order("sponsorship_packages.id").group_by(&:package)
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
   def beginning_countdown = FinalCountdown.until start_date
