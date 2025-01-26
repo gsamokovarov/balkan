@@ -15,7 +15,7 @@
   <% Current.event.sponsorship_packages.each do |package| %>
     <div class="space-y-4">
       <h2 class="text-2xl sm:text-3xl font-extrabold"><%= package.name %></h2>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-<%= package.variants.size %>">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <% package.variants.each do |var|  %>
           <%= render "package", name: var.name, price: (var.price if var.price.positive?), limited: var.quantity do %>
             <%= render_markdown var.perks %>
