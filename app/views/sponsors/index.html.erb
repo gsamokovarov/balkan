@@ -1,6 +1,10 @@
 <% title "Sponsors" %>
 
 <%= render "section", title: "Sponsors", title_element: "h1", highlight: true do %>
+  <% if Current.event.sponsors.none? %>
+    <%= render "sponsors/sponsorship" %>
+  <% end %>
+
   <% Current.event.sponsors.each do |package, sponsorships| %>
     <div class="space-y-6">
       <h2 class="text-2xl sm:text-3xl font-extrabold"><%= package.name %></h2>
@@ -28,8 +32,12 @@
   <% end %>
 <% end %>
 
-<%= render "section", title: "Sponsorship" do %>
-  <%= render "sponsors/sponsorship" %>
-<% end %>
+<% if Current.event.sponsors.any? %>
+  <%= render "section", title: "Sponsorship" do %>
+    <%= render "sponsors/sponsorship" %>
+  <% end %>
 
-<%= render "tickets/cta", highlight: true %>
+  <%= render "tickets/cta", highlight: true %>
+<% else %>
+  <%= render "tickets/cta" %>
+<% end %>
