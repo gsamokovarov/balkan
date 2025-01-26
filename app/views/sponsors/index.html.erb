@@ -2,11 +2,11 @@
 
 <%= render "section", title: "Sponsors", title_element: "h1", highlight: true do %>
   <% Current.event.sponsors.each do |package, sponsorships| %>
-    <div class="space-y-4">
+    <div class="space-y-6">
       <h2 class="text-2xl sm:text-3xl font-extrabold"><%= package.name %></h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         <% sponsorships.each do |sponsorship| %>
-          <div id="<%= sponsorship.sponsor.name %>" class="space-y-8">
+          <div id="<%= sponsorship.sponsor.name %>" class="space-y-6">
             <%= image_tag sponsorship.sponsor.logo,
               class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain",
               lazy: true %>
