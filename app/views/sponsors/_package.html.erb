@@ -3,7 +3,7 @@
     <%= name %>
     <div class="flex shrink gap-2">
       <% if price %>
-        <span class="badge-important"><%= price %></span>
+        <span class="badge-important"><%= format_money price %></span>
       <% end %>
       <% if limited %>
         <span class="badge-warning">limited</span>
