@@ -7,9 +7,17 @@
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         <% sponsorships.each do |sponsorship| %>
           <div id="<%= sponsorship.sponsor.name %>" class="space-y-6">
-            <%= image_tag sponsorship.sponsor.logo,
-              class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain",
-              lazy: true %>
+            <% if sponsorship.sponsor.url? %>
+              <%= link_to sponsorship.sponsor.url do %>
+                <%= image_tag sponsorship.sponsor.logo,
+                  class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain",
+                  lazy: true %>
+              <% end %>
+            <% else %>
+              <%= image_tag sponsorship.sponsor.logo,
+                class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain",
+                lazy: true %>
+            <% end %>
             <% if sponsorship.sponsor.description? %>
               <%= render("prose") { render_markdown sponsorship.sponsor.description } %>
             <% end %>
