@@ -3,6 +3,6 @@
 <%= admin_table sponsorship_packages do
   column "#",          -> { link_to it.id, [:admin, it.event, it] }
   column :name,        -> { link_to it.name, [:admin, it.event, it] }
-  column :description, -> { link_to it.description || "–", [:admin, it.event, it] }
+  column :description, -> { link_to truncate(it.description || "–", limit: 50), [:admin, it.event, it] }
   column :variants,    -> { link_to it.variants.map(&:name).to_sentence, [:admin, it.event, it] }
 end %>
