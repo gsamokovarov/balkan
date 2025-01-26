@@ -5,7 +5,7 @@
   <%= f.select_input :sponsor_id, Sponsor.all.map { [it.name, it.id] } do %>
     <%= link_to "New sponsor", new_admin_sponsor_path, class: "text-indigo-600 hover:underline" %>
   <% end %>
-  <%= f.select_input :variant_id, SponsorshipVariant.all.map { [it.display_name, it.id] } %>
+  <%= f.select_input :variant_id, event.sponsorship_variants.all.map { [it.display_name, it.id] } %>
   <%= f.number_input :price_paid, required: true %>
   <%= f.text_area_input :reason %>
   <%= f.submit %>
