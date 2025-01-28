@@ -1,6 +1,9 @@
 <% title "April 25-26, 2025" %>
 
 <%= render "hero_section" %>
+<% if Current.event.schedule&.published? %>
+  <%= render "schedule", schedule: Current.event.schedule %>
+<% end %>
 <%= render "speakers" %>
 <%= render "tickets", highlight: true %>
 <%= render "community_partners" %>
