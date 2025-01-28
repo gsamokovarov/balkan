@@ -55,5 +55,8 @@ class Admin::OrdersController < Admin::ApplicationController
   private
 
   def locale = params.fetch(:locale, I18n.locale)
-  def order_params = params.require(:order).permit(:name, :email, :amount, :refunded_amount, :issue_invoice, :invoice_id)
+
+  def order_params
+    params.require(:order).permit(:name, :email, :amount, :refunded_amount, :issue_invoice, :free_reason, :invoice_id)
+  end
 end
