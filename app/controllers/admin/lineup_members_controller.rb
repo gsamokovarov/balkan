@@ -1,6 +1,6 @@
 class Admin::LineupMembersController < Admin::ApplicationController
   def index
-    @lineup_members = LineupMember.includes(:talk, :speaker).for(event)
+    @lineup_members = event.lineup_members.includes :talk, :speaker
   end
 
   def show
@@ -8,11 +8,11 @@ class Admin::LineupMembersController < Admin::ApplicationController
   end
 
   def new
-    @lineup_member = LineupMember.new event:
+    @lineup_member = event.lineup_members.new
   end
 
   def create
-    @lineup_member = LineupMember.new(**lineup_member_params, event:)
+    @lineup_member = event.lineup_members.new(**lineup_member_params)
 
     if @lineup_member.save
       redirect_to admin_event_lineup_members_path(@lineup_member.event), notice: "Lineup member created"
