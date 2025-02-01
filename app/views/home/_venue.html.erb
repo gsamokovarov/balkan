@@ -3,28 +3,11 @@
 <%= render "section", title: "Venue", highlight: do %>
   <%= render "prose" do %>
     <%= render_markdown venue.description %>
-    <p>
-      <%= link_to "Puzl CowOrKing", "https://www.puzl.com", class: "link-primary" %>
-      is hosting us in two of their Greenhouse dedicated office spaces. Puzl
-      describes them as:
-    </p>
-
-    <blockquote class="border-l-2 border-black">
-      <p>
-        Greenhouse earned its name for a reason, as this time we decided to
-        use even MORE natural materials. Together with the massive wooden
-        desks, raw concrete, and stylish metal elements that are already a
-        Puzl signature, with the Greenhouse, we introduced the use of clay
-        (for a more cozy vibe), earth-like colors (proven to be great for
-        concentration and overall productivity), and more greenery than we’ve
-        ever placed before on a floor.
-      </p>
-    </blockquote>
   <% end %>
 
-  <% if vanue.gallery_images.any? %>
+  <% if venue.gallery_images.any? %>
     <div class="-mx-4 px-4 h-72 flex gap-4 overflow-x-auto snap-x snap-mandatory sm:h-96">
-      <% id vanue.gallery_images.each do |image| %>
+      <% venue.gallery_images.each do |image| %>
         <%= image_tag image, class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 h-full object-cover sm:w-3/4", lazy: true %>
       <% end %>
     </div>
@@ -50,7 +33,7 @@
 
   <% if venue.directions %>
     <%= render "prose" do %>
-      <%= VenueDirections.render_directions_markup venue.directions %>
+      <%= VenueDirections.render_directions_markup(venue).html_safe %>
     <% end %>
   <% end %>
 <% end %>
