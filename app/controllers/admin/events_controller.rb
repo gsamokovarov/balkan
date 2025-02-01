@@ -39,8 +39,7 @@ class Admin::EventsController < Admin::ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(
-      :invoice_sequence_id, :name, :host, :start_date, :end_date, :speaker_applications_end_date
-    )
+    params.require(:event).permit(:name, :host, :start_date, :end_date, :speaker_applications_end_date,
+                                  :venue_id, :invoice_sequence_id)
   end
 end
