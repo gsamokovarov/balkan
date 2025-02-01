@@ -19,8 +19,8 @@ module ApplicationHelper
     number_to_currency amount, unit: currency, precision:
   end
 
-  def render_markdown(content)
-    Markup.render_html(content).html_safe
+  def render_markdown(...)
+    Markup.render_html(...).html_safe
   end
 
   def title(name)

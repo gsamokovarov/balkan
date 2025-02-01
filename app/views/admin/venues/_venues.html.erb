@@ -1,0 +1,10 @@
+<%# locals: (venues:) %>
+
+<%= admin_table venues do
+  column "#",          -> { link_to it.id, admin_venue_path(it) }
+  column :name,        -> { link_to it.name, admin_venue_path(it) }
+  column :description, -> { truncate(it.description, length: 30) || "-" }
+  column :address,     -> { truncate(it.address, length: 30) || "-" }
+  column :place_id,    -> { truncate(it.place_id, length: 30) || "-" }
+  column :directions,  -> { truncate(it.directions, length: 30) || "-" }
+end %>

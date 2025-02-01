@@ -42,9 +42,10 @@ Rails.application.routes.draw do
       resources :sponsorships, only: [:index, :show, :new, :create, :edit, :update]
       resource :schedule, only: [:show, :new, :create, :edit, :update]
     end
-    resources :speakers
+    resources :speakers, only: [:index, :show, :new, :create, :edit, :update]
     resources :sponsors, only: [:index, :show, :new, :create, :edit, :update]
-    resources :talks
+    resources :talks, only: [:index, :show, :new, :create, :edit, :update]
+    resources :venues, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoice_sequences, only: [:index]
   end
 

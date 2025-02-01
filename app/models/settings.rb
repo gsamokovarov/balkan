@@ -1,15 +1,17 @@
 module Settings
   extend self
 
-  def admin_name = get :admin_name
-  def admin_password = get :admin_password
+  def admin_name = get __method__
+  def admin_password = get __method__
 
-  def sendgrid_api_key = get :sendgrid_api_key
+  def sendgrid_api_key = get __method__
 
-  def stripe_secret_key = get :stripe_secret_key
-  def stripe_webhook_secret = get :stripe_webhook_secret
+  def stripe_secret_key = get __method__
+  def stripe_webhook_secret = get __method__
 
-  def development_event = get :development_event, "Balkan Ruby 2025"
+  def google_api_key = get __method__, nil
+
+  def development_event = get __method__, "Balkan Ruby 2025"
 
   private
 

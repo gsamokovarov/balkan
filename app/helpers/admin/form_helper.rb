@@ -87,22 +87,28 @@ module Admin::FormHelper
       end
     end
 
-    def file_input(method, label: method, **, &addendum)
+    def file_input(method, label: method, multiple: false, **, &addendum)
       file_classes = [
         "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",
         "focus:ring-indigo-600",
       ]
 
       image_preview_classes = [
-        "w-full mb-2 aspect-square object-scale-down rounded-md border-1 border-gray-300",
+        "w-full max-h-64 mb-2 p-2 aspect-auto object-scale-down rounded-md border border-gray-300",
       ]
 
       input_for method, label:, addendum: do
-        attachment = object.public_send method
-        if attachment.attached?
-          @template.concat @template.image_tag(attachment, class: image_preview_classes)
+        if multiple
+          object.public_send(method).each do |attachment|
+            @template.concat @template.image_tag(attachment, class: image_preview_classes)
+          end
+        else
+          attachment = object.public_send method
+          if attachment.attached?
+            @template.concat @template.image_tag(attachment, class: image_preview_classes)
+          end
         end
-        @template.concat file_field(method, class: file_classes, **)
+        @template.concat file_field(method, class: file_classes, multiple:, **)
       end
     end
 
