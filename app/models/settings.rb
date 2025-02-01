@@ -9,6 +9,8 @@ module Settings
   def stripe_secret_key = get :stripe_secret_key
   def stripe_webhook_secret = get :stripe_webhook_secret
 
+  def google_api_key = get :google_api_key, nil
+
   def development_event = get :development_event, "Balkan Ruby 2025"
 
   private
