@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_14_185110) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_31_163653) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,7 +67,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_14_185110) do
     t.date "speaker_applications_end_date", default: "2024-02-02", null: false
     t.integer "invoice_sequence_id"
     t.string "host"
+    t.integer "venue_id"
     t.index ["invoice_sequence_id"], name: "index_events_on_invoice_sequence_id"
+    t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
   create_table "invoice_sequences", force: :cascade do |t|
@@ -239,11 +241,23 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_14_185110) do
     t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id"
   end
 
+  create_table "venues", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.string "address"
+    t.string "directions"
+    t.string "place_id"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "community_partners", "events"
   add_foreign_key "embeddings", "events"
   add_foreign_key "events", "invoice_sequences"
+  add_foreign_key "events", "venues"
   add_foreign_key "invoices", "invoice_sequences"
   add_foreign_key "invoices", "orders"
   add_foreign_key "lineup_members", "events"
