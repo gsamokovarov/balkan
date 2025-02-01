@@ -1,0 +1,14 @@
+<%# locals: (venue:) %>
+
+<%= admin_form [:admin, venue] do |f| %>
+  <%= f.text_input :name %>
+  <%= f.text_area_input :description %>
+  <%= f.text_input :url %>
+  <%= f.text_input :address %>
+  <%= f.text_area_input :drections %>
+  <%= f.text_input :place_id %>
+  <%= f.file_input :gallery_images, multiple: true %>
+  <%= f.file_input :additional_images, multiple: true %>
+
+  <%= f.submit %>
+<% end %>
