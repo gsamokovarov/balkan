@@ -33,61 +33,7 @@
 
   <% if venue.directions %>
     <%= render "prose" do %>
-      <%= VenueDirections.render_directions_markup(venue).html_safe %>
+      <%= render_markdown venue.directions, inline_images: venue.additional_images %>
     <% end %>
   <% end %>
 <% end %>
-
-<%# <%= render "section", title: "Venue", highlight: do %1> %>
-<%#   <%= render "prose" do %1> %>
-<%#     <p> %>
-<%#       <%= link_to "Puzl CowOrKing", "https://www.puzl.com", class: "link-primary" %1> %>
-<%#       is hosting us in two of their Greenhouse dedicated office spaces. Puzl %>
-<%#       describes them as: %>
-<%#     </p> %>
-
-<%#     <blockquote class="border-l-2 border-black"> %>
-<%#       <p> %>
-<%#         Greenhouse earned its name for a reason, as this time we decided to %>
-<%#         use even MORE natural materials. Together with the massive wooden %>
-<%#         desks, raw concrete, and stylish metal elements that are already a %>
-<%#         Puzl signature, with the Greenhouse, we introduced the use of clay %>
-<%#         (for a more cozy vibe), earth-like colors (proven to be great for %>
-<%#         concentration and overall productivity), and more greenery than we’ve %>
-<%#         ever placed before on a floor. %>
-<%#       </p> %>
-<%#     </blockquote> %>
-<%#   <% end %1> %>
-
-<%#   <div class="-mx-4 px-4 h-72 flex gap-4 overflow-x-auto snap-x snap-mandatory sm:h-96"> %>
-<%#     <% (1..7).each do |index| %1> %>
-<%#       <%= image_tag "venue/puzl-#{index}.jpeg", %>
-<%#         class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 h-full object-cover sm:w-3/4", %>
-<%#         lazy: true %1> %>
-<%#     <% end %1> %>
-<%#   </div> %>
-
-<%#   <div class="border-2 border-black rounded-md overflow-hidden h-72 sm:h-96"> %>
-<%#     <iframe %>
-<%#       width="100%" %>
-<%#       height="100%" %>
-<%#       frameborder="0" %>
-<%#       allowfullscreen %>
-<%#       loading="lazy" %>
-<%#       referrerpolicy="no-referrer-when-downgrade" %>
-<%#       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.9752055524723!2d23.315339776894874!3d42.661880815978755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa8459867f031d%3A0xc426608e7e3c2c14!2sPuzl%20CowOrKing!5e0!3m2!1sen!2sbg!4v1712988656219!5m2!1sen!2sbg"> %>
-<%#     </iframe> %>
-<%#   </div> %>
-
-<%#   <%= render "prose" do %1> %>
-<%#     <p> %>
-<%#       We are located in the Greenhouse offices on the 4th floor of the Siven %>
-<%#       building. To reach us, you have to take the elevator after the Athletic %>
-<%#       gym, not the one close to LIDL entrance. %>
-<%#     </p> %>
-<%#   <% end %1> %>
-
-<%#   <%= image_tag "venue/puzl-greenhouse-map.jpg", %>
-<%#     class: "bg-white border-2 border-black rounded-md object-contain w-full h-72 sm:h-96", %>
-<%#     lazy: true %1> %>
-<%# <% end %1> %>
