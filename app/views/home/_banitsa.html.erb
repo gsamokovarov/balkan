@@ -6,5 +6,7 @@
 <% end %>
 <%= render "speakers/speakers" %>
 <%= render "tickets", highlight: true %>
-<%= render "banitsa/venue" %>
+<% if Current.event.schedule&.published? %>
+  <%= render "venue", venue: Current.event.venue %>
+<% end %>
 <%= render "community_partners", highlight: true %>
