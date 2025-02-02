@@ -19,10 +19,6 @@ module ApplicationHelper
     number_to_currency amount, unit: currency, precision:
   end
 
-  def render_markdown(...)
-    Markup.render_html(...).html_safe
-  end
-
   def title(name)
     content_for(:title) { name } if name.present?
   end
