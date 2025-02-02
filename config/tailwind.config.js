@@ -52,7 +52,7 @@ module.exports = {
             },
             img: {
               "border-width": defaultTheme.borderWidth[2],
-              "border-color": theme("colors.white"),
+              "border-color": theme("colors.black"),
               "border-radius": defaultTheme.borderRadius.md,
             },
           },
