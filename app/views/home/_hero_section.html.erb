@@ -21,7 +21,7 @@
       <% if Current.event.speaker_applications_countdown.ongoing? %>
         <%= render "hero_countdown_cfp" %>
       <% elsif Current.event.beginning_countdown.ongoing? %>
-       <% render "hero_countdown_event" %>
+       <%= render "hero_countdown_event" %>
       <% end %>
     </div>
 
