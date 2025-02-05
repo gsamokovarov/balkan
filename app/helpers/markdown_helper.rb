@@ -23,7 +23,7 @@ module MarkdownHelper
       @html_renderer ||= Redcarpet::Markdown.new HTMLRenderer, autolink: true, tables: true, strikethrough: true
 
       if inline_images
-        content.gsub!(INLINE_IMAGE_PLACEHOLDER { "![image #{it[1]}](#{Link.url_for inline_images[it[1].to_i - 1]})" })
+        content.gsub!(INLINE_IMAGE_PLACEHOLDER) { "![image #{it[1]}](#{Link.url_for inline_images[it[1].to_i - 1]})" }
       end
 
       @html_renderer.render content
