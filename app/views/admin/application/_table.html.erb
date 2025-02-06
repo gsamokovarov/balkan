@@ -13,7 +13,7 @@
     </thead>
     <tbody class="divide-y divide-gray-200 bg-white">
       <% objects.each do |object| %>
-        <tr class="border-t border-gray-300">
+        <tr class="border-t border-gray-300 hover:bg-gray-100">
           <% table_def.columns.each do |column| %>
             <td class="p-3 text-sm font-semibold text-gray-900 whitespace-nowrap">
               <%= column.value object %>
