@@ -9,6 +9,9 @@ module Settings
   def stripe_secret_key = get __method__
   def stripe_webhook_secret = get __method__
 
+  def h_captcha_secret = get __method__, nil
+  def h_captcha_site_key = get __method__, nil
+
   def google_api_key = get __method__, nil
 
   def development_event = get __method__, "Balkan Ruby 2025"
