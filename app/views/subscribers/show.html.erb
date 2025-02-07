@@ -1,6 +1,6 @@
 <%= render "section", title: "Newsletter", title_element: "h1", highlight: true do %>
   <%= turbo_frame_tag "newsletter" do %>
-    <%= render "prose", class: "my-10" do %>
+    <%= render "prose", class: "my-6" do %>
       <p>
         You are about to unsubscribe <span class="text-banitsa-600"><%= @subscriber.email %></span> from our newsletter.
       </p>
@@ -11,6 +11,7 @@
 
     <%= button_to @subscriber.cancel_url, { method: :delete, class: "btn-primary w-fit" } do %>
       <%= h_captcha %>
+
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
