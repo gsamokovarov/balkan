@@ -1,8 +1,11 @@
 ENV["RAILS_ENV"] ||= "test"
+
+ENV["H_CAPTCHA_SECRET"] = nil
+ENV["H_CAPTCHA_SITE_KEY"] = nil
+
 require_relative "../config/environment"
 require "rspec/rails"
 require "rspec/xunit"
-
 require "spec_helper"
 
 abort "Cannot run tests in production mode" if Rails.env.production?
