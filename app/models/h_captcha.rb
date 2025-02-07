@@ -1,7 +1,7 @@
 module HCaptcha
   extend self
 
-  def invalid?(params) = !verify?(params["h-captcha-response"])
+  def valid?(params) = verify? params["h-captcha-response"]
 
   private
 
@@ -25,7 +25,7 @@ module HCaptcha
 
   def request_verification(token)
     uri = URI("https://hcaptcha.com/siteverify")
-    response = Net::HTTP.post_form(uri, { secret: Settings.h_captcha_secret, response: token })
+    response = Net::HTTP.post_form uri, { secret: Settings.h_captcha_secret, response: token }
     JSON.parse response.body
   rescue JSON::ParserError
     response.body

@@ -11,7 +11,7 @@
     </label>
 
     <%= form.hidden_field :event_id, value: event.id %>
-    <%= invisible_captcha %>
+    <%= h_captcha %>
 
     <%= form.button type: "submit", class: "btn-primary w-fit" do %>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
