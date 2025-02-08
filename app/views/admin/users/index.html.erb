@@ -1,0 +1,11 @@
+<%= render "section", title: "Users", cta: -> {
+  admin_button(:primary, link: new_admin_user_path) { "New user" }
+} do %>
+  <% if @users.any? %>
+    <%= render "users", users: @users %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_user_path) { "New user" } %>
+    <% end %>
+  <% end %>
+<% end %>

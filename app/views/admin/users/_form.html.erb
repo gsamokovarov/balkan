@@ -1,0 +1,8 @@
+<%# locals: (user:) %>
+
+<%= admin_form [:admin, user] do |f| %>
+  <%= f.email_input :email %>
+  <%= f.password_input :password %>
+
+  <%= f.submit %>
+<% end %>

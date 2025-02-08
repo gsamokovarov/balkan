@@ -1,0 +1,10 @@
+<%# locals: (users:) %>
+
+<%= admin_table users do
+  column "#",    -> { link_to it.id, [:admin, it] }
+  column :email, -> { link_to it.email, [:admin, it] }
+
+  column do
+    admin_button(:danger, :small, delete: [:admin, it]) { "Delete" }
+  end
+end %>

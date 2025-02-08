@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     resources :talks, only: [:index, :show, :new, :create, :edit, :update]
     resources :venues, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoice_sequences, only: [:index]
+    resources :users, only: [:index, :show, :new, :create, :update, :destroy]
   end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }
