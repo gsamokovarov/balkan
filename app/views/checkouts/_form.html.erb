@@ -89,7 +89,7 @@
 
   <%= form.hidden_field :ticket_type_id, value: @ticket_type.id %>
 
-  <%= invisible_captcha %>
+  <%= h_captcha %>
 
   <div class="flex flex-col gap-6">
     <%= form.button type: "submit", class: "btn-primary w-fit" do %>

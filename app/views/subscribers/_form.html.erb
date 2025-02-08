@@ -1,7 +1,7 @@
 <%# locals: (event:) -%>
 
 <%= turbo_frame_tag "newsletter" do %>
-  <%= form_with scope: :subscriber, url: subscribers_path, class: "flex flex-col gap-10" do |form| %>
+  <%= form_with scope: :subscriber, url: subscribers_path, class: "flex flex-col gap-6" do |form| %>
     <label class="flex flex-col gap-3">
       <span class="text-xl">Email</span>
       <%= form.email_field :email,
@@ -11,7 +11,8 @@
     </label>
 
     <%= form.hidden_field :event_id, value: event.id %>
-    <%= invisible_captcha %>
+
+    <%= h_captcha %>
 
     <%= form.button type: "submit", class: "btn-primary w-fit" do %>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
