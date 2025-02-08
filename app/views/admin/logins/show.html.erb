@@ -16,7 +16,7 @@
         <% end %>
       <% end %>
 
-      <%= f.text_input :username, required: true, autocomplete: "username" %>
+      <%= f.text_input :email, required: true, autofocus: true, autocomplete: "username" %>
       <%= f.password_input :password, required: true, autocomplete: "current-password" %>
       <%= f.submit "Sign in" %>
     <% end %>
