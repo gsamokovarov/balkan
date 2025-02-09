@@ -45,3 +45,5 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
 end
+
+gem "bcrypt", "~> 3.1"

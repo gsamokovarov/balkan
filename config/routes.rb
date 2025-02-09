@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       resources :ticket_types, only: [:index, :show, :new, :create, :edit, :update]
       resources :embeddings, only: [:index, :show, :new, :create, :edit, :update]
       resources :lineup_members, only: [:index, :show, :new, :create, :edit, :update]
+      resources :blog_posts, only: [:index, :show, :new, :create, :update]
       resources :community_partners, only: [:index, :show, :new, :create, :edit, :update]
       resources :subscribers, only: [:index, :destroy]
       resources :sponsorship_packages, only: [:index, :show, :new, :create, :edit, :update]
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
     resources :talks, only: [:index, :show, :new, :create, :edit, :update]
     resources :venues, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoice_sequences, only: [:index]
+    resources :users, only: [:index, :show, :new, :create, :update, :destroy]
   end
 
   direct(:twitter) { "https://twitter.com/@balkanruby" }

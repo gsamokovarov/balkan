@@ -1,0 +1,11 @@
+<%# locals: (blog_post:) %>
+
+<%= admin_form [:admin, blog_post.event, blog_post] do |f| %>
+  <%= f.readonly_input :event_id, [[blog_post.event.name, blog_post.event.id]] %>
+  <%= f.select_input :author_id, User.all.map { [it.email, it.id] }, include_blank: true %>
+  <%= f.date_input :date, required: true %>
+  <%= f.text_input :title, required: true %>
+  <%= f.text_area_input :content, required: true %>
+
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,13 @@
+<%# locals: (users:) %>
+
+<%= admin_table users do
+  column "#",     -> { link_to it.id, [:admin, it] }
+  column :name,   -> { link_to truncate(it.name, length: 30) || "–", [:admin, it] }
+  column :email,  -> { link_to it.email, [:admin, it] }
+  column :bio,    -> { link_to truncate(it.bio, lenght: 50) || "–", [:admin, it] }
+  column :avatar, -> { it.avatar.attached? ? "Yes" : "No" }
+
+  column do
+    admin_button(:danger, :small, delete: [:admin, it]) { "Delete" }
+  end
+end %>

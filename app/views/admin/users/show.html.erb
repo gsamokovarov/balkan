@@ -1,0 +1,11 @@
+<%= render "section", title: "User #{@user.email}" do %>
+  <%= render "form", user: @user %>
+<% end %>
+
+<%= render "section", title: "Sessions" do %>
+  <% if @user.sessions.any? %>
+    <%= render "sessions", sessions: @user.sessions.order(id: :desc) %>
+  <% else %>
+    <%= render "empty_state" %>
+  <% end %>
+<% end %>

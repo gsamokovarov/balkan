@@ -1,18 +1,18 @@
 class Admin::LoginsController < Admin::ApplicationController
+  allow_unauthenticated_access only: [:show, :create]
+
   layout -> { turbo_frame_request? ? "turbo_rails/frame" : "admin/login" }
 
-  skip_before_action :require_authentication, only: [:show, :create]
-
   def show
-    @user = Admin::User.new
+    @user = User.new
   end
 
   def create
-    @user = Admin::User.new user_params
+    @user = User.authenticate_by(user_params) || User.new { it.errors.add :base, "Invalid username or password" }
 
-    if @user.authenticate
-      session[:admin] = true
-      redirect_to admin_root_path
+    if @user.valid?
+      start_new_session_for @user
+      redirect_to after_authentication_url
     else
       render :show, status: :unauthorized
     end
@@ -20,7 +20,5 @@ class Admin::LoginsController < Admin::ApplicationController
 
   private
 
-  def user_params
-    params.require(:admin_user).permit :username, :password
-  end
+  def user_params = params.require(:user).permit :email, :password
 end

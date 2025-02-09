@@ -1,0 +1,11 @@
+<%= render "section", title: "Blog posts", cta: -> {
+  admin_button(:primary, link: new_admin_event_blog_post_path) { "New blog post" }
+} do %>
+  <% if @blog_posts.any? %>
+    <%= render "blog_posts", blog_posts: @blog_posts %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <% admin_button(:primary, link: new_admin_event_blog_post_path) { "New blog post" } %>
+    <% end %>
+  <% end %>
+<% end %>

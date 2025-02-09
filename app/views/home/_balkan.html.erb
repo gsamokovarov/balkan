@@ -1,12 +1,17 @@
 <% title "April 25-26, 2025" %>
 
+<% hi = section_highlighter %>
+
 <%= render "hero_section" %>
 <% if Current.event.schedule&.published? %>
-  <%= render "schedule", schedule: Current.event.schedule %>
+  <%= render "schedule", schedule: Current.event.schedule, highlight: !hi %>
 <% end %>
-<%= render "speakers" %>
-<%= render "tickets", highlight: true %>
-<%= render "community_partners" %>
-<%= render "sponsors/sponsors", highlight: true %>
-<%= render "summary_2024" %>
-<%= render "newsletter", highlight: true %>
+<% if Current.event.blog_posts.any? %>
+  <%= render "blog", highlight: !hi %>
+<% end %>
+<%= render "speakers", highlight: !hi %>
+<%= render "tickets", highlight: !hi %>
+<%= render "community_partners", highlight: !hi %>
+<%= render "sponsors/sponsors", highlight: !hi %>
+<%= render "summary_2024", highlight: !hi %>
+<%= render "newsletter", highlight: !hi %>

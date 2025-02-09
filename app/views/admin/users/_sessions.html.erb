@@ -1,0 +1,8 @@
+<%# locals: (sessions:) %>
+
+<%= admin_table sessions do
+  column "#", :id
+  column :ip_address
+  column :user_agent, -> { truncate it.user_agent, length: 50 }
+  column :created_at
+end %>
