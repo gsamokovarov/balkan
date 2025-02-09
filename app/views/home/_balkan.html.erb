@@ -4,6 +4,9 @@
 <% if Current.event.schedule&.published? %>
   <%= render "schedule", schedule: Current.event.schedule %>
 <% end %>
+<% if Current.event.blog_posts.any? %>
+  <%= render "blog" %>
+<% end %>
 <%= render "speakers" %>
 <%= render "tickets", highlight: true %>
 <%= render "community_partners" %>

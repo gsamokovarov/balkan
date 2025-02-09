@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
     Current.host = request.host
     Current.event =
       if Rails.env.development?
-        Event.includes(:ticket_types).find_by! name: Settings.development_event
+        Event.includes(:ticket_types, blog_posts: :author).find_by! name: Settings.development_event
       else
-        Event.includes(:ticket_types).find_by! host: request.host
+        Event.includes(:ticket_types, blog_posts: :author).find_by! host: request.host
       end
   end
 
