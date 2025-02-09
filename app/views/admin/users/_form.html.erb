@@ -1,8 +1,10 @@
 <%# locals: (user:) %>
 
 <%= admin_form [:admin, user] do |f| %>
-  <%= f.email_input :email %>
+  <%= f.text_input :name, required: true %>
+  <%= f.email_input :email, required: true  %>
   <%= f.password_input :password %>
+  <%= f.text_area_input :bio %>
 
   <%= f.submit %>
 <% end %>

@@ -2,6 +2,7 @@
 
 <%= admin_table users do
   column "#",    -> { link_to it.id, [:admin, it] }
+  column :name,  -> { truncate it.name, length: 30 }
   column :email, -> { link_to it.email, [:admin, it] }
 
   column do
