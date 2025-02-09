@@ -1,4 +1,4 @@
-class BlogPost < ApplicationFrozenRecord
+class StaticBlogPost < ApplicationFrozenRecord
   Author = Data.define :name, :about, :avatar
 
   def html_content = MarkdownRenderer.render content

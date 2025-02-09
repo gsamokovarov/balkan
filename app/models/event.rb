@@ -17,7 +17,7 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  def blog_posts = BlogPost.where(event_id: id).order(id: :desc)
+  def blog_posts = StaticBlogPost.where(event_id: id).order(id: :desc)
 
   def sponsors = sponsorships.includes(:package, :sponsor).order("sponsorship_packages.id").group_by(&:package)
 
