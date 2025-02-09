@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.4.1"
 
+gem "bcrypt", "~> 3.1"
 gem "bootsnap", require: false
 gem "countries", require: "countries/global"
 gem "csv"
@@ -10,7 +11,6 @@ gem "honeybadger", "~> 5.3"
 gem "icalendar"
 gem "image_processing"
 gem "importmap-rails"
-gem "invisible_captcha"
 gem "litestack", github: "oldmoe/litestack"
 gem "matrix", "~> 0.4.2"
 gem "prawn", "~> 2.4"
@@ -45,5 +45,3 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
 end
-
-gem "bcrypt", "~> 3.1"
