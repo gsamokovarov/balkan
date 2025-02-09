@@ -1,0 +1,8 @@
+<%# locals: (blog_posts:) %>
+
+<%= admin_table blog_posts do
+  column "#",      -> { link_to it.id, [:admin, it.event, it] }
+  column :author,  -> { link_to it.author.email, [:admin, it.author] }
+  column :title,   -> { truncate it.title, length: 30 }
+  column :content, -> { truncate it.content, length: 50 }
+end %>

@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   has_many :tickets, through: :orders
   has_many :subscribers
   has_many :lineup_members
+  has_many :blog_posts
   has_many :community_partners
   has_many :embeddings
   has_many :sponsorship_packages
@@ -16,8 +17,6 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-
-  def blog_posts = StaticBlogPost.where(event_id: id).order(id: :desc)
 
   def sponsors = sponsorships.includes(:package, :sponsor).order("sponsorship_packages.id").group_by(&:package)
 
