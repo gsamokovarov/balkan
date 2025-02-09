@@ -10,7 +10,7 @@ RSpec.case "Admin", type: :feature do
   end
 
   test "shows the admin dashboard after successful authentication" do
-    create :user, email: "admin@example.com", password: "admin"
+    create :user, name: "Admin", email: "admin@example.com", password: "admin"
     create :event, :balkan2025
 
     visit admin_orders_path
