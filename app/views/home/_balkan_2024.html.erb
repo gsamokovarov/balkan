@@ -1,12 +1,17 @@
 <% title "April 26-27, 2024" %>
 
+<% hi = section_highlighter %>
+
 <%= render "hero_section_2024" %>
 <% if Current.event.schedule&.published? %>
-  <%= render "schedule", schedule: Current.event.schedule %>
+  <%= render "schedule", schedule: Current.event.schedule, highlight: !hi %>
 <% end %>
-<%= render "speakers/speakers" %>
+<% if Current.event.blog_posts.any? %>
+  <%= render "blog", highlight: !hi %>
+<% end %>
+<%= render "speakers/speakers", highlight: !hi %>
 <% if Current.event.venue %>
-  <%= render "venue", venue: Current.event.venue, highlight: true %>
+  <%= render "venue", venue: Current.event.venue, highlight: !hi %>
 <% end %>
-<%= render "sponsors/sponsors" %>
-<%= render "community_partners", highlight: true %>
+<%= render "sponsors/sponsors", highlight: !hi %>
+<%= render "community_partners", highlight: !hi %>
