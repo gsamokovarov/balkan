@@ -1,9 +1,6 @@
 module Settings
   extend self
 
-  def admin_name = get __method__
-  def admin_password = get __method__
-
   def sendgrid_api_key = get __method__
 
   def stripe_secret_key = get __method__
