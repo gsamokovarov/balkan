@@ -1,3 +1,9 @@
 <%= render "section", title: "Blog post ##{@blog_post.id}" do %>
   <%= render "form", blog_post: @blog_post %>
 <% end %>
+
+<% if @blog_post.persisted? %>
+  <%= render "section", title: "Preview" do %>
+    <%= render_markdown @blog_post.content %>
+  <% end %>
+<% end %>
