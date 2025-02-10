@@ -8,11 +8,11 @@ Before running Balkan Ruby on your local macOS machine, you need the following s
 
 ### Ready...
 
-- Ruby 3.2.2
+- Ruby 3.4.1
 - SQLite3
 - Foreman (or [hivemind](https://github.com/DarthSim/hivemind))
 
-Install Ruby 3.3.3 with `rbenv`, `chruby` or `asdf`. Use [Homebrew](https://brew.sh) for everything else:
+Install Ruby 3.4.1 with `rbenv`, `chruby` or `asdf`. Use [Homebrew](https://brew.sh) for everything else:
 
 ```
 brew install sqlite3
