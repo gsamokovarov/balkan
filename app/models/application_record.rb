@@ -7,7 +7,9 @@ class ApplicationRecord < ActiveRecord::Base
 
     def time_as_boolean(attribute, field: "#{attribute}_at")
       define_method attribute, -> { read_attribute(field) ? true : false }
-      define_method "#{attribute}=", -> value { write_attribute(field, value.presence ? Time.current : nil) }
+      define_method "#{attribute}=", -> value do
+        write_attribute(field, value.in?(ActiveModel::Type::Boolean::FALSE_VALUES) ? nil : Time.current)
+      end
       alias_method "#{attribute}?", attribute
     end
 
