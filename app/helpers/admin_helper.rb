@@ -75,9 +75,10 @@ module AdminHelper
   end
 
   def admin_form(object, **options, &)
-    options[:html] = { class: "space-y-6", "data-turbo": false, **(options[:html] || {}) }
+    html_options = options[:html] || {}
 
-    tag.div class: "sm:max-w-sm" do
+    tag.div class: html_options.delete(:class) { "sm:max-w-sm" } do
+      options[:html] = { class: ["space-y-6"], "data-turbo": false, **html_options }
       form_with model: object, builder: Admin::FormHelper::Builder, **options, &
     end
   end
