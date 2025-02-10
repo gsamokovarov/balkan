@@ -84,3 +84,10 @@ banitsa2024.ticket_types.find_or_create_by! name: "Supporter" do
   it.price = "69"
   it.enabled = true
 end
+
+User.find_or_create_by! email: "admin@example.com" do
+  it.name = "Admin"
+  it.password = "admin"
+end
+
+puts "Admin user: admin@example.com with password 'admin'"
