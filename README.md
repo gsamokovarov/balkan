@@ -53,13 +53,8 @@ In development & test emails are not sent.
 
 #### Admin setup
 
-The admin is accessed at `/admin` and requires basic HTTP authentication
-controlled by 2 environment variables:
-
-- `ADMIN_NAME`
-- `ADMIN_PASSWORD`
-
-Both of them default to `admin`.
+The admin is accessed at `/admin`. The `admin@example.com` user is seeded with
+the password `admin`.
 
 ### Go!
 
