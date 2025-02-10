@@ -6,7 +6,6 @@ gem "bcrypt", "~> 3.1"
 gem "bootsnap", require: false
 gem "countries", require: "countries/global"
 gem "csv"
-gem "frozen_record", "~> 0.27.0"
 gem "honeybadger", "~> 5.3"
 gem "icalendar"
 gem "image_processing"
