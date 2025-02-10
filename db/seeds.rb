@@ -3,6 +3,7 @@ invoice_sequence = InvoiceSequence.find_or_create_by! initial_number: 10_001_049
 balkan2024 = Event.find_or_create_by! name: "Balkan Ruby 2024" do
   it.start_date = Date.new 2024, 4, 26
   it.end_date = Date.new 2024, 4, 27
+  it.invoice_sequence = invoice_sequence
   it.host = "2024.balkanruby.com"
 end
 
