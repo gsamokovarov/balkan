@@ -1,11 +1,11 @@
 <%= render "section", title: @blog_post.title, title_element: "h1", highlight: true do %>
   <article class="flex max-w-xl flex-col items-start justify-between">
-    <div class="flex items-center gap-x-4 text-lg">
+    <div class="flex items-center text-lg">
       <time datetime="<%= @blog_post.date.iso8601 %>" class="text-gray-500">
         <%= @blog_post.date.strftime "%d %b %Y" %>
       </time>
     </div>
-    <%= render "prose", variant: :xl, class: "mt-3" do %>
+    <%= render "prose", variant: :xl, class: "mt-8" do %>
       <%= render_markdown @blog_post.content %>
     <% end %>
     <div class="relative mt-8 flex items-center gap-x-4">
