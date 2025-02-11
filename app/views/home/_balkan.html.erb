@@ -13,5 +13,7 @@
 <%= render "tickets", highlight: !hi %>
 <%= render "community_partners", highlight: !hi %>
 <%= render "sponsors/sponsors", highlight: !hi %>
-<%= render "summary_2024", highlight: !hi %>
+<% if Current.event.venue %>
+  <%= render "venue", venue: Current.event.venue, highlight: !hi %>
+<% end %>
 <%= render "newsletter", highlight: !hi %>
