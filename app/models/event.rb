@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   has_many :tickets, through: :orders
   has_many :subscribers
   has_many :lineup_members
-  has_many :blog_posts, -> { where.not published_at: nil }
+  has_many :blog_posts
   has_many :community_partners
   has_many :embeddings
   has_many :sponsorship_packages

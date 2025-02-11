@@ -4,6 +4,8 @@ class BlogPost < ApplicationRecord
 
   time_as_boolean :published
 
+  def self.published = where.not published_at: nil
+
   validates :title, presence: true
   validates :content, presence: true
   validates :date, presence: true

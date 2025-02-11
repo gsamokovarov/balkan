@@ -6,7 +6,7 @@
 <% if Current.event.schedule&.published? %>
   <%= render "schedule", schedule: Current.event.schedule, highlight: !hi %>
 <% end %>
-<% if Current.event.blog_posts.any? %>
+<% if Current.event.blog_posts.published.any? %>
   <%= render "blog", highlight: !hi %>
 <% end %>
 <%= render "speakers", highlight: !hi %>

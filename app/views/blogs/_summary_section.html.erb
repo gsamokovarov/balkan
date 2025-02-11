@@ -1,5 +1,5 @@
 <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-  <% Current.event.blog_posts.each do |blog_post| %>
+  <% Current.event.blog_posts.published.each do |blog_post| %>
     <article class="flex max-w-xl flex-col items-start justify-between">
       <div class="flex items-center gap-x-4 text-lg">
         <time datetime="<%= blog_post.date.iso8601 %>" class="text-gray-500">
