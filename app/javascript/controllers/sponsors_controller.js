@@ -1,10 +1,10 @@
-import { Controller } from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="sponsors"
 export default class extends Controller {
   static targets = ["image"]
   static values = {
-    sponsorSrc: String
+    sponsorSrc: String,
   }
 
   connect() {

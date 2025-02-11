@@ -1,12 +1,12 @@
-import { Controller } from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="navigation"
 export default class extends Controller {
-  static targets = ["menu", "openIcon", "closeIcon"];
+  static targets = ["menu", "openIcon", "closeIcon"]
 
   static values = {
     open: { type: Boolean, default: false },
-  };
+  }
 
   collapse = () => {
     this.openValue = false

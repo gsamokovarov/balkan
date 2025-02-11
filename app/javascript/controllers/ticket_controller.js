@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus"
 
 const TICKET_SCROLL_OFFSET = 36
 
@@ -7,7 +7,7 @@ export default class extends Controller {
   static targets = ["tickets", "template", "summary", "buyButtonText"]
   static values = {
     count: { type: Number, default: 1 },
-    price: Number
+    price: Number,
   }
 
   add() {
@@ -53,9 +53,7 @@ export default class extends Controller {
 
   calculatePrice() {
     return formatMoney(
-      this.countValue < 3
-        ? this.countValue * this.priceValue
-        : this.countValue * this.priceValue * 0.9
+      this.countValue < 3 ? this.countValue * this.priceValue : this.countValue * this.priceValue * 0.9,
     )
   }
 
