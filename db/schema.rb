@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_10_182724) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_15_113351) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -81,6 +81,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_182724) do
     t.integer "invoice_sequence_id"
     t.string "host"
     t.integer "venue_id"
+    t.string "title"
+    t.string "subtitle"
+    t.string "description"
     t.index ["invoice_sequence_id"], name: "index_events_on_invoice_sequence_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
