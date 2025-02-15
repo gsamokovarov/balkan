@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_15_151803) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_15_152538) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_15_151803) do
     t.string "twitter_url"
     t.string "facebook_url"
     t.string "youtube_url"
+    t.string "speaker_applications_url"
     t.index ["invoice_sequence_id"], name: "index_events_on_invoice_sequence_id"
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
