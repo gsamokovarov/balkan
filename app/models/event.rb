@@ -13,6 +13,8 @@ class Event < ApplicationRecord
   has_many :sponsorship_packages
   has_many :sponsorship_variants, through: :sponsorship_packages, source: :variants
   has_many :sponsorships
+  has_one_attached :logo
+  has_many_attached :hero_images
 
   validates :name, presence: true
   validates :start_date, presence: true

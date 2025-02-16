@@ -1,12 +1,23 @@
 <%# locals: (event:) %>
 
 <%= admin_form [:admin, event] do |f| %>
-  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.initial_number, it.id] }, include_blank: true %>
-  <%= f.text_input :name %>
+  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.initial_number, it.id] }, include_blank: true, required: true %>
+  <%= f.date_input :start_date, required: true %>
+  <%= f.date_input :end_date, required: true %>
+  <%= f.text_input :host, required: true %>
+  <%= f.text_input :name, required: true %>
+  <%= f.text_input :contact_email %>
+  <%= f.file_input :logo %>
+  <%= f.text_input :title %>
+  <%= f.text_input :subtitle %>
+  <%= f.text_area_input :description %>
+  <%= f.file_input :hero_images, multiple: true %>
   <%= f.select_input :venue_id, Venue.all.map { [it.name, it.id] }, include_blank: true %>
-  <%= f.text_input :host %>
-  <%= f.date_input :start_date %>
-  <%= f.date_input :end_date %>
   <%= f.date_input :speaker_applications_end_date %>
+  <%= f.text_input :speaker_applications_url %>
+  <%= f.text_input :twitter_url %>
+  <%= f.text_input :facebook_url %>
+  <%= f.text_input :youtube_url %>
+
   <%= f.submit %>
 <% end %>
