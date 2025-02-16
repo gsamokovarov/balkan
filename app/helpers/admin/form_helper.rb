@@ -87,7 +87,7 @@ module Admin::FormHelper
       end
     end
 
-    def file_input(method, label: method, multiple: false, **, &addendum)
+    def file_input(method, label: method, multiple: false, include_hidden: false, **, &addendum)
       file_classes = [
         "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",
         "focus:ring-indigo-600",
@@ -108,7 +108,7 @@ module Admin::FormHelper
             @template.concat @template.image_tag(attachment, class: image_preview_classes)
           end
         end
-        @template.concat file_field(method, class: file_classes, multiple:, **)
+        @template.concat file_field(method, class: file_classes, multiple:, include_hidden:, **)
       end
     end
 

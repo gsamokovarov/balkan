@@ -38,10 +38,7 @@ class Admin::VenuesController < Admin::ApplicationController
   private
 
   def venue_params
-    venue_params = params.require(:venue).permit(:name, :description, :url, :address, :directions, :place_id,
-                                                 gallery_images: [], additional_images: [])
-    venue_params = venue_params.without(:gallery_images) if venue_params[:gallery_images] == [""]
-    venue_params = venue_params.without(:additional_images) if venue_params[:additional_images] == [""]
-    venue_params
+    params.require(:venue).permit(:name, :description, :url, :address, :directions, :place_id,
+                                  gallery_images: [], additional_images: [])
   end
 end
