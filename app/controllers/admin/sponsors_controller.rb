@@ -1,6 +1,6 @@
 class Admin::SponsorsController < Admin::ApplicationController
   def index
-    @sponsors = Sponsor.with_attached_logo
+    @sponsors = scope Sponsor.with_attached_logo
   end
 
   def show

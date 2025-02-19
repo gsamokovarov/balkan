@@ -1,6 +1,6 @@
 class Admin::EmbeddingsController < Admin::ApplicationController
   def index
-    @embeddings = Embedding.where event:
+    @embeddings = scope Embedding.where(event:)
   end
 
   def show

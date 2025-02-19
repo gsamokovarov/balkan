@@ -1,6 +1,6 @@
 class Admin::CommunityPartnersController < Admin::ApplicationController
   def index
-    @community_partners = event.community_partners.with_attached_logo
+    @community_partners = scope event.community_partners.with_attached_logo
   end
 
   def show

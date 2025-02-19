@@ -1,6 +1,6 @@
 class Admin::SubscribersController < Admin::ApplicationController
   def index
-    @subscribers = event.subscribers.order(id: :desc).page params[:page]
+    @subscribers = scope event.subscribers.order(id: :desc)
   end
 
   def destroy

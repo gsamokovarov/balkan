@@ -1,6 +1,6 @@
 class Admin::SponsorshipsController < Admin::ApplicationController
   def index
-    @sponsorships = event.sponsorships.includes :variant, :sponsor, :event
+    @sponsorships = scope event.sponsorships.includes(:variant, :sponsor, :event)
   end
 
   def show

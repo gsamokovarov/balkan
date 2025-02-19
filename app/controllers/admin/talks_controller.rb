@@ -1,6 +1,6 @@
 class Admin::TalksController < Admin::ApplicationController
   def index
-    @talks = Talk.all
+    @talks = scope Talk.all
   end
 
   def show

@@ -1,6 +1,6 @@
 class Admin::LineupMembersController < Admin::ApplicationController
   def index
-    @lineup_members = event.lineup_members.includes :talk, :speaker
+    @lineup_members = scope event.lineup_members.includes(:talk, :speaker)
   end
 
   def show

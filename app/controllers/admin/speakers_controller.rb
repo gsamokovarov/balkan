@@ -1,6 +1,6 @@
 class Admin::SpeakersController < Admin::ApplicationController
   def index
-    @speakers = Speaker.with_attached_avatar
+    @speakers = scope Speaker.with_attached_avatar
   end
 
   def show

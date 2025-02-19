@@ -1,6 +1,6 @@
 class Admin::BlogPostsController < Admin::ApplicationController
   def index
-    @blog_posts = event.blog_posts.includes :author
+    @blog_posts = scope event.blog_posts.includes(:author)
   end
 
   def show

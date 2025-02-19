@@ -1,6 +1,6 @@
 class Admin::TicketTypesController < Admin::ApplicationController
   def index
-    @ticket_types = event.ticket_types
+    @ticket_types = scope event.ticket_types
   end
 
   def show

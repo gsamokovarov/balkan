@@ -1,6 +1,6 @@
 class Admin::VenuesController < Admin::ApplicationController
   def index
-    @venues = Venue.all
+    @venues = scope Venue.all
   end
 
   def show

@@ -1,6 +1,6 @@
 class Admin::EventsController < Admin::ApplicationController
   def index
-    @events = Event.all
+    @events = scope Event.all
   end
 
   def show

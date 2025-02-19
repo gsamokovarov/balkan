@@ -1,6 +1,6 @@
 class Admin::TicketsController < Admin::ApplicationController
   def index
-    @tickets = event.tickets.includes(:ticket_type).order("tickets.id DESC").page(params[:page])
+    @tickets = scope event.tickets.includes(:ticket_type)
   end
 
   private
