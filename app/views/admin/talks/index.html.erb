@@ -3,6 +3,7 @@
 } do %>
   <% if @talks.any? %>
     <%= render "talks", talks: @talks %>
+    <%= admin_paginate @talks %>
   <% else %>
     <%= render "empty_state" do %>
       <%= admin_button(:primary, link: new_admin_talk_path) { "New talk" } %>
