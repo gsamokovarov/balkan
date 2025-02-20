@@ -3,6 +3,7 @@
 } do %>
   <% if @speakers.any? %>
     <%= render "speakers", speakers: @speakers %>
+    <%= admin_paginate @speakers %>
   <% else %>
     <%= render "empty_state" do %>
       <%= admin_button(:primary, link: new_admin_speaker_path) { "New speaker" } %>
