@@ -1,0 +1,36 @@
+<div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+  <% Current.event.blog_posts.published.each do |blog_post| %>
+    <article class="flex max-w-xl flex-col items-start justify-between">
+      <div class="flex items-center gap-x-4 text-lg">
+        <time datetime="<%= blog_post.date.iso8601 %>" class="text-gray-500">
+          <%= blog_post.date.strftime "%d %b %Y" %>
+        </time>
+      </div>
+      <div class="group relative">
+        <h3 class="my-3 text-2xl font-semibold leading-6 text-black-900 group-hover:text-banitsa-500">
+          <%= link_to blog_path(blog_post) do %>
+            <span class="absolute inset-0"></span>
+            <%= blog_post.title %>
+          <% end %>
+        </h3>
+        <%= render "prose", variant: :xl, class: "line-clamp-3" do %>
+          <%= render_markdown blog_post.content %>
+        <% end %>
+      </div>
+      <div class="relative mt-8 flex items-center gap-x-4">
+        <% if blog_post.author.avatar.attached? %>
+          <%= image_tag blog_post.author.avatar, alt: blog_post.author.name, class: "h-12 w-12 rounded-full border-2 border-black bg-white" %>
+        <% end %>
+        <div class="text-lg leading-6">
+          <p class="font-semibold">
+            <span class="absolute inset-0"></span>
+            <%= blog_post.author.name %>
+          </p>
+          <% if blog_post.author.bio %>
+            <p class="text-gray-500"><%= blog_post.author.bio %></p>
+          <% end %>
+        </div>
+      </div>
+    </article>
+  <% end %>
+</div>
