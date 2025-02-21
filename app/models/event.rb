@@ -26,9 +26,4 @@ class Event < ApplicationRecord
   def beginning_countdown = FinalCountdown.until start_date
 
   def upcoming? = Date.current.before? start_date
-
-  def balkan?(year = nil) = name.match? "Balkan.*#{year}"
-  def banitsa?(year = nil) = name.match? "Banitsa.*#{year}"
-
-  def contact_email = balkan? ? "hi@balkanruby.com" : "hi@rubybanitsa.com"
 end
