@@ -6,11 +6,7 @@
   <% end %>
 
   <% if venue.gallery_images.any? %>
-    <div class="-mx-4 px-4 h-72 flex gap-4 overflow-x-auto snap-x snap-mandatory sm:h-96">
-      <% venue.gallery_images.each do |image| %>
-        <%= image_tag image, class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 h-full object-cover sm:w-3/4", lazy: true %>
-      <% end %>
-    </div>
+    <%= render "image_gallery", images: venue.gallery_images %>
   <% end %>
 
   <% if venue.directions %>
