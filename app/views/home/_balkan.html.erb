@@ -1,4 +1,4 @@
-<% title "April 25-26, 2025" %>
+<% title Current.event.subtitle || Current.event.name %>
 
 <% hi = section_highlighter %>
 
@@ -11,9 +11,13 @@
 <% end %>
 <%= render "speakers", highlight: !hi %>
 <%= render "tickets", highlight: !hi %>
-<%= render "community_partners", highlight: !hi %>
+<% if Current.event.community_partners.any? %>
+  <%= render "community_partners", highlight: !hi %>
+<% end %>
 <%= render "sponsors/sponsors", highlight: !hi %>
 <% if Current.event.venue %>
   <%= render "venue", venue: Current.event.venue, highlight: !hi %>
 <% end %>
-<%= render "newsletter", highlight: !hi %>
+<% if Current.event.upcoming? %>
+  <%= render "newsletter", highlight: !hi %>
+<% end %>

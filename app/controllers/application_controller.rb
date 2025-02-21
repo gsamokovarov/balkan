@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  layout :current_event_layout
-
   before_action :set_current
 
   private
@@ -8,20 +6,12 @@ class ApplicationController < ActionController::Base
   def set_current
     Current.host = request.host
     Current.event =
-      if Rails.env.development?
-        Event.includes(:ticket_types, blog_posts: :author).find_by! name: Settings.development_event
-      else
-        Event.includes(:ticket_types, blog_posts: :author).find_by! host: request.host
-      end
-  end
-
-  def current_event_layout
-    if turbo_frame_request?
-      "turbo_rails/frame"
-    elsif Current.event.banitsa?
-      "banitsa"
-    else
-      "application"
-    end
+      Event.with_attached_hero_images.includes(:ticket_types, blog_posts: :author).find_by!(
+        if Rails.env.development?
+          { name: Settings.development_event }
+        else
+          { host: request.host }
+        end,
+      )
   end
 end

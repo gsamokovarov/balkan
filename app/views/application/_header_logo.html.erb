@@ -1,3 +1,7 @@
 <%= link_to root_path, class: "flex items-center mx-auto" do %>
-  <%= image_tag "logo-black.svg", class: "w-56", alt: "Balkan Ruby logo" %>
+  <% if Current.event.logo.attached? %>
+    <%= image_tag Current.event.logo, class: "w-56", alt: Current.event.name %>
+  <% else %>
+    <%= image_tag "logo-black.svg", class: "w-56", alt: "Balkan Ruby logo" %>
+  <% end %>
 <% end %>

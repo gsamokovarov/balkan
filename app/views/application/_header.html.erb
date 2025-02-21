@@ -1,8 +1,8 @@
 <% nav_links = [
   { name: "Home", path: root_path },
   { name: "Tickets", path: checkouts_path },
-  { name: "Sponsorship", path: new_sponsor_path },
-] %>
+  ({ name: "Sponsorship", path: new_sponsor_path } if Current.event.sponsorship_packages.any?),
+].compact %>
 
 <%= render "desktop_header", nav_links:, logo_partial: "header_logo" %>
 <%= render "mobile_header", nav_links:, logo_partial: "header_logo" %>
