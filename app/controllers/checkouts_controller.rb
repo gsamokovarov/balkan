@@ -4,9 +4,11 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-    precondition HCaptcha.valid?(params), "Invalid captcha"
-
-    redirect_to Checkout.create_link(checkout_params), allow_other_host: true
+    if HCaptcha.valid? params
+      redirect_to Checkout.create_link(checkout_params), allow_other_host: true
+    else
+      head :bad_request
+    end
   end
 
   def checkout_params
