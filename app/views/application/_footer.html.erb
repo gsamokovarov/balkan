@@ -10,7 +10,7 @@
       </div>
 
       <div class="flex items-center flex-wrap gap-10">
-        <%= link_to twitter_url, class: "link-secondary", aria: { label: "Twitter" } do %>
+        <%= link_to Current.event.twitter_url, class: "link-secondary", aria: { label: "Twitter" } do %>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -20,7 +20,7 @@
           </svg>
         <% end %>
 
-        <%= link_to facebook_url, class: "link-secondary", aria: { label: "Facebook" } do %>
+        <%= link_to Current.event.facebook_url, class: "link-secondary", aria: { label: "Facebook" } do %>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -34,7 +34,7 @@
           </svg>
         <% end %>
 
-        <%= link_to youtube_url, class: "link-secondary", aria: { label: "YouTube" } do %>
+        <%= link_to Current.event.youtube_url, class: "link-secondary", aria: { label: "YouTube" } do %>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -72,7 +72,7 @@
       </p>
 
       <%= link_to "Code of Conduct", "https://berlincodeofconduct.org", class: "link-secondary text-white/70" %>
-      <%= link_to "Contact us", "mailto:hi@balkanruby.com", class: "link-secondary text-white/70" %>
+      <%= link_to "Contact us", "mailto:#{Current.event.contact_email}", class: "link-secondary text-white/70" %>
     </div>
   <% end %>
 </footer>
