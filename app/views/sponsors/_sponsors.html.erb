@@ -15,6 +15,8 @@
             <%= image_tag sponsorship.sponsor.logo.variant(resize_to_limit: [500, 500]),
               class: "w-auto h-full object-contain",
               lazy: true %>
+          <% rescue %>
+            <%= image_tag sponsorship.sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
           <% end %>
         <% end %>
       <% end %>
