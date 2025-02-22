@@ -84,6 +84,43 @@ RSpec.case Checkout, type: :model do
     assert_eq ticket["ticket_type_id"], ticket_type.id
   end
 
+  test "creates an order with Stripe promotion code applied" do
+    ticket_type = create(:ticket_type, :enabled, event:)
+    params = {
+      tickets: [name: "John Doe", email: "john@example.com", shirt_size: "XXL"],
+      ticket_type_id: ticket_type.id,
+      discount_code: "DISCOUNT",
+    }
+
+    stub_stripe_checkout(
+      params[:tickets].map do
+        {
+          price: ticket_type.price,
+          description: "#{ticket_type.name} - #{it[:name]}",
+        }
+      end,
+      session_id: "stripe-session-id",
+      session_url: "https://stripe-checkout-link.com",
+      promotion_code: "DISCOUNT",
+    )
+
+    assert_change Order, :count do
+      Checkout.create_link params
+    end
+
+    order = Order.last
+    ticket = order.pending_tickets.first
+
+    assert_eq order.stripe_checkout_session_uid, "stripe-session-id"
+    assert_eq order.issue_invoice, false
+    assert_eq order.amount, "100.0".to_d
+    assert_eq ticket["name"], "John Doe"
+    assert_eq ticket["email"], "john@example.com"
+    assert_eq ticket["price"], "100.0"
+    assert_eq ticket["shirt_size"], "XXL"
+    assert_eq ticket["ticket_type_id"], ticket_type.id
+  end
+
   test "creates an order with 10% discount for 3 or more tickets" do
     ticket_type = create(:ticket_type, :enabled, event:)
     params = {

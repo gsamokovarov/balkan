@@ -1,21 +1,28 @@
 module SpecSupport
   module StripeHelper
-    def stub_stripe_checkout(expected_line_items, session_id:, session_url:)
+    def stub_stripe_checkout(expected_line_items, session_id:, session_url:, promotion_code: "")
       stub(Stripe::Checkout::Session).to receive(:create)
-        .with(stripe_checkout_opts(expected_line_items))
+        .with(stripe_checkout_opts(expected_line_items, promotion_code:))
         .and_return Stripe::Checkout::Session.construct_from(id: session_id, url: session_url)
+
+      stub(Stripe::PromotionCode).to receive(:list)
+        .with(code: promotion_code)
+        .and_return Stripe::PromotionCode.construct_from(data: [id: promotion_code.presence])
     end
 
-    def stub_stripe_checkout_with_invoice(expected_line_items, session_id:, session_url:)
+    def stub_stripe_checkout_with_invoice(expected_line_items, session_id:, session_url:, promotion_code: "")
       stub(Stripe::Checkout::Session).to receive(:create)
-        .with(stripe_checkout_opts(expected_line_items).merge(
-                billing_address_collection: "required",
-                tax_id_collection: { enabled: true },
-              ))
+        .with(stripe_checkout_opts(expected_line_items, promotion_code:,
+                                                        billing_address_collection: "required",
+                                                        tax_id_collection: { enabled: true }))
         .and_return Stripe::Checkout::Session.construct_from(id: session_id, url: session_url)
+
+      stub(Stripe::PromotionCode).to receive(:list)
+        .with(code: promotion_code)
+        .and_return Stripe::PromotionCode.construct_from(data: [id: promotion_code.presence])
     end
 
-    def stripe_checkout_opts(expected_line_items)
+    def stripe_checkout_opts(expected_line_items, promotion_code: "", **rest)
       {
         currency: "eur",
         success_url: "http://example.com/thanks",
@@ -33,7 +40,8 @@ module SpecSupport
           }
         end,
         mode: "payment",
-        allow_promotion_codes: true,
+        **(promotion_code.present? ? { discounts: [promotion_code:] } : { allow_promotion_codes: true }),
+        **rest,
       }
     end
 

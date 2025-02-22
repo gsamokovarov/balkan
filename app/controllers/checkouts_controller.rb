@@ -12,6 +12,6 @@ class CheckoutsController < ApplicationController
   end
 
   def checkout_params
-    params.require(:checkout).permit :ticket_type_id, :invoice, tickets: [:name, :email, :shirt_size]
+    params.require(:checkout).permit :ticket_type_id, :invoice, :discount_code, tickets: [:name, :email, :shirt_size]
   end
 end
