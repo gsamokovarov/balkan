@@ -73,7 +73,7 @@
       <span>Add ticket</span>
     </button>
 
-    <p class="text-xl text-gray-500 self-center" data-ticket-target="summary">
+    <p class="text-lg text-gray-500 self-center" data-ticket-target="summary">
       Buy 2 more and save 10%
     </p>
   </div>
@@ -85,6 +85,19 @@
         class: "w-5 h-5 text-banitsa-600 border-neutral-600 rounded-sm focus:border-black focus:outline-banitsa-600"
       %>
     </label>
+  </div>
+
+  <div class="flex flex-col gap-3">
+    <label class="flex flex-col gap-3 cursor-pointer">
+      <span class="text-xl">Discount code</span>
+      <%= form.text_field :discount_code,
+        value: params[:discount_code],
+        class: "w-full sm:w-72 border-2 rounded-md border-neutral-600 px-4 py-2 text-black text-ellipsis focus:ring-0 focus:border-neutral-600 focus:outline-banitsa-600"
+      %>
+    </label>
+    <p class="text-lg text-gray-500">
+      Have you checked our social media?
+    </p>
   </div>
 
   <%= form.hidden_field :ticket_type_id, value: @ticket_type.id %>

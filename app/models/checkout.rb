@@ -12,8 +12,9 @@ module Checkout
       pending_tickets = build_pending_tickets(order, params[:tickets], ticket_type:)
 
       issue_invoice = params[:invoice] == "1"
+      discount_code = params[:discount_code]
 
-      stripe_session = create_stripe_checkout_session(pending_tickets, issue_invoice:, ticket_type:)
+      stripe_session = create_stripe_checkout_session(pending_tickets, issue_invoice:, ticket_type:, discount_code:)
 
       order.update!(amount: pending_tickets.sum { it["price"] },
                     stripe_checkout_session_uid: stripe_session.id,
@@ -26,15 +27,21 @@ module Checkout
 
   private
 
-  def create_stripe_checkout_session(pending_tickets, issue_invoice:, ticket_type:)
+  def create_stripe_checkout_session(pending_tickets, issue_invoice:, ticket_type:, discount_code:)
     checkout_params = {
       currency: "eur",
       success_url: Link.thanks_url,
       cancel_url: Link.root_url,
       line_items: build_stripe_products(pending_tickets, ticket_type),
       mode: "payment",
-      allow_promotion_codes: true,
     }
+
+    promotion_code = Stripe::PromotionCode.list(code: discount_code).data.first&.id if discount_code
+    if promotion_code
+      checkout_params[:discounts] = [promotion_code:]
+    else
+      checkout_params[:allow_promotion_codes] = true
+    end
 
     if issue_invoice
       checkout_params[:billing_address_collection] = "required"
