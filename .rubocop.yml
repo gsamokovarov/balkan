@@ -9,6 +9,10 @@ AllCops:
 Naming/AccessorMethodName:
   Enabled: false
 
+# Let me reminisce my Golang days.
+Naming/RescuedExceptionsVariableName:
+  PreferredName: err
+
 # Don't complain on missing documentation for every class.
 Style/Documentation:
   Enabled: false

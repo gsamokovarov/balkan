@@ -36,14 +36,7 @@ module Checkout
       mode: "payment",
     }
 
-    promotion_code =
-      begin
-        Stripe::PromotionCode.list(code: discount_code).data.first&.id if discount_code
-      rescue Stripe::InvalidRequestError
-        # The promotion code is invalid or expired.
-        nil
-      end
-
+    promotion_code = Stripe::PromotionCode.list(code: discount_code).data.first&.id if discount_code
     if promotion_code
       checkout_params[:discounts] = [promotion_code:]
     else
@@ -55,7 +48,17 @@ module Checkout
       checkout_params[:tax_id_collection] = { enabled: true }
     end
 
-    Stripe::Checkout::Session.create checkout_params
+    begin
+      Stripe::Checkout::Session.create checkout_params
+    rescue Stripe::InvalidRequestError => err
+      if err.code == "promotion_code_expired"
+        checkout_params.delete :discounts
+        checkout_params[:allow_promotion_codes] = true
+        Stripe::Checkout::Session.create checkout_params
+      else
+        raise
+      end
+    end
   end
 
   def build_stripe_products(tickets, ticket_type)
