@@ -1,6 +1,6 @@
 <%# locals: (ticket_type:) %>
 
-<%= link_to checkout_path(ticket_type), class: "
+<%= link_to checkout_path(ticket_type, discount_code: params[:discount_code]), class: "
   block
   rounded-md
   transition
