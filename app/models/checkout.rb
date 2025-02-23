@@ -36,7 +36,14 @@ module Checkout
       mode: "payment",
     }
 
-    promotion_code = Stripe::PromotionCode.list(code: discount_code).data.first&.id if discount_code
+    promotion_code =
+      begin
+        Stripe::PromotionCode.list(code: discount_code).data.first&.id if discount_code
+      rescue Stripe::InvalidRequestError
+        # The promotion code is invalid or expired.
+        nil
+      end
+
     if promotion_code
       checkout_params[:discounts] = [promotion_code:]
     else
