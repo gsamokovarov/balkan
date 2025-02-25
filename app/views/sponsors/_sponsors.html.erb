@@ -12,11 +12,9 @@
                         index.zero? ? "col-span-2" : "col-span-1",
                         "transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1"
                       ] do %>
-            <%= image_tag sponsorship.sponsor.logo.variant(resize_to_limit: [500, 500]),
+            <%= image_tag try_variant(sponsorship.sponsor.logo, resize_to_limit: [500, 500]),
               class: "w-auto h-full object-contain",
               lazy: true %>
-          <% rescue %>
-            <%= image_tag sponsorship.sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
           <% end %>
         <% end %>
       <% end %>

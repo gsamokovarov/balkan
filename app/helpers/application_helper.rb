@@ -20,4 +20,10 @@ module ApplicationHelper
   def format_money(amount, currency: "€", precision: 2) = number_to_currency(amount, unit: currency, precision:)
   def title(name) = name.presence && content_for(:title) { name }
   def section_highlighter(initial: true) = SectionHighlighter.new initial
+
+  def try_variant(attachment, **)
+    attachment.variant(**)
+  rescue ActiveStorage::InvariableError
+    attachment
+  end
 end

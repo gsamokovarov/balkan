@@ -2,7 +2,7 @@
 
 <div class="-mx-4 px-4 h-72 flex gap-4 overflow-x-auto snap-x snap-mandatory sm:h-96">
   <% images.each do |image| %>
-    <%= image_tag image.variant(resize_to_limit: [1000, 1000]),
+    <%= image_tag try_variant(image, resize_to_limit: [1000, 1000]),
       class: "snap-always snap-center border-2 border-black rounded-md shrink-0 w-10/12 h-full object-cover sm:w-3/4",
       lazy: true %>
   <% end %>
