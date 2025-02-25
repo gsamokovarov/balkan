@@ -9,10 +9,10 @@
       April 25-26, 2025 in Sofia, Bulgaria
     </div>
   </div>
-  <div class="grid grid-cols-6 w-full mx-auto shrink">
+  <div class="grid grid-cols-7 w-full mx-auto shrink">
     <% event.lineup_members.confirmed.each.with_index do |member, index| %>
       <%= tag.div class: card_rotation(index) do %>
-        <%= render "avatar_card", avatar: member.speaker.avatar, title: member.speaker.name %>
+        <%= render "avatar_card", avatar: member.speaker.avatar %>
       <% end %>
     <% end %>
   </div>
