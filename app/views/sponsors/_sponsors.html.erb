@@ -3,13 +3,13 @@
 <%= render "section", title: "Sponsors", title_element:, highlight: do %>
   <% if Current.event.sponsors.any? %>
     <div class="grid grid-cols-4 gap-4 sm:gap-6">
-      <% Current.event.sponsors.each_with_index do |(_, sponsorship), index| %>
+      <% Current.event.sponsors.each do |(_, sponsorship)| %>
         <% sponsorship.each do |sponsorship| %>
           <%= link_to sponsors_path(anchor: sponsorship.sponsor.name),
                       title: sponsorship.sponsor.name,
                       class: [
                         "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md",
-                        index.zero? ? "col-span-2" : "col-span-1",
+                        sponsorship.fiscal? ? "col-span-2" : "col-span-1",
                         "transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1"
                       ] do %>
             <%= image_tag try_variant(sponsorship.sponsor.logo, resize_to_limit: [500, 500]),
