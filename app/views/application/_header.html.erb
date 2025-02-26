@@ -1,7 +1,8 @@
 <% nav_links = [
   { name: "Home", path: root_path },
-  { name: "Tickets", path: checkouts_path(discount_code: params[:discount_code]) },
+  { name: "Blog", path: blogs_path },
   ({ name: "Sponsorship", path: new_sponsor_path } if Current.event.sponsorship_packages.any?),
+  { name: "Tickets", path: checkouts_path(discount_code: params[:discount_code]) },
 ].compact %>
 
 <%= render "desktop_header", nav_links:, logo_partial: "header_logo" %>

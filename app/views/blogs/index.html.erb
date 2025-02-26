@@ -1,0 +1,11 @@
+<div class="px-5 md:px-0">
+  <h1 class="py-10 text-3xl sm:text-4xl font-extrabold">Blog</h1>
+
+  <% if @blog_posts.present? %>
+    <% @blog_posts.each do |blog_post| %>
+      <div class="mb-10">
+        <%= render 'blogs/blog_post_summary', blog_post: %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
