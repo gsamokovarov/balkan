@@ -1,0 +1,43 @@
+class <%= @namespace_class %> < Admin::ApplicationController
+  def index
+    @<%= @resource_plural %> = scope <%= @resource_class %>.all
+  end
+
+  def show
+    @<%= @resource_singular %> = <%= @resource_class %>.find params[:id]
+  end
+
+  def new
+    @<%= @resource_singular %> = <%= @resource_class %>.new
+  end
+
+  def create
+    @<%= @resource_singular %> = <%= @resource_class %>.new(<%= @resource_singular %>_params)
+
+    if @<%= @resource_singular %>.save
+      redirect_to admin_<%= @resource_plural %>_path, notice: "<%= @resource_class %> created"
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @<%= @resource_singular %> = <%= @resource_class %>.find params[:id]
+  end
+
+  def update
+    @<%= @resource_singular %> = <%= @resource_class %>.find params[:id]
+
+    if @<%= @resource_singular %>.update <%= @resource_singular %>_params
+      redirect_to admin_<%= @resource_plural %>_path, notice: "<%= @resource_class %> updated"
+    else
+      render :show
+    end
+  end
+
+  private
+
+  def <%= @resource_singular %>_params
+    params.require(:<%= @resource_singular %>).permit(:field1, :field2) # Update with actual fields
+  end
+end
