@@ -1,0 +1,9 @@
+<%# locals: (<%= @resource_singular %>:) %>
+
+<%= admin_form [:admin, <%= @resource_singular %>] do |f| %>
+  <%= f.text_input :field1 %>
+  <%= f.text_input :field2 %>
+  <%# Add more fields as needed %>
+
+  <%= f.submit %>
+<% end %>

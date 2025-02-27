@@ -1,0 +1,4 @@
+<%= render "section", title: "New <%= @resource_singular.titleize %>" do %>
+  <%= render "form", <%= @resource_singular %>: @<%= @resource_singular %> %>
+<% end %>
+

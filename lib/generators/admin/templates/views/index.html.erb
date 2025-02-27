@@ -1,0 +1,43 @@
+<%= render "section", title: "<%= @resource_plural.titleize %>", cta: -> {
+  admin_button(:primary, link: new_admin_<%= @resource_singular %>_path) { "New <%= @resource_singular.titleize %>" }
+} do %>
+  <% if @<%= @resource_plural %>.any? %>
+    <%= render "<%= @resource_plural %>", <%= @resource_plural %>: @<%= @resource_plural %> %>
+    <%= admin_paginate @<%= @resource_plural %> %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_<%= @resource_singular %>_path) { "New <%= @resource_singular.titleize %>" } %>
+    <% end %>
+  <% end %>
+<% end %>
+
+# lib/generators/admin/templates/views/new.html.erb
+<%= render "section", title: "New <%= @resource_singular.titleize %>" do %>
+  <%= render "form", <%= @resource_singular %>: @<%= @resource_singular %> %>
+<% end %>
+
+# lib/generators/admin/templates/views/show.html.erb
+<%= render "section", title: "<%= @resource_class %> ##{@<%= @resource_singular %>.id}" do %>
+  <%= render "form", <%= @resource_singular %>: @<%= @resource_singular %> %>
+<% end %>
+
+# lib/generators/admin/templates/views/_form.html.erb
+<%# locals: (<%= @resource_singular %>:) %>
+
+<%= admin_form [:admin, <%= @resource_singular %>] do |f| %>
+  <%= f.text_input :field1 %>
+  <%= f.text_input :field2 %>
+  <%# Add more fields as needed %>
+
+  <%= f.submit %>
+<% end %>
+
+# lib/generators/admin/templates/views/_resources.html.erb
+<%# locals: (<%= @resource_plural %>:) %>
+
+<%= admin_table <%= @resource_plural %> do
+  column "#",     -> { link_to it.id, [:admin, it] }
+  column :field1, -> { link_to it.field1, [:admin, it] }
+  column :field2, -> { link_to it.field2, [:admin, it] }
+  <%# Add more columns as needed %>
+end %>
