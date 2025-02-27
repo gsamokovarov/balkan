@@ -42,7 +42,7 @@
     </div>
   <% end %>
 
-  <% if @talk.description %>
+  <% if @talk.description.present? %>
     <%= render "prose" do %>
       <h2 class="text-2xl sm:text-3xl font-extrabold">About</h2>
       <%= render_markdown @talk.description %>
