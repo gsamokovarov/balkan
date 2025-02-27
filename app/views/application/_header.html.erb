@@ -1,6 +1,6 @@
 <% nav_links = [
   { name: "Home", path: root_path },
-  { name: "Blog", path: blogs_path },
+  ({ name: "Blog", path: blogs_path } if Current.event.blog_posts.published.any?),
   ({ name: "Sponsorship", path: new_sponsor_path } if Current.event.sponsorship_packages.any?),
   { name: "Tickets", path: checkouts_path(discount_code: params[:discount_code]) },
 ].compact %>
