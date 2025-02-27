@@ -1,3 +1,5 @@
+<% title "Blog" %>
+
 <%= render "section", title: "Blog", title_element: "h1", highlight: true do %>
   <% if @blog_posts.any? %>
     <% @blog_posts.each do |blog_post| %>
