@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :talks, only: [:show]
   resources :checkouts, only: [:index, :show, :create]
   resources :subscribers, only: [:new, :show, :create, :destroy]
-  resources :blogs, only: [:show]
+  resources :blogs, only: [:index, :show]
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
 

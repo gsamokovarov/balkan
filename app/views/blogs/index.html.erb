@@ -1,0 +1,14 @@
+<%= render "section", title: "Blog", title_element: "h1", highlight: true do %>
+  <% if @blog_posts.any? %>
+    <% @blog_posts.each do |blog_post| %>
+      <%= render 'blogs/blog_post_summary', blog_post: blog_post %>
+    <% end %>
+  <% else %>
+    <div class="w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
+      <h3 class="mt-2 text-xl font-semibold text-gray-900">Nothing to show</h3>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render "sponsors/sponsors" %>
+<%= render "tickets/cta", highlight: true %>
