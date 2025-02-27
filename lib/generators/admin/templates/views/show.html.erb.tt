@@ -1,0 +1,3 @@
+<%%= render "section", title: "<%= @resource_class %> ##{@<%= @resource_singular %>.id}" do %>
+  <%%= render "form", <%= @resource_singular %>: @<%= @resource_singular %> %>
+<%% end %>

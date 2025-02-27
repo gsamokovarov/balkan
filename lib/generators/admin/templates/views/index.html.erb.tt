@@ -1,0 +1,12 @@
+<%%= render "section", title: "<%= @resource_plural.titleize %>", cta: -> {
+  admin_button(:primary, link: new_admin_<%= @resource_singular %>_path) { "New <%= @resource_singular.titleize %>" }
+} do %>
+  <%% if @<%= @resource_plural %>.any? %>
+    <%%= render "<%= @resource_plural %>", <%= @resource_plural %>: @<%= @resource_plural %> %>
+    <%%= admin_paginate @<%= @resource_plural %> %>
+  <%% else %>
+    <%%= render "empty_state" do %>
+      <%%= admin_button(:primary, link: new_admin_<%= @resource_singular %>_path) { "New <%= @resource_singular.titleize %>" } %>
+    <%% end %>
+  <%% end %>
+<%% end %>
