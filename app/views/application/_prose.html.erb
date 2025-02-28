@@ -1,5 +1,14 @@
 <%# locals: (variant: "xl", class: "text-black") %>
 
-<div class="prose-<%= variant %>  max-w-prose <%= binding.local_variable_get :class %>">
+<%
+  variant_class = {
+    "xl" => "prose-xl",
+    "lg" => "prose-lg",
+    "md" => "prose-md",
+    "sm" => "prose-sm",
+  }.fetch(variant) { precondition_failure("Invalid variant: #{variant}") }
+%>
+
+<div class="prose-<%= variant_class %> max-w-prose <%= binding.local_variable_get :class %>">
   <%= yield %>
 </div>
