@@ -4,11 +4,13 @@
   variant_class = {
     "xl" => "prose-xl",
     "lg" => "prose-lg",
-    "md" => "prose-md",
+    "md" => "prose",
     "sm" => "prose-sm",
-  }.fetch(variant) { precondition_failure("Invalid variant: #{variant}") }
+  }.with_indifferent_access.fetch(variant) do
+    precondition_failure "Invalid variant: #{variant}"
+  end
 %>
 
-<div class="prose-<%= variant_class %> max-w-prose <%= binding.local_variable_get :class %>">
+<div class="<%= variant_class %> max-w-prose <%= binding.local_variable_get :class %>">
   <%= yield %>
 </div>
