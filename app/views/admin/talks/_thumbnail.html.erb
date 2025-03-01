@@ -1,6 +1,6 @@
 <%# locals: (talk:, event:) %>
 
-<section class="relative w-[960px] h-[540px] p-16 flex bg-black text-white">
+<section class="relative w-[960px] h-[540px] p-16 flex bg-banitsa-50">
   <div class="relative w-1/2 flex flex-col justify-center gap-8">
     <%= render "application/header_logo" %>
     <h1 class="text-3xl sm:text-4xl font-extrabold text-banitsa-500 text-center"><%= talk.name %></h1>
@@ -18,7 +18,7 @@
     <div class="grid grid-cols-<%= talk.speakers.size %>">
       <% talk.speakers.each.with_index do |speaker, index| %>
         <div class="<%= card_rotation(index) %> rounded-md max-w-64">
-          <%= render "avatar_card", avatar: speaker.avatar, title: speaker.name, class: "text-white/70" %>
+          <%= render "avatar_card", avatar: speaker.avatar, title: speaker.name %>
         </div>
       <% end %>
     </div>
