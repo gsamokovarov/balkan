@@ -1,6 +1,19 @@
 class Admin::LineupMembersController < Admin::ApplicationController
   def index
     @lineup_members = scope event.lineup_members.includes(:talk, :speaker)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @lineup_members.map {
+          {
+            talk: it.talk ? { name: it.talk.name, description: it.talk.description } : nil,
+            speaker: it.speaker.name,
+            role: it.role,
+          }
+        }
+      end
+    end
   end
 
   def show
