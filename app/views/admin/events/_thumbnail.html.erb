@@ -1,45 +1,53 @@
 <%# locals: (event:, lineup_members: event.lineup_members.confirmed, show_details: false, grid_columns: 7) %>
 
+<%# Force tailwindcss to generate classes for the grid columns:
+  grid-cols-1 grid-cols-2 grid-cols-3 grid-cols-4 grid-cols-5 grid-cols-6
+  grid-cols-7 grid-cols-8 grid-cols-9 grid-cols-10 grid-cols-11 grid-cols-12 %>
+
 <%= turbo_frame_tag "thumbnail" do %>
-  <section class="relative w-[960px] h-[540px] p-16 flex flex-col gap-8 bg-banitsa-50 overflow-hidden">
-    <div>
-      <h1 class="text-4xl sm:text-5xl font-black">
-        <%== event.title %>
-      </h1>
-      <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-500">
-        <%== event.subtitle %>
+  <div data-controller="screenshot">
+    <section data-screenshot-target="element" class="relative w-[960px] h-[540px] p-16 flex flex-col gap-8 bg-banitsa-50 overflow-hidden">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-black">
+          <%== event.title %>
+        </h1>
+        <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-500">
+          <%== event.subtitle %>
+        </div>
       </div>
-    </div>
-    <div class="grid grid-cols-<%= grid_columns %> w-full mx-auto shrink relative">
-      <% lineup_members.each_with_index do |member, index| %>
-        <%= tag.div class: [card_rotation(index), "max-h-60"] do %>
-          <% if show_details %>
-            <%= render "avatar_card", avatar: member.speaker.avatar, title: member.speaker.name, subtitle: member.talk&.name || member.role %>
-          <% else %>
-            <%= render "avatar_card", avatar: member.speaker.avatar %>
+      <div class="grid grid-cols-<%= grid_columns %> w-full mx-auto shrink relative">
+        <% lineup_members.each_with_index do |member, index| %>
+          <%= tag.div class: [card_rotation(index), "max-h-60 relative"] do %>
+            <% if show_details %>
+              <%= render "avatar_card", avatar: member.speaker.avatar, title: member.speaker.name, subtitle: member.talk&.name || member.role %>
+            <% else %>
+              <%= render "avatar_card", avatar: member.speaker.avatar %>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-    </div>
-  </section>
-
-  <%= admin_form url: thumbnail_admin_event_path(event), automatic: true do |f| %>
-    <fieldset class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
-      <legend class="text-sm font-medium leading-6 text-gray-500">Lineup </legend>
-
-      <div class="grid sm:grid-cols-2 gap-6">
-        <% event.lineup_members.each do |member| %>
-          <%= f.check_box_input :member_ids,
-            label: member.speaker.name,
-            multiple: true,
-            checked: lineup_members.include?(member),
-            checked_value: member.id,
-            unchecked_value: nil %>
-        <% end %>
       </div>
-    </fieldset>
+    </section>
 
-    <%= f.number_input :grid_columns, value: grid_columns %>
-    <%= f.check_box_input :show_details, checked: show_details %>
-  <% end %>
+    <%= admin_form url: thumbnail_admin_event_path(event), automatic: true do |f| %>
+      <fieldset class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
+        <legend class="text-sm font-medium leading-6 text-gray-500">Lineup</legend>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          <% event.lineup_members.each do |member| %>
+            <%= f.check_box_input :member_ids,
+              label: member.speaker.name,
+              multiple: true,
+              checked: lineup_members.include?(member),
+              checked_value: member.id,
+              unchecked_value: nil %>
+          <% end %>
+        </div>
+      </fieldset>
+
+      <%= f.number_input :grid_columns, value: grid_columns %>
+      <%= f.check_box_input :show_details, checked: show_details %>
+    <% end %>
+
+    <%= admin_button(:primary, data: { action: "screenshot#capture" }) { "Screenshot" } %>
+  </div>
 <% end %>
