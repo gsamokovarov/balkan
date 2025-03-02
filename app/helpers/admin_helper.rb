@@ -74,12 +74,17 @@ module AdminHelper
     nil
   end
 
-  def admin_form(object, **options, &)
+  def admin_form(object = nil, automatic: false, **options, &)
     html_options = options[:html] || {}
+    if automatic
+      html_options["data-controller"] = "automatic-form"
+    else
+      html_options["data-turbo"] = false
+    end
 
     tag.div class: html_options.delete(:class) { "sm:max-w-sm" } do
-      options[:html] = { class: ["space-y-6"], "data-turbo": false, **html_options }
-      form_with model: object, builder: Admin::FormHelper::Builder, **options, &
+      options[:html] = { class: ["space-y-6"], **html_options }
+      form_with model: object || false, builder: Admin::FormHelper::Builder, **options, &
     end
   end
 
