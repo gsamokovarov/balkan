@@ -9,7 +9,7 @@ module Admin::FormHelper
       valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600",
     }
 
-    def check_box_input(method, label: method, **, &addendum)
+    def check_box_input(method, label: method, checked_value: "1", unchecked_value: "0", **, &addendum)
       field_classes = [
         "rounded-md border-0 p-3 text-indigo-600 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset",
         "sm:text-sm sm:leading-6",
@@ -17,7 +17,7 @@ module Admin::FormHelper
       ]
 
       input_for method, label:, addendum: do
-        @template.concat check_box(method, class: field_classes, **)
+        @template.concat check_box(method, { class: field_classes, ** }, checked_value, unchecked_value)
       end
     end
 
@@ -113,7 +113,7 @@ module Admin::FormHelper
     end
 
     def submit(value = nil, **)
-      value ||= object.persisted? ? "Update" : "Save"
+      value ||= object&.persisted? ? "Update" : "Save"
 
       @template.admin_button(:primary, type: :submit) { value }
     end

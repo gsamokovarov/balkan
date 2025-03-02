@@ -36,6 +36,20 @@ class Admin::EventsController < Admin::ApplicationController
     end
   end
 
+  def thumbnail
+    @event = Event.find params[:id]
+    @selected_member_ids = Array(params[:member_ids])
+    @show_details = params[:show_details] == "1"
+    @grid_columns = params[:grid_columns]
+
+    @lineup_members =
+      if @selected_member_ids.any?
+        @event.lineup_members.confirmed.where id: @selected_member_ids
+      else
+        @event.lineup_members.confirmed
+      end
+  end
+
   private
 
   def event_params

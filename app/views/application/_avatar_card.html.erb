@@ -6,7 +6,7 @@
     <% when String, -> { ActiveStorage::Attached::One === it && it.attached? } %>
       <%= image_tag try_variant(avatar, resize_to_limit: [1000, 1000]),
         alt: title ? "#{title} avatar" : nil,
-        class: "w-full aspect-square object-cover",
+        class: "w-full h-full aspect-square object-cover",
         lazy: true %>
     <% else %>
       <div class="w-full aspect-square">

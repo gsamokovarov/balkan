@@ -32,6 +32,10 @@ Rails.application.routes.draw do
       end
     end
     resources :events, only: [:index, :show, :new, :create, :edit, :update] do
+      member do
+        post :thumbnail
+      end
+
       resources :tickets, only: [:index]
       resources :ticket_types, only: [:index, :show, :new, :create, :edit, :update]
       resources :embeddings, only: [:index, :show, :new, :create, :edit, :update]
