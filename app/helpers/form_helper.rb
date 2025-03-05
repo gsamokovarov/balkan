@@ -10,47 +10,49 @@ module FormHelper
       "focus:border-black focus:outline-banitsa-600",
     ]
 
-    def text_input(method, label: method, required: false, **)
-      input_for method, label:, required: do
+    def text_input(method, label: method, required: false, **, &addendum)
+      input_for method, label:, required:, addendum: do
         text_field method, class: field_classes, **
       end
     end
 
-    def email_input(method, label: method, required: false, **)
-      input_for method, label:, required: do
+    def email_input(method, label: method, required: false, **, &addendum)
+      input_for method, label:, required:, addendum: do
         email_field method, class: field_classes, **
       end
     end
 
-    def number_input(method, label: method, required: false, **)
-      input_for method, label:, required: do
+    def number_input(method, label: method, required: false, **, &addendum)
+      input_for method, label:, required:, addendum: do
         number_field method, class: field_classes, **
       end
     end
 
-    def select_input(method, choices, label: method, required: false, **options)
-      input_for method, label:, required: do
+    def select_input(method, choices, label: method, required: false, **options, &addendum)
+      input_for method, label:, required:, addendum: do
         select method, choices, options, class: field_classes
       end
     end
 
-    def check_box_input(method, label: method, **)
-      @template.tag.div class: "flex gap-6" do
-        @template.tag.label class: "flex flex-col gap-3 cursor-pointer" do
-          @template.tag.span(label, class: "text-xl") + check_box(method, { class: CHECKBOX_CLASSES }, **)
-        end
+    def check_box_input(method, label: method, required: false, **, &addendum)
+      input_for method, label:, required:, addendum:, class: "cursor-pointer" do
+        check_box method, { class: CHECKBOX_CLASSES }, **
       end
+    end
+
+    def submit(value = nil, **, &)
+      button value, type: "submit", class: "btn-primary w-fit", &
     end
 
     def captcha = @template.h_captcha
 
     private
 
-    def input_for(method, label: method, required: false, &block)
-      @template.tag.label label, class: "flex flex-col gap-3 sm:max-w-sm" do
-        label_text = "#{label.to_s.humanize}#{required ? ' *' : ''}"
-        @template.tag.span(label_text, class: "text-xl") +
-          @template.capture(&block)
+    def input_for(method, label: method, required: false, addendum: nil, class: nil, &)
+      @template.tag.label label, class: ["flex flex-col space-y-3 sm:max-w-sm", binding.local_variable_get(:class)] do
+        @template.concat @template.tag.span("#{label.to_s.humanize}#{' *' if required}", class: "text-xl")
+        @template.concat @template.tag.div(&)
+        @template.concat @template.tag.div(&addendum) if addendum
       end
     end
 

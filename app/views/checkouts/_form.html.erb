@@ -5,10 +5,7 @@
 ) do |f| %>
   <div data-ticket-target="tickets" class="flex flex-wrap gap-6">
     <%= f.fields_for :tickets, index: nil do |fields| %>
-      <div
-        data-ticket-target="template"
-        class="relative border-2 border-black rounded-md flex flex-col gap-6 p-4 w-full sm:w-64"
-      >
+      <div data-ticket-target="template" class="relative border-2 border-black rounded-md flex flex-col gap-6 p-4 w-full sm:w-64">
         <button type="button" data-action="ticket#remove" class="absolute right-4 top-4 invisible">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -23,19 +20,12 @@
 
         <%= fields.text_input :name, label: "Attendee name", required: true %>
         <%= fields.email_input :email, label: "Attendee email", required: true %>
-        <%= fields.select_input :shirt_size, 
-          %w[XS S M L XL XXL], 
-          label: "T-shirt size", 
-          required: true, 
-          selected: "M", 
-          prompt: true,
-          type: :text
-        %>
+        <%= fields.select_input :shirt_size, %w[XS S M L XL XXL], label: "T-shirt size", required: true, selected: "M" %>
       </div>
     <% end %>
   </div>
 
-  <div class="flex flex-wrap gap-6">
+  <div class="flex flex-wrap gap-3">
     <button type="button" class="btn-secondary shrink-0" data-action="ticket#add">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -59,36 +49,33 @@
 
   <%= f.check_box_input :invoice, label: "Do you need an invoice?" %>
 
-  <div class="flex flex-col gap-3">
-    <%= f.text_input :discount_code, label: "Discount code", value: params[:discount_code] %>
+  <%= f.text_input :discount_code, label: "Discount code", value: params[:discount_code] do %>
     <p class="text-lg text-gray-500">
       Have you checked our social media?
     </p>
-  </div>
+  <% end %>
 
   <%= f.hidden_field :ticket_type_id, value: @ticket_type.id %>
 
   <%= f.captcha %>
 
-  <div class="flex flex-col gap-6">
-    <%= f.button type: "submit", class: "btn-primary w-fit" do %>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 256 256"
-        class="w-5 h-5 text-current"
-      >
-        <g color="currentColor" weight="regular">
-        <path
-          d="M24,167.2a7.9,7.9,0,0,1,6.4-7.8,32.1,32.1,0,0,0,0-62.8A7.9,7.9,0,0,1,24,88.8V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V88.8a7.9,7.9,0,0,1-6.4,7.8,32.1,32.1,0,0,0,0,62.8,7.9,7.9,0,0,1,6.4,7.8V192a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8Z"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="16"
-          ></path>
-        </g>
-      </svg>
-      <span data-ticket-target="buyButtonText">Pay <%= @ticket_type.price %></span>
-    <% end %>
-  </div>
+  <%= f.submit do %>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      class="w-5 h-5 text-current"
+    >
+      <g color="currentColor" weight="regular">
+      <path
+        d="M24,167.2a7.9,7.9,0,0,1,6.4-7.8,32.1,32.1,0,0,0,0-62.8A7.9,7.9,0,0,1,24,88.8V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V88.8a7.9,7.9,0,0,1-6.4,7.8,32.1,32.1,0,0,0,0,62.8,7.9,7.9,0,0,1,6.4,7.8V192a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"
+        ></path>
+      </g>
+    </svg>
+    <span data-ticket-target="buyButtonText">Pay <%= @ticket_type.price %></span>
+  <% end %>
 <% end %>
