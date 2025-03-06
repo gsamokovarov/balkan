@@ -36,7 +36,7 @@ module Checkout
       mode: "payment",
     }
 
-    promotion_code = Stripe::PromotionCode.list(code: discount_code).data.first&.id if discount_code
+    promotion_code = Stripe::PromotionCode.list(code: discount_code).data.first&.id if discount_code.present?
     if promotion_code
       checkout_params[:discounts] = [promotion_code:]
     else
