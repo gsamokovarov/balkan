@@ -19,7 +19,5 @@ class SubscribersController < ApplicationController
 
   private
 
-  def subscriber_params
-    params.require(:subscriber).permit(:event_id, :email)
-  end
+  def subscriber_params = params.require(:subscriber).permit(:event_id, :email)
 end
