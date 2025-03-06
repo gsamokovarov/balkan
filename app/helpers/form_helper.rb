@@ -12,31 +12,31 @@ module FormHelper
 
     def text_input(method, label: method, required: false, **, &addendum)
       input_for method, label:, required:, addendum: do
-        text_field method, class: field_classes, **
+        text_field method, class: field_classes, required:, **
       end
     end
 
     def email_input(method, label: method, required: false, **, &addendum)
       input_for method, label:, required:, addendum: do
-        email_field method, class: field_classes, **
+        email_field method, class: field_classes, required:, **
       end
     end
 
     def number_input(method, label: method, required: false, **, &addendum)
       input_for method, label:, required:, addendum: do
-        number_field method, class: field_classes, **
+        number_field method, class: field_classes, required:, **
       end
     end
 
     def select_input(method, choices, label: method, required: false, **options, &addendum)
       input_for method, label:, required:, addendum: do
-        select method, choices, options, class: field_classes
+        select method, choices, options, required:, class: field_classes
       end
     end
 
     def check_box_input(method, label: method, required: false, **, &addendum)
       input_for method, label:, required:, addendum:, class: "cursor-pointer" do
-        check_box method, { class: CHECKBOX_CLASSES }, **
+        check_box method, { required:, class: CHECKBOX_CLASSES }, **
       end
     end
 
