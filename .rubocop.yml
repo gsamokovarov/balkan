@@ -121,6 +121,9 @@ Style/HashAsLastArrayItem:
 Style/DocumentDynamicEvalDefinition:
   Enabled: false
 
+Style/MultilineBlockChain:
+  Enabled: false
+
 # Let's not enforce arbitrary metrics.
 Metrics/MethodLength:
   Enabled: false
