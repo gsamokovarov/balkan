@@ -22,13 +22,13 @@ module Webhooks
         else
           precondition_failure "Unhandled event type: #{event.type}"
         end
-      rescue ActiveRecord::RecordNotFound => e
-        Honeybadger.event "Stripe order not found", message: e.message, payload:
-      rescue JSON::ParserError => e
-        render json: { error: { message: e.message } }, status: :bad_request
+      rescue ActiveRecord::RecordNotFound => err
+        Honeybadger.event "Stripe order not found", message: err.message, payload:
+      rescue JSON::ParserError => err
+        render json: { error: { message: err.message } }, status: :bad_request
         return
-      rescue Stripe::SignatureVerificationError => e
-        render json: { error: { message: e.message, extra: "Signature verification failed" } },
+      rescue Stripe::SignatureVerificationError => err
+        render json: { error: { message: err.message, extra: "Signature verification failed" } },
                status: :bad_request
         return
       end

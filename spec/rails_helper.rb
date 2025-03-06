@@ -12,8 +12,8 @@ abort "Cannot run tests in production mode" if Rails.env.production?
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
-rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
+rescue ActiveRecord::PendingMigrationError => err
+  abort err.to_s.strip
 end
 
 Capybara.register_driver :selenium_chrome do |app|
