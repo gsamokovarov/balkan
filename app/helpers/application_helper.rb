@@ -21,4 +21,13 @@ module ApplicationHelper
   def title(name) = name.presence && content_for(:title) { name }
   def section_highlighter(initial: true) = SectionHighlighter.new initial
   def try_variant(att, **) = att.blob.content_type == "image/svg+xml" ? att : att.variant(**)
+
+  def marketing_form(scope: nil, model: false, url: nil, **options, &)
+    html_options = options[:html] || {}
+
+    tag.div class: html_options.delete(:class) do
+      options[:html] = { class: ["space-y-10"], **html_options }
+      form_with(scope:, model:, url:, builder: FormHelper::Builder, **options, &)
+    end
+  end
 end
