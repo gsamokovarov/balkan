@@ -1,6 +1,6 @@
 module HCaptchaHelper
   def h_captcha
-    return unless Settings.h_captcha_site_key
+    return "".html_safe unless Settings.h_captcha_site_key
 
     capture do
       concat tag.div(class: "h-captcha", data: { sitekey: Settings.h_captcha_site_key, controller: "h-captcha" })
