@@ -8,7 +8,7 @@ class SubscribersController < ApplicationController
       @subscriber = Subscriber.create subscriber_params
       SubscriberMailer.welcome_email(@subscriber).deliver_later if @subscriber.valid?
     else
-      head :bad_request
+      redirect_back_or_to root_path, alert: "Verify you're not a robot"
     end
   end
 

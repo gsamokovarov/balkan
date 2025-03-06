@@ -44,7 +44,12 @@ module FormHelper
       button value, type: "submit", class: "btn-primary w-fit", &
     end
 
-    def captcha = @template.h_captcha
+    def captcha
+      @template.h_captcha +
+        if @template.flash[:alert]
+          @template.render("alert", class: "sm:max-w-sm") { @template.flash[:alert] }
+        end
+    end
 
     private
 
