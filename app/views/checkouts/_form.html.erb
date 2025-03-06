@@ -59,6 +59,12 @@
 
   <%= f.captcha %>
 
+  <% flash.each do |_, message| %>
+    <%= render "alert", class: "sm:max-w-sm" do %>
+      <%= message %>
+    <% end %>
+  <% end %>
+
   <%= f.submit do %>
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,8 @@
-<div class="rounded-md bg-banitsa-500 p-4">
+<%# locals: (class: nil) %>
+
+<div class="rounded-md bg-banitsa-500 p-4 <%= binding.local_variable_get(:class) %>">
   <div>
-    <%= render "prose", variant: :lg do %>
+    <%= render "prose", variant: :lg, class: "text-white" do %>
       <%= yield %>
     <% end %>
   </div>

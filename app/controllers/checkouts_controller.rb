@@ -7,7 +7,7 @@ class CheckoutsController < ApplicationController
     if HCaptcha.valid? params
       redirect_to Checkout.create_link(checkout_params), allow_other_host: true
     else
-      head :bad_request
+      redirect_back_or_to checkouts_path, alert: "Verify you're not a robot"
     end
   end
 
