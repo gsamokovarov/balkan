@@ -28,20 +28,22 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def report
+    date_range = Date.parse("#{params[:month]}-01").all_month
+
     orders =
       Order.completed
         .includes(:invoice, tickets: :ticket_type)
-        .where(created_at: Date.current.prev_month.beginning_of_month..)
+        .where(completed_at: date_range)
         .order("completed_at DESC")
 
     respond_to do |format|
       format.csv do
         report = Order::Reporting.export_to_csv orders
-        send_data report, filename: "orders-#{Date.current.iso8601}.csv", type: :csv
+        send_data report, filename: "orders-#{file_date}.csv", type: :csv
       end
       format.tar do
         report = Order::Reporting.export_invoices_to_tar orders
-        send_data report, filename: "invoices-#{Date.current.iso8601}.tar", type: :tar
+        send_data report, filename: "invoices-#{file_date}.tar", type: :tar
       end
     end
   end

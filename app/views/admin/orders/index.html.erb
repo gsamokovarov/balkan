@@ -1,9 +1,23 @@
 <%= render "section", title: "Order history", cta: -> {
-  admin_button_group(
-    {name: "CSV Export", link: report_admin_orders_path(format: :csv)},
-    {name: "Invoice Export", link: report_admin_orders_path(format: :tar)},
-  )
+  admin_button(:primary, onclick: "export_dialog.showModal()") { "Export" }
 } do %>
   <%= render "orders", orders: @orders %>
   <%= admin_paginate @orders %>
+<% end %>
+
+<%= admin_modal :export_dialog, "Export" do %>
+  <%= admin_form url: report_admin_orders_path, method: :get do |f| %>
+    <%= f.month_input "month", value: Date.current.strftime('%Y-%m'), required: true %>
+
+    <fieldset class="space-y-2">
+      <legend class="block text-sm font-medium leading-6 text-gray-900">Export Format</legend>
+      <%= f.radio_button_input "format", "csv", label: "Order details (CSV)", checked: true %>
+      <%= f.radio_button_input "format", "tar", label: "Invoice archive (TAR)" %>
+    </fieldset>
+
+    <div class="mt-6 flex justify-end gap-3">
+      <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>
+      <%= f.submit "Export" %>
+    </div>
+  <% end %>
 <% end %>
