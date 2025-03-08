@@ -57,6 +57,12 @@ module Admin::FormHelper
       end
     end
 
+    def month_input(method, label: method, **, &addendum)
+      input_for method, class:, label:, addendum: do
+        @template.concat month_field(method, class: field_classes(method), **)
+      end
+    end
+
     def time_input(method, label: method, **, &addendum)
       input_for method, label:, addendum: do
         @template.concat time_field(method, class: field_classes(method), **)
@@ -84,6 +90,21 @@ module Admin::FormHelper
 
       input_for method, label: options.delete(:label) || method, addendum: do
         @template.concat select(method, enum_choices, options, class: field_classes(method), **html_options)
+      end
+    end
+
+    def radio_button_input(method, value, label: value.to_s.humanize, checked: false, class: nil, **, &addendum)
+      field_classes = [
+        "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500",
+        object_errors(method).any? ? FIELD_CLASSES[:error] : FIELD_CLASSES[:valid],
+      ]
+
+      @template.tag.div class: ["flex items-center", binding.local_variable_get(:class)] do
+        @template.tag.label class: "flex items-center text-sm font-medium text-gray-700" do
+          @template.concat radio_button(method, value, { class: field_classes, checked:, ** })
+          @template.concat @template.tag.span(class: "ml-3") { label }
+          @template.concat @template.tag.div(&addendum) if addendum
+        end
       end
     end
 
