@@ -39,11 +39,11 @@ class Admin::OrdersController < Admin::ApplicationController
     respond_to do |format|
       format.csv do
         report = Order::Reporting.export_to_csv orders
-        send_data report, filename: "orders-#{file_date}.csv", type: :csv
+        send_data report, filename: "orders-#{params[:month]}.csv", type: :csv
       end
       format.tar do
         report = Order::Reporting.export_invoices_to_tar orders
-        send_data report, filename: "invoices-#{file_date}.tar", type: :tar
+        send_data report, filename: "invoices-#{params[:month]}.tar", type: :tar
       end
     end
   end
