@@ -136,7 +136,7 @@ module Admin::FormHelper
     def submit(value = nil, **)
       value ||= object&.persisted? ? "Update" : "Save"
 
-      @template.admin_button(:primary, type: :submit) { value }
+      @template.admin_button(:primary, type: :submit, **) { value }
     end
 
     private
