@@ -95,4 +95,8 @@ module AdminHelper
   def admin_paginate(scope)
     render "admin/application/pagination", scope:, current_page: [params[:page].to_i, 1].max
   end
+
+  def admin_modal(id, title, &)
+    render "admin/application/modal", id:, title:, &
+  end
 end
