@@ -7,6 +7,7 @@
     <%= f.date_input :date, required: true %>
     <%= f.text_input :title, required: true %>
     <%= f.text_area_input :content, required: true, data: { markdown_preview_target: "source" } %>
+    <%= f.file_input :ogp_image %>
     <%= f.check_box_input :published %>
 
     <%= f.submit %>

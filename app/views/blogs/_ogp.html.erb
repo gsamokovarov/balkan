@@ -1,0 +1,19 @@
+<%# locals: (blog_post:) %>
+
+<% content_for :ogp do %>
+  <meta property="og:title" content="<%= blog_post.title %> - <%= Current.event.name %>">
+  <meta property="og:site_name" content="<%= Current.event.name %> Blog">
+  <meta property="og:url" content="<%= blog_url(blog_post) %>">
+  <meta property="og:description" content="<%= truncate(Markup.render_plain(blog_post.content), length: 160) %>">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="<%= blog_post.date.iso8601 %>">
+  <meta property="article:author" content="<%= blog_post.author.name %>">
+  <meta property="og:image" content="<%= blog_post.ogp_image.attached? ? url_for(blog_post.ogp_image) : (blog_post.author.avatar.attached? ? url_for(blog_post.author.avatar) : image_url("ogp_image.png")) %>">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@balkanruby">
+  <meta name="twitter:creator" content="@gsamokovarov">
+  <meta name="twitter:title" content="<%= blog_post.title %> - <%= Current.event.name %>">
+  <meta name="twitter:description" content="<%= truncate(Markup.render_plain(blog_post.content), length: 160) %>">
+  <meta name="twitter:image" content="<%= blog_post.ogp_image.attached? ? url_for(blog_post.ogp_image) : (blog_post.author.avatar.attached? ? url_for(blog_post.author.avatar) : image_url("ogp_image.png")) %>">
+<% end %>

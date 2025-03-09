@@ -55,6 +55,6 @@ class Admin::EventsController < Admin::ApplicationController
   def event_params
     params.require(:event).permit(:name, :host, :start_date, :end_date, :venue_id, :title, :subtitle, :contact_email,
                                   :description, :speaker_applications_end_date, :speaker_applications_url, :twitter_url,
-                                  :facebook_url, :youtube_url, :invoice_sequence_id, :logo, hero_images: [])
+                                  :facebook_url, :youtube_url, :invoice_sequence_id, :logo, :ogp_image, hero_images: [])
   end
 end

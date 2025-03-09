@@ -1,4 +1,5 @@
 <% title @talk.name %>
+<%= render "talks/ogp", talk: @talk %>
 
 <%= render "section", title: @talk.name, title_element: "h1", highlight: true do %>
   <% @talk.speakers.each do |speaker| %>

@@ -1,0 +1,17 @@
+<%# locals: (event: Current.event) %>
+
+<% content_for :ogp do %>
+  <meta property="og:title" content="<%= event.title || event.name %>">
+  <meta property="og:site_name" content="<%= event.name %> – <%= event.start_date.strftime("%B %-d") %>-<%= event.end_date.strftime("%-d, %Y") %>">
+  <meta property="og:url" content="<%= root_url %>">
+  <meta property="og:description" content="<%= event.description || "#{event.name} is happening on #{event.start_date.strftime("%B %-d")}-#{event.end_date.strftime("%-d, %Y")} in Sofia, Bulgaria" %>">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="<%= event.ogp_image.attached? ? url_for(event.ogp_image) : image_url("ogp_image.png") %>">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@balkanruby">
+  <meta name="twitter:creator" content="@gsamokovarov">
+  <meta name="twitter:title" content="<%= event.title || event.name %>">
+  <meta name="twitter:description" content="<%= event.description || "#{event.name} is happening on #{event.start_date.strftime("%B %-d")}-#{event.end_date.strftime("%-d, %Y")} in Sofia, Bulgaria" %>">
+  <meta name="twitter:image" content="<%= event.ogp_image.attached? ? url_for(event.ogp_image) : image_url("ogp_image.png") %>">
+<% end %>
