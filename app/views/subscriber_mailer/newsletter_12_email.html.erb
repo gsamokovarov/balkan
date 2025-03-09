@@ -1,0 +1,68 @@
+<% event_countdown = FinalCountdown.until Date.new(2025, 4, 25) %>
+
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    You're receiving this email because you signed up for the Balkan Ruby
+    newsletter or purchased a ticket. I'm Genadi, the organizer, and I'm
+    excited to unveil our complete speaker lineup for <b>Balkan Ruby 2025</b>!
+  </p>
+
+  <p class="pb-2">
+    This year, we're all about <strong>the long term</strong> – exploring how Ruby empowers 
+    sustainable codebases, enduring careers, and thriving communities. We've assembled an 
+    exceptional group of speakers who embody this theme:
+  </p>
+
+  <p class="pb-2">
+    <strong>Maintaining & Evolving:</strong><br>
+    • <b>Julia López</b> will share practical lessons from maintaining a 20-year-old Rails monolith at Harvest<br>
+    • <b>Denitsa Belogusheva</b> brings insights from a 16-year project journey<br>
+    • <b>Jeremy Smith</b> tackles managing transitional states in long-lived applications
+  </p>
+
+  <p class="pb-2">
+    <strong>Open Source Sustainability:</strong><br>
+    • <b>Jasveen Sandral</b> dives into building for forever in Ruby Core<br>
+    • <b>Martin Verzilli</b> reflects on 13 years nurturing the Crystal programming language<br>
+    • <b>Andrey Sitnik</b> (PostCSS creator!) delivers a vision for privacy-first architecture
+  </p>
+
+  <p class="pb-2">
+    <strong>Growing & Adapting:</strong><br>
+    • <b>Paweł Strzałkowski</b> explores why creativity remains essential after 20+ years<br>
+    • <b>Michał Łęcicki</b> discusses how handling mistakes shapes long-term success<br>
+    • <b>Bozhidar Batsov</b> celebrates Ruby's enduring influence and timeless principles<br>
+    • <b>Yaroslav Shmarov</b> reveals practical strategies for staying competitive throughout your career
+  </p>
+
+  <p class="pb-2">
+    <strong>Building Better:</strong><br>
+    • <b>Stanislav Vasilev</b> and <b>Franz Fischbach</b> introduce CodeTracer, a time-traveling Ruby debugger<br>
+    • Plus a special talk from <b>Stefan Kanev</b> adding more long-term perspective!
+  </p>
+
+  <p class="pb-2">
+    All expertly guided by our returning MC, <b>Tsvetelina Borisova</b>, who did such a fantastic job
+    keeping the energy high last year!
+  </p>
+
+  <p class="pb-2">
+    Remember, Balkan Ruby isn't just about the code or the jug of Rakia (we have changed!) – it's about 
+    the community we've built together. Join us to meet the faces behind your favorite gems, share survival 
+    stories, and find inspiration for your next decade of Ruby development.
+  </p>
+
+  <p class="pb-2">
+    Mark your calendars! <%= link_to "Balkan Ruby 2025", root_url, class: "link-primary" %> will take
+    place on April 25–26 in Sofia, Bulgaria – that's just <b><%= event_countdown.days %></b> days away! 
+    Regular tickets are now available at the same low early bird prices, and all discount codes we've shared on 
+    our social media are still valid. <%= link_to "Grab your ticket", checkouts_url, class: "link-primary" %>
+    today and join your Ruby family in Sofia!
+  </p>
+
+  <%= render "closer" %>
+</div>
