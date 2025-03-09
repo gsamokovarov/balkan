@@ -15,7 +15,7 @@
         </svg>
       </div>
     </div>
-    <div class="absolute top-1/4 right-0 w-1/2 flex flex-col justify-center items-center">
+    <div class="absolute right-0 w-1/2 flex flex-col justify-center items-center">
       <div class="grid grid-cols-<%= talk.speakers.size %>">
         <% talk.speakers.each.with_index do |speaker, index| %>
           <div class="<%= card_rotation(index) %> rounded-md max-w-64">
