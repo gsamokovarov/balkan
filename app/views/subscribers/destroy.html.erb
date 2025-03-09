@@ -2,7 +2,7 @@
 
 <%= render "section", title: "Newsletter", title_element: "h1", highlight: true do %>
   <%= turbo_frame_tag "newsletter" do %>
-    <%= render "prose", class: "my-10" do
+    <%= render "prose", class: "my-10" do %>
       <p>
         You have been unsubscribed from our newsletter. You will no longer receive
         updates on <span class="text-banitsa-600"><%= @subscriber.email %></span>.
