@@ -2,3 +2,6 @@
   <%= render "form", blog_post: @blog_post %>
 <% end %>
 
+<%= render "section", title: "Thumbnail" do %>
+  <%= render "thumbnail", blog_post: @blog_post %>
+<% end %>

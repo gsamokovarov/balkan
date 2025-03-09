@@ -30,7 +30,7 @@
   <% if title %>
     <div class="mt-4 text-center">
       <h2 class="sm:text-lg font-medium leading-none"><%= title %></h2>
-      <% if subtitle %>
+      <% if subtitle.present? %>
         <p class="font-medium text-gray-500"><%= subtitle %></p>
       <% end %>
     </div>
