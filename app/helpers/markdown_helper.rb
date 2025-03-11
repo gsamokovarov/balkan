@@ -12,6 +12,7 @@ module MarkdownHelper
     class PlainTextRenderer < Redcarpet::Render::StripDown
       def paragraph(text) = "#{text}\n\n"
       def header(text, _header_level) = "#{text}\n\n"
+      def link(_link, _title, content) = content
     end
 
     class HTMLRenderer < Redcarpet::Render::HTML
@@ -36,4 +37,5 @@ module MarkdownHelper
   end
 
   def render_markdown(...) = Markup.render_html(...).html_safe
+  def render_plain(...) = Markup.render_plain(...)
 end
