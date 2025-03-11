@@ -24,16 +24,6 @@ module SponsorshipProspectus
       update(&)
     end
 
-    def fit_text(string, width:)
-      box = Prawn::Text::Box.new string,
-                                 document:,
-                                 width:,
-                                 at: [bounds.left, cursor],
-                                 overflow: :shrink_to_fit
-      box.render
-      move_down box.height
-    end
-
     def draw_table_header(headers, col_widths)
       header_height = 30
       header_y = cursor
