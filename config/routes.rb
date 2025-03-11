@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   root "home#show"
 
-  resources :sponsors, only: [:new, :index]
+  resources :sponsors, only: [:new, :index] do
+    collection do
+      get :prospectus
+    end
+  end
   resources :tickets, only: [:show]
   resources :speakers, only: [:index]
   resources :talks, only: [:show]
