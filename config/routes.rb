@@ -40,7 +40,11 @@ Rails.application.routes.draw do
         post :thumbnail
       end
 
-      resources :tickets, only: [:index]
+      resources :tickets, only: [:index] do
+        collection do
+          post :giveaway
+        end
+      end
       resources :ticket_types, only: [:index, :show, :new, :create, :edit, :update]
       resources :embeddings, only: [:index, :show, :new, :create, :edit, :update]
       resources :lineup_members, only: [:index, :show, :new, :create, :edit, :update]
