@@ -1,4 +1,5 @@
 class Admin::LoginsController < Admin::ApplicationController
+  skip_before_action :set_current
   allow_unauthenticated_access only: [:show, :create]
 
   layout -> { turbo_frame_request? ? "turbo_rails/frame" : "admin/login" }

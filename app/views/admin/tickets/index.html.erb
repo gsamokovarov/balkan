@@ -1,4 +1,35 @@
-<%= render "section", title: "Tickets" do %>
+<%= render "section", title: "Tickets", cta: -> {
+  admin_button(:primary, onclick: "giveaway_dialog.showModal()") { "Give Free Tickets" }
+} do %>
   <%= render "tickets", tickets: @tickets %>
   <%= admin_paginate @tickets %>
+<% end %>
+
+<%= admin_modal :giveaway_dialog, "Give Free Tickets" do %>
+  <%= admin_form scope: :giveaway, url: giveaway_admin_event_tickets_path, method: :post do |f| %>
+    <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
+      <legend class="text-sm font-medium leading-6 text-gray-900">Tickets</legend>
+
+      <div data-appendable-target="target" class="space-y-4">
+        <%= f.fields_for :tickets, index: "" do |ticket_form| %>
+          <%= render "ticket_form", form: ticket_form, removable: false %>
+        <% end %>
+      </div>
+
+      <template data-appendable-target="template">
+        <%= f.fields_for :tickets, index: "" do |ticket_form| %>
+          <%= render "ticket_form", form: ticket_form %>
+        <% end %>
+      </template>
+
+      <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add Ticket" } %>
+    </fieldset>
+
+    <%= f.text_area_input :reason, placeholder: "Why are these tickets being given away?" %>
+
+    <div class="mt-6 flex justify-end gap-3">
+      <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>
+      <%= f.submit "Create Tickets" %>
+    </div>
+  <% end %>
 <% end %>

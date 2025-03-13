@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     Current.host = request.host
     Current.event =
       Event.with_attached_hero_images.includes(:ticket_types, blog_posts: :author).find_by!(
-        if Rails.env.development?
+        if Rails.env.local?
           { name: Settings.development_event }
         else
           { host: request.host }
