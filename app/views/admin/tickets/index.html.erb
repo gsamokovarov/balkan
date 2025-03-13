@@ -25,7 +25,7 @@
       <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add Ticket" } %>
     </fieldset>
 
-    <%= f.text_area_input :reason, label: "Reason for giveaway", placeholder: "Why are these tickets being given away?" %>
+    <%= f.text_area_input :reason, placeholder: "Why are these tickets being given away?" %>
 
     <div class="mt-6 flex justify-end gap-3">
       <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>

@@ -5,7 +5,7 @@ class Admin::TicketsController < Admin::ApplicationController
 
   def giveaway
     tickets = giveaway_params[:tickets]
-    reason = giveaway_params[:reason] || "Giveaway"
+    reason = giveaway_params[:reason].presence || "Giveaway"
 
     Giveaway.create_free_tickets(event, tickets, reason:)
 
