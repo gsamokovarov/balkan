@@ -1,11 +1,11 @@
 <%= render "section", title: "Tickets", cta: -> {
-  admin_button(:primary, onclick: "giveaway_dialog.showModal()") { "Give Free Tickets" }
+  admin_button(:primary, onclick: "giveaway_dialog.showModal()") { "Giveaway" }
 } do %>
   <%= render "tickets", tickets: @tickets %>
   <%= admin_paginate @tickets %>
 <% end %>
 
-<%= admin_modal :giveaway_dialog, "Give Free Tickets" do %>
+<%= admin_modal :giveaway_dialog, "Giveaway" do %>
   <%= admin_form scope: :giveaway, url: giveaway_admin_event_tickets_path, method: :post do |f| %>
     <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
       <legend class="text-sm font-medium leading-6 text-gray-900">Tickets</legend>

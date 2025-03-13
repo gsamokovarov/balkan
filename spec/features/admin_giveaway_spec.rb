@@ -9,7 +9,7 @@ RSpec.case "Admin Giveaway", type: :feature do
 
     visit admin_event_tickets_path(event)
 
-    click_button "Give Free Tickets"
+    click_button "Giveaway"
 
     within "#giveaway_dialog" do
       fill_in "Name", with: "Jane Doe"
@@ -43,7 +43,7 @@ RSpec.case "Admin Giveaway", type: :feature do
 
     visit admin_event_tickets_path(event)
 
-    click_button "Give Free Tickets"
+    click_button "Giveaway"
 
     within "#giveaway_dialog" do
       fill_in "Name", with: "Jane Doe"
@@ -101,7 +101,7 @@ RSpec.case "Admin Giveaway", type: :feature do
 
     visit admin_event_tickets_path(event)
 
-    click_button "Give Free Tickets"
+    click_button "Giveaway"
 
     within "#giveaway_dialog" do
       fill_in "Name", with: "Jane Doe"
@@ -152,7 +152,7 @@ RSpec.case "Admin Giveaway", type: :feature do
 
     visit admin_event_tickets_path(event)
 
-    click_button "Give Free Tickets"
+    click_button "Giveaway"
 
     within "#giveaway_dialog" do
       fill_in "Name", with: "Jane Doe"
@@ -176,7 +176,7 @@ RSpec.case "Admin Giveaway", type: :feature do
 
     visit admin_event_tickets_path(event)
 
-    click_button "Give Free Tickets"
+    click_button "Giveaway"
 
     within "#giveaway_dialog" do
       click_button "Create Tickets"
@@ -194,7 +194,7 @@ RSpec.case "Admin Giveaway", type: :feature do
 
     visit admin_event_tickets_path(event)
 
-    click_button "Give Free Tickets"
+    click_button "Giveaway"
 
     within "#giveaway_dialog" do
       fill_in "Name", with: "Jane Doe"
