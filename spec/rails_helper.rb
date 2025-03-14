@@ -26,6 +26,7 @@ Capybara.register_driver :selenium_chrome do |app|
 end
 
 Capybara.javascript_driver = :selenium_chrome
+Capybara.server = :puma, { Silent: true }
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
