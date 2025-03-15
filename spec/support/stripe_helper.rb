@@ -1,4 +1,4 @@
-module SpecSupport
+module Support
   module StripeHelper
     def stub_stripe_checkout(expected_line_items, session_id:, session_url:, promotion_code: "")
       stub(Stripe::Checkout::Session).to receive(:create)

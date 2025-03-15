@@ -8,6 +8,8 @@ require "rspec/rails"
 require "rspec/xunit"
 require "spec_helper"
 
+Dir[Rails.root.join("spec/support/**/*.rb")].each { require it }
+
 abort "Cannot run tests in production mode" if Rails.env.production?
 
 begin
@@ -32,7 +34,8 @@ Capybara.server = :puma, { Silent: true }
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
-  config.include SpecSupport::StripeHelper
+  config.include Support::StripeHelper
+  config.include Support::PDFAssertions
 
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
