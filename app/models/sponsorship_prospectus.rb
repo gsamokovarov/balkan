@@ -181,8 +181,12 @@ module SponsorshipProspectus
         end
 
         package.variants.each do |variant|
-          quantity = variant.quantity.present? ? " (#{variant.quantity} available)" : ""
-          text "• #{variant.name}: €#{variant.price}#{quantity}", size: 12
+          quantity =
+            if variant.limited?
+              variant.available? ? "(#{variant.spots_remaining} available)" : "<b>Sold out</b>"
+            end
+
+          text "• #{variant.name}: €#{variant.price} #{quantity}", size: 12, inline_format: true
         end
 
         move_down 20
@@ -202,7 +206,12 @@ module SponsorshipProspectus
 
         package.variants.each do |variant|
           perks_text = format_perks_text variant.perks
-          quantity = variant.quantity.present? ? "#{variant.quantity} available" : "Unlimited"
+          quantity =
+            if variant.limited?
+              variant.available? ? "#{variant.spots_remaining} available" : "Sold out"
+            else
+              "Unlimited"
+            end
 
           row_data = [
             variant.name,
