@@ -215,9 +215,12 @@ RSpec.case "Admin Giveaway", type: :feature do
   def setup_and_login_user
     create :user, name: "Admin", email: "admin@example.com", password: "admin"
 
-    visit admin_login_path
+    visit admin_root_path
+
     fill_in "Email", with: "admin@example.com"
     fill_in "Password", with: "admin"
     click_button "Sign in"
+
+    assert_have_content page, "Current event"
   end
 end
