@@ -9,7 +9,7 @@
       <% end %>
 
       <% if variant.limited? && variant.available? %>
-        <span class="badge-warning"><%= variant.spots_remaining %> available</span>
+        <span class="badge-warning"><%= variant.spots_remaining %> left</span>
       <% elsif variant.limited? %>
         <span class="badge-important text-white">Sold out</span>
       <% end %>
