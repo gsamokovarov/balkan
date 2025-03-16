@@ -2,8 +2,7 @@ require "rails_helper"
 
 RSpec.case SponsorshipProspectus do
   test "unlimited variants are shown as unlimited" do
-    invoice_sequence = create :invoice_sequence, initial_number: 10_001_050
-    event = create(:event, :balkan2025, invoice_sequence:)
+    event = create :event, :balkan2025
     package = create(:sponsorship_package, name: "Test Package", event:)
     create :sponsorship_variant, name: "Gold", price: 5000,
                                  perks: "Logo on website\nBanner at venue",
@@ -15,8 +14,7 @@ RSpec.case SponsorshipProspectus do
   end
 
   test "limited variants show correct number of available spots" do
-    invoice_sequence = create :invoice_sequence, initial_number: 10_001_050
-    event = create(:event, :balkan2025, invoice_sequence:)
+    event = create :event, :balkan2025
     package = create(:sponsorship_package, name: "Test Package", event:)
     create :sponsorship_variant, name: "Silver", price: 3000,
                                  perks: "Logo on website",
@@ -28,8 +26,7 @@ RSpec.case SponsorshipProspectus do
   end
 
   test "partially taken variants show correct number of remaining spots" do
-    invoice_sequence = create :invoice_sequence, initial_number: 10_001_050
-    event = create(:event, :balkan2025, invoice_sequence:)
+    event = create :event, :balkan2025
     package = create(:sponsorship_package, name: "Test Package", event:)
     variant = create :sponsorship_variant, name: "Bronze", price: 1000,
                                            perks: "Logo on website",
@@ -43,8 +40,7 @@ RSpec.case SponsorshipProspectus do
   end
 
   test "sold out variants are marked as sold out" do
-    invoice_sequence = create :invoice_sequence, initial_number: 10_001_050
-    event = create(:event, :balkan2025, invoice_sequence:)
+    event = create :event, :balkan2025
     package = create(:sponsorship_package, name: "Test Package", event:)
     variant = create :sponsorship_variant, name: "Party", price: 2000,
                                            perks: "Logo at party",
@@ -57,18 +53,14 @@ RSpec.case SponsorshipProspectus do
   end
 
   test "multiple packages show correct availability for each variant" do
-    invoice_sequence = create :invoice_sequence, initial_number: 10_001_050
-    event = create(:event, :balkan2025, invoice_sequence:)
-
+    event = create :event, :balkan2025
     package1 = create(:sponsorship_package, name: "Main Packages", event:)
     package2 = create(:sponsorship_package, name: "Add-ons", event:)
-
     create :sponsorship_variant, name: "Platinum", price: 10_000,
                                  perks: "Everything", package: package1, quantity: 1
     silver = create :sponsorship_variant, name: "Silver", price: 3000,
                                           perks: "Some things", package: package1, quantity: 2
     create :sponsorship, sponsor: create(:sponsor), variant: silver, event:, price_paid: 3000
-
     create :sponsorship_variant, name: "After-party", price: 5000,
                                  perks: "Host after-party", package: package2, quantity: 1
 
@@ -82,10 +74,8 @@ RSpec.case SponsorshipProspectus do
   end
 
   test "prospectus includes venue information when available" do
-    invoice_sequence = create :invoice_sequence, initial_number: 10_001_050
-    event = create(:event, :balkan2025, invoice_sequence:)
     venue = create :venue, name: "Test Venue", address: "123 Test Street"
-    event.update(venue:)
+    event = create(:event, :balkan2025, venue:)
 
     pdf = SponsorshipProspectus.generate event
 
@@ -93,8 +83,7 @@ RSpec.case SponsorshipProspectus do
   end
 
   test "package descriptions are included in the prospectus" do
-    invoice_sequence = create :invoice_sequence, initial_number: 10_001_050
-    event = create(:event, :balkan2025, invoice_sequence:)
+    event = create :event, :balkan2025
     create(:sponsorship_package,
            name: "Package with Description",
            description: "This is a detailed description of the package.",
