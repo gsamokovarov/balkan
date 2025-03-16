@@ -53,10 +53,10 @@
   }
 
   .badge-important {
-    @apply rounded bg-banitsa-500 text-black text-base p-2 align-middle;
+    @apply rounded bg-banitsa-500 text-black text-base p-2 align-middle truncate;
   }
 
   .badge-warning {
-    @apply rounded bg-x-orange text-black text-base p-2 align-middle;
+    @apply rounded bg-x-orange text-black text-base p-2 align-middle truncate;
   }
 }
