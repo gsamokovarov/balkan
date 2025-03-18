@@ -32,7 +32,9 @@ module MarkdownHelper
 
     def render_plain(content)
       @plain_renderer ||= Redcarpet::Markdown.new PlainTextRenderer
-      @plain_renderer.render content
+
+      sanitizer = Rails::HTML::FullSanitizer.new
+      sanitizer.sanitize @plain_renderer.render(content)
     end
   end
 
