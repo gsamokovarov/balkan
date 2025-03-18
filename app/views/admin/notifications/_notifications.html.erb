@@ -1,0 +1,15 @@
+<%# locals: (notifications:) %>
+
+<%= admin_table notifications do
+  column "#",      -> { link_to it.id, [:admin, it.event, it] }
+  column :message, -> { link_to truncate(it.message, length: 50), [:admin, it.event, it] }
+  column :active , -> { link_to it.active ? "Yes" : "No", [:admin, it.event, it] }
+
+  column do
+    if it.active?
+      admin_button(:danger, :small, post: deactivate_admin_event_notification_path(it.event, it)) { "Deactivate" }
+    else
+      admin_button(:secondary, :small, post: activate_admin_event_notification_path(it.event, it)) { "Activate" }
+    end
+  end
+end %>

@@ -54,6 +54,12 @@ Rails.application.routes.draw do
       resources :sponsorship_packages, only: [:index, :show, :new, :create, :edit, :update]
       resources :sponsorships, only: [:index, :show, :new, :create, :edit, :update]
       resource :schedule, only: [:show, :new, :create, :edit, :update]
+      resources :notifications, only: [:index, :show, :new, :create, :edit, :update] do
+        member do
+          post :activate
+          post :deactivate
+        end
+      end
     end
     resources :speakers, only: [:index, :show, :new, :create, :edit, :update]
     resources :sponsors, only: [:index, :show, :new, :create, :edit, :update]
