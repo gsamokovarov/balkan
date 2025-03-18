@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_15_152538) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_18_193520) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -125,6 +125,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_15_152538) do
     t.index ["event_id"], name: "index_lineup_members_on_event_id"
     t.index ["speaker_id"], name: "index_lineup_members_on_speaker_id"
     t.index ["talk_id"], name: "index_lineup_members_on_talk_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.text "message", null: false
+    t.boolean "active", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_notifications_on_active", unique: true, where: "active = TRUE"
+    t.index ["event_id"], name: "index_notifications_on_event_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -305,6 +315,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_15_152538) do
   add_foreign_key "lineup_members", "events"
   add_foreign_key "lineup_members", "speakers"
   add_foreign_key "lineup_members", "talks"
+  add_foreign_key "notifications", "events"
   add_foreign_key "orders", "events"
   add_foreign_key "schedule_slots", "lineup_members"
   add_foreign_key "schedule_slots", "schedules"
