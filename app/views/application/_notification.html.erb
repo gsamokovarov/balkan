@@ -1,8 +1,8 @@
 <% if notification = Current.event.notifications.active %>
-   <div class="flex items-center gap-x-6 text-white bg-black px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
-     <%= tag.div class:"line-clamp-1", title: render_plain(notification.message) do %>
-       <%= render_markdown notification.message %>
-     <% end %>
-     <div class="flex flex-1 justify-end"></div>
-   </div>
- <% end %>
+  <div class="flex items-center gap-x-6 text-white bg-black px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <%= tag.div class:"line-clamp-1", title: render_plain(notification.message) do %>
+      <%= render_markdown notification.message %>
+    <% end %>
+    <div class="flex flex-1 justify-end"></div>
+  </div>
+<% end %>
