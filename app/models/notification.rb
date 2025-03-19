@@ -4,8 +4,14 @@ class Notification < ApplicationRecord
   validates :message, presence: true
 
   class << self
-    def activate(notification) = transaction { deactivate.then { notification.update! active: true } }
-    def deactivate = update_all active: false
-    def active = find_by active: true
+    def activate(notification)
+      transaction do
+        deactivate notification.event
+        notification.update! active: true
+      end
+    end
+
+    def deactivate(event) = event.notifications.update_all active: false
+    def active(event) = event.notifications.find_by active: true
   end
 end

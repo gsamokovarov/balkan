@@ -43,7 +43,7 @@ class Admin::NotificationsController < Admin::ApplicationController
   end
 
   def deactivate
-    event.notifications.deactivate
+    Notification.deactivate event
 
     redirect_to admin_event_notifications_path, notice: "Notification deactivated"
   end
