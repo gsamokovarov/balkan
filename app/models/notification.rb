@@ -12,6 +12,6 @@ class Notification < ApplicationRecord
     end
 
     def deactivate(event) = event.notifications.update_all active: false
-    def active(event) = event.notifications.find_by active: true
+    def active_for(event) = event.notifications.find_by active: true
   end
 end

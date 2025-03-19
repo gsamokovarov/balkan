@@ -37,14 +37,14 @@ RSpec.case Notification do
     create :notification, event:, active: false
     active_notification = create :notification, event:, active: true
 
-    assert_eq active_notification, Notification.active(event)
+    assert_eq active_notification, Notification.active_for(event)
   end
 
   test "active returns nil when no notifications are active" do
     event = create :event, :balkan2025
     create :notification, event:, active: false
 
-    assert_eq nil, Notification.active(event)
+    assert_eq nil, Notification.active_for(event)
   end
 
   test "only one notification can be active at the database level" do

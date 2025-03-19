@@ -22,6 +22,8 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
+  def active_notification = notifications.active_for self
+
   def sponsors = sponsorships.includes(:package, :sponsor).order("sponsorship_packages.id").group_by(&:package)
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
