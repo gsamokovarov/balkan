@@ -2,17 +2,16 @@
   <div class="grid grid-cols-2 gap-4 sm:flex sm:items-center sm:flex-wrap sm:gap-6">
     <% Current.event.ticket_types.enabled.each do |ticket_type| %>
       <%= render "tickets/ticket_card_link", ticket_type: %>
-
-      <% if ticket_type.supporter? %>
-        <%= render "prose" do %>
-          <p>
-            Supporter tickets get our eternal gratitude and a hand-made gift, made by
-            the organizers!
-          </p>
-        <% end %>
-      <% end %>
     <% end %>
   </div>
+  <% if Current.event.ticket_types.any?(&:supporter?) %>
+    <%= render "prose" do %>
+      <p>
+        Supporter tickets get our eternal gratitude and a hand-made gift, made by
+        the organizers!
+      </p>
+    <% end %>
+  <% end %>
 <% else %>
   <%= render "tickets/sold_out" %>
 <% end %>
