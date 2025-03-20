@@ -3,9 +3,10 @@
 <div class="flex flex-col gap-12">
   <%= render "section", title: "Health" do %>
     <%= render "stats", data: {
-      "Attendees" => @orders.reject(&:fully_refunded?).sum { it.tickets.size },
+      "Sponsors gross" => format_money(Current.event.sponsorships.sum(:price_paid)),
       "Tickets gross" => format_money(@orders.sum(&:amount)),
       "Refunded amount" => format_money(@orders.sum(&:refunded_amount)),
+      "Attendees" => @orders.reject(&:fully_refunded?).sum { it.tickets.size },
       "Newsletter subscribers" => Current.event.subscribers.count,
       "Unfinished orders" => Current.event.orders.where("completed_at IS NULL").count,
     } %>
