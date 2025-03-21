@@ -1,0 +1,7 @@
+<%# locals: (announcement:) %>
+
+<%= admin_form [:admin, announcement.event, announcement] do |f| %>
+  <%= f.text_area_input :message %>
+
+  <%= f.submit %>
+<% end %>
