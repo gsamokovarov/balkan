@@ -5,6 +5,8 @@
   lg:grid-cols-7 lg:grid-cols-8 lg:grid-cols-9 lg:grid-cols-10 lg:grid-cols-11 lg:grid-cols-12 %>
 
 <dl class="grid grid-cols-2 gap-x-8 gap-y-16 text-center lg:grid-cols-<%= columns %>">
+  <%= render "empty_state" if data.empty? %>
+
   <% data.each do |title, value| %>
     <div class="mx-auto flex max-w-xs flex-col gap-y-4">
       <dt class="text-base leading-7 text-gray-600"><%= title %></dt>
