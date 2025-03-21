@@ -4,13 +4,15 @@
   lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5 lg:grid-cols-6
   lg:grid-cols-7 lg:grid-cols-8 lg:grid-cols-9 lg:grid-cols-10 lg:grid-cols-11 lg:grid-cols-12 %>
 
-<dl class="grid grid-cols-2 gap-x-8 gap-y-16 text-center lg:grid-cols-<%= columns %>">
+<% if data.empty? %>
   <%= render "empty_state" if data.empty? %>
-
-  <% data.each do |title, value| %>
-    <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-      <dt class="text-base leading-7 text-gray-600"><%= title %></dt>
-      <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl"><%= value %></dd>
-    </div>
-  <% end %>
-</dl>
+<% else %>
+  <dl class="grid grid-cols-2 gap-x-8 gap-y-16 text-center lg:grid-cols-<%= columns %>">
+    <% data.each do |title, value| %>
+      <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+        <dt class="text-base leading-7 text-gray-600"><%= title %></dt>
+        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl"><%= value %></dd>
+      </div>
+    <% end %>
+  </dl>
+<% end %>
