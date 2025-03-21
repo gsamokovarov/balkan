@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   has_many :sponsorship_packages
   has_many :sponsorship_variants, through: :sponsorship_packages, source: :variants
   has_many :sponsorships
-  has_many :notifications
+  has_many :announcements
   has_one_attached :logo
   has_one_attached :ogp_image
   has_many_attached :hero_images
@@ -22,7 +22,7 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  def active_notification = notifications.active_for self
+  def active_announcement = announcements.active_for self
 
   def sponsors = sponsorships.includes(:package, :sponsor).order("sponsorship_packages.id").group_by(&:package)
 

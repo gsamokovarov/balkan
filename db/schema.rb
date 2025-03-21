@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_19_113448) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_22_000000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_19_113448) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "announcements", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.text "message", null: false
+    t.boolean "active", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "active"], name: "index_announcements_on_event_id_and_active", unique: true, where: "active = true"
+    t.index ["event_id"], name: "index_announcements_on_event_id"
   end
 
   create_table "blog_posts", force: :cascade do |t|
@@ -125,16 +135,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_19_113448) do
     t.index ["event_id"], name: "index_lineup_members_on_event_id"
     t.index ["speaker_id"], name: "index_lineup_members_on_speaker_id"
     t.index ["talk_id"], name: "index_lineup_members_on_talk_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.text "message", null: false
-    t.boolean "active", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id", "active"], name: "index_notifications_on_event_id_and_active", unique: true, where: "active = true"
-    t.index ["event_id"], name: "index_notifications_on_event_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -304,6 +304,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_19_113448) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "announcements", "events"
   add_foreign_key "blog_posts", "events"
   add_foreign_key "blog_posts", "users", column: "author_id"
   add_foreign_key "community_partners", "events"
@@ -315,7 +316,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_19_113448) do
   add_foreign_key "lineup_members", "events"
   add_foreign_key "lineup_members", "speakers"
   add_foreign_key "lineup_members", "talks"
-  add_foreign_key "notifications", "events"
   add_foreign_key "orders", "events"
   add_foreign_key "schedule_slots", "lineup_members"
   add_foreign_key "schedule_slots", "schedules"

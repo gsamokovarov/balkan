@@ -1,0 +1,12 @@
+<%= render "section", title: "Announcements", cta: -> {
+  admin_button(:primary, link: new_admin_event_announcement_path) { "New Announcement" }
+} do %>
+  <% if @announcements.any? %>
+    <%= render "announcements", announcements: @announcements %>
+    <%= admin_paginate @announcements %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_event_announcement_path) { "New Announcement" } %>
+    <% end %>
+  <% end %>
+<% end %>
