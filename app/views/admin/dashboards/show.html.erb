@@ -19,7 +19,9 @@
   <%= render "section", title: "T-shirts", description: "T-shirt sizes for all attendees" do %>
     <% shirt_sizes = Current.event.tickets.group(:shirt_size).count %>
     <% total_shirts = shirt_sizes.values.sum %>
-    <% render "stats", data: Hash[shirt_sizes.map { ["#{_1} (#{(_2.to_f / total_shirts * 100).round}%)", _2] }] %>
+    <% render "stats", columns: shirt_sizes.count, data: Hash[
+      shirt_sizes.map { ["#{_1} (#{(_2.to_f / total_shirts * 100).round}%)", _2] }
+    ] %>
   <% end %>
 
   <% Current.event.embeddings.each do |embedding| %>
