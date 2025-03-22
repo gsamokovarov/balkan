@@ -17,7 +17,14 @@ module MarkdownHelper
 
     class HTMLRenderer < Redcarpet::Render::HTML
       def link(link, title, content) = %(<a href="#{link}" title="#{title}" class="link-primary">#{content}</a>)
-      def image(link, title, alt) = %(<img src="#{link}" title="#{title}" alt="#{alt}" class="border-2 border-black rounded-md">)
+
+      def image(link, title, alt)
+        if link.end_with? ".mov", ".mp4", ".webm"
+          return %(<video class="border-2 border-black rounded-md" controls><source src="#{link}"></video>)
+        end
+
+        %(<img src="#{link}" title="#{title}" alt="#{alt}" class="border-2 border-black rounded-md">)
+      end
     end
 
     def render_html(content, inline_images: nil)
