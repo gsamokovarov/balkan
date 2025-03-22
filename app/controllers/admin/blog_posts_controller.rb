@@ -33,6 +33,9 @@ class Admin::BlogPostsController < Admin::ApplicationController
 
   private
 
-  def blog_post_params = params.require(:blog_post).permit(:event_id, :author_id, :title, :date, :content, :published, :ogp_image)
+  def blog_post_params
+    params.require(:blog_post).permit :event_id, :author_id, :title, :date, :content, :published, :ogp_image, images: []
+  end
+
   def event = Event.find(params[:event_id])
 end
