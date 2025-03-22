@@ -1,7 +1,9 @@
-<%= render "section", title: "Event ##{@event.id}" do %>
-  <%= render "form", event: @event %>
-<% end %>
+<div class="flex flex-col gap-12">
+  <%= render "section", title: "Event ##{@event.id}" do %>
+    <%= render "form", event: @event %>
+  <% end %>
 
-<%= render "section", title: "Thumbnail" do %>
-  <%= render "admin/events/thumbnail", event: @event %>
-<% end %>
+  <%= render "section", title: "Thumbnail" do %>
+    <%= render "admin/events/thumbnail", event: @event %>
+  <% end %>
+</div>

@@ -1,8 +1,9 @@
-<%= render "section", title: @talk.name do %>
-  <%= render "form", talk: @talk %>
-<% end %>
+<div class="flex flex-col gap-12">
+  <%= render "section", title: @talk.name do %>
+    <%= render "form", talk: @talk %>
+  <% end %>
 
-<%= render "section", title: "Thumbnail" do %>
-  <%= render "thumbnail", talk: @talk, event: Current.event %>
-<% end %>
-
+  <%= render "section", title: "Thumbnail" do %>
+    <%= render "thumbnail", talk: @talk, event: Current.event %>
+  <% end %>
+</div>
