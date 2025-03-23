@@ -1,9 +1,7 @@
-<div class="flex flex-col gap-12">
-  <%= render "section", title: "Blog post ##{@blog_post.id}" do %>
-    <%= render "form", blog_post: @blog_post %>
-  <% end %>
+<%= render "section", title: "Blog post ##{@blog_post.id}" do %>
+  <%= render "form", blog_post: @blog_post %>
+<% end %>
 
-  <%= render "section", title: "Thumbnail" do %>
-    <%= render "thumbnail", blog_post: @blog_post %>
-  <% end %>
-</div>
+<%= render "section", title: "Thumbnail" do %>
+  <%= render "thumbnail", blog_post: @blog_post %>
+<% end %>
