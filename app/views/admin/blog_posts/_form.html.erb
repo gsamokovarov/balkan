@@ -3,8 +3,8 @@
 <div class="flex flex-col md:flex-row md:space-x-6" data-controller="markdown-preview">
   <%= admin_form [:admin, blog_post.event, blog_post], html: { class: "sm:max-w-sm flex-1" } do |f| %>
     <%= f.readonly_input :event_id, [[blog_post.event.name, blog_post.event.id]] %>
-    <%= f.text_area_input :content, required: true, rows: 20, data: { markdown_preview_target: "source" } %>
-    <%= f.file_input :images, multiple: true %>
+    <%= f.text_area_input :content, required: true, rows: 20, data: { markdown_preview_target: "content" } %>
+    <%= f.file_input :images, multiple: true, data: { markdown_preview_target: "images" } %>
     <%= f.select_input :author_id, User.all.map { [it.email, it.id] }, required: true %>
     <%= f.date_input :date, required: true %>
     <%= f.text_input :title, required: true %>
