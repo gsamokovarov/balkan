@@ -3,19 +3,19 @@
 <div class="flex flex-col md:flex-row md:space-x-6" data-controller="markdown-preview">
   <%= admin_form [:admin, blog_post.event, blog_post], html: { class: "sm:max-w-sm flex-1" } do |f| %>
     <%= f.readonly_input :event_id, [[blog_post.event.name, blog_post.event.id]] %>
+    <%= f.text_area_input :content, required: true, rows: 20, data: { markdown_preview_target: "source" } %>
+    <%= f.file_input :images, multiple: true %>
     <%= f.select_input :author_id, User.all.map { [it.email, it.id] }, required: true %>
     <%= f.date_input :date, required: true %>
     <%= f.text_input :title, required: true %>
-    <%= f.text_area_input :content, required: true, data: { markdown_preview_target: "source" } %>
-    <%= f.file_input :images, multiple: true %>
     <%= f.file_input :ogp_image %>
     <%= f.check_box_input :published %>
 
     <%= f.submit %>
   <% end %>
 
-  <div class="w-96 overflow-scroll">
+  <div class="w-full sm:w-96 h-screen relative">
     <h2 class="text-lg font-semibold mb-6">Preview</h2>
-    <div class="prose" data-markdown-preview-target="preview"></div>
+    <div class="prose p-2 border border-gray-300 rounded-md shadow-sm sm:h-3/4 sm:overflow-y-scroll" data-markdown-preview-target="preview"></div>
   </div>
 </div>
