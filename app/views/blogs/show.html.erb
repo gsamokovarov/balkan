@@ -9,7 +9,7 @@
       </time>
     </div>
     <%= render "prose", variant: :xl, class: "mt-8" do %>
-      <%= render_markdown @blog_post.content, inline_images: @blog_post.images %>
+      <%= render_markdown @blog_post.content, images: @blog_post.images %>
     <% end %>
     <div class="relative mt-8 flex items-center gap-x-4">
       <% if @blog_post.author.avatar.attached? %>
