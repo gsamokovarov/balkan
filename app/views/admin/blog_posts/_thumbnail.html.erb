@@ -2,6 +2,8 @@
 
 <div data-controller="screenshot" class="space-y-6">
   <section data-screenshot-target="element" class="relative w-[960px] h-[540px] p-16 flex bg-banitsa-50">
+    <%= render "admin/shared/balkan_ruby_overlay" %>
+
     <div class="relative w-1/2 flex flex-col justify-center gap-8">
       <%= render "application/header_logo" %>
       <h1 class="text-3xl sm:text-4xl font-extrabold text-banitsa-500 text-center"><%= blog_post.title %></h1>

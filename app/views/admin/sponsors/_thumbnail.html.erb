@@ -1,0 +1,21 @@
+<%# locals: (sponsor:) %>
+
+<div data-controller="screenshot" class="space-y-6">
+  <section data-screenshot-target="element" class="relative w-[960px] h-[540px] p-16 flex bg-banitsa-50">
+    <%= render "admin/shared/balkan_ruby_overlay" %>
+
+    <div class="relative flex flex-col justify-center items-center gap-8">
+      <% if sponsor.logo.attached? %>
+        <%= image_tag sponsor.logo, class: "w-1/2 h-auto object-contain", alt: sponsor.name %>
+      <% end %>
+      <h2 class="text-2xl font-bold text-center text-gray-900">
+        <%= sponsor.name %>
+      </h2>
+      <p class="text-lg text-center font-semibold text-gray-500">
+        Thank you for your support!
+      </p>
+    </div>
+  </section>
+
+  <%= admin_button(:primary, data: { action: "screenshot#capture" }) { "Screenshot" } %>
+</div>
