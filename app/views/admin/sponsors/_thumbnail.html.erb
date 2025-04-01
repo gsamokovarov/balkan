@@ -2,36 +2,7 @@
 
 <div data-controller="screenshot" class="space-y-6">
   <section data-screenshot-target="element" class="relative w-[960px] h-[540px] p-16 flex bg-banitsa-50">
-    <div class="absolute left-0 top-0 h-full w-full">
-      <svg width="auto" height="100%" viewBox="0 0 822 980" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g opacity="0.2">
-          <path d="M415.142 978.525L754.738 464.99" stroke="#D42133" stroke-width="2"/>
-          <path d="M415.142 978.525L779.586 663.778" stroke="#D42133" stroke-width="2"/>
-          <path d="M415.142 978.525L75.5459 464.99" stroke="#D42133" stroke-width="2"/>
-          <path d="M75.5459 464.99L622.213 663.778" stroke="#D42133" stroke-width="2"/>
-          <path d="M763.02 464.99L820.999 332.465" stroke="#D42133" stroke-width="2"/>
-          <path d="M821.001 324.182L622.213 241.354" stroke="#D42133" stroke-width="2"/>
-          <path d="M779.586 663.778L821 332.465" stroke="#D42133" stroke-width="2"/>
-          <path d="M763.02 464.99L787.868 663.778" stroke="#D42133" stroke-width="2"/>
-          <path d="M622.213 249.636L771.304 175.091" stroke="#D42133" stroke-width="2"/>
-          <path d="M771.303 175.091L821 332.465" stroke="#D42133" stroke-width="2"/>
-          <path d="M92.1113 216.505L266.051 117.111" stroke="#D42133" stroke-width="2"/>
-          <path d="M75.5459 597.515L83.8287 216.505" stroke="#D42133" stroke-width="2"/>
-          <path d="M75.5455 464.99L1 315.899" stroke="#D42133" stroke-width="2"/>
-          <path d="M1 315.899L92.1111 216.505" stroke="#D42133" stroke-width="2"/>
-          <path d="M266.051 117.111L622.212 241.354" stroke="#D42133" stroke-width="2"/>
-          <path d="M92.1113 216.505L266.051 34.2828" stroke="#D42133" stroke-width="2"/>
-          <path d="M266.051 125.394V34.2828" stroke="#D42133" stroke-width="2"/>
-          <path d="M266.051 34.2828L622.212 1.15149" stroke="#D42133" stroke-width="2"/>
-          <path d="M622.213 1.15149V241.354" stroke="#D42133" stroke-width="2"/>
-          <path d="M622.213 1.15149L771.304 175.091" stroke="#D42133" stroke-width="2"/>
-          <path d="M763.02 464.99L456.556 597.515" stroke="#D42133" stroke-width="2"/>
-          <path d="M456.556 597.515L415.142 978.525" stroke="#D42133" stroke-width="2"/>
-          <path d="M415.142 978.525L75.5459 597.515" stroke="#D42133" stroke-width="2"/>
-          <path d="M75.5455 597.515L1 315.899" stroke="#D42133" stroke-width="2"/>
-        </g>
-      </svg>
-    </div>
+    <%= render "admin/shared/balkan_ruby_overlay" %>
 
     <div class="relative flex flex-col justify-center items-center gap-8">
       <% if sponsor.logo.attached? %>
