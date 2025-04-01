@@ -1,3 +1,7 @@
 <%= render "section", title: "Sponsorship #{@sponsorship.id}" do %>
   <%= render "form", sponsorship: @sponsorship %>
 <% end %>
+
+<%= render "section", title: "Thumbnail" do %>
+  <%= render "thumbnail", sponsorship: @sponsorship %>
+<% end %>
