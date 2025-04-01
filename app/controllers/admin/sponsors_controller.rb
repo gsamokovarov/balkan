@@ -1,6 +1,15 @@
 class Admin::SponsorsController < Admin::ApplicationController
   def index
     @sponsors = scope Sponsor.with_attached_logo
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @sponsors.map {
+          { name: it.name, description: it.description, url: it.url }
+        }
+      end
+    end
   end
 
   def show
