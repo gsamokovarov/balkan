@@ -1,6 +1,15 @@
 class Admin::SponsorshipsController < Admin::ApplicationController
   def index
     @sponsorships = scope event.sponsorships.includes(:variant, :sponsor, :event)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @sponsorships.map {
+          { variant: it.variant.name, name: it.sponsor.name, description: it.sponsor.description, url: it.sponsor.url }
+        }
+      end
+    end
   end
 
   def show
