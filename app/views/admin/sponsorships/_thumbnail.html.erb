@@ -14,7 +14,7 @@
       <%== qrcode.as_svg use_path: true, viewbox: true %>
     </div>
 
-    <div class="relative flex flex-col justify-center items-center gap-8">
+    <div class="relative h-full flex flex-col justify-center items-center gap-8">
       <% if sponsorship.sponsor.logo.attached? %>
         <%= image_tag sponsorship.sponsor.logo, class: "max-w-1/2 max-h-64 object-contain" %>
       <% end %>
