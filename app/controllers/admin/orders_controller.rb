@@ -28,7 +28,7 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def report
-    date_range = Date.parse("#{params[:month]}-01").all_month
+    date_range = Date.parse("#{params[:month]}-01").to_time.all_month
 
     orders =
       Order.completed
