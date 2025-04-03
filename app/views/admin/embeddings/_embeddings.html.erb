@@ -4,5 +4,8 @@
   column "#",          -> { link_to it.id, [:admin, it.event, it] }
   column :name,        -> { link_to it.name, [:admin, it.event, it] }
   column :description, -> { link_to truncate(it.description, length: 50), [:admin, it.event, it] }
-  column :url,         -> { link_to truncate(it.url, length: 50), it.url, class: "text-indigo-600 hover:underline", target: "_blank", rel: "noopener" }
+
+  column do
+    admin_button(:secondary, :small, link: it.url, target: "_blank", rel: "noopener") { "View" }
+  end
 end %>

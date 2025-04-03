@@ -23,8 +23,8 @@
   } %>
 <% end %>
 
-<% Current.event.embeddings.each do |embedding| %>
-  <%= render "embedding", embedding: %>
+<%= render "section", title: "Embeddings", description: "Embedded resources for #{Current.event.name}" do %>
+  <%= render "admin/embeddings/embeddings", embeddings: Current.event.embeddings %>
 <% end %>
 
 <% if Current.event.embeddings.none? %>
