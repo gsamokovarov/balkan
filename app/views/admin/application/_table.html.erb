@@ -15,7 +15,7 @@
       <% objects.each do |object| %>
         <tr class="border-t border-gray-300 hover:bg-gray-50">
           <% table_def.columns.each do |column| %>
-            <td class="p-3 text-sm font-semibold text-gray-900 whitespace-nowrap">
+            <td class="p-3 text-sm font-semibold text-gray-900 whitespace-nowrap has-[.inline-block]:block has-[.inline-block]:text-right">
               <%= column.value object %>
             </td>
           <% end %>
