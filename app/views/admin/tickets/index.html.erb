@@ -1,4 +1,6 @@
-<%= render "section", title: "Tickets", cta: -> {
+<% supporter_tickets_count = @tickets.where(ticket_type: { name: "Supporter" }).total_count %>
+
+<%= render "section", title: "Tickets", description: "#{supporter_tickets_count} supporter tickets", cta: -> {
   admin_button(:primary, onclick: "giveaway_dialog.showModal()") { "Giveaway" }
 } do %>
   <%= render "tickets", tickets: @tickets %>
