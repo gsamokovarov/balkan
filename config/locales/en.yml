@@ -6,7 +6,7 @@ en:
     vat_id: VAT ID
     ceo: CEO
     invoice: Invoice
-    original: ""
+    original: ORIGINAL
     number: Number
     date_of_issue: Date of issue
     date_of_tax_event: Date of tax exent
