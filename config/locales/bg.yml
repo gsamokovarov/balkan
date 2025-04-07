@@ -6,6 +6,7 @@ bg:
     vat_id: ЗДДС №
     ceo: М.О.Л.
     invoice: Фактура
+    original: ОРИГИНАЛ
     number: Номер
     date_of_issue: Дата на издаване
     date_of_tax_event: Дата на данъчно събитие

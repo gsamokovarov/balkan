@@ -126,6 +126,10 @@ module Invoice::Document
         text "<b>#{t 'date_of_tax_event'}</b>: #{order.completed_at.to_date.iso8601}", inline_format: true
       end
 
+      grid([1, 3], [1, 6]).bounding_box do
+        text t("original"), size: 22, style: :bold
+      end
+
       grid([2, 0], [2, 3]).bounding_box do
         text t("items"), size: 14, style: :bold
         text t("tickets", count: order.tickets.size, type: order.tickets.first.ticket_type.name)
