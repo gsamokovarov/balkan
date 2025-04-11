@@ -8,5 +8,6 @@
   <%= f.select_input :variant_id, sponsorship.event.sponsorship_variants.all.map { [it.display_name, it.id] } %>
   <%= f.number_input :price_paid, required: true %>
   <%= f.text_area_input :reason %>
+  <%= f.file_input :ogp_image %>
   <%= f.submit %>
 <% end %>
