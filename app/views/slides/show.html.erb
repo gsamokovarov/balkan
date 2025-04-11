@@ -55,7 +55,7 @@
 <% if mc = Current.event.lineup_members.find_by(role: "Master of Ceremonies") %>
   <section class="center">
     <div class="flex justify-center items-center">
-      <%= image_tag mc.user.avatar, class: "w-1/2 border-2 border-black rounded-md" %>
+      <%= image_tag mc.avatar, class: "w-1/2 border-2 border-black rounded-md" %>
     </div>
   </section>
 <% end %>
