@@ -1,3 +1,5 @@
+<% title "Slides" %>
+
 <section class="center">
   <div class="text-4xl sm:text-5xl font-black pb-8">
     <%== Current.event.title %>
@@ -16,7 +18,7 @@
 
 <section class="center">
   <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, community partners! 🙇</div>
-  <div class="grid grid-cols-2 gap-8 lg:grid-cols-5">
+  <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
     <% Current.event.community_partners.each do |partner| %>
       <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 border-2 border-black bg-white rounded-md" do %>
         <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
@@ -46,15 +48,17 @@
     <%= image_tag Current.event.logo, class: "w-56", alt: "Balkan Ruby logo" %>
   </div>
   <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-600">
-    https://balkanruby.com
+    <% Current.event.host %>
   </div>
 </section>
 
-<%# <section class="center"> %>
-<%#   <div class="flex justify-center items-center"> %>
-<%#     <%= image_tag Current.event.lineup_members.find_by!(role: "Master of Ceremonies").user.avatar, class: "w-1/2 border-2 border-white rounded-md" %1> %>
-<%#   </div> %>
-<%# </section> %>
+<% if mc = Current.event.lineup_members.find_by(role: "Master of Ceremonies") %>
+  <section class="center">
+    <div class="flex justify-center items-center">
+      <%= image_tag mc.user.avatar, class: "w-1/2 border-2 border-black rounded-md" %>
+    </div>
+  </section>
+<% end %>
 
 <% fiscal_sponsors = Current.event.sponsorships.filter(&:fiscal?).cycle %>
 
