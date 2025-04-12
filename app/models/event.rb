@@ -30,4 +30,5 @@ class Event < ApplicationRecord
   def beginning_countdown = FinalCountdown.until start_date
 
   def upcoming? = Date.current.before? start_date
+  def sales_tickets? = Time.current.before? end_date.end_of_day
 end
