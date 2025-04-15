@@ -1,0 +1,12 @@
+<%= render "section", title: "Slideshows", cta: -> {
+  admin_button(:primary, link: new_slideshow_path) { "New Slideshow" }
+} do %>
+  <% if @slideshows.any? %>
+    <%= render "slideshows", slideshows: @slideshows %>
+    <%= admin_paginate @slideshows %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_slideshow_path) { "New Slideshow" } %>
+    <% end %>
+  <% end %>
+<% end %>

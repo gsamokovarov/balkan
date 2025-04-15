@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="h-full">
   <head>
-    <title><%= Current.event.name %> – <%= yield :title %></title>
+    <title>Slideshow – <%= yield :title %></title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,20 +33,7 @@
 
   <body class="antialiased h-full">
     <div class="flex flex-col h-full">
-      <%= render "announcement" %>
-      <%= render "header" %>
-
-      <div class="grow">
-        <%= render "container" do %>
-          <div class="lg:flex lg:items-start">
-            <main class="grow">
-              <%= yield %>
-            </main>
-          </div>
-        <% end %>
-      </div>
-
-      <%= render "footer" %>
+      <%= yield %>
     </div>
   </body>
 </html>

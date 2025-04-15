@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   get "healthz" => "infra#health"
   get "version" => "infra#version"
 
-  root "home#show"
+  root "slideshows#index"
+  resources :slideshows
 
   resources :sponsors, only: [:new, :index] do
     collection do
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :slideshows
     root "dashboards#show"
     get "/current/orders", to: "dashboards#orders", as: :current_orders
     resource :login, only: [:show, :create]

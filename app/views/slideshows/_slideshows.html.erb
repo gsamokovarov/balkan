@@ -1,0 +1,6 @@
+<%# locals: (slideshows:) %>
+
+<%= admin_table slideshows do
+  column "#",      -> { link_to it.id, it }
+  column :content, -> { truncate render_plain(it.content), length: 100 }
+end %>

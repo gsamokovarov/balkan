@@ -26,7 +26,7 @@ export default class extends Controller {
     })
     let { html } = await response.json()
 
-    html = this.#replaceImagePlaceholders(html)
+    // html = this.#replaceImagePlaceholders(html)
 
     this.previewTarget.innerHTML = html
   }
