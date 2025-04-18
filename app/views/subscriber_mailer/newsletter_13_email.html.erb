@@ -1,0 +1,52 @@
+<% event_countdown = FinalCountdown.until Date.new(2025, 4, 25) %>
+
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    You are receiving this email because you have signed up for the <b>Balkan Ruby</b>
+    newsletter, or because you bought a ticket. I'm Genadi, the organizer,
+    and I'm happy to welcome you to Sofia <b>Balkan Ruby 2025</b> is just
+    <b><%= event_countdown.days %></b> days away!
+  </p>
+
+  <h2 class="pb-2">
+    Quick Reminders
+  </h2>
+
+  <ul class="pb-2">
+    <li>
+      <b>Need a place to stay?</b> Book something (we recommend downtown) ASAP. The venue is
+      <%= link_to "WTC Interpred", "https://www.interpred-wtcsofia.com/", class: "link-primary" %> which is located near the
+      <%= link_to "F. Joliot-Curie metro station", "https://www.metropolitan.bg/en/scheme/operating-metro/f-joliot-curie" %>.
+    </li>
+    <li>
+      <b>Connect</b> now by joining our #2025 <%= link_to "slack", "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw", class: "link-primary" %>
+      channel – coordinate travel, find conference buddies, and get tips from locals (it's just me!)
+    </li>
+    <li>
+      <b>First time in Sofia?</b> You're in for a treat! Amazing food, cool city (and programming) vibes,
+      and we'll even have <%= link_to "Banitsa", "https://rubybanitsa.com/" %> at the venue!
+    </li>
+  </ul>
+
+  <p class="pb-2">
+    Our "long term" theme brings together awesome speakers: Jasveen Sandral
+    talking Ruby Core, Julia López sharing how they keep a 20-year-old Rails
+    app running strong, Andrey Sitnik on privacy-first architecture, and more,
+    loads more great talks! Check out our <%= link_to "website", root_url, class: "link-primary" %>
+    for the schedule.
+  </p>
+
+  <p class="pb-2">
+    Can't wait to hang out with all of you Ruby folks next week!
+  </p>
+
+  <p class="pb-2">
+    See you in Sofia! 💎
+  </p>
+
+  <%= render "closer" %>
+</div>
