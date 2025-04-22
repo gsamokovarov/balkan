@@ -12,6 +12,25 @@
     </div>
 
     <label class="flex flex-col gap-3">
+      <span class="text-xl">Ticket Type</span>
+      <input
+        disabled
+        type="text"
+        value="<%= @ticket.ticket_type.name %>"
+        class="
+          w-full
+          border-2
+          rounded-md
+          <%= @ticket.supporter? ? "border-banitsa-500" : "border-neutral-600" %>
+          px-4
+          py-2
+          text-black
+          text-ellipsis
+        "
+      />
+    </label>
+
+    <label class="flex flex-col gap-3">
       <span class="text-xl">Attendee name</span>
       <input
         disabled
@@ -26,8 +45,6 @@
           py-2
           text-black
           text-ellipsis
-          focus:border-black
-          focus:outline-white
         "
       />
     </label>
@@ -47,8 +64,6 @@
           py-2
           text-black
           text-ellipsis
-          focus:border-black
-          focus:outline-white
         "
       />
     </label>
@@ -68,16 +83,8 @@
           py-2
           text-black
           text-ellipsis
-          focus:border-black
-          focus:outline-white
         "
       />
     </label>
-
-    <% if @ticket.supporter? %>
-      <%= render "alert" do %>
-        Supporter
-      <% end %>
-    <% end %>
   </div>
 <% end %>
