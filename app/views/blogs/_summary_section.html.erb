@@ -1,5 +1,11 @@
 <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-  <% Current.event.blog_posts.published.order(date: :desc).each do |blog_post| %>
+  <% blog_posts = Current.event.blog_posts.published.order(date: :desc) %>
+
+  <% blog_posts.take(2).each do |blog_post| %>
     <%= render 'blogs/blog_post_summary', blog_post: %>
+  <% end %>
+
+  <% if blog_posts.size > 2 %>
+    <%= link_to "All posts", blogs_path, class: "btn-secondary w-fit" %>
   <% end %>
 </div>
