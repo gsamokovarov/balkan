@@ -62,12 +62,20 @@
 
 <% fiscal_sponsors = Current.event.sponsorships.filter(&:fiscal?).cycle %>
 
-<% Current.event.schedule.slots.where(description: "Talk").each do |slot| %>
-  <% sponsorship = fiscal_sponsors.next %>
+<% Current.event.schedule.slots_for_day(params[:day].to_i).each do |slot| %>
+  <% if slot.description == "Talk" %>
+    <% sponsorship = fiscal_sponsors.next %>
 
-  <section class="center" data-controller="sponsors" data-sponsors-sponsor-src-value="<%= url_for sponsorship.ogp_image %>">
-    <%= image_tag slot.lineup_member.talk.ogp_image, class: "border-2 border-black bg-white rounded-md", "data-sponsors-target": "image" %>
-  </section>
+    <section class="center space-y-8" data-controller="sponsors" data-sponsors-sponsor-src-value="<%= url_for sponsorship.ogp_image %>">
+      <time class="font-semibold text-5xl text-gray-500" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+      <%= image_tag slot.lineup_member.talk.ogp_image, class: "border-2 border-black bg-white rounded-md object-cover", "data-sponsors-target": "image" %>
+    </section>
+  <% else %>
+    <section class="center space-y-8">
+      <time class="font-semibold text-5xl text-gray-500" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+      <div class="text-5xl font-extrabold"><%= slot.description %></div>
+    </section>
+  <% end %>
 <% end %>
 
 <section class="center">
