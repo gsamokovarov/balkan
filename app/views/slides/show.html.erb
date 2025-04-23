@@ -1,23 +1,23 @@
 <% title "Slides" %>
 
 <section class="center">
-  <div class="text-4xl sm:text-5xl font-black pb-8">
+  <div class="text-5xl font-black pb-8">
     <%== Current.event.title %>
   </div>
-  <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-600">
+  <div class="text-3xl font-semibold mt-3 text-gray-600">
     <%== Current.event.subtitle %>
   </div>
 </section>
 
-<section class="center">
-  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, attendees! 🙇</div>
-  <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-600">
+<section class="center space-y-8">
+  <div class="text-5xl font-extrabold">Thank you, attendees! 🙇</div>
+  <div class="text-4xl font-semibold text-gray-600">
     <span class="text-banitsa-500"><%= Current.event.tickets.count %></span> attendees
   </div>
 </section>
 
-<section class="center">
-  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, community partners! 🙇</div>
+<section class="center space-y-8">
+  <div class="text-5xl font-extrabold">Thank you, community partners! 🙇</div>
   <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
     <% Current.event.community_partners.each do |partner| %>
       <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 border-2 border-black bg-white rounded-md" do %>
@@ -27,8 +27,8 @@
   </div>
 </section>
 
-<section class="center">
-  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you, sponsors! 🙇</div>
+<section class="center space-y-8">
+  <div class="text-5xl font-extrabold">Thank you, sponsors! 🙇</div>
   <div class="grid grid-cols-4 gap-4 sm:gap-6">
     <% Current.event.sponsors.each do |(_, sponsorship)| %>
       <% sponsorship.each do |sponsorship| %>
@@ -43,11 +43,11 @@
   </div>
 </section>
 
-<section class="center">
-  <div class="flex justify-center items-center pb-8">
+<section class="center space-y-8">
+  <div class="flex justify-center items-center">
     <%= image_tag Current.event.logo, class: "w-56", alt: "Balkan Ruby logo" %>
   </div>
-  <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-600">
+  <div class="text-4xl font-semibold text-gray-600">
     <%= Current.event.host %>
   </div>
 </section>
@@ -66,18 +66,33 @@
   <% if slot.description == "Talk" %>
     <% sponsorship = fiscal_sponsors.next %>
 
-    <section class="center space-y-8" data-controller="sponsors" data-sponsors-sponsor-src-value="<%= url_for sponsorship.ogp_image %>">
-      <time class="font-semibold text-5xl text-gray-500" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+    <section class="center relative" data-controller="sponsors" data-sponsors-sponsor-src-value="<%= url_for sponsorship.ogp_image %>">
+      <time class="absolute top-8 left-16 font-semibold text-5xl text-gray-600" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
       <%= image_tag slot.lineup_member.talk.ogp_image, class: "border-2 border-black bg-white rounded-md object-cover", "data-sponsors-target": "image" %>
     </section>
   <% else %>
     <section class="center space-y-8">
-      <time class="font-semibold text-5xl text-gray-500" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+      <time class="font-semibold text-5xl text-gray-600" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
       <div class="text-5xl font-extrabold"><%= slot.description %></div>
     </section>
+
+    <% if slot.description == "Lunch break" %>
+      <section class="center">
+        <iframe class="border-2 border-black rounded-md mx-auto w-full h-[600px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d208.18111937907574!2d23.353182148819975!3d42.669092649285496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cc76a41139%3A0x96a236ccd4fb4b8!2sFarro%20pizza%20%26%20more!5e1!3m2!1sen!2sbg!4v1745403791212!5m2!1sen!2sbg" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </section>
+
+      <section class="center">
+        <iframe class="border-2 border-black rounded-md mx-auto w-full h-[600px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1665.445517391844!2d23.3439116377808!3d42.669220949169485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85252e90088d%3A0x8311894f24167561!2z0KDQldCh0KLQntCg0JDQndCiINCV0KDQlNCY0J3Qp9CVIC0g0JjQl9CT0KDQldCSIChFcmRpbmNoZSBSZXN0YXVyYW50KQ!5e1!3m2!1sen!2sbg!4v1745404239486!5m2!1sen!2sbg" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </section>
+    <% end %>
   <% end %>
 <% end %>
 
+<section class="center space-x-8">
+  <div class="text-5xl font-extrabold pb-8">Party at Vitamin B after 8 PM (20:00)</div>
+  <iframe class="border-2 border-black rounded-md mx-auto w-full h-[600px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3386.6248821310305!2d23.333082011979926!3d42.697897913570216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa856d6d55fbb1%3A0xced130f4c3d2a4eb!2sVitamin%20B%20-%20Craft%20Beer%20Bar!5e1!3m2!1sen!2sbg!4v1745404447670!5m2!1sen!2sbg" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
 <section class="center">
-  <div class="text-3xl sm:text-4xl font-extrabold pb-8">Thank you 👋</div>
+  <div class="text-5xl font-extrabold pb-8">Thank you 👋</div>
 </section>
