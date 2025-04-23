@@ -35,6 +35,14 @@ class Admin::CommunityPartnersController < Admin::ApplicationController
     end
   end
 
+  def destroy
+    community_partner = event.community_partners.find params[:id]
+    community_partner.destroy
+
+    redirect_to admin_event_community_partners_path(community_partner.event, page: params[:page]),
+                notice: "Community partner #{community_partner.name} was deleted"
+  end
+
   private
 
   def community_partner_params = params.require(:community_partner).permit(:event_id, :name, :url, :logo)
