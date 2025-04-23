@@ -20,7 +20,7 @@
   <div class="text-5xl font-extrabold">Thank you, community partners! 🙇</div>
   <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
     <% Current.event.community_partners.each do |partner| %>
-      <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 border-2 border-black bg-white rounded-md" do %>
+      <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 border-2 border-black bg-white rounded-md pointer-events-none" do %>
         <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
       <% end %>
     <% end %>
@@ -34,7 +34,7 @@
       <% sponsorship.each do |sponsorship| %>
         <%= link_to sponsors_path(anchor: sponsorship.sponsor.name), class: [
           "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md",
-          sponsorship.fiscal? ? "col-span-2" : "col-span-1",
+          sponsorship.fiscal? ? "col-span-2" : "col-span-1", "pointer-events-none"
         ] do %>
           <%= image_tag sponsorship.sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
         <% end %>
