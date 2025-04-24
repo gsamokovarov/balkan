@@ -63,6 +63,10 @@
   <div class="text-4xl font-semibold text-gray-600">
     <%= Current.event.host %>
   </div>
+  <div class="border-2 border-black rounded-md bg-white w-48 mx-auto">
+    <% qrcode = RQRCode::QRCode.new "https://#{Current.event.host}" %>
+    <%== qrcode.as_svg use_path: true, viewbox: true %>
+  </div>
 </section>
 
 <% if mc = Current.event.lineup_members.find_by(role: "Master of Ceremonies") %>
