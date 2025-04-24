@@ -1,5 +1,10 @@
 <% title "Slides" %>
 
+<%
+  first_day = params[:day].to_i == 0
+  second_day = params[:day].to_i == 1
+%>
+
 <section class="center">
   <div class="text-5xl font-black pb-8">
     <%== Current.event.title %>
@@ -88,10 +93,70 @@
   <% end %>
 <% end %>
 
-<section class="center space-x-8">
-  <div class="text-5xl font-extrabold pb-8">Party at Vitamin B after 8 PM (20:00)</div>
-  <iframe class="border-2 border-black rounded-md mx-auto w-full h-[600px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3386.6248821310305!2d23.333082011979926!3d42.697897913570216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa856d6d55fbb1%3A0xced130f4c3d2a4eb!2sVitamin%20B%20-%20Craft%20Beer%20Bar!5e1!3m2!1sen!2sbg!4v1745404447670!5m2!1sen!2sbg" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</section>
+<% if first_day %>
+  <section class="center space-x-8">
+    <div class="text-5xl font-extrabold pb-8">Party at Vitamin B after 8 PM (20:00)</div>
+    <iframe class="border-2 border-black rounded-md mx-auto w-full h-[600px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3386.6248821310305!2d23.333082011979926!3d42.697897913570216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa856d6d55fbb1%3A0xced130f4c3d2a4eb!2sVitamin%20B%20-%20Craft%20Beer%20Bar!5e1!3m2!1sen!2sbg!4v1745404447670!5m2!1sen!2sbg" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
+<% end %>
+
+<% if second_day %>
+  <section class="center space-y-8">
+    <div class="fragment text-5xl font-extrabold">Thank you, attendees! 🙇</div>
+  </section>
+
+  <section class="center space-y-8">
+    <div class="text-5xl font-extrabold">Thank you, community partners! 🙇</div>
+    <div class="grid grid-cols-2 gap-8 lg:grid-cols-3">
+      <% Current.event.community_partners.each do |partner| %>
+        <%= link_to partner.url, title: partner.name, class: "flex justify-center w-full h-16 p-2 border-2 border-black bg-white rounded-md pointer-events-none" do %>
+          <%= image_tag partner.logo, class: "w-auto h-full object-contain", alt: partner.name, lazy: true %>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="center space-y-8">
+    <div class="text-5xl font-extrabold">Thank you, sponsors! 🙇</div>
+    <div class="grid grid-cols-4 gap-4 sm:gap-6">
+      <% Current.event.sponsors.each do |(_, sponsorship)| %>
+        <% sponsorship.each do |sponsorship| %>
+          <%= link_to sponsors_path(anchor: sponsorship.sponsor.name), class: [
+            "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md",
+            sponsorship.fiscal? ? "col-span-2" : "col-span-1", "pointer-events-none"
+          ] do %>
+            <%= image_tag sponsorship.sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <% if mc = Current.event.lineup_members.find_by(role: "Master of Ceremonies") %>
+    <section class="center">
+      <div class="flex justify-center items-center">
+        <%= image_tag mc.speaker.avatar, class: "w-1/2 border-2 border-black rounded-md" %>
+      </div>
+    </section>
+  <% end %>
+
+  <% if digger_video = Current.event.community_partners.find_by(name: "Digger Video") %>
+    <section class="center">
+      <div class="flex justify-center items-center">
+        <%= image_tag digger_video.logo, class: "w-1/2 border-2 border-black rounded-md" %>
+      </div>
+    </section>
+  <% end %>
+
+  <section class="center space-y-8">
+    <div class="flex justify-center items-center">
+      <%= image_tag Current.event.logo, class: "w-56", alt: "Balkan Ruby logo" %>
+    </div>
+    <div class="fragment text-4xl font-semibold text-gray-600">
+      May 15-16, 2026
+    </div>
+  </section>
+<% end %>
 
 <section class="center">
   <div class="text-5xl font-extrabold pb-8">Thank you 👋</div>
