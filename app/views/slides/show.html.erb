@@ -48,6 +48,14 @@
   </div>
 </section>
 
+<% if digger_video = Current.event.community_partners.find_by(name: "Digger Video") %>
+  <section class="center">
+    <div class="flex justify-center items-center">
+      <%= image_tag digger_video.logo, class: "w-1/2 border-2 border-black rounded-md" %>
+    </div>
+  </section>
+<% end %>
+
 <section class="center space-y-8">
   <div class="flex justify-center items-center">
     <%= image_tag Current.event.logo, class: "w-56", alt: "Balkan Ruby logo" %>
