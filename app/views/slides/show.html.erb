@@ -80,6 +80,8 @@
 <% fiscal_sponsors = Current.event.sponsorships.filter(&:fiscal?).cycle %>
 
 <% Current.event.schedule.slots_for_day(params[:day].to_i).each do |slot| %>
+  <% next if slot.description.in? ["Registration", "Introduction", "Breakfast"] %>
+
   <% if slot.description == "Talk" %>
     <% sponsorship = fiscal_sponsors.next %>
 
