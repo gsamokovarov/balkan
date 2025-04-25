@@ -12,7 +12,7 @@
       <% end %>
     </h3>
     <%= render "prose", variant: :xl, class: "line-clamp-3" do %>
-      <%= render_markdown blog_post.content %>
+      <%= render_plain truncate(blog_post.content, length: 240) %>
     <% end %>
   </div>
   <div class="relative mt-8 flex items-center gap-x-4">
