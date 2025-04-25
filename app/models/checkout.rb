@@ -5,7 +5,6 @@ module Checkout
     ticket_type = TicketType.enabled.find params.fetch(:ticket_type_id)
 
     precondition params[:tickets].present?, "At least 1 ticket needs to be created"
-    precondition ticket_type.event.upcoming?, "Event has started or is in the past"
 
     ApplicationRecord.transaction do
       order = Order.create! event: ticket_type.event
