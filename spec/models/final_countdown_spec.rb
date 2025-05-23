@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe FinalCountdown do
+RSpec.case FinalCountdown do
   test "calculates correct days and hours when event is tomorrow at 2:30 PM" do
     travel_to Time.zone.local(2024, 1, 15, 14, 30, 0) do
       countdown = FinalCountdown.until Date.new(2024, 1, 16)
