@@ -150,7 +150,7 @@ RSpec.case FinalCountdown do
   end
 
   test "ongoing? returns false when days are negative" do
-    countdown = FinalCountdown.new(days: -1, hours: 0)
+    countdown = FinalCountdown.new days: -1, hours: 0
     assert !countdown.ongoing?
   end
 
