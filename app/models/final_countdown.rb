@@ -1,7 +1,10 @@
 class FinalCountdown
   def self.until(date)
     days = date - Date.current
-    hours = Time.current.seconds_until_end_of_day / 1.hour
+    return new days:, hours: 0 if days.negative?
+
+    seconds = date.end_of_day - Time.current
+    hours = (seconds % 1.day) / 1.hour
 
     new days:, hours:
   end
@@ -10,7 +13,7 @@ class FinalCountdown
 
   def initialize(days:, hours:)
     @days = days.to_i
-    @hours = days.negative? ? 0 : hours
+    @hours = hours.to_i
   end
 
   def counters = [["days", days], ["hours", hours]]
