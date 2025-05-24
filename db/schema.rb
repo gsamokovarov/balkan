@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_23_133427) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_25_000001) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -103,17 +103,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_133427) do
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
-  create_table "galleries", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.string "title"
-    t.string "videos_url", null: false
-    t.string "photos_url"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_galleries_on_event_id", unique: true
-  end
-
   create_table "invoice_sequences", force: :cascade do |t|
     t.integer "initial_number", null: false
     t.datetime "created_at", null: false
@@ -146,6 +135,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_133427) do
     t.index ["event_id"], name: "index_lineup_members_on_event_id"
     t.index ["speaker_id"], name: "index_lineup_members_on_speaker_id"
     t.index ["talk_id"], name: "index_lineup_members_on_talk_id"
+  end
+
+  create_table "media_galleries", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "title"
+    t.string "videos_url", null: false
+    t.string "photos_url"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_media_galleries_on_event_id", unique: true
   end
 
   create_table "orders", force: :cascade do |t|
@@ -322,12 +322,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_133427) do
   add_foreign_key "embeddings", "events"
   add_foreign_key "events", "invoice_sequences"
   add_foreign_key "events", "venues"
-  add_foreign_key "galleries", "events"
   add_foreign_key "invoices", "invoice_sequences"
   add_foreign_key "invoices", "orders"
   add_foreign_key "lineup_members", "events"
   add_foreign_key "lineup_members", "speakers"
   add_foreign_key "lineup_members", "talks"
+  add_foreign_key "media_galleries", "events"
   add_foreign_key "orders", "events"
   add_foreign_key "schedule_slots", "lineup_members"
   add_foreign_key "schedule_slots", "schedules"
