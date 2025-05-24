@@ -1,0 +1,9 @@
+<%= render "section", title: "Media Gallery" do %>
+  <% if @media_gallery %>
+    <%= render "form", media_gallery: @media_gallery %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_event_media_gallery_path(Current.event)) { "New media gallery" } %>
+    <% end %>
+  <% end %>
+<% end %>

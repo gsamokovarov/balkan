@@ -1,4 +1,4 @@
-class Gallery < ApplicationRecord
+class MediaGallery < ApplicationRecord
   belongs_to :event
   has_many_attached :highlights
 

@@ -15,8 +15,8 @@
 
 <%= render "speakers", highlight: !hi %>
 
-<% if Current.event.gallery %>
-  <%= render "gallery", gallery: Current.event.gallery, highlight: !hi %>
+<% if Current.event.media_gallery %>
+  <%= render "media_gallery", media_gallery: Current.event.media_gallery, highlight: !hi %>
 <% end %>
 
 <%= render "tickets", highlight: !hi %>

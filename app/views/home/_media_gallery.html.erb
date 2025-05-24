@@ -1,0 +1,18 @@
+<%# locals: (media_gallery:, highlight: false) %>
+
+<%= render "section", title: media_gallery.title || "Highlights", highlight: do %>
+  <% if media_gallery.description.present? %>
+    <%= render "prose" do %>
+      <%= render_markdown media_gallery.description %>
+    <% end %>
+  <% end %>
+  <% if media_gallery.highlights.any? %>
+    <%= render "image_gallery", images: media_gallery.highlights %>
+  <% end %>
+  <div class="flex gap-4">
+    <%= link_to "Watch videos", media_gallery.videos_url, class: "btn-primary", target: "_blank", rel: "noopener" %>
+    <% if media_gallery.photos_url.present? %>
+      <%= link_to "View photos", media_gallery.photos_url, class: "btn-secondary", target: "_blank", rel: "noopener" %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,6 +1,6 @@
-<%# locals: (gallery:) %>
+<%# locals: (media_gallery:) %>
 
-<%= admin_form gallery, url: admin_event_gallery_path(gallery.event) do |f| %>
+<%= admin_form media_gallery, url: admin_event_media_gallery_path(media_gallery.event) do |f| %>
   <%= f.text_input :title %>
   <%= f.text_area_input :description %>
   <%= f.text_input :videos_url, required: true %>
