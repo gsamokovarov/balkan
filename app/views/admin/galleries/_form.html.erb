@@ -1,0 +1,10 @@
+<%# locals: (gallery:) %>
+
+<%= admin_form gallery, url: admin_event_gallery_path(gallery.event) do |f| %>
+  <%= f.text_input :title %>
+  <%= f.text_area_input :description %>
+  <%= f.text_input :videos_url, required: true %>
+  <%= f.text_input :photos_url %>
+  <%= f.file_input :highlights, multiple: true %>
+  <%= f.submit %>
+<% end %>

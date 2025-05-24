@@ -1,0 +1,9 @@
+<%= render "section", title: "Gallery" do %>
+  <% if @gallery %>
+    <%= render "form", gallery: @gallery %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_event_gallery_path(Current.event)) { "New gallery" } %>
+    <% end %>
+  <% end %>
+<% end %>
