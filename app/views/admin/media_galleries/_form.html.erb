@@ -4,7 +4,11 @@
   <%= f.text_input :title %>
   <%= f.text_area_input :description %>
   <%= f.text_input :videos_url, required: true %>
+  <%= f.text_input :video1_url %>
+  <%= f.text_input :video2_url %>
+  <%= f.text_input :video3_url %>
+  <%= f.text_input :video4_url %>
   <%= f.text_input :photos_url %>
-  <%= f.file_input :highlights, multiple: true %>
+  <%= f.file_input :photo_highlights, multiple: true %>
   <%= f.submit %>
 <% end %>

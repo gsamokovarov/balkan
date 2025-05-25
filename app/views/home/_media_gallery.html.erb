@@ -1,18 +1,39 @@
 <%# locals: (media_gallery:, highlight: false) %>
 
-<%= render "section", title: media_gallery.title || "Highlights", highlight: do %>
+<%= render "section", title: media_gallery.title.presence || "Highlights", highlight: do %>
   <% if media_gallery.description.present? %>
     <%= render "prose" do %>
       <%= render_markdown media_gallery.description %>
     <% end %>
   <% end %>
-  <% if media_gallery.highlights.any? %>
-    <%= render "image_gallery", images: media_gallery.highlights %>
+
+  <% if media_gallery.photo_highlights.any? %>
+    <%= render "image_gallery", images: media_gallery.photo_highlights %>
   <% end %>
-  <div class="flex gap-4">
-    <%= link_to "Watch videos", media_gallery.videos_url, class: "btn-primary", target: "_blank", rel: "noopener" %>
+
+  <% if media_gallery.video_highlights.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <% media_gallery.video_highlights.each do |video_url| %>
+        <% if embed_url = media_gallery.video_embed_url(video_url) %>
+          <div class="aspect-video border-2 border-black rounded-md overflow-hidden">
+            <iframe
+              src="<%= embed_url %>"
+              title="Video"
+              frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowfullscreen
+              class="w-full h-full">
+            </iframe>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="flex gap-5">
+    <%= link_to "Watch all videos", media_gallery.videos_url, class: "btn-primary", target: "_blank", rel: "noopener" %>
     <% if media_gallery.photos_url.present? %>
-      <%= link_to "View photos", media_gallery.photos_url, class: "btn-secondary", target: "_blank", rel: "noopener" %>
+      <%= link_to "View all photos", media_gallery.photos_url, class: "btn-secondary", target: "_blank", rel: "noopener" %>
     <% end %>
   </div>
 <% end %>
