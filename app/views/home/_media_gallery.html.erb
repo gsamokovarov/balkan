@@ -13,12 +13,12 @@
 
   <% if media_gallery.video_highlights.any? %>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <% media_gallery.video_highlights.each do |video_url| %>
+      <% media_gallery.video_highlights.each_with_index do |video_url, index| %>
         <% if embed_url = media_gallery.video_embed_url(video_url) %>
           <div class="aspect-video border-2 border-black rounded-md overflow-hidden">
             <iframe
               src="<%= embed_url %>"
-              title="Video"
+              title="<%= "Video #{index + 1}" %>"
               frameborder="0"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               allowfullscreen
@@ -30,7 +30,7 @@
     </div>
   <% end %>
 
-  <div class="flex gap-5">
+  <div class="flex gap-4">
     <%= link_to "Watch all videos", media_gallery.videos_url, class: "btn-primary", target: "_blank", rel: "noopener" %>
     <% if media_gallery.photos_url.present? %>
       <%= link_to "View all photos", media_gallery.photos_url, class: "btn-secondary", target: "_blank", rel: "noopener" %>
