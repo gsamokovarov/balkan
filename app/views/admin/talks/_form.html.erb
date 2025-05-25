@@ -3,6 +3,7 @@
 <%= admin_form [:admin, talk] do |f| %>
   <%= f.text_input :name %>
   <%= f.text_area_input :description %>
+  <%= f.text_input :video_url %>
   <%= f.file_input :ogp_image %>
   <%= f.select_input :speaker_ids, Speaker.all.map { [it.name, it.id] }, multiple: true %>
   <%= f.submit %>

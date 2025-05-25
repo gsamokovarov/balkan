@@ -49,6 +49,20 @@
       <%= render_markdown @talk.description %>
     <% end %>
   <% end %>
+
+  <% if @talk.video_embed_url %>
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Video</h2>
+    <div class="aspect-video border-2 border-black rounded-md overflow-hidden">
+      <iframe
+        src="<%= @talk.video_embed_url %>"
+        title="<%= @talk.name %>"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen
+        class="w-full h-full">
+      </iframe>
+    </div>
+  <% end %>
 <% end %>
 
 <%= render "sponsors/sponsors" %>
