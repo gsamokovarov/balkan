@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_25_000002) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_25_000003) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -271,6 +271,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_25_000002) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "video_url"
   end
 
   create_table "ticket_types", force: :cascade do |t|
