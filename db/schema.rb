@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_25_000001) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_25_000002) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -145,6 +145,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_25_000001) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "video1_url"
+    t.string "video2_url"
+    t.string "video3_url"
+    t.string "video4_url"
     t.index ["event_id"], name: "index_media_galleries_on_event_id", unique: true
   end
 
