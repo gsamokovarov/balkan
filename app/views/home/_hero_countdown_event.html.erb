@@ -5,7 +5,7 @@
 
   <div class="mx-auto flex justify-center gap-8 w-fit">
     <% Current.event.beginning_countdown.counters.each do |unit, value| %>
-      <div class="flex flex-col gap-y-4 w-28 sm:w-36">
+      <div class="flex flex-col gap-y-4 min-w-28 sm:min-w-36">
         <dt class="text-lg text-center font-semibold"><%= unit %></dt>
         <dd class="order-first p-2 bg-black text-7xl text-white text-center font-semibold rounded-md sm:text-8xl">
           <%= format "%02d", value %>
