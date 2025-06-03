@@ -17,7 +17,7 @@
         </p>
       </div>
 
-      <% if Current.event.speaker_applications_countdown.ongoing? %>
+      <% if Current.event.accepts_speaking_applications? %>
         <%= render "hero_countdown_cfp" %>
       <% elsif Current.event.beginning_countdown.ongoing? %>
        <%= render "hero_countdown_event" %>
