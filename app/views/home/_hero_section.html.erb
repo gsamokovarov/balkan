@@ -19,7 +19,7 @@
 
       <% if Current.event.accepts_speaking_applications? %>
         <%= render "hero_countdown_cfp" %>
-      <% elsif Current.event.beginning_countdown.ongoing? %>
+      <% elsif Current.event.beginning_countdown.ongoing? && Current.event.ticket_types.any? %>
        <%= render "hero_countdown_event" %>
       <% end %>
     </div>
