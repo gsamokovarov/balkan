@@ -13,13 +13,17 @@
   <%= render "blog", highlight: !hi %>
 <% end %>
 
-<%= render "speakers", highlight: !hi %>
+<% if Current.event.lineup_members.any? %>
+  <%= render "speakers", highlight: !hi %>
+<% end %>
 
 <% if Current.event.media_gallery %>
   <%= render "media_gallery", media_gallery: Current.event.media_gallery, highlight: !hi %>
 <% end %>
 
-<%= render "tickets", highlight: !hi %>
+<% if Current.event.ticket_types.any? %>
+  <%= render "tickets", highlight: !hi %>
+<% end %>
 
 <% if Current.event.venue %>
   <%= render "venue", venue: Current.event.venue, highlight: !hi %>
