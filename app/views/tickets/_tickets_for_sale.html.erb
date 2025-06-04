@@ -4,13 +4,15 @@
       <%= render "tickets/ticket_card_link", ticket_type: %>
     <% end %>
   </div>
-  <% Current.event.ticket_types.enabled.each do |ticket_type| %>
-    <% if ticket_type.description.present? %>
-      <%= render "prose" do %>
-        <%= render_markdown ticket_type.description %>
+  <div class="flex flex-col gap-4">
+    <% Current.event.ticket_types.enabled.each do |ticket_type| %>
+      <% if ticket_type.description.present? %>
+        <%= render "prose" do %>
+          <%= render_markdown ticket_type.description %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% else %>
   <%= render "tickets/sold_out" %>
 <% end %>
