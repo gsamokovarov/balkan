@@ -7,7 +7,7 @@
   <% Current.event.ticket_types.enabled.each do |ticket_type| %>
     <% if ticket_type.description.present? %>
       <%= render "prose" do %>
-        <p><%= ticket_type.description %></p>
+        <%= render_markdown ticket_type.description %>
       <% end %>
     <% end %>
   <% end %>
