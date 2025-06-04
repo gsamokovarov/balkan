@@ -3,7 +3,7 @@
 <%= admin_form [:admin, sponsorship_package.event, sponsorship_package] do |f| %>
   <%= f.readonly_input :event_id, [[sponsorship_package.event.name, sponsorship_package.event.id]] %>
   <%= f.text_input :name, required: true %>
-  <%= f.text_input :description %>
+  <%= f.text_area_input :description %>
 
   <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
     <legend class="text-sm font-medium leading-6 text-gray-500">Variants</legend>
