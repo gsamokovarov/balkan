@@ -4,12 +4,11 @@
       <%= render "tickets/ticket_card_link", ticket_type: %>
     <% end %>
   </div>
-  <% if Current.event.ticket_types.any?(&:supporter?) %>
-    <%= render "prose" do %>
-      <p>
-        Supporter tickets get our eternal gratitude and a hand-made gift, made by
-        the organizers!
-      </p>
+  <% Current.event.ticket_types.enabled.each do |ticket_type| %>
+    <% if ticket_type.description.present? %>
+      <%= render "prose" do %>
+        <p><%= ticket_type.description %></p>
+      <% end %>
     <% end %>
   <% end %>
 <% else %>

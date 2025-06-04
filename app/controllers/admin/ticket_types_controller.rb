@@ -37,6 +37,6 @@ class Admin::TicketTypesController < Admin::ApplicationController
 
   private
 
-  def ticket_type_params = params.require(:ticket_type).permit(:event_id, :name, :price, :enabled)
+  def ticket_type_params = params.require(:ticket_type).permit(:event_id, :name, :description, :price, :enabled)
   def event = Event.find(params[:event_id])
 end
