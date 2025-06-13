@@ -23,11 +23,12 @@
   } %>
 <% end %>
 
-<%= render "section", title: "Embeddings", description: "Embedded resources for #{Current.event.name}" do %>
-  <%= render "admin/embeddings/embeddings", embeddings: Current.event.embeddings %>
-<% end %>
 
-<% if Current.event.embeddings.none? %>
+<% if Current.event.embeddings.any? %>
+  <%= render "section", title: "Embeddings", description: "Embedded resources for #{Current.event.name}" do %>
+    <%= render "admin/embeddings/embeddings", embeddings: Current.event.embeddings %>
+  <% end %>
+<% else %>
   <%= render "section", title: "Embeddings" do %>
     <%= render "empty_state" do %>
       <% admin_button(:primary, link: new_admin_event_embedding_path(Current.event)) { "New embedding" } %>
