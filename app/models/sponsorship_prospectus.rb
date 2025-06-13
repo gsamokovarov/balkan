@@ -35,13 +35,12 @@ module SponsorshipProspectus
       x_pos = 0
       headers.each_with_index do |header, i|
         width = col_widths[i]
-        text_box header,
-                 at: [x_pos + 10, header_y - 6],
-                 width: width - 10,
-                 height: header_height - 6,
-                 size: 12,
-                 style: :bold,
-                 valign: :center
+        text_box header, at: [x_pos + 10, header_y - 6],
+                         width: width - 10,
+                         height: header_height - 6,
+                         size: 12,
+                         style: :bold,
+                         valign: :center
         x_pos += width
       end
 
@@ -60,13 +59,7 @@ module SponsorshipProspectus
         column_text = row_data[column_index]
         column_width = col_widths[column_index] - 20
 
-        test_box = Prawn::Text::Box.new(
-          column_text,
-          at: [0, cursor],
-          width: column_width,
-          height: 1000,
-          document: self,
-        )
+        test_box = Prawn::Text::Box.new column_text, at: [0, cursor], width: column_width, height: 1000, document: self
         test_box.render dry_run: true
         content_height = test_box.height
         max_height = [max_height, content_height + 20].max
@@ -213,26 +206,13 @@ module SponsorshipProspectus
               "Unlimited"
             end
 
-          row_data = [
-            variant.name,
-            "€#{variant.price}",
-            perks_text,
-            quantity,
-          ]
-
+          row_data = [variant.name, "€#{variant.price}", perks_text, quantity]
           cell_styles = {
             0 => { style: :bold },
             2 => { size: 10, overflow: :shrink_to_fit },
           }
 
-          draw_table_row(
-            row_data,
-            col_widths,
-            {
-              height_for_column: { index: 2 },
-              cell_styles:,
-            },
-          )
+          draw_table_row row_data, col_widths, { height_for_column: { index: 2 }, cell_styles: }
         end
       end
 
