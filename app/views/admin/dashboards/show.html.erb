@@ -12,15 +12,25 @@
 <% end %>
 
 <%= render "section", title: "Tickets", description: "Tickets from the last 10 orders" do %>
-  <%= render "admin/tickets/tickets", tickets: @orders.first(10).flat_map(&:tickets) %>
+  <% if @orders.any? %>
+    <%= render "admin/tickets/tickets", tickets: @orders.first(10).flat_map(&:tickets) %>
+  <% else %>
+    <%= render "empty_state" %>
+  <% end %>
 <% end %>
 
 <%= render "section", title: "T-shirts", description: "T-shirt sizes for all attendees" do %>
   <% shirt_sizes = Current.event.tickets.group(:shirt_size).count %>
-  <% total_shirts = shirt_sizes.values.sum %>
-  <% render "stats", columns: shirt_sizes.count, data: shirt_sizes.map {
-    ["#{_1} (#{(_2.to_f / total_shirts * 100).round}%)", _2]
-  } %>
+  <% if shirt_sizes.empty? %>
+    <%= render "empty_state" do %>
+      <% admin_button(:primary, link: new_admin_event_ticket_path(Current.event)) { "New ticket" } %>
+    <% end %>
+  <% else %>
+    <% total_shirts = shirt_sizes.values.sum %>
+    <% render "stats", columns: shirt_sizes.count, data: shirt_sizes.map {
+      ["#{_1} (#{(_2.to_f / total_shirts * 100).round}%)", _2]
+    } %>
+  <% end %>
 <% end %>
 
 
