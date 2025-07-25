@@ -221,6 +221,6 @@ RSpec.case "Admin Giveaway", type: :feature do
     fill_in "Password", with: "admin"
     click_button "Sign in"
 
-    assert_have_content page, "Current event"
+    assert_have_content page, "Dashboard"
   end
 end
