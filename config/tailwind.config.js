@@ -1,4 +1,4 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require("tailwindcss/defaultTheme")
 
 module.exports = {
   future: {
@@ -60,8 +60,5 @@ module.exports = {
       }),
     },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms")
-  ],
-};
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+}
