@@ -14,7 +14,7 @@ module ApplicationHelper
     "rotate-6",
     "rotate-1",
     "-rotate-3",
-  ].freeze
+  ]
 
   def card_rotation(index) = CARD_ROTATIONS[index % CARD_ROTATIONS.size]
   def format_money(amount, currency: "€", precision: 2) = number_to_currency(amount, unit: currency, precision:)

@@ -1,5 +1,5 @@
 class Ticket < ApplicationRecord
-  SHIRT_SIZES = %w[XS S M L XL XXL].freeze
+  SHIRT_SIZES = %w[XS S M L XL XXL]
 
   belongs_to :order
   belongs_to :ticket_type
