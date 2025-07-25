@@ -2,8 +2,8 @@
 
 <% qrcode = RQRCode::QRCode.new sponsorship.sponsor.url %>
 
-<div data-controller="screenshot" class="space-y-6">
-  <section data-screenshot-target="element" class="relative w-[960px] h-[540px] p-16 bg-banitsa-50">
+<div class="space-y-6">
+  <section class="relative w-[960px] h-[540px] p-16 bg-banitsa-50">
     <%= render "admin/shared/balkan_ruby_overlay" %>
 
     <div class="<%= card_rotation(0) %> absolute top-8 right-8 bg-white p-4 border-2 border-black rounded-md max-w-64 font-semibold">
@@ -26,6 +26,4 @@
       </p>
     </div>
   </section>
-
-  <%= admin_button(:primary, data: { action: "screenshot#capture" }) { "Screenshot" } %>
 </div>

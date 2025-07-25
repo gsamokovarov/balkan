@@ -5,8 +5,8 @@
   grid-cols-7 grid-cols-8 grid-cols-9 grid-cols-10 grid-cols-11 grid-cols-12 %>
 
 <%= turbo_frame_tag "thumbnail" do %>
-  <div data-controller="screenshot">
-    <section data-screenshot-target="element" class="relative w-[960px] h-[540px] p-16 flex flex-col gap-8 bg-banitsa-50 overflow-hidden">
+  <div>
+    <section class="relative w-[960px] h-[540px] p-16 flex flex-col gap-8 bg-banitsa-50 overflow-hidden">
       <%= render "admin/shared/balkan_ruby_overlay" %>
 
       <div>
@@ -49,7 +49,5 @@
       <%= f.number_input :grid_columns, value: grid_columns %>
       <%= f.check_box_input :show_details, checked: show_details %>
     <% end %>
-
-    <%= admin_button(:primary, data: { action: "screenshot#capture" }) { "Screenshot" } %>
   </div>
 <% end %>
