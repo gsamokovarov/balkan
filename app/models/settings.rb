@@ -11,7 +11,7 @@ module Settings
 
   def google_api_key = get __method__, nil
 
-  def development_event = get __method__, "Balkan Ruby 2025"
+  def development_event = get __method__, nil
 
   private
 
