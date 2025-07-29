@@ -1,34 +1,49 @@
 <img alt="Balkan Ruby logo" src="https://2018.balkanruby.com/static/assets/balkanruby-logo.svg">
 
-Balkan Ruby is back to business!
+[Balkan Ruby 2026](https://balkanruby.com) is about the hot takes, the spicy
+memes, and (humbly) the best Ruby conference in the world.
+
+Was this README AI generated, can the kids these days still write (or code)?
+Are SPAs still worth it, or should we let the servers serve? Is cloud computing
+still on, or should you own your servers? Typed Ruby, when?
+
+Give us all your hot takes for a spicy [Balkan Ruby 2026](https://balkanruby.com)
+in Sofia, Bulgaria.
+
+## About
+
+This is the codebase for the [Balkan Ruby](https://balkanruby) conference
+website and its CMS, or conference-management-system. The code-base is
+pragmatic and modern. Most of the Balkan Ruby conference needs are covered by a
+custom-built admin management solution, but some features are still hard-coded.
+Welcome to the Balkans, where construction (and software development) is done
+for the sake of construction and is never finished.
 
 ## Development
 
-Before running Balkan Ruby on your local macOS machine, you need the following software:
-
-### Ready...
-
-- Ruby 3.4.1
+- Ruby 3.4.4
 - SQLite3
 - Foreman (or [hivemind](https://github.com/DarthSim/hivemind))
 
-Install Ruby 3.4.1 with `rbenv`, `chruby` or `asdf`. Use [Homebrew](https://brew.sh) for everything else:
+Install Ruby 3.4.4 with `rbenv`, `chruby` or `asdf`. Use
+[Homebrew](https://brew.sh), Portage or pacman (if you are a noob), for
+everything else:
 
 ```
-brew install sqlite3
+brew install sqlite3 libvips
 ```
 
-With the dependencies installed, proceed to the next step.
+With the dependencies installed, proceed to the next step and...
 
-### Steady...
+### Pour the rakia
 
-Clone the repo.
+Clone the repo:
 
 ```sh
 git clone git@github.com:gsamokovarov/balkan.git
 ```
 
-Setup project environment.
+Setup the project development environment:
 
 ```sh
 bin/setup
@@ -37,7 +52,7 @@ bin/setup
 #### Stripe setup
 
 > **Warning**
-> Make sure you are using the test mode in Stripe.
+> Make sure you are using the test mode in Stripe for local development.
 
 1. Install [stripe cli](https://stripe.com/docs/stripe-cli)
 2. Setup a [local listener for the webhooks](https://stripe.com/docs/development/dashboard/local-listener)
@@ -46,20 +61,50 @@ bin/setup
 - STRIPE_SECRET_KEY
 - STRIPE_WEBHOOK_SECRET
 
-#### Sendgrid setup
-
-The `SENDGRID_API_KEY` needs to be set with a random value e.g [.env.erb](./.env.erb).
-In development & test emails are not sent.
-
 #### Admin setup
 
 The admin is accessed at `/admin`. The `admin@example.com` user is seeded with
-the password `admin`.
+the password `admin` that you can use for development.
 
-### Go!
+### Enjoy it, responsibly
 
 Start the application.
 
 ```sh
 bin/dev
 ```
+
+## Testing
+
+Run the test suite:
+
+```sh
+bundle exec rspec
+```
+
+The project uses RSpec but with a twist – I enjoy minitest because of its
+simplicity, however, I love RSpec's runner and tooling. I created [rspec-xunit](https://github.com/gsamokovarov/rspec-xunit)
+so I use can RSpec with a xUnit testing dialect.
+
+## Deployment
+
+This application is deployed to a custom server maintained by me and @nenoganchev using
+[Hamal](https://github.com/gsamokovarov/hamal), a simple deployment tool we
+created for its deployment. The deployment configuration is in `config/deploy.yml`.
+
+To deploy (if you have access):
+
+```sh
+bin/hamal deploy
+```
+
+## Contributing
+
+This code is and always will be specific to Balkan Ruby and the events I run.
+If you find this code useful for your own conference or project, you're free to
+fork it and adapt it to your needs.
+
+## License
+
+This project is open source under the MIT License. Do whatever you want with
+it, just don't sue me (or request features).

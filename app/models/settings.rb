@@ -1,10 +1,10 @@
 module Settings
   extend self
 
-  def sendgrid_api_key = get __method__
-
   def stripe_secret_key = get __method__
   def stripe_webhook_secret = get __method__
+
+  def sendgrid_api_key = get __method__, nil
 
   def h_captcha_secret = get __method__, nil
   def h_captcha_site_key = get __method__, nil
