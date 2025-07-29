@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+if [ -z "$STRIPE_WEBHOOK_SECRET" ] || [ -z "$STRIPE_SECRET_KEY" ]; then
+  echo "STRIPE_WEBHOOK_SECRET and STRIPE_SECRET_KEY environment variables are not set. Running noop process until interrupted."
+  exec sleep infinity
+else
+  exec bundle exec stripe listen --forward-to localhost:3000/webhooks/stripe
+fi

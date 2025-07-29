@@ -49,10 +49,11 @@ Set up the project development environment:
 bin/setup
 ```
 
-#### Prepare salad (optional)
+#### Prepare the salad (optional)
 
 Optionally, you can set up the project to accept payments via Stripe in
-development. Without it, payments in development will not work.
+development. Without it, payments in development will not work but running the
+application through `bin/dev` will still work. Sorry for the spoilers.
 
 > **Warning**
 > Make sure you are using the test mode in Stripe for local development.
