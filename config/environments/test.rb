@@ -62,8 +62,6 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  config.lts_domain = "2024.example.com"
-
   Rails.application.routes.default_url_options[:host] = "example.com"
 
   # TODO: Figure out a better way to set those for the tests.
