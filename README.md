@@ -49,7 +49,10 @@ Setup the project development environment:
 bin/setup
 ```
 
-#### Stripe setup
+#### Prepare salad (optional)
+
+Optionally, you can setup the project to accept payments via Stripe in
+development. Without it, payments in development will not work.
 
 > **Warning**
 > Make sure you are using the test mode in Stripe for local development.
@@ -61,12 +64,12 @@ bin/setup
 - STRIPE_SECRET_KEY
 - STRIPE_WEBHOOK_SECRET
 
-#### Admin setup
+#### Resolve the geopolitical issues (required)
 
 The admin is accessed at `/admin`. The `admin@example.com` user is seeded with
 the password `admin` that you can use for development.
 
-### Enjoy it, responsibly
+### Enjoy it (responsibly)
 
 Start the application.
 
