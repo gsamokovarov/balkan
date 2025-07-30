@@ -1,4 +1,4 @@
-<img alt="Balkan Ruby logo" src="https://2018.balkanruby.com/static/assets/balkanruby-logo.svg">
+![Logo](./app/assets/images/logo-black.svg)
 
 [Balkan Ruby 2026](https://balkanruby.com) is about the hot takes, the spicy
 memes, and (humbly) the best Ruby conference in the world.
