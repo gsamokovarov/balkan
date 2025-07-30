@@ -124,6 +124,9 @@ Style/DocumentDynamicEvalDefinition:
 Style/MultilineBlockChain:
   Enabled: false
 
+Style/ItBlockParameter:
+  EnforcedStyle: only_numbered_parameters
+
 # Let's not enforce arbitrary metrics.
 Metrics/MethodLength:
   Enabled: false
