@@ -141,10 +141,10 @@ module Admin::FormHelper
 
     private
 
-    def input_for(method, error_method: method, label: method, addendum: nil, class: nil, &block)
+    def input_for(method, error_method: method, label: method, addendum: nil, class: nil, &)
       @template.tag.div class: do
         @template.concat label(label, class: "block text-sm font-medium leading-6 text-gray-900")
-        @template.concat @template.tag.div(class: "mt-2", &block)
+        @template.concat @template.tag.div(class: "mt-2", &)
         if object_errors(error_method).any?
           @template.concat @template.tag.p object_errors(error_method).first, class: "mt-2 text-sm text-red-600"
         end
