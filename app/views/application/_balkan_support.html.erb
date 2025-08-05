@@ -1,0 +1,37 @@
+<div data-controller="balkan-support" class="fixed bottom-4 right-4 z-50">
+  <button data-action="click->balkan-support#toggle" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-4 shadow-lg transition-all duration-200 flex items-center justify-center">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+    </svg>
+  </button>
+
+  <div data-balkan-support-target="widget" class="absolute bottom-16 right-0 w-80 h-96 bg-white rounded-lg shadow-xl border transform translate-y-full opacity-0 transition-all duration-300 ease-in-out">
+    <div class="bg-red-500 text-white px-4 py-3 rounded-t-lg flex items-center justify-between">
+      <div class="flex items-center">
+        <div class="w-8 h-8 bg-red-700 rounded-full flex items-center justify-center text-sm font-bold mr-3">
+          BS
+        </div>
+        <div>
+          <h3 class="font-semibold text-sm">Balkan Support</h3>
+          <p class="text-xs text-red-100">Online</p>
+        </div>
+      </div>
+      <button data-action="click->balkan-support#toggle" class="text-red-100 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div data-balkan-support-target="messages" class="h-64 overflow-y-auto p-4 bg-gray-50"></div>
+
+    <form data-action="submit->balkan-support#sendMessage" class="p-4 border-t bg-white rounded-b-lg">
+      <div class="flex space-x-2">
+        <input data-balkan-support-target="input" type="text" placeholder="Type your message..." class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-red-500" autocomplete="off">
+        <button data-balkan-support-target="sendButton" type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+          Send
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
