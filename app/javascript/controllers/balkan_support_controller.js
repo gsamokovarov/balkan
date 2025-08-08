@@ -1,13 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
 
+const WELCOME_MESSAGES = ["What do you want?", "Can't you see I'm busy?", "I'm on a break, come back later."]
+
+const RESPONSES = [
+  "THIS IS NOT INFORMATION! 🙅‍♀️",
+  "That's not my department.",
+  "Let me ask my colleague.",
+  "The system is down, nothing I can do.",
+  "What are you doing here? I did't called you!",
+]
+
 export default class extends Controller {
   static targets = ["widget", "messages", "input", "sendButton"]
 
   connect() {
     this.isOpen = false
-    this.welcomeMessages = ["What do you want?"]
-    this.responses = ["THIS IS NOT INFORMATION! 🙅‍♀️"]
-
     this.addWelcomeMessage()
   }
 
@@ -24,28 +31,24 @@ export default class extends Controller {
 
   sendMessage(event) {
     event.preventDefault()
-    const message = this.inputTarget.value.trim()
 
+    const message = this.inputTarget.value.trim()
     if (message) {
       this.addUserMessage(message)
       this.inputTarget.value = ""
-
-      setTimeout(() => {
-        this.addBotResponse()
-      }, 500)
+      setTimeout(() => this.addBotResponse(), 500)
     }
   }
 
   addWelcomeMessage() {
-    const welcomeMessage = this.welcomeMessages[Math.floor(Math.random() * this.welcomeMessages.length)]
-    this.addBotMessage(welcomeMessage)
+    this.addBotMessage(WELCOME_MESSAGES[Math.floor(Math.random() * WELCOME_MESSAGES.length)])
   }
 
   addUserMessage(message) {
     const messageDiv = document.createElement("div")
     messageDiv.className = "flex justify-end mb-3"
     messageDiv.innerHTML = `
-      <div class="bg-blue-500 text-white px-4 py-2 rounded-lg max-w-xs">
+      <div class="bg-banitsa-200 text-gray-800 px-4 py-2 rounded-lg max-w-xs">
         ${message}
       </div>
     `
@@ -60,9 +63,9 @@ export default class extends Controller {
       <div class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg max-w-xs">
         <div class="flex items-center mb-1">
           <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold mr-2">
-            BS
+            бI
           </div>
-          <span class="text-xs font-semibold">Balkan Support</span>
+          <span class="text-xs font-semibold">бAI Ivan</span>
         </div>
         ${message}
       </div>
@@ -72,8 +75,7 @@ export default class extends Controller {
   }
 
   addBotResponse() {
-    const response = this.responses[Math.floor(Math.random() * this.responses.length)]
-    this.addBotMessage(response)
+    this.addBotMessage(RESPONSES[Math.floor(Math.random() * RESPONSES.length)])
   }
 
   scrollToBottom() {
