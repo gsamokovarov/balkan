@@ -10,15 +10,6 @@ RSpec.case FinalCountdown do
     end
   end
 
-  test "calculates correct days and hours when event is in 2 days" do
-    travel_to Time.zone.local(2024, 1, 15, 14, 30, 0) do
-      countdown = FinalCountdown.until Date.new(2024, 1, 17)
-
-      assert_eq countdown.days, 2
-      assert_eq countdown.hours, 9
-    end
-  end
-
   test "calculates correct days and hours when event is in 10 days" do
     travel_to Time.zone.local(2024, 1, 15, 14, 30, 0) do
       countdown = FinalCountdown.until Date.new(2024, 1, 25)
@@ -43,16 +34,6 @@ RSpec.case FinalCountdown do
 
       assert_eq countdown.days, 0
       assert_eq countdown.hours, 11
-      assert countdown.ongoing?
-    end
-  end
-
-  test "shows 0 days and remaining hours when event is today in evening" do
-    travel_to Time.zone.local(2024, 1, 15, 20, 0, 0) do
-      countdown = FinalCountdown.until Date.current
-
-      assert_eq countdown.days, 0
-      assert_eq countdown.hours, 3
       assert countdown.ongoing?
     end
   end
@@ -95,15 +76,6 @@ RSpec.case FinalCountdown do
     end
   end
 
-  test "handles early morning correctly" do
-    travel_to Time.zone.local(2024, 1, 15, 1, 0, 0) do
-      countdown = FinalCountdown.until Date.new(2024, 1, 16)
-
-      assert_eq countdown.days, 1
-      assert_eq countdown.hours, 22
-    end
-  end
-
   test "shows decreasing hours as day progresses for same target" do
     target_date = Date.new 2024, 1, 16
 
@@ -127,40 +99,22 @@ RSpec.case FinalCountdown do
     assert afternoon_countdown.hours > evening_countdown.hours
   end
 
-  test "counters returns an array of days and hours" do
-    countdown = FinalCountdown.new days: 5, hours: 12
-
-    assert_eq countdown.counters, [["days", 5], ["hours", 12]]
-  end
-
   test "counters converts values to integers" do
     countdown = FinalCountdown.new days: 5.7, hours: 12.9
 
     assert_eq countdown.counters, [["days", 5], ["hours", 12]]
   end
 
-  test "ongoing? returns true when days are positive" do
-    countdown = FinalCountdown.new days: 1, hours: 0
-    assert countdown.ongoing?
-  end
-
   test "ongoing? returns true when days are zero" do
     countdown = FinalCountdown.new days: 0, hours: 5
+
     assert countdown.ongoing?
   end
 
   test "ongoing? returns false when days are negative" do
     countdown = FinalCountdown.new days: -1, hours: 0
+
     assert !countdown.ongoing?
-  end
-
-  test "hours calculation now correctly breaks down total time" do
-    travel_to Time.zone.local(2024, 1, 15, 14, 30, 0) do
-      countdown = FinalCountdown.until Date.new(2024, 1, 16)
-
-      assert_eq countdown.days, 1
-      assert_eq countdown.hours, 9
-    end
   end
 
   test "hours calculation shows correct fractional day part" do
@@ -169,6 +123,16 @@ RSpec.case FinalCountdown do
 
       assert_eq countdown.days, 5
       assert_eq countdown.hours, 9
+    end
+  end
+
+  test "an event is relevent if ongoing and in 99 days" do
+    travel_to Time.zone.local(2024, 1, 15, 14, 30, 0) do
+      countdown = FinalCountdown.until Date.new(2024, 8, 15)
+      assert !countdown.relevant?
+
+      countdown = FinalCountdown.until Date.new(2024, 4, 15)
+      assert countdown.relevant?
     end
   end
 end

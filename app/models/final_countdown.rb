@@ -18,4 +18,5 @@ class FinalCountdown
 
   def counters = [["days", days], ["hours", hours]]
   def ongoing? = days >= 0
+  def relevant? = days >= 0 && days < 100
 end
