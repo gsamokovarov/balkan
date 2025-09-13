@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   end
 
   direct(:banitsa) { "https://rubybanitsa.com" }
+  direct(:github) { "https://github.com/gsamokovarov/balkan" }
   direct(:neuvents) { "https://neuvents.com" }
   direct(:slack) { "https://join.slack.com/t/balkanruby/shared_invite/zt-2fijcgv90-wR5zAhcpC1qKPcV9waZjbw" }
 end
