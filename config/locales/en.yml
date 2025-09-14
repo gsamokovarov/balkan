@@ -17,6 +17,7 @@ en:
     invoice_total: Invoice total
     vat: VAT 20%
     total: Total
+    total_eur: Total (EUR)
     tickets:
       one: "%{type} ticket"
       other: "%{count} × %{type} tickets"

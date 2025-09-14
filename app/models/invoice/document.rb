@@ -22,6 +22,7 @@ module Invoice::Document
     def initialize(gross_in_eur, locale: :en)
       @bulgarian = locale.to_sym == :bg
 
+      @gross_in_eur = gross_in_eur
       @gross = round(@bulgarian ? eur_to_bgn(gross_in_eur) : gross_in_eur)
       @net = round @gross / (1 + BULGARIAN_VAT)
       @tax = round @gross - @net
@@ -30,6 +31,8 @@ module Invoice::Document
     def gross_format = format gross
     def net_format = format net
     def tax_format = format tax
+
+    def to_eur = Amount.new(@gross_in_eur, locale: :en)
 
     private
 
@@ -148,6 +151,10 @@ module Invoice::Document
         text "#{t 'invoice_total'}: <b>#{invoice_amount.net_format}</b>", inline_format: true
         text "#{t 'vat'}: <b>#{invoice_amount.tax_format}</b>", inline_format: true
         text "#{t 'total'}: <b>#{invoice_amount.gross_format}</b>", inline_format: true
+
+        if locale.to_sym == :bg
+          text "#{t 'total_eur'}: <b>#{invoice_amount.to_eur.gross_format}</b>", inline_format: true
+        end
       end
     end
   end

@@ -16,7 +16,8 @@ bg:
     bank_payment: Банкова карта
     invoice_total: Сума по фактура
     vat: ДДС 20%
-    total: Всичко
+    total: Всичко (BGN)
+    total_eur: Всичко (EUR)
     tickets:
       one: "%{type} билет"
       other: "%{count} × %{type} билета"
