@@ -18,11 +18,7 @@
             stroke="currentColor"
             class="w-10 h-10"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-            />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
           </svg>
           <svg
             data-navigation-target="closeIcon"
@@ -38,19 +34,7 @@
         </button>
       </div>
 
-      <nav
-        data-navigation-target="menu"
-        class="
-          hidden
-          grow
-          flex-col
-          items-center
-          justify-center
-          gap-20
-          text-3xl
-          font-medium
-        "
-      >
+      <nav data-navigation-target="menu" class="hidden grow flex-col items-center justify-center gap-20 text-3xl font-medium">
         <%= render "navigation_links", nav_links: %>
       </nav>
     </div>
