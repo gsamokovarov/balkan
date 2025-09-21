@@ -31,7 +31,7 @@
     </form>
 
     <div class="px-4 pb-3 bg-white rounded-b-lg">
-      <p class="text-xs text-gray-500">This widget is a joke! For <strong>real</strong> support, contact us at <%= link_to Current.event.contact_email, "mailto:#{Current.event.contact_email}", class: "link-primary" %>.</p>
+      <p class="text-xs text-gray-500">This widget is a joke! For <strong>real</strong> support, contact us at <%= mail_to Current.event.contact_email, class: "link-primary" %>.</p>
     </div>
   </div>
 

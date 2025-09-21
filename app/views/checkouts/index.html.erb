@@ -19,7 +19,7 @@
     <% end %>
     <%= render "question", title: "Do you offer refunds?" do %>
       <p>
-        Yes, we do. Request one at <%= link_to Current.event.contact_email, "mailto://#{Current.event.contact_email}", class: "link-primary" %>
+        Yes, we do. Request one at <%= mail_to Current.event.contact_email, class: "link-primary" %>
         before <time datetime="<%= Current.event.start_date.iso8601 %>"><%= Current.event.start_date.to_fs :long  %></time>.
       </p>
     <% end %>

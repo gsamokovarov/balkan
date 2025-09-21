@@ -93,7 +93,7 @@
       </div>
 
       <div class="flex sm:justify-end">
-        <%= link_to "Contact us", "mailto:#{Current.event.contact_email}", class: "link-secondary text-white/70" %>
+        <%= mail_to Current.event.contact_email, "Contact us", class: "link-secondary text-white/70" %>
       </div>
     </div>
   <% end %>
