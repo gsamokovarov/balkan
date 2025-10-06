@@ -22,8 +22,8 @@ module Invoice::Document
     def initialize(gross_in_eur, locale: :en)
       @bulgarian = locale.to_sym == :bg
 
-      @gross_in_eur = gross_in_eur
-      @gross = round(@bulgarian ? eur_to_bgn(gross_in_eur) : gross_in_eur)
+      @gross_in_eur = gross_in_eur.to_d
+      @gross = round(@bulgarian ? eur_to_bgn(@gross_in_eur) : @gross_in_eur)
       @net = round @gross / (1 + BULGARIAN_VAT)
       @tax = round @gross - @net
     end
