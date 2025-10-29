@@ -1,6 +1,6 @@
 class Admin::TicketsController < Admin::ApplicationController
   def index
-    @tickets = scope event.tickets.includes(:ticket_type)
+    @tickets = scope event.tickets.includes(:event, :ticket_type)
   end
 
   def giveaway
