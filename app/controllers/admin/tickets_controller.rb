@@ -10,8 +10,6 @@ class Admin::TicketsController < Admin::ApplicationController
     Giveaway.create_free_tickets(event, tickets, reason:)
 
     redirect_to admin_event_tickets_path(event), notice: "#{tickets.size} free tickets created successfully"
-  rescue StandardError => err
-    redirect_to admin_event_tickets_path(event), alert: "Error creating tickets: #{err.message}"
   end
 
   def email

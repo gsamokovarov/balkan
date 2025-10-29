@@ -145,29 +145,6 @@ RSpec.case "Admin Giveaway", type: :feature do
     assert_eq tickets[1].name, "John Smith"
   end
 
-  test "displays an error when no free ticket type exists", js: true do
-    event = create :event, :balkan2025
-
-    setup_and_login_user
-
-    visit admin_event_tickets_path(event)
-
-    click_button "Giveaway"
-
-    within "#giveaway_dialog" do
-      fill_in "Name", with: "Jane Doe"
-      fill_in "Email", with: "jane@example.com"
-      select "M", from: "Shirt size"
-
-      click_button "Create Tickets"
-    end
-
-    assert_have_content page, "Error creating tickets: Couldn't find TicketType"
-
-    assert_eq Order.count, 0
-    assert_eq Ticket.count, 0
-  end
-
   test "validates required fields", js: true do
     event = create :event, :balkan2025
     create(:ticket_type, :free, event:)
