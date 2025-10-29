@@ -44,6 +44,9 @@ Rails.application.routes.draw do
         collection do
           post :giveaway
         end
+        member do
+          post :email
+        end
       end
       resources :ticket_types, only: [:index, :show, :new, :create, :edit, :update]
       resources :embeddings, only: [:index, :show, :new, :create, :edit, :update]
