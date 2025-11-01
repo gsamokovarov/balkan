@@ -12,16 +12,16 @@
   page_url = -> { url_for(**params.to_unsafe_h, page: it, only_path: true) }
 %>
 
-<div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+<div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 sm:px-6">
   <div class="flex flex-1 justify-between sm:hidden">
     <%= link_to page_url.(current_page - 1), class: [
-      "relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50",
+      "relative inline-flex items-center rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600",
       current_page == 1 && "pointer-events-none opacity-50"
     ] do %>
       Previous
     <% end %>
     <%= link_to page_url.(current_page + 1), class: [
-      "relative ml-3 inline-flex items-center rounded-r-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50",
+      "relative ml-3 inline-flex items-center rounded-r-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600",
       !has_next_page && "pointer-events-none opacity-50"
     ] do %>
       Next
@@ -30,7 +30,7 @@
 
   <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
     <div>
-      <p class="text-sm text-gray-700">
+      <p class="text-sm text-gray-700 dark:text-gray-300">
         Showing <span class="font-medium"><%= scope.size %></span>
         <% if total_count %>
           of <span class="font-medium"><%= total_count %></span> results
@@ -40,7 +40,7 @@
     <div>
       <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
         <%= link_to page_url.(current_page - 1), class: [
-          "relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0",
+          "relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 dark:text-gray-500 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0",
           current_page == 1 && "pointer-events-none opacity-50"
         ] do %>
           <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -51,31 +51,31 @@
         <% if visible_pages.first > 1 %>
           <%= link_to 1, page_url.(1), class: [
             "relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-            "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
+            "text-gray-900 dark:text-gray-100 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-offset-0"
           ] %>
           <% if visible_pages.first > 2 %>
-            <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">...</span>
+            <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:outline-offset-0">...</span>
           <% end %>
         <% end %>
         <% visible_pages.each do |visible_page| %>
           <%= link_to visible_page, page_url.(visible_page), class: [
             "relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
             visible_page == current_page && "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
-            visible_page != current_page && "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
+            visible_page != current_page && "text-gray-900 dark:text-gray-100 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-offset-0"
           ] %>
         <% end %>
         <% unless visible_pages.last == total_pages %>
           <% if total_pages - visible_pages.last > 1 %>
-            <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">...</span>
+            <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:outline-offset-0">...</span>
           <% end %>
           <%= link_to total_pages, page_url.(total_pages), class: [
             "relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-            "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
+            "text-gray-900 dark:text-gray-100 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-offset-0"
           ] %>
         <% end %>
 
         <%= link_to page_url.(current_page + 1), class: [
-          "relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0",
+          "relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 dark:text-gray-500 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:z-20 focus:outline-offset-0",
           !has_next_page && "pointer-events-none opacity-50"
         ] do %>
           <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">

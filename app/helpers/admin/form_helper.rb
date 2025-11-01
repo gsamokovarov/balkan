@@ -5,8 +5,8 @@ module Admin::FormHelper
         "block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset",
         "sm:text-sm sm:leading-6",
       ],
-      error: "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
-      valid: "text-gray-900 ring-gray-300 placeholder:text-gray-400 focus:ring-indigo-600",
+      error: "text-red-900 dark:text-red-300 ring-red-300 dark:ring-red-500 placeholder:text-red-300 dark:placeholder:text-red-500 focus:ring-red-500 dark:bg-gray-800",
+      valid: "text-gray-900 dark:text-gray-100 ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-indigo-600 dark:bg-gray-800",
     }
 
     def check_box_input(method, label: method, checked_value: "1", unchecked_value: "0", **, &addendum)
@@ -95,12 +95,12 @@ module Admin::FormHelper
 
     def radio_button_input(method, value, label: value.to_s.humanize, checked: false, class: nil, **, &addendum)
       field_classes = [
-        "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500",
+        "h-4 w-4 border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500 dark:bg-gray-800",
         object_errors(method).any? ? FIELD_CLASSES[:error] : FIELD_CLASSES[:valid],
       ]
 
       @template.tag.div class: ["flex items-center", binding.local_variable_get(:class)] do
-        @template.tag.label class: "flex items-center text-sm font-medium text-gray-700" do
+        @template.tag.label class: "flex items-center text-sm font-medium text-gray-700 dark:text-gray-300" do
           @template.concat radio_button(method, value, { class: field_classes, checked:, ** })
           @template.concat @template.tag.span(class: "ml-3") { label }
           @template.concat @template.tag.div(&addendum) if addendum
@@ -110,12 +110,12 @@ module Admin::FormHelper
 
     def file_input(method, label: method, multiple: false, include_hidden: false, **, &addendum)
       file_classes = [
-        "block w-full rounded-md p-2 text-sm text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300",
-        "focus:ring-indigo-600",
+        "block w-full rounded-md p-2 text-sm text-gray-500 dark:text-gray-400 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600",
+        "focus:ring-indigo-600 dark:bg-gray-800",
       ]
 
       image_preview_classes = [
-        "w-full max-h-64 mb-2 p-2 aspect-auto object-scale-down rounded-md border border-gray-300",
+        "w-full max-h-64 mb-2 p-2 aspect-auto object-scale-down rounded-md border border-gray-300 dark:border-gray-600",
       ]
 
       input_for method, label:, addendum: do
@@ -143,10 +143,10 @@ module Admin::FormHelper
 
     def input_for(method, error_method: method, label: method, addendum: nil, class: nil, &)
       @template.tag.div class: do
-        @template.concat label(label, class: "block text-sm font-medium leading-6 text-gray-900")
+        @template.concat label(label, class: "block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100")
         @template.concat @template.tag.div(class: "mt-2", &)
         if object_errors(error_method).any?
-          @template.concat @template.tag.p object_errors(error_method).first, class: "mt-2 text-sm text-red-600"
+          @template.concat @template.tag.p object_errors(error_method).first, class: "mt-2 text-sm text-red-600 dark:text-red-400"
         end
         @template.concat @template.tag.div(class: "mt-2", &addendum) if addendum
       end

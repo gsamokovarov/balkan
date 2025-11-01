@@ -10,8 +10,8 @@
   <dl class="grid grid-cols-2 gap-x-8 gap-y-16 text-center lg:grid-cols-<%= columns %>">
     <% data.each do |title, value| %>
       <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-        <dt class="text-base leading-7 text-gray-600"><%= title %></dt>
-        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl"><%= value %></dd>
+        <dt class="text-base leading-7 text-gray-600 dark:text-gray-400"><%= title %></dt>
+        <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl"><%= value %></dd>
       </div>
     <% end %>
   </dl>

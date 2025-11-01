@@ -5,10 +5,10 @@
   <%= f.text_input :name, required: true %>
   <%= f.text_area_input :description %>
 
-  <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
-    <legend class="text-sm font-medium leading-6 text-gray-500">Variants</legend>
+  <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+    <legend class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400">Variants</legend>
 
-    <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300">
+    <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
       <% sponsorship_package.variants.each do |variant| %>
         <%= f.fields_for :variants_attributes, variant, index: "" do |form| %>
           <%= render "variant_form", form: %>

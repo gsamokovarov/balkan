@@ -9,8 +9,8 @@
 
 <%= admin_modal :giveaway_dialog, "Giveaway" do %>
   <%= admin_form scope: :giveaway, url: giveaway_admin_event_tickets_path, method: :post do |f| %>
-    <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
-      <legend class="text-sm font-medium leading-6 text-gray-900">Tickets</legend>
+    <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+      <legend class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Tickets</legend>
 
       <div data-appendable-target="target" class="space-y-4">
         <%= f.fields_for :tickets, index: "" do |ticket_form| %>

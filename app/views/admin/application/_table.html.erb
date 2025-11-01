@@ -1,21 +1,21 @@
 <%# locals: (objects:, table_def:) %>
 
 <div class="inline-block min-w-full py-2 align-middle">
-  <table class="min-w-full divide-y divide-gray-300">
+  <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
     <thead>
       <tr>
         <% table_def.columns.each do |column| %>
-          <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500">
+          <th scope="col" class="p-3 text-left text-sm font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
             <%= column.header %>
           </th>
         <% end %>
       </tr>
     </thead>
-    <tbody class="divide-y divide-gray-200 bg-white">
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
       <% objects.each do |object| %>
-        <tr class="border-t border-gray-300 hover:bg-gray-50">
+        <tr class="border-t border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
           <% table_def.columns.each do |column| %>
-            <td class="p-3 text-sm font-semibold text-gray-900 whitespace-nowrap has-[.inline-block]:block has-[.inline-block]:text-right">
+            <td class="p-3 text-sm font-semibold text-gray-900 dark:text-gray-100 whitespace-nowrap has-[.inline-block]:block has-[.inline-block]:text-right">
               <%= column.value object %>
             </td>
           <% end %>

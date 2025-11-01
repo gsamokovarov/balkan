@@ -1,6 +1,6 @@
 <%# locals: (form:, removable: true) %>
 
-<div class="space-y-3 py-1 sm:relative border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+<div class="space-y-3 py-1 sm:relative border-b border-gray-200 dark:border-gray-700 pb-4 last:border-b-0 last:pb-0">
 <%= form.text_input :name, required: true %>
 <%= form.email_input :email, required: true %>
 <%= form.select_input :shirt_size, %w[XS S M L XL XXL], required: true %>

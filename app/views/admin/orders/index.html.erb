@@ -10,7 +10,7 @@
     <%= f.month_input "month", value: Date.current.strftime('%Y-%m'), required: true %>
 
     <fieldset class="space-y-2">
-      <legend class="block text-sm font-medium leading-6 text-gray-900">Export Format</legend>
+      <legend class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Export Format</legend>
       <%= f.radio_button_input "format", "csv", label: "Order details (CSV)", checked: true %>
       <%= f.radio_button_input "format", "tar", label: "Invoice archive (TAR)" %>
     </fieldset>

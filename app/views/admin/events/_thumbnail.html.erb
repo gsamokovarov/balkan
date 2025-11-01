@@ -31,8 +31,8 @@
     </section>
 
     <%= admin_form url: thumbnail_admin_event_path(event), automatic: true do |f| %>
-      <fieldset class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300">
-        <legend class="text-sm font-medium leading-6 text-gray-500">Lineup</legend>
+      <fieldset class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+        <legend class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400">Lineup</legend>
 
         <div class="grid sm:grid-cols-2 gap-6">
           <% event.lineup_members.each do |member| %>

@@ -1,9 +1,9 @@
 module AdminHelper
   ADMIN_BADGE_VARIANTS = {
-    primary: "ring-gray-600/20 bg-gray-50 text-gray-700",
-    success: "ring-green-600/20 bg-green-50 text-green-700",
-    warning: "ring-yellow-600/20 bg-yellow-50 text-yellow-800",
-    danger: "ring-banitsa-500/20 bg-banitsa-50 text-banitsa-500",
+    primary: "ring-gray-600/20 dark:ring-gray-400/30 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300",
+    success: "ring-green-600/20 dark:ring-green-400/30 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400",
+    warning: "ring-yellow-600/20 dark:ring-yellow-400/30 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400",
+    danger: "ring-banitsa-500/20 dark:ring-banitsa-400/30 bg-banitsa-50 dark:bg-banitsa-900/30 text-banitsa-500 dark:text-banitsa-400",
   }
 
   def admin_badge(variant, content = nil, **options, &)
@@ -18,7 +18,7 @@ module AdminHelper
 
   ADMIN_BUTTON_VARIANTS = {
     primary: "bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600",
-    secondary: "bg-white text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50 focus-visible:outline-gray-600",
+    secondary: "bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ring-1 ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 focus-visible:outline-gray-600",
     danger: "bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600",
   }
 

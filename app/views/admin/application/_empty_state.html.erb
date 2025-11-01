@@ -1,7 +1,7 @@
-<div class="w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
-  <h3 class="mt-2 text-sm font-semibold text-gray-900">Nothing to show</h3>
+<div class="w-full rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-12 text-center">
+  <h3 class="mt-2 text-sm font-semibold text-gray-900 dark:text-gray-100">Nothing to show</h3>
   <% if additional_content = yield and additional_content.present? %>
-    <p class="mt-1 text-sm text-gray-500">Start by...</p>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Start by...</p>
     <div class="mt-6 mx-auto">
       <%= additional_content %>
     </div>
