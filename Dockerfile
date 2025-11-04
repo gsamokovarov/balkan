@@ -54,6 +54,5 @@ RUN useradd rails --uid 1001 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
 
-# Start the server
 EXPOSE 3000
-ENTRYPOINT ["/rails/bin/rails", "server"]
+ENTRYPOINT ["/rails/bin/rails"]
