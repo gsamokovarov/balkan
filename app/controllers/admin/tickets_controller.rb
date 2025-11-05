@@ -16,7 +16,7 @@ class Admin::TicketsController < Admin::ApplicationController
     ticket = event.tickets.find params[:id]
     TicketMailer.ticket_email(ticket).deliver_now
 
-    redirect_to admin_event_tickets_path(event), notice: "Email sent to #{ticket.email}"
+    redirect_to request.path, notice: "Email sent to #{ticket.email}"
   end
 
   private
