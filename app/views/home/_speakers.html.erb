@@ -2,6 +2,14 @@
 
 <%= render "speakers/speakers", highlight: do %>
   <% if Current.event.accepts_speaking_applications? %>
+    <% if Current.event.lineup_members.confirmed.none? %>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-10 sm:gap-2 p-4 w-full">
+        <%= link_to Current.event.speaker_applications_url, class: "rounded-md transition ease-in-out h-min hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1 hover:scale-110 hover:z-10" do %>
+          <%= render "avatar_card", title: "You", subtitle: "Apply" %>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="flex flex-col sm:flex-row">
       <%= link_to Current.event.speaker_applications_url, class: "btn-primary w-fit" do %>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

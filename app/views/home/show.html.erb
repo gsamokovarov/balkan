@@ -13,7 +13,7 @@
   <%= render "blog", highlight: !hi %>
 <% end %>
 
-<% if Current.event.lineup_members.any? || Current.event.accepts_speaking_applications? %>
+<% if Current.event.lineup_members.confirmed.any? || Current.event.accepts_speaking_applications? %>
   <%= render "speakers", highlight: !hi %>
 <% end %>
 
