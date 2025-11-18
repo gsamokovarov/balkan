@@ -24,6 +24,47 @@ module SponsorshipProspectus
       update(&)
     end
 
+    def format_perks_text(perks)
+      perks_text = ""
+      perks_lines = perks.split(/\n|\r\n?/).map { render_plain it }
+
+      perks_lines.each do |line|
+        formatted_line = line.strip
+        next if formatted_line.blank?
+
+        formatted_line = "• #{formatted_line}" unless formatted_line.start_with? "•", "-", "*"
+        perks_text << "#{formatted_line}\n"
+      end
+
+      perks_text
+    end
+
+    def calculate_column_widths(total_width, percentages) = percentages.map { total_width * it }
+
+    def draw_table(headers, col_widths, rows_data, cell_styles: {})
+      calculated_widths = calculate_column_widths bounds.width, col_widths
+      draw_table_header headers, calculated_widths
+
+      rows_data.each do |row_data|
+        max_height = 40
+
+        row_data.each_with_index do |cell_text, i|
+          cell_width = calculated_widths[i] - 20
+          test_box = Prawn::Text::Box.new cell_text.to_s, at: [0, cursor], width: cell_width, height: 1000, document: self
+          test_box.render dry_run: true
+          content_height = test_box.height
+          max_height = [max_height, content_height + 20].max
+        end
+
+        if cursor < max_height + 10
+          start_new_page
+          draw_table_header headers, calculated_widths
+        end
+
+        draw_table_row row_data, calculated_widths, { column_height: { index: 2 }, cell_styles: }
+      end
+    end
+
     def draw_table_header(headers, col_widths)
       header_height = 30
       header_y = cursor
@@ -92,48 +133,6 @@ module SponsorshipProspectus
       stroke_color "000000"
 
       max_height
-    end
-
-    def format_perks_text(perks)
-      perks_text = ""
-      perks_lines = perks.split(/\n|\r\n?/).map { render_plain it }
-
-      perks_lines.each do |line|
-        formatted_line = line.strip
-        next if formatted_line.blank?
-
-        formatted_line = "• #{formatted_line}" unless formatted_line.start_with? "•", "-", "*"
-        perks_text << "#{formatted_line}\n"
-      end
-
-      perks_text
-    end
-
-    def calculate_column_widths(total_width, percentages) = percentages.map { total_width * it }
-
-    def draw_table(headers, col_widths, rows_data)
-      draw_table_header headers, calculate_column_widths(bounds.width, col_widths)
-
-      rows_data.each do |row_data, styles|
-        max_height = 40
-        if styles[:column_height]
-          column_index = styles[:column_height][:index]
-          column_text = row_data[column_index]
-          column_width = col_widths[column_index] - 20
-
-          test_box = Prawn::Text::Box.new column_text, at: [0, cursor], width: column_width, height: 1000, document: self
-          test_box.render dry_run: true
-          content_height = test_box.height
-          max_height = [max_height, content_height + 20].max
-        end
-
-        if cursor < max_height + 10
-          start_new_page
-          draw_table_header headers, col_widths
-        end
-
-        draw_table_row row_data, col_widths, styles
-      end
     end
   end
 
@@ -234,6 +233,10 @@ module SponsorshipProspectus
 
             [variant.name, "€#{variant.price}", perks_text, quantity]
           end,
+          cell_styles: {
+            0 => { style: :bold },
+            2 => { size: 10, overflow: :shrink_to_fit },
+          },
         )
       end
 
