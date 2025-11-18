@@ -54,8 +54,8 @@ module SponsorshipProspectus
     def draw_table_row(row_data, col_widths, styles = {})
       max_height = 40
 
-      if styles[:height_for_column]
-        column_index = styles[:height_for_column][:index]
+      if styles[:column_height]
+        column_index = styles[:column_height][:index]
         column_text = row_data[column_index]
         column_width = col_widths[column_index] - 20
 
@@ -110,6 +110,31 @@ module SponsorshipProspectus
     end
 
     def calculate_column_widths(total_width, percentages) = percentages.map { total_width * it }
+
+    def draw_table(headers, col_widths, rows_data)
+      draw_table_header headers, calculate_column_widths(bounds.width, col_widths)
+
+      rows_data.each do |row_data, styles|
+        max_height = 40
+        if styles[:column_height]
+          column_index = styles[:column_height][:index]
+          column_text = row_data[column_index]
+          column_width = col_widths[column_index] - 20
+
+          test_box = Prawn::Text::Box.new column_text, at: [0, cursor], width: column_width, height: 1000, document: self
+          test_box.render dry_run: true
+          content_height = test_box.height
+          max_height = [max_height, content_height + 20].max
+        end
+
+        if cursor < max_height + 10
+          start_new_page
+          draw_table_header headers, col_widths
+        end
+
+        draw_table_row row_data, col_widths, styles
+      end
+    end
   end
 
   def generate(event)
@@ -195,28 +220,21 @@ module SponsorshipProspectus
         text package.name, size: 24, style: :bold
         move_down 20
 
-        package.variants.each do |variant|
-          start_new_page if cursor < 200
+        draw_table(
+          ["Name", "Price", "What's Included", "Availability"],
+          [0.25, 0.20, 0.40, 0.15],
+          package.variants.map do |variant|
+            perks_text = format_perks_text variant.perks
+            quantity =
+              if variant.limited?
+                variant.available? ? "#{variant.spots_remaining} available" : "Sold out"
+              else
+                "Unlimited"
+              end
 
-          col_widths = calculate_column_widths bounds.width, [0.25, 0.20, 0.40, 0.15]
-          draw_table_header ["Name", "Price", "What's Included", "Availability"], col_widths
-
-          perks_text = format_perks_text variant.perks
-          quantity =
-            if variant.limited?
-              variant.available? ? "#{variant.spots_remaining} available" : "Sold out"
-            else
-              "Unlimited"
-            end
-
-          row_data = [variant.name, "€#{variant.price}", perks_text, quantity]
-          cell_styles = {
-            0 => { style: :bold },
-            2 => { size: 10, overflow: :shrink_to_fit },
-          }
-
-          draw_table_row row_data, col_widths, { height_for_column: { index: 2 }, cell_styles: }
-        end
+            [variant.name, "€#{variant.price}", perks_text, quantity]
+          end,
+        )
       end
 
       start_new_page
