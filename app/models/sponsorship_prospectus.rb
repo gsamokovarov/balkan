@@ -190,6 +190,8 @@ module SponsorshipProspectus
       text "See detailed information about each package on the following pages.", size: 12, style: :italic
 
       event.sponsorship_packages.includes(:variants).each do |package|
+        start_new_page
+
         package.variants.each do |variant|
           start_new_page if cursor < 200
 
