@@ -63,7 +63,7 @@ module SponsorshipProspectus
           draw_table_header headers, calculated_widths
         end
 
-        draw_table_row row_data, calculated_widths, cell_styles:
+        draw_table_row row_data, calculated_widths, max_height:, cell_styles:
       end
     end
 
@@ -90,18 +90,7 @@ module SponsorshipProspectus
       move_down header_height
     end
 
-    def draw_table_row(row_data, col_widths, cell_styles: {})
-      max_height = 40
-
-      row_data.each_with_index do |cell_text, i|
-        test_box = Prawn::Text::Box.new cell_text.to_s, at: [0, cursor],
-                                                        width: col_widths[i] - 20,
-                                                        height: 1000,
-                                                        document: self
-        test_box.render dry_run: true
-        max_height = [max_height, test_box.height + 20].max
-      end
-
+    def draw_table_row(row_data, col_widths, max_height:, cell_styles: {})
       stroke_color "DDDDDD"
       stroke_horizontal_rule
       stroke_color "000000"
