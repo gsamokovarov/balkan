@@ -191,7 +191,7 @@ module SponsorshipProspectus
 
       event.sponsorship_packages.includes(:variants).each do |package|
         package.variants.each do |variant|
-          start_new_page
+          start_new_page if cursor < 200
 
           text package.name, size: 24, style: :bold
           move_down 20
