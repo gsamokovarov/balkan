@@ -49,11 +49,13 @@ module SponsorshipProspectus
         max_height = 40
 
         row_data.each_with_index do |cell_text, i|
-          cell_width = calculated_widths[i] - 20
-          test_box = Prawn::Text::Box.new cell_text.to_s, at: [0, cursor], width: cell_width, height: 1000, document: self
+          test_box = Prawn::Text::Box.new cell_text.to_s, at: [0, cursor],
+                                                          width: calculated_widths[i] - 20,
+                                                          height: 1000,
+                                                          document: self
           test_box.render dry_run: true
-          content_height = test_box.height
-          max_height = [max_height, content_height + 20].max
+
+          max_height = [max_height, test_box.height + 20].max
         end
 
         if cursor < max_height + 10
@@ -61,7 +63,7 @@ module SponsorshipProspectus
           draw_table_header headers, calculated_widths
         end
 
-        draw_table_row row_data, calculated_widths, { column_height: { index: 2 }, cell_styles: }
+        draw_table_row row_data, calculated_widths, { cell_styles: }
       end
     end
 
@@ -86,25 +88,23 @@ module SponsorshipProspectus
       end
 
       move_down header_height
-
-      stroke_color "DDDDDD"
-      stroke_horizontal_rule
-      stroke_color "000000"
     end
 
     def draw_table_row(row_data, col_widths, styles = {})
       max_height = 40
 
-      if styles[:column_height]
-        column_index = styles[:column_height][:index]
-        column_text = row_data[column_index]
-        column_width = col_widths[column_index] - 20
-
-        test_box = Prawn::Text::Box.new column_text, at: [0, cursor], width: column_width, height: 1000, document: self
+      row_data.each_with_index do |cell_text, i|
+        test_box = Prawn::Text::Box.new cell_text.to_s, at: [0, cursor],
+                                                        width: col_widths[i] - 20,
+                                                        height: 1000,
+                                                        document: self
         test_box.render dry_run: true
-        content_height = test_box.height
-        max_height = [max_height, content_height + 20].max
+        max_height = [max_height, test_box.height + 20].max
       end
+
+      stroke_color "DDDDDD"
+      stroke_horizontal_rule
+      stroke_color "000000"
 
       row_y = cursor
       x_pos = 0
@@ -127,10 +127,6 @@ module SponsorshipProspectus
       end
 
       move_down max_height
-
-      stroke_color "DDDDDD"
-      stroke_horizontal_rule
-      stroke_color "000000"
 
       max_height
     end
