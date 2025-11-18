@@ -63,7 +63,7 @@ module SponsorshipProspectus
           draw_table_header headers, calculated_widths
         end
 
-        draw_table_row row_data, calculated_widths, { cell_styles: }
+        draw_table_row row_data, calculated_widths, cell_styles:
       end
     end
 
@@ -90,7 +90,7 @@ module SponsorshipProspectus
       move_down header_height
     end
 
-    def draw_table_row(row_data, col_widths, styles = {})
+    def draw_table_row(row_data, col_widths, cell_styles: {})
       max_height = 40
 
       row_data.each_with_index do |cell_text, i|
@@ -110,7 +110,7 @@ module SponsorshipProspectus
       x_pos = 0
 
       row_data.each_with_index do |cell_text, i|
-        cell_style = (styles[:cell_styles] && styles[:cell_styles][i]) || {}
+        cell_style = cell_styles[i] || {}
         cell_width = col_widths[i] - 20
 
         text_box cell_text.to_s,
