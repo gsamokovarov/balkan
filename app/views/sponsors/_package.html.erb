@@ -2,7 +2,7 @@
 
 <div class="bg-white border-2 border-black rounded-md w-full lg:w-auto">
   <div class="flex shrink gap-4 justify-between p-4 border-b-2 border-black rounded-sm overflow-hidden text-2xl font-bold">
-    <%= variant.name %>
+    <span class="truncate" title="<%= variant.name %>"><%= variant.name %></span>
     <div class="flex shrink gap-2">
       <% if variant.fiscal? && variant.available? %>
         <span class="badge-important text-white"><%= format_money variant.price %></span>
