@@ -100,8 +100,10 @@ module SponsorshipProspectus
 
       perks_lines.each do |line|
         formatted_line = line.strip
+        next if formatted_line.blank?
+
         formatted_line = "• #{formatted_line}" unless formatted_line.start_with? "•", "-", "*"
-        perks_text += "#{formatted_line}\n"
+        perks_text << "#{formatted_line}\n"
       end
 
       perks_text

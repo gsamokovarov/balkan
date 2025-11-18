@@ -84,14 +84,29 @@ RSpec.case SponsorshipProspectus do
 
   test "package descriptions are included in the prospectus" do
     event = create :event, :balkan2025
-    create(:sponsorship_package,
-           name: "Package with Description",
-           description: "This is a detailed description of the package.",
-           event:)
+    create :sponsorship_package, event:, name: "Package with Description", description: <<~TEXT
+      This is a detailed description of the package.ACL
+    TEXT
 
     pdf = SponsorshipProspectus.generate event
 
     assert_pdf_content pdf, "Package with Description",
                        "This is a detailed description of the package"
+  end
+
+  test "formats perks with inline text alongs list-item" do
+    event = create :event, :balkan2025
+    package = create :sponsorship_package, event:, name: "Test Package"
+    create :sponsorship_variant, package:, name: "Diamond", price: 5000, perks: <<~TEXT
+      Luxorious package for special sponsors.
+
+      - Logo everywhere
+      - Grand branding
+    TEXT
+
+    pdf = SponsorshipProspectus.generate event
+
+    assert_pdf_content pdf, "Diamond", "€ 5000", "• Logo everywhere", "• Grand branding"
+    assert_without_pdf_content pdf, "• "
   end
 end
