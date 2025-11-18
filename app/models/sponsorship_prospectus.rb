@@ -192,14 +192,13 @@ module SponsorshipProspectus
       event.sponsorship_packages.includes(:variants).each do |package|
         start_new_page
 
+        text package.name, size: 24, style: :bold
+        move_down 20
+
         package.variants.each do |variant|
           start_new_page if cursor < 200
 
-          text package.name, size: 24, style: :bold
-          move_down 20
-
           col_widths = calculate_column_widths bounds.width, [0.25, 0.20, 0.40, 0.15]
-
           draw_table_header ["Name", "Price", "What's Included", "Availability"], col_widths
 
           perks_text = format_perks_text variant.perks
