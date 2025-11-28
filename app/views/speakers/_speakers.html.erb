@@ -1,13 +1,17 @@
 <%# locals: (title_element: "h2", highlight: false) %>
 
 <%= render "section", title_element:, title: "Speakers", highlight: do %>
-  <% if Current.event.lineup_members.confirmed.any? %>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-10 sm:gap-2 p-4 w-full">
-      <% Current.event.lineup_members.confirmed.each.with_index do |member, index| %>
-        <%= render "speakers/lineup_member", member:, rotation_class: card_rotation(index) %>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-10 sm:gap-2 p-4 w-full">
+    <% Current.event.lineup_members.confirmed.each.with_index do |member, index| %>
+      <%= render "speakers/lineup_member", member:, rotation_class: card_rotation(index) %>
+    <% end %>
+
+    <% if Current.event.accepts_speaking_applications? %>
+      <%= link_to Current.event.speaker_applications_url, class: "rounded-md transition ease-in-out h-min hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1 hover:scale-110 hover:z-10" do %>
+        <%= render "avatar_card", title: "You", subtitle: "Apply" %>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <%= yield %>
 <% end %>
