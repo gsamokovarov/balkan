@@ -38,87 +38,6 @@ module SponsorshipProspectus
 
       perks_text
     end
-
-    def calculate_column_widths(total_width, percentages) = percentages.map { total_width * it }
-
-    def draw_table(headers, col_widths, rows_data, cell_styles: {})
-      calculated_widths = calculate_column_widths bounds.width, col_widths
-      draw_table_header headers, calculated_widths
-
-      rows_data.each do |row_data|
-        max_height = 40
-
-        row_data.each_with_index do |cell_text, i|
-          test_box = Prawn::Text::Box.new cell_text.to_s, at: [0, cursor],
-                                                          width: calculated_widths[i] - 20,
-                                                          height: 1000,
-                                                          document: self
-          test_box.render dry_run: true
-
-          max_height = [max_height, test_box.height + 20].max
-        end
-
-        if cursor < max_height + 10
-          start_new_page
-          draw_table_header headers, calculated_widths
-        end
-
-        draw_table_row row_data, calculated_widths, max_height:, cell_styles:
-      end
-    end
-
-    def draw_table_header(headers, col_widths)
-      header_height = 30
-      header_y = cursor
-
-      fill_color "F0F0F0"
-      fill_rectangle [0, header_y], bounds.width, header_height
-      fill_color "000000"
-
-      x_pos = 0
-      headers.each_with_index do |header, i|
-        width = col_widths[i]
-        text_box header, at: [x_pos + 10, header_y - 6],
-                         width: width - 10,
-                         height: header_height - 6,
-                         size: 12,
-                         style: :bold,
-                         valign: :center
-        x_pos += width
-      end
-
-      move_down header_height
-    end
-
-    def draw_table_row(row_data, col_widths, max_height:, cell_styles: {})
-      stroke_color "DDDDDD"
-      stroke_horizontal_rule
-      stroke_color "000000"
-
-      row_y = cursor
-      x_pos = 0
-
-      row_data.each_with_index do |cell_text, i|
-        cell_style = cell_styles[i] || {}
-        cell_width = col_widths[i] - 20
-
-        text_box cell_text.to_s,
-                 at: [x_pos + 10, row_y - 6],
-                 width: cell_width,
-                 height: max_height - 6,
-                 size: cell_style[:size] || 12,
-                 style: cell_style[:style],
-                 align: cell_style[:align],
-                 valign: cell_style[:valign] || :top,
-                 overflow: cell_style[:overflow] || :truncate
-
-        x_pos += col_widths[i]
-      end
-
-      move_down max_height
-
-      max_height
-    end
   end
 
   def generate(event)
@@ -204,25 +123,31 @@ module SponsorshipProspectus
         text package.name, size: 24, style: :bold
         move_down 20
 
-        draw_table(
-          ["Name", "Price", "What's Included", "Availability"],
-          [0.25, 0.20, 0.40, 0.15],
-          package.variants.map do |variant|
-            perks_text = format_perks_text variant.perks
-            quantity =
-              if variant.limited?
-                variant.available? ? "#{variant.spots_remaining} available" : "Sold out"
-              else
-                "Unlimited"
-              end
+        table_data = [["Name", "Price", "What's Included", "Availability"]] +
+                     package.variants.map do |variant|
+                       perks_text = format_perks_text variant.perks
+                       quantity =
+                         if variant.limited?
+                           variant.available? ? "#{variant.spots_remaining} available" : "Sold out"
+                         else
+                           "Unlimited"
+                         end
 
-            [variant.name, "€#{variant.price}", perks_text, quantity]
-          end,
-          cell_styles: {
-            0 => { style: :bold },
-            2 => { size: 10, overflow: :shrink_to_fit },
-          },
-        )
+                       [variant.name, "€#{variant.price}", perks_text, quantity]
+                     end
+
+        table table_data, width: bounds.width, column_widths: [0.25, 0.20, 0.40, 0.15].map { bounds.width * it } do
+          row(0).font_style = :bold
+          row(0).background_color = "F0F0F0"
+          cells.padding = 10
+          cells.borders = [:bottom]
+          cells.border_color = "DDDDDD"
+          row(0).borders = [:top, :bottom]
+          row(0).border_color = "000000"
+
+          column(0).font_style = :bold
+          column(2).size = 10
+        end
       end
 
       start_new_page
