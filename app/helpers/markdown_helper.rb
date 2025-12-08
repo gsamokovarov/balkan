@@ -13,6 +13,7 @@ module MarkdownHelper
       def paragraph(text) = "#{text}\n\n"
       def header(text, _header_level) = "#{text}\n\n"
       def link(_link, _title, content) = content
+      def list_item(content, _type) = "• #{content}\n"
     end
 
     class HTMLRenderer < Redcarpet::Render::HTML

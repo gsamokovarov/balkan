@@ -118,7 +118,7 @@ module SponsorshipProspectus
                        [variant.name, "€#{variant.price}", render_plain(variant.perks), quantity]
                      end
 
-        table table_data, width: bounds.width, column_widths: [0.25, 0.20, 0.40, 0.15].map { bounds.width * it } do
+        table table_data, width: bounds.width, column_widths: [0.20, 0.20, 0.40, 0.20].map { bounds.width * it } do
           row(0).font_style = :bold
           row(0).background_color = "F0F0F0"
           cells.padding = 10
