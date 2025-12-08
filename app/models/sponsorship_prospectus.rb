@@ -21,6 +21,8 @@ module SponsorshipProspectus
       @sanitizer = Rails::HTML::FullSanitizer.new
       update(&)
     end
+
+    def sanitize(...) = @sanitizer.sanitize(...)
   end
 
   def generate(event)
@@ -39,12 +41,12 @@ module SponsorshipProspectus
         move_down 40
 
         if event.title.present?
-          text @sanitizer.sanitize(event.title), size: 18, align: :center
+          text sanitize(event.title), size: 18, align: :center
           move_down 10
         end
 
         if event.subtitle.present?
-          text @sanitizer.sanitize(event.subtitle), size: 16, align: :center, style: :italic
+          text sanitize(event.subtitle), size: 16, align: :center, style: :italic
           move_down 20
         end
 
@@ -60,7 +62,7 @@ module SponsorshipProspectus
         end
 
         if event.description.present?
-          text @sanitizer.sanitize(event.description), size: 14, align: :center
+          text sanitize(event.description), size: 14, align: :center
           move_down 50
         end
 
