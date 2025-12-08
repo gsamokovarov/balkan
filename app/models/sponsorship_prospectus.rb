@@ -14,29 +14,12 @@ module SponsorshipProspectus
 
     attr_reader :event
 
-    def self.render(event, &)
-      new(event, &).render
-    end
+    def self.render(event, &) = new(event, &).render
 
     def initialize(event, &)
       @event = event
       @sanitizer = Rails::HTML::FullSanitizer.new
       update(&)
-    end
-
-    def format_perks_text(perks)
-      perks_text = ""
-      perks_lines = perks.split(/\n|\r\n?/).map { render_plain it }
-
-      perks_lines.each do |line|
-        formatted_line = line.strip
-        next if formatted_line.blank?
-
-        formatted_line = "• #{formatted_line}" unless formatted_line.start_with? "•", "-", "*"
-        perks_text << "#{formatted_line}\n"
-      end
-
-      perks_text
     end
   end
 
@@ -125,7 +108,6 @@ module SponsorshipProspectus
 
         table_data = [["Name", "Price", "What's Included", "Availability"]] +
                      package.variants.map do |variant|
-                       perks_text = format_perks_text variant.perks
                        quantity =
                          if variant.limited?
                            variant.available? ? "#{variant.spots_remaining} available" : "Sold out"
@@ -133,7 +115,7 @@ module SponsorshipProspectus
                            "Unlimited"
                          end
 
-                       [variant.name, "€#{variant.price}", perks_text, quantity]
+                       [variant.name, "€#{variant.price}", render_plain(variant.perks), quantity]
                      end
 
         table table_data, width: bounds.width, column_widths: [0.25, 0.20, 0.40, 0.15].map { bounds.width * it } do
