@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :blogs, only: [:index, :show]
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
+  resource :apply, only: [:show]
 
   namespace :webhooks do
     resource :stripe, only: [:create]
