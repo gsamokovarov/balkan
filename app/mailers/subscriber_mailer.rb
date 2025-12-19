@@ -40,4 +40,10 @@ class SubscriberMailer < ApplicationMailer
 
     mail to: @subscriber.email, subject: "Balkan Ruby 2025 is in a week!"
   end
+
+  def newsletter_20_email(subscriber)
+    @subscriber = subscriber
+
+    mail to: @subscriber.email, subject: "Balkan Ruby 2026 is about the hot takes!"
+  end
 end

@@ -39,4 +39,10 @@ class SubscriberPreview < ActionMailer::Preview
 
     SubscriberMailer.newsletter_13_email(subscriber).deliver_now
   end
+
+  def newsletter_20_email
+    subscriber = build :subscriber, email: "genadi@hey.com"
+
+    SubscriberMailer.newsletter_20_email(subscriber).deliver_now
+  end
 end
