@@ -10,13 +10,14 @@
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="sm:col-span-2">
         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100"><%= @communication.subject %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100"><%= @communication.communication_draft.subject %></dd>
       </div>
 
       <div>
-        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Template</dt>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Draft</dt>
         <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <%= @communication.communication_template&.name || "None" %>
+          <%= link_to @communication.communication_draft.name, admin_communication_draft_path(@communication.communication_draft),
+              class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
         </dd>
       </div>
 
@@ -48,20 +49,6 @@
 
     <!-- Actions -->
     <div class="flex gap-2 flex-wrap">
-      <% if @communication.draft? %>
-        <%= admin_button :secondary, link: edit_admin_event_communication_path(@communication) do %>
-          Edit
-        <% end %>
-
-        <% if @communication.recipient_count > 0 %>
-          <%= admin_button :primary,
-              post: send_communication_admin_event_communication_path(@communication),
-              data: { turbo_confirm: "Send to #{@communication.recipient_count} recipients?" } do %>
-            Send Now (to <%= @communication.recipient_count %> recipients)
-          <% end %>
-        <% end %>
-      <% end %>
-
       <%= admin_button :secondary, link: preview_admin_event_communication_path(@communication),
           target: "_blank" do %>
         Preview in New Tab

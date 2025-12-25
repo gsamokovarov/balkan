@@ -1,14 +1,11 @@
 class Communication < ApplicationRecord
   belongs_to :event
-  belongs_to :communication_template, optional: true
+  belongs_to :communication_draft
   has_many :communication_recipients, dependent: :destroy
 
   accepts_nested_attributes_for :communication_recipients, allow_destroy: true
 
   enum :status, { draft: "draft", sending: "sending", sent: "sent" }, validate: true
-
-  validates :subject, presence: true, liquid: true
-  validates :content, presence: true, liquid: true
 
   # Virtual attributes for recipient selection
   attr_accessor :include_subscribers, :include_ticket_holders, :include_speakers, :event_ids, :custom_recipients_text
@@ -77,18 +74,7 @@ class Communication < ApplicationRecord
   end
 
   def render_for(email)
-    context = {
-      "email" => email,
-      "event_name" => event.name,
-      "event_start_date" => event.start_date.to_s,
-      "event_end_date" => event.end_date.to_s,
-      "year" => event.start_date.year.to_s,
-    }
-
-    {
-      subject: Liquid::Template.parse(subject).render(context),
-      body: Liquid::Template.parse(content).render(context),
-    }
+    communication_draft.render_for(email, event)
   end
 
   def deliver!

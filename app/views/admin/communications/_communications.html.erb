@@ -2,8 +2,10 @@
 
 <%= admin_table communications do
   column "#", -> { link_to it.id, admin_event_communication_path(it), class: "text-indigo-600 dark:text-indigo-400 hover:underline" }
-  column "Subject", -> { link_to truncate(it.subject, length: 60), admin_event_communication_path(it), class: "text-indigo-600 dark:text-indigo-400 hover:underline" }
-  column "Template", -> { it.communication_template&.name || "—" }
+  column "Draft", -> {
+    link_to it.communication_draft.name, admin_event_communication_path(it), class: "text-indigo-600 dark:text-indigo-400 hover:underline"
+  }
+  column "Subject", -> { truncate(it.communication_draft.subject, length: 60) }
   column "Status", -> {
     variant = it.sent? ? :success : it.sending? ? :warning : :primary
     admin_badge variant, it.status.humanize
@@ -12,11 +14,6 @@
   column "Sent", -> { it.sent_at&.strftime("%Y-%m-%d %H:%M") || "—" }
 
   column do
-    tag.div class: "flex gap-1" do
-      concat admin_button(:secondary, :small, link: admin_event_communication_path(it)) { "View" }
-      if it.draft?
-        concat admin_button(:primary, :small, link: edit_admin_event_communication_path(it)) { "Edit" }
-      end
-    end
+    admin_button(:secondary, :small, link: admin_event_communication_path(it)) { "View" }
   end
 end %>

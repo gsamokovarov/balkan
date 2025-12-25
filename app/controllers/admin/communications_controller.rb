@@ -1,6 +1,6 @@
 class Admin::CommunicationsController < Admin::ApplicationController
   def index
-    @communications = scope event.communications.includes(:communication_template).order(id: :desc)
+    @communications = scope event.communications.includes(:communication_draft).order(created_at: :desc)
   end
 
   def show
@@ -9,73 +9,31 @@ class Admin::CommunicationsController < Admin::ApplicationController
 
   def new
     @communication = event.communications.new
-
-    # Pre-fill from template if provided
-    if params[:template_id]
-      template = CommunicationTemplate.find(params[:template_id])
-      @communication.communication_template = template
-      @communication.subject = template.subject_template
-      @communication.content = template.content_template
-    end
+    @draft = CommunicationDraft.find(params[:draft_id]) if params[:draft_id]
+    @communication.communication_draft = @draft if @draft
   end
 
   def create
-    @communication = event.communications.create communication_params
+    @communication = event.communications.new(communication_params)
 
-    if @communication.valid?
-      redirect_to admin_event_communication_path(event, @communication), notice: "Communication created"
+    if @communication.save
+      # Build recipients from filters
+      @communication.build_recipients_from_filters if @communication.has_filter_changes?
+      @communication.save
+
+      # Send immediately
+      @communication.deliver!
+
+      # Mark draft as sent
+      @communication.communication_draft.update(sent_at: Time.current)
+
+      redirect_to admin_event_communications_path(event), notice: "Communication sent to #{@communication.recipient_count} recipients"
     else
+      @draft = @communication.communication_draft
       render :new
     end
-  end
-
-  def edit
-    @communication = event.communications.find(params[:id])
-
-    if @communication.sent?
-      redirect_to admin_event_communication_path(event, @communication),
-                  alert: "Cannot edit sent communication"
-    end
-  end
-
-  def update
-    @communication = event.communications.find(params[:id])
-
-    if @communication.sent?
-      redirect_to admin_event_communication_path(event, @communication),
-                  alert: "Cannot update sent communication"
-      return
-    end
-
-    if @communication.update(communication_params)
-      redirect_to admin_event_communication_path(event, @communication), notice: "Communication updated"
-    else
-      render :edit
-    end
-  end
-
-  def send_communication
-    @communication = event.communications.find(params[:id])
-
-    if @communication.sent?
-      redirect_to admin_event_communication_path(event, @communication),
-                  alert: "Communication already sent"
-      return
-    end
-
-    if @communication.recipient_count.zero?
-      redirect_to admin_event_communication_path(event, @communication),
-                  alert: "Cannot send communication with no recipients"
-      return
-    end
-
-    @communication.deliver!
-
-    redirect_to admin_event_communication_path(event, @communication),
-                notice: "Communication sent to #{@communication.recipient_count} recipients"
   rescue => e
-    redirect_to admin_event_communication_path(event, @communication),
-                alert: "Failed to send: #{e.message}"
+    redirect_to admin_event_communications_path(event), alert: "Failed to send: #{e.message}"
   end
 
   def preview
@@ -90,15 +48,12 @@ class Admin::CommunicationsController < Admin::ApplicationController
 
   def communication_params
     params.require(:communication).permit(
-      :subject,
-      :content,
-      :communication_template_id,
+      :communication_draft_id,
       :include_subscribers,
       :include_ticket_holders,
       :include_speakers,
       :custom_recipients_text,
-      event_ids: [],
-      communication_recipients_attributes: [:id, :email, :_destroy]
+      event_ids: []
     )
   end
 

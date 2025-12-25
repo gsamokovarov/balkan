@@ -78,7 +78,7 @@ Rails.application.routes.draw do
     resources :venues, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoice_sequences, only: [:index]
     resources :users, only: [:index, :show, :new, :create, :update, :destroy]
-    resources :communication_templates, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :communication_drafts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       member do
         get :preview
       end
