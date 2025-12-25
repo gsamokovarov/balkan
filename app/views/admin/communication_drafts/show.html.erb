@@ -1,35 +1,45 @@
-<%= render "section", title: @template.name do %>
+<%= render "section", title: @draft.name do %>
   <div class="space-y-6">
     <!-- Details -->
     <dl class="grid grid-cols-1 gap-4">
       <div>
         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Description</dt>
         <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <%= @template.description || "—" %>
+          <%= @draft.description || "—" %>
         </dd>
       </div>
 
       <div>
-        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject Template</dt>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Event</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <%= @draft.event&.name || "Not event-specific" %>
+        </dd>
+      </div>
+
+      <div>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject</dt>
         <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 font-mono bg-gray-50 dark:bg-gray-800 p-3 rounded">
-          <%= @template.subject_template %>
+          <%= @draft.subject %>
         </dd>
       </div>
 
       <div>
-        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Content Template</dt>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Content</dt>
         <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 font-mono bg-gray-50 dark:bg-gray-800 p-3 rounded whitespace-pre-wrap">
-          <%= @template.content_template %>
+          <%= @draft.content %>
         </dd>
       </div>
     </dl>
 
     <!-- Actions -->
     <div class="flex gap-2">
-      <%= admin_button :secondary, link: edit_admin_communication_template_path(@template) do %>
+      <%= admin_button :primary, link: new_admin_event_communication_path(event_id: @draft.event_id || Current.event.id, draft_id: @draft.id) do %>
+        Send
+      <% end %>
+      <%= admin_button :secondary, link: edit_admin_communication_draft_path(@draft) do %>
         Edit
       <% end %>
-      <%= admin_button :danger, delete: admin_communication_template_path(@template) do %>
+      <%= admin_button :danger, delete: admin_communication_draft_path(@draft) do %>
         Delete
       <% end %>
     </div>
@@ -39,7 +49,7 @@
 <!-- Preview Section -->
 <%= render "section", title: "Preview with Sample Data" do %>
   <div class="space-y-4">
-    <% preview = @template.preview %>
+    <% preview = @draft.preview %>
 
     <div>
       <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Subject:</h3>
@@ -54,7 +64,7 @@
     </div>
 
     <p class="text-sm text-gray-500 dark:text-gray-400">
-      Preview uses sample data: John Doe, john@example.com, Sample Conference 2026
+      Preview uses sample data: sample@example.com, Sample Conference 2026
     </p>
   </div>
 <% end %>
