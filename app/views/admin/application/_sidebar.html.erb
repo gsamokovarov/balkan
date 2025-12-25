@@ -5,6 +5,7 @@
     { name: "Tickets", path: admin_event_tickets_path(Current.event) },
     { name: "Orders", path: admin_current_orders_path },
     { name: "Subscribers", path: admin_event_subscribers_path(Current.event) },
+    { name: "Communications", path: admin_event_communications_path(Current.event) },
     { name: "Embeddings", path: admin_event_embeddings_path(Current.event) },
     { name: "Schedule", path: admin_event_schedule_path(Current.event) },
     { name: "Lineup members", path: admin_event_lineup_members_path(Current.event) },
@@ -23,6 +24,7 @@
   { name: "Orders history", path: admin_orders_path },
   { name: "Invoice sequences", path: admin_invoice_sequences_path },
   { name: "Users", path: admin_users_path },
+  { name: "Communication Templates", path: admin_communication_templates_path },
 ] %>
 
 <div id="sidebar" popover class="relative z-50" role="dialog" aria-modal="true">

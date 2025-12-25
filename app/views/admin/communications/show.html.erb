@@ -1,0 +1,108 @@
+<%= render "section", title: "Communication ##{@communication.id}" do %>
+  <div class="space-y-6">
+    <!-- Status Badge -->
+    <div>
+      <% variant = @communication.sent? ? :success : @communication.sending? ? :warning : :primary %>
+      <%= admin_badge variant, @communication.status.humanize, class: "text-base px-3 py-1" %>
+    </div>
+
+    <!-- Details -->
+    <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="sm:col-span-2">
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100"><%= @communication.subject %></dd>
+      </div>
+
+      <div>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Template</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <%= @communication.communication_template&.name || "None" %>
+        </dd>
+      </div>
+
+      <div>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Recipients</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <%= @communication.recipient_count %>
+        </dd>
+      </div>
+
+      <% if @communication.sent? %>
+        <div>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Sent At</dt>
+          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+            <%= @communication.sent_at.strftime("%B %d, %Y at %H:%M") %>
+          </dd>
+        </div>
+      <% end %>
+
+      <% if @communication.error_message.present? %>
+        <div class="sm:col-span-2">
+          <dt class="text-sm font-medium text-red-600 dark:text-red-400">Error</dt>
+          <dd class="mt-1 text-sm text-red-900 dark:text-red-100 bg-red-50 dark:bg-red-900/20 p-3 rounded">
+            <%= @communication.error_message %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
+
+    <!-- Actions -->
+    <div class="flex gap-2 flex-wrap">
+      <% if @communication.draft? %>
+        <%= admin_button :secondary, link: edit_admin_event_communication_path(@communication) do %>
+          Edit
+        <% end %>
+
+        <% if @communication.recipient_count > 0 %>
+          <%= admin_button :primary,
+              post: send_communication_admin_event_communication_path(@communication),
+              data: { turbo_confirm: "Send to #{@communication.recipient_count} recipients?" } do %>
+            Send Now (to <%= @communication.recipient_count %> recipients)
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= admin_button :secondary, link: preview_admin_event_communication_path(@communication),
+          target: "_blank" do %>
+        Preview in New Tab
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<!-- Preview Section -->
+<%= render "section", title: "Preview" do %>
+  <div class="space-y-4">
+    <% rendered = @communication.render_for("preview@example.com") %>
+
+    <div>
+      <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Subject:</h3>
+      <p class="text-base font-semibold text-gray-900 dark:text-gray-100"><%= rendered[:subject] %></p>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Body:</h3>
+      <div class="p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800">
+        <%= sanitize rendered[:body] %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- Recipients Section -->
+<% if @communication.recipient_count > 0 %>
+  <%= render "section", title: "Recipients (#{@communication.recipient_count})" do %>
+    <div class="max-h-96 overflow-y-auto">
+      <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+        <% @communication.communication_recipients.limit(100).each do |recipient| %>
+          <li class="py-2 text-sm text-gray-700 dark:text-gray-300"><%= recipient.email %></li>
+        <% end %>
+        <% if @communication.recipient_count > 100 %>
+          <li class="py-2 text-sm text-gray-500 dark:text-gray-400 italic">
+            ... and <%= @communication.recipient_count - 100 %> more
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

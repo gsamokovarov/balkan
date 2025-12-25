@@ -1,0 +1,30 @@
+<%# locals: (template:) %>
+
+<div class="space-y-6">
+  <%= admin_form [:admin, template] do |f| %>
+    <%= f.text_input :name, required: true,
+        placeholder: "e.g., Welcome Newsletter" %>
+
+    <%= f.text_area_input :description, rows: 3,
+        placeholder: "Brief description of when to use this template" %>
+
+    <%= f.text_input :subject_template, required: true,
+        placeholder: "e.g., Welcome to {{ event_name }}!", label: "Subject Template" %>
+
+    <%= f.text_area_input :content_template, required: true, rows: 15,
+        placeholder: "Use Liquid variables: {{ email }}, {{ event_name }}, {{ year }}, etc.", label: "Content Template" %>
+
+    <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm">
+      <p class="font-medium mb-2">Available Liquid Variables:</p>
+      <div class="grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
+        <code>{{ email }}</code>
+        <code>{{ event_name }}</code>
+        <code>{{ event_start_date }}</code>
+        <code>{{ event_end_date }}</code>
+        <code>{{ year }}</code>
+      </div>
+    </div>
+
+    <%= f.submit %>
+  <% end %>
+</div>

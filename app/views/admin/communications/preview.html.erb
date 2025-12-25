@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Preview</title>
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f3f4f6;
+    }
+    .email-container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .subject {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+    .body {
+      color: #374151;
+    }
+    .preview-note {
+      background: #fef3c7;
+      border: 1px solid #fbbf24;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #92400e;
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-note">
+    <strong>Preview Mode</strong> - This is how the email will appear to recipients.
+  </div>
+
+  <div class="email-container">
+    <div class="subject"><%= @rendered[:subject] %></div>
+    <div class="body"><%= sanitize @rendered[:body] %></div>
+  </div>
+</body>
+</html>
