@@ -1,0 +1,21 @@
+<%= render "section", title: "Communications" do %>
+  <div class="mb-4 flex gap-2">
+    <%= admin_button :primary, link: new_admin_event_communication_path do %>
+      Create Communication
+    <% end %>
+    <%= admin_button :secondary, link: admin_communication_templates_path do %>
+      Manage Templates
+    <% end %>
+  </div>
+
+  <% if @communications.any? %>
+    <%= render "communications", communications: @communications %>
+    <%= admin_paginate @communications %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button :primary, link: new_admin_event_communication_path do %>
+        Create First Communication
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
