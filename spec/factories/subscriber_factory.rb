@@ -1,9 +1,6 @@
 FactoryBot.define do
   factory :subscriber do
-    event { association :event, :balkan2024 }
-
-    trait :genadi do
-      email { "genadi@hey.com" }
-    end
+    event
+    sequence(:email) { |n| "subscriber#{n}@example.com" }
   end
 end
