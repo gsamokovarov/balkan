@@ -43,10 +43,10 @@ class Admin::CommunicationDraftsController < Admin::ApplicationController
   end
 
   def preview
-    @draft = CommunicationDraft.find params[:id]
-    @rendered = @draft.preview
+    event = Event.find(params[:event_id]) if params[:event_id].present?
+    draft = CommunicationDraft.new subject: params[:subject], content: params[:content], event: event
 
-    render json: @rendered
+    render json: draft.preview
   end
 
   private

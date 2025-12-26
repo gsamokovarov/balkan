@@ -74,8 +74,8 @@ Rails.application.routes.draw do
     resources :invoice_sequences, only: [:index]
     resources :users, only: [:index, :show, :new, :create, :update, :destroy]
     resources :communication_drafts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-      member do
-        get :preview
+      collection do
+        post :preview
       end
     end
   end
