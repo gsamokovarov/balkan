@@ -1,45 +1,15 @@
 <%= render "section", title: "Send Communication" do %>
-  <div class="grid grid-cols-2 gap-6">
-    <div>
-      <%= admin_form [:admin, @event, @communication] do |f| %>
-        <% if @draft %>
-          <%= f.readonly_input :communication_draft_id, [[@draft.name, @draft.id]] %>
-        <% else %>
-          <%= f.select_input :communication_draft_id,
-                @event.communication_drafts.map { [it.name, it.id] },
-                include_blank: "Select a draft" %>
-        <% end %>
+  <%= admin_form [:admin, @event, @communication] do |f| %>
+    <% if @draft %>
+      <%= f.readonly_input :communication_draft_id, [[@draft.name, @draft.id]] %>
+    <% else %>
+      <%= f.select_input :communication_draft_id, @event.communication_drafts.map { [it.name, it.id] }, include_blank: "Select a draft" %>
+    <% end %>
 
-        <%= f.check_box_input :to_subscribers %>
-        <%= f.check_box_input :to_event, label: "Ticket holders" %>
-        <%= f.check_box_input :to_speakers %>
+    <%= f.check_box_input :to_subscribers, label: "Subscribers" %>
+    <%= f.check_box_input :to_event, label: "Ticket holders" %>
+    <%= f.check_box_input :to_speakers, label: "Speakers" %>
 
-        <%= f.submit %>
-      <% end %>
-    </div>
-
-    <div>
-      <% if @draft %>
-        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Preview</h3>
-        <% preview = @draft.preview %>
-        <div class="space-y-4">
-          <div>
-            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Subject</h4>
-            <p class="text-base font-semibold text-gray-900 dark:text-gray-100"><%= preview[:subject] %></p>
-          </div>
-
-          <div>
-            <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Body</h4>
-            <div class="p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 max-h-96 overflow-y-auto">
-              <%= sanitize preview[:body] %>
-            </div>
-          </div>
-
-          <p class="text-xs text-gray-500 dark:text-gray-400">
-            Preview uses sample data
-          </p>
-        </div>
-      <% end %>
-    </div>
-  </div>
+    <%= f.submit %>
+  <% end %>
 <% end %>

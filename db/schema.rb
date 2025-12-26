@@ -65,7 +65,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
   create_table "communication_drafts", force: :cascade do |t|
     t.integer "event_id"
     t.string "name", null: false
-    t.text "description"
     t.text "subject", null: false
     t.text "content", null: false
     t.datetime "sent_at"
