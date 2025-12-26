@@ -6,7 +6,6 @@ RSpec.case CommunicationDraft do
 
     draft = CommunicationDraft.create!(event:,
                                        name: "Welcome Newsletter",
-                                       description: "Welcome email for attendees",
                                        subject: "Welcome to {{ event_name }}!",
                                        content: "Hi {{ email }}, see you in {{ year }}!")
 

@@ -3,7 +3,6 @@ class CreateCommunicationSystem < ActiveRecord::Migration[8.0]
     create_table :communication_drafts do |t|
       t.belongs_to :event, foreign_key: true
       t.string :name, null: false
-      t.text :description
       t.text :subject, null: false
       t.text :content, null: false
       t.datetime :sent_at
