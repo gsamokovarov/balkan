@@ -21,7 +21,22 @@ class CommunicationDraft < ApplicationRecord
     }
   end
 
-  def send(communication)
+  def render_for(email, event_context)
+    context = {
+      "email" => email,
+      "event_name" => event_context.name,
+      "event_start_date" => event_context.start_date.to_s,
+      "event_end_date" => event_context.end_date.to_s,
+      "year" => event_context.start_date.year.to_s,
+    }
+
+    {
+      subject: Liquid::Template.parse(subject).render(context),
+      body: Liquid::Template.parse(content).render(context),
+    }
+  end
+
+  def deliver(communication)
     recipients = communication.communication_recipients
     recipients.build(event.tickets.map { { email: it.email } }) if communication.to_event
     recipients.build(event.speakers.map { { email: it.email } }) if communication.to_speakers

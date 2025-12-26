@@ -6,7 +6,7 @@
   </div>
 
   <% if @communications.any? %>
-    <%= render "communications", communications: @communications %>
+    <%= render "communications", communications: @communications, event: @event %>
     <%= admin_paginate @communications %>
   <% else %>
     <%= render "empty_state" do %>
