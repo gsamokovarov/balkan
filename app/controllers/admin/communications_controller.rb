@@ -15,33 +15,16 @@ class Admin::CommunicationsController < Admin::ApplicationController
 
   def create
     @communication = event.communications.new(communication_params)
+    @draft = @communication.communication_draft
 
-    if @communication.save
-      # Build recipients from filters
-      @communication.build_recipients_from_filters if @communication.has_filter_changes?
-      @communication.save
+    @draft.send(@communication)
 
-      # Send immediately
-      @communication.deliver!
+    # Mark draft as sent
+    @draft.update(sent_at: Time.current)
 
-      # Mark draft as sent
-      @communication.communication_draft.update(sent_at: Time.current)
-
-      redirect_to admin_event_communications_path(event), notice: "Communication sent to #{@communication.recipient_count} recipients"
-    else
-      @draft = @communication.communication_draft
-      render :new
-    end
+    redirect_to admin_event_communications_path(event), notice: "Communication sent to #{@communication.recipient_count} recipients"
   rescue => e
-    redirect_to admin_event_communications_path(event), alert: "Failed to send: #{e.message}"
-  end
-
-  def preview
-    @communication = event.communications.find(params[:id])
-    @sample_email = params[:sample_email] || "preview@example.com"
-    @rendered = @communication.render_for(@sample_email)
-
-    render layout: false
+    render :new
   end
 
   private
@@ -49,11 +32,9 @@ class Admin::CommunicationsController < Admin::ApplicationController
   def communication_params
     params.require(:communication).permit(
       :communication_draft_id,
-      :include_subscribers,
-      :include_ticket_holders,
-      :include_speakers,
-      :custom_recipients_text,
-      event_ids: []
+      :to_speakers,
+      :to_subscribers,
+      :to_event
     )
   end
 

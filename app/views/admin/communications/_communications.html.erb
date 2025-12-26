@@ -6,12 +6,8 @@
     link_to it.communication_draft.name, admin_event_communication_path(it), class: "text-indigo-600 dark:text-indigo-400 hover:underline"
   }
   column "Subject", -> { truncate(it.communication_draft.subject, length: 60) }
-  column "Status", -> {
-    variant = it.sent? ? :success : it.sending? ? :warning : :primary
-    admin_badge variant, it.status.humanize
-  }
   column "Recipients", -> { it.recipient_count }
-  column "Sent", -> { it.sent_at&.strftime("%Y-%m-%d %H:%M") || "—" }
+  column "Sent", -> { it.created_at.strftime("%Y-%m-%d %H:%M") }
 
   column do
     admin_button(:secondary, :small, link: admin_event_communication_path(it)) { "View" }

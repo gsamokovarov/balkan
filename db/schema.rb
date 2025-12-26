@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -65,12 +65,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
   create_table "communication_drafts", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.text "subject_template", null: false
-    t.text "content_template", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "subject", null: false
+    t.text "content", null: false
     t.integer "event_id"
     t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_communication_drafts_on_event_id"
     t.index ["name"], name: "index_communication_drafts_on_name", unique: true
   end
@@ -85,14 +85,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
 
   create_table "communications", force: :cascade do |t|
     t.integer "event_id", null: false
-    t.string "status", default: "draft", null: false
-    t.datetime "sent_at"
-    t.text "error_message"
+    t.integer "communication_draft_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "communication_draft_id", null: false
-    t.index ["event_id", "status"], name: "index_communications_on_event_id_and_status"
-    t.index ["sent_at"], name: "index_communications_on_sent_at"
+    t.index ["communication_draft_id"], name: "index_communications_on_communication_draft_id"
+    t.index ["event_id"], name: "index_communications_on_event_id"
   end
 
   create_table "community_partners", force: :cascade do |t|
@@ -143,8 +140,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "invoice_sequence_id", null: false
+    t.integer "order_id", null: false
+    t.integer "invoice_sequence_id", null: false
     t.integer "number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -186,12 +183,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "event_id", null: false
+    t.integer "event_id", null: false
     t.string "email", default: "", null: false
     t.string "stripe_checkout_session_uid", default: "", null: false
     t.json "stripe_checkout_session"
-    t.datetime "completed_at", precision: nil
-    t.datetime "expired_at", precision: nil
+    t.datetime "completed_at"
+    t.datetime "expired_at"
     t.boolean "issue_invoice", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -293,7 +290,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
   end
 
   create_table "subscribers", force: :cascade do |t|
-    t.bigint "event_id", null: false
+    t.integer "event_id", null: false
     t.text "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -310,7 +307,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
   end
 
   create_table "ticket_types", force: :cascade do |t|
-    t.bigint "event_id", null: false
+    t.integer "event_id", null: false
     t.string "name"
     t.decimal "price", default: "0.0", null: false
     t.boolean "enabled", default: false, null: false
@@ -321,14 +318,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.bigint "order_id", null: false
+    t.integer "order_id", null: false
     t.string "name", null: false
     t.string "email", null: false
     t.decimal "price", null: false
     t.string "shirt_size", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "ticket_type_id"
+    t.integer "ticket_type_id"
     t.index ["order_id"], name: "index_tickets_on_order_id"
     t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id"
   end
@@ -354,6 +351,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_163905) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "announcements", "events"
   add_foreign_key "blog_posts", "events"
