@@ -19,14 +19,11 @@ class CreateCommunicationSystem < ActiveRecord::Migration[8.0]
     create_table :communications do |t|
       t.integer :event_id, null: false
       t.integer :communication_draft_id, null: false
-      t.string :status, default: "draft", null: false
-      t.datetime :sent_at
-      t.text :error_message
 
       t.timestamps
     end
 
-    add_index :communications, [:event_id, :status]
+    add_index :communications, :event_id
     add_index :communications, :communication_draft_id
     add_foreign_key :communications, :events
     add_foreign_key :communications, :communication_drafts

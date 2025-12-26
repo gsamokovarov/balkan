@@ -65,12 +65,7 @@ Rails.application.routes.draw do
           post :deactivate
         end
       end
-      resources :communications, only: [:index, :show, :new, :create, :edit, :update] do
-        member do
-          post :send_communication
-          get :preview
-        end
-      end
+      resources :communications, only: [:index, :show, :new, :create]
     end
     resources :speakers, only: [:index, :show, :new, :create, :edit, :update]
     resources :sponsors, only: [:index, :show, :new, :create, :edit, :update]

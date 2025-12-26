@@ -1,11 +1,5 @@
 <%= render "section", title: "Communication ##{@communication.id}" do %>
   <div class="space-y-6">
-    <!-- Status Badge -->
-    <div>
-      <% variant = @communication.sent? ? :success : @communication.sending? ? :warning : :primary %>
-      <%= admin_badge variant, @communication.status.humanize, class: "text-base px-3 py-1" %>
-    </div>
-
     <!-- Details -->
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="sm:col-span-2">
@@ -28,51 +22,14 @@
         </dd>
       </div>
 
-      <% if @communication.sent? %>
-        <div>
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Sent At</dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-            <%= @communication.sent_at.strftime("%B %d, %Y at %H:%M") %>
-          </dd>
-        </div>
-      <% end %>
-
-      <% if @communication.error_message.present? %>
-        <div class="sm:col-span-2">
-          <dt class="text-sm font-medium text-red-600 dark:text-red-400">Error</dt>
-          <dd class="mt-1 text-sm text-red-900 dark:text-red-100 bg-red-50 dark:bg-red-900/20 p-3 rounded">
-            <%= @communication.error_message %>
-          </dd>
-        </div>
-      <% end %>
+      <div>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Sent At</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <%= @communication.created_at.strftime("%B %d, %Y at %H:%M") %>
+        </dd>
+      </div>
     </dl>
 
-    <!-- Actions -->
-    <div class="flex gap-2 flex-wrap">
-      <%= admin_button :secondary, link: preview_admin_event_communication_path(@communication),
-          target: "_blank" do %>
-        Preview in New Tab
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<!-- Preview Section -->
-<%= render "section", title: "Preview" do %>
-  <div class="space-y-4">
-    <% rendered = @communication.render_for("preview@example.com") %>
-
-    <div>
-      <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Subject:</h3>
-      <p class="text-base font-semibold text-gray-900 dark:text-gray-100"><%= rendered[:subject] %></p>
-    </div>
-
-    <div>
-      <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Body:</h3>
-      <div class="p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800">
-        <%= sanitize rendered[:body] %>
-      </div>
-    </div>
   </div>
 <% end %>
 
