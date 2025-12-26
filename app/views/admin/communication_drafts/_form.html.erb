@@ -1,19 +1,22 @@
 <%# locals: (draft:) %>
 
-<div class="flex flex-col md:flex-row md:space-x-6">
+<div class="flex flex-col md:flex-row md:space-x-6" data-controller="communication-preview">
   <%= admin_form [:admin, draft], html: { class: "sm:max-w-sm flex-1" } do |f| %>
     <%= f.text_input :name, required: true,
         placeholder: "e.g., Welcome Newsletter" %>
 
     <%= f.select_input :event_id,
         Event.all.order(start_date: :desc).map { [it.name, it.id] },
-        { include_blank: "Not event-specific", label: "Event (optional)" } %>
+        { include_blank: "Not event-specific", label: "Event (optional)" },
+        data: { communication_preview_target: "eventId" } %>
 
     <%= f.text_input :subject, required: true,
-        placeholder: "e.g., Welcome to {{ event_name }}!" %>
+        placeholder: "e.g., Welcome to {{ event_name }}!",
+        data: { communication_preview_target: "subject" } %>
 
     <%= f.text_area_input :content, required: true, rows: 15,
-        placeholder: "Use Liquid variables: {{ email }}, {{ event_name }}, {{ year }}, etc." %>
+        placeholder: "Use Liquid variables: {{ email }}, {{ event_name }}, {{ year }}, etc.",
+        data: { communication_preview_target: "content" } %>
 
     <%= f.submit %>
   <% end %>
@@ -30,26 +33,10 @@
       </div>
     </div>
 
-    <% if draft.persisted? %>
-      <h2 class="text-lg font-semibold mb-4">Preview</h2>
-      <% preview = draft.preview %>
-      <div class="space-y-4">
-        <div>
-          <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Subject</h4>
-          <p class="text-base font-semibold text-gray-900 dark:text-gray-100"><%= preview[:subject] %></p>
-        </div>
-
-        <div>
-          <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Body</h4>
-          <div class="prose p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 max-h-96 overflow-y-auto">
-            <%= sanitize preview[:body] %>
-          </div>
-        </div>
-
-        <p class="text-xs text-gray-500 dark:text-gray-400">
-          Preview uses sample data
-        </p>
-      </div>
-    <% end %>
+    <h2 class="text-lg font-semibold mb-4">Preview</h2>
+    <div data-communication-preview-target="preview"></div>
+    <p class="text-xs text-gray-500 dark:text-gray-400 mt-4">
+      Preview uses sample data
+    </p>
   </div>
 </div>
