@@ -1,6 +1,7 @@
 <%= render "section", title: "Send communication" do %>
   <%= admin_form [:admin, @communication.event, @communication] do |f| %>
     <%= f.readonly_input :communication_draft_id, [[@draft.name, @draft.id]] %>
+    <%= f.hidden_field :communication_draft_id %>
     <%= f.check_box_input :to_subscribers, label: "Subscribers" %>
     <%= f.check_box_input :to_event, label: "Ticket holders" %>
     <%= f.check_box_input :to_speakers, label: "Speakers" %>
