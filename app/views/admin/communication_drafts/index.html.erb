@@ -1,52 +1,12 @@
-<%= render "section", title: "Communication Drafts" do %>
-  <div class="mb-4">
-    <%= admin_button :primary, link: new_admin_communication_draft_path do %>
-      Create Draft
-    <% end %>
-  </div>
-
+<%= render "section", title: "Communication Drafts", cta: -> {
+  admin_button(:primary, link: new_admin_event_communication_draft_path(Current.event)) { "New draft" }
+} do %>
   <% if @drafts.any? %>
-    <%= admin_table @drafts do |table| %>
-      <% table.column "#" do |draft| %>
-        <%= link_to draft.id, admin_communication_draft_path(draft), class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
-      <% end %>
-      <% table.column "Name" do |draft| %>
-        <%= link_to draft.name, admin_communication_draft_path(draft), class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
-      <% end %>
-      <% table.column "Event" do |draft| %>
-        <%= draft.event&.name || "—" %>
-      <% end %>
-      <% table.column "Status" do |draft| %>
-        <% if draft.sent_at %>
-          <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-            Sent <%= draft.sent_at.strftime("%Y-%m-%d") %>
-          </span>
-        <% else %>
-          <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
-            Draft
-          </span>
-        <% end %>
-      <% end %>
-      <% table.column "Actions" do |draft| %>
-        <div class="flex gap-1">
-          <%= admin_button :primary, :small, link: new_admin_event_communication_path(event_id: draft.event_id || Current.event.id, draft_id: draft.id) do %>
-            Send
-          <% end %>
-          <%= admin_button :secondary, :small, link: edit_admin_communication_draft_path(draft) do %>
-            Edit
-          <% end %>
-          <%= admin_button :danger, :small, delete: admin_communication_draft_path(draft) do %>
-            Delete
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render "drafts", drafts: @drafts %>
     <%= admin_paginate @drafts %>
   <% else %>
     <%= render "empty_state" do %>
-      <%= admin_button :primary, link: new_admin_communication_draft_path do %>
-        Create First Draft
-      <% end %>
+      <%= admin_button(:primary, link: new_admin_event_communication_draft_path(Current.event)) { "New draft" } %>
     <% end %>
   <% end %>
 <% end %>

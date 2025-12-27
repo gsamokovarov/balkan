@@ -55,7 +55,7 @@ RSpec.case CommunicationDraft do
     assert_eq communication.recipients, ["alice@example.com"]
   end
 
-  test "renders preview with liquid variables" do
+  test "renders email with liquid variables" do
     event = create :event, :balkan2024
 
     draft = CommunicationDraft.create!(event:,
@@ -63,9 +63,9 @@ RSpec.case CommunicationDraft do
                                        subject: "Welcome to {{ event_name }}!",
                                        content: "See you in {{ year }}, {{ email }}!")
 
-    preview = draft.preview
+    rendered = draft.render_for("attendee@example.com")
 
-    assert_eq preview, subject: "Welcome to Balkan Ruby 2024!",
-                       body: "See you in 2024, sample@example.com!"
+    assert_eq rendered, subject: "Welcome to Balkan Ruby 2024!",
+                        body: "See you in 2024, attendee@example.com!"
   end
 end

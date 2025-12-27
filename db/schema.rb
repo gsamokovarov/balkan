@@ -63,7 +63,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
   end
 
   create_table "communication_drafts", force: :cascade do |t|
-    t.integer "event_id"
+    t.integer "event_id", null: false
     t.string "name", null: false
     t.text "subject", null: false
     t.text "content", null: false

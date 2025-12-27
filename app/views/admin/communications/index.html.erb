@@ -1,21 +1,10 @@
 <%= render "section", title: "Sent Communications" do %>
-  <div class="mb-4 flex gap-2">
-    <%= admin_button :secondary, link: admin_communication_drafts_path do %>
-      Manage Drafts
-    <% end %>
-  </div>
-
   <% if @communications.any? %>
-    <%= render "communications", communications: @communications, event: @event %>
+    <%= render "communications", communications: @communications %>
     <%= admin_paginate @communications %>
   <% else %>
     <%= render "empty_state" do %>
-      <p class="text-gray-500 dark:text-gray-400 mb-4">
-        No communications sent yet. Create a draft and send it to get started.
-      </p>
-      <%= admin_button :primary, link: admin_communication_drafts_path do %>
-        Go to Drafts
-      <% end %>
+      <%= admin_button(:primary, link: admin_event_communication_drafts_path(Current.event)) { "Manage" } %>
     <% end %>
   <% end %>
 <% end %>

@@ -65,6 +65,11 @@ Rails.application.routes.draw do
           post :deactivate
         end
       end
+      resources :communication_drafts, only: [:index, :show, :new, :create, :update, :destroy] do
+        collection do
+          post :preview
+        end
+      end
       resources :communications, only: [:index, :show, :new, :create]
     end
     resources :speakers, only: [:index, :show, :new, :create, :edit, :update]
@@ -73,11 +78,6 @@ Rails.application.routes.draw do
     resources :venues, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoice_sequences, only: [:index]
     resources :users, only: [:index, :show, :new, :create, :update, :destroy]
-    resources :communication_drafts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-      collection do
-        post :preview
-      end
-    end
   end
 
   direct(:banitsa) { "https://rubybanitsa.com" }

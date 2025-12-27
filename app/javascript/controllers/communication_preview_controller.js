@@ -2,7 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="communication-preview"
 export default class extends Controller {
-  static targets = ["subject", "content", "preview", "eventId"]
+  static targets = ["subject", "content", "preview"]
+  static values = { eventId: String }
 
   connect() {
     this.#preview()
@@ -22,12 +23,9 @@ export default class extends Controller {
 
     formData.append("subject", subject)
     formData.append("content", content)
+    formData.append("event_id", this.eventIdValue)
 
-    if (this.hasEventIdTarget && this.eventIdTarget.value) {
-      formData.append("event_id", this.eventIdTarget.value)
-    }
-
-    const response = await fetch("/admin/communication_drafts/preview", {
+    const response = await fetch(`/admin/events/${this.eventIdValue}/communication_drafts/preview`, {
       method: "POST",
       headers: { "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content },
       body: formData,
