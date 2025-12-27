@@ -1,63 +1,12 @@
-<%= render "section", title: @draft.name do %>
-  <div class="space-y-6">
-    <!-- Details -->
-    <dl class="grid grid-cols-1 gap-4">
-      <div>
-        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Event</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <%= @draft.event&.name || "Not event-specific" %>
-        </dd>
-      </div>
-
-      <div>
-        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 font-mono bg-gray-50 dark:bg-gray-800 p-3 rounded">
-          <%= @draft.subject %>
-        </dd>
-      </div>
-
-      <div>
-        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Content</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 font-mono bg-gray-50 dark:bg-gray-800 p-3 rounded whitespace-pre-wrap">
-          <%= @draft.content %>
-        </dd>
-      </div>
-    </dl>
-
-    <!-- Actions -->
-    <div class="flex gap-2">
-      <%= admin_button :primary, link: new_admin_event_communication_path(event_id: @draft.event_id || Current.event.id, draft_id: @draft.id) do %>
-        Send
-      <% end %>
-      <%= admin_button :secondary, link: edit_admin_communication_draft_path(@draft) do %>
-        Edit
-      <% end %>
-      <%= admin_button :danger, delete: admin_communication_draft_path(@draft) do %>
-        Delete
-      <% end %>
-    </div>
-  </div>
+<%= render "section", title: @draft.persisted? ? "Edit Draft: #{@draft.name}" : "New Communication Draft" do %>
+  <%= render "form", draft: @draft %>
 <% end %>
 
-<!-- Preview Section -->
-<%= render "section", title: "Preview with Sample Data" do %>
-  <div class="space-y-4">
-    <% preview = @draft.preview %>
-
-    <div>
-      <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Subject:</h3>
-      <p class="text-base font-semibold text-gray-900 dark:text-gray-100"><%= preview[:subject] %></p>
+<% if @draft.persisted? %>
+  <%= render "section", title: "Actions" do %>
+    <div class="flex gap-2">
+      <%= admin_button(:primary, link: new_admin_event_communication_path(@draft.event, @draft)) { "Send communication" } %>
+      <%= admin_button(:danger, delete: admin_event_communication_draft_path(@draft.event, @draft)) { "Delete" } %>
     </div>
-
-    <div>
-      <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Body:</h3>
-      <div class="p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800">
-        <%= sanitize preview[:body] %>
-      </div>
-    </div>
-
-    <p class="text-sm text-gray-500 dark:text-gray-400">
-      Preview uses sample data: sample@example.com, Sample Conference 2026
-    </p>
-  </div>
+  <% end %>
 <% end %>

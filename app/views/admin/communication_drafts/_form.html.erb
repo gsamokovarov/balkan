@@ -1,14 +1,9 @@
-<%# locals: (draft:) %>
+<%# locals: (draft:, %>
 
-<div class="flex flex-col md:flex-row md:space-x-6" data-controller="communication-preview">
-  <%= admin_form [:admin, draft], html: { class: "sm:max-w-sm flex-1" } do |f| %>
+<div class="flex flex-col md:flex-row md:space-x-6" data-controller="communication-preview" data-communication-preview-event-id-value="<%= @draft.event.id %>">
+  <%= admin_form [:admin, @draft.event, draft], html: { class: "sm:max-w-sm flex-1" } do |f| %>
     <%= f.text_input :name, required: true,
         placeholder: "e.g., Welcome Newsletter" %>
-
-    <%= f.select_input :event_id,
-        Event.all.order(start_date: :desc).map { [it.name, it.id] },
-        { include_blank: "Not event-specific", label: "Event (optional)" },
-        data: { communication_preview_target: "eventId" } %>
 
     <%= f.text_input :subject, required: true,
         placeholder: "e.g., Welcome to {{ event_name }}!",
@@ -24,7 +19,7 @@
   <div class="w-full sm:w-96">
     <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm mb-6">
       <p class="font-medium mb-2">Available Liquid Variables:</p>
-      <div class="grid grid-cols-2 gap-2 text-gray-600 dark:text-gray-400">
+      <div class="grid grid-cols-2 gap-2 text-xs text-gray-600 dark:text-gray-400">
         <code>{{ email }}</code>
         <code>{{ event_name }}</code>
         <code>{{ event_start_date }}</code>

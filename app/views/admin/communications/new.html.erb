@@ -1,11 +1,6 @@
-<%= render "section", title: "Send Communication" do %>
-  <%= admin_form [:admin, @event, @communication] do |f| %>
-    <% if @draft %>
-      <%= f.readonly_input :communication_draft_id, [[@draft.name, @draft.id]] %>
-    <% else %>
-      <%= f.select_input :communication_draft_id, @event.communication_drafts.map { [it.name, it.id] }, include_blank: "Select a draft" %>
-    <% end %>
-
+<%= render "section", title: "Send communication" do %>
+  <%= admin_form [:admin, @communication.event, @communication] do |f| %>
+    <%= f.readonly_input :communication_draft_id, [[@draft.name, @draft.id]] %>
     <%= f.check_box_input :to_subscribers, label: "Subscribers" %>
     <%= f.check_box_input :to_event, label: "Ticket holders" %>
     <%= f.check_box_input :to_speakers, label: "Speakers" %>

@@ -1,7 +1,7 @@
 class CreateCommunicationSystem < ActiveRecord::Migration[8.0]
   def change
     create_table :communication_drafts do |t|
-      t.belongs_to :event, foreign_key: true
+      t.belongs_to :event, null: false, foreign_key: true
       t.string :name, null: false
       t.text :subject, null: false
       t.text :content, null: false
