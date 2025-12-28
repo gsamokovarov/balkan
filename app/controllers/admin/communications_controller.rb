@@ -5,7 +5,7 @@ class Admin::CommunicationsController < Admin::ApplicationController
 
   def show
     @communication = event.communications.find params[:id]
-    @recipients = @communication.communication_recipients.page params[:page]
+    @recipients = @communication.recipients.page params[:page]
   end
 
   def new
@@ -19,7 +19,7 @@ class Admin::CommunicationsController < Admin::ApplicationController
 
     @draft.deliver @communication
 
-    redirect_to admin_event_communications_path(event), notice: "Communication sent to #{@communication.recipient_count} recipients"
+    redirect_to admin_event_communications_path(event), notice: "Communication sent to #{@communication.recipients.count} recipients"
   end
 
   private

@@ -6,7 +6,7 @@
     link_to it.communication_draft.name, admin_event_communication_path(it.event, it), class: "text-indigo-600 dark:text-indigo-400 hover:underline"
   end
   column "Subject", -> { truncate(it.communication_draft.subject, length: 60) }
-  column "Recipients", -> { it.recipient_count }
+  column "Recipients", -> { it.recipients.count }
   column "Sent", -> { it.created_at.strftime("%Y-%m-%d %H:%M") }
 
   column do

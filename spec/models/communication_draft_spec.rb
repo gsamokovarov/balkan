@@ -26,8 +26,8 @@ RSpec.case CommunicationDraft do
     draft.deliver communication
 
     assert communication.persisted?
-    assert_eq communication.recipient_count, 7
-    assert_eq communication.recipients.sort, [
+    assert_eq communication.recipients.count, 7
+    assert_eq communication.recipients.pluck(:email).sort, [
       "alice@example.com",
       "bob@example.com",
       "charlie@example.com",
@@ -52,7 +52,7 @@ RSpec.case CommunicationDraft do
     communication = draft.communications.new to_speakers: true, to_subscribers: false, to_event: false
     draft.deliver communication
 
-    assert_eq communication.recipients, ["alice@example.com"]
+    assert_eq communication.recipients.pluck(:email), ["alice@example.com"]
   end
 
   test "renders email with liquid variables" do

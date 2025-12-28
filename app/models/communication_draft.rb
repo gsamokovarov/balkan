@@ -24,12 +24,12 @@ class CommunicationDraft < ApplicationRecord
   end
 
   def deliver(communication)
-    recipients = communication.communication_recipients
+    recipients = communication.recipients
     recipients.build(event.tickets.map { { email: it.email } }) if communication.to_event
     recipients.build(event.speakers.map { { email: it.email } }) if communication.to_speakers
     recipients.build(event.subscribers.map { { email: it.email } }) if communication.to_subscribers
 
-    communication.communication_recipients = recipients.uniq { it.email.downcase }
+    communication.recipients = recipients.uniq { it.email.downcase }
     communication.save!
     communication.deliver
     update! sent_at: Time.current
