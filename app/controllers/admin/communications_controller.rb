@@ -1,6 +1,6 @@
 class Admin::CommunicationsController < Admin::ApplicationController
   def index
-    @communications = scope event.communications.includes(:communication_draft).order(created_at: :desc)
+    @communications = scope event.communications.includes(:draft).order(created_at: :desc)
   end
 
   def show

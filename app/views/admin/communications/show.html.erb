@@ -3,13 +3,13 @@
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="sm:col-span-2">
         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100"><%= @communication.communication_draft.subject %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100"><%= @communication.draft.subject %></dd>
       </div>
 
       <div>
         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Draft</dt>
         <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
-          <%= link_to @communication.communication_draft.name, admin_event_communication_draft_path(@communication.event, @communication.communication_draft),
+          <%= link_to @communication.draft.name, admin_event_communication_draft_path(@communication.event, @communication.draft),
               class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
         </dd>
       </div>
