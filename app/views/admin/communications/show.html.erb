@@ -1,6 +1,5 @@
 <%= render "section", title: "Communication ##{@communication.id}" do %>
   <div class="space-y-6">
-    <!-- Details -->
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="sm:col-span-2">
         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject</dt>
@@ -29,24 +28,13 @@
         </dd>
       </div>
     </dl>
-
   </div>
 <% end %>
 
-<!-- Recipients Section -->
 <% if @communication.recipient_count > 0 %>
   <%= render "section", title: "Recipients (#{@communication.recipient_count})" do %>
-    <div class="max-h-96 overflow-y-auto">
-      <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-        <% @communication.communication_recipients.limit(100).each do |recipient| %>
-          <li class="py-2 text-sm text-gray-700 dark:text-gray-300"><%= recipient.email %></li>
-        <% end %>
-        <% if @communication.recipient_count > 100 %>
-          <li class="py-2 text-sm text-gray-500 dark:text-gray-400 italic">
-            ... and <%= @communication.recipient_count - 100 %> more
-          </li>
-        <% end %>
-      </ul>
-    </div>
+    <%= turbo_frame_tag "recipients", data: { turbo_action: "advance" } do %>
+      <%= render "recipients", recipients: @recipients %>
+    <% end %>
   <% end %>
 <% end %>

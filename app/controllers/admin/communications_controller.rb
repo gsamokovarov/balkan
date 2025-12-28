@@ -5,6 +5,7 @@ class Admin::CommunicationsController < Admin::ApplicationController
 
   def show
     @communication = event.communications.find params[:id]
+    @recipients = @communication.communication_recipients.page params[:page]
   end
 
   def new
