@@ -1,0 +1,12 @@
+<%= render "section", title: @draft.name do %>
+  <%= render "form", draft: @draft %>
+<% end %>
+
+<%= render "section", title: "Actions" do %>
+  <div class="flex gap-2">
+    <% unless @draft.sent? %>
+      <%= admin_button(:primary, link: new_admin_event_communication_path(@draft.event, draft_id: @draft.id)) { "Send" } %>
+    <% end %>
+    <%= admin_button(:danger, delete: admin_event_communication_draft_path(@draft.event, @draft)) { "Delete" } %>
+  </div>
+<% end %>

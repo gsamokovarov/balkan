@@ -1,0 +1,12 @@
+<%= render "section", title: "Communication drafts", cta: -> {
+  admin_button(:primary, link: new_admin_event_communication_draft_path(Current.event)) { "New draft" }
+} do %>
+  <% if @drafts.any? %>
+    <%= render "drafts", drafts: @drafts %>
+    <%= admin_paginate @drafts %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_event_communication_draft_path(Current.event)) { "New draft" } %>
+    <% end %>
+  <% end %>
+<% end %>

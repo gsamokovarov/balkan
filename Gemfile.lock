@@ -163,6 +163,9 @@ GEM
       childprocess (~> 5.0)
       logger (~> 1.6)
     lint_roller (1.1.0)
+    liquid (5.11.0)
+      bigdecimal
+      strscan (>= 3.1.1)
     logger (1.6.4)
     loofah (2.23.1)
       crass (~> 1.0.2)
@@ -336,6 +339,7 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.7)
     stripe (10.1.0)
+    strscan (3.1.6)
     tailwindcss-rails (2.7.9-aarch64-linux)
       railties (>= 7.0.0)
     tailwindcss-rails (2.7.9-arm64-darwin)
@@ -394,6 +398,7 @@ DEPENDENCIES
   icalendar
   image_processing
   importmap-rails
+  liquid (~> 5.4)
   litestack!
   matrix (~> 0.4.2)
   pdf-inspector

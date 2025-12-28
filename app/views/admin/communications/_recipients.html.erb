@@ -1,0 +1,8 @@
+<%# locals: (recipients:) %>
+
+<ul class="columns-2 md:columns-4 gap-x-4">
+  <% recipients.each do |recipient| %>
+    <li class="py-2 text-sm text-gray-700 dark:text-gray-300 break-inside-avoid"><%= recipient.email %></li>
+  <% end %>
+</ul>
+<%= admin_paginate recipients %>

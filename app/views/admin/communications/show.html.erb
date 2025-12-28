@@ -1,0 +1,40 @@
+<%= render "section", title: "Communication ##{@communication.id}" do %>
+  <div class="space-y-6">
+    <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="sm:col-span-2">
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Subject</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100"><%= @communication.draft.subject %></dd>
+      </div>
+
+      <div>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Draft</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <%= link_to @communication.draft.name, admin_event_communication_draft_path(@communication.event, @communication.draft),
+              class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
+        </dd>
+      </div>
+
+      <div>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Recipients</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <%= @communication.recipients.count %>
+        </dd>
+      </div>
+
+      <div>
+        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Sent At</dt>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">
+          <%= @communication.created_at.strftime("%B %d, %Y at %H:%M") %>
+        </dd>
+      </div>
+    </dl>
+  </div>
+<% end %>
+
+<% if @communication.recipients.count > 0 %>
+  <%= render "section", title: "Recipients (#{@communication.recipients.count})" do %>
+    <%= turbo_frame_tag "recipients", data: { turbo_action: "advance" } do %>
+      <%= render "recipients", recipients: @recipients %>
+    <% end %>
+  <% end %>
+<% end %>

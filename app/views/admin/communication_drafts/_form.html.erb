@@ -1,0 +1,34 @@
+<%# locals: (draft:, %>
+
+<div class="flex flex-col md:flex-row md:space-x-6" data-controller="communication-preview" data-communication-preview-event-id-value="<%= @draft.event.id %>">
+  <%= admin_form [:admin, @draft.event, draft], html: { class: "sm:max-w-sm flex-1" } do |f| %>
+    <%= f.text_input :name, required: true,
+        placeholder: "e.g., Welcome Newsletter" %>
+
+    <%= f.text_input :subject, required: true,
+        placeholder: "Welcome to {{ event_name }}!",
+        data: { communication_preview_target: "subject" } %>
+
+    <%= f.text_area_input :content, required: true, rows: 15,
+        placeholder: "Hey, {{ email }}, {{ event_name }}, {{ year }}, etc.",
+        data: { communication_preview_target: "content" } %>
+
+    <%= f.submit %>
+  <% end %>
+
+  <div class="w-full sm:w-96">
+    <div class="p-2 border border-gray-300 rounded-md shadow-sm mb-6">
+      <p class="font-medium text-sm mb-2 text-gray-900 dark:text-gray-100">Template variables:</p>
+      <div class="grid grid-cols-2 gap-2 text-xs text-gray-600 dark:text-gray-400">
+        <code>{{ email }}</code>
+        <code>{{ event_name }}</code>
+        <code>{{ event_start_date }}</code>
+        <code>{{ event_end_date }}</code>
+        <code>{{ year }}</code>
+      </div>
+    </div>
+
+    <h2 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Preview</h2>
+    <div class="prose dark:prose-invert p-2 border border-gray-300 rounded-md shadow-sm sm:h-3/4 sm:overflow-y-scroll" data-communication-preview-target="preview"></div>
+  </div>
+</div>

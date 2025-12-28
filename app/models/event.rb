@@ -15,6 +15,9 @@ class Event < ApplicationRecord
   has_many :sponsorship_variants, through: :sponsorship_packages, source: :variants
   has_many :sponsorships
   has_many :announcements
+  has_many :communication_drafts
+  has_many :communications, through: :communication_drafts
+  has_many :speakers, through: :lineup_members
   has_one_attached :logo
   has_one_attached :ogp_image
   has_many_attached :hero_images

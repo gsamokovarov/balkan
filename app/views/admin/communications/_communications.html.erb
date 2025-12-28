@@ -1,0 +1,15 @@
+<%# locals: (communications:) %>
+
+<%= admin_table communications do
+  column "#", -> { link_to it.id, admin_event_communication_path(it.event, it), class: "text-indigo-600 dark:text-indigo-400 hover:underline" }
+  column "Draft" do
+    link_to it.draft.name, admin_event_communication_path(it.event, it), class: "text-indigo-600 dark:text-indigo-400 hover:underline"
+  end
+  column "Subject", -> { truncate(it.draft.subject, length: 60) }
+  column "Recipients", -> { it.recipients.count }
+  column "Sent", -> { it.created_at.strftime("%Y-%m-%d %H:%M") }
+
+  column do
+    admin_button(:secondary, :small, link: admin_event_communication_path(it.event, it)) { "View" }
+  end
+end %>

@@ -1,0 +1,23 @@
+<%# locals: (drafts:) %>
+
+<%= admin_table drafts do
+  column "#", -> { link_to it.id, admin_event_communication_draft_path(it.event, it), class: "text-indigo-600 dark:text-indigo-400 hover:underline" }
+
+  column "Name", -> { link_to it.name, admin_event_communication_draft_path(it.event, it) }
+  column "Status" do |draft|
+    if draft.sent?
+      admin_badge :success, "Sent on #{draft.sent_at.to_fs(:short)}"
+    else
+      admin_badge :warning, "Draft"
+    end
+  end
+
+  column do |draft|
+    tag.div class: "flex gap-2" do
+      unless draft.sent?
+        concat admin_button(:primary, :small, link: new_admin_event_communication_path(draft.event, draft_id: draft.id)) { "Send" }
+      end
+      concat admin_button(:danger, :small, delete: admin_event_communication_draft_path(draft.event, draft)) { "Delete" }
+    end
+  end
+end %>

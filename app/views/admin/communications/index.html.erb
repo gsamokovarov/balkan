@@ -1,0 +1,10 @@
+<%= render "section", title: "Sent Communications" do %>
+  <% if @communications.any? %>
+    <%= render "communications", communications: @communications %>
+    <%= admin_paginate @communications %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: admin_event_communication_drafts_path(Current.event)) { "Manage" } %>
+    <% end %>
+  <% end %>
+<% end %>

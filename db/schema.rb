@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_04_143718) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,34 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_04_143718) do
     t.datetime "published_at"
     t.index ["author_id"], name: "index_blog_posts_on_author_id"
     t.index ["event_id"], name: "index_blog_posts_on_event_id"
+  end
+
+  create_table "communication_drafts", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "name", null: false
+    t.text "subject", null: false
+    t.text "content", null: false
+    t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "name"], name: "index_communication_drafts_on_event_id_and_name", unique: true
+    t.index ["event_id"], name: "index_communication_drafts_on_event_id"
+  end
+
+  create_table "communication_recipients", force: :cascade do |t|
+    t.integer "communication_id", null: false
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_id", "email"], name: "index_communication_recipients_on_communication_id_and_email", unique: true
+    t.index ["communication_id"], name: "index_communication_recipients_on_communication_id"
+  end
+
+  create_table "communications", force: :cascade do |t|
+    t.integer "communication_draft_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_draft_id"], name: "index_communications_on_communication_draft_id"
   end
 
   create_table "community_partners", force: :cascade do |t|
@@ -207,6 +235,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_04_143718) do
     t.string "social_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
   end
 
   create_table "speakers_talks", id: false, force: :cascade do |t|
@@ -324,6 +353,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_04_143718) do
   add_foreign_key "announcements", "events"
   add_foreign_key "blog_posts", "events"
   add_foreign_key "blog_posts", "users", column: "author_id"
+  add_foreign_key "communication_drafts", "events"
+  add_foreign_key "communication_recipients", "communications"
+  add_foreign_key "communications", "communication_drafts"
   add_foreign_key "community_partners", "events"
   add_foreign_key "embeddings", "events"
   add_foreign_key "events", "invoice_sequences"
