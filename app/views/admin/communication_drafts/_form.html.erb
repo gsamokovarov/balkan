@@ -6,19 +6,19 @@
         placeholder: "e.g., Welcome Newsletter" %>
 
     <%= f.text_input :subject, required: true,
-        placeholder: "e.g., Welcome to {{ event_name }}!",
+        placeholder: "Welcome to {{ event_name }}!",
         data: { communication_preview_target: "subject" } %>
 
     <%= f.text_area_input :content, required: true, rows: 15,
-        placeholder: "Use Liquid variables: {{ email }}, {{ event_name }}, {{ year }}, etc.",
+        placeholder: "Hey, {{ email }}, {{ event_name }}, {{ year }}, etc.",
         data: { communication_preview_target: "content" } %>
 
     <%= f.submit %>
   <% end %>
 
   <div class="w-full sm:w-96">
-    <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm mb-6">
-      <p class="font-medium mb-2">Available Liquid Variables:</p>
+    <div class="p-2 border border-gray-300 rounded-md shadow-sm mb-6">
+      <p class="font-medium text-sm mb-2">Template variables:</p>
       <div class="grid grid-cols-2 gap-2 text-xs text-gray-600 dark:text-gray-400">
         <code>{{ email }}</code>
         <code>{{ event_name }}</code>
@@ -29,9 +29,6 @@
     </div>
 
     <h2 class="text-lg font-semibold mb-4">Preview</h2>
-    <div data-communication-preview-target="preview"></div>
-    <p class="text-xs text-gray-500 dark:text-gray-400 mt-4">
-      Preview uses sample data
-    </p>
+    <div class="prose p-2 border border-gray-300 rounded-md shadow-sm sm:h-3/4 sm:overflow-y-scroll" data-communication-preview-target="preview"></div>
   </div>
 </div>

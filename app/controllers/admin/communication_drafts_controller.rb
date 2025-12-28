@@ -39,18 +39,10 @@ class Admin::CommunicationDraftsController < Admin::ApplicationController
   end
 
   def preview
-    context = {
-      "email" => "attendee@example.com",
-      "event_name" => event.name,
-      "event_start_date" => event.start_date.to_s,
-      "event_end_date" => event.end_date.to_s,
-      "year" => event.start_date.year.to_s,
-    }
+    draft = event.communication_drafts.new draft_params
+    draft.render_for("attendee@example.com") => { subject:, body: }
 
-    subject = Liquid::Template.parse(params[:subject]).render(context)
-    body = Liquid::Template.parse(params[:content]).render(context)
-
-    render json: { subject:, body: }
+    render json: { subject:, body: helpers.render_markdown(body) }
   end
 
   private

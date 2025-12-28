@@ -17,33 +17,20 @@ export default class extends Controller {
   }
 
   #preview = async () => {
-    const formData = new FormData()
-    const subject = this.subjectTarget.value || ""
-    const content = this.contentTarget.value || ""
-
-    formData.append("subject", subject)
-    formData.append("content", content)
-    formData.append("event_id", this.eventIdValue)
-
     const response = await fetch(`/admin/events/${this.eventIdValue}/communication_drafts/preview`, {
       method: "POST",
-      headers: { "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content },
-      body: formData,
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ subject: this.subjectTarget.value, content: this.contentTarget.value }),
     })
 
-    const { subject: renderedSubject, body: renderedBody } = await response.json()
+    const { subject, body } = await response.json()
 
     this.previewTarget.innerHTML = `
-      <div class="mb-4">
-        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Subject</h4>
-        <p class="text-base font-semibold text-gray-900 dark:text-gray-100">${renderedSubject || "—"}</p>
-      </div>
-      <div>
-        <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Body</h4>
-        <div class="prose p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 max-h-96 overflow-y-auto">
-          ${renderedBody || "—"}
-        </div>
-      </div>
+      <h3 class="mb-2">${subject || "No subject"}</h3>
+      <p>${body}</p>
     `
   }
 }

@@ -1,4 +1,4 @@
-<%= render "section", title: "Communication Drafts", cta: -> {
+<%= render "section", title: "Communication drafts", cta: -> {
   admin_button(:primary, link: new_admin_event_communication_draft_path(Current.event)) { "New draft" }
 } do %>
   <% if @drafts.any? %>
