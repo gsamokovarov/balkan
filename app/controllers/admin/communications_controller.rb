@@ -14,7 +14,7 @@ class Admin::CommunicationsController < Admin::ApplicationController
   end
 
   def create
-    @draft = event.communication_drafts.find communication_params[:communication_draft_id]
+    @draft = event.communication_drafts.find params[:communication][:communication_draft_id]
     @communication = @draft.communications.new communication_params
 
     @draft.deliver @communication
@@ -25,7 +25,8 @@ class Admin::CommunicationsController < Admin::ApplicationController
   private
 
   def communication_params
-    params.require(:communication).permit(:communication_draft_id, :to_speakers, :to_subscribers, :to_event)
+    params.require(:communication).permit(:to_speakers, :to_subscribers, :to_event,
+                                          recipients_attributes: [:id, :email])
   end
 
   def event = @event ||= Event.find(params[:event_id])
