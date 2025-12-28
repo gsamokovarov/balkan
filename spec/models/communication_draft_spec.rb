@@ -63,7 +63,7 @@ RSpec.case CommunicationDraft do
                                        subject: "Welcome to {{ event_name }}!",
                                        content: "See you in {{ year }}, {{ email }}!")
 
-    rendered = draft.render_for("attendee@example.com")
+    rendered = draft.interpolate_for("attendee@example.com")
 
     assert_eq rendered, subject: "Welcome to Balkan Ruby 2024!",
                         body: "See you in 2024, attendee@example.com!"

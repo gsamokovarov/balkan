@@ -10,7 +10,7 @@ class Communication < ApplicationRecord
   def recipients = @recipients ||= communication_recipients.map(&:email)
   def recipient_count = communication_recipients.size
 
-  def render_for(email) = communication_draft.render_for email
+  def interpolate_for(email) = communication_draft.interpolate_for email
 
   def deliver
     recipients.each { CommunicationMailer.campaign_email(self, it).deliver_later }

@@ -8,7 +8,7 @@ class CommunicationDraft < ApplicationRecord
   validates :subject, presence: true, liquid: true
   validates :content, presence: true, liquid: true
 
-  def render_for(email)
+  def interpolate_for(email)
     context = {
       "email" => email,
       "event_name" => event.name,

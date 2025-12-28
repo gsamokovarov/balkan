@@ -40,7 +40,7 @@ class Admin::CommunicationDraftsController < Admin::ApplicationController
 
   def preview
     draft = event.communication_drafts.new draft_params
-    draft.render_for("attendee@example.com") => { subject:, body: }
+    draft.interpolate_for("attendee@example.com") => { subject:, body: }
 
     render json: { subject:, body: helpers.render_markdown(body) }
   end
