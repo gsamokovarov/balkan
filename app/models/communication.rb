@@ -11,7 +11,7 @@ class Communication < ApplicationRecord
 
   def deliver
     recipients.each do
-      CommunicationMailer.campaign_email(self, it.email).deliver_later
+      CommunicationMailer.template_email(self, it.email).deliver_later
     end
   end
 end
