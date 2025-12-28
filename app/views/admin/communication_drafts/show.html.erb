@@ -1,12 +1,10 @@
-<%= render "section", title: @draft.persisted? ? "Edit Draft: #{@draft.name}" : "New Communication Draft" do %>
+<%= render "section", title: @draft.name do %>
   <%= render "form", draft: @draft %>
 <% end %>
 
-<% if @draft.persisted? %>
-  <%= render "section", title: "Actions" do %>
-    <div class="flex gap-2">
-      <%= admin_button(:primary, link: new_admin_event_communication_path(@draft.event, @draft)) { "Send communication" } %>
-      <%= admin_button(:danger, delete: admin_event_communication_draft_path(@draft.event, @draft)) { "Delete" } %>
-    </div>
-  <% end %>
+<%= render "section", title: "Actions" do %>
+  <div class="flex gap-2">
+    <%= admin_button(:primary, link: new_admin_event_communication_path(@draft.event, @draft)) { "Send" } %>
+    <%= admin_button(:danger, delete: admin_event_communication_draft_path(@draft.event, @draft)) { "Delete" } %>
+  </div>
 <% end %>
