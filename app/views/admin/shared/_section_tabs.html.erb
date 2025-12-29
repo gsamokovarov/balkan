@@ -21,8 +21,8 @@
             class: [
               "rounded-md px-3 py-2 text-sm font-medium inline-flex items-center gap-1.5",
               current_page?(tab[:path]) ?
-                "bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-gray-300" :
-                "text-gray-500 hover:text-gray-700 hover:bg-gray-50 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700"
+                "bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-300" :
+                "text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700"
             ] do %>
           <%= tab[:name] %>
           <% if tab[:global] %>

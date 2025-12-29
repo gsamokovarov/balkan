@@ -11,35 +11,44 @@
       <li>
         <ul role="list" class="-mx-2 space-y-1">
           <% nav_links.each do |nav| %>
-            <li>
-              <% if nav[:items] %>
-                <div data-controller="expand">
-                  <button data-action="expand#toggle" type="button" class="flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700" aria-controls="sub-menu-1" aria-expanded="false">
-                    <svg class="size-5 shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                    </svg>
-                    <%= nav[:name] %>
-                  </button>
-                  <ul data-expand-target="target"
-                    class="mt-1 px-2 <%= "hidden" if nav[:items].none? { current_page? it[:path] } %>"
-                  >
-                    <% nav[:items].each do |item| %>
-                      <li>
-                        <%= link_to item[:name], item[:path], title: item[:name], class: [
-                          "block rounded-md py-2 pl-9 pr-2 text-sm/6 text-gray-700 dark:text-gray-300 truncate hover:bg-gray-50 dark:hover:bg-gray-700",
-                          "bg-gray-50 dark:bg-gray-700": current_page?(item[:path])
-                        ] %>
-                      </li>
-                    <% end %>
-                  </ul>
+            <% if nav[:header] %>
+              <li class="mt-4 first:mt-0">
+                <div class="px-2 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <%= nav[:header] %>
                 </div>
-              <% else %>
-                <%= link_to nav[:name], nav[:path], title: nav[:name], class: [
-                  "block rounded-md py-2 pl-10 pr-2 text-sm/6 font-semibold text-gray-700 dark:text-gray-300 truncate hover:bg-gray-50 dark:hover:bg-gray-700",
-                  "bg-gray-50 dark:bg-gray-700": current_page?(nav[:path])
-                ] %>
-              <% end %>
-            </li>
+              </li>
+            <% else %>
+              <li>
+                <% if nav[:items] %>
+                  <div data-controller="expand">
+                    <button data-action="expand#toggle" type="button" class="flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700" aria-controls="sub-menu-1" aria-expanded="false">
+                      <svg class="size-5 shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                      </svg>
+                      <%= nav[:name] %>
+                    </button>
+                    <ul data-expand-target="target"
+                      class="mt-1 px-2 <%= "hidden" if nav[:items].none? { current_page? it[:path] } %>"
+                    >
+                      <% nav[:items].each do |item| %>
+                        <li>
+                          <%= link_to item[:name], item[:path], title: item[:name], class: [
+                            "block rounded-md py-2 pl-9 pr-2 text-sm/6 text-gray-700 dark:text-gray-300 truncate hover:bg-gray-50 dark:hover:bg-gray-700",
+                            "bg-gray-50 dark:bg-gray-700": current_page?(item[:path])
+                          ] %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% else %>
+                  <% is_active = nav[:section] ? section_active?(nav[:section]) : current_page?(nav[:path]) %>
+                  <%= link_to nav[:name], nav[:path], title: nav[:name], class: [
+                    "block rounded-md py-2 pl-10 pr-2 text-sm/6 font-semibold text-gray-700 dark:text-gray-300 truncate hover:bg-gray-100 dark:hover:bg-gray-700",
+                    "bg-gray-200 dark:bg-gray-700": is_active
+                  ] %>
+                <% end %>
+              </li>
+            <% end %>
           <% end %>
         </ul>
       </li>

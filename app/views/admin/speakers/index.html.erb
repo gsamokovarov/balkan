@@ -1,3 +1,5 @@
+<%= section_navigation :program %>
+
 <%= render "section", title: "Speakers", cta: -> {
   admin_button(:primary, link: new_admin_speaker_path) { "New speaker" }
 } do %>

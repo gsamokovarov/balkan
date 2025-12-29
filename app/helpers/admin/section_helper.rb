@@ -66,6 +66,15 @@ module Admin::SectionHelper
   def section_navigation(section_key)
     admin_sections.fetch(section_key) => { name:, tabs: }
 
-    render "admin/shared/section_tabs", name:, tabs:
+    content_for :section_navigation do
+      render "admin/shared/section_tabs", name:, tabs:
+    end
+  end
+
+  def section_active?(section_key)
+    section = admin_sections[section_key]
+    return false unless section
+
+    section[:tabs].any? { |tab| current_page?(tab[:path]) }
   end
 end
