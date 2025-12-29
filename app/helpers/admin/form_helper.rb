@@ -33,6 +33,12 @@ module Admin::FormHelper
       end
     end
 
+    def decimal_input(method, label: method, step: "0.01", **, &addendum)
+      input_for method, label:, addendum: do
+        @template.concat number_field(method, step:, class: field_classes(method), **)
+      end
+    end
+
     def text_input(method, label: method, class: nil, **, &addendum)
       input_for method, class:, label:, addendum: do
         @template.concat text_field(method, class: field_classes(method), **)

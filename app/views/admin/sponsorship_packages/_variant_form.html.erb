@@ -4,7 +4,7 @@
   <%= form.hidden_field :id %>
   <%= form.text_input :name, required: true %>
   <%= form.text_area_input :perks, required: true %>
-  <%= form.number_input :price, required: true %>
+  <%= form.decimal_input :price, required: true %>
   <%= form.number_input :quantity %>
 
   <button type="button" data-action="appendable#remove" class="sm:absolute top-0 right-0">
