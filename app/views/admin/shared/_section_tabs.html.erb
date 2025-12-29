@@ -2,7 +2,7 @@
 
 <div class="mb-6">
   <div class="grid grid-cols-1 sm:hidden">
-    <select aria-label="<%= name %>" onchange="window.location.href = this.value" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 dark:bg-gray-800/50 dark:text-gray-100 dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-gray-100">
+    <select aria-label="<%= name %>" onchange="window.location.href = this.value" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-gray-100 dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500">
       <% tabs.each do |tab| %>
         <option value="<%= tab[:path] %>" <%= "selected" if current_page?(tab[:path]) %>>
           <%= tab[:name] %><%= " 🌐" if tab[:global] %>
@@ -14,25 +14,27 @@
     </svg>
   </div>
   <div class="hidden sm:block">
-    <nav aria-label="<%= name %>" class="flex gap-2">
-      <% tabs.each do |tab| %>
-        <%= link_to tab[:path],
-            aria_current: (current_page?(tab[:path]) ? "page" : nil),
-            class: [
-              "rounded-md px-3 py-2 text-sm font-medium inline-flex items-center gap-1.5",
-              current_page?(tab[:path]) ?
-                "bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-300" :
-                "text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700"
-            ] do %>
-          <%= tab[:name] %>
-          <% if tab[:global] %>
-            <svg class="w-4 h-4 ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
+    <div class="border-b border-gray-200 dark:border-white/10">
+      <nav aria-label="<%= name %>" class="-mb-px flex space-x-8">
+        <% tabs.each do |tab| %>
+          <%= link_to tab[:path],
+              aria_current: (current_page?(tab[:path]) ? "page" : nil),
+              class: [
+                "flex items-center border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap",
+                current_page?(tab[:path]) ?
+                  "border-indigo-500 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400" :
+                  "border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:border-white/20 dark:hover:text-white"
+              ] do %>
+            <%= tab[:name] %>
+            <% if tab[:global] %>
+              <svg class="ml-1 w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-    </nav>
+      </nav>
+    </div>
   </div>
 </div>
