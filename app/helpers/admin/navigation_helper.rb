@@ -1,7 +1,6 @@
-module Admin::SectionHelper
+module Admin::NavigationHelper
   def admin_sections
     @admin_sections ||= {
-      # Event-scoped sections
       ticketing: {
         name: "Ticketing",
         tabs: [
@@ -51,7 +50,6 @@ module Admin::SectionHelper
         ],
       },
 
-      # Global sections
       system: {
         name: "System",
         tabs: [
@@ -61,6 +59,21 @@ module Admin::SectionHelper
         ],
       },
     }
+  end
+
+  def admin_sidebar_links
+    [
+      { name: "Dashboard", path: admin_root_path },
+      { header: Current.event.name },
+      { name: "Ticketing", path: admin_event_ticket_types_path(Current.event), section: :ticketing },
+      { name: "Program", path: admin_event_schedule_path(Current.event), section: :program },
+      { name: "Communications", path: admin_event_communication_drafts_path(Current.event), section: :communications },
+      { name: "Partnerships", path: admin_event_sponsorship_packages_path(Current.event), section: :partnerships },
+      { name: "Content", path: admin_event_blog_posts_path(Current.event), section: :content },
+      { header: "Manage" },
+      { name: "Events", path: admin_events_path },
+      { name: "System", path: admin_orders_path, section: :system },
+    ]
   end
 
   def section_navigation(section_key)
@@ -75,6 +88,6 @@ module Admin::SectionHelper
     section = admin_sections[section_key]
     return false unless section
 
-    section[:tabs].any? { |tab| current_page?(tab[:path]) }
+    section[:tabs].any? { |tab| current_page? tab[:path] }
   end
 end

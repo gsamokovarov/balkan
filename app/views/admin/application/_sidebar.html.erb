@@ -1,16 +1,3 @@
-<% nav_links = [
-  { name: "Dashboard", path: admin_root_path },
-  { header: Current.event.name },
-  { name: "Ticketing", path: admin_event_ticket_types_path(Current.event), section: :ticketing },
-  { name: "Program", path: admin_event_schedule_path(Current.event), section: :program },
-  { name: "Communications", path: admin_event_communication_drafts_path(Current.event), section: :communications },
-  { name: "Partnerships", path: admin_event_sponsorship_packages_path(Current.event), section: :partnerships },
-  { name: "Content", path: admin_event_blog_posts_path(Current.event), section: :content },
-  { header: "Manage" },
-  { name: "Events", path: admin_events_path },
-  { name: "System", path: admin_orders_path, section: :system },
-] %>
-
 <div id="sidebar" popover class="relative z-50" role="dialog" aria-modal="true">
   <div class="fixed inset-0 bg-gray-900/80" aria-hidden="true"></div>
 
@@ -24,13 +11,13 @@
         </button>
       </div>
 
-      <%= render "sidebar_content", nav_links: %>
+      <%= render "sidebar_content", admin_sidebar_links: %>
     </div>
   </div>
 </div>
 
 <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-56 lg:flex-col">
-  <%= render "sidebar_content", nav_links: %>
+  <%= render "sidebar_content", admin_sidebar_links: %>
 </div>
 
 <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white dark:bg-gray-800 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
@@ -40,6 +27,6 @@
     </svg>
   </button>
   <div class="flex-1 text-sm/6 font-semibold text-gray-900 dark:text-gray-100">
-    <%= admin_find_current_nav_link(nav_links)&.fetch(:name) %>
+    <%= admin_find_current_nav_link(admin_sidebar_links)&.fetch(:name) %>
   </div>
 </div>
