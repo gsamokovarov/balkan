@@ -23,7 +23,7 @@ gem "sprockets-rails"
 gem "sqlite3"
 gem "stimulus-rails"
 gem "stripe"
-gem "tailwindcss-rails", "~> 2.0"
+gem "tailwindcss-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
