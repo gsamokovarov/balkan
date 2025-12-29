@@ -63,7 +63,7 @@ class CommunicationPreview < ActionMailer::Preview
       P.S. Follow us on [Twitter](https://twitter.com/balkanruby) for the latest updates!
     MD
 
-    communication = draft.communications.new
+    communication = Communication.new(draft:)
 
     CommunicationMailer.template_email communication, "attendee@example.com"
   end
