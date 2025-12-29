@@ -4,8 +4,8 @@ module Admin::NavigationHelper
       ticketing: {
         name: "Ticketing",
         tabs: [
-          { name: "Ticket types", path: admin_event_ticket_types_path(Current.event) },
           { name: "Tickets", path: admin_event_tickets_path(Current.event) },
+          { name: "Ticket types", path: admin_event_ticket_types_path(Current.event) },
           { name: "Orders", path: admin_current_orders_path },
         ],
       },
@@ -13,8 +13,8 @@ module Admin::NavigationHelper
       program: {
         name: "Program",
         tabs: [
-          { name: "Schedule", path: admin_event_schedule_path(Current.event) },
           { name: "Lineup members", path: admin_event_lineup_members_path(Current.event) },
+          { name: "Schedule", path: admin_event_schedule_path(Current.event) },
           { name: "Speakers", path: admin_speakers_path, global: true },
           { name: "Talks", path: admin_talks_path, global: true },
         ],
@@ -50,10 +50,9 @@ module Admin::NavigationHelper
         ],
       },
 
-      system: {
-        name: "System",
+      settings: {
+        name: "Settings",
         tabs: [
-          { name: "Orders", path: admin_orders_path },
           { name: "Invoice sequences", path: admin_invoice_sequences_path },
           { name: "Users", path: admin_users_path },
         ],
@@ -62,17 +61,20 @@ module Admin::NavigationHelper
   end
 
   def admin_sidebar_links
+    first_tab = -> { admin_sections[it][:tabs].first[:path] }
+
     [
-      { name: "Dashboard", path: admin_root_path },
       { header: Current.event.name },
-      { name: "Ticketing", path: admin_event_ticket_types_path(Current.event), section: :ticketing },
-      { name: "Program", path: admin_event_schedule_path(Current.event), section: :program },
-      { name: "Communications", path: admin_event_communication_drafts_path(Current.event), section: :communications },
-      { name: "Partnerships", path: admin_event_sponsorship_packages_path(Current.event), section: :partnerships },
-      { name: "Content", path: admin_event_blog_posts_path(Current.event), section: :content },
+      { name: "Dashboard", path: admin_root_path },
+      { name: "Ticketing", path: first_tab[:ticketing], section: :ticketing },
+      { name: "Program", path: first_tab[:program], section: :program },
+      { name: "Communications", path: first_tab[:communications], section: :communications },
+      { name: "Partnerships", path: first_tab[:partnerships], section: :partnerships },
+      { name: "Content", path: first_tab[:content], section: :content },
       { header: "Manage" },
       { name: "Events", path: admin_events_path },
-      { name: "System", path: admin_orders_path, section: :system },
+      { name: "Orders", path: admin_orders_path },
+      { name: "Settings", path: first_tab[:settings], section: :settings },
     ]
   end
 
