@@ -1,3 +1,5 @@
+<%= section_navigation :ticketing %>
+
 <% supporter_tickets_count = @tickets.where(ticket_type: { name: "Supporter" }).total_count %>
 
 <%= render "section", title: "Tickets", description: "#{supporter_tickets_count} supporter tickets", cta: -> {

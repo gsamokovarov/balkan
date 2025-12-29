@@ -1,3 +1,5 @@
+<%= section_navigation :program %>
+
 <%= render "section", title: "Lineup members", cta: -> {
   admin_button(:primary, link: new_admin_event_lineup_member_path) { "New lineup member" }
 } do %>

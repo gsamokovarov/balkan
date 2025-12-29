@@ -1,3 +1,5 @@
+<%= section_navigation :ticketing %>
+
 <%= render "section", title: "Orders" do %>
   <%= render "admin/orders/orders", orders: @orders %>
   <%= admin_paginate @orders %>

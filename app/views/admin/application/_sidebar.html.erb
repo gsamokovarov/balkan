@@ -1,32 +1,3 @@
-<% nav_links = [
-  { name: "Dashboard", path: admin_root_path },
-  { name: "Current event", items: [
-    { name: "Ticket types", path: admin_event_ticket_types_path(Current.event) },
-    { name: "Tickets", path: admin_event_tickets_path(Current.event) },
-    { name: "Orders", path: admin_current_orders_path },
-    { name: "Subscribers", path: admin_event_subscribers_path(Current.event) },
-    { name: "Communication drafts", path: admin_event_communication_drafts_path(Current.event) },
-    { name: "Communications", path: admin_event_communications_path(Current.event) },
-    { name: "Embeddings", path: admin_event_embeddings_path(Current.event) },
-    { name: "Schedule", path: admin_event_schedule_path(Current.event) },
-    { name: "Lineup members", path: admin_event_lineup_members_path(Current.event) },
-    { name: "Blog posts", path: admin_event_blog_posts_path(Current.event) },
-    { name: "Community partners", path: admin_event_community_partners_path(Current.event) },
-    { name: "Sponsorship package", path: admin_event_sponsorship_packages_path(Current.event) },
-    { name: "Sponsorships", path: admin_event_sponsorships_path(Current.event) },
-    { name: "Announcements", path: admin_event_announcements_path(Current.event) },
-    { name: "Media Gallery", path: admin_event_media_gallery_path(Current.event) },
-  ]},
-  { name: "Events", path: admin_events_path },
-  { name: "Venues", path: admin_venues_path },
-  { name: "Speakers", path: admin_speakers_path },
-  { name: "Talks", path: admin_talks_path },
-  { name: "Sponsors", path: admin_sponsors_path },
-  { name: "Orders history", path: admin_orders_path },
-  { name: "Invoice sequences", path: admin_invoice_sequences_path },
-  { name: "Users", path: admin_users_path },
-] %>
-
 <div id="sidebar" popover class="relative z-50" role="dialog" aria-modal="true">
   <div class="fixed inset-0 bg-gray-900/80" aria-hidden="true"></div>
 
@@ -40,13 +11,13 @@
         </button>
       </div>
 
-      <%= render "sidebar_content", nav_links: %>
+      <%= render "sidebar_content", admin_sidebar_links: %>
     </div>
   </div>
 </div>
 
 <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-56 lg:flex-col">
-  <%= render "sidebar_content", nav_links: %>
+  <%= render "sidebar_content", admin_sidebar_links: %>
 </div>
 
 <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white dark:bg-gray-800 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
@@ -56,6 +27,6 @@
     </svg>
   </button>
   <div class="flex-1 text-sm/6 font-semibold text-gray-900 dark:text-gray-100">
-    <%= admin_find_current_nav_link(nav_links)&.fetch(:name) %>
+    <%= admin_find_current_nav_link(admin_sidebar_links)&.fetch(:name) %>
   </div>
 </div>

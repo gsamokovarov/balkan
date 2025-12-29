@@ -1,3 +1,5 @@
+<%= section_navigation :communications %>
+
 <%= render "section", title: "Sent Communications" do %>
   <% if @communications.any? %>
     <%= render "communications", communications: @communications %>

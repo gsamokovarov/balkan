@@ -1,3 +1,5 @@
+<%= section_navigation :communications %>
+
 <%= render "section", title: "Subscribers" do %>
   <% if @subscribers.any? %>
     <%= render "subscribers", subscribers: @subscribers %>
