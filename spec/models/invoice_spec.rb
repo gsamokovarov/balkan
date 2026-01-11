@@ -191,6 +191,148 @@ RSpec.case Invoice do
     assert_pdf_content bg, "Генади Самоковаров"
   end
 
+  test "manual? returns true when order is nil" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.new(invoice_sequence:, number: 1)
+
+    assert_eq invoice.manual?, true
+  end
+
+  test "manual? returns false when order is present" do
+    order = create :order, completed_at: Time.current, issue_invoice: true
+    invoice = Invoice.issue order
+
+    assert_eq invoice.manual?, false
+  end
+
+  test "credit_note? returns true when refunded_invoice is present" do
+    invoice_sequence = create :invoice_sequence
+    original = Invoice.create!(invoice_sequence:, number: 1)
+    credit_note = Invoice.new(invoice_sequence:, number: 2, refunded_invoice: original)
+
+    assert_eq credit_note.credit_note?, true
+    assert_eq credit_note.invoice?, false
+  end
+
+  test "credit_note? returns false when refunded_invoice is nil" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.new(invoice_sequence:, number: 1)
+
+    assert_eq invoice.credit_note?, false
+    assert_eq invoice.invoice?, true
+  end
+
+  test "total_amount sums invoice items" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.create!(invoice_sequence:, number: 1)
+    invoice.items.create!(description_en: "Item 1", description_bg: "Артикул 1", unit_price: 100)
+    invoice.items.create!(description_en: "Item 2", description_bg: "Артикул 2", unit_price: 50)
+
+    assert_eq invoice.total_amount, 150
+  end
+
+  test "total_amount returns zero when no items" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.create!(invoice_sequence:, number: 1)
+
+    assert_eq invoice.total_amount, 0
+  end
+
+  test "manual invoice customer details use invoice fields" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.create!(
+      invoice_sequence:,
+      number: 1,
+      customer_name: "Test Company",
+      customer_address: "123 Test St",
+      customer_country: "BG",
+      customer_vat_id: "BG123456789"
+    )
+
+    details = invoice.customer_details(locale: :en)
+
+    assert_eq details.name, "Test Company"
+    assert_eq details.address, "123 Test St"
+    assert_eq details.country, "Bulgaria"
+    assert_eq details.vat_id, "BG123456789"
+  end
+
+  test "manual invoice document generation" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.create!(
+      invoice_sequence:,
+      number: 1,
+      issue_date: Date.new(2024, 6, 15),
+      tax_event_date: Date.new(2024, 6, 15),
+      customer_name: "Test Company",
+      customer_address: "123 Test St",
+      customer_country: "BG",
+      includes_vat: true
+    )
+    invoice.items.create!(description_en: "Consulting services", description_bg: "Консултантски услуги", unit_price: 500)
+
+    pdf = invoice.document(locale: :en)
+
+    assert_pdf_content pdf,
+                       "Test Company",
+                       "Invoice",
+                       "Consulting services"
+  end
+
+  test "credit note document shows Credit Note header" do
+    invoice_sequence = create :invoice_sequence
+    original = Invoice.create!(
+      invoice_sequence:,
+      number: 1,
+      issue_date: Date.new(2024, 6, 15),
+      tax_event_date: Date.new(2024, 6, 15),
+      customer_name: "Test Company",
+      customer_address: "123 Test St",
+      customer_country: "BG"
+    )
+    original.items.create!(description_en: "Original item", description_bg: "Оригинален артикул", unit_price: 100)
+
+    credit_note = Invoice.create!(
+      invoice_sequence:,
+      number: 2,
+      issue_date: Date.new(2024, 6, 20),
+      tax_event_date: Date.new(2024, 6, 20),
+      refunded_invoice: original,
+      customer_name: "Test Company",
+      customer_address: "123 Test St",
+      customer_country: "BG"
+    )
+    credit_note.items.create!(description_en: "Refund", description_bg: "Възстановяване", unit_price: -100)
+
+    pdf = credit_note.document(locale: :en)
+
+    assert_pdf_content pdf,
+                       "Credit Note",
+                       "For invoice : 0000000001"
+  end
+
+  test "invoice with includes_vat false calculates VAT on top" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.create!(
+      invoice_sequence:,
+      number: 1,
+      issue_date: Date.new(2024, 6, 15),
+      tax_event_date: Date.new(2024, 6, 15),
+      customer_name: "Test",
+      customer_address: "Test",
+      customer_country: "BG",
+      includes_vat: false
+    )
+    invoice.items.create!(description_en: "Net item", description_bg: "Нето артикул", unit_price: 100)
+
+    pdf = invoice.document(locale: :en)
+
+    assert_pdf_content pdf,
+                       "Invoice total: \u20AC 100.00",
+                       "VAT 20%: \u20AC 20.00",
+                       "Total: \u20AC 120.00"
+  end
+
   def create_invoice_for_document_generation(
     name:,
     email:,

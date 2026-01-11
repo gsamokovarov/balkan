@@ -19,20 +19,29 @@ module Invoice::Document
 
     attr_reader :gross, :net, :tax
 
-    def initialize(gross_in_eur, locale: :en)
+    def initialize(amount_in_eur, locale: :en, includes_vat: true)
       @bulgarian = locale.to_sym == :bg
+      @includes_vat = includes_vat
 
-      @gross_in_eur = gross_in_eur.to_d
-      @gross = round(@bulgarian ? eur_to_bgn(@gross_in_eur) : @gross_in_eur)
-      @net = round @gross / (1 + BULGARIAN_VAT)
-      @tax = round @gross - @net
+      @amount_in_eur = amount_in_eur.to_d
+      amount = round(@bulgarian ? eur_to_bgn(@amount_in_eur) : @amount_in_eur)
+
+      if @includes_vat
+        @gross = amount
+        @net = round @gross / (1 + BULGARIAN_VAT)
+        @tax = round @gross - @net
+      else
+        @net = amount
+        @tax = round @net * BULGARIAN_VAT
+        @gross = round @net + @tax
+      end
     end
 
     def gross_format = format gross
     def net_format = format net
     def tax_format = format tax
 
-    def to_eur = Amount.new(@gross_in_eur, locale: :en)
+    def to_eur = Amount.new(@amount_in_eur, locale: :en, includes_vat: @includes_vat)
 
     private
 
@@ -53,7 +62,7 @@ module Invoice::Document
 
     include Prawn::View
 
-    attr_reader :invoice, :order, :invoice_amount, :customer_details
+    attr_reader :invoice, :invoice_amount, :customer_details
 
     def self.render(invoice, locale:, &)
       new(invoice, locale:, &).render
@@ -62,8 +71,8 @@ module Invoice::Document
     def initialize(invoice, locale:, &)
       @locale = locale
       @invoice = invoice
-      @order = invoice.order
-      @invoice_amount = Amount.new(@order.amount, locale:)
+      amount = invoice.manual? ? invoice.total_amount : invoice.order.amount
+      @invoice_amount = Amount.new(amount, locale:, includes_vat: invoice.includes_vat)
       @customer_details = invoice.customer_details(locale:)
 
       update(&)
@@ -99,11 +108,11 @@ module Invoice::Document
       column = grid [0, 0], [0, 2]
       column.bounding_box do
         text t("receiver"), size: 14, style: :bold
-        fit_text customer_details.name, width: column.width
-        fit_text customer_details.address, width: column.width
-        fit_text customer_details.country, width: column.width
+        fit_text customer_details.name.to_s, width: column.width
+        fit_text customer_details.address.to_s, width: column.width
+        fit_text customer_details.country.to_s, width: column.width
         move_down 10
-        text "<b>#{t 'company_id'}</b>:", inline_format: true
+        text "<b>#{t 'company_id'}</b>: #{invoice.receiver_company_uid}", inline_format: true
         text "<b>#{t 'vat_id'}</b>: #{customer_details.vat_id}", inline_format: true
         text "<b>#{t 'ceo'}</b>:", inline_format: true
       end
@@ -127,15 +136,28 @@ module Invoice::Document
       end
 
       grid([1, 3], [1, 6]).bounding_box do
-        text t("invoice"), size: 22, style: :bold
+        document_type = invoice.credit_note? ? t("credit_note") : t("invoice")
+        text document_type, size: 22, style: :bold
         text "<b>#{t 'number'}</b>: #{format '%010d', invoice.number}", inline_format: true
-        text "<b>#{t 'date_of_issue'}</b>: #{invoice.created_at.to_date.iso8601}", inline_format: true
-        text "<b>#{t 'date_of_tax_event'}</b>: #{order.completed_at.to_date.iso8601}", inline_format: true
+        issue_date = invoice.issue_date || invoice.created_at.to_date
+        text "<b>#{t 'date_of_issue'}</b>: #{issue_date.iso8601}", inline_format: true
+        tax_event_date = invoice.tax_event_date || invoice.order&.completed_at&.to_date
+        text "<b>#{t 'date_of_tax_event'}</b>: #{tax_event_date&.iso8601}", inline_format: true
+        if invoice.credit_note?
+          text "<b>#{t 'for_invoice'}</b>: #{format '%010d', invoice.refunded_invoice.number}", inline_format: true
+        end
       end
 
       grid([2, 0], [2, 3]).bounding_box do
         text t("items"), size: 14, style: :bold
-        text t("tickets", count: order.tickets.size, type: order.tickets.first.ticket_type.name)
+        if invoice.manual?
+          invoice.items.each do |item|
+            description = @locale.to_sym == :bg ? item.description_bg : item.description_en
+            text description.to_s
+          end
+        else
+          text t("tickets", count: invoice.order.tickets.size, type: invoice.order.tickets.first.ticket_type.name)
+        end
       end
 
       grid([2, 3], [2, 6]).bounding_box do
