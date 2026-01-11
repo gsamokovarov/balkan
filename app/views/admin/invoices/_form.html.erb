@@ -1,0 +1,45 @@
+<%# locals: (invoice:) %>
+
+<%= admin_form [:admin, invoice] do |f| %>
+  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.name, it.id] }, required: true %>
+  <%= f.date_input :issue_date, required: true %>
+  <%= f.date_input :tax_event_date, required: true %>
+  <%= f.select_input :refunded_invoice_id, Invoice.where.not(id: invoice.id).order(number: :desc).map { ["##{format '%010d', it.number} - #{it.customer_name}", it.id] }, include_blank: "None (regular invoice)" %>
+  <%= f.check_box_input :includes_vat %>
+
+  <fieldset class="mt-6 p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+    <legend class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400">Customer details</legend>
+    <%= f.text_input :customer_name, required: true %>
+    <%= f.email_input :receiver_email %>
+    <%= f.text_area_input :customer_address %>
+    <%= f.select_input :customer_country, Country.codes.map { [Country[it].translations[:en], it] }, include_blank: true %>
+    <%= f.text_input :receiver_company_name %>
+    <%= f.text_input :receiver_company_uid, label: "Company UID" %>
+    <%= f.text_input :customer_vat_id, label: "VAT ID" %>
+  </fieldset>
+
+
+  <fieldset data-controller="appendable" class="mt-6 p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+    <legend class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400">Items</legend>
+
+    <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
+      <% invoice.items.each do |item| %>
+        <%= f.fields_for :items_attributes, item, index: "" do |form| %>
+          <%= render "item_form", form: %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <template data-appendable-target="template">
+      <%= f.fields :items_attributes, index: "" do |form| %>
+        <%= render "item_form", form: %>
+      <% end %>
+    </template>
+
+    <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add item" } %>
+  </fieldset>
+
+  <%= f.text_area_input :notes %>
+
+  <%= f.submit %>
+<% end %>

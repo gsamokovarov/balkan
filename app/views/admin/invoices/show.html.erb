@@ -1,0 +1,9 @@
+<%= render "section", title: "Invoice ##{format '%010d', @invoice.number}" do %>
+  <%= render "form", invoice: @invoice %>
+<% end %>
+
+<% if @invoice.persisted? %>
+  <%= render "section", title: "Documents" do %>
+    <%= render "documents", invoice: @invoice %>
+  <% end %>
+<% end %>

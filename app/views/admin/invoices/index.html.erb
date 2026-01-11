@@ -1,0 +1,13 @@
+<%= section_navigation :accounting %>
+
+<%= render "section", title: "Invoices", cta: -> {
+  admin_button(:primary, link: new_admin_invoice_path) { "New invoice" }
+} do %>
+  <% if @invoices.any? %>
+    <%= render "invoices", invoices: @invoices %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <% admin_button(:primary, link: new_admin_invoice_path) { "New invoice" } %>
+    <% end %>
+  <% end %>
+<% end %>

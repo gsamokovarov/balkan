@@ -6,6 +6,8 @@ en:
     vat_id: VAT ID
     ceo: CEO
     invoice: Invoice
+    credit_note: Credit Note
+    for_invoice: For invoice
     original: ORIGINAL
     number: Number
     date_of_issue: Date of issue

@@ -6,7 +6,6 @@ module Admin::NavigationHelper
         tabs: [
           { name: "Tickets", path: admin_event_tickets_path(Current.event) },
           { name: "Ticket types", path: admin_event_ticket_types_path(Current.event) },
-          { name: "Orders", path: admin_current_orders_path },
         ],
       },
 
@@ -50,10 +49,19 @@ module Admin::NavigationHelper
         ],
       },
 
+      accounting: {
+        name: "Accounting",
+        tabs: [
+          { name: "Orders", path: admin_orders_path },
+          { name: "Invoices", path: admin_invoices_path },
+          { name: "Invoice sequences", path: admin_invoice_sequences_path },
+        ],
+      },
+
       settings: {
         name: "Settings",
         tabs: [
-          { name: "Invoice sequences", path: admin_invoice_sequences_path },
+          { name: "Events", path: admin_events_path },
           { name: "Users", path: admin_users_path },
         ],
       },
@@ -72,8 +80,7 @@ module Admin::NavigationHelper
       { name: "Partnerships", path: first_tab[:partnerships], section: :partnerships },
       { name: "Content", path: first_tab[:content], section: :content },
       { header: "Manage" },
-      { name: "Events", path: admin_events_path },
-      { name: "Orders", path: admin_orders_path },
+      { name: "Accounting", path: first_tab[:accounting], section: :accounting },
       { name: "Settings", path: first_tab[:settings], section: :settings },
     ]
   end

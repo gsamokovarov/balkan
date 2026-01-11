@@ -1,3 +1,5 @@
+<%= section_navigation :accounting %>
+
 <%= render "section", title: "Order history", cta: -> {
   admin_button(:primary, onclick: "export_dialog.showModal()") { "Export" }
 } do %>

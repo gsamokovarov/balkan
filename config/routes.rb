@@ -77,6 +77,11 @@ Rails.application.routes.draw do
     resources :talks, only: [:index, :show, :new, :create, :edit, :update]
     resources :venues, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoice_sequences, only: [:index]
+    resources :invoices, only: [:index, :show, :new, :create, :update] do
+      member do
+        get :download
+      end
+    end
     resources :users, only: [:index, :show, :new, :create, :update, :destroy]
   end
 

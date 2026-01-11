@@ -1,0 +1,11 @@
+<%# locals: (invoices:) %>
+
+<%= admin_table invoices do
+  column "#", -> { link_to it.id, admin_invoice_path(it), class: "text-indigo-600 hover:underline" }
+  column :number, -> { format "%010d", it.number }
+  column :sequence, -> { it.invoice_sequence.name }
+  column :type, -> { it.credit_note? ? "Credit Note" : "Invoice" }
+  column :customer, -> { it.customer_name }
+  column :issue_date, -> { it.issue_date&.iso8601 || it.created_at.to_date.iso8601 }
+  column :total, -> { it.manual? ? number_to_currency(it.total_amount, unit: "\u20AC") : number_to_currency(it.order.amount, unit: "\u20AC") }
+end %>
