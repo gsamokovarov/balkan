@@ -62,7 +62,7 @@ module Invoice::Document
 
     include Prawn::View
 
-    attr_reader :invoice, :invoice_amount, :customer_details
+    attr_reader :invoice, :invoice_amount, :customer_details, :line_items
 
     def self.render(invoice, locale:, &)
       new(invoice, locale:, &).render
@@ -71,9 +71,9 @@ module Invoice::Document
     def initialize(invoice, locale:, &)
       @locale = locale
       @invoice = invoice
-      amount = invoice.manual? ? invoice.total_amount : invoice.order.amount
-      @invoice_amount = Amount.new(amount, locale:, includes_vat: invoice.includes_vat)
+      @invoice_amount = Amount.new invoice.total_amount, locale:, includes_vat: invoice.includes_vat
       @customer_details = invoice.customer_details(locale:)
+      @line_items = invoice.line_items(locale:)
 
       update(&)
     end
@@ -141,8 +141,7 @@ module Invoice::Document
         text "<b>#{t 'number'}</b>: #{format '%010d', invoice.number}", inline_format: true
         issue_date = invoice.issue_date || invoice.created_at.to_date
         text "<b>#{t 'date_of_issue'}</b>: #{issue_date.iso8601}", inline_format: true
-        tax_event_date = invoice.tax_event_date || invoice.order&.completed_at&.to_date
-        text "<b>#{t 'date_of_tax_event'}</b>: #{tax_event_date&.iso8601}", inline_format: true
+        text "<b>#{t 'date_of_tax_event'}</b>: #{invoice.tax_event_date&.iso8601}", inline_format: true
         if invoice.credit_note?
           text "<b>#{t 'for_invoice'}</b>: #{format '%010d', invoice.refunded_invoice.number}", inline_format: true
         end
@@ -150,13 +149,8 @@ module Invoice::Document
 
       grid([2, 0], [2, 3]).bounding_box do
         text t("items"), size: 14, style: :bold
-        if invoice.manual?
-          invoice.items.each do |item|
-            description = @locale.to_sym == :bg ? item.description_bg : item.description_en
-            text description.to_s
-          end
-        else
-          text t("tickets", count: invoice.order.tickets.size, type: invoice.order.tickets.first.ticket_type.name)
+        line_items.each do |item|
+          text item.description.to_s
         end
       end
 

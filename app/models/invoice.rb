@@ -16,6 +16,8 @@ class Invoice < ApplicationRecord
   validates :number, presence: true, strict: true
   validates :customer_country, inclusion: { in: Country.codes }, allow_nil: true
 
+  LineItem = Data.define :description, :price
+
   def self.issue(order, **attributes)
     precondition order.invoicable?, "Order is not invoicable"
     precondition order.invoice.nil?, "Invoice already issued for order"
@@ -24,6 +26,9 @@ class Invoice < ApplicationRecord
 
     create! order:, **attributes, invoice_sequence:, number: invoice_sequence.next_invoice_number
   end
+
+  def total_amount = manual? ? items.sum(:unit_price) : order.amount
+  def tax_event_date = order&.completed_at&.to_date || super
 
   def document(locale:) = Invoice::Document.generate(self, locale:)
   def filename(locale:) = "invoice-#{number}-#{locale}.pdf"
@@ -45,5 +50,14 @@ class Invoice < ApplicationRecord
     end
   end
 
-  def total_amount = items.sum(:unit_price)
+  def line_items(locale:)
+    if manual?
+      items.map { LineItem.new description: it.description(locale:), price: it.unit_price }
+    else
+      order.tickets.group_by(&:ticket_type).map do |ticket_type, tickets|
+        LineItem.new description: I18n.t("invoicing.tickets", count: tickets.size, type: ticket_type.name, locale:),
+                     price: tickets.sum(&:price)
+      end
+    end
+  end
 end

@@ -44,7 +44,6 @@ class Admin::InvoicesController < Admin::ApplicationController
 
   def download
     @invoice = Invoice.find params[:id]
-    locale = params[:locale] || :en
 
     send_data @invoice.document(locale:),
               filename: @invoice.filename(locale:),
