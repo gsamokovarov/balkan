@@ -145,6 +145,19 @@ module Admin::FormHelper
       @template.admin_button(:primary, type: :submit, **) { value }
     end
 
+    FIELDSET_CLASSES = "p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"
+    LEGEND_CLASSES = "text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
+
+    def fieldset(legend, appendable: false, class: nil, &block)
+      options = { class: [FIELDSET_CLASSES, binding.local_variable_get(:class)] }
+      options[:data] = { controller: "appendable" } if appendable
+
+      @template.tag.fieldset(**options) do
+        @template.concat @template.tag.legend(legend, class: LEGEND_CLASSES)
+        @template.concat @template.capture(&block)
+      end
+    end
+
     private
 
     def input_for(method, error_method: method, label: method, addendum: nil, class: nil, &)

@@ -7,8 +7,7 @@
   <%= f.select_input :refunded_invoice_id, Invoice.where.not(id: invoice.id).order(number: :desc).map { ["##{format '%010d', it.number} - #{it.customer_name}", it.id] }, include_blank: "None (regular invoice)" %>
   <%= f.check_box_input :includes_vat %>
 
-  <fieldset class="mt-6 p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
-    <legend class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400">Customer details</legend>
+  <%= f.fieldset "Customer details", class: "mt-6" do %>
     <%= f.text_input :customer_name, required: true %>
     <%= f.email_input :receiver_email %>
     <%= f.text_area_input :customer_address %>
@@ -16,12 +15,9 @@
     <%= f.text_input :receiver_company_name %>
     <%= f.text_input :receiver_company_uid, label: "Company UID" %>
     <%= f.text_input :customer_vat_id, label: "VAT ID" %>
-  </fieldset>
+  <% end %>
 
-
-  <fieldset data-controller="appendable" class="mt-6 p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
-    <legend class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400">Items</legend>
-
+  <%= f.fieldset "Items", appendable: true, class: "mt-6" do %>
     <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
       <% invoice.items.each do |item| %>
         <%= f.fields_for :items_attributes, item, index: "" do |form| %>
@@ -37,7 +33,7 @@
     </template>
 
     <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add item" } %>
-  </fieldset>
+  <% end %>
 
   <%= f.text_area_input :notes %>
 

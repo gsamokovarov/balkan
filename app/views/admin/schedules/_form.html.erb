@@ -4,12 +4,8 @@
   <%= f.readonly_input :event_id, [[schedule.event.name, schedule.event.id]] %>
 
   <% schedule.dates.each do |date| %>
-    <fieldset data-controller="appendable" class="p-4 pt-0 space-y-4 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+    <%= f.fieldset date.strftime("%B-%d"), appendable: true do %>
       <%= f.fields :slots_attributes, index: "" do |slots_form| %>
-        <legend class="text-sm font-medium leading-6 text-gray-500 dark:text-gray-400">
-          <%= date.strftime("%B-%d") %>
-        </legend>
-
         <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
           <% schedule.slots_for(date).each do |slot| %>
             <%= f.fields_for :slots_attributes, slot, index: "" do |sf| %>
@@ -24,7 +20,7 @@
 
         <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add slot" } %>
       <% end %>
-    </fieldset>
+    <% end %>
   <% end %>
 
   <%= f.check_box_input :published %>
