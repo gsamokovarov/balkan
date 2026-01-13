@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_13_194934) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -131,14 +131,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
+  create_table "invoice_items", force: :cascade do |t|
+    t.integer "invoice_id", null: false
+    t.string "description_en"
+    t.string "description_bg"
+    t.decimal "unit_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+  end
+
   create_table "invoice_sequences", force: :cascade do |t|
     t.integer "initial_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.bigint "order_id", null: false
+    t.bigint "order_id"
     t.bigint "invoice_sequence_id", null: false
     t.integer "number", null: false
     t.datetime "created_at", null: false
@@ -146,9 +157,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
     t.string "customer_name"
     t.string "customer_address"
     t.string "customer_country"
-    t.string "customer_vat_id"
+    t.string "customer_vat_idx"
+    t.date "issue_date"
+    t.date "tax_event_date"
+    t.integer "refunded_invoice_id"
+    t.string "receiver_email"
+    t.string "receiver_company_name"
+    t.string "receiver_company_idx"
+    t.boolean "includes_vat", default: true, null: false
+    t.text "notes"
     t.index ["invoice_sequence_id"], name: "index_invoices_on_invoice_sequence_id"
     t.index ["order_id"], name: "index_invoices_on_order_id"
+    t.index ["refunded_invoice_id"], name: "index_invoices_on_refunded_invoice_id"
   end
 
   create_table "lineup_members", force: :cascade do |t|
@@ -360,7 +380,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_25_135738) do
   add_foreign_key "embeddings", "events"
   add_foreign_key "events", "invoice_sequences"
   add_foreign_key "events", "venues"
+  add_foreign_key "invoice_items", "invoices"
   add_foreign_key "invoices", "invoice_sequences"
+  add_foreign_key "invoices", "invoices", column: "refunded_invoice_id"
   add_foreign_key "invoices", "orders"
   add_foreign_key "lineup_members", "events"
   add_foreign_key "lineup_members", "speakers"

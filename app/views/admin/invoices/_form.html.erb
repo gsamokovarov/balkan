@@ -1,0 +1,41 @@
+<%# locals: (invoice:) %>
+
+<%= admin_form [:admin, invoice] do |f| %>
+  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.name, it.id] }, required: true %>
+  <%= f.date_input :issue_date, required: true %>
+  <%= f.date_input :tax_event_date, required: true %>
+  <%= f.select_input :refunded_invoice_id, Invoice.where.not(id: invoice.id).order(number: :desc).map { ["##{format '%010d', it.number} - #{it.customer_name}", it.id] }, include_blank: "None (regular invoice)" %>
+  <%= f.check_box_input :includes_vat, label: "Include VAT" %>
+
+  <%= f.fieldset "Customer details", class: "mt-6" do %>
+    <%= f.text_input :customer_name, required: true %>
+    <%= f.email_input :receiver_email %>
+    <%= f.text_area_input :customer_address %>
+    <%= f.select_input :customer_country, Country.codes.map { [Country[it].translations[:en], it] }, include_blank: true %>
+    <%= f.text_input :receiver_company_name %>
+    <%= f.text_input :receiver_company_idx, label: "Company ID" %>
+    <%= f.text_input :customer_vat_idx, label: "VAT ID" %>
+  <% end %>
+
+  <%= f.fieldset "Items", appendable: true, class: "mt-6" do %>
+    <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
+      <% invoice.items.each do |item| %>
+        <%= f.fields_for :items_attributes, item, index: "" do |form| %>
+          <%= render "item_form", form: %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <template data-appendable-target="template">
+      <%= f.fields :items_attributes, index: "" do |form| %>
+        <%= render "item_form", form: %>
+      <% end %>
+    </template>
+
+    <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add item" } %>
+  <% end %>
+
+  <%= f.text_area_input :notes %>
+
+  <%= f.submit %>
+<% end %>

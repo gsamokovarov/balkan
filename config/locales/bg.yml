@@ -6,6 +6,8 @@ bg:
     vat_id: ЗДДС №
     ceo: М.О.Л.
     invoice: Фактура
+    credit_note: Кредитно известие
+    for_invoice: Към фактура
     original: ОРИГИНАЛ
     number: Номер
     date_of_issue: Дата на издаване

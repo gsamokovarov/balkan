@@ -2,5 +2,6 @@
 
 <%= admin_table invoice_sequences do
   column "#", -> { it.id }
+  column :name
   column :initial_number
 end %>

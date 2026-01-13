@@ -1,0 +1,8 @@
+<%# locals: (invoice:) %>
+
+<div class="inline-block min-w-full align-middle">
+  <div class="flex flex-col md:flex-row gap-4">
+    <iframe src="<%= admin_invoice_path invoice, format: :pdf, locale: :en %>" class="w-full h-[656px] border-2 border-gray-300 dark:border-gray-600 rounded-md"></iframe>
+    <iframe src="<%= admin_invoice_path invoice, format: :pdf, locale: :bg %>" class="w-full h-[656px] border-2 border-gray-300 dark:border-gray-600 rounded-md"></iframe>
+  </div>
+</div>
