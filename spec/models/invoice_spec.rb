@@ -106,7 +106,7 @@ RSpec.case Invoice do
     invoice = Invoice.issue order, customer_name: "Test",
                                    customer_address: "Test",
                                    customer_country: "BG",
-                                   customer_vat_id: "BG0123456789"
+                                   customer_vat_idx: "BG0123456789"
 
     customer_details = invoice.customer_details locale: :en
 
@@ -246,7 +246,7 @@ RSpec.case Invoice do
       customer_name: "Test Company",
       customer_address: "123 Test St",
       customer_country: "BG",
-      customer_vat_id: "BG123456789"
+      customer_vat_idx: "BG123456789"
     )
 
     details = invoice.customer_details(locale: :en)

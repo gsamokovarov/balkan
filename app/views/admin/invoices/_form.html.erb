@@ -5,7 +5,7 @@
   <%= f.date_input :issue_date, required: true %>
   <%= f.date_input :tax_event_date, required: true %>
   <%= f.select_input :refunded_invoice_id, Invoice.where.not(id: invoice.id).order(number: :desc).map { ["##{format '%010d', it.number} - #{it.customer_name}", it.id] }, include_blank: "None (regular invoice)" %>
-  <%= f.check_box_input :includes_vat %>
+  <%= f.check_box_input :includes_vat, label: "Include VAT" %>
 
   <%= f.fieldset "Customer details", class: "mt-6" do %>
     <%= f.text_input :customer_name, required: true %>
@@ -13,8 +13,8 @@
     <%= f.text_area_input :customer_address %>
     <%= f.select_input :customer_country, Country.codes.map { [Country[it].translations[:en], it] }, include_blank: true %>
     <%= f.text_input :receiver_company_name %>
-    <%= f.text_input :receiver_company_uid, label: "Company UID" %>
-    <%= f.text_input :customer_vat_id, label: "VAT ID" %>
+    <%= f.text_input :receiver_company_idx, label: "Company ID" %>
+    <%= f.text_input :customer_vat_idx, label: "VAT ID" %>
   <% end %>
 
   <%= f.fieldset "Items", appendable: true, class: "mt-6" do %>

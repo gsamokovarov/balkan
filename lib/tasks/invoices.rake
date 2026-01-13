@@ -42,8 +42,8 @@ namespace :invoices do
         customer_name: record["receiver_name"],
         receiver_email: record["receiver_email"],
         receiver_company_name: record["receiver_company_name"],
-        receiver_company_uid: record["receiver_comapny_uid"],
-        customer_vat_id: record["receiver_comapny_vat_uid"],
+        receiver_company_idx: record["receiver_comapny_uid"],
+        customer_vat_idx: record["receiver_comapny_vat_uid"],
         customer_address: record["receiver_address"],
         includes_vat: !record["skip_vat"],
         notes: record["notes"].presence

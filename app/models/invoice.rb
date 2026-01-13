@@ -36,7 +36,7 @@ class Invoice < ApplicationRecord
   def customer_details(locale:)
     if manual?
       country = customer_country ? Country[customer_country].translations[locale] : nil
-      CustomerDetails.new name: customer_name, address: customer_address, country:, vat_id: customer_vat_id
+      CustomerDetails.new name: customer_name, address: customer_address, country:, vat_id: customer_vat_idx
     else
       name = customer_name || order.stripe.customer_details.name
       address =
@@ -44,7 +44,7 @@ class Invoice < ApplicationRecord
         order.stripe.customer_details.address.line1 ||
         "#{order.stripe.customer_details.address.city} #{order.stripe.customer_details.address.postal_code}"
       country = Country[customer_country || order.stripe.customer_details.address.country].translations[locale]
-      vat_id = customer_vat_id || order.stripe.customer_details.tax_ids.first&.value
+      vat_id = customer_vat_idx || order.stripe.customer_details.tax_ids.first&.value
 
       CustomerDetails.new name:, address:, country:, vat_id:
     end

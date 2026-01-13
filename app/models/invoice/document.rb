@@ -112,7 +112,7 @@ module Invoice::Document
         fit_text customer_details.address.to_s, width: column.width
         fit_text customer_details.country.to_s, width: column.width
         move_down 10
-        text "<b>#{t 'company_id'}</b>: #{invoice.receiver_company_uid}", inline_format: true
+        text "<b>#{t 'company_id'}</b>: #{invoice.receiver_company_idx}", inline_format: true
         text "<b>#{t 'vat_id'}</b>: #{customer_details.vat_id}", inline_format: true
         text "<b>#{t 'ceo'}</b>:", inline_format: true
       end
