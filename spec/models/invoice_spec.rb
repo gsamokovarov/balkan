@@ -193,7 +193,7 @@ RSpec.case Invoice do
 
   test "manual? returns true when order is nil" do
     invoice_sequence = create :invoice_sequence
-    invoice = Invoice.new(invoice_sequence:, number: 1)
+    invoice = Invoice.new invoice_sequence:, number: 1
 
     assert_eq invoice.manual?, true
   end
@@ -207,8 +207,8 @@ RSpec.case Invoice do
 
   test "credit_note? returns true when refunded_invoice is present" do
     invoice_sequence = create :invoice_sequence
-    original = Invoice.create!(invoice_sequence:, number: 1)
-    credit_note = Invoice.new(invoice_sequence:, number: 2, refunded_invoice: original)
+    original = Invoice.create! invoice_sequence:, number: 1
+    credit_note = Invoice.new invoice_sequence:, number: 2, refunded_invoice: original
 
     assert_eq credit_note.credit_note?, true
     assert_eq credit_note.invoice?, false
@@ -216,7 +216,7 @@ RSpec.case Invoice do
 
   test "credit_note? returns false when refunded_invoice is nil" do
     invoice_sequence = create :invoice_sequence
-    invoice = Invoice.new(invoice_sequence:, number: 1)
+    invoice = Invoice.new invoice_sequence:, number: 1
 
     assert_eq invoice.credit_note?, false
     assert_eq invoice.invoice?, true
@@ -224,18 +224,27 @@ RSpec.case Invoice do
 
   test "total_amount sums invoice items" do
     invoice_sequence = create :invoice_sequence
-    invoice = Invoice.create!(invoice_sequence:, number: 1)
-    invoice.items.create!(description_en: "Item 1", description_bg: "Артикул 1", unit_price: 100)
-    invoice.items.create!(description_en: "Item 2", description_bg: "Артикул 2", unit_price: 50)
+    invoice = Invoice.create! invoice_sequence:, number: 1
+    invoice.items.create! description_en: "Item 1", description_bg: "Артикул 1", unit_price: 100
+    invoice.items.create! description_en: "Item 2", description_bg: "Артикул 2", unit_price: 50
 
     assert_eq invoice.total_amount, 150
   end
 
   test "total_amount returns zero when no items" do
     invoice_sequence = create :invoice_sequence
-    invoice = Invoice.create!(invoice_sequence:, number: 1)
+    invoice = Invoice.create! invoice_sequence:, number: 1
 
     assert_eq invoice.total_amount, 0
+  end
+
+  test "total_amount sums unsaved in-memory items" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.new invoice_sequence:, number: 1
+    invoice.items.build description_en: "Item 1", description_bg: "Артикул 1", unit_price: 100
+    invoice.items.build description_en: "Item 2", description_bg: "Артикул 2", unit_price: 50
+
+    assert_eq invoice.total_amount, 150
   end
 
   test "manual invoice customer details use invoice fields" do
@@ -246,10 +255,10 @@ RSpec.case Invoice do
       customer_name: "Test Company",
       customer_address: "123 Test St",
       customer_country: "BG",
-      customer_vat_idx: "BG123456789"
+      customer_vat_idx: "BG123456789",
     )
 
-    details = invoice.customer_details(locale: :en)
+    details = invoice.customer_details locale: :en
 
     assert_eq details.name, "Test Company"
     assert_eq details.address, "123 Test St"
@@ -267,11 +276,11 @@ RSpec.case Invoice do
       customer_name: "Test Company",
       customer_address: "123 Test St",
       customer_country: "BG",
-      includes_vat: true
+      includes_vat: true,
     )
-    invoice.items.create!(description_en: "Consulting services", description_bg: "Консултантски услуги", unit_price: 500)
+    invoice.items.create! description_en: "Consulting services", description_bg: "Консултантски услуги", unit_price: 500
 
-    pdf = invoice.document(locale: :en)
+    pdf = invoice.document locale: :en
 
     assert_pdf_content pdf,
                        "Test Company",
@@ -288,9 +297,9 @@ RSpec.case Invoice do
       tax_event_date: Date.new(2024, 6, 15),
       customer_name: "Test Company",
       customer_address: "123 Test St",
-      customer_country: "BG"
+      customer_country: "BG",
     )
-    original.items.create!(description_en: "Original item", description_bg: "Оригинален артикул", unit_price: 100)
+    original.items.create! description_en: "Original item", description_bg: "Оригинален артикул", unit_price: 100
 
     credit_note = Invoice.create!(
       invoice_sequence:,
@@ -300,18 +309,18 @@ RSpec.case Invoice do
       refunded_invoice: original,
       customer_name: "Test Company",
       customer_address: "123 Test St",
-      customer_country: "BG"
+      customer_country: "BG",
     )
     credit_note.items.create!(description_en: "Refund", description_bg: "Възстановяване", unit_price: -100)
 
-    pdf = credit_note.document(locale: :en)
+    pdf = credit_note.document locale: :en
 
     assert_pdf_content pdf,
                        "Credit Note",
                        "For invoice : 0000000001"
   end
 
-  test "invoice with includes_vat false calculates VAT on top" do
+  test "invoice with includes_vat false shows zero VAT" do
     invoice_sequence = create :invoice_sequence
     invoice = Invoice.create!(
       invoice_sequence:,
@@ -321,16 +330,16 @@ RSpec.case Invoice do
       customer_name: "Test",
       customer_address: "Test",
       customer_country: "BG",
-      includes_vat: false
+      includes_vat: false,
     )
-    invoice.items.create!(description_en: "Net item", description_bg: "Нето артикул", unit_price: 100)
+    invoice.items.create! description_en: "Net item", description_bg: "Нето артикул", unit_price: 100
 
-    pdf = invoice.document(locale: :en)
+    pdf = invoice.document locale: :en
 
     assert_pdf_content pdf,
-                       "Invoice total: \u20AC 100.00",
-                       "VAT 20%: \u20AC 20.00",
-                       "Total: \u20AC 120.00"
+                       "Invoice total: € 100.00",
+                       "VAT 0%: € 0.00",
+                       "Total: € 100.00"
   end
 
   def create_invoice_for_document_generation(

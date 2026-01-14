@@ -18,6 +18,7 @@ bg:
     bank_payment: Банкова карта
     invoice_total: Сума по фактура
     vat: ДДС 20%
+    vat_exempt: ДДС 0%
     total: Всичко (BGN)
     total_eur: Всичко (EUR)
     tickets:

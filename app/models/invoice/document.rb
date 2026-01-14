@@ -32,8 +32,8 @@ module Invoice::Document
         @tax = round @gross - @net
       else
         @net = amount
-        @tax = round @net * BULGARIAN_VAT
-        @gross = round @net + @tax
+        @tax = 0
+        @gross = @net
       end
     end
 
@@ -164,8 +164,9 @@ module Invoice::Document
       end
 
       grid([3, 3], [3, 6]).bounding_box do
+        vat_label = invoice.includes_vat? ? t("vat") : t("vat_exempt")
         text "#{t 'invoice_total'}: <b>#{invoice_amount.net_format}</b>", inline_format: true
-        text "#{t 'vat'}: <b>#{invoice_amount.tax_format}</b>", inline_format: true
+        text "#{vat_label}: <b>#{invoice_amount.tax_format}</b>", inline_format: true
         text "#{t 'total'}: <b>#{invoice_amount.gross_format}</b>", inline_format: true
 
         if locale.to_sym == :bg

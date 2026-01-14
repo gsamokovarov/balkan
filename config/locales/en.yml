@@ -18,6 +18,7 @@ en:
     bank_payment: Stripe / Credit Card
     invoice_total: Invoice total
     vat: VAT 20%
+    vat_exempt: VAT 0%
     total: Total
     total_eur: Total (EUR)
     tickets:
