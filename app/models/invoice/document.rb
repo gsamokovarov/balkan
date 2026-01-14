@@ -90,6 +90,10 @@ module Invoice::Document
 
     private
 
+    def line_item_amount(price)
+      Amount.new(price, locale: @locale, includes_vat: invoice.includes_vat?).net_format
+    end
+
     def genadi_ceo? = invoice.created_at.after? GENADI_AS_CEO_DATE
 
     def t(key, **) = I18n.t("invoicing.#{key}", **, locale: @locale)
@@ -156,7 +160,9 @@ module Invoice::Document
 
       grid([2, 3], [2, 6]).bounding_box do
         text t("price"), size: 14, style: :bold
-        text invoice_amount.net_format
+        line_items.each do |item|
+          text line_item_amount(item.price)
+        end
       end
 
       grid([3, 0], [3, 3]).bounding_box do
