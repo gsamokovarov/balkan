@@ -37,5 +37,5 @@ class Admin::SpeakersController < Admin::ApplicationController
     end
   end
 
-  private def speaker_params = params.require(:speaker).permit(:name, :bio, :github_url, :social_url, :avatar)
+  private def speaker_params = params.require(:speaker).permit(:name, :email, :bio, :github_url, :social_url, :avatar)
 end
