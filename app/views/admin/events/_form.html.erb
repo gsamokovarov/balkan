@@ -1,7 +1,7 @@
 <%# locals: (event:) %>
 
 <%= admin_form [:admin, event] do |f| %>
-  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.initial_number, it.id] }, include_blank: true, required: true %>
+  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, include_blank: true, required: true %>
   <%= f.date_input :start_date, required: true %>
   <%= f.date_input :end_date, required: true %>
   <%= f.text_input :host, required: true %>
