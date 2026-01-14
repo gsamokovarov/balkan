@@ -1,41 +1,50 @@
 <%# locals: (invoice:) %>
 
-<%= admin_form [:admin, invoice] do |f| %>
-  <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true %>
-  <%= f.date_input :issue_date, required: true %>
-  <%= f.date_input :tax_event_date, required: true %>
-  <%= f.select_input :refunded_invoice_id, Invoice.where.not(id: invoice.id).order(number: :desc).map { ["##{format '%010d', it.number} - #{it.customer_name}", it.id] }, include_blank: "None (regular invoice)" %>
-  <%= f.check_box_input :includes_vat, label: "Include VAT" %>
+<div class="flex flex-col lg:flex-row lg:space-x-6" <%= "data-controller=invoice-preview" if invoice.new_record? %>>
+  <%= admin_form [:admin, invoice], html: { class: "sm:max-w-sm flex-1 ", data: { invoice_preview_target: ("form" if invoice.new_record?) }.compact } do |f| %>
+    <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true %>
+    <%= f.date_input :issue_date, required: true %>
+    <%= f.date_input :tax_event_date, required: true %>
+    <%= f.select_input :refunded_invoice_id, Invoice.where.not(id: invoice.id).order(number: :desc).map { ["##{format '%010d', it.number} - #{it.customer_name}", it.id] }, include_blank: "None (regular invoice)" %>
+    <%= f.check_box_input :includes_vat, label: "Include VAT" %>
 
-  <%= f.fieldset "Customer details", class: "mt-6" do %>
-    <%= f.text_input :customer_name, required: true %>
-    <%= f.email_input :receiver_email %>
-    <%= f.text_area_input :customer_address %>
-    <%= f.select_input :customer_country, Country.codes.map { [Country[it].translations[:en], it] }, include_blank: true %>
-    <%= f.text_input :receiver_company_name %>
-    <%= f.text_input :receiver_company_idx, label: "Company ID" %>
-    <%= f.text_input :customer_vat_idx, label: "VAT ID" %>
-  <% end %>
+    <%= f.fieldset "Customer details", class: "mt-6" do %>
+      <%= f.text_input :customer_name, required: true %>
+      <%= f.email_input :receiver_email %>
+      <%= f.text_area_input :customer_address %>
+      <%= f.select_input :customer_country, Country.codes.map { [Country[it].translations[:en], it] }, include_blank: true %>
+      <%= f.text_input :receiver_company_name %>
+      <%= f.text_input :receiver_company_idx, label: "Company ID" %>
+      <%= f.text_input :customer_vat_idx, label: "VAT ID" %>
+    <% end %>
 
-  <%= f.fieldset "Items", appendable: true, class: "mt-6" do %>
-    <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
-      <% invoice.items.each do |item| %>
-        <%= f.fields_for :items_attributes, item, index: "" do |form| %>
+    <%= f.fieldset "Items", appendable: true, class: "mt-6" do %>
+      <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
+        <% invoice.items.each do |item| %>
+          <%= f.fields_for :items_attributes, item, index: "" do |form| %>
+            <%= render "item_form", form: %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <template data-appendable-target="template">
+        <%= f.fields :items_attributes, index: "" do |form| %>
           <%= render "item_form", form: %>
         <% end %>
-      <% end %>
-    </div>
+      </template>
 
-    <template data-appendable-target="template">
-      <%= f.fields :items_attributes, index: "" do |form| %>
-        <%= render "item_form", form: %>
-      <% end %>
-    </template>
+      <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add item" } %>
+    <% end %>
 
-    <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add item" } %>
+    <%= f.text_area_input :notes %>
+
+    <%= f.submit %>
   <% end %>
 
-  <%= f.text_area_input :notes %>
-
-  <%= f.submit %>
-<% end %>
+  <% if invoice.new_record? %>
+    <div class="flex-1 mt-6 lg:mt-0">
+      <h2 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Preview</h2>
+      <iframe data-invoice-preview-target="preview" class="w-full h-[800px] border border-gray-300 rounded-md shadow-sm"></iframe>
+    </div>
+  <% end %>
+</div>

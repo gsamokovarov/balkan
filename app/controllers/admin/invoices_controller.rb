@@ -51,6 +51,19 @@ class Admin::InvoicesController < Admin::ApplicationController
               disposition: "attachment"
   end
 
+  def preview
+    @invoice = Invoice.new(**invoice_params)
+    @invoice.number ||= @invoice.invoice_sequence&.next_invoice_number || 0
+    @invoice.created_at ||= Time.current
+    @invoice.customer_name = "Customer Name" if @invoice.customer_name.blank?
+
+    @invoice.items.build(description_en: "Item description", description_bg: "Описание", unit_price: 0) if @invoice.items.empty?
+
+    send_data @invoice.document(locale:),
+              disposition: "inline",
+              type: "application/pdf"
+  end
+
   private
 
   def locale = params.fetch(:locale, I18n.locale)

@@ -36,6 +36,7 @@ RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
   config.include Support::StripeHelper
   config.include Support::PDFAssertions
+  config.include Support::AuthenticationHelper, type: :request
 
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!

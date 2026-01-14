@@ -78,6 +78,9 @@ Rails.application.routes.draw do
     resources :venues, only: [:index, :show, :new, :create, :edit, :update]
     resources :invoice_sequences, only: [:index]
     resources :invoices, only: [:index, :show, :new, :create, :update] do
+      collection do
+        post :preview
+      end
       member do
         get :download
       end
