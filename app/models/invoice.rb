@@ -27,6 +27,27 @@ class Invoice < ApplicationRecord
     create! order:, **attributes, invoice_sequence:, number: invoice_sequence.next_invoice_number
   end
 
+  def issue_refund(amount, invoice_sequence:)
+    precondition invoice? && !manual?, "Cannot issue credit note"
+
+    create_refund!(
+      invoice_sequence:,
+      number: invoice_sequence.next_invoice_number,
+      customer_name: order.name,
+      receiver_email: order.email,
+      customer_address: order.customer_address,
+      customer_country: order.customer_country,
+      customer_vat_idx: order.customer_vat_idx,
+      items_attributes: [
+        {
+          description_en: I18n.t("invoicing.refund_description", number:, locale: :en),
+          description_bg: I18n.t("invoicing.refund_description", number:, locale: :bg),
+          unit_price: amount,
+        },
+      ],
+    )
+  end
+
   def total_amount = manual? ? items.sum(&:unit_price) : order.amount
   def tax_event_date = order&.completed_at&.to_date || super
 

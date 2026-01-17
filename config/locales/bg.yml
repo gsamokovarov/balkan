@@ -21,6 +21,7 @@ bg:
     vat_exempt: ДДС 0%
     total: Всичко (BGN)
     total_eur: Всичко (EUR)
+    refund_description: "Възстановяване за фактура #%{number}"
     tickets:
       one: "%{type} билет"
       other: "%{count} × %{type} билета"

@@ -62,28 +62,7 @@ class Order < ApplicationRecord
 
     transaction do
       update!(refunded_amount:)
-
-      if issue_credit_note
-        Invoice.create!(
-          invoice_sequence:,
-          number: invoice_sequence.next_invoice_number,
-          refunded_invoice: invoice,
-          issue_date: Date.current,
-          tax_event_date: Date.current,
-          customer_name: name,
-          receiver_email: email,
-          customer_address:,
-          customer_country:,
-          customer_vat_idx:,
-          items_attributes: [
-            {
-              description_en: "Refund for Invoice ##{invoice.number}",
-              description_bg: "Възстановяване за фактура ##{invoice.number}",
-              unit_price: refunded_amount,
-            },
-          ],
-        )
-      end
+      invoice.issue_refund(refunded_amount, invoice_sequence:) if issue_credit_note
     end
 
     OrderMailer.refund_email(reload).deliver_later if issue_credit_note

@@ -21,6 +21,7 @@ en:
     vat_exempt: VAT 0%
     total: Total
     total_eur: Total (EUR)
+    refund_description: "Refund for Invoice #%{number}"
     tickets:
       one: "%{type} ticket"
       other: "%{count} × %{type} tickets"
