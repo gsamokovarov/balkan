@@ -51,7 +51,6 @@ class Invoice < ApplicationRecord
   def prefixed_number = format "%010d", number
 
   def total_amount = manual? ? items.sum(&:unit_price) : order.amount
-  def tax_event_date = order&.completed_at&.to_date || super
 
   def document(locale:) = Invoice::Document.generate(self, locale:)
   def filename(locale:) = "invoice-#{number}-#{locale}.pdf"
