@@ -10,14 +10,22 @@ namespace :invoices do
     end
 
     data = JSON.parse(File.read(file_path))
-    sequence_name = File.basename(file_path, ".json")
+    sequence_identifier = File.basename(file_path, ".json").to_i
 
-    invoice_sequence = InvoiceSequence.find_or_create_by!(name: sequence_name) do |seq|
-      first_number = data.first["number"].to_i
-      seq.initial_number = first_number
+    # Find sequence by matching the number range - the file is named after
+    # the sequence's starting number prefix (e.g., 10001049 for sequence starting at 10001049)
+    invoice_sequence = InvoiceSequence.find_by(initial_number: sequence_identifier)
+
+    unless invoice_sequence
+      puts "Error: No invoice sequence found with initial_number #{sequence_identifier}"
+      puts "Available sequences:"
+      InvoiceSequence.all.each do |seq|
+        puts "  - #{seq.name.presence || '(unnamed)'}: initial_number=#{seq.initial_number}"
+      end
+      exit 1
     end
 
-    puts "Importing #{data.size} invoices into sequence '#{sequence_name}' (ID: #{invoice_sequence.id})"
+    puts "Importing #{data.size} invoices into sequence '#{invoice_sequence.name.presence || '(unnamed)'}' (ID: #{invoice_sequence.id}, initial: #{invoice_sequence.initial_number})"
 
     imported = 0
     skipped = 0
@@ -46,6 +54,7 @@ namespace :invoices do
         customer_vat_idx: record["receiver_comapny_vat_uid"],
         customer_address: record["receiver_address"],
         includes_vat: !record["skip_vat"],
+        payment_method: record["payment_method"].presence,
         notes: record["notes"].presence
       )
 
