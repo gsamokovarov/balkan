@@ -1,6 +1,12 @@
 <%# locals: (invoice:) %>
 
 <div class="inline-block min-w-full align-middle">
+  <% if invoice.credit_note? %>
+    <p class="mb-4 text-sm text-gray-700 dark:text-gray-300">
+      Refunds <%= link_to "Invoice ##{invoice.refunded_invoice.prefixed_number}", admin_invoice_path(invoice.refunded_invoice), class: "text-indigo-600 dark:text-indigo-400 hover:underline" %>
+    </p>
+  <% end %>
+
   <%= render "document_preview", urls: [
     admin_invoice_path(invoice, format: :pdf, locale: :en),
     admin_invoice_path(invoice, format: :pdf, locale: :bg),
