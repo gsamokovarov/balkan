@@ -1,6 +1,6 @@
 class Admin::InvoicesController < Admin::ApplicationController
   def index
-    @invoices = scope Invoice.includes(:invoice_sequence, :order, :refunded_invoice)
+    @invoices = scope Invoice.includes(:invoice_sequence, :order, :refunded_invoice).order(created_at: :desc)
   end
 
   def show
@@ -57,11 +57,11 @@ class Admin::InvoicesController < Admin::ApplicationController
     @invoice.created_at ||= Time.current
     @invoice.customer_name = "Customer Name" if @invoice.customer_name.blank?
 
-    @invoice.items.build(description_en: "Item description", description_bg: "Описание", unit_price: 0) if @invoice.items.empty?
+    if @invoice.items.empty?
+      @invoice.items.build description_en: "Item description", description_bg: "Описание", unit_price: 0
+    end
 
-    send_data @invoice.document(locale:),
-              disposition: "inline",
-              type: "application/pdf"
+    send_data @invoice.document(locale:), disposition: "inline", type: "application/pdf"
   end
 
   private
