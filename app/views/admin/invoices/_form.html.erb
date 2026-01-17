@@ -5,6 +5,7 @@
     <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true %>
     <%= f.date_input :issue_date, required: true %>
     <%= f.date_input :tax_event_date, required: true %>
+    <%= f.text_input :payment_method, placeholder: "e.g., Bank transfer, Cash" %>
     <%= f.check_box_input :includes_vat, label: "Include VAT" %>
 
     <%= f.fieldset "Customer details", class: "mt-6" do %>
@@ -16,6 +17,7 @@
       <%= f.text_input :receiver_company_idx, label: "Company ID" %>
       <%= f.text_input :customer_vat_idx, label: "VAT ID" %>
     <% end %>
+
 
     <%= f.fieldset "Items", appendable: true, class: "mt-6" do %>
       <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">

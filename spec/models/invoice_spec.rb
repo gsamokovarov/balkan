@@ -288,6 +288,45 @@ RSpec.case Invoice do
                        "Consulting services"
   end
 
+  test "manual invoice shows custom payment method in PDF" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.create!(
+      invoice_sequence:,
+      number: 1,
+      issue_date: Date.new(2024, 6, 15),
+      tax_event_date: Date.new(2024, 6, 15),
+      customer_name: "Test Company",
+      customer_address: "123 Test St",
+      customer_country: "BG",
+      includes_vat: true,
+      payment_method: "Bank transfer",
+    )
+    invoice.items.create! description_en: "Consulting", description_bg: "Консултации", unit_price: 100
+
+    pdf = invoice.document locale: :en
+
+    assert_pdf_content pdf, "Payment method", "Bank transfer"
+  end
+
+  test "manual invoice without payment method shows default in PDF" do
+    invoice_sequence = create :invoice_sequence
+    invoice = Invoice.create!(
+      invoice_sequence:,
+      number: 1,
+      issue_date: Date.new(2024, 6, 15),
+      tax_event_date: Date.new(2024, 6, 15),
+      customer_name: "Test Company",
+      customer_address: "123 Test St",
+      customer_country: "BG",
+      includes_vat: true,
+    )
+    invoice.items.create! description_en: "Consulting", description_bg: "Консултации", unit_price: 100
+
+    pdf = invoice.document locale: :en
+
+    assert_pdf_content pdf, "Payment method", "Stripe / Credit Card"
+  end
+
   test "credit note document shows Credit Note header" do
     invoice_sequence = create :invoice_sequence
     original = Invoice.create!(

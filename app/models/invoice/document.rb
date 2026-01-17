@@ -79,23 +79,16 @@ module Invoice::Document
     end
 
     def fit_text(string, width:)
-      box = Prawn::Text::Box.new string,
-                                 document:,
-                                 width:,
-                                 at: [bounds.left, cursor],
-                                 overflow: :shrink_to_fit
+      box = Prawn::Text::Box.new string, document:, width:, at: [bounds.left, cursor], overflow: :shrink_to_fit
       box.render
+
       move_down box.height
     end
 
     private
 
-    def line_item_amount(price)
-      Amount.new(price, locale: @locale, includes_vat: invoice.includes_vat?).net_format
-    end
-
+    def line_item_amount(price) = Amount.new(price, locale: @locale, includes_vat: invoice.includes_vat?).net_format
     def genadi_ceo? = invoice.created_at.after? GENADI_AS_CEO_DATE
-
     def t(key, **) = I18n.t("invoicing.#{key}", **, locale: @locale)
   end
 
@@ -128,11 +121,8 @@ module Invoice::Document
         text t("neuvents.country")
         move_down 10
         text "<b>#{t 'company_id'}</b>: #{t 'neuvents.company_id'}", inline_format: true
-        text <<~TEXT, inline_format: true
-          <b>#{t 'vat_id'}</b>: #{t 'neuvents.vat_id'}
-        TEXT
-        text "<b>#{t 'ceo'}</b>: #{t(genadi_ceo? ? 'neuvents.genadi_ceo' : 'neuvents.svetli_ceo')}",
-             inline_format: true
+        text "<b>#{t 'vat_id'}</b>: #{t 'neuvents.vat_id'}", inline_format: true
+        text "<b>#{t 'ceo'}</b>: #{t(genadi_ceo? ? 'neuvents.genadi_ceo' : 'neuvents.svetli_ceo')}", inline_format: true
       end
 
       grid([1, 0], [1, 3]).bounding_box do
@@ -144,9 +134,7 @@ module Invoice::Document
         text "<b>#{t 'number'}</b>: #{invoice.prefixed_number}", inline_format: true
         text "<b>#{t 'date_of_issue'}</b>: #{(invoice.issue_date || invoice.created_at.to_date).iso8601}", inline_format: true
         text "<b>#{t 'date_of_tax_event'}</b>: #{(invoice.issue_date || invoice.created_at.to_date).iso8601}", inline_format: true
-        if invoice.credit_note?
-          text "<b>#{t 'for_invoice'}</b>: #{invoice.refunded_invoice.prefixed_number}", inline_format: true
-        end
+        text "<b>#{t 'for_invoice'}</b>: #{invoice.refunded_invoice.prefixed_number}", inline_format: true if invoice.credit_note?
       end
 
       grid([2, 0], [2, 3]).bounding_box do
@@ -164,7 +152,8 @@ module Invoice::Document
       end
 
       grid([3, 0], [3, 3]).bounding_box do
-        text "#{t 'payment_method'}: <b>#{t 'bank_payment'}</b>", inline_format: true
+        text "<b>#{t 'payment_method'}</b>", inline_format: true
+        fit_text invoice.payment_method.presence || t("bank_payment"), width: column.width
       end
 
       grid([3, 3], [3, 6]).bounding_box do

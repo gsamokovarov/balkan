@@ -82,6 +82,7 @@ class Admin::InvoicesController < Admin::ApplicationController
       :receiver_company_name,
       :receiver_company_idx,
       :includes_vat,
+      :payment_method,
       :notes,
       items_attributes: [:id, :description_en, :description_bg, :unit_price, :_destroy],
     )
