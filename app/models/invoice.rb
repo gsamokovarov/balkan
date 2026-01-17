@@ -40,8 +40,8 @@ class Invoice < ApplicationRecord
       customer_vat_idx: order.customer_vat_idx,
       items_attributes: [
         {
-          description_en: I18n.t("invoicing.refund_description", number:, locale: :en),
-          description_bg: I18n.t("invoicing.refund_description", number:, locale: :bg),
+          description_en: I18n.t("invoicing.refund_description", number: prefixed_number, locale: :en),
+          description_bg: I18n.t("invoicing.refund_description", number: prefixed_number, locale: :bg),
           unit_price: amount,
         },
       ],
