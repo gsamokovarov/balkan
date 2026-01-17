@@ -51,10 +51,12 @@ class Order < ApplicationRecord
   def refund!(refunded_amount:, invoice_sequence: nil)
     precondition !refunded?, "Order already refunded"
 
+    issue_credit_note = invoice && invoice_sequence
+
     transaction do
       update!(refunded_amount:)
 
-      if invoice && invoice_sequence
+      if issue_credit_note
         customer_name = stripe.customer_details.name
         customer_address =
           stripe.customer_details.address.line1 ||
@@ -85,5 +87,7 @@ class Order < ApplicationRecord
         )
       end
     end
+
+    OrderMailer.refund_email(reload).deliver_later if issue_credit_note
   end
 end

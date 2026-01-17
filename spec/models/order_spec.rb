@@ -208,13 +208,13 @@ RSpec.case Order do
 
     refund_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
 
-    credit_invoice = order.refund! refunded_amount: 50, invoice_sequence: refund_sequence
+    order.refund! refunded_amount: 50, invoice_sequence: refund_sequence
 
     assert_eq order.reload.refunded_amount, 50
-    assert_eq credit_invoice.credit_note?, true
-    assert_eq credit_invoice.refunded_invoice, order.invoice
-    assert_eq credit_invoice.number, 90_000_001
-    assert_eq credit_invoice.items.first.unit_price, 50
+    assert_eq order.credit_note.credit_note?, true
+    assert_eq order.credit_note.refunded_invoice, order.invoice
+    assert_eq order.credit_note.number, 90_000_001
+    assert_eq order.credit_note.items.first.unit_price, 50
   end
 
   test "refund! fails if order already refunded" do
@@ -224,6 +224,37 @@ RSpec.case Order do
     assert_raises Precondition::Error do
       order.refund! refunded_amount: 100
     end
+  end
+
+  test "refund! sends refund email" do
+    ticket_type = create :ticket_type, :enabled
+    ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: {
+        name: "Test Customer",
+        email: "test@example.com",
+        address: { line1: "123 Test St", city: "Sofia", country: "BG", postal_code: "1000" },
+        tax_ids: [type: "bg_vat", value: "BG123456789"],
+      },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 15_000,
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params], issue_invoice: true
+    order.complete! checkout_session
+
+    ActionMailer::Base.deliveries.clear
+    refund_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
+
+    order.refund! refunded_amount: 150, invoice_sequence: refund_sequence
+
+    assert_eq ActionMailer::Base.deliveries.count, 1
+
+    email = ActionMailer::Base.deliveries.first
+    assert_eq email.to, [order.email]
+    assert_eq email.subject, "Balkan Ruby 2024 credit note"
+    assert_eq email.attachments.size, 2
   end
 
   def build_ticket_params(index:, price:, ticket_type:)
