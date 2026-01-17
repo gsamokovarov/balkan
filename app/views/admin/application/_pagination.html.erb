@@ -12,7 +12,7 @@
   page_url = -> { url_for(**params.to_unsafe_h, page: it, only_path: true) }
 %>
 
-<div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 sm:px-6">
+<div class="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 px-4 py-3 sm:px-6">
   <div class="flex flex-1 justify-between sm:hidden">
     <%= link_to page_url.(current_page - 1), class: [
       "relative inline-flex items-center rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600",
