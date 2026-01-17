@@ -48,6 +48,8 @@ class Invoice < ApplicationRecord
     )
   end
 
+  def prefixed_number = format "%010d", number
+
   def total_amount = manual? ? items.sum(&:unit_price) : order.amount
   def tax_event_date = order&.completed_at&.to_date || super
 

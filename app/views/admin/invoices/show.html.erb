@@ -1,4 +1,4 @@
-<%= render "section", title: "Invoice ##{format '%010d', @invoice.number}" do %>
+<%= render "section", title: "Invoice ##{@invoice.prefixed_number}" do %>
   <%= render "form", invoice: @invoice %>
 <% end %>
 
