@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   has_many :tickets
   has_one :invoice_sequence, through: :event
   has_one :invoice
+  has_one :credit_note, through: :invoice, source: :refund
 
   def self.completed = where("completed_at IS NOT NULL")
 

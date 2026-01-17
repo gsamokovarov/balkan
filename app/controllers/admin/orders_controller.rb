@@ -4,15 +4,16 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def show
-    @order = Order.completed.includes(tickets: :ticket_type).find params[:id]
+    @order = Order.completed.includes(tickets: :ticket_type, invoice: :refund).find params[:id]
 
     respond_to do |format|
       format.html
       format.pdf do
-        send_data @order.invoice.document(locale:),
+        document = params[:type] == "credit_note" ? @order.credit_note : @order.invoice
+        send_data document.document(locale:),
                   disposition: "inline",
                   type: "application/pdf",
-                  filename: @order.invoice.filename(locale:)
+                  filename: document.filename(locale:)
       end
     end
   end
@@ -52,6 +53,12 @@ class Admin::OrdersController < Admin::ApplicationController
     @order = Order.completed.includes(tickets: :ticket_type).find params[:id]
 
     OrderMailer.invoice_email(@order).deliver_later
+  end
+
+  def credit_note
+    @order = Order.completed.includes(invoice: :refund).find params[:id]
+
+    OrderMailer.refund_email(@order).deliver_later
   end
 
   def refund

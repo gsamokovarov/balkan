@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       end
       member do
         post :invoice
+        post :credit_note
         post :refund
       end
     end
