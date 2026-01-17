@@ -5,7 +5,6 @@
     <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true %>
     <%= f.date_input :issue_date, required: true %>
     <%= f.date_input :tax_event_date, required: true %>
-    <%= f.select_input :refunded_invoice_id, Invoice.where.not(id: invoice.id).order(number: :desc).map { ["##{format '%010d', it.number} - #{it.customer_name}", it.id] }, include_blank: "None (regular invoice)" %>
     <%= f.check_box_input :includes_vat, label: "Include VAT" %>
 
     <%= f.fieldset "Customer details", class: "mt-6" do %>

@@ -178,6 +178,54 @@ RSpec.case Order do
     assert_eq order.fully_refunded?, false
   end
 
+  test "refund! sets refunded_amount" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
+
+    order.refund! refunded_amount: 50
+
+    assert_eq order.reload.refunded_amount, 50
+    assert_eq order.refunded?, true
+  end
+
+  test "refund! creates credit invoice when order has invoice" do
+    ticket_type = create :ticket_type, :enabled
+    ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: {
+        name: "Test Customer",
+        email: "test@example.com",
+        address: { line1: "123 Test St", city: "Sofia", country: "BG", postal_code: "1000" },
+        tax_ids: [type: "bg_vat", value: "BG123456789"],
+      },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 15_000,
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params], issue_invoice: true
+    order.complete! checkout_session
+
+    refund_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
+
+    credit_invoice = order.refund! refunded_amount: 50, invoice_sequence: refund_sequence
+
+    assert_eq order.reload.refunded_amount, 50
+    assert_eq credit_invoice.credit_note?, true
+    assert_eq credit_invoice.refunded_invoice, order.invoice
+    assert_eq credit_invoice.number, 90_000_001
+    assert_eq credit_invoice.items.first.unit_price, 50
+  end
+
+  test "refund! fails if order already refunded" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current, refunded_amount: 50
+
+    assert_raises Precondition::Error do
+      order.refund! refunded_amount: 100
+    end
+  end
+
   def build_ticket_params(index:, price:, ticket_type:)
     {
       "name" => "John Doe #{index}",

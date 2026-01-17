@@ -54,6 +54,20 @@ class Admin::OrdersController < Admin::ApplicationController
     OrderMailer.invoice_email(@order).deliver_later
   end
 
+  def refund
+    @order = Order.completed.find params[:id]
+    invoice_sequence = InvoiceSequence.find_by id: params[:invoice_sequence_id]
+    refunded_amount = params[:refunded_amount].to_d
+
+    @order.refund!(refunded_amount:, invoice_sequence:)
+
+    if @order.invoicable?
+      redirect_to admin_order_path(@order), notice: "Credit note created"
+    else
+      redirect_to admin_order_path(@order), notice: "Refund recorded"
+    end
+  end
+
   private
 
   def locale = params.fetch(:locale, I18n.locale)

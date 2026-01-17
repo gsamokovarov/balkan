@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       end
       member do
         post :invoice
+        post :refund
       end
     end
     resources :events, only: [:index, :show, :new, :create, :edit, :update] do

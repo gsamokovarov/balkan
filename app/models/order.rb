@@ -8,7 +8,10 @@ class Order < ApplicationRecord
 
   def self.completed = where("completed_at IS NOT NULL")
 
-  def stripe = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
+  def stripe
+    @stripe ||= stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
+    block_given? ? yield(@stripe) : @stripe
+  end
 
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded? && refunded_amount == amount
@@ -42,5 +45,44 @@ class Order < ApplicationRecord
     tickets.each { TicketMailer.welcome_email(it).deliver_later }
     OrderMailer.invoice_email(self).deliver_later if issue_invoice?
     NotificationMailer.sale_email(self).deliver_later
+  end
+
+  def refund!(refunded_amount:, invoice_sequence: nil)
+    precondition !refunded?, "Order already refunded"
+
+    transaction do
+      update!(refunded_amount:)
+
+      if invoice && invoice_sequence
+        customer_name = stripe.customer_details.name
+        customer_address =
+          stripe.customer_details.address.line1 ||
+          "#{stripe.customer_details.address.city} #{stripe.customer_details.address.postal_code}"
+        customer_country = stripe.customer_details.address.country
+        customer_vat_idx = stripe.customer_details.tax_ids.first&.value
+        receiver_email = stripe.customer_details.email
+
+        Invoice.create!(
+          invoice_sequence:,
+          number: invoice_sequence.next_invoice_number,
+          refunded_invoice: invoice,
+          issue_date: Date.current,
+          tax_event_date: Date.current,
+          customer_name:,
+          customer_address:,
+          customer_country:,
+          customer_vat_idx:,
+          receiver_email:,
+          includes_vat: invoice.includes_vat,
+          items_attributes: [
+            {
+              description_en: "Refund for Invoice ##{invoice.number}",
+              description_bg: "Възстановяване за фактура ##{invoice.number}",
+              unit_price: refunded_amount,
+            },
+          ],
+        )
+      end
+    end
   end
 end

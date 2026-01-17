@@ -6,11 +6,27 @@
     <iframe src="<%= admin_order_path order, format: :pdf, locale: :bg %>" class="w-full h-[656px] border-2 border-gray-300 dark:border-gray-600 rounded-md"></iframe>
   </div>
 
-  <div class="mt-4">
+  <div class="mt-4 flex gap-3">
     <%= turbo_frame_tag "invoice" do %>
       <%= form_with url: invoice_admin_order_path do |form| %>
         <%= admin_button(:primary, type: :submit, class: "w-fit") { "Send to customer" } %>
       <% end %>
     <% end %>
+
+    <% unless order.refunded? %>
+      <%= admin_button(:danger, onclick: "refund_dialog.showModal()") { "Refund" } %>
+    <% end %>
   </div>
 </div>
+
+<%= admin_modal :refund_dialog, "Create credit note" do %>
+  <%= admin_form url: refund_admin_order_path(order), method: :post do |f| %>
+    <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true, label: "Invoice Sequence" %>
+    <%= f.decimal_input :refunded_amount, required: true, value: order.amount, label: "Refunded Amount" %>
+
+    <div class="mt-6 flex justify-end gap-3">
+      <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>
+      <%= f.submit "Create credit note" %>
+    </div>
+  <% end %>
+<% end %>
