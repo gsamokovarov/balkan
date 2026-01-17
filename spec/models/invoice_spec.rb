@@ -362,7 +362,7 @@ RSpec.case Invoice do
 
     credit_note_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
 
-    credit_note = order.invoice.issue_refund(50, invoice_sequence: credit_note_sequence)
+    credit_note = order.invoice.issue_refund 50, invoice_sequence: credit_note_sequence
 
     assert_eq credit_note.credit_note?, true
     assert_eq credit_note.refunded_invoice, order.invoice
@@ -373,8 +373,8 @@ RSpec.case Invoice do
     assert_eq credit_note.customer_vat_idx, "BG123456789"
     assert_eq credit_note.receiver_email, "test@example.com"
     assert_eq credit_note.items.first.unit_price, 50
-    assert_eq credit_note.items.first.description_en, "Refund for Invoice ##{order.invoice.number}"
-    assert_eq credit_note.items.first.description_bg, "Възстановяване за фактура ##{order.invoice.number}"
+    assert_eq credit_note.items.first.description_en, "Refund for Invoice ##{order.invoice.prefixed_number}"
+    assert_eq credit_note.items.first.description_bg, "Възстановяване за фактура ##{order.invoice.prefixed_number}"
   end
 
   test "issue_refund fails for credit notes" do
@@ -383,7 +383,7 @@ RSpec.case Invoice do
     credit_note = Invoice.create! invoice_sequence:, number: 2, refunded_invoice: original
 
     assert_raises Precondition::Error do
-      credit_note.issue_refund(50, invoice_sequence:)
+      credit_note.issue_refund 50, invoice_sequence:
     end
   end
 
@@ -392,7 +392,7 @@ RSpec.case Invoice do
     manual_invoice = Invoice.create! invoice_sequence:, number: 1
 
     assert_raises Precondition::Error do
-      manual_invoice.issue_refund(50, invoice_sequence:)
+      manual_invoice.issue_refund 50, invoice_sequence:
     end
   end
 
