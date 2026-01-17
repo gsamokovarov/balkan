@@ -3,7 +3,7 @@
 <%= admin_table invoices do
   column "#", -> { link_to it.id, admin_invoice_path(it), class: "text-indigo-600 hover:underline" }
   column :number, -> { it.prefixed_number }
-  column :sequence, -> { it.invoice_sequence.name }
+  column :sequence, -> { it.invoice_sequence.display_name }
   column :type, -> { it.credit_note? ? "Credit Note" : "Invoice" }
   column :customer, -> { it.customer_name }
   column :issue_date, -> { it.issue_date&.iso8601 || it.created_at.to_date.iso8601 }
