@@ -12,7 +12,11 @@
     end
   end
 
-  column :customer, -> { tag.span truncate(it.customer_name, length: 30), title: it.customer_name }
+  column :customer do |invoice|
+    customer = invoice.customer_name || invoice.receiver_company_name || invoice.order&.name
+    tag.span truncate(customer, length: 30), title: customer
+  end
+
   column :issue_date, -> { (it.issue_date || it.created_at.to_date).iso8601 }
-  column :total, -> { format_money(it.total_amount) }
+  column :total, -> { format_money it.total_amount }
 end %>
