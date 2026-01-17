@@ -25,7 +25,7 @@ namespace :invoices do
         refunded_invoice: if record["for_invoice_number"].present?
                             Invoice.find_by number: record["for_invoice_number"]
                           end,
-        items_attributes: record["items"],
+        items_attributes: record["items"].map { { **it, "unit_price" => it["unit_price"].to_d.abs } },
         created_at: record["issue_date"],
         updated_at: record["issue_date"],
       )
