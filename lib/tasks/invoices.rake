@@ -26,6 +26,8 @@ namespace :invoices do
                             Invoice.find_by number: record["for_invoice_number"]
                           end,
         items_attributes: record["items"],
+        created_at: record["issue_date"],
+        updated_at: record["issue_date"],
       )
     end
   end
