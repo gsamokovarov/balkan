@@ -34,20 +34,5 @@
       <% end %>
     <% end %>
 
-    <% unless order.refunded? %>
-      <%= admin_button(:danger, onclick: "refund_dialog.showModal()") { "Refund" } %>
-    <% end %>
   </div>
 </div>
-
-<%= admin_modal :refund_dialog, "Create credit note" do %>
-  <%= admin_form url: refund_admin_order_path(order), method: :post do |f| %>
-    <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true, label: "Invoice Sequence" %>
-    <%= f.decimal_input :refunded_amount, required: true, value: order.amount, label: "Refunded Amount" %>
-
-    <div class="mt-6 flex justify-end gap-3">
-      <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>
-      <%= f.submit "Create credit note" %>
-    </div>
-  <% end %>
-<% end %>

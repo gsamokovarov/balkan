@@ -65,6 +65,6 @@ class Order < ApplicationRecord
       invoice.issue_refund(refunded_amount, invoice_sequence:) if issue_credit_note
     end
 
-    OrderMailer.refund_email(reload).deliver_later if issue_credit_note
+    OrderMailer.refund_email(reload).deliver_later
   end
 end

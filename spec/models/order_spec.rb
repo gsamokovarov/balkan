@@ -180,7 +180,8 @@ RSpec.case Order do
 
   test "refund! sets refunded_amount" do
     event = create :event, :balkan2024
-    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current,
+                          name: "Test Customer", email: "test@example.com"
 
     order.refund! refunded_amount: 50
 
@@ -219,14 +220,32 @@ RSpec.case Order do
 
   test "refund! fails if order already refunded" do
     event = create :event, :balkan2024
-    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current, refunded_amount: 50
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current, refunded_amount: 50,
+                          name: "Test Customer", email: "test@example.com"
 
     assert_raises Precondition::Error do
       order.refund! refunded_amount: 100
     end
   end
 
-  test "refund! sends refund email" do
+  test "refund! sends refund email without attachments for non-invoicable orders" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current,
+                          name: "Test Customer", email: "test@example.com"
+
+    ActionMailer::Base.deliveries.clear
+
+    order.refund! refunded_amount: 50
+
+    assert_eq ActionMailer::Base.deliveries.count, 1
+
+    email = ActionMailer::Base.deliveries.first
+    assert_eq email.to, ["test@example.com"]
+    assert_eq email.subject, "Balkan Ruby 2024 refund"
+    assert_eq email.attachments.size, 0
+  end
+
+  test "refund! sends refund email with credit note attachments" do
     ticket_type = create :ticket_type, :enabled
     ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
     checkout_session = Stripe::Checkout::Session.construct_from(
@@ -253,7 +272,7 @@ RSpec.case Order do
 
     email = ActionMailer::Base.deliveries.first
     assert_eq email.to, [order.email]
-    assert_eq email.subject, "Balkan Ruby 2024 credit note"
+    assert_eq email.subject, "Balkan Ruby 2024 refund"
     assert_eq email.attachments.size, 2
   end
 
