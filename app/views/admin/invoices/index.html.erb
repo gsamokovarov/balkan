@@ -5,6 +5,7 @@
 } do %>
   <% if @invoices.any? %>
     <%= render "invoices", invoices: @invoices %>
+    <%= admin_paginate @invoices %>
   <% else %>
     <%= render "empty_state" do %>
       <% admin_button(:primary, link: new_admin_invoice_path) { "New invoice" } %>
