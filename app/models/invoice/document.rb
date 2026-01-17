@@ -78,7 +78,7 @@ module Invoice::Document
       update(&)
     end
 
-    def fit_text(string, width:)
+    def fit_text(string, width: bounds.width)
       box = Prawn::Text::Box.new string, document:, width:, at: [bounds.left, cursor], overflow: :shrink_to_fit
       box.render
 
@@ -102,12 +102,11 @@ module Invoice::Document
 
       define_grid columns: 6, rows: 4, gutter: 10
 
-      column = grid [0, 0], [0, 2]
-      column.bounding_box do
+      grid([0, 0], [0, 2]).bounding_box do
         text t("receiver"), size: 14, style: :bold
-        fit_text customer_details.name.to_s, width: column.width
-        fit_text customer_details.address.to_s, width: column.width
-        fit_text customer_details.country.to_s, width: column.width
+        fit_text customer_details.name.to_s
+        fit_text customer_details.address.to_s
+        fit_text customer_details.country.to_s
         move_down 10
         text "<b>#{t 'company_id'}</b>: #{invoice.receiver_company_idx}", inline_format: true
         text "<b>#{t 'vat_id'}</b>: #{customer_details.vat_id}", inline_format: true
@@ -137,14 +136,14 @@ module Invoice::Document
         text "<b>#{t 'for_invoice'}</b>: #{invoice.refunded_invoice.prefixed_number}", inline_format: true if invoice.credit_note?
       end
 
-      grid([2, 0], [2, 3]).bounding_box do
+      grid([2, 0], [2, 4]).bounding_box do
         text t("items"), size: 14, style: :bold
         line_items.each do |item|
-          fit_text item.description.to_s, width: column.width
+          fit_text item.description.to_s
         end
       end
 
-      grid([2, 3], [2, 6]).bounding_box do
+      grid([2, 4], [2, 6]).bounding_box do
         text t("price"), size: 14, style: :bold
         line_items.each do |item|
           text line_item_amount(item.price)
@@ -153,7 +152,7 @@ module Invoice::Document
 
       grid([3, 0], [3, 3]).bounding_box do
         text "<b>#{t 'payment_method'}</b>", inline_format: true
-        fit_text invoice.payment_method.presence || t("bank_payment"), width: column.width
+        fit_text invoice.payment_method.presence || t("bank_payment")
       end
 
       grid([3, 3], [3, 6]).bounding_box do
