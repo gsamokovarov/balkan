@@ -178,6 +178,104 @@ RSpec.case Order do
     assert_eq order.fully_refunded?, false
   end
 
+  test "refund! sets refunded_amount" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current,
+                          name: "Test Customer", email: "test@example.com"
+
+    order.refund! refunded_amount: 50
+
+    assert_eq order.reload.refunded_amount, 50
+    assert_eq order.refunded?, true
+  end
+
+  test "refund! creates credit invoice when order has invoice" do
+    ticket_type = create :ticket_type, :enabled
+    ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: {
+        name: "Test Customer",
+        email: "test@example.com",
+        address: { line1: "123 Test St", city: "Sofia", country: "BG", postal_code: "1000" },
+        tax_ids: [type: "bg_vat", value: "BG123456789"],
+      },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 15_000,
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params], issue_invoice: true
+    order.complete! checkout_session
+
+    refund_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
+
+    order.refund! refunded_amount: 50, invoice_sequence: refund_sequence
+
+    assert_eq order.reload.refunded_amount, 50
+    assert_eq order.credit_note.credit_note?, true
+    assert_eq order.credit_note.refunded_invoice, order.invoice
+    assert_eq order.credit_note.number, 90_000_001
+    assert_eq order.credit_note.items.first.unit_price, 50
+  end
+
+  test "refund! fails if order already refunded" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current, refunded_amount: 50,
+                          name: "Test Customer", email: "test@example.com"
+
+    assert_raises Precondition::Error do
+      order.refund! refunded_amount: 100
+    end
+  end
+
+  test "refund! sends refund email without attachments for non-invoicable orders" do
+    event = create :event, :balkan2024
+    order = Order.create! event:, free: true, free_reason: "Giveaway", completed_at: Time.current,
+                          name: "Test Customer", email: "test@example.com"
+
+    ActionMailer::Base.deliveries.clear
+
+    order.refund! refunded_amount: 50
+
+    assert_eq ActionMailer::Base.deliveries.count, 1
+
+    email = ActionMailer::Base.deliveries.first
+    assert_eq email.to, ["test@example.com"]
+    assert_eq email.subject, "Balkan Ruby 2024 refund"
+    assert_eq email.attachments.size, 0
+  end
+
+  test "refund! sends refund email with credit note attachments" do
+    ticket_type = create :ticket_type, :enabled
+    ticket_params = build_ticket_params(index: 1, price: 150, ticket_type:)
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: {
+        name: "Test Customer",
+        email: "test@example.com",
+        address: { line1: "123 Test St", city: "Sofia", country: "BG", postal_code: "1000" },
+        tax_ids: [type: "bg_vat", value: "BG123456789"],
+      },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 15_000,
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", pending_tickets: [ticket_params], issue_invoice: true
+    order.complete! checkout_session
+
+    ActionMailer::Base.deliveries.clear
+    refund_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
+
+    order.refund! refunded_amount: 150, invoice_sequence: refund_sequence
+
+    assert_eq ActionMailer::Base.deliveries.count, 1
+
+    email = ActionMailer::Base.deliveries.first
+    assert_eq email.to, [order.email]
+    assert_eq email.subject, "Balkan Ruby 2024 refund"
+    assert_eq email.attachments.size, 2
+  end
+
   def build_ticket_params(index:, price:, ticket_type:)
     {
       "name" => "John Doe #{index}",

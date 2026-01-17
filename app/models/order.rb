@@ -5,10 +5,21 @@ class Order < ApplicationRecord
   has_many :tickets
   has_one :invoice_sequence, through: :event
   has_one :invoice
+  has_one :credit_note, through: :invoice, source: :refund
 
   def self.completed = where("completed_at IS NOT NULL")
 
-  def stripe = stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
+  def stripe
+    @stripe ||= stripe_checkout_session && Stripe::Checkout::Session.construct_from(stripe_checkout_session)
+  end
+
+  def customer_vat_idx = stripe.customer_details.tax_ids.first&.value
+  def customer_country = stripe.customer_details.address.country
+
+  def customer_address
+    stripe.customer_details.address.line1 ||
+      "#{stripe.customer_details.address.city} #{stripe.customer_details.address.postal_code}"
+  end
 
   def refunded? = refunded_amount.positive?
   def fully_refunded? = refunded? && refunded_amount == amount
@@ -42,5 +53,18 @@ class Order < ApplicationRecord
     tickets.each { TicketMailer.welcome_email(it).deliver_later }
     OrderMailer.invoice_email(self).deliver_later if issue_invoice?
     NotificationMailer.sale_email(self).deliver_later
+  end
+
+  def refund!(refunded_amount:, invoice_sequence: nil)
+    precondition !refunded?, "Order already refunded"
+
+    issue_credit_note = invoice && invoice_sequence
+
+    transaction do
+      update!(refunded_amount:)
+      invoice.issue_refund(refunded_amount, invoice_sequence:) if issue_credit_note
+    end
+
+    OrderMailer.refund_email(reload).deliver_later
   end
 end

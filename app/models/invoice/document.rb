@@ -140,14 +140,12 @@ module Invoice::Document
       end
 
       grid([1, 3], [1, 6]).bounding_box do
-        document_type = invoice.credit_note? ? t("credit_note") : t("invoice")
-        text document_type, size: 22, style: :bold
-        text "<b>#{t 'number'}</b>: #{format '%010d', invoice.number}", inline_format: true
-        issue_date = invoice.issue_date || invoice.created_at.to_date
-        text "<b>#{t 'date_of_issue'}</b>: #{issue_date.iso8601}", inline_format: true
-        text "<b>#{t 'date_of_tax_event'}</b>: #{invoice.tax_event_date&.iso8601}", inline_format: true
+        text invoice.credit_note? ? t("credit_note") : t("invoice"), size: 22, style: :bold
+        text "<b>#{t 'number'}</b>: #{invoice.prefixed_number}", inline_format: true
+        text "<b>#{t 'date_of_issue'}</b>: #{(invoice.issue_date || invoice.created_at.to_date).iso8601}", inline_format: true
+        text "<b>#{t 'date_of_tax_event'}</b>: #{(invoice.issue_date || invoice.created_at.to_date).iso8601}", inline_format: true
         if invoice.credit_note?
-          text "<b>#{t 'for_invoice'}</b>: #{format '%010d', invoice.refunded_invoice.number}", inline_format: true
+          text "<b>#{t 'for_invoice'}</b>: #{invoice.refunded_invoice.prefixed_number}", inline_format: true
         end
       end
 

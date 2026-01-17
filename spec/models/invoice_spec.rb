@@ -342,6 +342,60 @@ RSpec.case Invoice do
                        "Total: € 100.00"
   end
 
+  test "issue_refund creates credit note with correct attributes" do
+    ticket_type = create :ticket_type, :enabled
+    checkout_session = Stripe::Checkout::Session.construct_from(
+      id: "test",
+      customer_details: {
+        name: "Test Customer",
+        email: "test@example.com",
+        address: { line1: "123 Test St", city: "Sofia", country: "BG", postal_code: "1000" },
+        tax_ids: [type: "bg_vat", value: "BG123456789"],
+      },
+      total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 0 },
+      amount_total: 15_000,
+    )
+
+    order = create :order, stripe_checkout_session_uid: "test", issue_invoice: true,
+                           pending_tickets: [{ "name" => "John", "email" => "john@example.com", "price" => 150, "shirt_size" => "L", "ticket_type_id" => ticket_type.id }]
+    order.complete! checkout_session
+
+    credit_note_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
+
+    credit_note = order.invoice.issue_refund(50, invoice_sequence: credit_note_sequence)
+
+    assert_eq credit_note.credit_note?, true
+    assert_eq credit_note.refunded_invoice, order.invoice
+    assert_eq credit_note.number, 90_000_001
+    assert_eq credit_note.customer_name, "Test Customer"
+    assert_eq credit_note.customer_address, "123 Test St"
+    assert_eq credit_note.customer_country, "BG"
+    assert_eq credit_note.customer_vat_idx, "BG123456789"
+    assert_eq credit_note.receiver_email, "test@example.com"
+    assert_eq credit_note.items.first.unit_price, 50
+    assert_eq credit_note.items.first.description_en, "Refund for Invoice ##{order.invoice.number}"
+    assert_eq credit_note.items.first.description_bg, "Възстановяване за фактура ##{order.invoice.number}"
+  end
+
+  test "issue_refund fails for credit notes" do
+    invoice_sequence = create :invoice_sequence
+    original = Invoice.create! invoice_sequence:, number: 1
+    credit_note = Invoice.create! invoice_sequence:, number: 2, refunded_invoice: original
+
+    assert_raises Precondition::Error do
+      credit_note.issue_refund(50, invoice_sequence:)
+    end
+  end
+
+  test "issue_refund fails for manual invoices" do
+    invoice_sequence = create :invoice_sequence
+    manual_invoice = Invoice.create! invoice_sequence:, number: 1
+
+    assert_raises Precondition::Error do
+      manual_invoice.issue_refund(50, invoice_sequence:)
+    end
+  end
+
   def create_invoice_for_document_generation(
     name:,
     email:,

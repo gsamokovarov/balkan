@@ -19,5 +19,28 @@
   <% if order.free? %>
     <%= f.text_area_input :free_reason %>
   <% end %>
-  <%= f.submit %>
+
+  <div class="flex gap-3">
+    <%= f.submit %>
+
+    <% unless order.refunded? %>
+      <%= admin_button(:danger, type: :button, onclick: "refund_dialog.showModal()") { "Refund" } %>
+    <% end %>
+  </div>
+<% end %>
+
+<% unless order.refunded? %>
+  <%= admin_modal :refund_dialog, "Refund order" do %>
+    <%= admin_form url: refund_admin_order_path(order), method: :post do |f| %>
+      <% if order.invoicable? %>
+        <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true, label: "Invoice Sequence" %>
+      <% end %>
+      <%= f.decimal_input :refunded_amount, required: true, value: order.amount, label: "Refunded Amount" %>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>
+        <%= f.submit "Refund" %>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
