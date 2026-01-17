@@ -140,7 +140,7 @@ module Invoice::Document
       grid([2, 0], [2, 3]).bounding_box do
         text t("items"), size: 14, style: :bold
         line_items.each do |item|
-          text item.description.to_s
+          fit_text item.description.to_s, width: column.width
         end
       end
 
