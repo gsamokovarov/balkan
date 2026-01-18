@@ -211,7 +211,6 @@ RSpec.case Invoice do
     credit_note = Invoice.new invoice_sequence:, number: 2, refunded_invoice: original
 
     assert_eq credit_note.credit_note?, true
-    assert_eq credit_note.invoice?, false
   end
 
   test "credit_note? returns false when refunded_invoice is nil" do
@@ -219,7 +218,6 @@ RSpec.case Invoice do
     invoice = Invoice.new invoice_sequence:, number: 1
 
     assert_eq invoice.credit_note?, false
-    assert_eq invoice.invoice?, true
   end
 
   test "total_amount sums invoice items" do

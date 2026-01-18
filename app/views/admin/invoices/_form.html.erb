@@ -42,7 +42,7 @@
     <div class="flex gap-3">
       <%= f.submit %>
 
-      <% if invoice.persisted? && invoice.manual? && invoice.invoice? && !invoice.refunded? %>
+      <% if invoice.persisted? && invoice.manual? && !invoice.credit_note? && !invoice.refunded? %>
         <%= admin_button(:danger, type: :button, onclick: "refund_dialog.showModal()") { "Refund" } %>
       <% end %>
     </div>
@@ -56,7 +56,7 @@
   <% end %>
 </div>
 
-<% if invoice.persisted? && invoice.manual? && invoice.invoice? && invoice.refund.nil? %>
+<% if invoice.persisted? && invoice.manual? && !invoice.credit_note? && !invoice.refunded? %>
   <%= admin_modal :refund_dialog, "Refund invoice" do %>
     <%= admin_form url: refund_admin_invoice_path(invoice), method: :post do |f| %>
       <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true, label: "Invoice Sequence" %>

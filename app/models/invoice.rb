@@ -10,7 +10,6 @@ class Invoice < ApplicationRecord
   accepts_nested_attributes_for :items
 
   def credit_note? = !!refunded_invoice_id
-  def invoice? = !credit_note?
   def manual? = order.nil?
   def refunded? = !!refund
 
@@ -29,7 +28,7 @@ class Invoice < ApplicationRecord
   end
 
   def issue_refund(amount, invoice_sequence:)
-    precondition invoice?, "Cannot issue credit note"
+    precondition !credit_note?, "Cannot issue credit note"
 
     create_refund!(
       invoice_sequence:,
