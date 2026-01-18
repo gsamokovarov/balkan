@@ -164,7 +164,6 @@ Lint/AssignmentInCondition:
 Lint/ItWithoutArgumentsInBlock:
   Enabled: false
 
-
 Layout/DefEndAlignment:
   EnforcedStyleAlignWith: start_of_line
 

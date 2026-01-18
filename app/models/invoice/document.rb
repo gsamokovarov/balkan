@@ -136,26 +136,27 @@ module Invoice::Document
         text "<b>#{t 'for_invoice'}</b>: #{invoice.refunded_invoice.prefixed_number}", inline_format: true if invoice.credit_note?
       end
 
-      grid([2, 0], [2, 4]).bounding_box do
-        text t("items"), size: 14, style: :bold
-        line_items.each do |item|
-          fit_text item.description.to_s
-        end
+      move_cursor_to grid([2, 0], [2, 0]).top_left[1]
+
+      items_table_data = [[t("items"), t("price")]] + line_items.map do |item|
+        [item.description.to_s, line_item_amount(item.price)]
       end
 
-      grid([2, 4], [2, 6]).bounding_box do
-        text t("price"), size: 14, style: :bold
-        line_items.each do |item|
-          text line_item_amount(item.price)
-        end
+      table_width = bounds.width
+      table items_table_data, width: table_width, cell_style: { borders: [], padding: [2, 4] } do
+        row(0).font_style = :bold
+        row(0).size = 14
+        column(0).width = table_width * 0.50
       end
 
-      grid([3, 0], [3, 3]).bounding_box do
+      move_down 20
+
+      float do
         text "<b>#{t 'payment_method'}</b>", inline_format: true
-        fit_text invoice.payment_method.presence || t("bank_payment")
+        fit_text invoice.payment_method.presence || t("bank_payment"), width: bounds.width / 2
       end
 
-      grid([3, 3], [3, 6]).bounding_box do
+      bounding_box [bounds.width / 2, cursor], width: bounds.width / 2 do
         vat_label = invoice.includes_vat? ? t("vat") : t("vat_exempt")
         text "#{t 'invoice_total'}: <b>#{invoice_amount.net_format}</b>", inline_format: true
         text "#{vat_label}: <b>#{invoice_amount.tax_format}</b>", inline_format: true
