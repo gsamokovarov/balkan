@@ -4,9 +4,13 @@
   column "#", -> { link_to it.id, admin_invoice_path(it), class: "text-indigo-600 hover:underline" }
   column :number, -> { it.prefixed_number }
 
-  column :type do |invoice|
+  column :status do |invoice|
     if invoice.credit_note?
       admin_badge :danger, "Credit note"
+    elsif invoice.refunded?
+      admin_badge :warning, "Refunded"
+    elsif invoice.manual?
+      admin_badge :primary, "Manual"
     else
       admin_badge :success, "Invoice"
     end

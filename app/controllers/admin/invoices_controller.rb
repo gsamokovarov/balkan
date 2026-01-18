@@ -1,6 +1,6 @@
 class Admin::InvoicesController < Admin::ApplicationController
   def index
-    @invoices = scope Invoice.includes(:invoice_sequence, :order, :refunded_invoice).order(created_at: :desc)
+    @invoices = scope Invoice.includes(:invoice_sequence, :order, :refunded_invoice, :refund).order(created_at: :desc)
   end
 
   def show
