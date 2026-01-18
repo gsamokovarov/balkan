@@ -28,16 +28,17 @@ class Invoice < ApplicationRecord
   end
 
   def issue_refund(amount, invoice_sequence:)
-    precondition invoice? && !manual?, "Cannot issue credit note"
+    precondition invoice?, "Cannot issue credit note"
 
     create_refund!(
       invoice_sequence:,
       number: invoice_sequence.next_invoice_number,
-      customer_name: order.name,
-      receiver_email: order.email,
-      customer_address: order.customer_address,
-      customer_country: order.customer_country,
-      customer_vat_idx: order.customer_vat_idx,
+      customer_name: customer_name || order&.name,
+      receiver_email: receiver_email || order&.email,
+      customer_address: customer_address || order&.customer_address,
+      customer_country: customer_country || order&.customer_country,
+      customer_vat_idx: customer_vat_idx || order&.customer_vat_idx,
+
       items_attributes: [
         {
           description_en: I18n.t("invoicing.refund_description", number: prefixed_number, locale: :en),

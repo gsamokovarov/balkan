@@ -426,13 +426,33 @@ RSpec.case Invoice do
     end
   end
 
-  test "issue_refund fails for manual invoices" do
+  test "issue_refund works for manual invoices" do
     invoice_sequence = create :invoice_sequence
-    manual_invoice = Invoice.create! invoice_sequence:, number: 1
+    credit_note_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
 
-    assert_raises Precondition::Error do
-      manual_invoice.issue_refund 50, invoice_sequence:
-    end
+    manual_invoice = Invoice.create!(
+      invoice_sequence:,
+      number: 1,
+      customer_name: "Manual Customer",
+      customer_address: "456 Manual St",
+      customer_country: "DE",
+      customer_vat_idx: "DE123456789",
+      receiver_email: "manual@example.com",
+    )
+    manual_invoice.items.create! description_en: "Service", description_bg: "Услуга", unit_price: 100
+
+    credit_note = manual_invoice.issue_refund 100, invoice_sequence: credit_note_sequence
+
+    assert_eq credit_note.credit_note?, true
+    assert_eq credit_note.refunded_invoice, manual_invoice
+    assert_eq credit_note.number, 90_000_001
+    assert_eq credit_note.customer_name, "Manual Customer"
+    assert_eq credit_note.customer_address, "456 Manual St"
+    assert_eq credit_note.customer_country, "DE"
+    assert_eq credit_note.customer_vat_idx, "DE123456789"
+    assert_eq credit_note.receiver_email, "manual@example.com"
+    assert_eq credit_note.items.first.unit_price, 100
+    assert_eq credit_note.items.first.description_en, "Refund for Invoice ##{manual_invoice.prefixed_number}"
   end
 
   def create_invoice_for_document_generation(
