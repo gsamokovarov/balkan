@@ -64,6 +64,16 @@ class Admin::InvoicesController < Admin::ApplicationController
     send_data @invoice.document(locale:), disposition: "inline", type: "application/pdf"
   end
 
+  def refund
+    @invoice = Invoice.find(params[:id])
+    invoice_sequence = InvoiceSequence.find(params[:invoice_sequence_id])
+    refunded_amount = params[:refunded_amount].to_d
+
+    @invoice.issue_refund(refunded_amount, invoice_sequence:)
+
+    redirect_to admin_invoice_path(@invoice), notice: "Credit note created"
+  end
+
   private
 
   def locale = params.fetch(:locale, I18n.locale)

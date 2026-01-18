@@ -39,7 +39,13 @@
 
     <%= f.text_area_input :notes %>
 
-    <%= f.submit %>
+    <div class="flex gap-3">
+      <%= f.submit %>
+
+      <% if invoice.persisted? && invoice.manual? && invoice.invoice? && !invoice.refunded? %>
+        <%= admin_button(:danger, type: :button, onclick: "refund_dialog.showModal()") { "Refund" } %>
+      <% end %>
+    </div>
   <% end %>
 
   <% if invoice.new_record? %>
@@ -49,3 +55,17 @@
     </div>
   <% end %>
 </div>
+
+<% if invoice.persisted? && invoice.manual? && invoice.invoice? && invoice.refund.nil? %>
+  <%= admin_modal :refund_dialog, "Refund invoice" do %>
+    <%= admin_form url: refund_admin_invoice_path(invoice), method: :post do |f| %>
+      <%= f.select_input :invoice_sequence_id, InvoiceSequence.all.map { [it.display_name, it.id] }, required: true, label: "Invoice Sequence" %>
+      <%= f.decimal_input :refunded_amount, required: true, value: invoice.total_amount, label: "Refunded Amount" %>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>
+        <%= f.submit "Refund" %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

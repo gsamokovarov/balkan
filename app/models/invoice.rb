@@ -9,9 +9,10 @@ class Invoice < ApplicationRecord
 
   accepts_nested_attributes_for :items
 
-  def credit_note? = refunded_invoice_id.present?
+  def credit_note? = !!refunded_invoice_id
   def invoice? = !credit_note?
   def manual? = order.nil?
+  def refunded? = !!refund
 
   validates :number, presence: true, strict: true
   validates :customer_country, inclusion: { in: Country.codes }, allow_nil: true

@@ -39,4 +39,35 @@ RSpec.case Admin::InvoicesController, type: :request do
 
     assert_have_http_status response, :redirect
   end
+
+  test "refund creates a credit note for manual invoice" do
+    create :event, :balkan2025
+    sign_in create(:user, name: "Admin", email: "admin@example.com", password: "password")
+
+    invoice_sequence = create :invoice_sequence
+    credit_note_sequence = create :invoice_sequence, name: "Credit Notes", initial_number: 90_000_001
+
+    invoice = Invoice.create!(
+      invoice_sequence:,
+      number: invoice_sequence.next_invoice_number,
+      customer_name: "Test Customer",
+      customer_address: "123 Test St",
+      customer_country: "BG",
+      receiver_email: "test@example.com",
+    )
+    invoice.items.create! description_en: "Service", description_bg: "Услуга", unit_price: 100
+
+    post refund_admin_invoice_path(invoice), params: {
+      invoice_sequence_id: credit_note_sequence.id,
+      refunded_amount: "100.00",
+    }
+
+    assert_have_http_status response, :redirect
+
+    credit_note = invoice.reload.refund
+    assert_eq credit_note.present?, true
+    assert_eq credit_note.credit_note?, true
+    assert_eq credit_note.customer_name, "Test Customer"
+    assert_eq credit_note.items.first.unit_price, 100
+  end
 end
