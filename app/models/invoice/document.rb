@@ -138,34 +138,30 @@ module Invoice::Document
 
       move_cursor_to grid([2, 0], [2, 0]).top_left[1]
 
-      items_table_data = [[t("items"), t("price")]] + line_items.map do |item|
-        [item.description.to_s, line_item_amount(item.price)]
-      end
+      table_style = { borders: [], padding: [2, 4], inline_format: true }
+      column_widths = [bounds.width * 0.5, bounds.width * 0.5]
 
-      table_width = bounds.width
-      table items_table_data, width: table_width, cell_style: { borders: [], padding: [2, 4] } do
+      items_data = [
+        [t("items"), t("price")],
+        *line_items.map { [it.description.to_s, line_item_amount(it.price)] },
+      ]
+
+      table items_data, column_widths:, cell_style: table_style do
         row(0).font_style = :bold
         row(0).size = 14
-        column(0).width = table_width * 0.50
       end
 
-      move_down 20
+      move_cursor_to bounds.bottom + 80
 
-      float do
-        text "<b>#{t 'payment_method'}</b>", inline_format: true
-        fit_text invoice.payment_method.presence || t("bank_payment"), width: bounds.width / 2
-      end
+      vat_label = invoice.includes_vat? ? t("vat") : t("vat_exempt")
+      footer_data = [
+        ["<b>#{t 'payment_method'}</b>", "#{t 'invoice_total'}: <b>#{invoice_amount.net_format}</b>"],
+        [invoice.payment_method.presence || t("bank_payment"), "#{vat_label}: <b>#{invoice_amount.tax_format}</b>"],
+        ["", "#{t 'total'}: <b>#{invoice_amount.gross_format}</b>"],
+      ]
+      footer_data << ["", "#{t 'total_eur'}: <b>#{invoice_amount.to_eur.gross_format}</b>"] if locale.to_sym == :bg
 
-      bounding_box [bounds.width / 2, cursor], width: bounds.width / 2 do
-        vat_label = invoice.includes_vat? ? t("vat") : t("vat_exempt")
-        text "#{t 'invoice_total'}: <b>#{invoice_amount.net_format}</b>", inline_format: true
-        text "#{vat_label}: <b>#{invoice_amount.tax_format}</b>", inline_format: true
-        text "#{t 'total'}: <b>#{invoice_amount.gross_format}</b>", inline_format: true
-
-        if locale.to_sym == :bg
-          text "#{t 'total_eur'}: <b>#{invoice_amount.to_eur.gross_format}</b>", inline_format: true
-        end
-      end
+      table footer_data, column_widths:, cell_style: table_style
     end
   end
 end
