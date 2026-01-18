@@ -191,6 +191,42 @@ RSpec.case Invoice do
     assert_pdf_content bg, "Генади Самоковаров"
   end
 
+  test "Euruko 2016 issuer in documents before 2017-07-10" do
+    invoice = create_invoice_for_document_generation(
+      name: "Test",
+      email: "test@example.com",
+      address: "Test",
+      country: "BG",
+      amount: "300".to_d,
+      ticket_count: 3,
+      created_at: DateTime.new(2016, 8, 9),
+    )
+
+    en = invoice.document locale: "en"
+    bg = invoice.document locale: "bg"
+
+    assert_pdf_content en, "Euruko 2016 Ltd.", "Svetlozar Todorov"
+    assert_pdf_content bg, "Еуруко 2016 ООД", "Светлозар Тодоров"
+  end
+
+  test "Svetlozar Todorov as МОЛ at NEUVENTS before 2019-06-03" do
+    invoice = create_invoice_for_document_generation(
+      name: "Test",
+      email: "test@example.com",
+      address: "Test",
+      country: "BG",
+      amount: "300".to_d,
+      ticket_count: 3,
+      created_at: DateTime.new(2018, 5, 1),
+    )
+
+    en = invoice.document locale: "en"
+    bg = invoice.document locale: "bg"
+
+    assert_pdf_content en, "NEUVENTS LTD", "Svetlozar Todorov"
+    assert_pdf_content bg, "НОЙВЕНТС ООД", "Светлозар Тодоров"
+  end
+
   test "manual? returns true when order is nil" do
     invoice_sequence = create :invoice_sequence
     invoice = Invoice.new invoice_sequence:, number: 1

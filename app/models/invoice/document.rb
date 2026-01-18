@@ -57,16 +57,37 @@ module Invoice::Document
     end
   end
 
-  class Template
-    GENADI_AS_CEO_DATE = Date.new 2024, 3, 12
+  class Issuer
+    PERIODS = [
+      { key: :euruko_2016, duration: Date.new(2016, 1, 1)..Date.new(2017, 7, 9) },
+      { key: :neuvents_todorov, duration: Date.new(2017, 7, 10)..Date.new(2019, 6, 2) },
+      { key: :neuvents_mihaylov, duration: Date.new(2019, 6, 3)..Date.new(2024, 3, 11) },
+      { key: :neuvents_genadi, duration: Date.new(2024, 3, 12).. },
+    ]
 
+    def initialize(date:, locale:)
+      @key = PERIODS.find { it[:duration].cover?(date) }.fetch(:key)
+      @locale = locale
+    end
+
+    def company_name = t(:company_name)
+    def address = t(:address)
+    def country = t(:country)
+    def company_id = t(:company_id)
+    def vat_id = t(:vat_id)
+    def ceo = t(:ceo)
+
+    private
+
+    def t(attr) = I18n.t("invoicing.issuers.#{@key}.#{attr}", locale: @locale)
+  end
+
+  class Template
     include Prawn::View
 
-    attr_reader :invoice, :invoice_amount, :customer_details, :line_items
+    attr_reader :invoice, :invoice_amount, :customer_details, :line_items, :issuer
 
-    def self.render(invoice, locale:, &)
-      new(invoice, locale:, &).render
-    end
+    def self.render(...) = new(...).render
 
     def initialize(invoice, locale:, &)
       @locale = locale
@@ -74,6 +95,7 @@ module Invoice::Document
       @invoice_amount = Amount.new invoice.total_amount, locale:, includes_vat: invoice.includes_vat
       @customer_details = invoice.customer_details(locale:)
       @line_items = invoice.line_items(locale:)
+      @issuer = Issuer.new(date: invoice.created_at.to_date, locale:)
 
       update(&)
     end
@@ -88,7 +110,6 @@ module Invoice::Document
     private
 
     def line_item_amount(price) = Amount.new(price, locale: @locale, includes_vat: invoice.includes_vat?).net_format
-    def genadi_ceo? = invoice.created_at.after? GENADI_AS_CEO_DATE
     def t(key, **) = I18n.t("invoicing.#{key}", **, locale: @locale)
   end
 
@@ -115,13 +136,13 @@ module Invoice::Document
 
       grid([0, 3], [0, 6]).bounding_box do
         text t("supplier"), size: 14, style: :bold
-        text t("neuvents.company_name")
-        text t("neuvents.address")
-        text t("neuvents.country")
+        text issuer.company_name
+        text issuer.address
+        text issuer.country
         move_down 10
-        text "<b>#{t 'company_id'}</b>: #{t 'neuvents.company_id'}", inline_format: true
-        text "<b>#{t 'vat_id'}</b>: #{t 'neuvents.vat_id'}", inline_format: true
-        text "<b>#{t 'ceo'}</b>: #{t(genadi_ceo? ? 'neuvents.genadi_ceo' : 'neuvents.svetli_ceo')}", inline_format: true
+        text "<b>#{t 'company_id'}</b>: #{issuer.company_id}", inline_format: true
+        text "<b>#{t 'vat_id'}</b>: #{issuer.vat_id}", inline_format: true
+        text "<b>#{t 'ceo'}</b>: #{issuer.ceo}", inline_format: true
       end
 
       grid([1, 0], [1, 3]).bounding_box do

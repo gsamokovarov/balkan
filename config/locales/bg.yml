@@ -25,11 +25,32 @@ bg:
     tickets:
       one: "%{type} билет"
       other: "%{count} × %{type} билета"
-    neuvents:
-      company_name: НОЙВЕНТС ООД
-      address: София, ул. Банат 3, ет. 1, ап. 3
-      country: България
-      company_id: 203844519
-      vat_id: BG203844519
-      genadi_ceo: Генади Самоковаров
-      svetli_ceo: Светлозар Михайлов
+    issuers:
+      euruko_2016:
+        company_name: Еуруко 2016 ООД
+        address: София, ул. Банат 3, ет. 1, ап. 3
+        country: България
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Светлозар Тодоров
+      neuvents_todorov:
+        company_name: НОЙВЕНТС ООД
+        address: София, ул. Банат 3, ет. 1, ап. 3
+        country: България
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Светлозар Тодоров
+      neuvents_mihaylov:
+        company_name: НОЙВЕНТС ООД
+        address: София, ул. Банат 3, ет. 1, ап. 3
+        country: България
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Светлозар Михайлов
+      neuvents_genadi:
+        company_name: НОЙВЕНТС ООД
+        address: София, ул. Банат 3, ет. 1, ап. 3
+        country: България
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Генади Самоковаров

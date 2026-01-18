@@ -25,11 +25,32 @@ en:
     tickets:
       one: "%{type} ticket"
       other: "%{count} × %{type} tickets"
-    neuvents:
-      company_name: NEUVENTS LTD
-      address: Sofia, Banat 3 str., floor 1, apt. 3
-      country: Bulgaria
-      company_id: 203844519
-      vat_id: BG203844519
-      genadi_ceo: Genadi Samokovarov
-      svetli_ceo: Svetlozar Mihaylov
+    issuers:
+      euruko_2016:
+        company_name: Euruko 2016 Ltd.
+        address: Sofia, Banat 3 str., floor 1, apt. 3
+        country: Bulgaria
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Svetlozar Todorov
+      neuvents_todorov:
+        company_name: NEUVENTS LTD
+        address: Sofia, Banat 3 str., floor 1, apt. 3
+        country: Bulgaria
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Svetlozar Todorov
+      neuvents_mihaylov:
+        company_name: NEUVENTS LTD
+        address: Sofia, Banat 3 str., floor 1, apt. 3
+        country: Bulgaria
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Svetlozar Mihaylov
+      neuvents_genadi:
+        company_name: NEUVENTS LTD
+        address: Sofia, Banat 3 str., floor 1, apt. 3
+        country: Bulgaria
+        company_id: "203844519"
+        vat_id: BG203844519
+        ceo: Genadi Samokovarov
