@@ -9,6 +9,14 @@ module MarkdownHelper
 
     INLINE_IMAGE_PLACEHOLDER = /\[(\d+)\]/
 
+    DEFAULT_EXTENSIONS = {
+      autolink: true,
+      tables: true,
+      strikethrough: true,
+      fenced_code_blocks: true,
+      disable_indented_code_blocks: true,
+    }
+
     class PlainTextRenderer < Redcarpet::Render::StripDown
       def paragraph(text) = "#{text}\n\n"
       def header(text, _header_level) = "#{text}\n\n"
@@ -29,7 +37,7 @@ module MarkdownHelper
     end
 
     def render_html(content, images: nil)
-      @html_renderer ||= Redcarpet::Markdown.new HTMLRenderer, autolink: true, tables: true, strikethrough: true
+      @html_renderer ||= Redcarpet::Markdown.new HTMLRenderer, **DEFAULT_EXTENSIONS
 
       if images
         content.gsub!(INLINE_IMAGE_PLACEHOLDER) { "![image #{it[1]}](#{Link.url_for images[it[1].to_i - 1]})" }
