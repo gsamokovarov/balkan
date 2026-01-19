@@ -18,7 +18,10 @@ module Markup
   end
 
   def render_html(content, images: nil)
-    @html_renderer ||= Redcarpet::Markdown.new HTMLRenderer, autolink: true, tables: true, strikethrough: true
+    @html_renderer ||= Redcarpet::Markdown.new HTMLRenderer, autolink: true,
+                                                             tables: true,
+                                                             strikethrough: true,
+                                                             fenced_code_blocks: true
 
     if images
       content.gsub!(INLINE_IMAGE_PLACEHOLDER { "![image #{it[1]}](#{Link.url_for images[it[1].to_i - 1]})" })
