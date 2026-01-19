@@ -4,7 +4,7 @@
   <meta property="og:title" content="<%= talk.name %> - <%= Current.event.name %>">
   <meta property="og:site_name" content="<%= Current.event.name %> - <%= Current.event.subtitle %>">
   <meta property="og:url" content="<%= talk_url(talk) %>">
-  <meta property="og:description" content="<%= talk.description.present? ? truncate(Markup.render_plain(talk.description), length: 160) : "#{talk.speaker_names} will be speaking at #{Current.event.name}!" %>">
+  <meta property="og:description" content="<%= talk.description.present? ? render_plain(truncate(talk.description, length: 160)) : "#{talk.speaker_names} will be speaking at #{Current.event.name}!" %>">
   <meta property="og:type" content="website">
   <meta property="og:image" content="<%= talk.ogp_image.attached? ? url_for(talk.ogp_image) : image_url("ogp_image.png") %>">
 
@@ -12,6 +12,6 @@
   <meta name="twitter:site" content="@balkanruby">
   <meta name="twitter:creator" content="@gsamokovarov">
   <meta name="twitter:title" content="<%= talk.name %> - <%= Current.event.name %>">
-  <meta name="twitter:description" content="<%= talk.description.present? ? truncate(Markup.render_plain(talk.description), length: 160) : "#{talk.speaker_names} will be speaking at #{Current.event.name}!" %>">
+  <meta name="twitter:description" content="<%= talk.description.present? ? render_plain(truncate(talk.description, length: 160)) : "#{talk.speaker_names} will be speaking at #{Current.event.name}!" %>">
   <meta name="twitter:image" content="<%= talk.ogp_image.attached? ? url_for(talk.ogp_image) : image_url("ogp_image.png") %>">
 <% end %>
