@@ -2,7 +2,7 @@
 <%= render "blogs/ogp", blog_post: @blog_post %>
 
 <%= render "section", title: @blog_post.title, title_element: "h1", highlight: true do %>
-  <article class="flex max-w-xl flex-col items-start justify-between">
+  <article class="flex w-full max-w-xl flex-col items-start justify-between">
     <div class="flex items-center text-lg">
       <time datetime="<%= @blog_post.date.iso8601 %>" class="text-gray-500">
         <%= @blog_post.date.strftime "%d %b %Y" %>

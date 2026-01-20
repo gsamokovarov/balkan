@@ -11,6 +11,6 @@
   end
 %>
 
-<div class="<%= variant_class %> max-w-prose <%= binding.local_variable_get :class %>">
+<div class="<%= variant_class %> w-full max-w-prose overflow-hidden <%= binding.local_variable_get :class %>">
   <%= yield %>
 </div>

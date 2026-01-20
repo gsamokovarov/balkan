@@ -32,7 +32,7 @@ module MarkdownHelper
           return %(<video class="max-w-full border-2 border-black rounded-md" controls><source src="#{link}"></video>)
         end
 
-        %(<img src="#{link}" title="#{title}" alt="#{alt}" class="max-w-full border-2 border-black rounded-md">)
+        %(<img src="#{link}" title="#{title}" alt="#{alt}" class="max-w-full h-auto border-2 border-black rounded-md">)
       end
     end
 
