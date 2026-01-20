@@ -29,10 +29,10 @@ module MarkdownHelper
 
       def image(link, title, alt)
         if link.end_with? ".mov", ".mp4", ".webm"
-          return %(<video class="border-2 border-black rounded-md" controls><source src="#{link}"></video>)
+          return %(<video class="max-w-full border-2 border-black rounded-md" controls><source src="#{link}"></video>)
         end
 
-        %(<img src="#{link}" title="#{title}" alt="#{alt}" class="border-2 border-black rounded-md">)
+        %(<img src="#{link}" title="#{title}" alt="#{alt}" class="max-w-full border-2 border-black rounded-md">)
       end
     end
 
