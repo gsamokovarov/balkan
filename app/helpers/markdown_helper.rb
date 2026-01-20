@@ -27,6 +27,10 @@ module MarkdownHelper
     class HTMLRenderer < Redcarpet::Render::HTML
       def link(link, title, content) = %(<a href="#{link}" title="#{title}" class="link-primary">#{content}</a>)
 
+      def block_code(code, language)
+        %(<pre class="overflow-x-auto"><code>#{ERB::Util.html_escape(code)}</code></pre>)
+      end
+
       def image(link, title, alt)
         if link.end_with? ".mov", ".mp4", ".webm"
           return %(<video class="max-w-full border-2 border-black rounded-md" controls><source src="#{link}"></video>)
