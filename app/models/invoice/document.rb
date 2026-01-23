@@ -19,13 +19,12 @@ module Invoice::Document
 
     attr_reader :gross, :net, :tax
 
-    def initialize(amount_in_eur, locale: :en, includes_vat: true)
+    def initialize(amount_in_eur, locale: :en, includes_vat: true, negate: false)
       @bulgarian = locale.to_sym == :bg
       @includes_vat = includes_vat
-
+      @negate = negate
       @amount_in_eur = amount_in_eur.to_d
       amount = round(@bulgarian ? eur_to_bgn(@amount_in_eur) : @amount_in_eur)
-
       if @includes_vat
         @gross = amount
         @net = round @gross / (1 + BULGARIAN_VAT)
@@ -41,7 +40,7 @@ module Invoice::Document
     def net_format = format net
     def tax_format = format tax
 
-    def to_eur = Amount.new(@amount_in_eur, locale: :en, includes_vat: @includes_vat)
+    def to_eur = Amount.new(@amount_in_eur, locale: :en, includes_vat: @includes_vat, negate: @negate)
 
     private
 
@@ -49,10 +48,11 @@ module Invoice::Document
     def eur_to_bgn(eur) = eur * EUR_TO_BGN_RATE
 
     def format(amount)
+      display_amount = @negate ? -amount : amount
       if @bulgarian
-        Kernel.format "%0.2f лв.", amount
+        Kernel.format "%0.2f лв.", display_amount
       else
-        Kernel.format "€%0.2f", amount
+        Kernel.format "€%0.2f", display_amount
       end
     end
   end
@@ -92,7 +92,7 @@ module Invoice::Document
     def initialize(invoice, locale:, &)
       @locale = locale
       @invoice = invoice
-      @invoice_amount = Amount.new invoice.total_amount, locale:, includes_vat: invoice.includes_vat
+      @invoice_amount = Amount.new invoice.total_amount, locale:, includes_vat: invoice.includes_vat, negate: invoice.credit_note?
       @customer_details = invoice.customer_details(locale:)
       @line_items = invoice.line_items(locale:)
       @issuer = Issuer.new(date: invoice.created_at.to_date, locale:)
@@ -109,7 +109,10 @@ module Invoice::Document
 
     private
 
-    def line_item_amount(price) = Amount.new(price, locale: @locale, includes_vat: invoice.includes_vat?).net_format
+    def line_item_amount(price)
+      Amount.new(price, locale: @locale, includes_vat: invoice.includes_vat?, negate: invoice.credit_note?).net_format
+    end
+
     def t(key, **) = I18n.t("invoicing.#{key}", **, locale: @locale)
   end
 
