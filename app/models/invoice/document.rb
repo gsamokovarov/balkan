@@ -16,15 +16,16 @@ module Invoice::Document
   class Amount
     EUR_TO_BGN_RATE = "1.95583".to_d
     BULGARIAN_VAT = "0.2".to_d
+    CURRENCY_FORMATS = { en: "€%0.2f", bg: "%0.2f лв." }.freeze
 
     attr_reader :gross, :net, :tax
 
     def initialize(amount_in_eur, locale: :en, includes_vat: true, negate: false)
-      @bulgarian = locale.to_sym == :bg
+      @locale = locale.to_sym
       @includes_vat = includes_vat
       @negate = negate
       @amount_in_eur = amount_in_eur.to_d
-      amount = round(@bulgarian ? eur_to_bgn(@amount_in_eur) : @amount_in_eur)
+      amount = round(@locale == :bg ? eur_to_bgn(@amount_in_eur) : @amount_in_eur)
       if @includes_vat
         @gross = amount
         @net = round @gross / (1 + BULGARIAN_VAT)
@@ -40,21 +41,13 @@ module Invoice::Document
     def net_format = format net
     def tax_format = format tax
 
-    def to_eur = Amount.new(@amount_in_eur, locale: :en, includes_vat: @includes_vat, negate: @negate)
+    def to_eur = @locale == :en ? self : Amount.new(@amount_in_eur, locale: :en, includes_vat: @includes_vat, negate: @negate)
 
     private
 
+    def format(amount) = CURRENCY_FORMATS[@locale] % (@negate ? -amount : amount)
     def round(amount) = amount.round 2, :half_even
     def eur_to_bgn(eur) = eur * EUR_TO_BGN_RATE
-
-    def format(amount)
-      display_amount = @negate ? -amount : amount
-      if @bulgarian
-        Kernel.format "%0.2f лв.", display_amount
-      else
-        Kernel.format "€%0.2f", display_amount
-      end
-    end
   end
 
   class Issuer
