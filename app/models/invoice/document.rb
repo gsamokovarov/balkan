@@ -14,40 +14,23 @@ module Invoice::Document
   }
 
   class Amount
-    EUR_TO_BGN_RATE = "1.95583".to_d
     BULGARIAN_VAT = "0.2".to_d
-    CURRENCY_FORMATS = { en: "€%0.2f", bg: "%0.2f лв." }.freeze
 
-    attr_reader :gross, :net, :tax
-
-    def initialize(amount_in_eur, locale: :en, includes_vat: true, negate: false)
-      @locale = locale.to_sym
-      @includes_vat = includes_vat
+    def initialize(amount_in_eur, includes_vat: true, negate: false)
       @negate = negate
-      @amount_in_eur = amount_in_eur.to_d
-      amount = round(@locale == :bg ? eur_to_bgn(@amount_in_eur) : @amount_in_eur)
-      if @includes_vat
-        @gross = amount
-        @net = round @gross / (1 + BULGARIAN_VAT)
-        @tax = round @gross - @net
-      else
-        @net = amount
-        @tax = 0
-        @gross = @net
-      end
+      @gross = amount_in_eur.to_d
+      @net = includes_vat ? round(@gross / (1 + BULGARIAN_VAT)) : @gross
+      @tax = includes_vat ? round(@gross - @net) : 0
     end
 
-    def gross_format = format gross
-    def net_format = format net
-    def tax_format = format tax
-
-    def to_eur = @locale == :en ? self : Amount.new(@amount_in_eur, locale: :en, includes_vat: @includes_vat, negate: @negate)
+    def gross_format = format @gross
+    def net_format = format @net
+    def tax_format = format @tax
 
     private
 
-    def format(amount) = CURRENCY_FORMATS[@locale] % (@negate ? -amount : amount)
     def round(amount) = amount.round 2, :half_even
-    def eur_to_bgn(eur) = eur * EUR_TO_BGN_RATE
+    def format(amount) = Kernel.format("€%0.2f", (@negate ? -amount : amount))
   end
 
   class Issuer
@@ -85,7 +68,7 @@ module Invoice::Document
     def initialize(invoice, locale:, &)
       @locale = locale
       @invoice = invoice
-      @invoice_amount = Amount.new invoice.total_amount, locale:, includes_vat: invoice.includes_vat, negate: invoice.credit_note?
+      @invoice_amount = Amount.new invoice.total_amount, includes_vat: invoice.includes_vat, negate: invoice.credit_note?
       @customer_details = invoice.customer_details(locale:)
       @line_items = invoice.line_items(locale:)
       @issuer = Issuer.new(date: invoice.created_at.to_date, locale:)
@@ -103,7 +86,7 @@ module Invoice::Document
     private
 
     def line_item_amount(price)
-      Amount.new(price, locale: @locale, includes_vat: invoice.includes_vat?, negate: invoice.credit_note?).net_format
+      Amount.new(price, includes_vat: invoice.includes_vat?, negate: invoice.credit_note?).net_format
     end
 
     def t(key, **) = I18n.t("invoicing.#{key}", **, locale: @locale)
@@ -168,7 +151,7 @@ module Invoice::Document
         row(0).size = 14
       end
 
-      move_cursor_to bounds.bottom + 80
+      move_cursor_to bounds.bottom + 60
 
       vat_label = invoice.includes_vat? ? t("vat") : t("vat_exempt")
       footer_data = [
@@ -176,8 +159,6 @@ module Invoice::Document
         [invoice.payment_method.presence || t("bank_payment"), "#{vat_label}: <b>#{invoice_amount.tax_format}</b>"],
         ["", "#{t 'total'}: <b>#{invoice_amount.gross_format}</b>"],
       ]
-      footer_data << ["", "#{t 'total_eur'}: <b>#{invoice_amount.to_eur.gross_format}</b>"] if locale.to_sym == :bg
-
       table footer_data, column_widths:, cell_style: table_style
     end
   end
