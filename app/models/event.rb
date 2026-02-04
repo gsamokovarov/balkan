@@ -6,7 +6,6 @@ class Event < ApplicationRecord
   has_many :orders
   has_many :ticket_types, -> { order :price }
   has_many :tickets, through: :orders
-  has_many :subscribers
   has_many :lineup_members
   has_many :blog_posts
   has_many :community_partners

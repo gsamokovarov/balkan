@@ -1,9 +1,6 @@
-<%# locals: (event:) -%>
-
 <%= turbo_frame_tag "newsletter" do %>
   <%= marketing_form scope: :subscriber, url: subscribers_path do |f| %>
     <%= f.email_input :email, required: true, autocomplete: "off" %>
-    <%= f.hidden_field :event_id, value: event.id %>
 
     <%= f.captcha %>
 
