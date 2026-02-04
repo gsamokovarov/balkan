@@ -13,8 +13,8 @@ RSpec.case CommunicationDraft do
     create(:lineup_member, event:, speaker: create(:speaker, email: "bob@example.com")).speaker
     create(:lineup_member, :pending, event:, speaker: create(:speaker, email: "charlie@example.com")).speaker
 
-    create :subscriber, event:, email: "subscriber1@example.com"
-    create :subscriber, event:, email: "subscriber2@example.com"
+    create :subscriber, email: "subscriber1@example.com"
+    create :subscriber, email: "subscriber2@example.com"
 
     ticket_type = create :ticket_type, event:, name: "Regular", price: 100
     order = create(:order, event:)
@@ -47,7 +47,7 @@ RSpec.case CommunicationDraft do
                                        content: "Message for speakers")
 
     create :lineup_member, event:, speaker: create(:speaker, email: "alice@example.com")
-    create :subscriber, event:, email: "subscriber@example.com"
+    create :subscriber, email: "subscriber@example.com"
 
     communication = draft.communications.new to_speakers: true, to_subscribers: false, to_event: false
     draft.deliver communication
