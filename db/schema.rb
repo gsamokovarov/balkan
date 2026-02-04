@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_17_173904) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_04_155842) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -308,12 +308,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_17_173904) do
   end
 
   create_table "subscribers", force: :cascade do |t|
-    t.bigint "event_id", null: false
     t.text "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_subscribers_on_email", unique: true
-    t.index ["event_id"], name: "index_subscribers_on_event_id"
   end
 
   create_table "talks", force: :cascade do |t|
@@ -399,7 +397,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_17_173904) do
   add_foreign_key "sponsorships", "events"
   add_foreign_key "sponsorships", "sponsors"
   add_foreign_key "sponsorships", "sponsorship_variants", column: "variant_id"
-  add_foreign_key "subscribers", "events"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "orders"
   add_foreign_key "tickets", "ticket_types"
