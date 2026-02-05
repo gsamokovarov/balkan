@@ -2,11 +2,11 @@
   <%= render_markdown @body %>
 </div>
 
-<% if @recipient.subscriber %>
+<% if @subscriber %>
   <hr />
 
   <p>
     If you don't want to receive more emails from us, you can
-    <%= link_to "unsubscribe", @recipient.subscriber.cancel_url, class: "link-primary" %> at any time.
+    <%= link_to "unsubscribe", @subscriber.cancel_url, class: "link-primary" %> at any time.
   </p>
 <% end %>
