@@ -1,8 +1,10 @@
 class CommunicationMailer < ApplicationMailer
-  def template_email(communication, recipient_email)
-    communication.interpolate_for(recipient_email) => { subject:, body: }
+  def template_email(communication, recipient)
+    communication.interpolate_for(recipient.email) => { subject:, body: }
+    @communication = communication
+    @recipient = recipient
     @body = body
 
-    mail to: recipient_email, subject:
+    mail to: recipient.email, subject:
   end
 end
