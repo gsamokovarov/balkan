@@ -15,7 +15,7 @@
   <% Current.event.sponsorship_packages.each do |package| %>
     <div class="space-y-6">
       <h2 class="text-2xl sm:text-3xl font-extrabold"><%= package.name %></h2>
-      <div class="grid grid-cols-1 grid-cols-2 gap-4 sm:gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <% package.variants.each do |variant| %>
           <%= render "package", variant: do %>
             <%= render_markdown variant.perks %>
