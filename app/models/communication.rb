@@ -7,7 +7,9 @@ class Communication < ApplicationRecord
 
   attr_accessor :to_speakers, :to_subscribers, :to_event
 
-  def interpolate_for(email) = draft.interpolate_for email
+  def to_speakers? = to_speakers && !to_speakers.in?(ActiveModel::Type::Boolean::FALSE_VALUES)
+  def to_subscribers? = to_subscribers && !to_subscribers.in?(ActiveModel::Type::Boolean::FALSE_VALUES)
+  def to_event? = to_event && !to_event.in?(ActiveModel::Type::Boolean::FALSE_VALUES)
 
   def deliver
     recipients.each do

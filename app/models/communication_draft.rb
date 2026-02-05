@@ -25,9 +25,9 @@ class CommunicationDraft < ApplicationRecord
 
   def deliver(communication)
     recipients = communication.recipients
-    recipients.build(event.tickets.map { { email: it.email } }) if communication.to_event
-    recipients.build(event.speakers.map { { email: it.email } }) if communication.to_speakers
-    recipients.build(Subscriber.all.map { { email: it.email } }) if communication.to_subscribers
+    recipients.build(event.tickets.map { { email: it.email } }) if communication.to_event?
+    recipients.build(event.speakers.map { { email: it.email } }) if communication.to_speakers?
+    recipients.build(Subscriber.all.map { { email: it.email } }) if communication.to_subscribers?
 
     communication.recipients = recipients.uniq { it.email.downcase }
     communication.save!
