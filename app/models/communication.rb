@@ -11,6 +11,8 @@ class Communication < ApplicationRecord
   def to_subscribers? = to_subscribers && !to_subscribers.in?(ActiveModel::Type::Boolean::FALSE_VALUES)
   def to_event? = to_event && !to_event.in?(ActiveModel::Type::Boolean::FALSE_VALUES)
 
+  def interpolate_for(email) = draft.interpolate_for email
+
   def deliver
     recipients.each do
       CommunicationMailer.template_email(self, it.email).deliver_later
