@@ -1,0 +1,8 @@
+<%# locals: (proposals:) %>
+
+<%= admin_table proposals do
+  column "#",    -> { link_to it.id, admin_event_proposal_path(Current.event, it) }
+  column :name,  -> { link_to it.name, admin_event_proposal_path(Current.event, it) }
+  column :email
+  column :title, -> { truncate it.title, length: 40 }
+end %>

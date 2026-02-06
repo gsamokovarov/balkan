@@ -1,0 +1,18 @@
+<%# locals: (proposal:) %>
+
+<%= turbo_frame_tag "proposal" do %>
+  <%= marketing_form model: proposal, url: proposals_path do |f| %>
+    <%= f.text_input :name, required: true %>
+    <%= f.email_input :email, required: true %>
+    <%= f.text_area_input :bio %>
+    <%= f.text_input :social_url %>
+    <%= f.text_input :title, required: true %>
+    <%= f.text_area_input :description %>
+
+    <%= f.captcha %>
+
+    <%= f.submit do %>
+      <span>Submit proposal</span>
+    <% end %>
+  <% end %>
+<% end %>

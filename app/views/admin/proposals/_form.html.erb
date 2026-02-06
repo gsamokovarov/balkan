@@ -1,0 +1,11 @@
+<%# locals: (proposal:) %>
+
+<%= admin_form [:admin, Current.event, proposal] do |f| %>
+  <%= f.text_input :name %>
+  <%= f.text_input :email %>
+  <%= f.text_area_input :bio %>
+  <%= f.text_input :social_url %>
+  <%= f.text_input :title %>
+  <%= f.text_area_input :description %>
+  <%= f.submit %>
+<% end %>

@@ -28,6 +28,12 @@ module FormHelper
       end
     end
 
+    def text_area_input(method, label: method, required: false, **, &addendum)
+      input_for method, label:, required:, addendum: do
+        text_area method, class: field_classes, required:, **
+      end
+    end
+
     def select_input(method, choices, label: method, required: false, **options, &addendum)
       input_for method, label:, required:, addendum: do
         select method, choices, options, required:, class: field_classes

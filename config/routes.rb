@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
   resource :apply, only: [:show]
+  resources :proposals, only: [:new, :create]
 
   namespace :webhooks do
     resource :stripe, only: [:create]
@@ -73,6 +74,7 @@ Rails.application.routes.draw do
         end
       end
       resources :communications, only: [:index, :show, :new, :create]
+      resources :proposals, only: [:index, :show, :edit, :update]
     end
     resources :speakers, only: [:index, :show, :new, :create, :edit, :update]
     resources :sponsors, only: [:index, :show, :new, :create, :edit, :update]

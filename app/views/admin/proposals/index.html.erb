@@ -1,0 +1,10 @@
+<%= section_navigation :program %>
+
+<%= render "section", title: "Proposals" do %>
+  <% if @proposals.any? %>
+    <%= render "proposals", proposals: @proposals %>
+    <%= admin_paginate @proposals %>
+  <% else %>
+    <%= render "empty_state" %>
+  <% end %>
+<% end %>
