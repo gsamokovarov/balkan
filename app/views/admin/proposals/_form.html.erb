@@ -7,5 +7,6 @@
   <%= f.text_input :social_url %>
   <%= f.text_input :title %>
   <%= f.text_area_input :description %>
+  <%= f.enum_input :status, Proposal.statuses %>
   <%= f.submit %>
 <% end %>

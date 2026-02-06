@@ -74,7 +74,13 @@ Rails.application.routes.draw do
         end
       end
       resources :communications, only: [:index, :show, :new, :create]
-      resources :proposals, only: [:index, :show, :edit, :update]
+      resources :proposals, only: [:index, :show, :edit, :update] do
+        member do
+          post :accept
+          post :decline
+          post :like
+        end
+      end
     end
     resources :speakers, only: [:index, :show, :new, :create, :edit, :update]
     resources :sponsors, only: [:index, :show, :new, :create, :edit, :update]
