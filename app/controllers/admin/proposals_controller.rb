@@ -1,6 +1,8 @@
 class Admin::ProposalsController < Admin::ApplicationController
   def index
-    @proposals = scope event.proposals
+    proposals = event.proposals
+    proposals = proposals.where(liked: true) if params[:filter] == "starred"
+    @proposals = scope proposals
   end
 
   def show
