@@ -2,7 +2,7 @@ class ProposalMailer < ApplicationMailer
   def selected(proposal)
     @proposal = proposal
 
-    mail to: @proposal.email, subject: "Your talk has been selected for #{proposal.event.name}"
+    mail to: @proposal.email, subject: "Your talk has been accepted for #{proposal.event.name}"
   end
 
   def waitlisted(proposal)

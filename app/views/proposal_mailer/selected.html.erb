@@ -1,22 +1,66 @@
 <div class="w-prose">
   <p class="pb-2">
-    Hi <%= first_name @proposal.name %>,
+    Dear <%= @proposal.name %>,
   </p>
 
   <p class="pb-2">
-    Great news! Your talk "<%= @proposal.title %>" has been selected for
-    <%= @proposal.event.name %>. We loved your proposal and can't wait to
-    have you on stage!
+    Thank you for proposing the presentation: "<%= @proposal.title %>".
+    It has been accepted as one of the talks for <%= @proposal.event.name %>!
   </p>
 
   <p class="pb-2">
-    I'll follow up soon with more details about the schedule, travel, and
-    logistics. In the meantime, please confirm that you're still available
-    by replying to this email.
+    What we need you to do right now:
   </p>
 
   <p class="pb-2">
-    Best regards,<br>
+    1) Reply to this email and confirm that:
+  </p>
+
+  <p class="pb-2">
+    a) you will be present to give this talk at <%= @proposal.event.name %><br>
+    b) you consent to your presentation being recorded and published (we may skip the video of the talk if you insist)<br>
+    c) you have read and will follow the <a href="http://berlincodeofconduct.org">Code of Conduct</a>
+  </p>
+
+  <p class="pb-2">
+    Confirm those three things via a reply to this email within two weeks.
+    If we do not hear from you by then, we may need to offer the slot to
+    another speaker.
+  </p>
+
+  <p class="pb-2">
+    2) Describe any desired edits for your talk description &amp; bio, and
+    provide us with a photo that we'll be listing on the website:
+  </p>
+
+  <p class="pb-2">
+    [Talk Summary]<br>
+    [Speaker Bio]<br>
+    [Speaker Photo]
+  </p>
+
+  <p class="pb-2">
+    3) Please wait until we announce you as a speaker before doing it
+    yourself. Not every proposal submitter has responded to us. We will
+    announce on social media once the lineup is complete.
+  </p>
+
+  <p class="pb-2">
+    4) We want to ask if your employer can cover your expenses. If so, we
+    will list them as a travel sponsor on our website. Otherwise, we'll be
+    happy to cover them ourselves. We'll need the location from which
+    you'll be traveling. If you need a visa, give us a heads up and we'll
+    help you with the paperwork.
+  </p>
+
+  <p class="pb-2">
+    We will get back to you with further information on the schedule and
+    the speakers' infrastructure. If you have any questions, please respond
+    to this email.
+  </p>
+
+  <p class="pb-2">
+    Sincerely,<br>
     Genadi Samokovarov
   </p>
 </div>
