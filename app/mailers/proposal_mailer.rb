@@ -1,4 +1,10 @@
 class ProposalMailer < ApplicationMailer
+  def submitted(proposal)
+    @proposal = proposal
+
+    mail to: @proposal.email, subject: "Your #{proposal.event.name} proposal has been received"
+  end
+
   def selected(proposal)
     @proposal = proposal
 

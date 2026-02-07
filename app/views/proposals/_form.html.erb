@@ -1,7 +1,7 @@
 <%# locals: (proposal:) %>
 
 <%= turbo_frame_tag "proposal" do %>
-  <%= marketing_form model: proposal, url: proposals_path do |f| %>
+  <%= marketing_form model: proposal, url: (proposal.access_url unless proposal.new_record?) do |f| %>
     <%= f.text_input :name, required: true %>
     <%= f.email_input :email, required: true %>
     <%= f.text_area_input :bio %>
@@ -9,10 +9,8 @@
     <%= f.text_input :title, required: true %>
     <%= f.text_area_input :description %>
 
-    <%= f.captcha %>
+    <%= f.captcha if proposal.new_record? %>
 
-    <%= f.submit do %>
-      <span>Submit proposal</span>
-    <% end %>
+    <%= f.submit(proposal.new_record? ? "Submit" : "Update") %>
   <% end %>
 <% end %>
