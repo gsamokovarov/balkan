@@ -80,6 +80,10 @@ Rails.application.routes.draw do
           post :decline
           post :like
         end
+        collection do
+          post :select
+          post :waitlist
+        end
       end
     end
     resources :speakers, only: [:index, :show, :new, :create, :edit, :update]

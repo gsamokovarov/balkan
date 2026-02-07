@@ -1,9 +1,18 @@
 <%= section_navigation :program %>
 
-<%= render "section", title: "Proposals" do %>
+<%= render "section", title: "Proposals", cta: -> {
+  if @filter == "accepted" && Current.event.proposals.accepted.where(notified_at: nil).any?
+    admin_button(:primary, post: select_admin_event_proposals_path(Current.event)) { "Notify all" }
+  elsif @filter == "pending" && Current.event.proposals.pending.where(notified_at: nil).any?
+    admin_button(:danger, post: waitlist_admin_event_proposals_path(Current.event)) { "Notify all" }
+  end
+} do %>
   <%= render "pills", pills: [
     { name: "All", path: admin_event_proposals_path(Current.event) },
     { name: "Starred", path: admin_event_proposals_path(Current.event, filter: :starred) },
+    { name: "Waitinglist", path: admin_event_proposals_path(Current.event, filter: :pending) },
+    { name: "Declined", path: admin_event_proposals_path(Current.event, filter: :declined) },
+    { name: "Accepted", path: admin_event_proposals_path(Current.event, filter: :accepted) },
   ] %>
 
   <% if @proposals.any? %>

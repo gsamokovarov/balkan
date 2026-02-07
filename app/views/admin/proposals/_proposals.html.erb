@@ -1,11 +1,24 @@
 <%# locals: (proposals:) %>
 
 <%= admin_table proposals do
-  column "#",     -> { link_to it.id, admin_event_proposal_path(Current.event, it) }
-  column :name,   -> { link_to it.name, admin_event_proposal_path(Current.event, it) }
+  column "#",     -> { link_to it.id, [:admin, it.event, it] }
+  column :name,   -> { link_to it.name, [:admin, it.event, it] }
   column :email,  -> { truncate it.email, length: 30 }
   column :title,  -> { truncate it.title, length: 40 }
-  column :status, -> { it.status.humanize }
+
+  column :status do |proposal|
+    link_to [:admin, proposal.event, proposal] do
+      if proposal.declined?
+        admin_badge :danger, proposal.status.humanize
+      elsif proposal.accepted?
+        admin_badge :success, proposal.status.humanize
+      elsif proposal.notified?
+        admin_badge :primary, proposal.status.humanize
+      else
+        admin_badge :warning, proposal.status.humanize
+      end
+    end
+  end
 
   column do
     if it.liked?
@@ -24,6 +37,12 @@
       admin_button(:primary, :small, post: accept_admin_event_proposal_path(Current.event, it)) { <<~SVG.html_safe }
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
           <path d="M7.493 18.5c-.425 0-.82-.236-.975-.632A7.48 7.48 0 0 1 6 15.125c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V3a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23h-.777ZM2.331 10.727a.75.75 0 0 1 .75-.75h.758a.75.75 0 0 1 .75.75v6.696a.75.75 0 0 1-.75.75h-.758a.75.75 0 0 1-.75-.75v-6.696Z" />
+        </svg>
+      SVG
+    end + if it.accepted?
+      admin_button(:danger, :small, post: decline_admin_event_proposal_path(Current.event, it)) { <<~SVG.html_safe }
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+          <path d="M15.73 5.5h1.035A7.984 7.984 0 0 1 18 9.625c0 .768-.108 1.51-.311 2.243A7.48 7.48 0 0 1 17.507 14c-.425 0-.82.236-.975.632-.151.386-.373.786-.6.975-.473.183-.89.514-1.212.924a9.042 9.042 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.498 4.498 0 0 0-.322 1.672V21a.75.75 0 0 1-.75.75 2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521.388-.482.987-.729 1.605-.729H9.77c.483 0 .964.078 1.423.23l3.114 1.04a4.501 4.501 0 0 0 1.423.23ZM21.669 13.773a.75.75 0 0 1-.75.75h-.758a.75.75 0 0 1-.75-.75V7.077a.75.75 0 0 1 .75-.75h.758a.75.75 0 0 1 .75.75v6.696Z" />
         </svg>
       SVG
     end
