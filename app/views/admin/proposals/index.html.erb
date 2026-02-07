@@ -1,22 +1,10 @@
 <%= section_navigation :program %>
 
 <%= render "section", title: "Proposals" do %>
-  <nav class="flex gap-2 mb-6">
-    <%
-      pills = [
-        { name: "All", path: admin_event_proposals_path(Current.event) },
-        { name: "Starred", path: admin_event_proposals_path(Current.event, filter: :starred) },
-      ]
-    %>
-    <% pills.each do |pill| %>
-      <%= link_to pill[:name], pill[:path], class: [
-        "rounded-full px-3 py-1 text-sm font-medium",
-        current_page?(pill[:path], check_parameters: true) ?
-          "bg-indigo-600 text-white" :
-          "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-      ] %>
-    <% end %>
-  </nav>
+  <%= render "pills", pills: [
+    { name: "All", path: admin_event_proposals_path(Current.event) },
+    { name: "Starred", path: admin_event_proposals_path(Current.event, filter: :starred) },
+  ] %>
 
   <% if @proposals.any? %>
     <%= render "proposals", proposals: @proposals %>
