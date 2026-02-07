@@ -1,0 +1,5 @@
+class AddNotifiedAtToProposals < ActiveRecord::Migration[8.0]
+  def change
+    add_column :proposals, :notified_at, :datetime
+  end
+end
