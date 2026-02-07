@@ -4,11 +4,16 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    if HCaptcha.valid? params
-      @proposal = Current.event.proposals.create proposal_params
-      ProposalMailer.submitted(@proposal).deliver_later if @proposal.persisted?
+    unless HCaptcha.valid? params
+      return redirect_back_or_to root_path, alert: "Verify you're not a robot"
+    end
+
+    @proposal = Current.event.proposals.new proposal_params
+
+    if @proposal.save
+      ProposalMailer.submitted(@proposal).deliver_later
     else
-      redirect_back_or_to root_path, alert: "Verify you're not a robot"
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -22,7 +27,7 @@ class ProposalsController < ApplicationController
     if @proposal.update proposal_params
       redirect_to @proposal.access_url, notice: "Proposal updated"
     else
-      render :show
+      render :show, status: :unprocessable_entity
     end
   end
 
