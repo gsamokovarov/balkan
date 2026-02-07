@@ -1,5 +1,9 @@
 <% title "Edit Proposal" %>
 
 <%= render "section", title: "Edit Proposal", title_element: "h1" do %>
-  <%= render "proposals/form", proposal: @proposal %>
+  <% if Current.event.speaker_applications_end_date.future? %>
+    <%= render "proposals/form", proposal: @proposal %>
+  <% else %>
+    <%= render "proposals/closed" %>
+  <% end %>
 <% end %>
