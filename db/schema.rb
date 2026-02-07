@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_06_212201) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_07_081120) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -235,6 +235,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_06_212201) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.boolean "liked", default: false
+    t.datetime "notified_at"
     t.index ["event_id"], name: "index_proposals_on_event_id"
   end
 
