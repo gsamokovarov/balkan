@@ -12,9 +12,9 @@ module Admin::NavigationHelper
       program: {
         name: "Program",
         tabs: [
-          { name: "Proposals", path: admin_event_proposals_path(Current.event) },
           { name: "Lineup members", path: admin_event_lineup_members_path(Current.event) },
           { name: "Schedule", path: admin_event_schedule_path(Current.event) },
+          { name: "Proposals", path: admin_event_proposals_path(Current.event) },
           { name: "Speakers", path: admin_speakers_path, global: true },
           { name: "Talks", path: admin_talks_path, global: true },
         ],
