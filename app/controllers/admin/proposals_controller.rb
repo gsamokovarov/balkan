@@ -77,6 +77,6 @@ class Admin::ProposalsController < Admin::ApplicationController
 
   private
 
-  def proposal_params = params.require(:proposal).permit(:name, :email, :bio, :social_url, :title, :description, :status, :liked)
+  def proposal_params = params.require(:proposal).permit(:name, :email, :bio, :company, :location, :social_url, :github_url, :title, :description, :notes, :status, :liked)
   def event = Event.find(params[:event_id])
 end
