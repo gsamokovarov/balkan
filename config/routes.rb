@@ -83,6 +83,7 @@ Rails.application.routes.draw do
         collection do
           post :select
           post :waitlist
+          post :import
         end
       end
     end

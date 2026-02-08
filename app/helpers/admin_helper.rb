@@ -27,7 +27,7 @@ module AdminHelper
     medium: "px-3 py-2 text-sm",
   }
 
-  def admin_button(variant, size = :medium, link: false, delete: nil, post: nil, **options, &)
+  def admin_button(variant, size = :medium, link: false, delete: nil, post: nil, import: nil, **options, &)
     classes = [
       "inline-block rounded-md text-center font-semibold shadow-sm",
       "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
@@ -42,6 +42,13 @@ module AdminHelper
     elsif post
       button_to(post, class: classes, form_class: "m-0",
                       data: { turbo_confirm: "Are you sure?" }, **options, &)
+    elsif import
+      form_with url: import, multipart: true, class: "inline-flex m-0" do |f|
+        safe_join [
+          f.file_field(:file, accept: ".csv", class: "hidden", onchange: "this.form.submit()"),
+          tag.button(type: "button", class: classes, onclick: "this.closest('form').querySelector('input[type=file]').click()", &),
+        ]
+      end
     elsif link
       tag.a(**options, href: link, class: classes, &)
     else

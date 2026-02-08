@@ -75,6 +75,12 @@ class Admin::ProposalsController < Admin::ApplicationController
     redirect_to admin_event_proposals_path(filter: :pending), notice: "Waitlisted #{proposals.size} proposals"
   end
 
+  def import
+    count = Proposal::Importer.import event, params[:file].read
+
+    redirect_to admin_event_proposals_path, notice: "Imported #{count} proposals"
+  end
+
   private
 
   def proposal_params = params.require(:proposal).permit(:name, :email, :bio, :company, :location, :social_url, :github_url, :title, :description, :notes, :status, :liked)
