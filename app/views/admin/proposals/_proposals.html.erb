@@ -1,10 +1,10 @@
 <%# locals: (proposals:) %>
 
 <%= admin_table proposals do
-  column "#",     -> { link_to it.id, [:admin, it.event, it] }
-  column :name,   -> { link_to truncate(it.name, length: 20), [:admin, it.event, it] }
-  column :email,  -> { truncate it.email, length: 25 }
-  column :title,  -> { truncate it.title, length: 40 }
+  column "#",    -> { link_to it.id, [:admin, it.event, it] }
+  column :name,  -> { link_to truncate(it.name, length: 20), [:admin, it.event, it] }
+  column :email, -> { truncate it.email, length: 25 }
+  column :title, -> { tag.span truncate(it.title, length: 40), title: it.description }
 
   column :status do |proposal|
     link_to [:admin, proposal.event, proposal] do
