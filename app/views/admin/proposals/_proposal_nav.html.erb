@@ -1,0 +1,11 @@
+<%# locals: (workingset:, filter: nil) %>
+
+<div class="sticky top-0 z-1 flex items-center justify-end gap-4 mb-4 py-2 text-sm">
+  <% if workingset.prev %>
+    <%= admin_button(:secondary, :small, link: admin_event_proposal_path(Current.event, workingset.prev, filter: filter)) { "\u2190 Prev" } %>
+  <% end %>
+  <span class="text-gray-500 tabular-nums min-w-13 text-center"><%= workingset.position %> / <%= workingset.total %></span>
+  <% if workingset.next %>
+    <%= admin_button(:secondary, :small, link: admin_event_proposal_path(Current.event, workingset.next, filter: filter)) { "Next \u2192" } %>
+  <% end %>
+</div>

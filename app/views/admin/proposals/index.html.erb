@@ -18,7 +18,7 @@
   ] %>
 
   <% if @proposals.any? %>
-    <%= render "proposals", proposals: @proposals %>
+    <%= render "proposals", proposals: @proposals, filter: @filter %>
     <%= admin_paginate @proposals %>
   <% else %>
     <%= render "empty_state" %>

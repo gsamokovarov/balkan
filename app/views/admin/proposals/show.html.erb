@@ -1,3 +1,5 @@
+<%= render "proposal_nav", workingset: @workingset, filter: @filter %>
+
 <%= render "section", title: @proposal.title do %>
   <%= render "form", proposal: @proposal %>
 <% end %>

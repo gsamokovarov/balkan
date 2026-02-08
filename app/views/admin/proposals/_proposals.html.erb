@@ -1,13 +1,13 @@
-<%# locals: (proposals:) %>
+<%# locals: (proposals:, filter: nil) %>
 
 <%= admin_table proposals do
-  column "#",    -> { link_to it.id, [:admin, it.event, it] }
-  column :name,  -> { link_to truncate(it.name, length: 20), [:admin, it.event, it] }
+  column "#",    -> { link_to it.id, [:admin, it.event, it, filter: filter] }
+  column :name,  -> { link_to truncate(it.name, length: 20), [:admin, it.event, it, filter: filter] }
   column :email, -> { truncate it.email, length: 25 }
   column :title, -> { tag.span truncate(it.title, length: 40), title: it.description }
 
   column :status do |proposal|
-    link_to [:admin, proposal.event, proposal] do
+    link_to [:admin, proposal.event, proposal, { filter: filter }] do
       if proposal.declined?
         admin_badge :danger, proposal.status.humanize
       elsif proposal.accepted?

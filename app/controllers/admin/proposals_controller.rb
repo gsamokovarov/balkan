@@ -1,33 +1,30 @@
 class Admin::ProposalsController < Admin::ApplicationController
   def index
-    proposals = event.proposals
-
-    case params[:filter]
-    when "starred"  then proposals = proposals.where(liked: true)
-    when "accepted" then proposals = proposals.accepted
-    when "pending"  then proposals = proposals.pending
-    when "declined" then proposals = proposals.declined
-    end
-
     @filter = params[:filter]
-    @proposals = scope proposals
+    @proposals = scope filtered_proposals
   end
 
   def show
     @proposal = event.proposals.find params[:id]
+    @filter = params[:filter]
+    @workingset = Admin::Workingset.new(filtered_proposals.order(id: :desc), @proposal)
   end
 
   def edit
     @proposal = event.proposals.find params[:id]
+    @filter = params[:filter]
+    @workingset = Admin::Workingset.new(filtered_proposals.order(id: :desc), @proposal)
     render :show
   end
 
   def update
     @proposal = event.proposals.find params[:id]
+    @filter = params[:filter]
 
     if @proposal.update proposal_params
       redirect_to admin_event_proposals_path, notice: "Proposal updated"
     else
+      @workingset = Admin::Workingset.new(filtered_proposals.order(id: :desc), @proposal)
       render :show
     end
   end
@@ -82,6 +79,17 @@ class Admin::ProposalsController < Admin::ApplicationController
   end
 
   private
+
+  def filtered_proposals
+    proposals = event.proposals
+    case params[:filter]
+    when "starred"  then proposals.where(liked: true)
+    when "accepted" then proposals.accepted
+    when "pending"  then proposals.pending
+    when "declined" then proposals.declined
+    else proposals
+    end
+  end
 
   def proposal_params = params.require(:proposal).permit(:name, :email, :bio, :company, :location, :social_url, :github_url, :title, :description, :notes, :status, :liked)
   def event = Event.find(params[:event_id])
