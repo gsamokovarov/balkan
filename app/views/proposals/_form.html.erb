@@ -1,20 +1,22 @@
-<%# locals: (proposal:) %>
+<%# locals: (proposal:, readonly: false) %>
 
 <%= turbo_frame_tag "proposal" do %>
   <%= marketing_form model: proposal, url: (proposal.access_url unless proposal.new_record?) do |f| %>
-    <%= f.text_input :name, required: true %>
-    <%= f.email_input :email, required: true %>
-    <%= f.text_area_input :bio %>
-    <%= f.text_input :company %>
-    <%= f.text_input :location %>
-    <%= f.text_input :social_url %>
-    <%= f.text_input :github_url %>
-    <%= f.text_input :title, required: true %>
-    <%= f.text_area_input :description %>
-    <%= f.text_area_input :notes %>
+    <%= f.text_input :name, required: true, disabled: readonly %>
+    <%= f.email_input :email, required: true, disabled: readonly %>
+    <%= f.text_area_input :bio, disabled: readonly %>
+    <%= f.text_input :company, disabled: readonly %>
+    <%= f.text_input :location, disabled: readonly %>
+    <%= f.text_input :social_url, disabled: readonly %>
+    <%= f.text_input :github_url, disabled: readonly %>
+    <%= f.text_input :title, required: true, disabled: readonly %>
+    <%= f.text_area_input :description, disabled: readonly %>
+    <%= f.text_area_input :notes, disabled: readonly %>
 
-    <%= f.captcha if proposal.new_record? %>
+    <% unless readonly %>
+      <%= f.captcha if proposal.new_record? %>
 
-    <%= f.submit(proposal.new_record? ? "Submit" : "Update") %>
+      <%= f.submit(proposal.new_record? ? "Submit" : "Update") %>
+    <% end %>
   <% end %>
 <% end %>

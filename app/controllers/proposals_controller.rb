@@ -26,9 +26,7 @@ class ProposalsController < ApplicationController
   def update
     @proposal = Proposal.find_by_token_for! :access, params[:id]
 
-    if @proposal.update proposal_params
-      redirect_to @proposal.access_url, notice: "Proposal updated"
-    else
+    unless @proposal.update proposal_params
       render :show, status: :unprocessable_entity
     end
   end
