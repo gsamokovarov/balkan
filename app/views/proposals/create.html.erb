@@ -1,6 +1,6 @@
-<% title "Call for Proposals" %>
+<% title "Speak at #{Current.event.name}" %>
 
-<%= render "section", title: "Call for Proposals", title_element: "h1" do %>
+<%= render "section", title: "Speak at #{Current.event.name}", title_element: "h1" do %>
   <%= turbo_frame_tag "proposal" do %>
     <%= render "prose", class: "my-10" do %>
       <p>

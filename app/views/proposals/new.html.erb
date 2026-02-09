@@ -1,6 +1,6 @@
-<% title "Call for Proposals" %>
+<% title "Speak at #{Current.event.name}" %>
 
-<%= render "section", title: "Call for Proposals", title_element: "h1", highlight: true do %>
+<%= render "section", title: "Speak at #{Current.event.name}", title_element: "h1", highlight: true do %>
   <% if Current.event.speaker_applications_end_date.future? %>
     <%= render "proposals/form", proposal: @proposal %>
   <% else %>
