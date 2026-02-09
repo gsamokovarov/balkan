@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   resources :blogs, only: [:index, :show]
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
-  resource :apply, only: [:show]
   resources :proposals, only: [:new, :create, :show, :update]
+  get "apply", to: redirect("/proposals/new")
 
   namespace :webhooks do
     resource :stripe, only: [:create]

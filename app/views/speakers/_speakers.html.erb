@@ -7,7 +7,7 @@
     <% end %>
 
     <% if Current.event.accepts_speaking_applications? %>
-      <%= link_to Current.event.speaker_applications_url, class: "rounded-md transition ease-in-out h-min hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1 hover:scale-110 hover:z-10" do %>
+      <%= link_to new_proposal_path, class: "rounded-md transition ease-in-out h-min hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1 hover:scale-110 hover:z-10" do %>
         <%= render "avatar_card", title: "You", subtitle: "Apply" %>
       <% end %>
     <% end %>
