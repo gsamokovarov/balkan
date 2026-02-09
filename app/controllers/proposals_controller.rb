@@ -4,7 +4,7 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    precondition Current.event.speaker_applications_end_date.future?
+    precondition Current.event.accepts_speaking_applications?
 
     unless HCaptcha.valid? params
       return redirect_back_or_to root_path, alert: "Verify you're not a robot"
