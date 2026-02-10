@@ -5,7 +5,7 @@
 <% end %>
 
 <%= render "section", title: "Actions" do %>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-2 p-2">
     <% if @proposal.liked? %>
       <%= admin_button(:secondary, post: like_admin_event_proposal_path(Current.event, @proposal)) { "Unstar" } %>
     <% else %>
