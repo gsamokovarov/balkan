@@ -1,11 +1,19 @@
 <%# locals: (workingset:, filter: nil) %>
 
-<div class="sticky top-0 z-1 flex items-center justify-end gap-4 mb-4 py-2 text-sm">
-  <% if workingset.prev %>
-    <%= admin_button(:secondary, :small, link: admin_event_proposal_path(Current.event, workingset.prev, filter: filter)) { "\u2190 Prev" } %>
+<div class="sticky top-0 z-1 flex items-center gap-4 mb-4 py-4 text-sm bg-white dark:bg-gray-900">
+  <%= admin_button(:secondary, :small, link: admin_event_proposals_path(Current.event, filter: filter)) do %>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+      <path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+    </svg>
   <% end %>
-  <span class="text-gray-500 tabular-nums min-w-13 text-center"><%= workingset.position %> / <%= workingset.total %></span>
-  <% if workingset.next %>
-    <%= admin_button(:secondary, :small, link: admin_event_proposal_path(Current.event, workingset.next, filter: filter)) { "Next \u2192" } %>
-  <% end %>
+
+  <div class="flex items-center justify-end gap-2 ml-auto">
+    <% if workingset.prev %>
+      <%= admin_button(:secondary, :small, link: admin_event_proposal_path(Current.event, workingset.prev, filter: filter)) { "\u2190 Prev" } %>
+    <% end %>
+    <span class="text-gray-500 tabular-nums min-w-13 text-center"><%= workingset.position %> / <%= workingset.total %></span>
+    <% if workingset.next %>
+      <%= admin_button(:secondary, :small, link: admin_event_proposal_path(Current.event, workingset.next, filter: filter)) { "Next \u2192" } %>
+    <% end %>
+  </div>
 </div>
