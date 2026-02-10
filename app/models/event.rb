@@ -15,6 +15,7 @@ class Event < ApplicationRecord
   has_many :sponsorships
   has_many :announcements
   has_many :communication_drafts
+  has_many :proposals
   has_many :communications, through: :communication_drafts
   has_many :speakers, through: :lineup_members
   has_one_attached :logo
@@ -34,5 +35,5 @@ class Event < ApplicationRecord
 
   def upcoming? = Date.current.before? start_date
   def sales_tickets? = Time.current.before? end_date.end_of_day
-  def accepts_speaking_applications? = speaker_applications_url.present? && speaker_applications_countdown.ongoing?
+  def accepts_speaking_applications? = speaker_applications_countdown.ongoing?
 end

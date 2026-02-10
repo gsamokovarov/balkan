@@ -28,6 +28,12 @@ module FormHelper
       end
     end
 
+    def text_area_input(method, label: method, required: false, **, &addendum)
+      input_for method, label:, required:, addendum: do
+        text_area method, class: field_classes, required:, **
+      end
+    end
+
     def select_input(method, choices, label: method, required: false, **options, &addendum)
       input_for method, label:, required:, addendum: do
         select method, choices, options, required:, class: field_classes
@@ -57,9 +63,14 @@ module FormHelper
       @template.tag.label label, class: ["flex flex-col space-y-3 sm:max-w-sm", binding.local_variable_get(:class)] do
         @template.concat @template.tag.span("#{label.to_s.humanize}#{' *' if required}", class: "text-xl")
         @template.concat @template.tag.div(&)
+        if object_errors(method).any?
+          @template.concat @template.tag.p(object_errors(method).first, class: "text-sm text-red-600")
+        end
         @template.concat @template.tag.div(&addendum) if addendum
       end
     end
+
+    def object_errors(method) = object.respond_to?(:errors) ? object.errors[method] : []
 
     def field_classes(*) = [*FIELD_CLASSES, *]
   end

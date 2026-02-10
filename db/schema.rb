@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_05_120207) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_08_083900) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -223,6 +223,26 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_05_120207) do
     t.index ["event_id"], name: "index_orders_on_event_id"
   end
 
+  create_table "proposals", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.text "bio"
+    t.string "social_url"
+    t.string "title", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.boolean "liked", default: false
+    t.datetime "notified_at"
+    t.string "location"
+    t.string "company"
+    t.string "github_url"
+    t.text "notes"
+    t.index ["event_id"], name: "index_proposals_on_event_id"
+  end
+
   create_table "schedule_slots", force: :cascade do |t|
     t.integer "schedule_id", null: false
     t.integer "lineup_member_id"
@@ -391,6 +411,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_05_120207) do
   add_foreign_key "lineup_members", "talks"
   add_foreign_key "media_galleries", "events"
   add_foreign_key "orders", "events"
+  add_foreign_key "proposals", "events"
   add_foreign_key "schedule_slots", "lineup_members"
   add_foreign_key "schedule_slots", "schedules"
   add_foreign_key "schedules", "events"

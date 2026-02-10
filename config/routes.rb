@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   resources :blogs, only: [:index, :show]
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
-  resource :apply, only: [:show]
+  resources :proposals, only: [:new, :create, :show, :update]
+  get "apply", to: redirect("/proposals/new")
 
   namespace :webhooks do
     resource :stripe, only: [:create]
@@ -73,6 +74,18 @@ Rails.application.routes.draw do
         end
       end
       resources :communications, only: [:index, :show, :new, :create]
+      resources :proposals, only: [:index, :show, :edit, :update] do
+        member do
+          post :accept
+          post :decline
+          post :like
+        end
+        collection do
+          post :select
+          post :waitlist
+          post :import
+        end
+      end
     end
     resources :speakers, only: [:index, :show, :new, :create, :edit, :update]
     resources :sponsors, only: [:index, :show, :new, :create, :edit, :update]

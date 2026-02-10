@@ -1,0 +1,9 @@
+<% title "Speak at #{Current.event.name}" %>
+
+<%= render "section", title: "Speak at #{Current.event.name}", title_element: "h1", highlight: true do %>
+  <% if Current.event.accepts_speaking_applications? %>
+    <%= render "proposals/form", proposal: @proposal %>
+  <% else %>
+    <%= render "proposals/closed" %>
+  <% end %>
+<% end %>

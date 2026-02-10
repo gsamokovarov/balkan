@@ -1,0 +1,18 @@
+<% title "Speak at #{Current.event.name}" %>
+
+<%= render "section", title: "Speak at #{Current.event.name}", title_element: "h1", highlight: true do %>
+  <%= turbo_frame_tag "proposal" do %>
+    <%= render "prose", class: "my-10" do %>
+      <p>
+        <% if @proposal.errors.any? %>
+          Something went wrong. Please try again.
+        <% else %>
+          Thank you for your proposal! We'll review it and get back to you at
+          <span class="text-banitsa-600"><%= @proposal.email %></span>.
+          You can <%= link_to "view and edit", @proposal.access_url, class: "link-primary" %>
+          your proposal while speaker applications are open.
+        <% end %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

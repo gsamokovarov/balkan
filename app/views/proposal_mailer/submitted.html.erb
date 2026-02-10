@@ -1,0 +1,24 @@
+<div class="w-prose">
+  <p class="pb-2">
+    Hi <%= first_name @proposal.name %>,
+  </p>
+
+  <p class="pb-2">
+    Thank you for submitting "<%= @proposal.title %>" to
+    <%= @proposal.event.name %>! We have received your proposal and will
+    review it shortly.
+  </p>
+
+  <p class="pb-2">
+    You can view and edit your proposal using the link below while proposals are open:
+  </p>
+
+  <p class="pb-2">
+    <%= link_to @proposal.access_url, @proposal.access_url %>
+  </p>
+
+  <p class="pb-2">
+    Best regards,<br>
+    Genadi Samokovarov
+  </p>
+</div>

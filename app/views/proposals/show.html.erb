@@ -1,0 +1,12 @@
+<% if Current.event.accepts_speaking_applications? %>
+  <% title "Edit your talk" %>
+  <%= render "section", title: "Edit your talk", title_element: "h1", highlight: true do %>
+    <%= render "proposals/form", proposal: @proposal %>
+  <% end %>
+<% else %>
+  <% title "Your talk" %>
+  <%= render "section", title: "Your talk", title_element: "h1", highlight: true do %>
+    <%= render "proposals/closed" %>
+    <%= render "proposals/form", proposal: @proposal, readonly: true %>
+  <% end %>
+<% end %>

@@ -1,0 +1,13 @@
+<% title "Edit your talk" %>
+
+<%= render "section", title: "Edit your talk", title_element: "h1" do %>
+  <%= turbo_frame_tag "proposal" do %>
+    <%= render "prose", class: "my-10" do %>
+      <p>
+        Your changes have been saved! Our reviewers will see the latest version.
+        Feel free to <%= link_to "keep editing", @proposal.access_url, class: "link-primary" %>
+        while speaker applications are open.
+      </p>
+    <% end %>
+  <% end %>
+<% end %>

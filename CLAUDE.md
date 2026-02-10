@@ -55,6 +55,13 @@ The `Current` class (ActiveSupport::CurrentAttributes) maintains thread-local st
 - Authentication via custom session system (not Devise)
 - Default admin user: `admin@example.com` / `admin` (development only)
 
+### View Partials
+- Partials that accept local variables must declare them with the magic comment: `<%# locals: (pills:) %>`
+
+### Ruby Style
+- Do not write multi-line braced blocks — use `do...end` for multi-line blocks
+- Do not use implicit arguments (`it`) for multi-line blocks — use explicit block parameters
+
 ### Key Architectural Patterns
 
 #### Custom ActiveRecord Extensions
