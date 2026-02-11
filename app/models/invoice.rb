@@ -54,7 +54,7 @@ class Invoice < ApplicationRecord
   def total_amount = manual? ? items.sum(&:unit_price) : order.amount
 
   def document(locale:) = Invoice::Document.generate(self, locale:)
-  def filename(locale:) = "invoice-#{number}-#{locale}.pdf"
+  def filename(locale:) = "invoice-#{prefixed_number}-#{locale}.pdf"
 
   def customer_details(locale:)
     if manual?
