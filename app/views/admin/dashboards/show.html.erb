@@ -22,7 +22,7 @@
 <%= render "section", title: "T-shirts", description: "T-shirt sizes for all attendees" do %>
   <% shirt_sizes = Current.event.tickets.group(:shirt_size).count.sort_by { Ticket::SHIRT_SIZES.index it[0] } %>
   <% if shirt_sizes.any? %>
-    <% total_shirts = shirt_sizes.values.sum %>
+    <% total_shirts = shirt_sizes.sum { _2 } %>
     <% render "stats", columns: shirt_sizes.count, data: shirt_sizes.map {
       ["#{_1} (#{(_2.to_f / total_shirts * 100).round}%)", _2]
     } %>
