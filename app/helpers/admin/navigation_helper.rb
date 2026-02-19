@@ -26,7 +26,7 @@ module Admin::NavigationHelper
           { name: "Communication drafts", path: admin_event_communication_drafts_path(Current.event) },
           { name: "Communications", path: admin_event_communications_path(Current.event) },
           { name: "Announcements", path: admin_event_announcements_path(Current.event) },
-          { name: "Subscribers", path: admin_event_subscribers_path(Current.event) },
+          { name: "Subscribers", path: admin_subscribers_path },
         ],
       },
 

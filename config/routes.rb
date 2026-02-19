@@ -57,7 +57,6 @@ Rails.application.routes.draw do
       resources :lineup_members, only: [:index, :show, :new, :create, :edit, :update]
       resources :blog_posts, only: [:index, :show, :new, :create, :update]
       resources :community_partners, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-      resources :subscribers, only: [:index, :destroy]
       resources :sponsorship_packages, only: [:index, :show, :new, :create, :edit, :update]
       resources :sponsorships, only: [:index, :show, :new, :create, :edit, :update]
       resource :schedule, only: [:show, :new, :create, :edit, :update]
@@ -101,6 +100,7 @@ Rails.application.routes.draw do
         post :refund
       end
     end
+    resources :subscribers, only: [:index, :destroy]
     resources :users, only: [:index, :show, :new, :create, :update, :destroy]
   end
 
