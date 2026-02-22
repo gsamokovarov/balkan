@@ -1,9 +1,14 @@
 class Admin::Workingset
-  def initialize(scope, current)
-    @ids = scope.pluck :id
-    @index = @ids.index current.id
+  def self.for(record, in:)
+    ids = binding.local_variable_get(:in).pluck :id
+    index = ids.index record.id
 
-    precondition @index.present?, "Current record is not in the scope"
+    new ids, index if index
+  end
+
+  def initialize(ids, index)
+    @ids = ids
+    @index = index
   end
 
   def position = @index + 1
