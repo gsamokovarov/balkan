@@ -50,6 +50,13 @@ module Admin::NavigationHelper
         ],
       },
 
+      marketing: {
+        name: "Marketing",
+        tabs: [
+          { name: "QR codes", path: admin_qr_code_path },
+        ],
+      },
+
       accounting: {
         name: "Accounting",
         tabs: [
@@ -80,6 +87,7 @@ module Admin::NavigationHelper
       { name: "Communications", path: first_tab[:communications], section: :communications },
       { name: "Partnerships", path: first_tab[:partnerships], section: :partnerships },
       { name: "Content", path: first_tab[:content], section: :content },
+      { name: "Marketing", path: first_tab[:marketing], section: :marketing },
       { header: "Manage" },
       { name: "Accounting", path: first_tab[:accounting], section: :accounting },
       { name: "Settings", path: first_tab[:settings], section: :settings },

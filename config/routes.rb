@@ -100,6 +100,7 @@ Rails.application.routes.draw do
         post :refund
       end
     end
+    resource :qr_code, only: [:show, :create]
     resources :subscribers, only: [:index, :destroy]
     resources :users, only: [:index, :show, :new, :create, :update, :destroy]
   end

@@ -1,0 +1,14 @@
+<%= section_navigation :marketing %>
+
+<%= render "section", title: "QR code generator" do %>
+  <%= admin_form url: admin_qr_code_path, method: :post do |f| %>
+    <%= f.text_input :url, value: @url %>
+    <%= f.submit "Generate" %>
+  <% end %>
+
+  <% if @qrcode_svg %>
+    <div class="mt-8 w-64 border-4 border-black rounded-md">
+      <%== @qrcode_svg %>
+    </div>
+  <% end %>
+<% end %>
