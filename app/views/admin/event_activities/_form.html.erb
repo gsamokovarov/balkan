@@ -1,0 +1,17 @@
+<%# locals: (event_activity:) %>
+
+<div class="flex flex-col md:flex-row md:space-x-6" data-controller="markdown-preview">
+  <%= admin_form [:admin, event_activity.event, event_activity], url: admin_event_event_activity_path(event_activity.event), html: { class: "sm:max-w-sm flex-1" } do |f| %>
+    <%= f.readonly_input :event_id, [[event_activity.event.name, event_activity.event.id]] %>
+    <%= f.text_area_input :content, required: true, rows: 20, data: { markdown_preview_target: "content" } %>
+    <%= f.file_input :images, multiple: true, data: { markdown_preview_target: "images" } %>
+    <%= f.check_box_input :published %>
+
+    <%= f.submit %>
+  <% end %>
+
+  <div class="w-full sm:w-96 h-screen relative">
+    <h2 class="text-lg font-semibold mb-6">Preview</h2>
+    <div class="prose border border-gray-300 rounded-md shadow-sm sm:h-3/4 sm:overflow-y-scroll" data-markdown-preview-target="preview"></div>
+  </div>
+</div>
