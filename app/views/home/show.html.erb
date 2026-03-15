@@ -3,7 +3,7 @@
 
 <% hi = section_highlighter %>
 
-<%= render "hero_section" %>
+<%= render "hero_section", highlight: hi %>
 
 <% if Current.event.schedule&.published? %>
   <%= render "schedule", schedule: Current.event.schedule, highlight: !hi %>

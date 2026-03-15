@@ -1,4 +1,4 @@
-<%# locals: (highlight: true) %>
+<%# locals: (highlight:) %>
 
 <%= render "section", highlight: do %>
   <div class="grid gap-8">
@@ -8,10 +8,12 @@
           <h1 class="text-4xl sm:text-5xl font-black">
             <%== Current.event.title %>
           </h1>
+
           <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-500">
             <%== Current.event.subtitle %>
           </div>
         </div>
+
         <p class="text-xl max-w-prose">
           <%== Current.event.description %>
         </p>
@@ -20,7 +22,7 @@
       <% if Current.event.accepts_speaking_applications? %>
         <%= render "hero_countdown_cfp" %>
       <% elsif Current.event.beginning_countdown.relevant? && Current.event.ticket_types.any? %>
-       <%= render "hero_countdown_event" %>
+        <%= render "hero_countdown_event" %>
       <% end %>
     </div>
 
