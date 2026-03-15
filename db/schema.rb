@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_08_083900) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_10_213018) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,6 +110,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_08_083900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_embeddings_on_event_id"
+  end
+
+  create_table "event_activities", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.text "content"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_activities_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -400,6 +409,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_08_083900) do
   add_foreign_key "communications", "communication_drafts"
   add_foreign_key "community_partners", "events"
   add_foreign_key "embeddings", "events"
+  add_foreign_key "event_activities", "events"
   add_foreign_key "events", "invoice_sequences"
   add_foreign_key "events", "venues"
   add_foreign_key "invoice_items", "invoices"

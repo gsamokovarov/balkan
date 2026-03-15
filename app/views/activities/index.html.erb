@@ -1,0 +1,29 @@
+<% title "Activities" %>
+
+<% hi = section_highlighter %>
+
+<%= render "section", title: "Activities", title_element: "h1", highlight: hi do %>
+  <% if @activity %>
+    <article class="w-full max-w-3xl">
+      <%= render "prose", variant: :xl do %>
+        <%= render_markdown @activity.content, images: @activity.images %>
+      <% end %>
+    </article>
+  <% else %>
+    <div class="w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
+      <h3 class="mt-2 text-xl font-semibold text-gray-900">Nothing to show</h3>
+    </div>
+  <% end %>
+<% end %>
+
+<% if Current.event.ticket_types.any? %>
+  <%= render "tickets/cta", highlight: !hi %>
+<% end %>
+
+<% if Current.event.sponsors.any? %>
+  <%= render "sponsors/sponsors", highlight: !hi %>
+<% end %>
+
+<% if Current.event.community_partners.any? %>
+  <%= render "home/community_partners", highlight: !hi %>
+<% end %>
