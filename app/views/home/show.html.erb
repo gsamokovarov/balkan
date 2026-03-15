@@ -17,7 +17,7 @@
   <%= render "speakers", highlight: !hi %>
 <% end %>
 
-<% if Current.event.media_gallery %>
+<% if Current.event.media_gallery&.published? %>
   <%= render "media_gallery", media_gallery: Current.event.media_gallery, highlight: !hi %>
 <% end %>
 

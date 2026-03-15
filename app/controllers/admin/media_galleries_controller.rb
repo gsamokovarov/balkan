@@ -33,6 +33,6 @@ class Admin::MediaGalleriesController < Admin::ApplicationController
 
   def media_gallery_params
     params.require(:media_gallery).permit(:title, :videos_url, :photos_url, :description,
-                                          :video1_url, :video2_url, :video3_url, :video4_url, photo_highlights: [])
+                                          :video1_url, :video2_url, :video3_url, :video4_url, :published, photo_highlights: [])
   end
 end
