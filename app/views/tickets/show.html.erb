@@ -86,5 +86,24 @@
         "
       />
     </label>
+
+    <%= link_to wallet_pass_ticket_path(@ticket.generate_token_for(:event_access)), class: "flex justify-center mt-2" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="180" height="44" viewBox="0 0 180 44">
+        <rect width="180" height="44" rx="7" fill="black"/>
+        <rect x="0.75" y="0.75" width="178.5" height="42.5" rx="6.25" stroke="white" stroke-width="0.5" fill="none"/>
+        <text x="56" y="17" fill="white" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8.5" font-weight="400">Add to</text>
+        <text x="56" y="32" fill="white" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600">Apple Wallet</text>
+        <g transform="translate(16, 8) scale(0.55)">
+          <path fill="white" d="M36.7 0H14.3C6.4 0 0 6.4 0 14.3v22.4C0 44.6 6.4 51 14.3 51h22.4C44.6 51 51 44.6 51 36.7V14.3C51 6.4 44.6 0 36.7 0z"/>
+          <path fill="black" d="M36.7 1C44 1 50 7 50 14.3v22.4C50 44 44 50 36.7 50H14.3C7 50 1 44 1 36.7V14.3C1 7 7 1 14.3 1h22.4m0-1H14.3C6.4 0 0 6.4 0 14.3v22.4C0 44.6 6.4 51 14.3 51h22.4C44.6 51 51 44.6 51 36.7V14.3C51 6.4 44.6 0 36.7 0z"/>
+          <path fill="#F9A533" d="M25.5 4L6 17.7V47h39V17.7z"/>
+          <path fill="#F26F56" d="M25.5 4L6 23.4V47h39V23.4z"/>
+          <path fill="#E24251" d="M25.5 4L6 29.1V47h39V29.1z"/>
+          <path fill="#5E398F" d="M25.5 4L6 34.8V47h39V34.8z"/>
+          <path fill="#3B71B8" d="M25.5 4L6 40.5V47h39v-6.5z"/>
+          <path fill="none" stroke="black" stroke-width="1" d="M25.5 4L6 17.7V47h39V17.7z"/>
+        </g>
+      </svg>
+    <% end %>
   </div>
 <% end %>

@@ -45,3 +45,7 @@
 # Ignore default Litestack SQLite databases.
 /db/**/*.sqlite3
 /db/**/*.sqlite3-*
+
+# Ignore Apple Wallet signing certificates.
+/private/wallet_pass/*.pem
+/private/wallet_pass/*.cer

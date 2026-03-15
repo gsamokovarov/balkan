@@ -415,6 +415,7 @@ DEPENDENCIES
   rspec-rails (~> 6.1.0)
   rspec-xunit
   rubocop
+  rubyzip (~> 2.3)
   selenium-webdriver
   sprockets-rails
   sqlite3
