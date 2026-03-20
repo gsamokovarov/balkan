@@ -4,6 +4,6 @@ class JobPostingsController < ApplicationController
   end
 
   def show
-    @job_posting = Current.event.job_postings.published.find params[:id]
+    @job_posting = Current.event.job_postings.find params[:id]
   end
 end
