@@ -1,0 +1,33 @@
+<% title @job_posting.title %>
+
+<%= render "section", title: @job_posting.title, title_element: "h1", highlight: true do %>
+  <div class="flex items-center gap-4 mb-8">
+    <% if @job_posting.sponsor.logo.attached? %>
+      <%= image_tag try_variant(@job_posting.sponsor.logo, resize_to_limit: [500, 500]),
+        class: "w-20 h-20 p-2 bg-white border-2 border-black rounded-md object-contain",
+        lazy: true %>
+    <% end %>
+    <div>
+      <p class="text-xl font-semibold"><%= @job_posting.sponsor.name %></p>
+    </div>
+  </div>
+
+  <% if @job_posting.description? %>
+    <%= render "prose", variant: :xl do %>
+      <%= render_markdown @job_posting.description, images: @job_posting.images %>
+    <% end %>
+  <% end %>
+
+  <% if @job_posting.images.any? %>
+    <%= render "image_gallery", images: @job_posting.images %>
+  <% end %>
+
+  <div class="mt-8">
+    <%= link_to @job_posting.application_url, class: "btn-primary", target: "_blank", rel: "noopener noreferrer" do %>
+      <span>Apply now</span>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render "sponsors/sponsors" %>
+<%= render "tickets/cta", highlight: true %>

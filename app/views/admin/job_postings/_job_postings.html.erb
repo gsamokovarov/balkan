@@ -1,0 +1,8 @@
+<%# locals: (job_postings:) %>
+
+<%= admin_table job_postings do
+  column "#",         -> { link_to it.id, [:admin, it.event, it] }
+  column :title,      -> { link_to it.title, [:admin, it.event, it] }
+  column :sponsor,    -> { link_to it.sponsor.name, [:admin, it.event, it] }
+  column :published,  -> { it.published? ? admin_badge(:success, "Yes") : admin_badge(:primary, "No") }
+end %>

@@ -1,0 +1,14 @@
+<%# locals: (job_posting:) %>
+
+<%= admin_form [:admin, job_posting.event, job_posting] do |f| %>
+  <%= f.readonly_input :event_id, [[job_posting.event.name, job_posting.event.id]] %>
+  <%= f.select_input :sponsor_id, Sponsor.all.map { [it.name, it.id] } do %>
+    <%= link_to "New sponsor", new_admin_sponsor_path, class: "text-indigo-600 hover:underline" %>
+  <% end %>
+  <%= f.text_input :title, required: true %>
+  <%= f.text_area_input :description, required: true %>
+  <%= f.text_input :application_url, required: true %>
+  <%= f.file_input :images, multiple: true %>
+  <%= f.check_box_input :published %>
+  <%= f.submit %>
+<% end %>

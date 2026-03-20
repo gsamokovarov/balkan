@@ -1,0 +1,29 @@
+<% title "Jobs" %>
+
+<%= render "section", title: "Jobs", title_element: "h1", highlight: true do %>
+  <% if @job_postings.any? %>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <% @job_postings.each do |job_posting| %>
+        <%= link_to job_posting_path(job_posting),
+              class: "flex items-center gap-4 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
+          <% if job_posting.sponsor.logo.attached? %>
+            <%= image_tag try_variant(job_posting.sponsor.logo, resize_to_limit: [500, 500]),
+              class: "w-16 h-16 object-contain shrink-0",
+              lazy: true %>
+          <% end %>
+          <div>
+            <h2 class="text-lg font-bold text-black"><%= job_posting.title %></h2>
+            <p class="text-gray-600"><%= job_posting.sponsor.name %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center">
+      <h3 class="mt-2 text-xl font-semibold text-gray-900">Nothing to show</h3>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render "sponsors/sponsors" %>
+<%= render "tickets/cta", highlight: true %>
