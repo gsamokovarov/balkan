@@ -1,0 +1,28 @@
+<%# locals: (highlight: nil) %>
+
+<% if Current.event.job_postings.published.any? %>
+  <%= render "section", title: "Looking for a job?", highlight: do %>
+    <%= render "prose" do %>
+      <p>Our sponsors are hiring.</p>
+    <% end %>
+
+    <div class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+      <% Current.event.job_postings.published.includes(:sponsor).each do |job_posting| %>
+        <%= link_to job_posting_path(job_posting),
+              class: "flex items-center gap-4 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
+          <%= image_tag try_variant(job_posting.sponsor.logo, resize_to_limit: [500, 500]),
+            class: "w-14 h-14 object-contain shrink-0",
+            lazy: true %>
+          <div>
+            <h3 class="text-lg font-bold text-black"><%= job_posting.title %></h3>
+            <p class="text-gray-600"><%= job_posting.sponsor.name %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= link_to job_postings_path, class: "btn-secondary" do %>
+      <span>View all job postings</span>
+    <% end %>
+  <% end %>
+<% end %>

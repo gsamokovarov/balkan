@@ -32,6 +32,8 @@
   <% end %>
 <% end %>
 
+<%= render "job_postings/jobs" %>
+
 <% if Current.event.sponsors.any? %>
   <%= render "section", title: "Sponsorship" do %>
     <%= render "sponsors/sponsorship" %>
