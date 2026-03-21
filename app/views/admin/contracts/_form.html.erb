@@ -1,0 +1,17 @@
+<%# locals: (contract:) %>
+
+<%= admin_form [:admin, contract.event, contract], automatic: contract.persisted? do |f| %>
+  <%= f.select_input :contract_template_id, contract.event.contract_templates.map { [it.name, it.id] } %>
+  <%= f.date_input :agreement_date, required: true %>
+  <%= f.date_input :payment_deadline %>
+  <%= f.date_input :materials_deadline %>
+  <%= f.number_input :price %>
+  <%= f.text_input :company_name, required: true %>
+  <%= f.text_input :company_address %>
+  <%= f.text_input :company_country %>
+  <%= f.text_input :company_id_number, label: "Company ID" %>
+  <%= f.text_input :company_vat_id, label: "VAT ID" %>
+  <%= f.text_input :representative_name, required: true %>
+  <%= f.text_area_input :perks, rows: 10, placeholder: "- Perk one\n- Perk two" %>
+  <%= f.submit %>
+<% end %>

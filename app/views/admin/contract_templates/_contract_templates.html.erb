@@ -1,0 +1,6 @@
+<%# locals: (contract_templates:) %>
+
+<%= admin_table contract_templates do
+  column "#",    -> { link_to it.id, [:admin, it.event, it] }
+  column :name,  -> { link_to it.name, [:admin, it.event, it] }
+end %>

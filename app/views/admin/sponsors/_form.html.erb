@@ -5,5 +5,10 @@
   <%= f.text_area_input :description %>
   <%= f.text_input :url %>
   <%= f.file_input :logo %>
+  <%= f.text_input :address %>
+  <%= f.text_input :country %>
+  <%= f.text_input :company_id_number, label: "Company ID" %>
+  <%= f.text_input :vat_id, label: "VAT ID" %>
+  <%= f.text_input :representative_name %>
   <%= f.submit %>
 <% end %>

@@ -1,0 +1,14 @@
+<%= section_navigation :partnerships %>
+
+<%= render "section", title: "Contract templates", cta: -> {
+  admin_button(:primary, link: new_admin_event_contract_template_path(Current.event)) { "New template" }
+} do %>
+  <% if @contract_templates.any? %>
+    <%= render "contract_templates", contract_templates: @contract_templates %>
+    <%= admin_paginate @contract_templates %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_event_contract_template_path(Current.event)) { "New template" } %>
+    <% end %>
+  <% end %>
+<% end %>

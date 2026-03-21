@@ -1,0 +1,10 @@
+<%= render "section", title: "Contract ##{@contract.id} — #{@contract.contract_template.name}" do %>
+  <%= render "form", contract: @contract %>
+<% end %>
+
+<%= render "section", title: "Document" do %>
+  <%= render "document_preview", urls: admin_event_contract_path(@contract.event, @contract, format: :pdf) %>
+  <div class="mt-4">
+    <%= admin_button(:secondary, link: download_admin_event_contract_path(@contract.event, @contract)) { "Download PDF" } %>
+  </div>
+<% end %>
