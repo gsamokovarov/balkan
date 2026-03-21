@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_20_103002) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_21_103739) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -100,6 +100,35 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_20_103002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_community_partners_on_event_id"
+  end
+
+  create_table "contract_templates", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "name", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_contract_templates_on_event_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "contract_template_id", null: false
+    t.date "agreement_date"
+    t.date "payment_deadline"
+    t.date "materials_deadline"
+    t.decimal "price"
+    t.string "company_name"
+    t.string "company_address"
+    t.string "company_country"
+    t.string "company_id_number"
+    t.string "company_vat_id"
+    t.string "representative_name"
+    t.text "perks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_template_id"], name: "index_contracts_on_contract_template_id"
+    t.index ["event_id"], name: "index_contracts_on_event_id"
   end
 
   create_table "embeddings", force: :cascade do |t|
@@ -319,6 +348,11 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_20_103002) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.string "country"
+    t.string "company_id_number"
+    t.string "vat_id"
+    t.string "representative_name"
   end
 
   create_table "sponsorship_packages", force: :cascade do |t|
@@ -423,6 +457,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_20_103002) do
   add_foreign_key "communication_recipients", "communications"
   add_foreign_key "communications", "communication_drafts"
   add_foreign_key "community_partners", "events"
+  add_foreign_key "contract_templates", "events"
+  add_foreign_key "contracts", "contract_templates"
+  add_foreign_key "contracts", "events"
   add_foreign_key "embeddings", "events"
   add_foreign_key "event_activities", "events"
   add_foreign_key "events", "invoice_sequences"
