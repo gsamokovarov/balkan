@@ -37,7 +37,9 @@
   <%= render "sponsors/sponsors", highlight: !hi %>
 <% end %>
 
-<%= render "job_postings/jobs", highlight: !hi %>
+<% if Current.event.job_postings.published.any? %>
+  <%= render "job_postings/jobs", highlight: !hi %>
+<% end %>
 
 <% if Current.event.upcoming? %>
   <%= render "newsletter", highlight: !hi %>

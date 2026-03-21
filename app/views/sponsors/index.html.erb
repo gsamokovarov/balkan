@@ -11,13 +11,7 @@
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         <% sponsorships.each do |sponsorship| %>
           <div id="<%= sponsorship.sponsor.name.parameterize %>" class="space-y-6">
-            <% if sponsorship.sponsor.url? %>
-              <%= link_to sponsorship.sponsor.url do %>
-                <%= image_tag try_variant(sponsorship.sponsor.logo, resize_to_limit: [1000, 1000]),
-                  class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain mb-4",
-                  lazy: true %>
-              <% end %>
-            <% else %>
+            <%= link_to sponsor_path(sponsorship.sponsor) do %>
               <%= image_tag try_variant(sponsorship.sponsor.logo, resize_to_limit: [1000, 1000]),
                 class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain mb-4",
                 lazy: true %>

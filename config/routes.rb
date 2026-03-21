@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root "home#show"
 
-  resources :sponsors, only: [:new, :index] do
+  resources :sponsors, only: [:new, :index, :show] do
     collection do
       get :prospectus
     end

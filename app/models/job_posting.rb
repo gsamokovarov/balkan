@@ -9,5 +9,6 @@ class JobPosting < ApplicationRecord
   validates :description, presence: true
   validates :application_url, presence: true
 
-  scope :published, -> { where.not(published_at: nil) }
+  def self.published = where.not(published_at: nil)
+  def self.for(event) = published.where(event:)
 end
