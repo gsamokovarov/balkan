@@ -1,0 +1,35 @@
+<% title @sponsor.name %>
+
+<% hi = section_highlighter %>
+
+<%= render "section", title: @sponsor.name, title_element: "h1", highlight: hi do %>
+  <%= image_tag try_variant(@sponsor.logo, resize_to_limit: [1000, 1000]),
+    class: "w-full h-48 p-4 bg-white border-2 border-black rounded-md object-contain",
+    lazy: true %>
+
+  <% if @sponsor.description? %>
+    <%= render("prose") { render_markdown @sponsor.description } %>
+  <% end %>
+
+  <% if @sponsor.url? %>
+    <%= link_to @sponsor.url, class: "btn-secondary", target: "_blank", rel: "noopener noreferrer" do %>
+      <span>Visit website</span>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @job_postings.any? %>
+  <%= render "section", title: "Job postings", section: !hi do %>
+    <div class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+      <% @job_postings.each do |job_posting| %>
+        <%= link_to job_posting_path(job_posting),
+              class: "block p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
+          <h3 class="text-lg font-bold text-black"><%= job_posting.title %></h3>
+          <p class="mt-1 text-gray-600 line-clamp-2"><%= render_plain truncate(job_posting.description, length: 200) %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render "tickets/cta", highlight: !hi %>

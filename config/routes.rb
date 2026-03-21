@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root "home#show"
 
-  resources :sponsors, only: [:new, :index] do
+  resources :sponsors, only: [:new, :index, :show] do
     collection do
       get :prospectus
     end
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :checkouts, only: [:index, :show, :create]
   resources :subscribers, only: [:new, :show, :create, :destroy]
   resources :blogs, only: [:index, :show]
+  resources :job_postings, only: [:index, :show]
   resources :activities, only: [:index]
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
       resources :community_partners, only: [:index, :show, :new, :create, :edit, :update, :destroy]
       resources :sponsorship_packages, only: [:index, :show, :new, :create, :edit, :update]
       resources :sponsorships, only: [:index, :show, :new, :create, :edit, :update]
+      resources :job_postings, only: [:index, :show, :new, :create, :update]
       resource :schedule, only: [:show, :new, :create, :edit, :update]
       resource :media_gallery, only: [:show, :new, :create, :edit, :update]
       resources :announcements, only: [:index, :show, :new, :create, :edit, :update] do

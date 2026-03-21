@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_15_163851) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_20_103002) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -182,6 +182,20 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_15_163851) do
     t.index ["invoice_sequence_id"], name: "index_invoices_on_invoice_sequence_id"
     t.index ["order_id"], name: "index_invoices_on_order_id"
     t.index ["refunded_invoice_id"], name: "index_invoices_on_refunded_invoice_id"
+  end
+
+  create_table "job_postings", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "sponsor_id", null: false
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "application_url", null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "sponsor_id"], name: "index_job_postings_on_event_id_and_sponsor_id"
+    t.index ["event_id"], name: "index_job_postings_on_event_id"
+    t.index ["sponsor_id"], name: "index_job_postings_on_sponsor_id"
   end
 
   create_table "lineup_members", force: :cascade do |t|
@@ -417,6 +431,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_15_163851) do
   add_foreign_key "invoices", "invoice_sequences"
   add_foreign_key "invoices", "invoices", column: "refunded_invoice_id"
   add_foreign_key "invoices", "orders"
+  add_foreign_key "job_postings", "events"
+  add_foreign_key "job_postings", "sponsors"
   add_foreign_key "lineup_members", "events"
   add_foreign_key "lineup_members", "speakers"
   add_foreign_key "lineup_members", "talks"

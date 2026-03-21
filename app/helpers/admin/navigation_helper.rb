@@ -36,6 +36,7 @@ module Admin::NavigationHelper
           { name: "Sponsorship packages", path: admin_event_sponsorship_packages_path(Current.event) },
           { name: "Sponsorships", path: admin_event_sponsorships_path(Current.event) },
           { name: "Community partners", path: admin_event_community_partners_path(Current.event) },
+          { name: "Job postings", path: admin_event_job_postings_path(Current.event) },
           { name: "Sponsors", path: admin_sponsors_path, global: true },
           { name: "Venues", path: admin_venues_path, global: true },
         ],
