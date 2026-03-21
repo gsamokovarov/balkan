@@ -33,31 +33,6 @@ module Invoice::Document
     def format(amount) = Kernel.format("€%0.2f", (@negate ? -amount : amount))
   end
 
-  class Issuer
-    PERIODS = [
-      { key: :euruko_2016, duration: Date.new(2016, 1, 1)..Date.new(2017, 7, 9) },
-      { key: :neuvents_todorov, duration: Date.new(2017, 7, 10)..Date.new(2019, 6, 2) },
-      { key: :neuvents_mihaylov, duration: Date.new(2019, 6, 3)..Date.new(2024, 3, 11) },
-      { key: :neuvents_genadi, duration: Date.new(2024, 3, 12).. },
-    ]
-
-    def initialize(date:, locale:)
-      @key = PERIODS.find { it[:duration].cover?(date) }.fetch(:key)
-      @locale = locale
-    end
-
-    def company_name = t(:company_name)
-    def address = t(:address)
-    def country = t(:country)
-    def company_id = t(:company_id)
-    def vat_id = t(:vat_id)
-    def ceo = t(:ceo)
-
-    private
-
-    def t(attr) = I18n.t("invoicing.issuers.#{@key}.#{attr}", locale: @locale)
-  end
-
   class Template
     include Prawn::View
 
@@ -71,7 +46,7 @@ module Invoice::Document
       @invoice_amount = Amount.new invoice.total_amount, includes_vat: invoice.includes_vat, negate: invoice.credit_note?
       @customer_details = invoice.customer_details(locale:)
       @line_items = invoice.line_items(locale:)
-      @issuer = Issuer.new(date: invoice.created_at.to_date, locale:)
+      @issuer = ::Issuer.new(date: invoice.created_at.to_date, locale:)
 
       update(&)
     end
