@@ -40,7 +40,6 @@ module Admin::NavigationHelper
           { name: "Community partners", path: admin_event_community_partners_path(Current.event) },
           { name: "Job postings", path: admin_event_job_postings_path(Current.event) },
           { name: "Sponsors", path: admin_sponsors_path, global: true },
-          { name: "Venues", path: admin_venues_path, global: true },
         ],
       },
 
@@ -51,6 +50,7 @@ module Admin::NavigationHelper
           { name: "Media Gallery", path: admin_event_media_gallery_path(Current.event) },
           { name: "Activity", path: admin_event_event_activity_path(Current.event) },
           { name: "Embeddings", path: admin_event_embeddings_path(Current.event) },
+          { name: "Venues", path: admin_venues_path, global: true },
         ],
       },
 
