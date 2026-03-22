@@ -1,0 +1,56 @@
+<%# locals: (contract_template:) %>
+
+<div class="flex flex-col md:flex-row md:space-x-6">
+  <%= admin_form [:admin, contract_template.event, contract_template], html: { class: "sm:max-w-sm flex-1" } do |f| %>
+    <%= f.text_input :name, required: true %>
+    <%= f.text_area_input :content, required: true, rows: 30,
+        placeholder: "# Sponsorship Agreement for {{ event_name }}\n\nThis Agreement..." %>
+    <%= f.submit %>
+  <% end %>
+
+  <div class="w-full sm:w-96">
+    <div class="p-2 border border-gray-300 rounded-md shadow-sm mb-6">
+      <p class="font-medium text-sm mb-2 text-gray-900 dark:text-gray-100">Template variables:</p>
+      <div class="grid grid-cols-2 gap-2 text-xs text-gray-600 dark:text-gray-400">
+        <p class="col-span-2 font-medium text-gray-700 dark:text-gray-300 mt-2">Event</p>
+        <code>{{ event_name }}</code>
+        <code>{{ event_dates }}</code>
+        <code>{{ event_start_date }}</code>
+        <code>{{ event_end_date }}</code>
+        <code>{{ event_year }}</code>
+        <code>{{ event_venue }}</code>
+        <code>{{ event_venue_address }}</code>
+
+        <p class="col-span-2 font-medium text-gray-700 dark:text-gray-300 mt-2">Pricing</p>
+        <code>{{ price }}</code>
+        <code>{{ price_with_vat }}</code>
+        <code>{{ vat_amount }}</code>
+        <code>{{ vat_percent }}</code>
+
+        <p class="col-span-2 font-medium text-gray-700 dark:text-gray-300 mt-2">Contract</p>
+        <code>{{ perks }}</code>
+
+        <p class="col-span-2 font-medium text-gray-700 dark:text-gray-300 mt-2">Company</p>
+        <code>{{ company_name }}</code>
+        <code>{{ company_address }}</code>
+        <code>{{ company_country }}</code>
+        <code>{{ company_id_number }}</code>
+        <code>{{ company_vat_id }}</code>
+        <code>{{ representative_name }}</code>
+
+        <p class="col-span-2 font-medium text-gray-700 dark:text-gray-300 mt-2">Issuer (Neuvents)</p>
+        <code>{{ issuer_company_name }}</code>
+        <code>{{ issuer_address }}</code>
+        <code>{{ issuer_country }}</code>
+        <code>{{ issuer_company_id }}</code>
+        <code>{{ issuer_vat_id }}</code>
+        <code>{{ issuer_ceo }}</code>
+
+        <p class="col-span-2 font-medium text-gray-700 dark:text-gray-300 mt-2">Dates</p>
+        <code>{{ agreement_date }}</code>
+        <code>{{ payment_deadline }}</code>
+        <code>{{ materials_deadline }}</code>
+      </div>
+    </div>
+  </div>
+</div>

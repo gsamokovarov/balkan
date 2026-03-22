@@ -35,6 +35,8 @@ module Admin::NavigationHelper
         tabs: [
           { name: "Sponsorship packages", path: admin_event_sponsorship_packages_path(Current.event) },
           { name: "Sponsorships", path: admin_event_sponsorships_path(Current.event) },
+          { name: "Contract templates", path: admin_event_contract_templates_path(Current.event) },
+          { name: "Contracts", path: admin_event_contracts_path(Current.event) },
           { name: "Community partners", path: admin_event_community_partners_path(Current.event) },
           { name: "Job postings", path: admin_event_job_postings_path(Current.event) },
           { name: "Sponsors", path: admin_sponsors_path, global: true },

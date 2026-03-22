@@ -13,6 +13,8 @@ class Event < ApplicationRecord
   has_many :sponsorship_packages
   has_many :sponsorship_variants, through: :sponsorship_packages, source: :variants
   has_many :sponsorships
+  has_many :contract_templates
+  has_many :contracts
   has_many :job_postings
   has_many :announcements
   has_many :communication_drafts
