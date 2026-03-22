@@ -15,7 +15,7 @@
   </div>
   <div class="hidden sm:block">
     <div class="border-b border-gray-200 dark:border-white/10">
-      <nav aria-label="<%= name %>" class="-mb-px flex space-x-8">
+      <nav aria-label="<%= name %>" class="-mb-px flex space-x-8 overflow-x-auto">
         <% tabs.each do |tab| %>
           <%= link_to tab[:path],
               aria_current: (current_page?(tab[:path]) ? "page" : nil),
