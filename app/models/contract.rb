@@ -2,7 +2,7 @@ class Contract < ApplicationRecord
   belongs_to :event
   belongs_to :contract_template
 
-  validates :agreement_date, presence: true
+  validates :date, presence: true
   validates :company_name, presence: true
   validates :representative_name, presence: true
 
@@ -13,7 +13,7 @@ class Contract < ApplicationRecord
   private
 
   def liquid_context
-    issuer = Issuer.new date: agreement_date, locale: :en
+    issuer = Issuer.new date:, locale: :en
 
     {
       "event_name" => event.name,
@@ -39,9 +39,9 @@ class Contract < ApplicationRecord
       "issuer_company_id" => issuer.company_id,
       "issuer_vat_id" => issuer.vat_id,
       "issuer_ceo" => issuer.ceo,
-      "agreement_date" => agreement_date&.strftime("%d.%m.%Y").to_s,
-      "payment_deadline" => payment_deadline&.strftime("%d.%m.%Y").to_s,
-      "materials_deadline" => materials_deadline&.strftime("%d.%m.%Y").to_s,
+      "date" => date&.strftime("%d.%m.%Y").to_s,
+      "payment_deadline" => (date + 7.days).strftime("%d.%m.%Y"),
+      "materials_deadline" => (event.start_date - 2.weeks).strftime("%d.%m.%Y"),
       "perks" => perks.to_s,
     }
   end
