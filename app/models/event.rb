@@ -32,7 +32,8 @@ class Event < ApplicationRecord
 
   def active_announcement = announcements.active_for self
 
-  def sponsors = sponsorships.includes(:package, :sponsor).order("sponsorship_packages.id").group_by(&:package)
+  def sponsors = sponsorships.includes(:sponsor).order(price_paid: :desc)
+
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
   def beginning_countdown = FinalCountdown.until start_date
