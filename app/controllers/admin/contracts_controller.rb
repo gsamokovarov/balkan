@@ -32,7 +32,7 @@ class Admin::ContractsController < Admin::ApplicationController
     @contract = event.contracts.find params[:id]
 
     if @contract.update contract_params
-      redirect_to admin_event_contract_path(event, @contract), notice: "Contract updated"
+      redirect_to admin_event_contracts_path(event), notice: "Contract updated"
     else
       render :show
     end

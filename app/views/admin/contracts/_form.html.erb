@@ -1,6 +1,6 @@
 <%# locals: (contract:) %>
 
-<%= admin_form [:admin, contract.event, contract], automatic: contract.persisted? do |f| %>
+<%= admin_form [:admin, contract.event, contract] do |f| %>
   <%= f.select_input :contract_template_id, contract.event.contract_templates.map { [it.name, it.id] } %>
   <%= f.date_input :date, required: true %>
   <%= f.decimal_input :price %>

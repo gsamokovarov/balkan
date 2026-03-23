@@ -29,7 +29,7 @@ class Admin::ContractTemplatesController < Admin::ApplicationController
     @contract_template = event.contract_templates.find params[:id]
 
     if @contract_template.update contract_template_params
-      redirect_to admin_event_contract_template_path(event, @contract_template), notice: "Contract template updated"
+      redirect_to admin_event_contract_templates_path(event), notice: "Contract template updated"
     else
       render :show
     end
