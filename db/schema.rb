@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_21_103739) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_23_075614) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -114,9 +114,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_21_103739) do
   create_table "contracts", force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "contract_template_id", null: false
-    t.date "agreement_date"
-    t.date "payment_deadline"
-    t.date "materials_deadline"
+    t.date "date"
     t.decimal "price"
     t.string "company_name"
     t.string "company_address"

@@ -122,9 +122,9 @@ RSpec.case Contract::Document do
   test "renders agreement date in DD.MM.YYYY format" do
     event = create :event, :balkan2025
     template = create :contract_template, event:, content: <<~MARKDOWN
-      Date: {{ agreement_date }}
+      Date: {{ date }}
     MARKDOWN
-    contract = create :contract, event:, contract_template: template, agreement_date: Date.new(2026, 2, 11)
+    contract = create :contract, event:, contract_template: template, date: Date.new(2026, 2, 11)
 
     pdf = contract.document
 

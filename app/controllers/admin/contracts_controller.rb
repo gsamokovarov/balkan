@@ -4,8 +4,7 @@ class Admin::ContractsController < Admin::ApplicationController
   end
 
   def new
-    @contract = event.contracts.new
-    @contract.agreement_date = Date.current
+    @contract = event.contracts.new date: Date.current
   end
 
   def create
@@ -24,10 +23,7 @@ class Admin::ContractsController < Admin::ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        send_data @contract.document,
-                  disposition: "inline",
-                  type: "application/pdf",
-                  filename: @contract.filename
+        send_data @contract.document, disposition: "inline", type: "application/pdf", filename: @contract.filename
       end
     end
   end
@@ -45,10 +41,7 @@ class Admin::ContractsController < Admin::ApplicationController
   def download
     @contract = event.contracts.find params[:id]
 
-    send_data @contract.document,
-              filename: @contract.filename,
-              type: "application/pdf",
-              disposition: "attachment"
+    send_data @contract.document, filename: @contract.filename, type: "application/pdf", disposition: "attachment"
   end
 
   private
@@ -56,19 +49,15 @@ class Admin::ContractsController < Admin::ApplicationController
   def event = @event ||= Event.find(params[:event_id])
 
   def contract_params
-    params.require(:contract).permit(
-      :contract_template_id,
-      :agreement_date,
-      :payment_deadline,
-      :materials_deadline,
-      :price,
-      :company_name,
-      :company_address,
-      :company_country,
-      :company_id_number,
-      :company_vat_id,
-      :representative_name,
-      :perks,
-    )
+    params.require(:contract).permit(:contract_template_id,
+                                     :date,
+                                     :price,
+                                     :company_name,
+                                     :company_address,
+                                     :company_country,
+                                     :company_id_number,
+                                     :company_vat_id,
+                                     :representative_name,
+                                     :perks)
   end
 end
