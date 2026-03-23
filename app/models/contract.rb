@@ -40,7 +40,7 @@ class Contract < ApplicationRecord
       "issuer_vat_id" => issuer.vat_id,
       "issuer_ceo" => issuer.ceo,
       "date" => date&.strftime("%d.%m.%Y").to_s,
-      "payment_deadline" => (date + 7.days).strftime("%d.%m.%Y"),
+      "payment_deadline" => (date + 15.days).strftime("%d.%m.%Y"),
       "materials_deadline" => (event.start_date - 2.weeks).strftime("%d.%m.%Y"),
       "perks" => perks.to_s,
     }
