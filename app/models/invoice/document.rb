@@ -126,7 +126,7 @@ module Invoice::Document
         row(0).size = 14
       end
 
-      move_cursor_to bounds.bottom + 60
+      move_cursor_to bounds.bottom + 80
 
       vat_label = invoice.includes_vat? ? t("vat") : t("vat_exempt")
       footer_data = [
