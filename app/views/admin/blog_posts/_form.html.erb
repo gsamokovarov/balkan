@@ -5,7 +5,7 @@
     <%= f.readonly_input :event_id, [[blog_post.event.name, blog_post.event.id]] %>
     <%= f.text_area_input :content, required: true, rows: 20, data: { markdown_preview_target: "content" } %>
     <%= f.file_input :images, multiple: true, data: { markdown_preview_target: "images" } %>
-    <%= f.select_input :author_id, User.all.map { [it.email, it.id] }, required: true %>
+    <%= f.select_input :author_id, User.all.order(id: :desc).map { [it.email, it.id] }, required: true %>
     <%= f.date_input :date, required: true %>
     <%= f.text_input :title, required: true %>
     <%= f.file_input :ogp_image %>

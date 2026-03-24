@@ -2,7 +2,7 @@
 
 <%= admin_form [:admin, job_posting.event, job_posting] do |f| %>
   <%= f.readonly_input :event_id, [[job_posting.event.name, job_posting.event.id]] %>
-  <%= f.select_input :sponsor_id, Sponsor.all.map { [it.name, it.id] } do %>
+  <%= f.select_input :sponsor_id, Sponsor.all.order(id: :desc).map { [it.name, it.id] } do %>
     <%= link_to "New sponsor", new_admin_sponsor_path, class: "text-indigo-600 hover:underline" %>
   <% end %>
   <%= f.text_input :title, required: true %>

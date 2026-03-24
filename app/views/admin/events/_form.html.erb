@@ -13,7 +13,7 @@
   <%= f.text_input :subtitle %>
   <%= f.text_area_input :description %>
   <%= f.file_input :hero_images, multiple: true %>
-  <%= f.select_input :venue_id, Venue.all.map { [it.name, it.id] }, include_blank: true %>
+  <%= f.select_input :venue_id, Venue.all.order(id: :desc).map { [it.name, it.id] }, include_blank: true %>
   <%= f.date_input :speaker_applications_end_date %>
   <%= f.text_input :speaker_applications_url %>
   <%= f.text_input :twitter_url %>

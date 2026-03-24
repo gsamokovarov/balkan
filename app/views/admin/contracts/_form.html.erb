@@ -1,7 +1,7 @@
 <%# locals: (contract:) %>
 
 <%= admin_form [:admin, contract.event, contract] do |f| %>
-  <%= f.select_input :contract_template_id, contract.event.contract_templates.map { [it.name, it.id] } %>
+  <%= f.select_input :contract_template_id, contract.event.contract_templates.order(id: :desc).map { [it.name, it.id] } %>
   <%= f.date_input :date, required: true %>
   <%= f.decimal_input :price %>
   <%= f.text_input :company_name, required: true %>

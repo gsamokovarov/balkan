@@ -2,10 +2,10 @@
 
 <%= admin_form [:admin, sponsorship.event, sponsorship] do |f| %>
   <%= f.readonly_input :event_id, [[sponsorship.event.name, sponsorship.event.id]] %>
-  <%= f.select_input :sponsor_id, Sponsor.all.map { [it.name, it.id] } do %>
+  <%= f.select_input :sponsor_id, Sponsor.all.order(id: :desc).map { [it.name, it.id] } do %>
     <%= link_to "New sponsor", new_admin_sponsor_path, class: "text-indigo-600 hover:underline" %>
   <% end %>
-  <%= f.select_input :variant_id, sponsorship.event.sponsorship_variants.all.map { [it.display_name, it.id] } %>
+  <%= f.select_input :variant_id, sponsorship.event.sponsorship_variants.order(id: :desc).map { [it.display_name, it.id] } %>
   <%= f.number_input :price_paid, required: true %>
   <%= f.text_area_input :reason %>
   <%= f.file_input :ogp_image %>
