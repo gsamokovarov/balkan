@@ -2,7 +2,7 @@
 
 <% hi = section_highlighter %>
 
-<%= render "section", title: "Jobs", title_element: "h1", highlight: gi do %>
+<%= render "section", title: "Jobs", title_element: "h1", highlight: hi do %>
   <% if @job_postings.any? %>
     <div class="space-y-12">
       <% @job_postings.group_by(&:sponsor).each do |sponsor, job_postings| %>
