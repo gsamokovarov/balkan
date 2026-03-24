@@ -1,6 +1,8 @@
 <% title "Jobs" %>
 
-<%= render "section", title: "Jobs", title_element: "h1", highlight: true do %>
+<% hi = section_highlighter %>
+
+<%= render "section", title: "Jobs", title_element: "h1", highlight: gi do %>
   <% if @job_postings.any? %>
     <div class="space-y-12">
       <% @job_postings.group_by(&:sponsor).each do |sponsor, job_postings| %>
@@ -29,5 +31,4 @@
   <% end %>
 <% end %>
 
-<%= render "sponsors/sponsors" %>
-<%= render "tickets/cta", highlight: true %>
+<%= render "tickets/cta", highlight: !hi %>
