@@ -1,6 +1,8 @@
 <% title "Sponsors" %>
 
-<%= render "section", title: "Sponsors", title_element: "h1", highlight: true do %>
+<% hi = section_highlighter %>
+
+<%= render "section", title: "Sponsors", title_element: "h1", highlight: hi do %>
   <% if Current.event.sponsors.none? %>
     <%= render "sponsors/sponsorship" %>
   <% end %>
@@ -26,14 +28,14 @@
   <% end %>
 <% end %>
 
-<%= render "job_postings/jobs" %>
+<% if Current.event.job_postings.published.any? %>
+  <%= render "jobs/jobs", highlight: !hi %>
+<% end %>
 
 <% if Current.event.sponsors.any? %>
-  <%= render "section", title: "Sponsorship" do %>
+  <%= render "section", title: "Sponsorship", highlight: !hi do %>
     <%= render "sponsors/sponsorship" %>
   <% end %>
-
-  <%= render "tickets/cta", highlight: true %>
-<% else %>
-  <%= render "tickets/cta" %>
 <% end %>
+
+  <%= render "tickets/cta", highlight: !hi %>

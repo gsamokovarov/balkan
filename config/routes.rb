@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :checkouts, only: [:index, :show, :create]
   resources :subscribers, only: [:new, :show, :create, :destroy]
   resources :blogs, only: [:index, :show]
-  resources :job_postings, only: [:index, :show]
+  resources :jobs, only: [:index, :show]
   resources :activities, only: [:index]
   resource :thanks, only: [:show]
   resource :slides, only: [:show]
