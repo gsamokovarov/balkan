@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_23_075614) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_27_120249) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -211,12 +211,21 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_23_075614) do
     t.index ["refunded_invoice_id"], name: "index_invoices_on_refunded_invoice_id"
   end
 
+  create_table "job_posting_contacts", force: :cascade do |t|
+    t.integer "job_posting_id", null: false
+    t.string "name"
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_posting_id"], name: "index_job_posting_contacts_on_job_posting_id"
+  end
+
   create_table "job_postings", force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "sponsor_id", null: false
     t.string "title", null: false
     t.text "description", null: false
-    t.string "application_url", null: false
+    t.string "application_url"
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -466,6 +475,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_23_075614) do
   add_foreign_key "invoices", "invoice_sequences"
   add_foreign_key "invoices", "invoices", column: "refunded_invoice_id"
   add_foreign_key "invoices", "orders"
+  add_foreign_key "job_posting_contacts", "job_postings"
   add_foreign_key "job_postings", "events"
   add_foreign_key "job_postings", "sponsors"
   add_foreign_key "lineup_members", "events"
