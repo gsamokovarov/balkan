@@ -9,6 +9,7 @@
         class: "w-20 h-20 p-2 bg-white border-2 border-black rounded-md object-contain",
         lazy: true %>
     <% end %>
+
     <div>
       <p class="text-4xl font-semibold"><%= @job_posting.sponsor.name %></p>
     </div>
@@ -23,10 +24,15 @@
           <% if contact.name.present? %>
             <p class="text-lg font-bold text-black"><%= contact.name %></p>
           <% end %>
+
           <p class="text-banitsa-600 underline"><%= contact.email %></p>
         <% end %>
       <% end %>
     </div>
+
+    <p class="text-sm text-gray-500">
+      Or email directly: <%= @job_posting.contacts.map(&:display_name).join(", ") %>
+    </p>
   </div>
 <% end %>
 
