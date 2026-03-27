@@ -36,6 +36,6 @@ class Admin::JobPostingsController < Admin::ApplicationController
   def event = Event.find(params[:event_id])
 
   def job_posting_params
-    params.require(:job_posting).permit(:title, :description, :application_url, :sponsor_id, :published, images: [])
+    params.require(:job_posting).permit(:title, :description, :application_url, :sponsor_id, :published, images: [], contacts_attributes: [:id, :name, :email, :_destroy])
   end
 end

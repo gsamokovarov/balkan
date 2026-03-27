@@ -9,6 +9,7 @@
         class: "w-20 h-20 p-2 bg-white border-2 border-black rounded-md object-contain",
         lazy: true %>
     <% end %>
+
     <div>
       <p class="text-4xl font-semibold"><%= @job_posting.sponsor.name %></p>
     </div>
@@ -21,8 +22,16 @@
   <% end %>
 
   <div class="mt-8">
-    <%= link_to @job_posting.application_url, class: "btn-primary", target: "_blank", rel: "noopener noreferrer" do %>
-      Apply now
+    <% if @job_posting.application_url.present? %>
+      <%= link_to @job_posting.application_url, class: "btn-primary", target: "_blank", rel: "noopener noreferrer" do %>
+        Apply now
+      <% end %>
+    <% elsif @job_posting.contacts.any? %>
+      <%= marketing_form url: jobs_path, data: { turbo: false } do |f| %>
+        <%= hidden_field_tag :job_posting_id, @job_posting.id %>
+        <%= f.captcha %>
+        <%= f.submit "Apply now" %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

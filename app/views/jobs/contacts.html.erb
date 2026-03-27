@@ -1,0 +1,33 @@
+<% title "Apply to #{@job_posting.title}" %>
+
+<% hi = section_highlighter %>
+
+<%= render "section", title: @job_posting.title, title_element: "h1", highlight: hi do %>
+  <div class="flex items-center gap-4 mb-8">
+    <% if @job_posting.sponsor.logo.attached? %>
+      <%= image_tag try_variant(@job_posting.sponsor.logo, resize_to_limit: [500, 500]),
+        class: "w-20 h-20 p-2 bg-white border-2 border-black rounded-md object-contain",
+        lazy: true %>
+    <% end %>
+    <div>
+      <p class="text-4xl font-semibold"><%= @job_posting.sponsor.name %></p>
+    </div>
+  </div>
+
+  <div class="space-y-6">
+    <p class="text-xl">To apply for this position, send your resume to the following contacts:</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <% @job_posting.contacts.each do |contact| %>
+        <%= mail_to contact.email, class: "block p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
+          <% if contact.name.present? %>
+            <p class="text-lg font-bold text-black"><%= contact.name %></p>
+          <% end %>
+          <p class="text-banitsa-600 underline"><%= contact.email %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= render "tickets/cta", highlight: !hi %>

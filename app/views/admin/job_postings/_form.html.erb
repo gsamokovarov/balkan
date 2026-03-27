@@ -7,8 +7,27 @@
   <% end %>
   <%= f.text_input :title, required: true %>
   <%= f.text_area_input :description, required: true %>
-  <%= f.text_input :application_url, required: true %>
+  <%= f.text_input :application_url %>
   <%= f.file_input :images, multiple: true %>
+
+  <%= f.fieldset "Contacts", appendable: true do %>
+    <div data-appendable-target="target" class="space-y-4 divide-dashed divide-y-2 divide-gray-300 dark:divide-gray-600">
+      <% job_posting.contacts.each do |contact| %>
+        <%= f.fields_for :contacts, contact do |cf| %>
+          <%= render "contact_form", form: cf %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <template data-appendable-target="template">
+      <%= f.fields :contacts_attributes, index: "" do |cf| %>
+        <%= render "contact_form", form: cf %>
+      <% end %>
+    </template>
+
+    <%= admin_button(:secondary, type: :button, "data-action": "appendable#add") { "Add contact" } %>
+  <% end %>
+
   <%= f.check_box_input :published %>
   <%= f.submit %>
 <% end %>
