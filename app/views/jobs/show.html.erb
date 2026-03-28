@@ -27,8 +27,7 @@
         Apply now
       <% end %>
     <% elsif @job_posting.contacts.any? %>
-      <%= marketing_form url: jobs_path, data: { turbo: false } do |f| %>
-        <%= hidden_field_tag :job_posting_id, @job_posting.id %>
+      <%= marketing_form url: job_path(@job_posting), html: { method: :put }, data: { turbo: false } do |f| %>
         <%= f.captcha %>
         <%= f.submit "Apply now" %>
       <% end %>

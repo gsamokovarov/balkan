@@ -7,11 +7,11 @@ class JobsController < ApplicationController
     @job_posting = Current.event.job_postings.find params[:id]
   end
 
-  def create
-    @job_posting = Current.event.job_postings.find params[:job_posting_id]
+  def update
+    @job_posting = Current.event.job_postings.find params[:id]
 
     if HCaptcha.valid? params
-      render :contacts
+      render :update
     else
       redirect_to job_path(@job_posting), alert: "Verify you're not a robot"
     end
