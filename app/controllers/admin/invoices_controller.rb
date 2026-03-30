@@ -1,6 +1,6 @@
 class Admin::InvoicesController < Admin::ApplicationController
   def index
-    @invoices = scope Invoice.includes(:invoice_sequence, :order, :refunded_invoice, :refund).order(created_at: :desc)
+    @invoices = scope filtered_invoices
   end
 
   def show
@@ -75,6 +75,12 @@ class Admin::InvoicesController < Admin::ApplicationController
   end
 
   private
+
+  def filtered_invoices
+    invoices = Invoice.includes(:invoice_sequence, :order, :refunded_invoice, :refund).order(created_at: :desc)
+    invoices = invoices.where(invoice_sequence_id: params[:invoice_sequence_id]) if params[:invoice_sequence_id].present?
+    invoices
+  end
 
   def locale = params.fetch(:locale, I18n.locale)
 

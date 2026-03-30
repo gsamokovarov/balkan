@@ -3,6 +3,11 @@
 <%= render "section", title: "Invoices", cta: -> {
   admin_button(:primary, link: new_admin_invoice_path) { "New invoice" }
 } do %>
+  <%= render "pills", pills: [
+    { name: "All", path: admin_invoices_path },
+    *InvoiceSequence.all.map { { name: it.display_name, path: admin_invoices_path(invoice_sequence_id: it.id) } }
+  ] %>
+
   <% if @invoices.any? %>
     <%= render "invoices", invoices: @invoices %>
     <%= admin_paginate @invoices %>
