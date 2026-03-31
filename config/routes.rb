@@ -63,7 +63,7 @@ Rails.application.routes.draw do
       resources :sponsorship_packages, only: [:index, :show, :new, :create, :edit, :update]
       resources :sponsorships, only: [:index, :show, :new, :create, :edit, :update]
       resources :contract_templates, only: [:index, :show, :new, :create, :edit, :update]
-      resources :contracts, only: [:index, :show, :new, :create, :update] do
+      resources :contracts, only: [:index, :show, :new, :create, :update, :destroy] do
         member do
           get :download
         end

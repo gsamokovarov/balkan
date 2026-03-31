@@ -44,6 +44,13 @@ class Admin::ContractsController < Admin::ApplicationController
     send_data @contract.document, filename: @contract.filename, type: "application/pdf", disposition: "attachment"
   end
 
+  def destroy
+    @contract = event.contracts.find params[:id]
+    @contract.destroy
+
+    redirect_to admin_event_contracts_path(event), notice: "Contract deleted"
+  end
+
   private
 
   def event = @event ||= Event.find(params[:event_id])
