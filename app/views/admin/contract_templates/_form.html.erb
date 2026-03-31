@@ -3,6 +3,7 @@
 <div class="flex flex-col md:flex-row md:space-x-6">
   <%= admin_form [:admin, contract_template.event, contract_template], html: { class: "sm:max-w-sm flex-1" } do |f| %>
     <%= f.text_input :name, required: true %>
+    <%= f.select_input :language, [["Bulgarian", "bg"], ["English", "en"]] %>
     <%= f.text_area_input :content, required: true, rows: 30,
         placeholder: "# Sponsorship Agreement for {{ event_name }}\n\nThis Agreement..." %>
     <%= f.submit %>

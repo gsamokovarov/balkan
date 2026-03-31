@@ -13,7 +13,7 @@ class Contract < ApplicationRecord
   private
 
   def liquid_context
-    issuer = Issuer.new date:, locale: :en
+    issuer = Issuer.new date:, locale: contract_template.language
 
     {
       "event_name" => event.name,

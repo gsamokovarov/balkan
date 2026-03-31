@@ -39,5 +39,5 @@ class Admin::ContractTemplatesController < Admin::ApplicationController
 
   def event = @event ||= Event.find(params[:event_id])
 
-  def contract_template_params = params.require(:contract_template).permit(:name, :content)
+  def contract_template_params = params.require(:contract_template).permit(:name, :content, :language)
 end
