@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 const WELCOME_MESSAGES = ["What do you want?", "Can't you see I'm busy?", "I'm on a break, come back later."]
 
+const DISCOUNT_RESPONSES = ["<strong>AI-SIKTIR</strong>! Go back in line."]
+
 const RESPONSES = [
   "THIS IS NOT INFORMATION! 🙅‍♀️",
   "That's not my department.",
@@ -36,7 +38,7 @@ export default class extends Controller {
     if (message) {
       this.addUserMessage(message)
       this.inputTarget.value = ""
-      setTimeout(() => this.addBotResponse(), 500)
+      setTimeout(() => this.addBotResponse(message), 500)
     }
   }
 
@@ -74,8 +76,12 @@ export default class extends Controller {
     this.scrollToBottom()
   }
 
-  addBotResponse() {
-    this.addBotMessage(RESPONSES[Math.floor(Math.random() * RESPONSES.length)])
+  addBotResponse(message) {
+    if (/discount|coupon|promo|voucher|code/i.test(message)) {
+      this.addBotMessage(DISCOUNT_RESPONSES[Math.floor(Math.random() * DISCOUNT_RESPONSES.length)])
+    } else {
+      this.addBotMessage(RESPONSES[Math.floor(Math.random() * RESPONSES.length)])
+    }
   }
 
   scrollToBottom() {
