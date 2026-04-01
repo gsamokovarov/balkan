@@ -7,10 +7,10 @@
     <div class="space-y-12">
       <% @job_postings.group_by(&:sponsor).each do |sponsor, job_postings| %>
         <div class="space-y-4">
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-4">
             <%= image_tag try_variant(sponsor.logo, resize_to_limit: [500, 500]),
-              class: "w-10 h-10 object-contain shrink-0" %>
-            <h2 class="text-xl font-extrabold"><%= sponsor.name %></h2>
+              class: "w-16 h-16 object-contain shrink-0" %>
+            <h2 class="text-2xl font-extrabold"><%= sponsor.name %></h2>
           </div>
 
           <div class="space-y-3">
