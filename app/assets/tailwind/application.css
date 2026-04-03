@@ -3,6 +3,14 @@
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
+@utility scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer components {
   .btn-primary {
     @apply
