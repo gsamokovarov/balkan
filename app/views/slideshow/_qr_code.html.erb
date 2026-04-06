@@ -1,0 +1,12 @@
+<%# locals: (event:) %>
+
+<div class="flex justify-center items-center">
+  <%= image_tag event.logo, class: "w-56", alt: event.name %>
+</div>
+<div class="text-4xl font-semibold text-gray-600">
+  <%= event.host %>
+</div>
+<div class="border-2 border-black rounded-md bg-white w-48 mx-auto">
+  <% qrcode = RQRCode::QRCode.new "https://#{event.host}" %>
+  <%== qrcode.as_svg use_path: true, viewbox: true %>
+</div>

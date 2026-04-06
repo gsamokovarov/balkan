@@ -1,0 +1,16 @@
+<%# locals: (slot:, sponsorship:) %>
+
+<div class="relative"
+  <% if sponsorship&.ogp_image&.attached? %>
+    data-controller="sponsors"
+    data-sponsors-sponsor-src-value="<%= url_for sponsorship.ogp_image %>"
+  <% end %>
+>
+  <time class="absolute top-8 left-16 font-semibold text-5xl text-gray-600" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+  <% if slot.lineup_member.talk.ogp_image.attached? %>
+    <%= image_tag slot.lineup_member.talk.ogp_image, class: "border-2 border-black bg-white rounded-md object-cover", "data-sponsors-target": "image" %>
+  <% else %>
+    <div class="text-3xl font-extrabold"><%= slot.lineup_member.talk.name %></div>
+    <div class="text-2xl text-gray-600"><%= slot.lineup_member.speaker.name %></div>
+  <% end %>
+</div>

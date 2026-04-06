@@ -1,0 +1,4 @@
+<%# locals: (slot:) %>
+
+<time class="font-semibold text-5xl text-gray-600" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+<div class="text-5xl font-extrabold"><%= slot.description %></div>

@@ -1,0 +1,12 @@
+<%# locals: (sponsorships:) %>
+
+<div class="grid grid-cols-4 gap-4 sm:gap-6">
+  <% sponsorships.each do |sponsorship| %>
+    <%= link_to sponsors_path(anchor: sponsorship.sponsor.name), class: [
+      "flex justify-center w-full h-24 p-4 bg-white border-2 border-black rounded-md",
+      sponsorship.fiscal? ? "col-span-2" : "col-span-1", "pointer-events-none"
+    ] do %>
+      <%= image_tag sponsorship.sponsor.logo, class: "w-auto h-full object-contain", lazy: true %>
+    <% end %>
+  <% end %>
+</div>
