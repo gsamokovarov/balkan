@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_31_074856) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_06_080326) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -333,6 +333,14 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_31_074856) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "slideshows", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_slideshows_on_event_id", unique: true
+  end
+
   create_table "speakers", force: :cascade do |t|
     t.string "name", null: false
     t.string "bio"
@@ -489,6 +497,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_31_074856) do
   add_foreign_key "schedule_slots", "schedules"
   add_foreign_key "schedules", "events"
   add_foreign_key "sessions", "users"
+  add_foreign_key "slideshows", "events"
   add_foreign_key "sponsorship_packages", "events"
   add_foreign_key "sponsorship_variants", "sponsorship_packages", column: "package_id"
   add_foreign_key "sponsorships", "events"
