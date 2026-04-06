@@ -1,0 +1,7 @@
+<%# locals: (slideshow:) %>
+
+<%= admin_form slideshow, url: admin_event_slideshow_path(slideshow.event) do |f| %>
+  <%= f.text_area_input :content, required: true, rows: 30 %>
+
+  <%= f.submit %>
+<% end %>

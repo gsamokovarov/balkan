@@ -48,6 +48,7 @@ module Admin::NavigationHelper
         tabs: [
           { name: "Blog posts", path: admin_event_blog_posts_path(Current.event) },
           { name: "Media Gallery", path: admin_event_media_gallery_path(Current.event) },
+          { name: "Slideshow", path: admin_event_slideshow_path(Current.event) },
           { name: "Activity", path: admin_event_event_activity_path(Current.event) },
           { name: "Embeddings", path: admin_event_embeddings_path(Current.event) },
           { name: "Venues", path: admin_venues_path, global: true },
