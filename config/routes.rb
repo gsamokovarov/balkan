@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       end
       resources :job_postings, only: [:index, :show, :new, :create, :update]
       resource :schedule, only: [:show, :new, :create, :edit, :update]
+      resource :slideshow, only: [:show, :new, :create, :update]
       resource :media_gallery, only: [:show, :new, :create, :edit, :update]
       resources :announcements, only: [:index, :show, :new, :create, :edit, :update] do
         member do

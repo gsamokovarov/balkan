@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   belongs_to :invoice_sequence
   belongs_to :venue, optional: true
   has_one :schedule
+  has_one :slideshow
   has_one :media_gallery
   has_many :orders
   has_many :ticket_types, -> { order :price }

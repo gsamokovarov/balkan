@@ -1,0 +1,20 @@
+<%= section_navigation :content %>
+
+<%= render "section", title: "Slideshow" do %>
+  <% if @slideshow %>
+    <%= render "form", slideshow: @slideshow %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <%= admin_button(:primary, link: new_admin_event_slideshow_path(Current.event)) { "New slideshow" } %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @slideshow %>
+  <%= render "section", title: "Preview" do %>
+    <div class="flex gap-4">
+      <iframe src="<%= slides_path(day: 0) %>" class="w-1/2 h-[600px] border-2 border-gray-300 rounded-md"></iframe>
+      <iframe src="<%= slides_path(day: 1) %>" class="w-1/2 h-[600px] border-2 border-gray-300 rounded-md"></iframe>
+    </div>
+  <% end %>
+<% end %>
