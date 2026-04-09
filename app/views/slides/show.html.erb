@@ -3,7 +3,7 @@
 <% if @slideshow %>
   <% render_slideshow(@slideshow, day: params[:day].to_i).each do |slide| %>
     <section class="center">
-      <%== slide %>
+      <%= render_markdown slide %>
     </section>
   <% end %>
 <% end %>
