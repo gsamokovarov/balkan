@@ -87,4 +87,8 @@
       />
     </label>
   </div>
+
+  <%= link_to ticket_path(@ticket.generate_token_for(:event_access), format: :pkpass), class: "mt-2" do %>
+    <%= image_tag "add-to-apple-wallet.svg", alt: "Add to Apple Wallet", width: 180 %>
+  <% end %>
 <% end %>
