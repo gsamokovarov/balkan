@@ -25,7 +25,7 @@
 }
 
 @utility animate-seismic-slam {
-  animation: seismic-slam 850ms linear;
+  animation: seismic-slam 1000ms linear;
 }
 
 @layer components {
