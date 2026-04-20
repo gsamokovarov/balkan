@@ -86,5 +86,15 @@
         "
       />
     </label>
+
+    <% if Current.user %>
+      <% if @ticket.checked_in? %>
+        <div class="text-center text-xs uppercase tracking-widest text-neutral-500 font-medium">
+          Checked in at <%= @ticket.checkin.created_at.to_fs :short %>
+        </div>
+      <% else %>
+        <%= button_to "Check in", ticket_checkin_path(params[:id]), class: "btn-primary w-full" %>
+      <% end %>
+    <% end %>
   </div>
 <% end %>

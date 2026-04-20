@@ -8,6 +8,7 @@
   column :type,  -> { it.ticket_type.name }
   column :shirt, -> { it.shirt_size }
   column :price, -> { format_money it.price }
+  column "Checked in", -> { it.checkin&.created_at&.to_fs :short }
 
   column do
     admin_button(:primary, :small, post: email_admin_event_ticket_path(it.event, it)) { "Send" }
