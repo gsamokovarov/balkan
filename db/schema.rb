@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_06_080326) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_20_100000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_06_080326) do
     t.datetime "published_at"
     t.index ["author_id"], name: "index_blog_posts_on_author_id"
     t.index ["event_id"], name: "index_blog_posts_on_event_id"
+  end
+
+  create_table "checkins", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "ticket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_checkins_on_event_id"
+    t.index ["ticket_id"], name: "index_checkins_on_ticket_id", unique: true
   end
 
   create_table "communication_drafts", force: :cascade do |t|
@@ -469,6 +478,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_06_080326) do
   add_foreign_key "announcements", "events"
   add_foreign_key "blog_posts", "events"
   add_foreign_key "blog_posts", "users", column: "author_id"
+  add_foreign_key "checkins", "events"
+  add_foreign_key "checkins", "tickets"
   add_foreign_key "communication_drafts", "events"
   add_foreign_key "communication_recipients", "communications"
   add_foreign_key "communications", "communication_drafts"

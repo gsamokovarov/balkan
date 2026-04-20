@@ -4,6 +4,7 @@ class Ticket < ApplicationRecord
   belongs_to :order
   belongs_to :ticket_type
   has_one :event, through: :order
+  has_one :checkin, dependent: :destroy
 
   generates_token_for :event_access
 
@@ -20,4 +21,6 @@ class Ticket < ApplicationRecord
   def qrcode = RQRCode::QRCode.new event_access_url
 
   def supporter? = ticket_type.supporter?
+
+  def checked_in? = checkin.present?
 end

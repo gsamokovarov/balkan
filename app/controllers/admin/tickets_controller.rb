@@ -1,6 +1,7 @@
 class Admin::TicketsController < Admin::ApplicationController
   def index
-    @tickets = scope event.tickets.includes(:event, :ticket_type)
+    @filter = params[:filter]
+    @tickets = scope filtered_tickets.includes(:event, :ticket_type, :checkin)
   end
 
   def giveaway
@@ -20,6 +21,14 @@ class Admin::TicketsController < Admin::ApplicationController
   end
 
   private
+
+  def filtered_tickets
+    tickets = event.tickets
+    case params[:filter]
+    when "expected" then tickets.where.missing(:checkin)
+    else tickets
+    end
+  end
 
   def giveaway_params = params.require(:giveaway).permit(:reason, tickets: [:name, :email, :shirt_size])
 

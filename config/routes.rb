@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       get :prospectus
     end
   end
-  resources :tickets, only: [:show]
+  resources :tickets, only: [:show] do
+    resource :checkin, only: [:create]
+  end
   resources :speakers, only: [:index]
   resources :talks, only: [:show]
   resources :checkouts, only: [:index, :show, :create]
