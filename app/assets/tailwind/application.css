@@ -11,6 +11,23 @@
   }
 }
 
+@keyframes seismic-slam {
+  0%   { transform: translateY(0);    box-shadow: 0 0 0 0 #000; }
+  10%  { transform: translateY(-8px); box-shadow: 2px 2px 0 0 #000; }
+  20%  { transform: translateY(0);    box-shadow: 12px 12px 0 0 #000; }
+  30%  { transform: translateY(-5px); box-shadow: 8px 8px 0 0 #000; }
+  40%  { transform: translateY(0);    box-shadow: 10px 10px 0 0 #000; }
+  50%  { transform: translateY(-3px); box-shadow: 6px 6px 0 0 #000; }
+  60%  { transform: translateY(0);    box-shadow: 8px 8px 0 0 #000; }
+  70%  { transform: translateX(-2px); box-shadow: 6px 6px 0 0 #000; }
+  80%  { transform: translateX(2px);  box-shadow: 5px 5px 0 0 #000; }
+  100% { transform: translate(0, 0);  box-shadow: 4px 4px 0 0 #000; }
+}
+
+@utility animate-seismic-slam {
+  animation: seismic-slam 850ms linear;
+}
+
 @layer components {
   .btn-primary {
     @apply
