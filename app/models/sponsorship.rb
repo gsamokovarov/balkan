@@ -6,4 +6,5 @@ class Sponsorship < ApplicationRecord
   has_one_attached :ogp_image
 
   def fiscal? = price_paid.positive?
+  def significant? = fiscal? && price_paid > 5000
 end
