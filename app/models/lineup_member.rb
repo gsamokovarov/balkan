@@ -4,4 +4,6 @@ class LineupMember < ApplicationRecord
   belongs_to :talk, optional: true
 
   enum :status, [:pending, :cancelled, :confirmed]
+
+  def speaker? = role == "Speaker"
 end
