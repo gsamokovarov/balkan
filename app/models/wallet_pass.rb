@@ -34,6 +34,18 @@ module WalletPass
         "#{event.start_date.strftime '%b %d'}–#{event.end_date.strftime '%d, %Y'}"
       end
 
+    secondary_fields = [
+      { key: "dates", label: "DATES", value: date_format },
+    ]
+    back_fields = [
+      { key: "email", label: "Email", value: ticket.email },
+    ]
+
+    if event.venue
+      secondary_fields << { key: "venue", label: "VENUE", value: event.venue.name }
+      back_fields << { key: "address", label: "Address", value: event.venue.address } if event.venue.address.present?
+    end
+
     {
       formatVersion: 1,
       passTypeIdentifier: Settings.apple_wallet_pass_type_identifier,
@@ -41,29 +53,25 @@ module WalletPass
       serialNumber: ticket.id.to_s,
       organizationName: event.name,
       description: "#{event.name} ticket",
-      foregroundColor: "rgb(255, 255, 255)",
-      backgroundColor: "rgb(182, 70, 69)",
-      labelColor: "rgb(255, 255, 255)",
+      foregroundColor: "rgb(0, 0, 0)",
+      backgroundColor: "rgb(253, 242, 243)",
+      labelColor: "rgb(0, 0, 0)",
       relevantDates: (event.start_date..event.end_date).map do
         { startDate: it.in_time_zone.change(hour: 9).iso8601, endDate: it.in_time_zone.change(hour: 17).iso8601 }
       end,
       eventTicket: {
         headerFields: [
-          { key: "ticket_type", label: "TICKET", value: ticket.ticket_type.name },
+          { key: "ticket_type", label: "TICKET", value: ticket.supporter? ? "Supporter" : "Regular" },
         ],
         primaryFields: [
           { key: "event_name", label: "EVENT", value: event.name },
         ],
-        secondaryFields: [
-          { key: "dates", label: "DATES", value: date_format },
-        ],
+        secondaryFields: secondary_fields,
         auxiliaryFields: [
           { key: "attendee", label: "ATTENDEE", value: ticket.name },
+          { key: "shirt_size", label: "T-SHIRT", value: ticket.shirt_size },
         ],
-        backFields: [
-          { key: "email", label: "Email", value: ticket.email },
-          { key: "shirt_size", label: "T-Shirt Size", value: ticket.shirt_size },
-        ],
+        backFields: back_fields,
       },
       barcodes: [
         { message: ticket.event_access_url, format: "PKBarcodeFormatQR", messageEncoding: "iso-8859-1" },
