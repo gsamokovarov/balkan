@@ -73,7 +73,7 @@ module WalletPass
 
   def sign(data)
     @cert ||= OpenSSL::X509::Certificate.new Settings.apple_wallet_certificate
-    @key ||= OpenSSL::PKey.read Settings.apple_wallet_key, Settings.apple_wallet_key_password.to_s
+    @key ||= OpenSSL::PKey.read Settings.apple_wallet_key
     @wwdr ||= OpenSSL::X509::Certificate.new Settings.apple_wallet_wwdr
 
     OpenSSL::PKCS7.sign(@cert, @key, data, [@wwdr], OpenSSL::PKCS7::BINARY | OpenSSL::PKCS7::DETACHED).to_der

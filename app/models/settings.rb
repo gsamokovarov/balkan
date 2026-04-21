@@ -15,7 +15,6 @@ module Settings
   def apple_wallet_pass_type_identifier = get __method__
   def apple_wallet_certificate = get __method__
   def apple_wallet_key = get __method__
-  def apple_wallet_key_password = get __method__, optional: true
   def apple_wallet_wwdr = get __method__
 
   def development_event = get __method__, optional: true
