@@ -12,7 +12,7 @@ module WalletPass
       "logo@2x.png" => Rails.public_path.join("pass/logo@2x.png").binread,
     }
 
-    files["manifest.json"] = files.transform_values { Digest::SHA256.hexdigest it }.to_json
+    files["manifest.json"] = files.transform_values { Digest::SHA1.hexdigest it }.to_json
     files["signature"] = sign files["manifest.json"]
 
     Zip::OutputStream.write_buffer do |zip|
@@ -45,7 +45,7 @@ module WalletPass
       backgroundColor: "rgb(182, 70, 69)",
       labelColor: "rgb(255, 255, 255)",
       relevantDates: (event.start_date..event.end_date).map do
-        { startDate: it.change(hour: 9).iso8601, endDate: it.change(hour: 17).iso8601 }
+        { startDate: it.in_time_zone.change(hour: 9).iso8601, endDate: it.in_time_zone.change(hour: 17).iso8601 }
       end,
       eventTicket: {
         headerFields: [
