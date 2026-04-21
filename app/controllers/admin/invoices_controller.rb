@@ -64,9 +64,18 @@ class Admin::InvoicesController < Admin::ApplicationController
     send_data @invoice.document(locale:), disposition: "inline", type: "application/pdf"
   end
 
+  def export
+    date_range = Date.parse("#{params[:month]}-01").to_time.all_month
+
+    invoices = filtered_invoices.where created_at: date_range
+
+    report = Invoice::Reporting.export_to_tar invoices
+    send_data report, filename: "invoices-#{params[:month]}.tar", type: :tar
+  end
+
   def refund
-    @invoice = Invoice.find(params[:id])
-    invoice_sequence = InvoiceSequence.find(params[:invoice_sequence_id])
+    @invoice = Invoice.find params[:id]
+    invoice_sequence = InvoiceSequence.find params[:invoice_sequence_id]
     refunded_amount = params[:refunded_amount].to_d
 
     @invoice.issue_refund(refunded_amount, invoice_sequence:)

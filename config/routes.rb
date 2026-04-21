@@ -107,6 +107,7 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index, :show, :new, :create, :update] do
       collection do
         post :preview
+        get :export
       end
       member do
         get :download

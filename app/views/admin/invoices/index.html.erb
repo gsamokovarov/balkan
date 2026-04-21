@@ -1,7 +1,10 @@
 <%= section_navigation :accounting %>
 
 <%= render "section", title: "Invoices", cta: -> {
-  admin_button(:primary, link: new_admin_invoice_path) { "New invoice" }
+  safe_join [
+    admin_button(:primary, link: new_admin_invoice_path, class: "mr-2") { "New invoice" },
+    admin_button(:secondary, onclick: "export_dialog.showModal()") { "Export" },
+  ]
 } do %>
   <%= render "pills", pills: [
     { name: "All", path: admin_invoices_path },
@@ -15,5 +18,20 @@
     <%= render "empty_state" do %>
       <% admin_button(:primary, link: new_admin_invoice_path) { "New invoice" } %>
     <% end %>
+  <% end %>
+<% end %>
+
+<%= admin_modal :export_dialog, "Export" do %>
+  <%= admin_form url: export_admin_invoices_path, method: :get do |f| %>
+    <% if params[:invoice_sequence_id].present? %>
+      <%= hidden_field_tag :invoice_sequence_id, params[:invoice_sequence_id] %>
+    <% end %>
+
+    <%= f.month_input "month", value: Date.current.strftime('%Y-%m'), required: true %>
+
+    <div class="mt-6 flex justify-end gap-3">
+      <%= admin_button(:secondary, type: :button, formmethod: :dialog, data: { action: "modal#close" }) { "Cancel" } %>
+      <%= f.submit "Export" %>
+    </div>
   <% end %>
 <% end %>
