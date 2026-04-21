@@ -9,6 +9,15 @@ class TicketsController < ApplicationController
     resume_session
 
     @ticket = Ticket.find_by_token_for! :event_access, params[:id]
+
+    respond_to do |format|
+      format.html
+      format.pkpass do
+        send_data WalletPass.to_pkpass(@ticket), type: :pkpass,
+                                                 filename: "balkanruby-#{@ticket.id}.pkpass",
+                                                 disposition: :attachment
+      end
+    end
   end
 
   private
