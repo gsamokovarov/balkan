@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.case WalletPass, type: :model do
   test "generates a valid pkpass ZIP" do
     venue = create :venue, name: "Material House", address: "Tsar Samuil 73, Sofia"
-    event = create(:event, :balkan2025, venue: venue)
+    event = create(:event, :balkan2025, venue: venue, contact_email: "hello@balkanruby.com")
     order = create(:order, event:)
     ticket_type = create(:ticket_type, :enabled, event:)
     ticket = create :ticket, :early_bird, ticket_type:, order:,
@@ -50,8 +50,8 @@ RSpec.case WalletPass, type: :model do
           { "key" => "shirt_size", "label" => "T-SHIRT", "value" => "M" },
         ],
         "backFields" => [
-          { "key" => "email", "label" => "Email", "value" => "genadi@hey.com" },
-          { "key" => "address", "label" => "Address", "value" => "Tsar Samuil 73, Sofia" },
+          { "key" => "email", "label" => "Support email", "value" => "hello@balkanruby.com" },
+          { "key" => "address", "label" => "Venue address", "value" => "Tsar Samuil 73, Sofia" },
         ],
       },
       "barcodes" => [

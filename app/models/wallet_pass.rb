@@ -34,18 +34,6 @@ module WalletPass
         "#{event.start_date.strftime '%b %d'}–#{event.end_date.strftime '%d, %Y'}"
       end
 
-    secondary_fields = [
-      { key: "dates", label: "DATES", value: date_format },
-    ]
-    back_fields = [
-      { key: "email", label: "Email", value: ticket.email },
-    ]
-
-    if event.venue
-      secondary_fields << { key: "venue", label: "VENUE", value: event.venue.name }
-      back_fields << { key: "address", label: "Address", value: event.venue.address } if event.venue.address.present?
-    end
-
     {
       formatVersion: 1,
       passTypeIdentifier: Settings.apple_wallet_pass_type_identifier,
@@ -66,12 +54,18 @@ module WalletPass
         primaryFields: [
           { key: "event_name", label: "EVENT", value: event.name },
         ],
-        secondaryFields: secondary_fields,
+        secondaryFields: [
+          { key: "dates", label: "DATES", value: date_format },
+          ({ key: "venue", label: "VENUE", value: event.venue.name } if event.venue),
+        ].compact,
         auxiliaryFields: [
           { key: "attendee", label: "ATTENDEE", value: ticket.name },
           { key: "shirt_size", label: "T-SHIRT", value: ticket.shirt_size },
         ],
-        backFields: back_fields,
+        backFields: [
+          ({ key: "email", label: "Support email", value: event.contact_email } if event.contact_email),
+          ({ key: "address", label: "Venue address", value: event.venue.address } if event.venue&.address),
+        ].compact,
       },
       barcodes: [
         { message: ticket.event_access_url, format: "PKBarcodeFormatQR", messageEncoding: "iso-8859-1" },
