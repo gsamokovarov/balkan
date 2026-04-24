@@ -21,6 +21,5 @@ class Ticket < ApplicationRecord
   def qrcode = RQRCode::QRCode.new event_access_url
 
   def supporter? = ticket_type.supporter?
-
   def checked_in? = checkin.present?
 end

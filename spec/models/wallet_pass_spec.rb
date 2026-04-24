@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.case WalletPass, type: :model do
   test "generates a valid pkpass ZIP" do
     venue = create :venue, name: "Material House", address: "Tsar Samuil 73, Sofia"
-    event = create(:event, :balkan2025, venue: venue, contact_email: "hello@balkanruby.com")
+    event = create :event, :balkan2025, venue:, contact_email: "hello@balkanruby.com"
     order = create(:order, event:)
     ticket_type = create(:ticket_type, :enabled, event:)
     ticket = create :ticket, :early_bird, ticket_type:, order:,
@@ -36,7 +36,7 @@ RSpec.case WalletPass, type: :model do
       end,
       "eventTicket" => {
         "headerFields" => [
-          { "key" => "ticket_type", "label" => "TICKET", "value" => "Regular" },
+          { "key" => "ticket_type", "label" => "TICKET", "value" => "Early Bird" },
         ],
         "primaryFields" => [
           { "key" => "event_name", "label" => "EVENT", "value" => "Balkan Ruby 2025" },
@@ -60,27 +60,5 @@ RSpec.case WalletPass, type: :model do
     }
 
     assert_eq JSON.parse(entries["manifest.json"]).keys.sort, ["icon.png", "icon@2x.png", "logo.png", "logo@2x.png", "pass.json"]
-  end
-
-  test "labels supporter tickets in the top-right badge" do
-    event = create :event, :balkan2025
-    order = create(:order, event:)
-    ticket_type = create(:ticket_type, :enabled, event:, name: "Supporter")
-    ticket = create :ticket, :early_bird, ticket_type:, order:,
-                                          name: "Genadi Samokovarov",
-                                          email: "genadi@hey.com"
-
-    data = WalletPass.to_pkpass ticket
-
-    pass_json = nil
-    Zip::InputStream.open StringIO.new(data) do |zip|
-      while (entry = zip.get_next_entry)
-        pass_json = zip.read if entry.name == "pass.json"
-      end
-    end
-
-    assert_eq JSON.parse(pass_json).dig("eventTicket", "headerFields"), [
-      { "key" => "ticket_type", "label" => "TICKET", "value" => "Supporter" },
-    ]
   end
 end

@@ -49,7 +49,7 @@ module WalletPass
       end,
       eventTicket: {
         headerFields: [
-          { key: "ticket_type", label: "TICKET", value: ticket.supporter? ? "Supporter" : "Regular" },
+          { key: "ticket_type", label: "TICKET", value: ticket.ticket_type.name },
         ],
         primaryFields: [
           { key: "event_name", label: "EVENT", value: event.name },
