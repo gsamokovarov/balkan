@@ -8,8 +8,8 @@ class CommunicationMailer < ApplicationMailer
     @sponsor_attachments =
       if communication.with_sponsors?
         communication.event.sponsors.filter_map do |sponsorship|
-          filename = "sponsor-#{sponsorship.id}-#{sponsorship.sponsor.logo.filename}"
-          attachments.inline[filename] = sponsorship.sponsor.logo.download
+          filename = "sponsor-#{sponsorship.id}.png"
+          attachments.inline[filename] = sponsorship.sponsor.logo.variant(resize_to_limit: [200, 200], format: :png).processed.download
           { name: sponsorship.sponsor.name, filename: }
         end
       end

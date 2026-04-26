@@ -31,6 +31,7 @@
       .h-auto { height: auto; }
       .w-auto { width: auto; }
       .w-full { width: 100%; }
+      .w-24 { width: 6rem; }
       .w-56 { width: 14rem; }
       .w-prose { width: 65ch; max-width: 100%; }
       .max-h-16 { max-height: 4rem; }
@@ -161,7 +162,7 @@
     <div class="flex flex-col">
       <% if attachments['logo.png'] %>
         <header class="py-6 px-4">
-          <%= image_tag attachments['logo.png'].url, title: "Logo", alt: "Logo" %>
+          <%= image_tag attachments['logo.png'].url, class: "w-24", title: "Logo", alt: "Logo" %>
         </header>
       <% end %>
 

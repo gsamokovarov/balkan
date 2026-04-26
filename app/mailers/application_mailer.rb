@@ -12,6 +12,8 @@ class ApplicationMailer < ActionMailer::Base
   private
 
   def attach_event_logo(event)
-    attachments.inline["logo.png"] = event.logo.download if event.logo.attached?
+    return unless event.logo.attached?
+
+    attachments.inline["logo.png"] = event.logo.variant(resize_to_limit: [200, 200], format: :png).processed.download
   end
 end
