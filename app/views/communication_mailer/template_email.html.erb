@@ -2,6 +2,24 @@
   <%= render_markdown @body %>
 </div>
 
+<% if @sponsor_attachments.present? %>
+  <hr />
+
+  <p><strong>Our sponsors:</strong></p>
+
+  <table class="w-prose border-collapse mt-6" cellpadding="12" cellspacing="0" border="0">
+    <% @sponsor_attachments.each_slice(4) do |sponsors| %>
+      <tr>
+        <% sponsors.each do |sponsor| %>
+          <td class="text-center align-middle" width="<%= 100 / sponsors.size %>%">
+            <%= image_tag attachments[sponsor[:filename]].url, alt: sponsor[:name], title: sponsor[:name], class: "h-auto w-auto max-h-16 max-w-full" %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <% if @subscriber %>
   <hr />
 

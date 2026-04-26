@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_20_100000) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_25_120000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -99,6 +99,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_20_100000) do
     t.boolean "to_subscribers", default: false, null: false
     t.boolean "to_event", default: false, null: false
     t.boolean "to_speakers", default: false, null: false
+    t.boolean "with_sponsors", default: false, null: false
     t.index ["communication_draft_id"], name: "index_communications_on_communication_draft_id"
   end
 

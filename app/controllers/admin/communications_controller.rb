@@ -25,7 +25,7 @@ class Admin::CommunicationsController < Admin::ApplicationController
   private
 
   def communication_params
-    params.require(:communication).permit(:to_speakers, :to_subscribers, :to_event,
+    params.require(:communication).permit(:to_speakers, :to_subscribers, :to_event, :with_sponsors,
                                           recipients_attributes: [:id, :email])
   end
 

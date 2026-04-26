@@ -2,11 +2,12 @@
   <%= render "form", draft: @draft %>
 <% end %>
 
-<%= render "section", title: "Actions" do %>
+<% last_sent = @draft.communications.order(created_at: :desc).first %>
+<% description = last_sent && "Last sent on #{last_sent.created_at.to_fs(:short)} to #{pluralize last_sent.recipients.count, "recipient"}." %>
+
+<%= render "section", title: "Actions", description: do %>
   <div class="flex gap-2">
-    <% unless @draft.sent? %>
-      <%= admin_button(:primary, link: new_admin_event_communication_path(@draft.event, draft_id: @draft.id)) { "Send" } %>
-    <% end %>
+    <%= admin_button(:primary, link: new_admin_event_communication_path(@draft.event, draft_id: @draft.id)) { "Send" } %>
     <%= admin_button(:danger, delete: admin_event_communication_draft_path(@draft.event, @draft)) { "Delete" } %>
   </div>
 <% end %>
