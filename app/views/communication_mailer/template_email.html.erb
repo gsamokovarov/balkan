@@ -12,7 +12,7 @@
       <tr>
         <% sponsors.each do |sponsor| %>
           <td class="text-center align-middle" width="<%= 100 / sponsors.size %>%">
-            <%= image_tag attachments[sponsor[:filename]].url, alt: sponsor[:name], title: sponsor[:name], class: "w-24 h-auto" %>
+            <%= image_tag attachments[sponsor[:filename]].url, alt: sponsor[:name], title: sponsor[:name], class: "w-16 h-auto" %>
           </td>
         <% end %>
       </tr>
