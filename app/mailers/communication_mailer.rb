@@ -1,5 +1,7 @@
 class CommunicationMailer < ApplicationMailer
   def template_email(communication, recipient)
+    attach_event_logo communication.event
+
     communication.interpolate_for(recipient.email) => { subject:, body: }
     @subscriber = communication.to_subscribers? && Subscriber.find_by(email: recipient.email)
     @body = body
