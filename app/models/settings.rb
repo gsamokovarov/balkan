@@ -9,6 +9,8 @@ module Settings
   def h_captcha_secret = get __method__
   def h_captcha_site_key = get __method__
 
+  def honeybadger_key = get __method__, optional: true
+
   def google_api_key = get __method__
 
   def apple_wallet_team_identifier = get __method__
