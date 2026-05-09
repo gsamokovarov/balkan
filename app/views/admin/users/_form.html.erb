@@ -6,6 +6,9 @@
   <%= f.password_input :password %>
   <%= f.text_area_input :bio %>
   <%= f.file_input :avatar %>
+  <% if Current.user&.organizer? %>
+    <%= f.enum_input :role, User.roles, selected: user.role || :staff %>
+  <% end %>
 
   <%= f.submit %>
 <% end %>

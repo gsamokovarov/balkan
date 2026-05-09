@@ -13,8 +13,10 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def create
-    @user = User.create user_params
-    if @user.valid?
+    @user = User.new user_params
+    @user.role = role_param if role_param
+
+    if @user.save
       redirect_to admin_users_path, notice: "User was created"
     else
       render :new, status: :unprocessable_entity
@@ -23,8 +25,10 @@ class Admin::UsersController < Admin::ApplicationController
 
   def update
     @user = User.find params[:id]
+    @user.assign_attributes user_params
+    @user.role = role_param if role_param
 
-    if @user.update user_params
+    if @user.save
       redirect_to admin_users_path, notice: "User was updated"
     else
       render :show, status: :unprocessable_entity
@@ -41,4 +45,5 @@ class Admin::UsersController < Admin::ApplicationController
   private
 
   def user_params = params.require(:user).permit :name, :email, :password, :bio, :avatar
+  def role_param  = Current.user&.organizer? ? params.dig(:user, :role).presence : nil
 end

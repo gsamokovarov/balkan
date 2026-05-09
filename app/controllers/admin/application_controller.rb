@@ -1,5 +1,6 @@
 class Admin::ApplicationController < ApplicationController
   include Authentication
+  include Authorization
 
   layout -> { turbo_frame_request? ? "turbo_rails/frame" : "admin/application" }
 
