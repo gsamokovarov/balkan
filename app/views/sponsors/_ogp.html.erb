@@ -1,0 +1,27 @@
+<%# locals: (sponsor:) %>
+
+<% content_for :ogp do %>
+  <% sponsorship = sponsor.sponsorships.find_by(event: Current.event) %>
+  <% image = if sponsorship&.ogp_image&.attached?
+               url_for(sponsorship.ogp_image)
+             elsif Current.event.ogp_image.attached?
+               url_for(Current.event.ogp_image)
+             else
+               image_url("ogp_image.png")
+             end %>
+  <% description = sponsor.description.present? ? render_plain(truncate(sponsor.description, length: 160)) : "#{sponsor.name} is sponsoring #{Current.event.name}!" %>
+
+  <meta property="og:title" content="<%= sponsor.name %> - <%= Current.event.name %>">
+  <meta property="og:site_name" content="<%= Current.event.name %>">
+  <meta property="og:url" content="<%= sponsor_url(sponsor) %>">
+  <meta property="og:description" content="<%= description %>">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="<%= image %>">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@balkanruby">
+  <meta name="twitter:creator" content="@gsamokovarov">
+  <meta name="twitter:title" content="<%= sponsor.name %> - <%= Current.event.name %>">
+  <meta name="twitter:description" content="<%= description %>">
+  <meta name="twitter:image" content="<%= image %>">
+<% end %>

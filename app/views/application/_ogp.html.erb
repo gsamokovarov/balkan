@@ -1,13 +1,28 @@
-<meta property="og:title" content="Balkan Ruby">
-<meta property="og:site_name" content="Balkan Ruby – April 25-26, 2025">
-<meta property="og:url" content="https://balkanruby.com">
-<meta property="og:description" content="Balkan Ruby is about the long term! April 25-26, 2025 in Sofia, Bulgaria">
+<% event = Current.event %>
+
+<% if event %>
+  <% title = event.title ? strip_tags(event.title) : event.name %>
+  <% dates = "#{event.start_date.strftime("%B %-d")}-#{event.end_date.strftime("%-d, %Y")}" %>
+  <% site_name = "#{strip_tags(event.name)} – #{dates}" %>
+  <% description = event.description ? strip_tags(event.description) : "#{event.name} is happening on #{dates} in Sofia, Bulgaria" %>
+  <% image = event.ogp_image.attached? ? url_for(event.ogp_image) : image_url("ogp_image.png") %>
+<% else %>
+  <% title = "Balkan Ruby" %>
+  <% site_name = "Balkan Ruby" %>
+  <% description = "An annual gathering of Rubyists in Sofia, Bulgaria." %>
+  <% image = image_url("ogp_image.png") %>
+<% end %>
+
+<meta property="og:title" content="<%= title %>">
+<meta property="og:site_name" content="<%= site_name %>">
+<meta property="og:url" content="<%= request.original_url %>">
+<meta property="og:description" content="<%= description %>">
 <meta property="og:type" content="website">
-<meta property="og:image" content="<%= image_url("ogp_image.png") %>">
+<meta property="og:image" content="<%= image %>">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@balkanruby">
 <meta name="twitter:creator" content="@gsamokovarov">
-<meta name="twitter:title" content="Balkan Ruby – April 25-26, 2025">
-<meta name="twitter:description" content="Balkan Ruby is about the long term! April 25-26, 2025 in Sofia, Bulgaria">
-<meta name="twitter:image" content="<%= image_url("ogp_image.png") %>">
+<meta name="twitter:title" content="<%= title %>">
+<meta name="twitter:description" content="<%= description %>">
+<meta name="twitter:image" content="<%= image %>">
