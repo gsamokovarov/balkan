@@ -18,5 +18,5 @@ class User < ApplicationRecord
     password_digest&.last 10
   end
 
-  def invited? = password_digest.blank?
+  def incomplete? = password_digest.blank?
 end

@@ -2,7 +2,7 @@
   <%= render "form", user: @user %>
 <% end %>
 
-<% if @user.invited? %>
+<% if Current.user.organizer? && @user.incomplete? %>
   <%= render "section", title: "Activation link", description: "This user hasn't set a password yet. Send them this one-time link to finish setup." do %>
     <%= render "activation", user: @user %>
   <% end %>
