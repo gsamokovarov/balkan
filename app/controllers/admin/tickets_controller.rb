@@ -1,4 +1,6 @@
 class Admin::TicketsController < Admin::ApplicationController
+  allow_staff_to :checkin
+
   def index
     @filter = params[:filter]
     @tickets = scope filtered_tickets.includes(:event, :ticket_type, :checkin)
@@ -18,6 +20,13 @@ class Admin::TicketsController < Admin::ApplicationController
     TicketMailer.ticket_email(ticket).deliver_now
 
     redirect_to request.path, notice: "Email sent to #{ticket.email}"
+  end
+
+  def checkin
+    ticket = event.tickets.find params[:id]
+    ticket.create_checkin!(event:)
+
+    redirect_back_or_to ticket.event_access_url
   end
 
   private

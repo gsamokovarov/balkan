@@ -93,7 +93,7 @@
           Checked in at <%= @ticket.checkin.created_at.to_fs :short %>
         </div>
       <% else %>
-        <%= button_to "Check in", ticket_checkin_path(params[:id]), class: "btn-primary w-full" %>
+        <%= button_to "Check in", checkin_admin_event_ticket_path(@ticket.event, @ticket), class: "btn-primary w-full" %>
       <% end %>
     <% end %>
   </div>
