@@ -2,6 +2,12 @@
   <%= render "form", user: @user %>
 <% end %>
 
+<% if @user.invited? %>
+  <%= render "section", title: "Activation link", description: "This user hasn't set a password yet. Send them this one-time link to finish setup." do %>
+    <%= render "activation", user: @user %>
+  <% end %>
+<% end %>
+
 <%= render "section", title: "Sessions" do %>
   <% if @user.sessions.any? %>
     <%= render "sessions", sessions: @user.sessions.order(id: :desc) %>

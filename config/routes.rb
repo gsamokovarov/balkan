@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     root "dashboards#show"
     get "/current/orders", to: "dashboards#orders", as: :current_orders
     resource :login, only: [:show, :create]
+    resources :invitations, only: [:show, :update]
     resources :markdown_previews, only: [:create]
     resources :orders, only: [:index, :show, :update] do
       collection do

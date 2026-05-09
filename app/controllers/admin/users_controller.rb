@@ -17,7 +17,7 @@ class Admin::UsersController < Admin::ApplicationController
     @user.role = role_param if role_param
 
     if @user.save
-      redirect_to admin_users_path, notice: "User was created"
+      redirect_to admin_user_path(@user), notice: "User was created"
     else
       render :new, status: :unprocessable_entity
     end

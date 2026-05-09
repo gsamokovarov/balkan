@@ -53,7 +53,7 @@ The `Current` class (ActiveSupport::CurrentAttributes) maintains thread-local st
 - Custom admin interface at `/admin` with role-based access
 - Admin scaffold generator: `bin/rails generate admin:scaffold ResourceName`
 - Authentication via custom session system (not Devise)
-- Default admin user: `admin@example.com` / `admin` (development only)
+- Default admin user: `admin@example.com` / `test1234` (development only)
 
 ### View Partials
 - Partials that accept local variables must declare them with the magic comment: `<%# locals: (pills:) %>`

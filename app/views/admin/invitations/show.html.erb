@@ -1,0 +1,29 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= image_tag "logo-ruby.png", class: "mx-auto h-10 w-auto" %>
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
+      Set your password
+    </h2>
+    <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+      Welcome <%= @user.name %>, choose a password to finish setting up your account.
+    </p>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= admin_form @user, url: admin_invitation_path(params[:id]), method: :patch do |f| %>
+      <% if @user.errors.any? %>
+        <%= render "alert" do %>
+          <% @user.errors.full_messages.each do |message| %>
+            <p class="text-red-700 dark:text-red-400 text-sm font-medium">
+              <%= message %>
+            </p>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= f.password_input :password, required: true, autofocus: true, autocomplete: "new-password" %>
+      <%= f.password_input :password_confirmation, required: true, autocomplete: "new-password" %>
+      <%= f.submit "Set password" %>
+    <% end %>
+  </div>
+</div>

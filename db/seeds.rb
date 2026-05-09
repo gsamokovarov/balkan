@@ -88,7 +88,7 @@ end
 
 User.find_or_create_by! email: "admin@example.com" do
   it.name = "Admin"
-  it.password = "admin"
+  it.password = "test1234"
 end
 
-puts "Admin user: admin@example.com with password 'admin'"
+puts "Admin user: admin@example.com with password 'test1234'"

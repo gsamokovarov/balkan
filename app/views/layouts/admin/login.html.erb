@@ -32,6 +32,12 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <%= yield %>
         </div>
+
+        <% flash.each do |type, message| %>
+          <%= render "admin/application/alert", class: "fixed bottom-8 left-1/2 -translate-x-1/2 shadow-sm", temporary: true do %>
+            <%= message %>
+          <% end %>
+        <% end %>
       </main>
     </div>
   </body>
