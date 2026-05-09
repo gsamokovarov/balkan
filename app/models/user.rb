@@ -14,7 +14,7 @@ class User < ApplicationRecord
     errors.add :password, :blank if password_digest.blank?
   end
 
-  generates_token_for :invitation, expires_in: 14.days do
+  generates_token_for :invitation, expires_in: 2.days do
     password_digest&.last 10
   end
 
