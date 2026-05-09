@@ -1,6 +1,7 @@
 class Admin::QrCodesController < Admin::ApplicationController
-  def show
-  end
+  allow_staff_to :create
+
+  def show = nil
 
   def create
     @url = params[:url]
