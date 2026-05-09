@@ -40,4 +40,12 @@ RSpec.case "Admin authorization", type: :request do
     assert_have_http_status response, :redirect
     assert_eq Sponsor.exists?(name: "Acme"), true
   end
+
+  test "the login page loads for unauthenticated users" do
+    create :event, :balkan2025
+
+    get admin_login_path
+
+    assert_have_http_status response, :ok
+  end
 end
