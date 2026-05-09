@@ -37,6 +37,30 @@ RSpec.case "Admin invitation", type: :feature do
     assert_eq invitee.sessions.any?, true
   end
 
+  test "an empty-password submission is rejected and does not create a session" do
+    create :event, :balkan2025
+    sign_in_admin
+
+    visit new_admin_user_path
+    fill_in "Name", with: "Jane Invitee"
+    fill_in "Email", with: "jane@example.com"
+    click_button "Save"
+
+    activation_url = find("code[data-clipboard-target='source']").text
+    activation_path = URI.parse(activation_url).request_uri
+
+    Capybara.reset_sessions!
+
+    visit activation_path
+    click_button "Set password"
+
+    assert_have_content page, "Password can't be blank"
+
+    invitee = User.find_by! email: "jane@example.com"
+    assert_eq invitee.password_digest, nil
+    assert_eq invitee.sessions.any?, false
+  end
+
   test "the activation link stops working once the password is set" do
     create :event, :balkan2025
     sign_in_admin
