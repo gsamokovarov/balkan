@@ -35,7 +35,7 @@ module SlideshowHelper
     end
 
     if event.schedule
-      fiscal_sponsorships = event.sponsorships.filter(&:fiscal?)
+      fiscal_sponsorships = event.sponsorships.filter(&:fiscal?).sort_by { -it.price_paid }
       talks, breaks = event.schedule.slots_for_day(day).partition { it.lineup_member&.talk }
 
       talks.each.with_index 1 do |slot, i|
