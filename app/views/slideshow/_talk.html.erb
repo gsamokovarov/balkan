@@ -6,7 +6,7 @@
     data-sponsors-sponsor-src-value="<%= url_for sponsorship.ogp_image %>"
   <% end %>
 >
-  <time class="absolute top-8 left-16 font-semibold text-5xl text-gray-600" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
+  <time class="absolute top-8 left-32 font-semibold text-5xl text-gray-600" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>
   <% if slot.lineup_member.talk.ogp_image.attached? %>
     <%= image_tag slot.lineup_member.talk.ogp_image, class: "border-2 border-black bg-white rounded-md object-cover", "data-sponsors-target": "image" %>
   <% else %>
