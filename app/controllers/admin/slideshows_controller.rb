@@ -1,4 +1,6 @@
 class Admin::SlideshowsController < Admin::ApplicationController
+  allow_staff_to :update
+
   def show
     @slideshow = event.slideshow
   end
@@ -30,8 +32,5 @@ class Admin::SlideshowsController < Admin::ApplicationController
   private
 
   def event = Event.find(params[:event_id])
-
-  def slideshow_params
-    params.require(:slideshow).permit(:content)
-  end
+  def slideshow_params = params.require(:slideshow).permit(:content)
 end
