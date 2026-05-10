@@ -1,9 +1,11 @@
-<%# locals: (slot:, sponsorship:) %>
+<%# locals: (slot:, sponsorships:) %>
+
+<% sponsor_images = sponsorships.select { it.ogp_image.attached? }.map { url_for it.ogp_image } %>
 
 <div class="relative"
-  <% if sponsorship&.ogp_image&.attached? %>
+  <% if sponsor_images.any? %>
     data-controller="sponsors"
-    data-sponsors-sponsor-src-value="<%= url_for sponsorship.ogp_image %>"
+    data-sponsors-images-value="<%= sponsor_images.to_json %>"
   <% end %>
 >
   <time class="absolute top-8 left-32 font-semibold text-5xl text-gray-600" datetime="<%= slot.time.iso8601 %>"><%= slot.time.strftime("%H:%M") %></time>

@@ -4,18 +4,23 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["image"]
   static values = {
-    sponsorSrc: String,
+    images: Array,
   }
 
   connect() {
     const image = this.imageTarget
-    const originalSrc = image.src
+    this.originalSrc = image.src
+    this.sponsorIndex = 0
+    this.showingOriginal = true
 
     this.rotateIntervalHandler = setInterval(() => {
-      if (image.src === originalSrc) {
-        image.src = this.sponsorSrcValue
+      if (this.showingOriginal) {
+        image.src = this.imagesValue[this.sponsorIndex]
+        this.sponsorIndex = (this.sponsorIndex + 1) % this.imagesValue.length
+        this.showingOriginal = false
       } else {
-        image.src = originalSrc
+        image.src = this.originalSrc
+        this.showingOriginal = true
       }
     }, 10000)
   }

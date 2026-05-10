@@ -35,11 +35,11 @@ module SlideshowHelper
     end
 
     if event.schedule
-      fiscal_sponsors = (event.sponsorships.filter(&:fiscal?).presence || [nil]).cycle
+      fiscal_sponsorships = event.sponsorships.filter(&:fiscal?)
       talks, breaks = event.schedule.slots_for_day(day).partition { it.lineup_member&.talk }
 
       talks.each.with_index 1 do |slot, i|
-        variables["talk_#{i}"] = render "slideshow/talk", slot:, sponsorship: fiscal_sponsors.next
+        variables["talk_#{i}"] = render "slideshow/talk", slot:, sponsorships: fiscal_sponsorships
       end
 
       breaks.each.with_index 1 do |slot, i|
