@@ -26,7 +26,7 @@ module SlideshowHelper
     variables["qr_code"] = render("slideshow/qr_code", event:)
 
     event.lineup_members.where(role: "Master of Ceremonies").each.with_index(1) do |mc, i|
-      variables["mc_#{i}"] = render "slideshow/mc", lineup_member: mc
+      variables["mc_#{i}"] = render("slideshow/mc", lineup_member: mc).strip
     end
 
     event.community_partners.each do |partner|
