@@ -1,13 +1,12 @@
 <%= section_navigation :ticketing %>
 
-<% supporter_tickets_count = @tickets.where(ticket_type: { name: "Supporter" }).total_count %>
-
-<%= render "section", title: "Tickets", description: "#{supporter_tickets_count} supporter tickets", cta: -> {
+<%= render "section", title: "Tickets", description: pluralize(@tickets.total_count, "ticket"), cta: -> {
   admin_button(:primary, onclick: "giveaway_dialog.showModal()") { "Giveaway" }
 } do %>
   <%= render "pills", pills: [
     { name: "All", path: admin_event_tickets_path(Current.event) },
     { name: "Expected", path: admin_event_tickets_path(Current.event, filter: :expected) },
+    *Current.event.ticket_types.map { { name: it.name, path: admin_event_tickets_path(Current.event, ticket_type_id: it.id) } },
   ] %>
 
   <%= render "tickets", tickets: @tickets %>
