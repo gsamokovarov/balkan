@@ -22,7 +22,7 @@ class Event < ApplicationRecord
   has_one :event_activity
   has_many :proposals
   has_many :communications, through: :communication_drafts
-  has_many :speakers, through: :lineup_members
+  has_many :speakers, -> { merge(LineupMember.confirmed) }, through: :lineup_members
   has_one_attached :logo
   has_one_attached :ogp_image
   has_many_attached :hero_images
@@ -34,7 +34,6 @@ class Event < ApplicationRecord
   def active_announcement = announcements.active_for self
 
   def sponsors = sponsorships.includes(:sponsor).order(price_paid: :desc)
-
 
   def speaker_applications_countdown = FinalCountdown.until speaker_applications_end_date
   def beginning_countdown = FinalCountdown.until start_date

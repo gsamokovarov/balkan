@@ -11,4 +11,17 @@ RSpec.case "Event" do
       assert_eq countdown.hours, 11
     end
   end
+
+  test "speakers only include confirmed lineup members" do
+    event = create :event, :balkan2024
+    confirmed = create :speaker
+    pending = create :speaker
+    cancelled = create :speaker
+
+    create :lineup_member, event:, speaker: confirmed, status: :confirmed
+    create :lineup_member, event:, speaker: pending, status: :pending
+    create :lineup_member, event:, speaker: cancelled, status: :cancelled
+
+    assert_eq event.speakers.to_a, [confirmed]
+  end
 end
