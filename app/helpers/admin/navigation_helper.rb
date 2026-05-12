@@ -27,6 +27,7 @@ module Admin::NavigationHelper
           { name: "Communications", path: admin_event_communications_path(Current.event) },
           { name: "Announcements", path: admin_event_announcements_path(Current.event) },
           { name: "Subscribers", path: admin_subscribers_path, global: true },
+          { name: "Marketing", path: admin_qr_code_path },
         ],
       },
 
@@ -52,13 +53,6 @@ module Admin::NavigationHelper
           { name: "Activity", path: admin_event_event_activity_path(Current.event) },
           { name: "Embeddings", path: admin_event_embeddings_path(Current.event) },
           { name: "Venues", path: admin_venues_path, global: true },
-        ],
-      },
-
-      marketing: {
-        name: "Marketing",
-        tabs: [
-          { name: "QR codes", path: admin_qr_code_path },
         ],
       },
 
@@ -92,7 +86,6 @@ module Admin::NavigationHelper
       { name: "Communications", path: first_tab[:communications], section: :communications },
       { name: "Partnerships", path: first_tab[:partnerships], section: :partnerships },
       { name: "Content", path: first_tab[:content], section: :content },
-      { name: "Marketing", path: first_tab[:marketing], section: :marketing },
       { header: "Manage" },
       { name: "Accounting", path: first_tab[:accounting], section: :accounting },
       { name: "Settings", path: first_tab[:settings], section: :settings },
