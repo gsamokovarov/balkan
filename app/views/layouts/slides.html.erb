@@ -38,7 +38,14 @@
        * GENADI SI PRAVI KAKVOTO ISKA
        *********************************************/
       .reveal img,
-      .reveal video { display: block; margin: 0 auto; }
+      .reveal video {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        max-height: 90vh;
+        width: auto;
+        height: auto;
+      }
     </style>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
