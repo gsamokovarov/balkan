@@ -1,0 +1,33 @@
+<div class="w-prose">
+  <p class="pb-2">
+    Hey there,
+  </p>
+
+  <p class="pb-2">
+    We're running a <strong>Balkan Ruby 2026 treasure hunt</strong> and you're invited
+    to play! Find the clues, solve the puzzles, claim the loot.
+  </p>
+
+  <p class="pb-2">
+    You can jump straight in with your magic link:
+    <%= link_to "Start the hunt", @magic_link, class: "link-primary" %>.
+  </p>
+
+  <p class="pb-2">
+    If you'd rather log in by hand, here are your credentials:
+  </p>
+
+  <ul class="pb-2">
+    <li>Email: <code><%= @email %></code></li>
+    <li>Password: <code><%= @password %></code></li>
+  </ul>
+
+  <p class="pb-2">
+    Good luck, and see you in Sofia! 💎
+  </p>
+
+  <p class="pb-2">
+    Best regards,<br>
+    Genadi Samokovarov
+  </p>
+</div>
