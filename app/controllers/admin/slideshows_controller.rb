@@ -32,5 +32,5 @@ class Admin::SlideshowsController < Admin::ApplicationController
   private
 
   def event = Event.find(params[:event_id])
-  def slideshow_params = params.require(:slideshow).permit(:content)
+  def slideshow_params = params.require(:slideshow).permit(:content, images: [])
 end
