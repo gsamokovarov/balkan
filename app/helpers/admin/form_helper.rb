@@ -120,19 +120,29 @@ module Admin::FormHelper
         "focus:ring-indigo-600 dark:bg-gray-800",
       ]
 
-      image_preview_classes = [
+      single_preview_classes = [
         "w-full max-h-64 mb-2 p-2 aspect-auto object-scale-down rounded-md border border-gray-300 dark:border-gray-600",
+      ]
+
+      thumbnail_classes = [
+        "w-full aspect-square object-cover rounded-md border border-gray-300 dark:border-gray-600",
       ]
 
       input_for method, label:, addendum: do
         if multiple
-          object.public_send(method).each do |attachment|
-            @template.concat @template.image_tag(attachment, class: image_preview_classes)
+          attachments = object.public_send method
+          if attachments.any?
+            grid = @template.tag.div class: "grid grid-cols-3 gap-2 mb-2" do
+              attachments.each do |attachment|
+                @template.concat @template.image_tag(attachment, class: thumbnail_classes)
+              end
+            end
+            @template.concat grid
           end
         else
           attachment = object.public_send method
           if attachment.attached?
-            @template.concat @template.image_tag(attachment, class: image_preview_classes)
+            @template.concat @template.image_tag(attachment, class: single_preview_classes)
           end
         end
         @template.concat file_field(method, class: file_classes, multiple:, include_hidden:, **)
