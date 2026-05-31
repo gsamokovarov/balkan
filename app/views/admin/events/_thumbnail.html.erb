@@ -14,7 +14,7 @@
           <%== event.title %>
         </h1>
         <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-500">
-          <%== event.subtitle %>
+          <%= render_markdown event.subtitle %>
         </div>
       </div>
       <div class="grid grid-cols-<%= grid_columns %> w-full mx-auto shrink relative">

@@ -4,7 +4,7 @@
   <% title = event.title ? strip_tags(event.title) : event.name %>
   <% dates = "#{event.start_date.strftime("%B %-d")}-#{event.end_date.strftime("%-d, %Y")}" %>
   <% site_name = "#{strip_tags(event.name)} – #{dates}" %>
-  <% description = event.description ? strip_tags(event.description) : "#{event.name} is happening on #{dates} in Sofia, Bulgaria" %>
+  <% description = event.description ? render_plain(event.description) : "#{event.name} is happening on #{dates} in Sofia, Bulgaria" %>
   <% image = event.ogp_image.attached? ? url_for(event.ogp_image) : image_url("ogp_image.png") %>
 <% else %>
   <% title = "Balkan Ruby" %>

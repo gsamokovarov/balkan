@@ -2,7 +2,7 @@
 
 <% content_for :ogp do %>
   <meta property="og:title" content="<%= talk.name %> - <%= Current.event.name %>">
-  <meta property="og:site_name" content="<%= Current.event.name %> - <%= Current.event.subtitle %>">
+  <meta property="og:site_name" content="<%= Current.event.name %> - <%= render_plain Current.event.subtitle %>">
   <meta property="og:url" content="<%= talk_url(talk) %>">
   <meta property="og:description" content="<%= talk.description.present? ? render_plain(truncate(talk.description, length: 160)) : "#{talk.speaker_names} will be speaking at #{Current.event.name}!" %>">
   <meta property="og:type" content="website">

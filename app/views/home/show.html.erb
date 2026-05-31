@@ -1,4 +1,4 @@
-<% title Current.event.subtitle || Current.event.name %>
+<% title Current.event.subtitle ? render_plain(Current.event.subtitle) : Current.event.name %>
 
 <% hi = section_highlighter %>
 

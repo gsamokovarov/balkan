@@ -10,13 +10,13 @@
           </h1>
 
           <div class="text-2xl sm:text-3xl font-semibold mt-3 text-gray-500">
-            <%== Current.event.subtitle %>
+            <%= render_markdown Current.event.subtitle %>
           </div>
         </div>
 
-        <p class="text-xl max-w-prose">
-          <%== Current.event.description %>
-        </p>
+        <%= render "prose" do %>
+          <%= render_markdown Current.event.description %>
+        <% end %>
       </div>
 
       <% if Current.event.accepts_speaking_applications? %>
