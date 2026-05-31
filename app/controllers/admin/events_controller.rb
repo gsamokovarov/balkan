@@ -1,4 +1,6 @@
 class Admin::EventsController < Admin::ApplicationController
+  allow_staff_to :thumbnail
+
   def index
     @events = scope Event.all
   end
