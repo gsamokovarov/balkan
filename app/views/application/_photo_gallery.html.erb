@@ -2,7 +2,7 @@
 
 <% urls = photos.map { url_for try_variant(it, resize_to_limit: [1400, 1400]) } %>
 
-<div class="relative -mx-4 px-4 sm:mx-0 sm:px-0" data-controller="gallery" data-gallery-urls-value="<%= urls.to_json %>">
+<div class="relative -mx-4 px-4 sm:mx-0 sm:px-0" data-controller="gallery" data-gallery-urls-value="<%= urls.to_json %>" data-action="touchstart->gallery#swipeStart touchend->gallery#swipeEnd">
   <div class="aspect-video overflow-hidden rounded-md border-2 border-black bg-black cursor-zoom-in" data-action="click->gallery#open">
     <%= image_tag "", alt: "Event photo", class: "h-full w-full object-contain", data: { gallery_target: "image" } %>
   </div>

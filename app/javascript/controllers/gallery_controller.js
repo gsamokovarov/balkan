@@ -1,11 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="gallery"
-//
-// Rotates through a list of image URLs while keeping only a single <img> per
-// view in the DOM, so 20-50+ photos stay light. Tapping the gallery opens a
-// full-screen, modal-like overlay (no native fullscreen API) that reads well on
-// mobile. The next image is preloaded so each swap is instant.
 export default class extends Controller {
   static targets = ["image", "counter", "overlay"]
   static values = {
@@ -33,6 +28,24 @@ export default class extends Controller {
 
   backdropClose(event) {
     if (event.target === this.overlayTarget) this.close()
+  }
+
+  swipeStart(event) {
+    const touch = event.changedTouches[0]
+    this.swipeStartX = touch.clientX
+    this.swipeStartY = touch.clientY
+  }
+
+  swipeEnd(event) {
+    const touch = event.changedTouches[0]
+    const deltaX = touch.clientX - this.swipeStartX
+    const deltaY = touch.clientY - this.swipeStartY
+
+    // Ignore taps and mostly-vertical gestures (those are page scrolls).
+    if (Math.abs(deltaX) < 40 || Math.abs(deltaX) < Math.abs(deltaY)) return
+
+    if (deltaX < 0) this.next()
+    else this.previous()
   }
 
   next() {
