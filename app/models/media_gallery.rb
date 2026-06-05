@@ -1,12 +1,12 @@
 class MediaGallery < ApplicationRecord
   belongs_to :event
-  has_many_attached :photo_highlights
+  has_many_attached :photos
 
   time_as_boolean :published
 
   validates :videos_url, presence: true
 
-  def video_highlights = [video1_url, video2_url, video3_url, video4_url].compact_blank
+  def video_highlights = [video1_url, video2_url].compact_blank
 
   def video_embed_url(video_url)
     video_id =
