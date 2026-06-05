@@ -19,11 +19,16 @@ export default class extends Controller {
   }
 
   open() {
+    clearInterval(this.timer)
     this.overlayTarget.showModal()
   }
 
   close() {
     this.overlayTarget.close()
+  }
+
+  closed() {
+    this.startTimer()
   }
 
   backdropClose(event) {
@@ -61,7 +66,7 @@ export default class extends Controller {
   startTimer() {
     clearInterval(this.timer)
 
-    if (this.urlsValue.length > 1) {
+    if (this.urlsValue.length > 1 && !this.overlayTarget.open) {
       this.timer = setInterval(() => this.next(), this.intervalValue)
     }
   }
