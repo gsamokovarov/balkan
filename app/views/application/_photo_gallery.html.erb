@@ -19,7 +19,7 @@
       class="absolute right-6 top-1/2 -translate-y-1/2 cursor-pointer select-none rounded-full bg-white/10 focus:outline-none px-4 py-2 text-3xl font-bold leading-none text-white hover:bg-white/20 sm:right-2"
       data-action="gallery#next">&rsaquo;</button>
 
-    <div class="absolute bottom-2 right-6 rounded-md bg-white/10 px-3 py-1 text-sm font-medium text-white sm:right-2" data-gallery-target="counter"></div>
+    <div class="absolute bottom-2 right-6 select-none rounded-md bg-white/10 px-3 py-1 text-sm font-medium text-white sm:right-2" data-gallery-target="counter"></div>
   <% end %>
 
   <dialog class="fixed inset-0 m-0 h-dvh max-h-none w-dvw max-w-none items-center justify-center touch-manipulation overscroll-contain bg-black/95 p-4 open:flex sm:p-8" aria-label="Photo gallery" data-gallery-target="overlay" data-action="click->gallery#backdropClose keydown.left->gallery#previous keydown.right->gallery#next">
@@ -41,7 +41,7 @@
         class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer select-none rounded-full bg-white/10 focus:outline-none px-4 py-2 text-3xl font-bold leading-none text-white hover:bg-white/20"
         data-action="gallery#next">&rsaquo;</button>
 
-      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-md bg-white/10 px-3 py-1 text-sm font-medium text-white" data-gallery-target="counter"></div>
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 select-none rounded-md bg-white/10 px-3 py-1 text-sm font-medium text-white" data-gallery-target="counter"></div>
     <% end %>
   </dialog>
 </div>
