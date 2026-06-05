@@ -1,6 +1,6 @@
 class MediaGallery < ApplicationRecord
   belongs_to :event
-  has_many_attached :photo_highlights
+  has_many_attached :photos
 
   time_as_boolean :published
 

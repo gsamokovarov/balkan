@@ -7,8 +7,8 @@
     <% end %>
   <% end %>
 
-  <% if media_gallery.photo_highlights.any? %>
-    <%= render "image_gallery", images: media_gallery.photo_highlights %>
+  <% if media_gallery.photos.any? %>
+    <%= render "photo_gallery", photos: media_gallery.photos %>
   <% end %>
 
   <% if media_gallery.video_highlights.any? %>
