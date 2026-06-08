@@ -42,6 +42,7 @@ export default class extends Controller {
 
   swipeEnd(event) {
     if (this.multiTouch || event.touches.length > 0) return
+    if (window.visualViewport && window.visualViewport.scale > 1) return
 
     const touch = event.changedTouches[0]
     const deltaX = touch.clientX - this.swipeStartX
