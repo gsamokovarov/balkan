@@ -32,12 +32,17 @@ export default class extends Controller {
   }
 
   swipeStart(event) {
+    this.multiTouch = event.touches.length > 1
+    if (this.multiTouch) return
+
     const touch = event.changedTouches[0]
     this.swipeStartX = touch.clientX
     this.swipeStartY = touch.clientY
   }
 
   swipeEnd(event) {
+    if (this.multiTouch || event.touches.length > 0) return
+
     const touch = event.changedTouches[0]
     const deltaX = touch.clientX - this.swipeStartX
     const deltaY = touch.clientY - this.swipeStartY
