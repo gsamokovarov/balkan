@@ -22,7 +22,7 @@
     <div class="absolute bottom-2 right-6 select-none rounded-md bg-white/10 px-3 py-1 text-sm font-medium text-white sm:right-2" data-gallery-target="counter"></div>
   <% end %>
 
-  <dialog class="fixed inset-0 m-0 h-dvh max-h-none w-dvw max-w-none items-center justify-center touch-manipulation overscroll-contain bg-black/95 p-4 open:flex sm:p-8" aria-label="Photo gallery" data-gallery-target="overlay" data-action="click->gallery#backdropClose close->gallery#closed keydown.left->gallery#previous keydown.right->gallery#next">
+  <dialog class="fixed inset-0 m-0 h-dvh max-h-none w-dvw max-w-none items-center justify-center touch-manipulation overscroll-contain bg-black/95 p-4 open:flex sm:p-8" aria-label="Photo gallery" data-gallery-target="overlay" data-action="close->gallery#closed keydown.left->gallery#previous keydown.right->gallery#next">
     <div class="pointer-events-none absolute inset-0 grid place-items-center">
       <div class="h-12 w-12 animate-spin rounded-full border-4 border-white/20 border-t-white/80"></div>
     </div>

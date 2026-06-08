@@ -31,10 +31,6 @@ export default class extends Controller {
     this.startTimer()
   }
 
-  backdropClose(event) {
-    if (event.target === this.overlayTarget) this.close()
-  }
-
   swipeStart(event) {
     const touch = event.changedTouches[0]
     this.swipeStartX = touch.clientX
