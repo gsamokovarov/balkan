@@ -36,7 +36,7 @@
   <%= render "sponsors/sponsors", highlight: !hi %>
 <% end %>
 
-<% if Current.event.job_postings.published.any? %>
+<% if Current.event.job_postings.published.any?(&:relevant?) %>
   <%= render "jobs/jobs", highlight: !hi %>
 <% end %>
 

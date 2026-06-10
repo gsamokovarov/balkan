@@ -12,5 +12,7 @@ class JobPosting < ApplicationRecord
   validates :description, presence: true
 
   def self.published = where.not(published_at: nil)
-  def self.for(event) = published.where(event:)
+  def self.for(event) = published.where(event:).select(&:relevant?)
+
+  def relevant? = published? && Date.current.before?(event.end_date + 1.month)
 end

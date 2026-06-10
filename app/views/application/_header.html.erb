@@ -1,10 +1,10 @@
 <% nav_links = [
   { name: "Home", path: root_path },
   ({ name: "Blog", path: blogs_path } if Current.event.blog_posts.published.any?),
-  ({ name: "Jobs", path: jobs_path } if Current.event.job_postings.published.any?),
-  ({ name: "Activities", path: activities_path } if Current.event.event_activity&.published?),
-  ({ name: "Sponsorship", path: new_sponsor_path } if Current.event.sponsorship_packages.any?),
-  { name: "Tickets", path: checkouts_path(discount_code: params[:discount_code]) },
+  ({ name: "Jobs", path: jobs_path } if Current.event.job_postings.published.any?(&:relevant?)),
+  ({ name: "Activities", path: activities_path } if Current.event.event_activity&.relevant?),
+  ({ name: "Sponsorship", path: new_sponsor_path } if Current.event.upcoming? && Current.event.sponsorship_packages.any?),
+  ({ name: "Tickets", path: checkouts_path(discount_code: params[:discount_code]) } if Current.event.sales_tickets?),
 ].compact %>
 
 <%= render "desktop_header", nav_links:, logo_partial: "header_logo" %>
