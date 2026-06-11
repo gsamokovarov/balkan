@@ -94,6 +94,8 @@ module MarkdownHelper
     def render_html(content, images: nil)
       @html_renderer ||= Redcarpet::Markdown.new HTMLRenderer, **DEFAULT_EXTENSIONS
 
+      content = content.to_s
+
       if images
         content.gsub!(INLINE_IMAGE_PLACEHOLDER) { "![image #{it[1]}](#{Link.url_for images[it[1].to_i - 1]})" }
       end
@@ -105,7 +107,7 @@ module MarkdownHelper
       @plain_renderer ||= Redcarpet::Markdown.new PlainTextRenderer
 
       sanitizer = Rails::HTML::FullSanitizer.new
-      sanitizer.sanitize @plain_renderer.render(content).strip
+      sanitizer.sanitize @plain_renderer.render(content.to_s).strip
     end
 
     def render_pdf(content, document:)
