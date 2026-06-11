@@ -11,7 +11,6 @@ RSpec.case CommunicationDraft do
 
     create(:lineup_member, event:, speaker: create(:speaker, email: "alice@example.com")).speaker
     create(:lineup_member, event:, speaker: create(:speaker, email: "bob@example.com")).speaker
-    create(:lineup_member, :pending, event:, speaker: create(:speaker, email: "charlie@example.com")).speaker
 
     create :subscriber, email: "subscriber1@example.com"
     create :subscriber, email: "subscriber2@example.com"
@@ -26,16 +25,33 @@ RSpec.case CommunicationDraft do
     draft.deliver communication
 
     assert communication.persisted?
-    assert_eq communication.recipients.count, 7
+    assert_eq communication.recipients.count, 6
     assert_eq communication.recipients.pluck(:email).sort, [
       "alice@example.com",
       "bob@example.com",
-      "charlie@example.com",
       "subscriber1@example.com",
       "subscriber2@example.com",
       "ticket1@example.com",
       "ticket2@example.com",
     ]
+  end
+
+  test "does not send to non-confirmed lineup members" do
+    event = create :event, :balkan2024
+
+    draft = CommunicationDraft.create!(event:,
+                                       name: "Speaker Update",
+                                       subject: "Important update",
+                                       content: "Message for speakers")
+
+    create :lineup_member, event:, status: :confirmed, speaker: create(:speaker, email: "confirmed@example.com")
+    create :lineup_member, event:, status: :pending, speaker: create(:speaker, email: "pending@example.com")
+    create :lineup_member, event:, status: :cancelled, speaker: create(:speaker, email: "cancelled@example.com")
+
+    communication = draft.communications.new to_speakers: true, to_subscribers: false, to_event: false
+    draft.deliver communication
+
+    assert_eq communication.recipients.pluck(:email), ["confirmed@example.com"]
   end
 
   test "sends to only selected recipient types" do
@@ -63,7 +79,7 @@ RSpec.case CommunicationDraft do
                                        subject: "Welcome to {{ event_name }}!",
                                        content: "See you in {{ year }}, {{ email }}!")
 
-    rendered = draft.interpolate_for("attendee@example.com")
+    rendered = draft.interpolate_for "attendee@example.com"
 
     assert_eq rendered, subject: "Welcome to Balkan Ruby 2024!",
                         body: "See you in 2024, attendee@example.com!"
