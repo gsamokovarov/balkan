@@ -2,15 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="gallery"
 export default class extends Controller {
-  static targets = ["image", "counter", "overlay"]
+  static targets = ["scroller", "overlay", "overlayScroller", "counter"]
   static values = {
-    urls: Array,
     interval: { type: Number, default: 5000 },
   }
 
   connect() {
     this.index = 0
-    this.show(0)
     this.startTimer()
   }
 
@@ -21,6 +19,7 @@ export default class extends Controller {
   open() {
     clearInterval(this.timer)
     this.overlayTarget.showModal()
+    this.scrollTo(this.overlayScrollerTarget, this.index, "instant")
   }
 
   close() {
@@ -28,63 +27,60 @@ export default class extends Controller {
   }
 
   closed() {
+    this.scrollTo(this.scrollerTarget, this.index, "instant")
     this.startTimer()
-  }
-
-  swipeStart(event) {
-    this.multiTouch = event.touches.length > 1
-    if (this.multiTouch) return
-
-    const touch = event.changedTouches[0]
-    this.swipeStartX = touch.clientX
-    this.swipeStartY = touch.clientY
-  }
-
-  swipeEnd(event) {
-    if (this.multiTouch || event.touches.length > 0) return
-    if (window.visualViewport && window.visualViewport.scale > 1) return
-
-    const touch = event.changedTouches[0]
-    const deltaX = touch.clientX - this.swipeStartX
-    const deltaY = touch.clientY - this.swipeStartY
-
-    // Ignore taps and mostly-vertical gestures (those are page scrolls).
-    if (Math.abs(deltaX) < 40 || Math.abs(deltaX) < Math.abs(deltaY)) return
-
-    if (deltaX < 0) this.next()
-    else this.previous()
   }
 
   next() {
-    this.show((this.index + 1) % this.urlsValue.length)
-    this.startTimer()
+    this.show(this.index + 1)
   }
 
   previous() {
-    this.show((this.index - 1 + this.urlsValue.length) % this.urlsValue.length)
+    this.show(this.index - 1)
+  }
+
+  // Native swipes and smooth scrolls both land here, keeping the counter and
+  // the rotation timer in sync without any touch tracking of our own.
+  scrolled(event) {
+    const scroller = event.target
+    const index = Math.round(scroller.scrollLeft / scroller.clientWidth)
+    if (index === this.index) return
+
+    this.index = index
+    this.updateCounters()
     this.startTimer()
+  }
+
+  show(index) {
+    this.index = (index + this.count) % this.count
+    this.scrollTo(this.activeScroller, this.index, "smooth")
+    this.updateCounters()
+    this.startTimer()
+  }
+
+  scrollTo(scroller, index, behavior) {
+    scroller.scrollTo({ left: index * scroller.clientWidth, behavior })
   }
 
   startTimer() {
     clearInterval(this.timer)
 
-    if (this.urlsValue.length > 1 && !this.overlayTarget.open) {
+    if (this.count > 1 && !this.overlayTarget.open) {
       this.timer = setInterval(() => this.next(), this.intervalValue)
     }
   }
 
-  show(index) {
-    this.index = index
-    this.imageTargets.forEach((image) => (image.src = this.urlsValue[index]))
+  updateCounters() {
     this.counterTargets.forEach((counter) => {
-      counter.textContent = `${index + 1} / ${this.urlsValue.length}`
+      counter.textContent = `${this.index + 1} / ${this.count}`
     })
-    this.preloadNext()
   }
 
-  preloadNext() {
-    const next = (this.index + 1) % this.urlsValue.length
-    const image = new Image()
-    image.src = this.urlsValue[next]
+  get activeScroller() {
+    return this.overlayTarget.open ? this.overlayScrollerTarget : this.scrollerTarget
+  }
+
+  get count() {
+    return this.scrollerTarget.children.length
   }
 }
