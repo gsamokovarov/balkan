@@ -3,6 +3,11 @@
 <% urls = photos.map { url_for try_variant(it, resize_to_limit: [1400, 1400]) } %>
 
 <div class="relative -mx-4 px-4 touch-manipulation select-none sm:mx-0 sm:px-0" data-controller="gallery" data-gallery-urls-value="<%= urls.to_json %>" data-action="touchstart->gallery#swipeStart touchend->gallery#swipeEnd">
+  <% if photos.size > 1 %>
+    <link rel="preload" as="image" href="<%= urls.second %>" data-gallery-target="preload">
+    <link rel="preload" as="image" href="<%= urls.last %>" data-gallery-target="preload">
+  <% end %>
+
   <div class="relative aspect-video overflow-hidden rounded-md border-2 border-black bg-black cursor-zoom-in" data-action="click->gallery#open">
     <div class="pointer-events-none absolute inset-0 grid place-items-center">
       <div class="h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-white/80"></div>

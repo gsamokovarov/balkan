@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="gallery"
 export default class extends Controller {
-  static targets = ["image", "counter", "overlay"]
+  static targets = ["image", "counter", "overlay", "preload"]
   static values = {
     urls: Array,
     interval: { type: Number, default: 5000 },
@@ -79,12 +79,14 @@ export default class extends Controller {
     this.counterTargets.forEach((counter) => {
       counter.textContent = `${index + 1} / ${this.urlsValue.length}`
     })
-    this.preloadNext()
+    this.preloadNeighbors()
   }
 
-  preloadNext() {
-    const next = (this.index + 1) % this.urlsValue.length
-    const image = new Image()
-    image.src = this.urlsValue[next]
+  preloadNeighbors() {
+    const length = this.urlsValue.length
+    if (length < 2) return
+
+    this.preloadTargets[0].href = this.urlsValue[(this.index + 1) % length]
+    this.preloadTargets[1].href = this.urlsValue[(this.index - 1 + length) % length]
   }
 }
