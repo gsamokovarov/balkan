@@ -17,7 +17,7 @@ module.exports = {
       },
       colors: {
         current: "currentColor",
-        banitsa: {
+        brand: {
           50: "#FDF2F3",
           100: "#FCE9EB",
           200: "#F8CED3",

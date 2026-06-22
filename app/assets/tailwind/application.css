@@ -43,7 +43,7 @@
       px-8
       bg-black
       text-white
-      hover:bg-banitsa-500
+      hover:bg-brand-500
       hover:text-white
       hover:shadow-brutal
       hover:-translate-x-1
@@ -71,15 +71,15 @@
   }
 
   .link-primary {
-    @apply text-banitsa-600 hover:underline hover:decoration-banitsa-600 hover:underline-offset-4 hover:ease-in-out;
+    @apply text-brand-600 hover:underline hover:decoration-brand-600 hover:underline-offset-4 hover:ease-in-out;
   }
 
   .link-secondary {
-    @apply text-banitsa-50 hover:text-banitsa-500;
+    @apply text-brand-50 hover:text-brand-500;
   }
 
   .badge-important {
-    @apply rounded bg-banitsa-500 text-black text-base p-2 align-middle truncate;
+    @apply rounded bg-brand-500 text-black text-base p-2 align-middle truncate;
   }
 
   .badge-warning {

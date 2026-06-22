@@ -3,7 +3,7 @@ module AdminHelper
     primary: "ring-gray-600/20 dark:ring-gray-400/30 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300",
     success: "ring-green-600/20 dark:ring-green-400/30 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400",
     warning: "ring-yellow-600/20 dark:ring-yellow-400/30 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400",
-    danger: "ring-banitsa-500/20 dark:ring-banitsa-400/30 bg-banitsa-50 dark:bg-banitsa-900/30 text-banitsa-500 dark:text-banitsa-400",
+    danger: "ring-brand-500/20 dark:ring-brand-400/30 bg-brand-50 dark:bg-brand-900/30 text-brand-500 dark:text-brand-400",
   }
 
   def admin_badge(variant, content = nil, **options, &)
