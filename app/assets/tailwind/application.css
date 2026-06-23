@@ -33,87 +33,73 @@
 }
 
 .theme-2 {
-  --brand-50: #F6F1FE;
-  --brand-100: #ECE3FC;
-  --brand-200: #D7C2F9;
-  --brand-300: #BB98F6;
-  --brand-400: #9F6EF2;
-  --brand-500: #7C3AED;
-  --brand-600: #6215E6;
-  --brand-700: #5111BD;
-  --brand-800: #430E9D;
-  --brand-900: #330B77;
-  --brand-950: #1D0644;
+  --brand-50: #FFFBEB;
+  --brand-100: #FEF3C7;
+  --brand-200: #FDE68A;
+  --brand-300: #FCD34D;
+  --brand-400: #FBBF24;
+  --brand-500: #F59E0B;
+  --brand-600: #D97706;
+  --brand-700: #B45309;
+  --brand-800: #92400E;
+  --brand-900: #78350F;
+  --brand-950: #451A03;
 }
 
 .theme-3 {
-  --brand-50: #F1F9FD;
-  --brand-100: #E3F3FC;
-  --brand-200: #C3E6F8;
-  --brand-300: #9AD4F4;
-  --brand-400: #71C3EF;
-  --brand-500: #178FD0;
-  --brand-600: #147AB1;
-  --brand-700: #106492;
-  --brand-800: #0D5379;
-  --brand-900: #0A3F5C;
-  --brand-950: #062434;
+  --brand-50: #F7FEE7;
+  --brand-100: #ECFCCB;
+  --brand-200: #D9F99D;
+  --brand-300: #BEF264;
+  --brand-400: #A3E635;
+  --brand-500: #84CC16;
+  --brand-600: #65A30D;
+  --brand-700: #4D7C0F;
+  --brand-800: #3F6212;
+  --brand-900: #365314;
+  --brand-950: #1A2E05;
 }
 
 .theme-4 {
-  --brand-50: #FEFBF0;
-  --brand-100: #FEF7E2;
-  --brand-200: #FCEDC0;
-  --brand-300: #FAE094;
-  --brand-400: #F8D368;
-  --brand-500: #F6C945;
-  --brand-600: #F4BC18;
-  --brand-700: #D29F0A;
-  --brand-800: #AE8408;
-  --brand-900: #846406;
-  --brand-950: #4B3904;
+  --brand-50: #ECFDF5;
+  --brand-100: #D1FAE5;
+  --brand-200: #A7F3D0;
+  --brand-300: #6EE7B7;
+  --brand-400: #34D399;
+  --brand-500: #10B981;
+  --brand-600: #059669;
+  --brand-700: #047857;
+  --brand-800: #065F46;
+  --brand-900: #064E3B;
+  --brand-950: #022C22;
 }
 
 .theme-5 {
-  --brand-50: #F2FDF6;
-  --brand-100: #E5FBED;
-  --brand-200: #C6F6D7;
-  --brand-300: #9EEFBB;
-  --brand-400: #77E99F;
-  --brand-500: #1AA14A;
-  --brand-600: #16893F;
-  --brand-700: #127134;
-  --brand-800: #0F5D2B;
-  --brand-900: #0B4721;
-  --brand-950: #062812;
+  --brand-50: #F0F9FF;
+  --brand-100: #E0F2FE;
+  --brand-200: #BAE6FD;
+  --brand-300: #7DD3FC;
+  --brand-400: #38BDF8;
+  --brand-500: #0EA5E9;
+  --brand-600: #0284C7;
+  --brand-700: #0369A1;
+  --brand-800: #075985;
+  --brand-900: #0C4A6E;
+  --brand-950: #082F49;
 }
 
 .theme-6 {
-  --brand-50: #FDF2F9;
-  --brand-100: #FBE4F3;
-  --brand-200: #F7C5E4;
-  --brand-300: #F19DD2;
-  --brand-400: #EB75BF;
-  --brand-500: #E0249A;
-  --brand-600: #C21B84;
-  --brand-700: #9F176C;
-  --brand-800: #84135A;
-  --brand-900: #640E44;
-  --brand-950: #390827;
-}
-
-.theme-7 {
-  --brand-50: #FEF5F1;
-  --brand-100: #FDEBE2;
-  --brand-200: #FBD4C1;
-  --brand-300: #F8B695;
-  --brand-400: #F6986A;
-  --brand-500: #F1641E;
-  --brand-600: #D9510D;
-  --brand-700: #B3430B;
-  --brand-800: #943709;
-  --brand-900: #702A07;
-  --brand-950: #401804;
+  --brand-50: #EEF2FF;
+  --brand-100: #E0E7FF;
+  --brand-200: #C7D2FE;
+  --brand-300: #A5B4FC;
+  --brand-400: #818CF8;
+  --brand-500: #6366F1;
+  --brand-600: #4F46E5;
+  --brand-700: #4338CA;
+  --brand-800: #3730A3;
+  --brand-900: #312E81;
+  --brand-950: #1E1B4B;
 }
 
 @utility scrollbar-hidden {
