@@ -30,6 +30,7 @@
   --brand-800: #9F1926;
   --brand-900: #7A131D;
   --brand-950: #400A0F;
+  --brand-shadow: #4B43E6;
 }
 
 .theme-2 {
@@ -44,6 +45,7 @@
   --brand-800: #825907;
   --brand-900: #654609;
   --brand-950: #3C2A07;
+  --brand-shadow: #0BA0E8;
 }
 
 .theme-3 {
@@ -58,6 +60,7 @@
   --brand-800: #4D7110;
   --brand-900: #3D580F;
   --brand-950: #24340A;
+  --brand-shadow: #E03647;
 }
 
 .theme-4 {
@@ -72,6 +75,7 @@
   --brand-800: #0B6045;
   --brand-900: #0B4B37;
   --brand-950: #082C20;
+  --brand-shadow: #F5A300;
 }
 
 .theme-5 {
@@ -86,6 +90,7 @@
   --brand-800: #0C577C;
   --brand-900: #0D4560;
   --brand-950: #092939;
+  --brand-shadow: #8BD413;
 }
 
 .theme-6 {
@@ -100,6 +105,7 @@
   --brand-800: #201A8C;
   --brand-900: #1C186E;
   --brand-950: #121041;
+  --brand-shadow: #0BB47E;
 }
 
 @utility scrollbar-hidden {

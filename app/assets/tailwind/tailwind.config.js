@@ -12,8 +12,8 @@ module.exports = {
         sans: ["Inter", "sans-serif"],
       },
       boxShadow: {
-        brutal: "4px 4px #000",
-        "brutal-md": "6px 6px #000",
+        brutal: "4px 4px var(--brand-shadow, #000)",
+        "brutal-md": "6px 6px var(--brand-shadow, #000)",
       },
       colors: {
         current: "currentColor",
