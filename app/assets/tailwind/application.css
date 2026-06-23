@@ -33,17 +33,87 @@
 }
 
 .theme-2 {
-  --brand-50: #EFF6FF;
-  --brand-100: #DBEAFE;
-  --brand-200: #BFDBFE;
-  --brand-300: #93C5FD;
-  --brand-400: #60A5FA;
-  --brand-500: #2563EB;
-  --brand-600: #1D4ED8;
-  --brand-700: #1E40AF;
-  --brand-800: #1E3A8A;
-  --brand-900: #172554;
-  --brand-950: #0F172A;
+  --brand-50: #F6F1FE;
+  --brand-100: #ECE3FC;
+  --brand-200: #D7C2F9;
+  --brand-300: #BB98F6;
+  --brand-400: #9F6EF2;
+  --brand-500: #7C3AED;
+  --brand-600: #6215E6;
+  --brand-700: #5111BD;
+  --brand-800: #430E9D;
+  --brand-900: #330B77;
+  --brand-950: #1D0644;
+}
+
+.theme-3 {
+  --brand-50: #F1F9FD;
+  --brand-100: #E3F3FC;
+  --brand-200: #C3E6F8;
+  --brand-300: #9AD4F4;
+  --brand-400: #71C3EF;
+  --brand-500: #178FD0;
+  --brand-600: #147AB1;
+  --brand-700: #106492;
+  --brand-800: #0D5379;
+  --brand-900: #0A3F5C;
+  --brand-950: #062434;
+}
+
+.theme-4 {
+  --brand-50: #FEFBF0;
+  --brand-100: #FEF7E2;
+  --brand-200: #FCEDC0;
+  --brand-300: #FAE094;
+  --brand-400: #F8D368;
+  --brand-500: #F6C945;
+  --brand-600: #F4BC18;
+  --brand-700: #D29F0A;
+  --brand-800: #AE8408;
+  --brand-900: #846406;
+  --brand-950: #4B3904;
+}
+
+.theme-5 {
+  --brand-50: #F2FDF6;
+  --brand-100: #E5FBED;
+  --brand-200: #C6F6D7;
+  --brand-300: #9EEFBB;
+  --brand-400: #77E99F;
+  --brand-500: #1AA14A;
+  --brand-600: #16893F;
+  --brand-700: #127134;
+  --brand-800: #0F5D2B;
+  --brand-900: #0B4721;
+  --brand-950: #062812;
+}
+
+.theme-6 {
+  --brand-50: #FDF2F9;
+  --brand-100: #FBE4F3;
+  --brand-200: #F7C5E4;
+  --brand-300: #F19DD2;
+  --brand-400: #EB75BF;
+  --brand-500: #E0249A;
+  --brand-600: #C21B84;
+  --brand-700: #9F176C;
+  --brand-800: #84135A;
+  --brand-900: #640E44;
+  --brand-950: #390827;
+}
+
+.theme-7 {
+  --brand-50: #FEF5F1;
+  --brand-100: #FDEBE2;
+  --brand-200: #FBD4C1;
+  --brand-300: #F8B695;
+  --brand-400: #F6986A;
+  --brand-500: #F1641E;
+  --brand-600: #D9510D;
+  --brand-700: #B3430B;
+  --brand-800: #943709;
+  --brand-900: #702A07;
+  --brand-950: #401804;
 }
 
 @utility scrollbar-hidden {
