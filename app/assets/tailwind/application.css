@@ -3,6 +3,49 @@
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
+@theme inline {
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+}
+
+:root,
+.theme-1 {
+  --brand-50: #FDF2F3;
+  --brand-100: #FCE9EB;
+  --brand-200: #F8CED3;
+  --brand-300: #F2ABB2;
+  --brand-400: #EB7F8A;
+  --brand-500: #E03647;
+  --brand-600: #D42133;
+  --brand-700: #B51C2B;
+  --brand-800: #9F1926;
+  --brand-900: #7A131D;
+  --brand-950: #400A0F;
+}
+
+.theme-2 {
+  --brand-50: #EFF6FF;
+  --brand-100: #DBEAFE;
+  --brand-200: #BFDBFE;
+  --brand-300: #93C5FD;
+  --brand-400: #60A5FA;
+  --brand-500: #2563EB;
+  --brand-600: #1D4ED8;
+  --brand-700: #1E40AF;
+  --brand-800: #1E3A8A;
+  --brand-900: #172554;
+  --brand-950: #0F172A;
+}
+
 @utility scrollbar-hidden {
   -ms-overflow-style: none;
   scrollbar-width: none;
