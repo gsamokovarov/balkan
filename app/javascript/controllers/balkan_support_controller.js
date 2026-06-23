@@ -50,7 +50,7 @@ export default class extends Controller {
     const messageDiv = document.createElement("div")
     messageDiv.className = "flex justify-end mb-3"
     messageDiv.innerHTML = `
-      <div class="bg-banitsa-200 text-gray-800 px-4 py-2 rounded-lg max-w-xs">
+      <div class="bg-brand-200 text-gray-800 px-4 py-2 rounded-lg max-w-xs">
         ${message}
       </div>
     `

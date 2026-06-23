@@ -66,7 +66,7 @@ RSpec.case ApplicationHelper, type: :helper do
     end
 
     assert_include? form_html, 'type="checkbox"'
-    assert_include? form_html, 'class="w-5 h-5 text-banitsa-600 border-neutral-600 rounded-sm'
+    assert_include? form_html, 'class="w-5 h-5 text-brand-600 border-neutral-600 rounded-sm'
   end
 
   test "marketing_form renders submit button with custom text" do

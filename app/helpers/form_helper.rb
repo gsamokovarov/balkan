@@ -2,12 +2,12 @@ module FormHelper
   class Builder < ActionView::Helpers::FormBuilder
     FIELD_CLASSES = [
       "w-full border-2 rounded-md border-neutral-600 px-4 py-2 text-black text-ellipsis",
-      "focus:ring-0 focus:border-neutral-600 focus:outline-banitsa-600",
+      "focus:ring-0 focus:border-neutral-600 focus:outline-brand-600",
     ]
 
     CHECKBOX_CLASSES = [
-      "w-5 h-5 text-banitsa-600 border-neutral-600 rounded-sm",
-      "focus:border-black focus:outline-banitsa-600",
+      "w-5 h-5 text-brand-600 border-neutral-600 rounded-sm",
+      "focus:border-black focus:outline-brand-600",
     ]
 
     def text_input(method, label: method, required: false, **, &addendum)

@@ -3,6 +3,105 @@
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
+@theme inline {
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+}
+
+:root,
+.theme-1 {
+  --brand-50: #FDF2F3;
+  --brand-100: #FCE9EB;
+  --brand-200: #F8CED3;
+  --brand-300: #F2ABB2;
+  --brand-400: #EB7F8A;
+  --brand-500: #E03647;
+  --brand-600: #D42133;
+  --brand-700: #B51C2B;
+  --brand-800: #9F1926;
+  --brand-900: #7A131D;
+  --brand-950: #400A0F;
+}
+
+.theme-2 {
+  --brand-50: #FFFBEB;
+  --brand-100: #FEF3C7;
+  --brand-200: #FDE68A;
+  --brand-300: #FCD34D;
+  --brand-400: #FBBF24;
+  --brand-500: #F59E0B;
+  --brand-600: #D97706;
+  --brand-700: #B45309;
+  --brand-800: #92400E;
+  --brand-900: #78350F;
+  --brand-950: #451A03;
+}
+
+.theme-3 {
+  --brand-50: #F7FEE7;
+  --brand-100: #ECFCCB;
+  --brand-200: #D9F99D;
+  --brand-300: #BEF264;
+  --brand-400: #A3E635;
+  --brand-500: #84CC16;
+  --brand-600: #65A30D;
+  --brand-700: #4D7C0F;
+  --brand-800: #3F6212;
+  --brand-900: #365314;
+  --brand-950: #1A2E05;
+}
+
+.theme-4 {
+  --brand-50: #ECFDF5;
+  --brand-100: #D1FAE5;
+  --brand-200: #A7F3D0;
+  --brand-300: #6EE7B7;
+  --brand-400: #34D399;
+  --brand-500: #10B981;
+  --brand-600: #059669;
+  --brand-700: #047857;
+  --brand-800: #065F46;
+  --brand-900: #064E3B;
+  --brand-950: #022C22;
+}
+
+.theme-5 {
+  --brand-50: #F0F9FF;
+  --brand-100: #E0F2FE;
+  --brand-200: #BAE6FD;
+  --brand-300: #7DD3FC;
+  --brand-400: #38BDF8;
+  --brand-500: #0EA5E9;
+  --brand-600: #0284C7;
+  --brand-700: #0369A1;
+  --brand-800: #075985;
+  --brand-900: #0C4A6E;
+  --brand-950: #082F49;
+}
+
+.theme-6 {
+  --brand-50: #EEF2FF;
+  --brand-100: #E0E7FF;
+  --brand-200: #C7D2FE;
+  --brand-300: #A5B4FC;
+  --brand-400: #818CF8;
+  --brand-500: #6366F1;
+  --brand-600: #4F46E5;
+  --brand-700: #4338CA;
+  --brand-800: #3730A3;
+  --brand-900: #312E81;
+  --brand-950: #1E1B4B;
+}
+
 @utility scrollbar-hidden {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -43,7 +142,7 @@
       px-8
       bg-black
       text-white
-      hover:bg-banitsa-500
+      hover:bg-brand-500
       hover:text-white
       hover:shadow-brutal
       hover:-translate-x-1
@@ -71,15 +170,15 @@
   }
 
   .link-primary {
-    @apply text-banitsa-600 hover:underline hover:decoration-banitsa-600 hover:underline-offset-4 hover:ease-in-out;
+    @apply text-brand-600 hover:underline hover:decoration-brand-600 hover:underline-offset-4 hover:ease-in-out;
   }
 
   .link-secondary {
-    @apply text-banitsa-50 hover:text-banitsa-500;
+    @apply text-brand-50 hover:text-brand-500;
   }
 
   .badge-important {
-    @apply rounded bg-banitsa-500 text-black text-base p-2 align-middle truncate;
+    @apply rounded bg-brand-500 text-black text-base p-2 align-middle truncate;
   }
 
   .badge-warning {
