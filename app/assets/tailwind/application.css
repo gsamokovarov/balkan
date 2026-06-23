@@ -15,6 +15,9 @@
   --color-brand-800: var(--brand-800);
   --color-brand-900: var(--brand-900);
   --color-brand-950: var(--brand-950);
+
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
 }
 
 :root,
@@ -31,6 +34,9 @@
   --brand-900: #7A131D;
   --brand-950: #400A0F;
   --brand-shadow: #4B43E6;
+
+  --surface: #FFFFFF;
+  --ink: #000000;
 }
 
 .theme-2 {
