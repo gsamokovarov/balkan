@@ -6,7 +6,7 @@
   <div class="flex items-center gap-4 mb-8">
     <% if @job_posting.sponsor.logo.attached? %>
       <%= image_tag try_variant(@job_posting.sponsor.logo, resize_to_limit: [500, 500]),
-        class: "w-20 h-20 p-2 bg-white border-2 border-black rounded-md object-contain",
+        class: "w-20 h-20 p-2 bg-brand-card border-2 border-brand-line rounded-md object-contain",
         lazy: true %>
     <% end %>
 

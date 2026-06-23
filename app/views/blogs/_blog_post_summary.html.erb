@@ -1,6 +1,6 @@
 <article class="flex max-w-xl flex-col items-start justify-between">
   <div class="flex items-center gap-x-4 text-lg">
-    <time datetime="<%= blog_post.date.iso8601 %>" class="text-gray-500">
+    <time datetime="<%= blog_post.date.iso8601 %>" class="text-brand-muted">
       <%= blog_post.date.strftime "%d %b %Y" %>
     </time>
   </div>
@@ -17,7 +17,7 @@
   </div>
   <div class="relative mt-8 flex items-center gap-x-4">
     <% if blog_post.author.avatar.attached? %>
-      <%= image_tag blog_post.author.avatar, alt: blog_post.author.name, class: "h-12 w-12 rounded-full border-2 border-black bg-white" %>
+      <%= image_tag blog_post.author.avatar, alt: blog_post.author.name, class: "h-12 w-12 rounded-full border-2 border-brand-line bg-brand-card" %>
     <% end %>
     <div class="text-lg leading-6">
       <p class="font-semibold">
@@ -25,7 +25,7 @@
         <%= blog_post.author.name %>
       </p>
       <% if blog_post.author.bio %>
-        <p class="text-gray-500"><%= blog_post.author.bio %></p>
+        <p class="text-brand-muted"><%= blog_post.author.bio %></p>
       <% end %>
     </div>
   </div>

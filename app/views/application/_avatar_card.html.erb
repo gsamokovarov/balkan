@@ -1,7 +1,7 @@
 <%# locals: (avatar: nil, subtitle: nil, title: nil, class: nil) %>
 
-<div class="p-2 sm:p-3 bg-white border-2 border-black rounded-md <%= binding.local_variable_get :class %>">
-  <div class="border-2 border-black rounded-sm overflow-hidden">
+<div class="p-2 sm:p-3 bg-brand-card border-2 border-brand-line rounded-md <%= binding.local_variable_get :class %>">
+  <div class="border-2 border-brand-line rounded-sm overflow-hidden">
     <% case avatar %>
     <% when String, -> { ActiveStorage::Attached::One === it && it.attached? } %>
       <%= image_tag try_variant(avatar, resize_to_limit: [1000, 1000]),
@@ -31,7 +31,7 @@
     <div class="mt-4 text-center">
       <h2 class="sm:text-lg font-medium leading-none"><%= title %></h2>
       <% if subtitle.present? %>
-        <p class="font-medium text-gray-500"><%= subtitle %></p>
+        <p class="font-medium text-brand-muted"><%= subtitle %></p>
       <% end %>
     </div>
   <% end %>
