@@ -116,6 +116,15 @@
   }
 }
 
+@utility dot-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--brand-300) 16%, transparent) 1.5px,
+    transparent 1.6px
+  );
+  background-size: 16px 16px;
+  background-attachment: fixed;
+}
+
 @keyframes seismic-slam {
   0%   { transform: translateY(0);    box-shadow: 0 0 0 0 #000; }
   10%  { transform: translateY(-8px); box-shadow: 2px 2px 0 0 #000; }
