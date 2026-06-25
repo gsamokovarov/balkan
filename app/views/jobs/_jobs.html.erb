@@ -8,13 +8,13 @@
   <div class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
     <% Current.event.job_postings.published.includes(:sponsor).select(&:relevant?).each do |job_posting| %>
       <%= link_to job_path(job_posting),
-            class: "flex items-center gap-4 p-4 bg-white border-2 border-black rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
+            class: "flex items-center gap-4 p-4 bg-brand-card border-2 border-brand-line rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
         <%= image_tag try_variant(job_posting.sponsor.logo, resize_to_limit: [500, 500]),
           class: "w-14 h-14 object-contain shrink-0",
           lazy: true %>
         <div>
-          <h3 class="text-lg font-bold text-black"><%= job_posting.title %></h3>
-          <p class="text-gray-600"><%= job_posting.sponsor.name %></p>
+          <h3 class="text-lg font-bold text-brand-content"><%= job_posting.title %></h3>
+          <p class="text-brand-muted"><%= job_posting.sponsor.name %></p>
         </div>
       <% end %>
     <% end %>

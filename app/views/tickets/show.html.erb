@@ -3,10 +3,10 @@
 <%= render "section", title: "Ticket", title_element: "h1", highlight: true do %>
   <div
     data-ticket-target="template"
-    class="bg-white border-2 border-black rounded-md flex flex-col gap-6 p-4 w-full sm:w-72"
+    class="bg-brand-card border-2 border-brand-line rounded-md flex flex-col gap-6 p-4 w-full sm:w-72"
   >
     <div class="flex flex-1 w-full justify-center">
-      <div class="border-2 border-black rounded-md bg-white w-full">
+      <div class="border-2 border-brand-line rounded-md bg-brand-card w-full">
         <%== @ticket.qrcode.as_svg use_path: true, viewbox: true %>
       </div>
     </div>
@@ -24,7 +24,7 @@
           <%= @ticket.supporter? ? "border-brand-500" : "border-neutral-600" %>
           px-4
           py-2
-          text-black
+          text-brand-content
           text-ellipsis
         "
       />
@@ -43,7 +43,7 @@
           border-neutral-600
           px-4
           py-2
-          text-black
+          text-brand-content
           text-ellipsis
         "
       />
@@ -62,7 +62,7 @@
           border-neutral-600
           px-4
           py-2
-          text-black
+          text-brand-content
           text-ellipsis
         "
       />
@@ -81,7 +81,7 @@
           border-neutral-600
           px-4
           py-2
-          text-black
+          text-brand-content
           text-ellipsis
         "
       />
@@ -89,7 +89,7 @@
 
     <% if Current.user %>
       <% if @ticket.checked_in? %>
-        <div class="text-center text-xs uppercase tracking-widest text-neutral-500 font-medium">
+        <div class="text-center text-xs uppercase tracking-widest text-brand-muted font-medium">
           Checked in at <%= @ticket.checkin.created_at.to_fs :short %>
         </div>
       <% else %>

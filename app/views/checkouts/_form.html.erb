@@ -5,7 +5,7 @@
 ) do |f| %>
   <div data-ticket-target="tickets" class="flex flex-wrap gap-6">
     <%= f.fields_for :tickets, index: nil do |fields| %>
-      <div data-ticket-target="template" class="relative border-2 border-black rounded-md flex flex-col gap-6 p-4 w-full sm:w-64">
+      <div data-ticket-target="template" class="relative border-2 border-brand-line rounded-md flex flex-col gap-6 p-4 w-full sm:w-64">
         <button type="button" data-action="ticket#remove" class="absolute right-4 top-4 invisible">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@
       <span>Add ticket</span>
     </button>
 
-    <p class="text-lg text-gray-500 self-center" data-ticket-target="summary">
+    <p class="text-lg text-brand-muted self-center" data-ticket-target="summary">
       Buy 2 more and save 10%
     </p>
   </div>
@@ -50,7 +50,7 @@
   <%= f.check_box_input :invoice, label: "Do you need an invoice?" %>
 
   <%= f.text_input :discount_code, label: "Discount code", value: params[:discount_code] do %>
-    <p class="text-lg text-gray-500">
+    <p class="text-lg text-brand-muted">
       Have you checked our social media?
     </p>
   <% end %>

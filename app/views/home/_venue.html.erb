@@ -17,7 +17,7 @@
 
   <div class="space-y-2">
     <% if venue.place_id %>
-      <div class="border-2 border-black rounded-md overflow-hidden h-72 sm:h-96">
+      <div class="border-2 border-brand-line rounded-md overflow-hidden h-72 sm:h-96">
         <iframe width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps/embed/v1/place?key=<%= Settings.google_api_key %>&q=place_id:<%= venue.place_id %>">
         </iframe>

@@ -23,7 +23,7 @@
         <% end %>
       </div>
       <% if package.description? %>
-        <%= render("prose", class: "text-gray-500") { render_markdown package.description } %>
+        <%= render("prose", class: "text-brand-muted") { render_markdown package.description } %>
       <% end %>
     </div>
   <% end %>
