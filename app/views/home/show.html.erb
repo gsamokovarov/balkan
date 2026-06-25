@@ -20,7 +20,7 @@
   <%= render "media_gallery", media_gallery: Current.event.media_gallery, highlight: !hi %>
 <% end %>
 
-<% if Current.event.ticket_types.any? %>
+<% if Current.event.sales_tickets? %>
   <%= render "tickets", highlight: !hi %>
 <% end %>
 

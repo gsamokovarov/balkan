@@ -16,7 +16,7 @@
   <% end %>
 <% end %>
 
-<% if Current.event.ticket_types.any? %>
+<% if Current.event.sales_tickets? %>
   <%= render "tickets/cta", highlight: !hi %>
 <% end %>
 

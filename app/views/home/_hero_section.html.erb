@@ -21,7 +21,7 @@
 
       <% if Current.event.accepts_speaking_applications? %>
         <%= render "hero_countdown_cfp" %>
-      <% elsif Current.event.beginning_countdown.relevant? && Current.event.ticket_types.any? %>
+      <% elsif Current.event.beginning_countdown.relevant? && Current.event.sales_tickets? %>
         <%= render "hero_countdown_event" %>
       <% end %>
     </div>
