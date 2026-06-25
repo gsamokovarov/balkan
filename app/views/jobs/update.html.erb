@@ -22,7 +22,7 @@
       <% @job_posting.contacts.each do |contact| %>
         <%= mail_to contact.email, class: "block p-4 bg-brand-card border-2 border-brand-line rounded-md transition ease-in-out hover:shadow-brutal hover:-translate-x-1 hover:-translate-y-1" do %>
           <% if contact.name.present? %>
-            <p class="text-lg font-bold text-brand-ink"><%= contact.name %></p>
+            <p class="text-lg font-bold text-brand-content"><%= contact.name %></p>
           <% end %>
 
           <p class="text-brand-600 underline"><%= contact.email %></p>
