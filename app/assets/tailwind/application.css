@@ -118,6 +118,7 @@
   --brand-shadow: #0BB47E;
 }
 
+/* Comment out the dark theme until I setup the application to support it.
 @media (prefers-color-scheme: dark) {
   :root,
   .theme-1 {
@@ -239,6 +240,7 @@
     --tw-prose-td-borders: var(--brand-line);
   }
 }
+*/
 
 @utility scrollbar-hidden {
   -ms-overflow-style: none;
