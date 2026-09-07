@@ -5,4 +5,5 @@
   column :name,  -> { link_to it.name, [:admin, it] }
   column :host,  -> { link_to it.host || "–", [:admin, it] }
   column :dates, -> { link_to [it.start_date, it.end_date].to_a.join(" – "), [:admin, it] }
+  column :announced, -> { it.announced? ? admin_badge(:success, "Yes") : admin_badge(:primary, "No") }
 end %>

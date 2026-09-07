@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :event do
     invoice_sequence { association :invoice_sequence, :balkan2024 }
+    announced_at { Time.current }
 
     trait :balkan2024 do
       name { "Balkan Ruby 2024" }

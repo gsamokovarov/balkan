@@ -27,6 +27,10 @@ class Event < ApplicationRecord
   has_one_attached :ogp_image
   has_many_attached :hero_images
 
+  time_as_boolean :announced
+
+  def self.announced = where.not(announced_at: nil)
+
   validates :name, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true

@@ -5,6 +5,7 @@ balkan2024 = Event.find_or_create_by! name: "Balkan Ruby 2024" do
   it.end_date = Date.new 2024, 4, 27
   it.invoice_sequence = invoice_sequence
   it.host = "2024.balkanruby.com"
+  it.announced = true
 end
 
 balkan2024.ticket_types.find_or_create_by! name: "Free" do
@@ -32,6 +33,7 @@ balkan2025 = Event.find_or_create_by! name: "Balkan Ruby 2025" do
   it.end_date = Date.new 2025, 4, 26
   it.invoice_sequence = invoice_sequence
   it.host = "balkanruby.com"
+  it.announced = true
 end
 
 balkan2025.ticket_types.find_or_create_by! name: "Free" do
@@ -64,6 +66,7 @@ banitsa2024 = Event.find_or_create_by! name: "Ruby Banitsa 2024" do
   it.end_date = Date.new 2024, 12, 7
   it.invoice_sequence = invoice_sequence
   it.host = "conf.rubybanitsa.com"
+  it.announced = true
 end
 
 banitsa2024.ticket_types.find_or_create_by! name: "Free" do
