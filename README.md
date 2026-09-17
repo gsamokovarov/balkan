@@ -12,7 +12,7 @@ in Sofia, Bulgaria.
 
 ## About
 
-This is the codebase for the [Balkan Ruby](https://balkanruby) conference
+This is the codebase for the [Balkan Ruby](https://balkanruby.com) conference
 website and its CMS, or conference-management-system. The codebase is
 pragmatic and modern. Most of the Balkan Ruby conference needs are covered by a
 custom-built admin management solution, but some features are still hard-coded.
