@@ -32,7 +32,7 @@ class Admin::TicketsController < Admin::ApplicationController
   private
 
   def filtered_tickets
-    tickets = event.tickets
+    tickets = event.tickets.search params[:search]
     tickets = tickets.where.missing(:checkin) if params[:filter] == "expected"
     tickets = tickets.where(ticket_type_id: params[:ticket_type_id]) if params[:ticket_type_id].present?
     tickets

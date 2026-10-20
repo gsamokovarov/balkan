@@ -87,6 +87,10 @@ module AdminHelper
     render "admin/application/table", objects:, table_def: Admin::TableHelper::Definition.new(self, &)
   end
 
+  def admin_search(placeholder, url)
+    render "admin/application/search", placeholder:, url:
+  end
+
   def admin_paginate(scope)
     render "admin/application/pagination", scope:, current_page: [params[:page].to_i, 1].max
   end

@@ -45,6 +45,12 @@ module Admin::FormHelper
       end
     end
 
+    def search_input(method, label: method, **, &addendum)
+      input_for method, label:, addendum: do
+        @template.concat search_field(method, class: field_classes(method), **)
+      end
+    end
+
     def text_area_input(method, label: method, class: nil, **, &addendum)
       input_for method, class:, label:, addendum: do
         @template.concat text_area(method, class: field_classes(method), rows: 8, **)

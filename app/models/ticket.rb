@@ -17,6 +17,11 @@ class Ticket < ApplicationRecord
 
   normalizes :email, with: -> { it.downcase.strip }
 
+  def self.search(query)
+    where "tickets.name LIKE :pattern ESCAPE '\\' OR tickets.email LIKE :pattern ESCAPE '\\'",
+          pattern: "%#{sanitize_sql_like query.to_s.strip}%"
+  end
+
   def event_access_url = Link.with_host(event.host) { Link.ticket_url generate_token_for(:event_access) }
   def qrcode = RQRCode::QRCode.new event_access_url
 
