@@ -61,6 +61,8 @@ module AdminHelper
       if nested_nav_links = link[:items]
         nested_link = admin_find_current_nav_link nested_nav_links
         return nested_link if nested_link
+      elsif link[:section]
+        return link if section_active? link[:section]
       elsif link[:path]
         return link if current_page? link[:path]
       end

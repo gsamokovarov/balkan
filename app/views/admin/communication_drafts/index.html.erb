@@ -1,8 +1,13 @@
 <%= section_navigation :communications %>
 
-<%= render "section", title: "Communication drafts", cta: -> {
+<%= render "section", title: "Communications", cta: -> {
   admin_button(:primary, link: new_admin_event_communication_draft_path(Current.event)) { "New draft" }
 } do %>
+  <%= render "pills", pills: [
+    { name: "Drafts", path: admin_event_communication_drafts_path(Current.event) },
+    { name: "Sent", path: admin_event_communications_path(Current.event) },
+  ] %>
+
   <% if @drafts.any? %>
     <%= render "drafts", drafts: @drafts %>
     <%= admin_paginate @drafts %>

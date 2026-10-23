@@ -1,6 +1,11 @@
 <%= section_navigation :communications %>
 
-<%= render "section", title: "Sent Communications" do %>
+<%= render "section", title: "Communications" do %>
+  <%= render "pills", pills: [
+    { name: "Drafts", path: admin_event_communication_drafts_path(Current.event) },
+    { name: "Sent", path: admin_event_communications_path(Current.event) },
+  ] %>
+
   <% if @communications.any? %>
     <%= render "communications", communications: @communications %>
     <%= admin_paginate @communications %>

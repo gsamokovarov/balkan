@@ -3,6 +3,11 @@
 <%= render "section", title: "Sponsorships", cta: -> {
   admin_button(:primary, link: new_admin_event_sponsorship_path) { "New sponsorship" }
 } do %>
+  <%= render "pills", pills: [
+    { name: "Sponsorships", path: admin_event_sponsorships_path(Current.event) },
+    { name: "Packages", path: admin_event_sponsorship_packages_path(Current.event) },
+  ] %>
+
   <% if @sponsorships.any? %>
     <%= render "sponsorships", sponsorships: @sponsorships %>
   <% else %>

@@ -3,6 +3,11 @@
 <%= render "section", title: "Contracts", cta: -> {
   admin_button(:primary, link: new_admin_event_contract_path(Current.event)) { "New contract" }
 } do %>
+  <%= render "pills", pills: [
+    { name: "Contracts", path: admin_event_contracts_path(Current.event) },
+    { name: "Templates", path: admin_event_contract_templates_path(Current.event) },
+  ] %>
+
   <% if @contracts.any? %>
     <%= render "contracts", contracts: @contracts %>
     <%= admin_paginate @contracts %>

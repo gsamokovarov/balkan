@@ -1,8 +1,13 @@
 <%= section_navigation :partnerships %>
 
-<%= render "section", title: "Sponsorship packages", cta: -> {
+<%= render "section", title: "Sponsorships", cta: -> {
   admin_button(:primary, link: new_admin_event_sponsorship_package_path) { "New sponsorship package" }
 } do %>
+  <%= render "pills", pills: [
+    { name: "Sponsorships", path: admin_event_sponsorships_path(Current.event) },
+    { name: "Packages", path: admin_event_sponsorship_packages_path(Current.event) },
+  ] %>
+
   <% if @sponsorship_packages.any? %>
     <%= render "sponsorship_packages", sponsorship_packages: @sponsorship_packages %>
   <% else %>

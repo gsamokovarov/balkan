@@ -23,8 +23,7 @@ module Admin::NavigationHelper
       communications: {
         name: "Communications",
         tabs: [
-          { name: "Communication drafts", path: admin_event_communication_drafts_path(Current.event) },
-          { name: "Communications", path: admin_event_communications_path(Current.event) },
+          { name: "Communications", path: admin_event_communication_drafts_path(Current.event) },
           { name: "Announcements", path: admin_event_announcements_path(Current.event) },
           { name: "Subscribers", path: admin_subscribers_path, global: true },
           { name: "Marketing", path: admin_qr_code_path },
@@ -34,9 +33,7 @@ module Admin::NavigationHelper
       partnerships: {
         name: "Partnerships",
         tabs: [
-          { name: "Sponsorship packages", path: admin_event_sponsorship_packages_path(Current.event) },
           { name: "Sponsorships", path: admin_event_sponsorships_path(Current.event) },
-          { name: "Contract templates", path: admin_event_contract_templates_path(Current.event) },
           { name: "Contracts", path: admin_event_contracts_path(Current.event) },
           { name: "Community partners", path: admin_event_community_partners_path(Current.event) },
           { name: "Job postings", path: admin_event_job_postings_path(Current.event) },
@@ -93,6 +90,7 @@ module Admin::NavigationHelper
   end
 
   def section_navigation(section_key)
+    @active_section = section_key
     admin_sections.fetch(section_key) => { name:, tabs: }
 
     content_for :section_navigation do
@@ -100,10 +98,5 @@ module Admin::NavigationHelper
     end
   end
 
-  def section_active?(section_key)
-    section = admin_sections[section_key]
-    return false unless section
-
-    section[:tabs].any? { |tab| current_page? tab[:path] }
-  end
+  def section_active?(section_key) = @active_section == section_key
 end
