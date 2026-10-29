@@ -15,7 +15,7 @@ class Admin::EventNotesController < Admin::ApplicationController
     @event_note = EventNote.new(**event_note_params, event:)
 
     if @event_note.save
-      redirect_to admin_event_event_notes_path(event), notice: "Event note created"
+      redirect_to admin_event_event_notes_path(event), notice: "Note created"
     else
       render :new
     end
@@ -29,7 +29,7 @@ class Admin::EventNotesController < Admin::ApplicationController
     @event_note = EventNote.find params[:id]
 
     if @event_note.update event_note_params
-      redirect_to admin_event_event_notes_path(event), notice: "Event note updated"
+      redirect_to admin_event_event_notes_path(event), notice: "Note updated"
     else
       render :edit
     end

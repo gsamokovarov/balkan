@@ -32,13 +32,13 @@
 <% end %>
 
 <% if Current.event.event_notes.any? %>
-  <%= render "section", title: "Event notes", description: "Notes for #{Current.event.name}" do %>
-    <%= render "admin/event_notes/event_notes", event_notes: Current.event.event_notes %>
+  <%= render "section", title: "Notes", description: "Notes for #{Current.event.name}" do %>
+    <%= render "admin/event_notes/event_notes", event_notes: Current.event.event_notes, tall: true %>
   <% end %>
 <% else %>
-  <%= render "section", title: "Event notes" do %>
+  <%= render "section", title: "Notes" do %>
     <%= render "empty_state" do %>
-      <% admin_button(:primary, link: new_admin_event_event_note_path(Current.event)) { "New event note" } %>
+      <% admin_button(:primary, link: new_admin_event_event_note_path(Current.event)) { "New note" } %>
     <% end %>
   <% end %>
 <% end %>
