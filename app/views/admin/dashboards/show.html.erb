@@ -31,14 +31,14 @@
   <% end %>
 <% end %>
 
-<% if Current.event.embeddings.any? %>
-  <%= render "section", title: "Embeddings", description: "Embedded resources for #{Current.event.name}" do %>
-    <%= render "admin/embeddings/embeddings", embeddings: Current.event.embeddings %>
+<% if Current.event.event_notes.any? %>
+  <%= render "section", title: "Event notes", description: "Notes for #{Current.event.name}" do %>
+    <%= render "admin/event_notes/event_notes", event_notes: Current.event.event_notes %>
   <% end %>
 <% else %>
-  <%= render "section", title: "Embeddings" do %>
+  <%= render "section", title: "Event notes" do %>
     <%= render "empty_state" do %>
-      <% admin_button(:primary, link: new_admin_event_embedding_path(Current.event)) { "New embedding" } %>
+      <% admin_button(:primary, link: new_admin_event_event_note_path(Current.event)) { "New event note" } %>
     <% end %>
   <% end %>
 <% end %>

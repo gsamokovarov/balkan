@@ -1,0 +1,9 @@
+<%# locals: (event_note:) %>
+
+<%= admin_form [:admin, event_note.event, event_note] do |f| %>
+  <%= f.readonly_input :event_id, [[event_note.event.name, event_note.event.id]] %>
+  <%= f.text_input :name %>
+  <%= f.text_input :description %>
+  <%= f.text_input :url %>
+  <%= f.submit %>
+<% end %>

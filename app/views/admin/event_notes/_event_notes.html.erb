@@ -1,6 +1,6 @@
-<%# locals: (embeddings:) %>
+<%# locals: (event_notes:) %>
 
-<%= admin_table embeddings do
+<%= admin_table event_notes do
   column "#",          -> { link_to it.id, [:admin, it.event, it] }
   column :name,        -> { link_to it.name, [:admin, it.event, it] }
   column :description, -> { link_to truncate(it.description, length: 50), [:admin, it.event, it] }

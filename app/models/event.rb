@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   has_many :lineup_members
   has_many :blog_posts
   has_many :community_partners
-  has_many :embeddings
+  has_many :event_notes
   has_many :sponsorship_packages
   has_many :sponsorship_variants, through: :sponsorship_packages, source: :variants
   has_many :sponsorships

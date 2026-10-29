@@ -1,0 +1,13 @@
+<%= section_navigation :content %>
+
+<%= render "section", title: "Event notes", cta: -> {
+  admin_button(:primary, link: new_admin_event_event_note_path) { "New event note" }
+} do %>
+  <% if @event_notes.any? %>
+    <%= render "event_notes", event_notes: @event_notes %>
+  <% else %>
+    <%= render "empty_state" do %>
+      <% admin_button(:primary, link: new_admin_event_event_note_path) { "New event note" } %>
+    <% end %>
+  <% end %>
+<% end %>

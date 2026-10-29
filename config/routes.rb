@@ -57,7 +57,7 @@ Rails.application.routes.draw do
         end
       end
       resources :ticket_types, only: [:index, :show, :new, :create, :edit, :update]
-      resources :embeddings, only: [:index, :show, :new, :create, :edit, :update]
+      resources :event_notes, only: [:index, :show, :new, :create, :edit, :update]
       resources :lineup_members, only: [:index, :show, :new, :create, :edit, :update]
       resources :blog_posts, only: [:index, :show, :new, :create, :update]
       resource :event_activity, only: [:show, :create, :update]
