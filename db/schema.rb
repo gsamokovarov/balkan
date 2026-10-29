@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_29_000000) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_29_000001) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -153,7 +153,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_29_000000) do
     t.integer "event_id", null: false
     t.string "name", null: false
     t.string "description"
-    t.string "url", null: false
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_notes_on_event_id"
