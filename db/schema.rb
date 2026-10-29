@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_21_000000) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_29_000000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -140,16 +140,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_21_000000) do
     t.index ["event_id"], name: "index_contracts_on_event_id"
   end
 
-  create_table "embeddings", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.string "name", null: false
-    t.string "description"
-    t.string "url", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_embeddings_on_event_id"
-  end
-
   create_table "event_activities", force: :cascade do |t|
     t.integer "event_id", null: false
     t.text "content"
@@ -157,6 +147,16 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_21_000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_activities_on_event_id"
+  end
+
+  create_table "event_notes", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.string "name", null: false
+    t.string "description"
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_notes_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -491,8 +491,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_21_000000) do
   add_foreign_key "contract_templates", "events"
   add_foreign_key "contracts", "contract_templates"
   add_foreign_key "contracts", "events"
-  add_foreign_key "embeddings", "events"
   add_foreign_key "event_activities", "events"
+  add_foreign_key "event_notes", "events"
   add_foreign_key "events", "invoice_sequences"
   add_foreign_key "events", "venues"
   add_foreign_key "invoice_items", "invoices"
