@@ -1,9 +1,16 @@
 <%# locals: (event_note:) %>
 
-<%= admin_form [:admin, event_note.event, event_note] do |f| %>
-  <%= f.readonly_input :event_id, [[event_note.event.name, event_note.event.id]] %>
-  <%= f.text_input :name %>
-  <%= f.text_input :description %>
-  <%= f.text_input :url %>
-  <%= f.submit %>
-<% end %>
+<div class="flex flex-col gap-6 md:flex-row" data-controller="markdown-preview">
+  <%= admin_form [:admin, event_note.event, event_note], html: { class: "sm:max-w-sm flex-1" } do |f| %>
+    <%= f.readonly_input :event_id, [[event_note.event.name, event_note.event.id]] %>
+    <%= f.text_input :name %>
+    <%= f.text_area_input :description, data: { markdown_preview_target: "content" } %>
+    <%= f.text_input :url %>
+    <%= f.submit %>
+  <% end %>
+
+  <div class="w-full sm:w-96 h-screen relative">
+    <h2 class="text-lg font-semibold mb-6 text-gray-900 dark:text-gray-100">Preview</h2>
+    <div class="prose dark:prose-invert border border-gray-300 dark:border-gray-600 rounded-md shadow-sm sm:h-3/4 sm:overflow-y-scroll p-4" data-markdown-preview-target="preview"></div>
+  </div>
+</div>

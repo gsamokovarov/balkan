@@ -32,6 +32,8 @@ export default class extends Controller {
   }
 
   #replaceImagePlaceholders(html) {
+    if (!this.hasImagesTarget) return html
+
     const files = this.imagesTarget.files || []
     const existingImages = this.imagesTarget.parentElement.querySelectorAll("img")
 
