@@ -33,7 +33,7 @@
 
 <% if Current.event.event_notes.any? %>
   <%= render "section", title: "Notes", description: "Notes for #{Current.event.name}" do %>
-    <%= render "admin/event_notes/event_notes", event_notes: Current.event.event_notes, tall: true %>
+    <%= render "admin/event_notes/event_notes", event_notes: Current.event.event_notes %>
   <% end %>
 <% else %>
   <%= render "section", title: "Notes" do %>

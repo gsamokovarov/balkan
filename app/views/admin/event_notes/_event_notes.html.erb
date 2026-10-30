@@ -1,24 +1,19 @@
-<%# locals: (event_notes:, tall: false) %>
+<%# locals: (event_notes:) %>
 
 <ul role="list" class="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 xl:grid-cols-3">
   <% event_notes.each do |event_note| %>
-    <% description_clamp = if tall
-      event_note.url.present? ? "line-clamp-10" : "line-clamp-12"
-    else
-      event_note.url.present? ? "line-clamp-4" : "line-clamp-6"
-    end %>
-    <li class="flex min-w-0 flex-col rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <h2 class="line-clamp-2 shrink-0 break-words text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
+    <li class="min-w-0 space-y-3 rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+      <h2 class="line-clamp-2 break-words text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
         <%= link_to event_note.name, [:admin, event_note.event, event_note], class: "hover:text-indigo-600 dark:hover:text-indigo-400" %>
       </h2>
-      <% if event_note.description.present? %>
-        <p class="mt-2 break-words whitespace-pre-line text-sm leading-6 text-gray-600 dark:text-gray-400 <%= description_clamp %>"><%= event_note.description.strip %></p>
-      <% end %>
-      <% if event_note.url.present? %>
-        <div class="mt-3">
-          <%= link_to event_note.url, event_note.url, target: "_blank", rel: "noopener", title: event_note.url,
-            class: "block truncate text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300" %>
+      <% if event_note.description %>
+        <div class="prose prose-sm dark:prose-invert max-w-none max-h-72 overflow-hidden break-words">
+          <%= render_markdown event_note.description %>
         </div>
+      <% end %>
+      <% if event_note.url %>
+        <%= link_to event_note.url, event_note.url, target: "_blank", rel: "noopener", title: event_note.url,
+          class: "block truncate text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300" %>
       <% end %>
     </li>
   <% end %>
