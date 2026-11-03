@@ -42,6 +42,6 @@
 
 /config/credentials/production.key
 
-# Ignore default Litestack SQLite databases.
+# Ignore the SQLite databases (one directory per environment).
 /db/**/*.sqlite3
 /db/**/*.sqlite3-*

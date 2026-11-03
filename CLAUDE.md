@@ -81,10 +81,10 @@ The `Current` class (ActiveSupport::CurrentAttributes) maintains thread-local st
 ## Technology Stack
 
 ### Backend
-- **Rails 8** with SQLite3 (via Litestack for production features)
+- **Rails 8** with SQLite3 (plain `sqlite3` adapter)
 - **Authentication**: Custom session-based system (no Devise)
 - **File Storage**: Active Storage with local/cloud storage
-- **Background Jobs**: Litequeue (part of Litestack)
+- **Background Jobs**: Solid Queue in production (runs inside Puma via `SOLID_QUEUE_IN_PUMA`), async in development, inline in tests
 - **PDF Generation**: Prawn for invoices
 - **Payments**: Stripe with webhook support
 
@@ -113,8 +113,8 @@ For payment testing, configure:
 3. Set environment variables: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
 
 ### Database Notes
-- Uses SQLite in all environments via Litestack
-- Multiple database files: main data, queue system, cache
+- Uses SQLite in all environments, with one directory per environment under `db/<env>/`
+- Production has multiple database files: `data.sqlite3` (primary) and `queue.sqlite3` (Solid Queue, schema in `db/queue_schema.rb`)
 - Migrations include event-specific and multi-tenant considerations
 
 ### Custom Generators
