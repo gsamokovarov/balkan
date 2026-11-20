@@ -21,11 +21,11 @@ for the sake of construction and is never finished.
 
 ## Development
 
-- Ruby 4.0.9
+- Ruby 4.0.10
 - SQLite3
 - Foreman (or [hivemind](https://github.com/DarthSim/hivemind))
 
-Install Ruby 4.0.9 with `rbenv`, `chruby`, or `asdf`. Use
+Install Ruby 4.0.10 with `rbenv`, `chruby`, or `asdf`. Use
 [Homebrew](https://brew.sh), Portage, or pacman (if you are a noob), for
 everything else:
 
