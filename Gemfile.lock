@@ -129,7 +129,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    hamal (0.2)
+    hamal (1.0)
       json
     hashery (2.1.2)
     hashie (3.6.0)

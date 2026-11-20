@@ -94,7 +94,7 @@ so I can use RSpec with an xUnit testing dialect.
 
 This application is deployed to a custom server maintained by me and [Neno Ganchev](https://github.com/nenoganchev)
 using [Hamal](https://github.com/gsamokovarov/hamal), a simple deployment tool we
-created. The deployment configuration lives in `config/deploy.yml`.
+created. The deployment configuration lives in `config/deploy.rb`.
 
 To deploy (if you have access):
 
