@@ -1,17 +1,9 @@
 <% title "Thank you" %>
 
 <div data-controller="napkins" class="px-5 py-16 sm:p-10">
-  <canvas
-    data-napkins-target="canvas"
-    class="fixed inset-0 z-50 size-full pointer-events-none"
-    aria-hidden="true"
-  ></canvas>
+  <canvas data-napkins-target="canvas" class="absolute top-0 left-0 z-50 pointer-events-none" aria-hidden="true"></canvas>
 
   <section class="mx-auto max-w-2xl space-y-8 rounded-md border-2 border-brand-line bg-brand-card p-8 shadow-brutal-md sm:p-12">
-    <p class="w-fit rounded-full border-2 border-brand-line bg-brand-100 px-3 py-1 text-sm font-semibold">
-      Payment received
-    </p>
-
     <h1 class="text-4xl font-extrabold text-balance sm:text-6xl">
       Thank you! <span class="text-brand-500">You're in.</span>
     </h1>
@@ -20,13 +12,11 @@
       <p>
         Your ticket for <%= Current.event.name %> is on its way to your
         inbox. If it doesn't show up in a few minutes, or you have any
-        questions, feel free to
-        <%= mail_to Current.event.contact_email, "contact us", class: "link-primary" %>.
+        questions, feel free to <%= mail_to Current.event.contact_email, "contact us", class: "link-primary" %>.
       </p>
 
       <p>
-        Around here, a good night ends with napkins in the air. These
-        are on us.
+        Around here, a good night ends with napkins in the air. These are on us.
       </p>
     <% end %>
 

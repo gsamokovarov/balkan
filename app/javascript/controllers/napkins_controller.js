@@ -4,10 +4,6 @@ const GRAVITY = 520
 const MAX_FRAME_SECONDS = 0.05
 
 // Connects to data-controller="napkins"
-//
-// Paper napkins in the air, the way a good night at a Balkan tavern ends. A
-// handful rains down on connect, and `throw` tosses more up from the element
-// that triggered it.
 export default class extends Controller {
   static targets = ["canvas", "thrower"]
   static values = { count: { type: Number, default: 70 } }
@@ -22,6 +18,8 @@ export default class extends Controller {
     this.resize = this.resize.bind(this)
     this.tick = this.tick.bind(this)
 
+    this.observer = new ResizeObserver(this.resize)
+    this.observer.observe(this.element)
     window.addEventListener("resize", this.resize)
     this.resize()
 
@@ -30,6 +28,7 @@ export default class extends Controller {
   }
 
   disconnect() {
+    this.observer?.disconnect()
     window.removeEventListener("resize", this.resize)
     cancelAnimationFrame(this.frame)
     this.frame = null
@@ -42,7 +41,7 @@ export default class extends Controller {
     for (let index = 0; index < count; index++) {
       this.napkins.push(this.build({
         x: random(0, this.width),
-        y: -random(40, this.height * 1.6),
+        y: -random(40, window.innerHeight * 1.6),
         vx: random(-30, 30),
         vy: random(60, 140),
       }))
@@ -55,11 +54,12 @@ export default class extends Controller {
     if (!this.canvasContext) return
 
     const origin = event.currentTarget.getBoundingClientRect()
+    const page = this.canvasTarget.getBoundingClientRect()
 
     for (let index = 0; index < 16; index++) {
       this.napkins.push(this.build({
-        x: origin.left + origin.width / 2 + random(-20, 20),
-        y: origin.top,
+        x: origin.left - page.left + origin.width / 2 + random(-20, 20),
+        y: origin.top - page.top,
         vx: random(-520, 520),
         vy: -random(900, 1900),
       }))
@@ -109,7 +109,6 @@ export default class extends Controller {
   }
 
   move(napkin, seconds) {
-    // A napkin that falls edge-on cuts through the air, a flat one floats.
     const terminal = napkin.terminal * (0.65 + 0.7 * Math.abs(Math.sin(napkin.rx)))
     const drag = GRAVITY / terminal
 
@@ -130,14 +129,12 @@ export default class extends Controller {
     const facing = Math.cos(napkin.rx) * Math.cos(napkin.ry)
     const project = (u, v) => projectPoint(napkin, u * half, v * half)
 
-    // The sheet itself.
     trace(context, [project(-1, -1), project(1, -1), project(1, 1), project(-1, 1)])
     context.fillStyle = facing > 0 ? this.colors.front : this.colors.back
     context.fill()
     context.fillStyle = `rgba(0, 0, 0, ${(1 - Math.abs(facing)) * 0.1})`
     context.fill()
 
-    // The creases left from being folded in four.
     context.beginPath()
     line(context, project(0, -1), project(0, 1))
     line(context, project(-1, 0), project(1, 0))
@@ -145,7 +142,6 @@ export default class extends Controller {
     context.strokeStyle = this.colors.crease
     context.stroke()
 
-    // The embossed border.
     trace(context, [project(-0.72, -0.72), project(0.72, -0.72), project(0.72, 0.72), project(-0.72, 0.72)])
     context.setLineDash([2, 3])
     context.strokeStyle = this.colors.emboss
@@ -162,8 +158,11 @@ export default class extends Controller {
   resize() {
     const ratio = window.devicePixelRatio || 1
 
-    this.width = window.innerWidth
-    this.height = window.innerHeight
+    this.canvasTarget.style.height = "0"
+    this.width = document.documentElement.clientWidth
+    this.height = document.documentElement.scrollHeight
+    this.canvasTarget.style.width = `${this.width}px`
+    this.canvasTarget.style.height = `${this.height}px`
     this.canvasTarget.width = this.width * ratio
     this.canvasTarget.height = this.height * ratio
     this.canvasContext.setTransform(ratio, 0, 0, ratio, 0, 0)
@@ -183,8 +182,6 @@ export default class extends Controller {
   }
 }
 
-// Rotates a point of the flat sheet around the X, Y and Z axes, then drops
-// the depth to get its place on the screen.
 function projectPoint(napkin, u, v) {
   const y = v * Math.cos(napkin.rx)
   const depth = v * Math.sin(napkin.rx)
