@@ -1,10 +1,13 @@
+<%# locals: (ticket:, ticket_png:) %>
+
 <p class="pb-2">
-  This is your ticket for <%= ticket.event.name %>. Keep it around, we'll ask for it during registration.<br>
+  This is your ticket for <%= ticket.event.name %>. Keep it around, we'll ask for it during registration.
+</p>
 
-  <%= image_tag attachments['inline_ticket.png'].url, alt: "Ticket for #{ticket.name}", title: "Ticket" %>
-  <br>
+<p class="pb-2">
+  <%= image_tag attachments['inline_ticket.png'].url, alt: "Ticket for #{ticket.name}", title: "Ticket", class: "p-3 bg-brand-card border-2 border-brand-line rounded-md shadow-brutal" %>
+</p>
 
-  <%= link_to ticket.event_access_url, class: "link-primary" do %>
-    <em>You can also view your ticket here.</em>
-  <% end %>
+<p class="pb-2">
+  <%= link_to "View your ticket online", ticket.event_access_url, class: "btn-primary" %>
 </p>
