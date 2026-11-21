@@ -10,11 +10,4 @@ class TicketPreview < ActionMailer::Preview
 
     TicketMailer.welcome_email(ticket).deliver_now
   end
-
-  def ticket_email
-    ticket = build :ticket, name: "Genadi Samokovarov"
-    ticket.event = ticket.order.event
-
-    TicketMailer.ticket_email(ticket).deliver_now
-  end
 end
