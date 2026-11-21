@@ -17,25 +17,4 @@ class TicketPreview < ActionMailer::Preview
 
     TicketMailer.ticket_email(ticket).deliver_now
   end
-
-  def pre_event_email
-    ticket = build :ticket, name: "Genadi Samokovarov"
-    ticket.event = ticket.order.event
-
-    TicketMailer.pre_event_email(ticket).deliver_now
-  end
-
-  def post_event_email
-    ticket = build :ticket, name: "Genadi Samokovarov"
-    ticket.event = ticket.order.event
-
-    TicketMailer.post_event_email(ticket).deliver_now
-  end
-
-  def post_event_2_email
-    ticket = build :ticket, name: "Genadi Samokovarov"
-    ticket.event = ticket.order.event
-
-    TicketMailer.post_event_2_email(ticket).deliver_now
-  end
 end

@@ -4,46 +4,4 @@ class SubscriberMailer < ApplicationMailer
 
     mail to: @subscriber.email, subject: "Welcome to #{Current.event.name} newsletter!"
   end
-
-  def newsletter_1_email(subscriber)
-    @subscriber = subscriber
-
-    mail to: @subscriber.email, subject: "Get ready for Balkan Ruby 2024"
-  end
-
-  def newsletter_2_email(subscriber)
-    @subscriber = subscriber
-
-    mail to: @subscriber.email, subject: "Balkan Ruby 2024 in a new venue"
-  end
-
-  def newsletter_10_email(subscriber)
-    @subscriber = subscriber
-
-    mail to: @subscriber.email, subject: "Get ready for Balkan Ruby 2025"
-  end
-
-  def newsletter_11_email(subscriber)
-    @subscriber = subscriber
-
-    mail to: @subscriber.email, subject: "Balkan Ruby 2025 is looking for speakers"
-  end
-
-  def newsletter_12_email(subscriber)
-    @subscriber = subscriber
-
-    mail to: @subscriber.email, subject: "Announcing our full Balkan Ruby 2025 lineup!"
-  end
-
-  def newsletter_13_email(subscriber)
-    @subscriber = subscriber
-
-    mail to: @subscriber.email, subject: "Balkan Ruby 2025 is in a week!"
-  end
-
-  def newsletter_20_email(subscriber)
-    @subscriber = subscriber
-
-    mail to: @subscriber.email, subject: "Balkan Ruby 2026 is about the hot takes!"
-  end
 end

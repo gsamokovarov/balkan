@@ -9,40 +9,4 @@ class SubscriberPreview < ActionMailer::Preview
 
     SubscriberMailer.welcome_email(subscriber).deliver_now
   end
-
-  def newsletter_1_email
-    subscriber = build :subscriber, email: "genadi@hey.com"
-
-    SubscriberMailer.newsletter_1_email(subscriber).deliver_now
-  end
-
-  def newsletter_10_email
-    subscriber = build :subscriber, email: "genadi@hey.com"
-
-    SubscriberMailer.newsletter_10_email(subscriber).deliver_now
-  end
-
-  def newsletter_11_email
-    subscriber = build :subscriber, email: "genadi@hey.com"
-
-    SubscriberMailer.newsletter_11_email(subscriber).deliver_now
-  end
-
-  def newsletter_12_email
-    subscriber = build :subscriber, email: "genadi@hey.com"
-
-    SubscriberMailer.newsletter_12_email(subscriber).deliver_now
-  end
-
-  def newsletter_13_email
-    subscriber = build :subscriber, email: "genadi@hey.com"
-
-    SubscriberMailer.newsletter_13_email(subscriber).deliver_now
-  end
-
-  def newsletter_20_email
-    subscriber = build :subscriber, email: "genadi@hey.com"
-
-    SubscriberMailer.newsletter_20_email(subscriber).deliver_now
-  end
 end
