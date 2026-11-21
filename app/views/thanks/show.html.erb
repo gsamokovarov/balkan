@@ -1,7 +1,7 @@
 <% title "Thank you" %>
 
 <div data-controller="napkins" class="px-5 py-16 sm:p-10">
-  <canvas data-napkins-target="canvas" class="absolute top-0 left-0 z-50 pointer-events-none" aria-hidden="true"></canvas>
+  <canvas data-napkins-target="canvas" class="absolute top-0 left-0 z-50 w-full pointer-events-none" aria-hidden="true"></canvas>
 
   <section class="mx-auto max-w-2xl space-y-8 rounded-md border-2 border-brand-line bg-brand-card p-8 shadow-brutal-md sm:p-12">
     <h1 class="text-4xl font-extrabold text-balance sm:text-6xl">
@@ -21,7 +21,7 @@
     <% end %>
 
     <div class="flex flex-wrap gap-4">
-      <button type="button" class="btn-primary" data-napkins-target="thrower" data-action="napkins#throw" hidden>
+      <button type="button" class="btn-primary motion-reduce:hidden" data-action="napkins#throw">
         Throw more napkins
       </button>
 
